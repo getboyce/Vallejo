@@ -8,7 +8,13 @@ The Vallejo Design System is a comprehensive repository of design tokens, compon
 
 ## 📍 Location
 
-The design system is located at: `/Users/psboyce/Cursor Projects/vallejo-design-system/`
+The design system is available on GitHub: `https://github.com/getboyce/Vallejo`
+
+Clone the repository:
+```bash
+git clone https://github.com/getboyce/Vallejo.git
+cd Vallejo
+```
 
 ## 🔍 How to Reference This Design System
 
@@ -16,20 +22,20 @@ The design system is located at: `/Users/psboyce/Cursor Projects/vallejo-design-
 
 When starting a new project or prototype, reference this design system by:
 
-1. **Including the design system path in your context:**
+1. **Including the design system in your context:**
    ```
-   "I want to use components from the Vallejo Design System located at 
-   /Users/psboyce/Cursor Projects/vallejo-design-system/"
+   "I want to use components from the Vallejo Design System from 
+   https://github.com/getboyce/Vallejo"
    ```
 
 2. **Importing specific components:**
    ```javascript
-   import { Button, Input, Card } from '/Users/psboyce/Cursor Projects/vallejo-design-system/components';
+   import { Button, Input, Card } from './path/to/Vallejo/components';
    ```
 
 3. **Using design tokens:**
    ```javascript
-   import { colors, typography, spacing } from '/Users/psboyce/Cursor Projects/vallejo-design-system/tokens';
+   import { colors, typography, spacing } from './path/to/Vallejo/tokens';
    ```
 
 ## 📂 Key Directories
@@ -56,7 +62,7 @@ When starting a new project or prototype, reference this design system by:
 
 ```html
 <!-- Include the design system CSS -->
-<link rel="stylesheet" href="/path/to/vallejo-design-system/styles/main.css">
+<link rel="stylesheet" href="./path/to/Vallejo/styles/main.css">
 
 <!-- Use the component -->
 <button class="vds-button vds-button--primary" data-vds-component="button">
@@ -64,7 +70,7 @@ When starting a new project or prototype, reference this design system by:
 </button>
 
 <script type="module">
-  import { Button } from '/path/to/vallejo-design-system/components/button/button.js';
+  import { Button } from './path/to/Vallejo/components/button/button.js';
   Button.init();
 </script>
 ```
@@ -72,7 +78,7 @@ When starting a new project or prototype, reference this design system by:
 ### Example: Using Design Tokens
 
 ```javascript
-import { colors, typography, spacing } from '/path/to/vallejo-design-system/tokens/index.js';
+import { colors, typography, spacing } from './path/to/Vallejo/tokens/index.js';
 
 // Use in your code
 const primaryColor = colors.primary[500];
@@ -121,8 +127,8 @@ When building a new prototype, ensure you're using components from this design s
 
 ## 🔗 Quick Reference
 
+- **GitHub Repository:** `https://github.com/getboyce/Vallejo`
 - **Figma File:** `ixkN3RSoiQc5aSlxZ21Hay`
-- **Design System Path:** `/Users/psboyce/Cursor Projects/vallejo-design-system/`
 - **Main Entry:** `components/index.js` and `styles/main.css`
 
 ## 💡 Tips for Cursor Sessions

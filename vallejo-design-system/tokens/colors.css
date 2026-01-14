@@ -1,0 +1,62 @@
+/**
+ * Color Design Tokens - CSS Variables
+ * Extracted from Figma screenshots
+ */
+
+:root {
+  /* Primary Colors (Blue) */
+  --color-primary-100: #F6F9FD;
+  --color-primary-200: #EEF2FC;
+  --color-primary-300: #E1E9FA;
+  --color-primary-400: #2662D9;
+  --color-primary-500: #063598;
+  --color-primary-600: #0F2757;
+  
+  /* Neutral Colors (Gray) */
+  --color-neutral-0: #FFFFFF;
+  --color-neutral-100: #F4F5F6;
+  --color-neutral-200: #E2E5E9;
+  --color-neutral-300: #C5CCD3;
+  --color-neutral-350: #6C7073;
+  --color-neutral-400: #46525D;
+  --color-neutral-500: #2F333C;
+  
+  /* Alert Colors */
+  --color-alert-error: #FCE5E9;
+  --color-alert-success: #D7E8D1;
+  --color-alert-warning: #FFF7D1;
+  --color-alert-neutral: #E0EBFF;
+  --color-alert-error-text: #C20022;
+  --color-alert-success-text: #1B6600;
+  --color-alert-warning-text: #705700;
+  --color-alert-neutral-text: #0F2757;
+  
+  /* Semantic Colors (for compatibility) */
+  --color-success: #1B6600;
+  --color-success-background: #D7E8D1;
+  --color-warning: #705700;
+  --color-warning-background: #FFF7D1;
+  --color-error: #C20022;
+  --color-error-background: #FCE5E9;
+  --color-info: #0F2757;
+  --color-info-background: #E0EBFF;
+  
+  /* Text Colors */
+  --color-text-primary: #2F333C;
+  --color-text-secondary: #46525D;
+  --color-text-tertiary: #6C7073;
+  --color-text-inverse: #FFFFFF;
+  --color-text-disabled: #C5CCD3;
+  
+  /* Background Colors */
+  --color-background-default: #FFFFFF;
+  --color-background-secondary: #F4F5F6;
+  --color-background-tertiary: #E2E5E9;
+  --color-background-inverse: #2F333C;
+  
+  /* Border Colors */
+  --color-border-default: #E2E5E9;
+  --color-border-light: #F4F5F6;
+  --color-border-dark: #C5CCD3;
+  --color-border-focus: #2662D9;
+}

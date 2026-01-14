@@ -1,0 +1,83 @@
+/**
+ * Search Bar Component Styles
+ */
+
+.vds-search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.vds-search-bar__input {
+  width: 100%;
+  padding: var(--spacing-2, 0.5rem) var(--spacing-10, 2.5rem) var(--spacing-2, 0.5rem) var(--spacing-10, 2.5rem);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base, 1rem);
+  font-weight: var(--font-weight-normal, 400);
+  line-height: var(--line-height-normal, 1.5);
+  color: var(--color-text-primary, #2F333C);
+  background-color: var(--color-background-default, #FFFFFF);
+  border: 1px solid var(--color-border-default, #E2E5E9);
+  border-radius: var(--spacing-1, 0.25rem);
+  transition: all 0.2s ease-in-out;
+}
+
+.vds-search-bar__input:hover {
+  border-color: var(--color-border-dark, #C5CCD3);
+}
+
+.vds-search-bar--focus .vds-search-bar__input {
+  border-color: var(--color-border-focus, #2662D9);
+  outline: none;
+  box-shadow: var(--shadow-input-focus, 0 0 0 3px rgba(38, 98, 217, 0.1));
+}
+
+.vds-search-bar__input::placeholder {
+  color: var(--color-text-tertiary, #6C7073);
+}
+
+.vds-search-bar__icon {
+  position: absolute;
+  left: var(--spacing-3, 0.75rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-text-tertiary, #6C7073);
+  pointer-events: none;
+}
+
+.vds-search-bar__clear {
+  position: absolute;
+  right: var(--spacing-3, 0.75rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-tertiary, #6C7073);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+
+.vds-search-bar__clear--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.vds-search-bar__clear:hover {
+  color: var(--color-text-primary, #2F333C);
+}
+
+.vds-search-bar__clear:focus {
+  outline: 2px solid var(--color-border-focus, #2662D9);
+  outline-offset: 2px;
+  border-radius: var(--spacing-1, 0.25rem);
+}

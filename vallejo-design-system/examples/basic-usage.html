@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vallejo Design System - Basic Usage</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body style="padding: var(--spacing-8); max-width: 800px; margin: 0 auto;">
+  <h1>Vallejo Design System - Examples</h1>
+  
+  <section style="margin-bottom: var(--spacing-12);">
+    <h2>Buttons</h2>
+    <div style="display: flex; gap: var(--spacing-4); flex-wrap: wrap; margin-top: var(--spacing-4);">
+      <button class="vds-button vds-button--primary" data-vds-component="button">
+        Primary
+      </button>
+      <button class="vds-button vds-button--secondary" data-vds-component="button">
+        Secondary
+      </button>
+      <button class="vds-button vds-button--tertiary" data-vds-component="button">
+        Tertiary
+      </button>
+      <button class="vds-button vds-button--danger" data-vds-component="button">
+        Danger
+      </button>
+      <button class="vds-button vds-button--ghost" data-vds-component="button">
+        Ghost
+      </button>
+    </div>
+    
+    <h3 style="margin-top: var(--spacing-6);">Sizes</h3>
+    <div style="display: flex; gap: var(--spacing-4); align-items: center; margin-top: var(--spacing-4);">
+      <button class="vds-button vds-button--primary vds-button--sm" data-vds-component="button">
+        Small
+      </button>
+      <button class="vds-button vds-button--primary vds-button--md" data-vds-component="button">
+        Medium
+      </button>
+      <button class="vds-button vds-button--primary vds-button--lg" data-vds-component="button">
+        Large
+      </button>
+    </div>
+    
+    <h3 style="margin-top: var(--spacing-6);">States</h3>
+    <div style="display: flex; gap: var(--spacing-4); margin-top: var(--spacing-4);">
+      <button class="vds-button vds-button--primary" data-vds-component="button" disabled>
+        Disabled
+      </button>
+      <button class="vds-button vds-button--primary" data-vds-component="button" data-loading="true">
+        Loading
+      </button>
+    </div>
+  </section>
+  
+  <section style="margin-bottom: var(--spacing-12);">
+    <h2>Inputs</h2>
+    <div style="display: flex; flex-direction: column; gap: var(--spacing-4); margin-top: var(--spacing-4); max-width: 400px;">
+      <div class="vds-input-wrapper">
+        <input 
+          type="text" 
+          class="vds-input" 
+          data-vds-component="input"
+          placeholder="Enter text"
+        />
+      </div>
+      
+      <div class="vds-input-wrapper">
+        <input 
+          type="email" 
+          class="vds-input" 
+          data-vds-component="input"
+          placeholder="Email address"
+        />
+      </div>
+      
+      <div class="vds-input-wrapper">
+        <input 
+          type="text" 
+          class="vds-input vds-input--error" 
+          data-vds-component="input"
+          data-error="true"
+          placeholder="Error state"
+        />
+      </div>
+      
+      <div class="vds-input-wrapper">
+        <input 
+          type="text" 
+          class="vds-input" 
+          data-vds-component="input"
+          placeholder="Disabled input"
+          disabled
+        />
+      </div>
+    </div>
+  </section>
+  
+  <section style="margin-bottom: var(--spacing-12);">
+    <h2>Form Example</h2>
+    <form style="max-width: 500px; margin-top: var(--spacing-4);">
+      <div class="vds-input-wrapper" style="margin-bottom: var(--spacing-4);">
+        <label for="name" style="display: block; margin-bottom: var(--spacing-2); font-weight: var(--font-weight-medium);">
+          Name
+        </label>
+        <input 
+          type="text" 
+          id="name"
+          class="vds-input" 
+          data-vds-component="input"
+          required
+        />
+      </div>
+      
+      <div class="vds-input-wrapper" style="margin-bottom: var(--spacing-6);">
+        <label for="email" style="display: block; margin-bottom: var(--spacing-2); font-weight: var(--font-weight-medium);">
+          Email
+        </label>
+        <input 
+          type="email" 
+          id="email"
+          class="vds-input" 
+          data-vds-component="input"
+          required
+        />
+      </div>
+      
+      <div style="display: flex; gap: var(--spacing-4);">
+        <button 
+          type="submit" 
+          class="vds-button vds-button--primary" 
+          data-vds-component="button"
+        >
+          Submit
+        </button>
+        <button 
+          type="button" 
+          class="vds-button vds-button--secondary" 
+          data-vds-component="button"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </section>
+  
+  <section>
+    <h2>Design Tokens</h2>
+    <div style="margin-top: var(--spacing-4);">
+      <h3>Colors</h3>
+      <div style="display: flex; gap: var(--spacing-4); flex-wrap: wrap; margin-top: var(--spacing-4);">
+        <div style="width: 100px; height: 100px; background: var(--color-primary-500); border-radius: var(--spacing-2);"></div>
+        <div style="width: 100px; height: 100px; background: var(--color-success); border-radius: var(--spacing-2);"></div>
+        <div style="width: 100px; height: 100px; background: var(--color-warning); border-radius: var(--spacing-2);"></div>
+        <div style="width: 100px; height: 100px; background: var(--color-error); border-radius: var(--spacing-2);"></div>
+        <div style="width: 100px; height: 100px; background: var(--color-info); border-radius: var(--spacing-2);"></div>
+      </div>
+    </div>
+  </section>
+  
+  <script type="module">
+    import { initAll } from '../components/index.js';
+    initAll();
+  </script>
+</body>
+</html>

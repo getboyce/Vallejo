@@ -1,0 +1,67 @@
+/**
+ * Tooltip Component Styles
+ */
+
+.vds-tooltip {
+  position: absolute;
+  z-index: 10000;
+  padding: var(--spacing-2, 0.5rem) var(--spacing-3, 0.75rem);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: var(--font-weight-medium, 500);
+  line-height: var(--line-height-16px, 1rem);
+  color: var(--color-text-inverse, #FFFFFF);
+  background-color: var(--color-background-inverse, #2F333C);
+  border-radius: var(--spacing-1, 0.25rem);
+  box-shadow: var(--shadow-tooltip, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+  pointer-events: none;
+  white-space: nowrap;
+  max-width: 200px;
+  word-wrap: break-word;
+  white-space: normal;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.vds-tooltip::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+/* Position: Top */
+.vds-tooltip--top::before {
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 4px 4px 0 4px;
+  border-color: var(--color-background-inverse, #2F333C) transparent transparent transparent;
+}
+
+/* Position: Bottom */
+.vds-tooltip--bottom::before {
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 4px 4px 4px;
+  border-color: transparent transparent var(--color-background-inverse, #2F333C) transparent;
+}
+
+/* Position: Left */
+.vds-tooltip--left::before {
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 4px 0 4px 4px;
+  border-color: transparent transparent transparent var(--color-background-inverse, #2F333C);
+}
+
+/* Position: Right */
+.vds-tooltip--right::before {
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 4px 4px 4px 0;
+  border-color: transparent var(--color-background-inverse, #2F333C) transparent transparent;
+}

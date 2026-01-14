@@ -1,0 +1,232 @@
+/**
+ * Utility Classes
+ * Common utility classes for spacing, typography, layout, etc.
+ */
+
+/* Display */
+.vds-hidden {
+  display: none !important;
+}
+
+.vds-block {
+  display: block !important;
+}
+
+.vds-inline {
+  display: inline !important;
+}
+
+.vds-inline-block {
+  display: inline-block !important;
+}
+
+.vds-flex {
+  display: flex !important;
+}
+
+.vds-inline-flex {
+  display: inline-flex !important;
+}
+
+.vds-grid {
+  display: grid !important;
+}
+
+/* Flexbox Utilities */
+.vds-flex-row {
+  flex-direction: row !important;
+}
+
+.vds-flex-col {
+  flex-direction: column !important;
+}
+
+.vds-items-center {
+  align-items: center !important;
+}
+
+.vds-items-start {
+  align-items: flex-start !important;
+}
+
+.vds-items-end {
+  align-items: flex-end !important;
+}
+
+.vds-justify-center {
+  justify-content: center !important;
+}
+
+.vds-justify-between {
+  justify-content: space-between !important;
+}
+
+.vds-justify-start {
+  justify-content: flex-start !important;
+}
+
+.vds-justify-end {
+  justify-content: flex-end !important;
+}
+
+.vds-gap-1 {
+  gap: var(--spacing-1) !important;
+}
+
+.vds-gap-2 {
+  gap: var(--spacing-2) !important;
+}
+
+.vds-gap-4 {
+  gap: var(--spacing-4) !important;
+}
+
+.vds-gap-6 {
+  gap: var(--spacing-6) !important;
+}
+
+/* Spacing Utilities */
+.vds-m-0 { margin: 0 !important; }
+.vds-m-1 { margin: var(--spacing-1) !important; }
+.vds-m-2 { margin: var(--spacing-2) !important; }
+.vds-m-4 { margin: var(--spacing-4) !important; }
+.vds-m-6 { margin: var(--spacing-6) !important; }
+.vds-m-8 { margin: var(--spacing-8) !important; }
+
+.vds-mt-0 { margin-top: 0 !important; }
+.vds-mt-1 { margin-top: var(--spacing-1) !important; }
+.vds-mt-2 { margin-top: var(--spacing-2) !important; }
+.vds-mt-4 { margin-top: var(--spacing-4) !important; }
+.vds-mt-6 { margin-top: var(--spacing-6) !important; }
+.vds-mt-8 { margin-top: var(--spacing-8) !important; }
+
+.vds-mb-0 { margin-bottom: 0 !important; }
+.vds-mb-1 { margin-bottom: var(--spacing-1) !important; }
+.vds-mb-2 { margin-bottom: var(--spacing-2) !important; }
+.vds-mb-4 { margin-bottom: var(--spacing-4) !important; }
+.vds-mb-6 { margin-bottom: var(--spacing-6) !important; }
+.vds-mb-8 { margin-bottom: var(--spacing-8) !important; }
+
+.vds-p-0 { padding: 0 !important; }
+.vds-p-1 { padding: var(--spacing-1) !important; }
+.vds-p-2 { padding: var(--spacing-2) !important; }
+.vds-p-4 { padding: var(--spacing-4) !important; }
+.vds-p-6 { padding: var(--spacing-6) !important; }
+.vds-p-8 { padding: var(--spacing-8) !important; }
+
+/* Text Utilities */
+.vds-text-left {
+  text-align: left !important;
+}
+
+.vds-text-center {
+  text-align: center !important;
+}
+
+.vds-text-right {
+  text-align: right !important;
+}
+
+.vds-text-primary {
+  color: var(--color-text-primary) !important;
+}
+
+.vds-text-secondary {
+  color: var(--color-text-secondary) !important;
+}
+
+.vds-text-tertiary {
+  color: var(--color-text-tertiary) !important;
+}
+
+.vds-text-success {
+  color: var(--color-success) !important;
+}
+
+.vds-text-warning {
+  color: var(--color-warning) !important;
+}
+
+.vds-text-error {
+  color: var(--color-error) !important;
+}
+
+.vds-text-info {
+  color: var(--color-info) !important;
+}
+
+/* Font Size Utilities */
+.vds-text-xs { font-size: var(--font-size-xs) !important; }
+.vds-text-sm { font-size: var(--font-size-sm) !important; }
+.vds-text-base { font-size: var(--font-size-base) !important; }
+.vds-text-lg { font-size: var(--font-size-lg) !important; }
+.vds-text-xl { font-size: var(--font-size-xl) !important; }
+.vds-text-2xl { font-size: var(--font-size-2xl) !important; }
+.vds-text-3xl { font-size: var(--font-size-3xl) !important; }
+
+/* Font Weight Utilities */
+.vds-font-light { font-weight: var(--font-weight-light) !important; }
+.vds-font-normal { font-weight: var(--font-weight-normal) !important; }
+.vds-font-medium { font-weight: var(--font-weight-medium) !important; }
+.vds-font-semibold { font-weight: var(--font-weight-semibold) !important; }
+.vds-font-bold { font-weight: var(--font-weight-bold) !important; }
+
+/* Width Utilities */
+.vds-w-full {
+  width: 100% !important;
+}
+
+.vds-w-auto {
+  width: auto !important;
+}
+
+/* Border Radius */
+.vds-rounded {
+  border-radius: 0.375rem !important;
+}
+
+.vds-rounded-sm {
+  border-radius: 0.25rem !important;
+}
+
+.vds-rounded-lg {
+  border-radius: 0.5rem !important;
+}
+
+.vds-rounded-full {
+  border-radius: 9999px !important;
+}
+
+/* Shadow Utilities */
+.vds-shadow-sm {
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.vds-shadow {
+  box-shadow: var(--shadow-base) !important;
+}
+
+.vds-shadow-md {
+  box-shadow: var(--shadow-md) !important;
+}
+
+.vds-shadow-lg {
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.vds-shadow-xl {
+  box-shadow: var(--shadow-xl) !important;
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .vds-mobile-hidden {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .vds-desktop-hidden {
+    display: none !important;
+  }
+}

@@ -1,0 +1,86 @@
+/**
+ * Card Component Styles
+ */
+
+.vds-card {
+  background-color: var(--color-background-default, #FFFFFF);
+  border: 1px solid var(--color-border-default, #E2E5E9);
+  border-radius: var(--spacing-2, 0.5rem);
+  box-shadow: var(--shadow-card, 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06));
+  overflow: hidden;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.vds-card--hoverable:hover {
+  box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+}
+
+.vds-card__header {
+  padding: var(--spacing-6, 1.5rem);
+  border-bottom: 1px solid var(--color-border-default, #E5E7EB);
+}
+
+.vds-card__body {
+  padding: var(--spacing-6, 1.5rem);
+}
+
+.vds-card__footer {
+  padding: var(--spacing-6, 1.5rem);
+  border-top: 1px solid var(--color-border-default, #E5E7EB);
+  background-color: var(--color-background-secondary, #F4F5F6);
+}
+
+.vds-card__title {
+  font-size: var(--font-size-lg, 1.25rem);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--color-text-primary, #2F333C);
+  margin: 0 0 var(--spacing-2, 0.5rem) 0;
+}
+
+.vds-card__subtitle {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--color-text-secondary, #46525D);
+  margin: 0;
+}
+
+/* Card Image Section */
+.vds-card__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.vds-card__image-wrapper {
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--color-background-secondary, #F4F5F6);
+}
+
+/* Card Typography Styles */
+.vds-card__body {
+  font-size: var(--font-size-sm, 0.875rem); /* Body 2 M */
+  font-weight: var(--font-weight-medium, 500);
+  line-height: var(--line-height-20px, 1.25rem);
+  color: var(--color-text-primary, #2F333C);
+}
+
+.vds-card__body .vds-card__text--small {
+  font-size: var(--font-size-xs, 0.75rem); /* Body 3 SM */
+  font-weight: var(--font-weight-normal, 400);
+  line-height: var(--line-height-18px, 1.125rem);
+  color: var(--color-text-secondary, #46525D);
+}
+
+/* Card with integrated input fields */
+.vds-card__input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3, 0.75rem);
+  margin-top: var(--spacing-4, 1rem);
+}
+
+/* Card action button */
+.vds-card__action {
+  margin-top: var(--spacing-4, 1rem);
+}

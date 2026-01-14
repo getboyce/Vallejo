@@ -1,0 +1,113 @@
+/**
+ * Modal Component Styles
+ */
+
+.vds-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+
+.vds-modal--open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.vds-modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.vds-modal__content {
+  position: relative;
+  background-color: var(--color-background-default, #FFFFFF);
+  border-radius: var(--spacing-2, 0.5rem);
+  box-shadow: var(--shadow-modal, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  z-index: 1;
+  transform: scale(0.95);
+  transition: transform 0.2s ease-in-out;
+}
+
+.vds-modal--open .vds-modal__content {
+  transform: scale(1);
+}
+
+.vds-modal__header {
+  padding: var(--spacing-6, 1.5rem);
+  border-bottom: 1px solid var(--color-border-default, #E2E5E9);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vds-modal__title {
+  font-size: var(--font-size-lg, 1.25rem);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--color-text-primary, #2F333C);
+  margin: 0;
+}
+
+.vds-modal__close {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text-secondary, #46525D);
+  border-radius: var(--spacing-1, 0.25rem);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.vds-modal__close:hover {
+  background-color: var(--color-background-secondary, #F4F5F6);
+}
+
+.vds-modal__body {
+  padding: var(--spacing-6, 1.5rem);
+}
+
+.vds-modal__footer {
+  padding: var(--spacing-6, 1.5rem);
+  border-top: 1px solid var(--color-border-default, #E2E5E9);
+  display: flex;
+  gap: var(--spacing-3, 0.75rem);
+  justify-content: flex-end;
+}
+
+/* Size variants */
+.vds-modal--sm .vds-modal__content {
+  width: 24rem;
+}
+
+.vds-modal--md .vds-modal__content {
+  width: 32rem;
+}
+
+.vds-modal--lg .vds-modal__content {
+  width: 48rem;
+}
+
+.vds-modal--xl .vds-modal__content {
+  width: 64rem;
+}

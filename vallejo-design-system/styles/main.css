@@ -1,0 +1,44 @@
+/**
+ * Vallejo Design System - Main Stylesheet
+ * 
+ * This file imports all design tokens and component styles.
+ * Include this file in your project to get the full design system.
+ */
+
+/* Design Tokens */
+@import '../tokens/colors.css';
+@import '../tokens/typography.css';
+@import '../tokens/spacing.css';
+@import '../tokens/shadows.css';
+
+/* Base Styles */
+@import './base.css';
+@import './utilities.css';
+
+/* Component Styles */
+@import '../components/icon/icon.css';
+@import '../components/logo/logo.css';
+@import '../components/button/button.css';
+@import '../components/input/input.css';
+@import '../components/checkbox/checkbox.css';
+@import '../components/radio/radio.css';
+@import '../components/toggle/toggle.css';
+@import '../components/dropdown/dropdown.css';
+@import '../components/date-picker/date-picker.css';
+@import '../components/mobile-date-picker/mobile-date-picker.css';
+@import '../components/filter-chip/filter-chip.css';
+@import '../components/alert/alert.css';
+@import '../components/toast/toast.css';
+@import '../components/tooltip/tooltip.css';
+@import '../components/status-token/status-token.css';
+@import '../components/tabs/tabs.css';
+@import '../components/switcher/switcher.css';
+@import '../components/pagination/pagination.css';
+@import '../components/card/card.css';
+@import '../components/modal/modal.css';
+@import '../components/shelf/shelf.css';
+@import '../components/mobile-shelf/mobile-shelf.css';
+@import '../components/accordion/accordion.css';
+@import '../components/table/table.css';
+@import '../components/search-bar/search-bar.css';
+@import '../components/progress-tracker/progress-tracker.css';

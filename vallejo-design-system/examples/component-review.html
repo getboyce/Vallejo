@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vallejo Design System - Component Review</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <style>
+    body {
+      padding: var(--spacing-8);
+      max-width: 1200px;
+      margin: 0 auto;
+      background: var(--color-background, #ffffff);
+      color: var(--color-text-primary, #2F333C);
+      font-family: var(--font-family-primary, 'Inter', sans-serif);
+    }
+    
+    .header {
+      margin-bottom: var(--spacing-12);
+      padding-bottom: var(--spacing-6);
+      border-bottom: 2px solid var(--color-border, #E5E7EB);
+    }
+    
+    .header h1 {
+      margin: 0 0 var(--spacing-2) 0;
+      font-size: var(--font-size-3xl, 2rem);
+      font-weight: var(--font-weight-bold, 700);
+    }
+    
+    .header p {
+      margin: 0;
+      color: var(--color-text-secondary, #6B7280);
+      font-size: var(--font-size-base, 1rem);
+    }
+    
+    .component-section {
+      margin-bottom: var(--spacing-16);
+      padding: var(--spacing-6);
+      background: var(--color-background, #ffffff);
+      border: 1px solid var(--color-border, #E5E7EB);
+      border-radius: var(--spacing-2, 0.5rem);
+    }
+    
+    .component-section h2 {
+      margin: 0 0 var(--spacing-4) 0;
+      font-size: var(--font-size-2xl, 1.5rem);
+      font-weight: var(--font-weight-semibold, 600);
+      color: var(--color-text-primary, #2F333C);
+    }
+    
+    .component-section h3 {
+      margin: var(--spacing-6) 0 var(--spacing-3) 0;
+      font-size: var(--font-size-lg, 1.125rem);
+      font-weight: var(--font-weight-medium, 500);
+      color: var(--color-text-secondary, #6B7280);
+    }
+    
+    .component-grid {
+      display: flex;
+      gap: var(--spacing-4);
+      flex-wrap: wrap;
+      margin-top: var(--spacing-4);
+      align-items: center;
+    }
+    
+    .component-row {
+      display: flex;
+      gap: var(--spacing-4);
+      flex-wrap: wrap;
+      margin-top: var(--spacing-4);
+      align-items: flex-start;
+    }
+    
+    .component-column {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-4);
+      margin-top: var(--spacing-4);
+    }
+    
+    .demo-label {
+      font-size: var(--font-size-sm, 0.875rem);
+      color: var(--color-text-secondary, #6B7280);
+      margin-bottom: var(--spacing-2);
+      font-weight: var(--font-weight-medium, 500);
+    }
+    
+    .code-snippet {
+      background: var(--color-gray-50, #F9FAFB);
+      border: 1px solid var(--color-border, #E5E7EB);
+      border-radius: var(--spacing-1, 0.25rem);
+      padding: var(--spacing-4);
+      margin-top: var(--spacing-4);
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: var(--font-size-sm, 0.875rem);
+      overflow-x: auto;
+    }
+    
+    .interactive-demo {
+      padding: var(--spacing-4);
+      background: var(--color-gray-50, #F9FAFB);
+      border-radius: var(--spacing-2, 0.5rem);
+      margin-top: var(--spacing-4);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Vallejo Design System - Component Review</h1>
+    <p>Comprehensive showcase of all implemented components with variants, sizes, and states</p>
+  </div>
+
+  <!-- Button Component -->
+  <section class="component-section">
+    <h2>Button</h2>
+    <p>Flexible button component with multiple variants and sizes.</p>
+    
+    <h3>Variants</h3>
+    <div class="component-grid">
+      <button class="vds-button vds-button--primary" data-vds-component="button">Primary</button>
+      <button class="vds-button vds-button--secondary" data-vds-component="button">Secondary</button>
+      <button class="vds-button vds-button--tertiary" data-vds-component="button">Tertiary</button>
+      <button class="vds-button vds-button--danger" data-vds-component="button">Danger</button>
+      <button class="vds-button vds-button--ghost" data-vds-component="button">Ghost</button>
+    </div>
+    
+    <h3>Sizes</h3>
+    <div class="component-grid">
+      <button class="vds-button vds-button--primary vds-button--sm" data-vds-component="button">Small</button>
+      <button class="vds-button vds-button--primary vds-button--md" data-vds-component="button">Medium</button>
+      <button class="vds-button vds-button--primary vds-button--lg" data-vds-component="button">Large</button>
+    </div>
+    
+    <h3>States</h3>
+    <div class="component-grid">
+      <button class="vds-button vds-button--primary" data-vds-component="button" disabled>Disabled</button>
+      <button class="vds-button vds-button--primary" data-vds-component="button" data-loading="true">Loading</button>
+    </div>
+  </section>
+
+  <!-- Input Component -->
+  <section class="component-section">
+    <h2>Input</h2>
+    <p>Input component with validation states and helper text.</p>
+    
+    <h3>States</h3>
+    <div class="component-column" style="max-width: 400px;">
+      <div>
+        <div class="demo-label">Default</div>
+        <div class="vds-input-wrapper">
+          <input 
+            type="text" 
+            class="vds-input" 
+            data-vds-component="input"
+            placeholder="Enter text"
+          />
+        </div>
+      </div>
+      
+      <div>
+        <div class="demo-label">With Value</div>
+        <div class="vds-input-wrapper">
+          <input 
+            type="text" 
+            class="vds-input" 
+            data-vds-component="input"
+            value="Sample text"
+          />
+        </div>
+      </div>
+      
+      <div>
+        <div class="demo-label">Error State</div>
+        <div class="vds-input-wrapper">
+          <input 
+            type="text" 
+            class="vds-input vds-input--error" 
+            data-vds-component="input"
+            data-error="true"
+            placeholder="Error state"
+          />
+        </div>
+      </div>
+      
+      <div>
+        <div class="demo-label">Disabled</div>
+        <div class="vds-input-wrapper">
+          <input 
+            type="text" 
+            class="vds-input" 
+            data-vds-component="input"
+            placeholder="Disabled input"
+            disabled
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Checkbox Component -->
+  <section class="component-section">
+    <h2>Checkbox</h2>
+    <p>Checkbox component with multiple states.</p>
+    
+    <h3>States</h3>
+    <div class="component-column" style="max-width: 300px;">
+      <label style="display: flex; align-items: center; gap: var(--spacing-3); cursor: pointer;">
+        <input type="checkbox" class="vds-checkbox" data-vds-component="checkbox" />
+        <span>Unchecked</span>
+      </label>
+      
+      <label style="display: flex; align-items: center; gap: var(--spacing-3); cursor: pointer;">
+        <input type="checkbox" class="vds-checkbox" data-vds-component="checkbox" checked />
+        <span>Checked</span>
+      </label>
+      
+      <label style="display: flex; align-items: center; gap: var(--spacing-3); cursor: pointer;">
+        <input type="checkbox" class="vds-checkbox" data-vds-component="checkbox" data-indeterminate="true" />
+        <span>Indeterminate</span>
+      </label>
+      
+      <label style="display: flex; align-items: center; gap: var(--spacing-3); cursor: not-allowed; opacity: 0.6;">
+        <input type="checkbox" class="vds-checkbox" data-vds-component="checkbox" disabled />
+        <span>Disabled</span>
+      </label>
+    </div>
+  </section>
+
+  <!-- Radio Component -->
+  <section class="component-section">
+    <h2>Radio Buttons</h2>
+    <p>Radio button component for single selection within a group.</p>
+    
+    <h3>Radio Group</h3>
+    <div class="component-column" style="max-width: 300px;">
+      <label style="display: flex; align-items: center; gap: var(--spacing-3); cursor: pointer;">
+        <input type="radio" name="radio-demo" class="vds-radio" data-vds-component="radio" value="option1" />
+        <span>Option 1</span>
+      </label>
+      
+      <label style="display: flex; align-items: center; gap: var(--spacing-3); cursor: pointer;">
+        <input type="radio" name="radio-demo" class="vds-radio" data-vds-component="radio" value="option2" checked />
+        <span>Option 2 (Selected)</span>
+      </label>
+      
+      <label style="display: flex; align-items: center; gap: var(--spacing-3); cursor: pointer;">
+        <input type="radio" name="radio-demo" class="vds-radio" data-vds-component="radio" value="option3" />
+        <span>Option 3</span>
+      </label>
+      
+      <label style="display: flex; align-items: center; gap: var(--spacing-3); cursor: not-allowed; opacity: 0.6;">
+        <input type="radio" name="radio-demo-disabled" class="vds-radio" data-vds-component="radio" disabled />
+        <span>Disabled</span>
+      </label>
+    </div>
+  </section>
+
+  <!-- Toggle Component -->
+  <section class="component-section">
+    <h2>Toggle</h2>
+    <p>Toggle switch component for on/off states.</p>
+    
+    <h3>States</h3>
+    <div class="component-column" style="max-width: 300px;">
+      <div style="display: flex; align-items: center; gap: var(--spacing-3);">
+        <button type="button" class="vds-toggle" data-vds-component="toggle" aria-pressed="false">
+          <span class="vds-toggle__track"></span>
+          <span class="vds-toggle__thumb"></span>
+        </button>
+        <span>Off</span>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: var(--spacing-3);">
+        <button type="button" class="vds-toggle" data-vds-component="toggle" aria-pressed="true">
+          <span class="vds-toggle__track"></span>
+          <span class="vds-toggle__thumb"></span>
+        </button>
+        <span>On</span>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: var(--spacing-3); opacity: 0.6;">
+        <button type="button" class="vds-toggle" data-vds-component="toggle" aria-pressed="false" disabled>
+          <span class="vds-toggle__track"></span>
+          <span class="vds-toggle__thumb"></span>
+        </button>
+        <span>Disabled</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Alert Component -->
+  <section class="component-section">
+    <h2>Alert</h2>
+    <p>Alert component for displaying important messages.</p>
+    
+    <h3>Variants</h3>
+    <div class="component-column">
+      <div class="vds-alert vds-alert--success" data-vds-component="alert">
+        <div class="vds-alert__content">Success! Your changes have been saved.</div>
+      </div>
+      
+      <div class="vds-alert vds-alert--warning" data-vds-component="alert">
+        <div class="vds-alert__content">Warning: Please review your input before submitting.</div>
+      </div>
+      
+      <div class="vds-alert vds-alert--error" data-vds-component="alert">
+        <div class="vds-alert__content">Error: Something went wrong. Please try again.</div>
+      </div>
+      
+      <div class="vds-alert vds-alert--info" data-vds-component="alert">
+        <div class="vds-alert__content">Info: This is an informational message.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Card Component -->
+  <section class="component-section">
+    <h2>Card</h2>
+    <p>Card component for displaying content in a contained format.</p>
+    
+    <h3>Basic Card</h3>
+    <div class="component-row">
+      <div class="vds-card" data-vds-component="card" style="max-width: 300px;">
+        <div class="vds-card__header">
+          <h4 style="margin: 0; font-size: var(--font-size-lg, 1.125rem);">Card Title</h4>
+        </div>
+        <div class="vds-card__body">
+          <p style="margin: 0;">This is the card body content. It can contain any type of content.</p>
+        </div>
+        <div class="vds-card__footer">
+          <button class="vds-button vds-button--primary vds-button--sm" data-vds-component="button">Action</button>
+        </div>
+      </div>
+      
+      <div class="vds-card" data-vds-component="card" data-hoverable="true" style="max-width: 300px;">
+        <div class="vds-card__header">
+          <h4 style="margin: 0; font-size: var(--font-size-lg, 1.125rem);">Hoverable Card</h4>
+        </div>
+        <div class="vds-card__body">
+          <p style="margin: 0;">Hover over this card to see the hover effect.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Component -->
+  <section class="component-section">
+    <h2>Modal</h2>
+    <p>Modal dialog component for displaying content in an overlay.</p>
+    
+    <h3>Interactive Demo</h3>
+    <div class="interactive-demo">
+      <button 
+        class="vds-button vds-button--primary" 
+        data-vds-component="button"
+        onclick="document.getElementById('demoModal').classList.add('vds-modal--open')"
+      >
+        Open Modal
+      </button>
+      
+      <div class="vds-modal" data-vds-component="modal" id="demoModal">
+        <div class="vds-modal__overlay"></div>
+        <div class="vds-modal__content">
+          <div class="vds-modal__header">
+            <h3 style="margin: 0;">Modal Title</h3>
+            <button class="vds-modal__close" aria-label="Close modal">×</button>
+          </div>
+          <div class="vds-modal__body">
+            <p>This is a modal dialog. You can close it by clicking the overlay, pressing Escape, or clicking the close button.</p>
+          </div>
+          <div class="vds-modal__footer">
+            <button class="vds-button vds-button--secondary" data-vds-component="button" onclick="document.getElementById('demoModal').classList.remove('vds-modal--open')">Cancel</button>
+            <button class="vds-button vds-button--primary" data-vds-component="button" onclick="document.getElementById('demoModal').classList.remove('vds-modal--open')">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabs Component -->
+  <section class="component-section">
+    <h2>Tabs</h2>
+    <p>Tabbed navigation component with keyboard support.</p>
+    
+    <h3>Tab Navigation</h3>
+    <div class="vds-tabs" data-vds-component="tabs">
+      <div class="vds-tabs__list" role="tablist">
+        <button class="vds-tabs__tab" role="tab" aria-selected="true">Overview</button>
+        <button class="vds-tabs__tab" role="tab">Details</button>
+        <button class="vds-tabs__tab" role="tab">Settings</button>
+      </div>
+      <div class="vds-tabs__panel" role="tabpanel">
+        <p style="padding: var(--spacing-4); margin: 0;">This is the Overview tab content. Use arrow keys to navigate between tabs.</p>
+      </div>
+      <div class="vds-tabs__panel" role="tabpanel" hidden>
+        <p style="padding: var(--spacing-4); margin: 0;">This is the Details tab content.</p>
+      </div>
+      <div class="vds-tabs__panel" role="tabpanel" hidden>
+        <p style="padding: var(--spacing-4); margin: 0;">This is the Settings tab content.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Accordion Component -->
+  <section class="component-section">
+    <h2>Accordion</h2>
+    <p>Collapsible accordion component with single or multiple open options.</p>
+    
+    <h3>Single Open (Default)</h3>
+    <div class="vds-accordion" data-vds-component="accordion" style="max-width: 600px;">
+      <div class="vds-accordion__item">
+        <button class="vds-accordion__trigger">What is the Vallejo Design System?</button>
+        <div class="vds-accordion__panel">
+          <p style="margin: 0; padding: var(--spacing-4);">The Vallejo Design System is a comprehensive collection of design tokens, components, and patterns extracted from Figma and implemented in vanilla JavaScript.</p>
+        </div>
+      </div>
+      <div class="vds-accordion__item">
+        <button class="vds-accordion__trigger">How do I use the components?</button>
+        <div class="vds-accordion__panel">
+          <p style="margin: 0; padding: var(--spacing-4);">Components are initialized automatically when you include the component JavaScript and add the appropriate data attributes to your HTML elements.</p>
+        </div>
+      </div>
+      <div class="vds-accordion__item">
+        <button class="vds-accordion__trigger">Can I customize the components?</button>
+        <div class="vds-accordion__panel">
+          <p style="margin: 0; padding: var(--spacing-4);">Yes! All components use CSS custom properties (design tokens) that can be customized to match your brand.</p>
+        </div>
+      </div>
+    </div>
+    
+    <h3>Multiple Open</h3>
+    <div class="vds-accordion" data-vds-component="accordion" data-allow-multiple="true" style="max-width: 600px;">
+      <div class="vds-accordion__item">
+        <button class="vds-accordion__trigger">Item 1</button>
+        <div class="vds-accordion__panel">
+          <p style="margin: 0; padding: var(--spacing-4);">Content for item 1. Multiple items can be open at once.</p>
+        </div>
+      </div>
+      <div class="vds-accordion__item">
+        <button class="vds-accordion__trigger">Item 2</button>
+        <div class="vds-accordion__panel">
+          <p style="margin: 0; padding: var(--spacing-4);">Content for item 2. Click to toggle.</p>
+        </div>
+      </div>
+      <div class="vds-accordion__item">
+        <button class="vds-accordion__trigger">Item 3</button>
+        <div class="vds-accordion__panel">
+          <p style="margin: 0; padding: var(--spacing-4);">Content for item 3. All items can be expanded simultaneously.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Form Example -->
+  <section class="component-section">
+    <h2>Form Example</h2>
+    <p>Example form combining multiple components.</p>
+    
+    <div class="interactive-demo" style="max-width: 500px;">
+      <form onsubmit="event.preventDefault(); alert('Form submitted!');">
+        <div style="margin-bottom: var(--spacing-4);">
+          <label for="form-name" style="display: block; margin-bottom: var(--spacing-2); font-weight: var(--font-weight-medium, 500);">
+            Name
+          </label>
+          <div class="vds-input-wrapper">
+            <input 
+              type="text" 
+              id="form-name"
+              class="vds-input" 
+              data-vds-component="input"
+              required
+            />
+          </div>
+        </div>
+        
+        <div style="margin-bottom: var(--spacing-4);">
+          <label for="form-email" style="display: block; margin-bottom: var(--spacing-2); font-weight: var(--font-weight-medium, 500);">
+            Email
+          </label>
+          <div class="vds-input-wrapper">
+            <input 
+              type="email" 
+              id="form-email"
+              class="vds-input" 
+              data-vds-component="input"
+              required
+            />
+          </div>
+        </div>
+        
+        <div style="margin-bottom: var(--spacing-4);">
+          <label style="display: flex; align-items: center; gap: var(--spacing-3); cursor: pointer;">
+            <input type="checkbox" class="vds-checkbox" data-vds-component="checkbox" required />
+            <span>I agree to the terms and conditions</span>
+          </label>
+        </div>
+        
+        <div style="display: flex; gap: var(--spacing-4);">
+          <button 
+            type="submit" 
+            class="vds-button vds-button--primary" 
+            data-vds-component="button"
+          >
+            Submit
+          </button>
+          <button 
+            type="button" 
+            class="vds-button vds-button--secondary" 
+            data-vds-component="button"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script type="module">
+    import { initAll } from '../components/index.js';
+    initAll();
+    
+    // Initialize indeterminate checkboxes
+    document.querySelectorAll('[data-indeterminate="true"]').forEach(checkbox => {
+      checkbox.indeterminate = true;
+    });
+  </script>
+</body>
+</html>

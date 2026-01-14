@@ -1,0 +1,45 @@
+/**
+ * Shadow Design Tokens - CSS Variables
+ * 
+ * Verified for internal consistency across components.
+ * Figma Node: 755-588 (Drop Shadows)
+ */
+
+:root {
+  /* Base Shadows */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  
+  /* Component Shadows */
+  /* Dashboard Card Shadow - Verify against Figma Node: 755-413 */
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-dropdown: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-tooltip: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  
+  /* Button Shadows */
+  --shadow-button-default: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-button-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-button-active: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --shadow-button-focus: 0 0 0 3px rgba(38, 98, 217, 0.5);
+  --shadow-toggle-thumb: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  
+  /* Input Shadows */
+  --shadow-input-default: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-input-focus: 0 0 0 3px rgba(38, 98, 217, 0.1);
+  --shadow-input-error: 0 0 0 3px rgba(194, 0, 34, 0.1);
+  --shadow-focus-ring-lg: 0 0 0 4px rgba(38, 98, 217, 0.1);
+  
+  /* Elevation Levels (for reference - verify with Figma) */
+  --shadow-elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-elevation-2: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-elevation-3: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-elevation-4: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-elevation-5: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}

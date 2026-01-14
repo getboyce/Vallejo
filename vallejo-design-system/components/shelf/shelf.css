@@ -1,0 +1,98 @@
+/**
+ * Shelf Component Styles
+ */
+
+.vds-shelf {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--color-background-default, #FFFFFF);
+  box-shadow: var(--shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
+}
+
+.vds-shelf--left {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.vds-shelf--right {
+  right: 0;
+  transform: translateX(100%);
+}
+
+.vds-shelf--open {
+  transform: translateX(0);
+}
+
+.vds-shelf__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.vds-shelf__overlay--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.vds-shelf__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-4, 1rem);
+  border-bottom: 1px solid var(--color-border-default, #E2E5E9);
+}
+
+.vds-shelf__title {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-lg, 1.25rem);
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: var(--line-height-normal, 1.5);
+  color: var(--color-text-primary, #2F333C);
+}
+
+.vds-shelf__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-secondary, #46525D);
+  border-radius: var(--spacing-1, 0.25rem);
+  transition: all 0.2s ease-in-out;
+}
+
+.vds-shelf__close:hover {
+  background-color: var(--color-background-secondary, #F4F5F6);
+  color: var(--color-text-primary, #2F333C);
+}
+
+.vds-shelf__body {
+  flex: 1;
+  padding: var(--spacing-4, 1rem);
+  overflow-y: auto;
+}
+
+.vds-shelf__footer {
+  padding: var(--spacing-4, 1rem);
+  border-top: 1px solid var(--color-border-default, #E2E5E9);
+}

@@ -1,0 +1,43 @@
+/**
+ * Mobile Date Picker Component Styles
+ */
+
+.vds-mobile-date-picker {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.vds-mobile-date-picker__input {
+  width: 100%;
+  padding: var(--spacing-2, 0.5rem) var(--spacing-3, 0.75rem);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base, 1rem);
+  font-weight: var(--font-weight-normal, 400);
+  line-height: var(--line-height-normal, 1.5);
+  color: var(--color-text-primary, #2F333C);
+  background-color: var(--color-background-default, #FFFFFF);
+  border: 1px solid var(--color-border-default, #E2E5E9);
+  border-radius: var(--spacing-1, 0.25rem);
+  transition: all 0.2s ease-in-out;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.vds-mobile-date-picker__input:hover {
+  border-color: var(--color-border-dark, #C5CCD3);
+}
+
+.vds-mobile-date-picker__input:focus {
+  border-color: var(--color-border-focus, #2662D9);
+  outline: none;
+  box-shadow: var(--shadow-input-focus, 0 0 0 3px rgba(38, 98, 217, 0.1));
+}
+
+/* Mobile-specific styling */
+@media (max-width: 768px) {
+  .vds-mobile-date-picker__input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}

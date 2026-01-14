@@ -1,0 +1,35 @@
+/**
+ * Logo Component Styles
+ */
+
+.vds-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.vds-logo svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Size variants */
+.vds-logo[data-size="small"],
+.vds-logo[size="small"] {
+  width: 80px;
+  height: auto;
+}
+
+.vds-logo[data-size="medium"],
+.vds-logo[size="medium"] {
+  width: 120px;
+  height: auto;
+}
+
+.vds-logo[data-size="large"],
+.vds-logo[size="large"] {
+  width: 200px;
+  height: auto;
+}

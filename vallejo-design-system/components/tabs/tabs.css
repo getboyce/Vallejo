@@ -1,0 +1,57 @@
+/**
+ * Tabs Component Styles
+ */
+
+.vds-tabs {
+  width: 100%;
+}
+
+.vds-tabs__list {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--color-border-default, #E2E5E9);
+  margin-bottom: var(--spacing-6, 1.5rem);
+}
+
+.vds-tabs__tab {
+  background: none;
+  border: none;
+  padding: var(--spacing-3, 0.75rem) var(--spacing-6, 1.5rem);
+  font-size: var(--font-size-base, 1rem);
+  font-weight: var(--font-weight-medium, 500);
+  color: var(--color-text-secondary, #46525D);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+.vds-tabs__tab:hover {
+  color: var(--color-text-primary, #2F333C);
+  background-color: var(--color-background-secondary, #F4F5F6);
+}
+
+.vds-tabs__tab:focus {
+  outline: 2px solid var(--color-border-focus, #2662D9);
+  outline-offset: -2px;
+}
+
+.vds-tabs__tab--active {
+  color: var(--color-primary-400, #2662D9);
+  border-bottom-color: var(--color-primary-400, #2662D9);
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+.vds-tabs__tab:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.vds-tabs__panel {
+  display: block;
+}
+
+.vds-tabs__panel[hidden] {
+  display: none;
+}

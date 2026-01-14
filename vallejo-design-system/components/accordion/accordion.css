@@ -44,7 +44,7 @@
 
 .vds-accordion__trigger::after {
   content: '▼';
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs, 0.75rem);
   transition: transform 0.2s ease-in-out;
   color: var(--color-text-secondary, #46525D);
 }

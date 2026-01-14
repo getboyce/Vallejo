@@ -8,7 +8,7 @@
 
 .vds-tabs__list {
   display: flex;
-  gap: 0;
+  gap: var(--spacing-0, 0);
   border-bottom: 2px solid var(--color-border-default, #E2E5E9);
   margin-bottom: var(--spacing-6, 1.5rem);
 }

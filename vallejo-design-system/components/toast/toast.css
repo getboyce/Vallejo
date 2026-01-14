@@ -61,7 +61,7 @@
   box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
   pointer-events: auto;
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(calc(var(--spacing-2, 0.5rem) * -2));
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
@@ -72,7 +72,7 @@
 
 .vds-toast--hide {
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(calc(var(--spacing-2, 0.5rem) * -2));
 }
 
 .vds-toast__icon {

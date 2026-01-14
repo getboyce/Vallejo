@@ -12,12 +12,12 @@
 }
 
 .vds-card--hoverable:hover {
-  box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+  box-shadow: var(--shadow-card-hover, var(--shadow-medium, -2px 3px 30px 0 rgba(70, 82, 93, 0.12)));
 }
 
 .vds-card__header {
   padding: var(--spacing-6, 1.5rem);
-  border-bottom: 1px solid var(--color-border-default, #E5E7EB);
+  border-bottom: 1px solid var(--color-border-default, #E2E5E9);
 }
 
 .vds-card__body {
@@ -26,7 +26,7 @@
 
 .vds-card__footer {
   padding: var(--spacing-6, 1.5rem);
-  border-top: 1px solid var(--color-border-default, #E5E7EB);
+  border-top: 1px solid var(--color-border-default, #E2E5E9);
   background-color: var(--color-background-secondary, #F4F5F6);
 }
 

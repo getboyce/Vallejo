@@ -5,7 +5,7 @@
 .vds-input-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--spacing-2, 0.5rem);
   width: 100%;
   position: relative;
 }
@@ -14,7 +14,7 @@
   font-size: var(--font-size-sm, 0.875rem);
   font-weight: var(--font-weight-medium, 500);
   color: var(--color-text-primary, #2F333C);
-  margin-bottom: 0.25rem;
+  margin-bottom: var(--spacing-1, 0.25rem);
   transition: color 0.2s ease-in-out;
 }
 
@@ -39,7 +39,7 @@
   font-size: var(--font-size-base, 1rem);
   font-weight: var(--font-weight-normal, 400);
   line-height: var(--line-height-normal, 1.5);
-  color: var(--color-text-primary, #111827);
+  color: var(--color-text-primary, #2F333C);
   
   background-color: var(--color-background-default, #FFFFFF);
   border: 1px solid var(--color-border-default, #E2E5E9);
@@ -85,11 +85,11 @@
 }
 
 .vds-input__icon--left {
-  left: 0.75rem;
+  left: var(--spacing-3, 0.75rem);
 }
 
 .vds-input__icon--right {
-  right: 0.75rem;
+  right: var(--spacing-3, 0.75rem);
 }
 
 .vds-input__icon--clear {
@@ -142,7 +142,7 @@
 
 .vds-input:disabled,
 .vds-input[aria-disabled="true"] {
-  background-color: var(--color-background-secondary, #F9FAFB);
+  background-color: var(--color-background-secondary, #F4F5F6);
   color: var(--color-text-disabled, #C5CCD3);
   cursor: not-allowed;
   opacity: 0.6;
@@ -174,7 +174,7 @@
 .vds-input__supporting {
   font-size: var(--font-size-sm, 0.875rem);
   color: var(--color-text-secondary, #46525D);
-  margin-top: -0.25rem;
+  margin-top: calc(var(--spacing-1, 0.25rem) * -1);
   transition: color 0.2s ease-in-out;
 }
 
@@ -187,15 +187,15 @@
 .vds-input__error {
   font-size: var(--font-size-sm, 0.875rem);
   color: var(--color-error, #C20022);
-  margin-top: -0.25rem;
+  margin-top: calc(var(--spacing-1, 0.25rem) * -1);
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: var(--spacing-1, 0.25rem);
 }
 
 .vds-input__error::before {
   content: '⚠';
-  font-size: 1rem;
+  font-size: var(--font-size-base, 1rem);
 }
 
 /* Input sizes */

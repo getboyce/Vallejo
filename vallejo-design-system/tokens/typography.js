@@ -164,7 +164,7 @@ export const typography = {
     buttonExtraLarge: {
       fontSize: '1.25rem',   // 20px - Typography/Font Size/500
       fontWeight: '600',     // Typography/Weight/Semibold
-      lineHeight: '24px',    // 24px
+      lineHeight: '28px',    // 28px - matches Figma Desktop/Button Extra Large
       letterSpacing: '0',
       fontFamily: 'Inter',
     },

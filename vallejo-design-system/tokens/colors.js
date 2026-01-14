@@ -84,6 +84,19 @@ export const colors = {
     dark: '#C5CCD3',     // neutral/300
     focus: '#2662D9',    // primary/400 (blue)
   },
+  
+  // Dark mode colors (from Figma)
+  darkMode: {
+    primary: {
+      400: '#92B0EC',    // [Dark Mode] Primary/Copart Blue
+    },
+  },
+  
+  // Brand colors (from Figma)
+  brand: {
+    copartBlue: '#2662D9',  // color/brand/copart-blue
+    copartWhite: '#FFFFFF',  // color/brand/copart-white
+  },
 };
 
 // CSS Custom Properties export
@@ -144,5 +157,12 @@ export const colorsCSS = `
     --color-border-light: ${colors.border.light};
     --color-border-dark: ${colors.border.dark};
     --color-border-focus: ${colors.border.focus};
+    
+    /* Dark Mode Colors */
+    --color-dark-mode-primary-400: ${colors.darkMode.primary[400]};
+    
+    /* Brand Colors */
+    --color-brand-copart-blue: ${colors.brand.copartBlue};
+    --color-brand-copart-white: ${colors.brand.copartWhite};
   }
 `;

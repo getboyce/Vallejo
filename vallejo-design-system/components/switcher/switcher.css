@@ -5,7 +5,7 @@
 .vds-switcher {
   display: inline-flex;
   align-items: center;
-  gap: 0;
+  gap: var(--spacing-0, 0);
   background-color: var(--color-background-secondary, #F4F5F6);
   border-radius: var(--spacing-1, 0.25rem);
   padding: var(--spacing-1, 0.25rem);

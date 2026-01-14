@@ -32,36 +32,36 @@
 
 /* Position: Top */
 .vds-tooltip--top::before {
-  bottom: -4px;
+  bottom: calc(var(--spacing-1, 0.25rem) * -1);
   left: 50%;
   transform: translateX(-50%);
-  border-width: 4px 4px 0 4px;
+  border-width: var(--spacing-1, 0.25rem) var(--spacing-1, 0.25rem) 0 var(--spacing-1, 0.25rem);
   border-color: var(--color-background-inverse, #2F333C) transparent transparent transparent;
 }
 
 /* Position: Bottom */
 .vds-tooltip--bottom::before {
-  top: -4px;
+  top: calc(var(--spacing-1, 0.25rem) * -1);
   left: 50%;
   transform: translateX(-50%);
-  border-width: 0 4px 4px 4px;
+  border-width: 0 var(--spacing-1, 0.25rem) var(--spacing-1, 0.25rem) var(--spacing-1, 0.25rem);
   border-color: transparent transparent var(--color-background-inverse, #2F333C) transparent;
 }
 
 /* Position: Left */
 .vds-tooltip--left::before {
-  right: -4px;
+  right: calc(var(--spacing-1, 0.25rem) * -1);
   top: 50%;
   transform: translateY(-50%);
-  border-width: 4px 0 4px 4px;
+  border-width: var(--spacing-1, 0.25rem) 0 var(--spacing-1, 0.25rem) var(--spacing-1, 0.25rem);
   border-color: transparent transparent transparent var(--color-background-inverse, #2F333C);
 }
 
 /* Position: Right */
 .vds-tooltip--right::before {
-  left: -4px;
+  left: calc(var(--spacing-1, 0.25rem) * -1);
   top: 50%;
   transform: translateY(-50%);
-  border-width: 4px 4px 4px 0;
+  border-width: var(--spacing-1, 0.25rem) var(--spacing-1, 0.25rem) var(--spacing-1, 0.25rem) 0;
   border-color: transparent var(--color-background-inverse, #2F333C) transparent transparent;
 }

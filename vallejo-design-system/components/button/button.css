@@ -74,7 +74,7 @@
   padding: var(--spacing-3, 0.75rem) var(--spacing-6, 1.5rem);
   font-size: var(--font-size-20px, 1.25rem); /* 20px */
   font-weight: var(--font-weight-semibold, 600);
-  line-height: var(--line-height-24px, 1.5rem); /* 24px */
+  line-height: 28px; /* 28px - matches Figma Desktop/Button Extra Large */
   min-height: 3.5rem;
 }
 
@@ -98,18 +98,18 @@
 /* Variants - Secondary */
 .vds-button--secondary {
   background-color: var(--color-background-default, #FFFFFF);
-  color: var(--color-text-primary, #111827);
+  color: var(--color-text-primary, #2F333C);
   border-color: var(--color-border-default, #E2E5E9);
   box-shadow: var(--shadow-button-default);
 }
 
 .vds-button--secondary:hover:not(:disabled):not([aria-disabled="true"]) {
-  background-color: var(--color-background-secondary, #F9FAFB);
+  background-color: var(--color-background-secondary, #F4F5F6);
   border-color: var(--color-border-dark, #C5CCD3);
 }
 
 .vds-button--secondary:active:not(:disabled):not([aria-disabled="true"]) {
-  background-color: var(--color-background-tertiary, #F3F4F6);
+  background-color: var(--color-background-tertiary, #E2E5E9);
   box-shadow: var(--shadow-button-active);
 }
 
@@ -128,7 +128,7 @@
 /* Variants - Danger */
 .vds-button--danger {
   background-color: var(--color-error, #EF4444);
-  color: white;
+  color: var(--color-text-inverse, #FFFFFF);
   box-shadow: var(--shadow-button-default);
 }
 
@@ -140,12 +140,12 @@
 /* Variants - Ghost */
 .vds-button--ghost {
   background-color: transparent;
-  color: var(--color-text-primary, #111827);
+  color: var(--color-text-primary, #2F333C);
   border: none;
 }
 
 .vds-button--ghost:hover:not(:disabled):not([aria-disabled="true"]) {
-  background-color: var(--color-background-secondary, #F9FAFB);
+  background-color: var(--color-background-secondary, #F4F5F6);
 }
 
 /* Icon support */

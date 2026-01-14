@@ -4,23 +4,26 @@ This document describes all components available in the Vallejo Design System.
 
 ## Foundation Components
 
-### Typography
-**Status:** Placeholder (needs Figma extraction)
+### Typography ✅
+**Status:** Implemented
 - Text styles (h1-h6, body, caption, etc.)
 - Font families and sizes
 - Line heights and letter spacing
+- See `tokens/typography.js` for all typography tokens
 
-### Icons
-**Status:** Placeholder (needs Figma extraction)
-- SVG icon library
+### Icons ✅
+**Status:** Implemented
+- SVG icon library (88+ icons in `assets/icons/`)
 - Icon sizes and colors
 - Usage guidelines
+- Component: `components/icon/icon.js`
 
-### Logos
-**Status:** Placeholder (needs Figma extraction)
-- Brand logos
-- Logo variations
+### Logos ✅
+**Status:** Implemented
+- Brand logos (Copart logos in `assets/logos/`)
+- Logo variations (light/dark/default modes)
 - Usage guidelines
+- Component: `components/logo/logo.js`
 
 ## Form Components
 
@@ -95,142 +98,163 @@ input.setError('This field is required');
 input.setHelperText('Helper text here');
 ```
 
-### Checkbox
-**Status:** Placeholder (needs implementation)
+### Checkbox ✅
+**Status:** Implemented
 - Single and multiple selection
 - Indeterminate state
 - Disabled state
+- Component: `components/checkbox/checkbox.js`
 
-### Radio Buttons
-**Status:** Placeholder (needs implementation)
+### Radio Buttons ✅
+**Status:** Implemented
 - Radio group selection
 - Disabled state
 - Required validation
+- Component: `components/radio/radio.js`
 
-### Toggle
-**Status:** Placeholder (needs implementation)
+### Toggle ✅
+**Status:** Implemented
 - On/off toggle switch
 - Disabled state
 - Size variants
+- Component: `components/toggle/toggle.js`
 
-### Input Dropdown
-**Status:** Placeholder (needs implementation)
+### Input Dropdown ✅
+**Status:** Implemented
 - Select dropdown
 - Searchable dropdown
 - Multi-select dropdown
+- Component: `components/dropdown/dropdown.js`
 
-### Date Picker
-**Status:** Placeholder (needs implementation)
+### Date Picker ✅
+**Status:** Implemented
 - Date selection
 - Date range selection
 - Calendar view
+- Components: `components/date-picker/date-picker.js` and `components/mobile-date-picker/mobile-date-picker.js`
 
-### Filter Chips
-**Status:** Placeholder (needs implementation)
+### Filter Chips ✅
+**Status:** Implemented
 - Filter selection chips
 - Multiple selection
 - Active/inactive states
+- Component: `components/filter-chip/filter-chip.js`
 
 ## Feedback Components
 
-### Alert
-**Status:** Placeholder (needs implementation)
+### Alert ✅
+**Status:** Implemented
 - Success, warning, error, info variants
 - Dismissible alerts
 - Icon support
+- Component: `components/alert/alert.js`
 
-### Toast
-**Status:** Placeholder (needs implementation)
+### Toast ✅
+**Status:** Implemented
 - Notification toasts
 - Auto-dismiss
 - Stack management
+- Component: `components/toast/toast.js`
 
-### Tooltip
-**Status:** Placeholder (needs implementation)
+### Tooltip ✅
+**Status:** Implemented
 - Hover tooltips
 - Position variants
 - Rich content support
+- Component: `components/tooltip/tooltip.js`
 
-### Status Token
-**Status:** Placeholder (needs implementation)
+### Status Token ✅
+**Status:** Implemented
 - Status indicators
 - Color-coded states
 - Icon support
+- Component: `components/status-token/status-token.js`
 
 ## Navigation Components
 
-### Tabbed Navigation
-**Status:** Placeholder (needs implementation)
+### Tabbed Navigation ✅
+**Status:** Implemented
 - Tab navigation
 - Active state
 - Disabled tabs
+- Component: `components/tabs/tabs.js`
 
-### Switcher
-**Status:** Placeholder (needs implementation)
+### Switcher ✅
+**Status:** Implemented
 - View switcher
 - Option selection
 - Active state
+- Component: `components/switcher/switcher.js`
 
-### Pagination
-**Status:** Placeholder (needs implementation)
+### Pagination ✅
+**Status:** Implemented
 - Page navigation
 - Page numbers
 - Previous/next controls
+- Component: `components/pagination/pagination.js`
 
 ## Layout Components
 
-### Dashboard Cards
-**Status:** Placeholder (needs implementation)
+### Dashboard Cards ✅
+**Status:** Implemented
 - Card container
 - Header, body, footer sections
 - Hover states
+- Component: `components/card/card.js`
 
-### Modal
-**Status:** Placeholder (needs implementation)
+### Modal ✅
+**Status:** Implemented
 - Modal dialogs
 - Overlay
 - Close button
 - Size variants
+- Component: `components/modal/modal.js`
 
-### Shelf
-**Status:** Placeholder (needs implementation)
+### Shelf ✅
+**Status:** Implemented
 - Side panel
 - Slide-in animation
 - Overlay
+- Component: `components/shelf/shelf.js`
 
-### Mobile Shelf
-**Status:** Placeholder (needs implementation)
+### Mobile Shelf ✅
+**Status:** Implemented
 - Mobile side panel
 - Bottom sheet variant
 - Touch gestures
+- Component: `components/mobile-shelf/mobile-shelf.js`
 
-### Accordion
-**Status:** Placeholder (needs implementation)
+### Accordion ✅
+**Status:** Implemented
 - Collapsible sections
 - Single/multiple open
 - Icon indicators
+- Component: `components/accordion/accordion.js`
 
-### Table
-**Status:** Placeholder (needs implementation)
+### Table ✅
+**Status:** Implemented
 - Data tables
 - Sortable columns
 - Row selection
 - Pagination
+- Component: `components/table/table.js`
 
 ## Utility Components
 
-### Search Bar
-**Status:** Placeholder (needs implementation)
+### Search Bar ✅
+**Status:** Implemented
 - Search input
 - Clear button
 - Loading state
 - Results display
+- Component: `components/search-bar/search-bar.js`
 
-### Progress Tracker
-**Status:** Placeholder (needs implementation)
+### Progress Tracker ✅
+**Status:** Implemented
 - Step indicator
 - Progress bar
 - Completion states
+- Component: `components/progress-tracker/progress-tracker.js`
 
 ## Component Patterns
 

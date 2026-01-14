@@ -6,7 +6,12 @@
  */
 
 :root {
-  /* Base Shadows */
+  /* Figma Dropshadow Tokens (from node 755-588) */
+  --shadow-light: 0 3px 30px 0 rgba(230, 230, 230, 0.7); /* Dropshadow/Light */
+  --shadow-medium: -2px 3px 30px 0 rgba(70, 82, 93, 0.12); /* Dropshadow/Medium */
+  --shadow-dark: -4px 6px 30px 4px rgba(108, 112, 115, 0.2); /* Dropshadow/Dark */
+  
+  /* Base Shadows (Legacy - for compatibility) */
   --shadow-none: none;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
@@ -16,12 +21,12 @@
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
   
-  /* Component Shadows */
-  /* Dashboard Card Shadow - Verify against Figma Node: 755-413 */
-  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --shadow-dropdown: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-tooltip: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  /* Component Shadows (using Figma Dropshadow tokens) */
+  --shadow-card: var(--shadow-light); /* Dropshadow/Light */
+  --shadow-card-hover: var(--shadow-medium); /* Dropshadow/Medium */
+  --shadow-modal: var(--shadow-dark); /* Dropshadow/Dark */
+  --shadow-dropdown: var(--shadow-medium); /* Dropshadow/Medium */
+  --shadow-tooltip: var(--shadow-light); /* Dropshadow/Light */
   
   /* Button Shadows */
   --shadow-button-default: 0 1px 2px 0 rgba(0, 0, 0, 0.05);

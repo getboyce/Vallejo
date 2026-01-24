@@ -60,9 +60,6 @@ The showcase page includes:
 - [Components](./docs/components.md) - All available components
 - [Usage Guidelines](./docs/usage.md) - Best practices and patterns
 - [Cursor Integration](./docs/cursor-integration.md) - Instructions for Cursor sessions
-- [Figma Audit](./FIGMA_AUDIT.md) - Comparison between Figma designs and codebase implementation
-- [Final Verification Report](./FINAL_VERIFICATION_REPORT.md) - Complete verification status and fixes
-- [100% Verification Report](./100_PERCENT_VERIFICATION.md) - Complete 100% verification status
 
 ## 🎨 Components
 

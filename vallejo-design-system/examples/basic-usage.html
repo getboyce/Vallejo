@@ -30,7 +30,7 @@
     </div>
     
     <h3 style="margin-top: var(--spacing-6);">Sizes</h3>
-    <div style="display: flex; gap: var(--spacing-4); align-items: center; margin-top: var(--spacing-4);">
+    <div style="display: flex; gap: var(--spacing-4); align-items: center; margin-top: var(--spacing-4); flex-wrap: wrap;">
       <button class="vds-button vds-button--primary vds-button--sm" data-vds-component="button">
         Small
       </button>
@@ -40,10 +40,13 @@
       <button class="vds-button vds-button--primary vds-button--lg" data-vds-component="button">
         Large
       </button>
+      <button class="vds-button vds-button--primary vds-button--xl" data-vds-component="button">
+        Extra Large
+      </button>
     </div>
     
     <h3 style="margin-top: var(--spacing-6);">States</h3>
-    <div style="display: flex; gap: var(--spacing-4); margin-top: var(--spacing-4);">
+    <div style="display: flex; gap: var(--spacing-4); margin-top: var(--spacing-4); flex-wrap: wrap;">
       <button class="vds-button vds-button--primary" data-vds-component="button" disabled>
         Disabled
       </button>
@@ -51,47 +54,100 @@
         Loading
       </button>
     </div>
+    
+    <h3 style="margin-top: var(--spacing-6);">Disabled States (All Variants)</h3>
+    <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-2); font-size: 0.875rem;">All button variants use the same disabled styling per Figma specifications.</p>
+    <div style="display: flex; gap: var(--spacing-4); margin-top: var(--spacing-4); flex-wrap: wrap;">
+      <button class="vds-button vds-button--primary" data-vds-component="button" disabled>
+        Primary Disabled
+      </button>
+      <button class="vds-button vds-button--outline" data-vds-component="button" disabled>
+        Outline Disabled
+      </button>
+      <button class="vds-button vds-button--tertiary" data-vds-component="button" disabled>
+        Text Disabled
+      </button>
+    </div>
+    
+    <h3 style="margin-top: var(--spacing-6);">Extra Large Variants</h3>
+    <div style="display: flex; gap: var(--spacing-4); margin-top: var(--spacing-4); flex-wrap: wrap;">
+      <button class="vds-button vds-button--primary vds-button--xl" data-vds-component="button">
+        Primary
+      </button>
+      <button class="vds-button vds-button--outline vds-button--xl" data-vds-component="button">
+        Outline
+      </button>
+      <button class="vds-button vds-button--tertiary vds-button--xl" data-vds-component="button">
+        Text
+      </button>
+    </div>
   </section>
   
   <section style="margin-bottom: var(--spacing-12);">
     <h2>Inputs</h2>
-    <div style="display: flex; flex-direction: column; gap: var(--spacing-4); margin-top: var(--spacing-4); max-width: 400px;">
+    <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-4);">Updated to match Figma specifications exactly.</p>
+    <div style="display: flex; flex-direction: column; gap: var(--spacing-6); margin-top: var(--spacing-4); max-width: 400px;">
       <div class="vds-input-wrapper">
+        <label class="vds-input-label" for="basic-input-default">Label</label>
         <input 
           type="text" 
+          id="basic-input-default"
           class="vds-input" 
           data-vds-component="input"
-          placeholder="Enter text"
+          placeholder="Placeholder"
         />
+        <div class="vds-input__supporting">Supporting text</div>
       </div>
       
       <div class="vds-input-wrapper">
+        <label class="vds-input-label" for="basic-input-email">Email Address</label>
         <input 
           type="email" 
+          id="basic-input-email"
           class="vds-input" 
           data-vds-component="input"
-          placeholder="Email address"
+          placeholder="you@example.com"
         />
+        <div class="vds-input__supporting">Supporting text</div>
       </div>
       
-      <div class="vds-input-wrapper">
+      <div class="vds-input-wrapper vds-input-wrapper--error">
+        <label class="vds-input-label" for="basic-input-error">Label</label>
         <input 
           type="text" 
+          id="basic-input-error"
           class="vds-input vds-input--error" 
           data-vds-component="input"
           data-error="true"
-          placeholder="Error state"
+          value="Input"
         />
+        <div class="vds-input__error">Error message</div>
       </div>
       
-      <div class="vds-input-wrapper">
+      <div class="vds-input-wrapper vds-input-wrapper--disabled">
+        <label class="vds-input-label" for="basic-input-disabled">Label</label>
         <input 
           type="text" 
+          id="basic-input-disabled"
           class="vds-input" 
           data-vds-component="input"
-          placeholder="Disabled input"
+          placeholder="Placeholder"
           disabled
         />
+        <div class="vds-input__supporting">Supporting text</div>
+      </div>
+
+      <div class="vds-input-wrapper">
+        <label class="vds-input-label" for="basic-search">Search</label>
+        <input 
+          type="search" 
+          id="basic-search"
+          class="vds-input vds-input--search" 
+          data-vds-component="input"
+          data-search="true"
+          placeholder="Search..."
+        />
+        <div class="vds-input__supporting">Supporting text</div>
       </div>
     </div>
   </section>
@@ -100,29 +156,29 @@
     <h2>Form Example</h2>
     <form style="max-width: 500px; margin-top: var(--spacing-4);">
       <div class="vds-input-wrapper" style="margin-bottom: var(--spacing-4);">
-        <label for="name" style="display: block; margin-bottom: var(--spacing-2); font-weight: var(--font-weight-medium);">
-          Name
-        </label>
+        <label class="vds-input-label" for="name">Name</label>
         <input 
           type="text" 
           id="name"
           class="vds-input" 
           data-vds-component="input"
+          placeholder="Enter your name"
           required
         />
+        <div class="vds-input__supporting">Supporting text</div>
       </div>
       
       <div class="vds-input-wrapper" style="margin-bottom: var(--spacing-6);">
-        <label for="email" style="display: block; margin-bottom: var(--spacing-2); font-weight: var(--font-weight-medium);">
-          Email
-        </label>
+        <label class="vds-input-label" for="email">Email</label>
         <input 
           type="email" 
           id="email"
           class="vds-input" 
           data-vds-component="input"
+          placeholder="you@example.com"
           required
         />
+        <div class="vds-input__supporting">Supporting text</div>
       </div>
       
       <div style="display: flex; gap: var(--spacing-4);">

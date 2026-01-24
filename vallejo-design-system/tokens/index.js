@@ -12,7 +12,7 @@ import * as shadowsModule from './shadows.js';
 // Re-export individual tokens
 export { colors, colorsCSS } from './colors.js';
 export { typography, typographyCSS } from './typography.js';
-export { spacing, spacingSemantic, spacingComponents, spacingCSS } from './spacing.js';
+export { spacing, spacingSemantic, spacingComponents, spacingCSS, borderRadius } from './spacing.js';
 export { shadows, shadowsCSS } from './shadows.js';
 
 // Combined CSS export - use module properties to ensure they're available

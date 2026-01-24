@@ -198,13 +198,13 @@
           <code style="font-size: 0.75rem; color: white;">#2662D9</code>
         </div>
         <div class="token-swatch">
-          <div class="token-swatch-color" style="background: var(--color-primary-500, #063598);"></div>
+          <div class="token-swatch-color" style="background: var(--color-primary-500, #003298);"></div>
           <div>Primary 500</div>
-          <code style="font-size: 0.75rem; color: white;">#063598</code>
+          <code style="font-size: 0.75rem; color: white;">#003298</code>
         </div>
         <div class="token-swatch">
-          <div class="token-swatch-color" style="background: var(--color-primary-600, #0F2757);"></div>
-          <div>Primary 600</div>
+          <div class="token-swatch-color" style="background: var(--color-primary-900, #0F2757);"></div>
+          <div>Primary 900</div>
           <code style="font-size: 0.75rem; color: white;">#0F2757</code>
         </div>
       </div>
@@ -476,6 +476,28 @@
         </div>
       </div>
       
+      <h3>Disabled States</h3>
+      <p style="color: var(--color-text-secondary); margin-bottom: 1rem;">All button variants use the same disabled styling (solid light grey background with dark grey text) per Figma specifications.</p>
+      <div class="component-demo">
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <button class="vds-button vds-button--primary" data-vds-component="button" disabled>Primary Disabled</button>
+          <button class="vds-button vds-button--outline" data-vds-component="button" disabled>Outline Disabled</button>
+          <button class="vds-button vds-button--tertiary" data-vds-component="button" disabled>Text Disabled</button>
+          <button class="vds-button vds-button--secondary" data-vds-component="button" disabled>Secondary Disabled</button>
+        </div>
+      </div>
+      
+      <h3>Extra Large Buttons</h3>
+      <div class="component-demo">
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button class="vds-button vds-button--primary vds-button--xl" data-vds-component="button">Primary</button>
+            <button class="vds-button vds-button--outline vds-button--xl" data-vds-component="button">Outline</button>
+            <button class="vds-button vds-button--tertiary vds-button--xl" data-vds-component="button">Text</button>
+          </div>
+        </div>
+      </div>
+      
       <div class="code-block">
 &lt;button class="vds-button vds-button--primary" data-vds-component="button"&gt;
   Click Me
@@ -486,19 +508,23 @@
     <!-- Inputs -->
     <section id="inputs" class="docs-section">
       <h2>Inputs</h2>
+      <p>Input components updated to match Figma specifications exactly. All typography, colors, and spacing now match the design system.</p>
       
       <h3>Basic Input</h3>
       <div class="component-demo">
         <div class="vds-input-wrapper" style="max-width: 400px;">
-          <input type="text" class="vds-input" data-vds-component="input" placeholder="Enter text">
+          <label class="vds-input-label" for="docs-input-basic">Label</label>
+          <input type="text" id="docs-input-basic" class="vds-input" data-vds-component="input" placeholder="Placeholder">
+          <div class="vds-input__supporting">Supporting text</div>
         </div>
       </div>
       
       <h3>Input with Label</h3>
       <div class="component-demo">
         <div class="vds-input-wrapper" style="max-width: 400px;">
-          <label style="display: block; margin-bottom: 0.5rem; font-weight: var(--font-weight-medium);">Email Address</label>
-          <input type="email" class="vds-input" data-vds-component="input" placeholder="you@example.com">
+          <label class="vds-input-label" for="docs-input-email">Email Address</label>
+          <input type="email" id="docs-input-email" class="vds-input" data-vds-component="input" placeholder="you@example.com">
+          <div class="vds-input__supporting">Supporting text</div>
         </div>
       </div>
       
@@ -506,13 +532,19 @@
       <div class="component-demo">
         <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px;">
           <div class="vds-input-wrapper">
-            <input type="text" class="vds-input" data-vds-component="input" placeholder="Default state">
+            <label class="vds-input-label" for="docs-input-default">Label</label>
+            <input type="text" id="docs-input-default" class="vds-input" data-vds-component="input" placeholder="Placeholder">
+            <div class="vds-input__supporting">Supporting text</div>
           </div>
-          <div class="vds-input-wrapper">
-            <input type="text" class="vds-input vds-input--error" data-vds-component="input" data-error="true" placeholder="Error state">
+          <div class="vds-input-wrapper vds-input-wrapper--error">
+            <label class="vds-input-label" for="docs-input-error">Label</label>
+            <input type="text" id="docs-input-error" class="vds-input vds-input--error" data-vds-component="input" data-error="true" value="Input">
+            <div class="vds-input__error">Error message</div>
           </div>
-          <div class="vds-input-wrapper">
-            <input type="text" class="vds-input" data-vds-component="input" placeholder="Disabled" disabled>
+          <div class="vds-input-wrapper vds-input-wrapper--disabled">
+            <label class="vds-input-label" for="docs-input-disabled">Label</label>
+            <input type="text" id="docs-input-disabled" class="vds-input" data-vds-component="input" placeholder="Placeholder" disabled>
+            <div class="vds-input__supporting">Supporting text</div>
           </div>
         </div>
       </div>
@@ -521,9 +553,9 @@
       <div class="component-demo">
         <div style="max-width: 400px;">
           <div class="vds-input-wrapper">
-            <label style="display: block; margin-bottom: 0.5rem; font-weight: var(--font-weight-medium);">Password</label>
-            <input type="password" class="vds-input" data-vds-component="input" placeholder="Enter password">
-            <div class="vds-input__helper" style="margin-top: 0.25rem; font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+            <label class="vds-input-label" for="docs-input-password">Password</label>
+            <input type="password" id="docs-input-password" class="vds-input" data-vds-component="input" placeholder="Enter password">
+            <div class="vds-input__supporting">
               Must be at least 8 characters long
             </div>
           </div>
@@ -534,7 +566,9 @@
       <div class="component-demo">
         <div style="max-width: 400px;">
           <div class="vds-input-wrapper">
-            <input type="search" class="vds-input vds-input--search" data-vds-component="input" data-search="true" placeholder="Search...">
+            <label class="vds-input-label" for="docs-input-search">Label</label>
+            <input type="search" id="docs-input-search" class="vds-input vds-input--search" data-vds-component="input" data-search="true" placeholder="Placeholder">
+            <div class="vds-input__supporting">Supporting text</div>
           </div>
         </div>
       </div>

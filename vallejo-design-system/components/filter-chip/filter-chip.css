@@ -39,8 +39,8 @@
 }
 
 .vds-filter-chip--selected:hover:not(.vds-filter-chip--disabled) {
-  background-color: var(--color-primary-500, #063598);
-  border-color: var(--color-primary-500, #063598);
+  background-color: var(--color-primary-500, #003298);
+  border-color: var(--color-primary-500, #003298);
 }
 
 .vds-filter-chip--disabled {

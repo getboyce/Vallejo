@@ -8,8 +8,20 @@
  *     Click Me
  *   </button>
  * 
- * Variants: primary, secondary, tertiary, danger, ghost
- * Sizes: sm, md, lg
+ * Variants: 
+ *   - primary (solid blue)
+ *   - secondary (solid dark blue)
+ *   - outline (outline primary blue)
+ *   - outline-secondary (outline dark blue)
+ *   - outline-tertiary (outline gray)
+ *   - tertiary (text-only primary blue)
+ *   - tertiary-secondary (text-only dark blue)
+ *   - tertiary-gray (text-only gray)
+ *   - disabled-solid (solid gray)
+ *   - watchlist (with heart icon)
+ *   - watchlist-icon-only (icon only)
+ *   - danger, ghost
+ * Sizes: sm, md, lg, xl
  * States: default, hover, active, disabled, loading
  */
 

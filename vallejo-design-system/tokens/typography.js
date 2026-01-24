@@ -9,8 +9,8 @@ export const typography = {
   // Font Families (from Figma)
   fontFamily: {
     primary: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    secondary: 'Georgia, "Times New Roman", serif',
-    mono: '"SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace',
+    secondary: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    mono: 'Inter, "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace',
   },
   
   // Font Sizes (from Figma - Typography/Font Size tokens)
@@ -155,7 +155,7 @@ export const typography = {
       fontFamily: 'Inter',
     },
     buttonLarge: {
-      fontSize: '1.125rem',   // 18px
+      fontSize: '1rem',       // 16px - Updated to match Figma and CSS implementation
       fontWeight: '600',      // Typography/Weight/Semibold
       lineHeight: '22px',     // 22px
       letterSpacing: '0',

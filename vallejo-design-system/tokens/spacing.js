@@ -13,9 +13,11 @@ export const spacing = {
   4: '1rem',      // 16px
   5: '1.25rem',   // 20px
   6: '1.5rem',    // 24px
+  7: '1.75rem',   // 28px
   8: '2rem',      // 32px
   10: '2.5rem',   // 40px
   12: '3rem',     // 48px
+  14: '3.5rem',   // 56px
   16: '4rem',     // 64px
   20: '5rem',     // 80px
   24: '6rem',     // 96px
@@ -35,6 +37,12 @@ export const spacingSemantic = {
   '2xl': spacing[12], // 48px
   '3xl': spacing[16], // 64px
   '4xl': spacing[24], // 96px
+};
+
+// Border radius tokens (from Figma size/border-radius)
+export const borderRadius = {
+  200: '0.5rem',  // 8px - size/border-radius/200 (Small/Medium buttons)
+  300: '0.75rem', // 12px - size/border-radius/300 (Large/Extra Large buttons)
 };
 
 // Component-specific spacing
@@ -76,9 +84,11 @@ export const spacingCSS = `
     --spacing-4: ${spacing[4]};
     --spacing-5: ${spacing[5]};
     --spacing-6: ${spacing[6]};
+    --spacing-7: ${spacing[7]};
     --spacing-8: ${spacing[8]};
     --spacing-10: ${spacing[10]};
     --spacing-12: ${spacing[12]};
+    --spacing-14: ${spacing[14]};
     --spacing-16: ${spacing[16]};
     --spacing-20: ${spacing[20]};
     --spacing-24: ${spacing[24]};
@@ -92,5 +102,9 @@ export const spacingCSS = `
     --spacing-xl: ${spacingSemantic.xl};
     --spacing-2xl: ${spacingSemantic['2xl']};
     --spacing-3xl: ${spacingSemantic['3xl']};
+    
+    /* Border Radius (from Figma size/border-radius) */
+    --border-radius-200: ${borderRadius[200]}; /* 8px - Small/Medium buttons */
+    --border-radius-300: ${borderRadius[300]}; /* 12px - Large/Extra Large buttons */
   }
 `;

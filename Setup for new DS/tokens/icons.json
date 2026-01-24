@@ -1,0 +1,429 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Vallejo Design System - Icon Library",
+  "description": "Complete icon library for the Vallejo Design System, extracted from Figma",
+  "version": "1.0",
+  "lastUpdated": "2025-01-23",
+  "icons": {
+    "close": {
+      "name": "Close",
+      "aliases": ["x", "cancel", "dismiss"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M18 6L6 18M6 6l12 12\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Close or cancel action"
+    },
+    "close-circle": {
+      "name": "Close Circle",
+      "aliases": ["x-circle", "cancel-circle"],
+      "viewBox": "0 0 24 24",
+      "path": "<circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M15 9l-6 6M9 9l6 6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Close action in a circle"
+    },
+    "check": {
+      "name": "Check",
+      "aliases": ["checkmark", "tick", "done"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M20 6L9 17l-5-5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Checkmark or success indicator"
+    },
+    "check-circle": {
+      "name": "Check Circle",
+      "aliases": ["checkmark-circle", "success"],
+      "viewBox": "0 0 24 24",
+      "path": "<circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M9 12l2 2 4-4\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Checkmark in a circle"
+    },
+    "chevron-up": {
+      "name": "Chevron Up",
+      "aliases": ["arrow-up", "up"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M18 15l-6-6-6 6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Upward pointing chevron"
+    },
+    "chevron-down": {
+      "name": "Chevron Down",
+      "aliases": ["arrow-down", "down"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M6 9l6 6 6-6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Downward pointing chevron"
+    },
+    "chevron-left": {
+      "name": "Chevron Left",
+      "aliases": ["arrow-left", "left"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M15 18l-6-6 6-6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Leftward pointing chevron"
+    },
+    "chevron-right": {
+      "name": "Chevron Right",
+      "aliases": ["arrow-right", "right"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M9 18l6-6-6-6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Rightward pointing chevron"
+    },
+    "search": {
+      "name": "Search",
+      "aliases": ["magnifying-glass", "find"],
+      "viewBox": "0 0 24 24",
+      "path": "<circle cx=\"11\" cy=\"11\" r=\"8\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"m21 21-4.35-4.35\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Search or magnifying glass"
+    },
+    "heart": {
+      "name": "Heart",
+      "aliases": ["favorite", "like", "love"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>",
+      "description": "Heart or favorite icon"
+    },
+    "heart-filled": {
+      "name": "Heart Filled",
+      "aliases": ["favorite-filled", "like-filled"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z\" fill=\"currentColor\"/>",
+      "description": "Filled heart icon"
+    },
+    "info": {
+      "name": "Info",
+      "aliases": ["information", "help-info"],
+      "viewBox": "0 0 24 24",
+      "path": "<circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M12 16v-4M12 8h.01\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/>",
+      "description": "Information icon"
+    },
+    "warning": {
+      "name": "Warning",
+      "aliases": ["alert", "exclamation"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><path d=\"M12 9v4M12 17h.01\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/>",
+      "description": "Warning triangle with exclamation"
+    },
+    "error": {
+      "name": "Error",
+      "aliases": ["x-circle", "close-circle"],
+      "viewBox": "0 0 24 24",
+      "path": "<circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M12 8v4M12 16h.01\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/>",
+      "description": "Error or close circle"
+    },
+    "success": {
+      "name": "Success",
+      "aliases": ["check-circle"],
+      "viewBox": "0 0 24 24",
+      "path": "<circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M9 12l2 2 4-4\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Success checkmark in circle"
+    },
+    "clock": {
+      "name": "Clock",
+      "aliases": ["time", "timer"],
+      "viewBox": "0 0 24 24",
+      "path": "<circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M12 6v6l4 2\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Clock or time icon"
+    },
+    "calendar": {
+      "name": "Calendar",
+      "aliases": ["date"],
+      "viewBox": "0 0 24 24",
+      "path": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M16 2v4M8 2v4M3 10h18\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/>",
+      "description": "Calendar icon"
+    },
+    "user": {
+      "name": "User",
+      "aliases": ["profile", "person", "account"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><circle cx=\"12\" cy=\"7\" r=\"4\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/>",
+      "description": "User profile icon"
+    },
+    "settings": {
+      "name": "Settings",
+      "aliases": ["gear", "cog"],
+      "viewBox": "0 0 24 24",
+      "path": "<circle cx=\"12\" cy=\"12\" r=\"3\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/>",
+      "description": "Settings or gear icon"
+    },
+    "filter": {
+      "name": "Filter",
+      "aliases": ["funnel"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M22 3H2l8 9.46V19l4 2v-8.54L22 3z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>",
+      "description": "Filter icon"
+    },
+    "menu": {
+      "name": "Menu",
+      "aliases": ["hamburger", "nav"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/>",
+      "description": "Hamburger menu icon"
+    },
+    "plus": {
+      "name": "Plus",
+      "aliases": ["add"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M12 5v14M5 12h14\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/>",
+      "description": "Plus or add icon"
+    },
+    "minus": {
+      "name": "Minus",
+      "aliases": ["remove", "subtract"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M5 12h14\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/>",
+      "description": "Minus or remove icon"
+    },
+    "download": {
+      "name": "Download",
+      "aliases": ["save"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><path d=\"M7 10l5 5 5-5M12 15V3\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Download icon"
+    },
+    "upload": {
+      "name": "Upload",
+      "aliases": ["import"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><path d=\"M17 8l-5-5-5 5M12 3v12\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Upload icon"
+    },
+    "trash": {
+      "name": "Trash",
+      "aliases": ["delete", "remove"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>",
+      "description": "Trash or delete icon"
+    },
+    "edit": {
+      "name": "Edit",
+      "aliases": ["pencil"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><path d=\"M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>",
+      "description": "Edit or pencil icon"
+    },
+    "more": {
+      "name": "More",
+      "aliases": ["ellipsis", "dots", "options"],
+      "viewBox": "0 0 24 24",
+      "path": "<circle cx=\"12\" cy=\"12\" r=\"1\" fill=\"currentColor\"/><circle cx=\"19\" cy=\"12\" r=\"1\" fill=\"currentColor\"/><circle cx=\"5\" cy=\"12\" r=\"1\" fill=\"currentColor\"/>",
+      "description": "More options (three dots)"
+    },
+    "more-vertical": {
+      "name": "More Vertical",
+      "aliases": ["ellipsis-vertical", "dots-vertical"],
+      "viewBox": "0 0 24 24",
+      "path": "<circle cx=\"12\" cy=\"5\" r=\"1\" fill=\"currentColor\"/><circle cx=\"12\" cy=\"12\" r=\"1\" fill=\"currentColor\"/><circle cx=\"12\" cy=\"19\" r=\"1\" fill=\"currentColor\"/>",
+      "description": "More options vertical (three dots)"
+    },
+    "arrow-left": {
+      "name": "Arrow Left",
+      "aliases": ["back"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M19 12H5M12 19l-7-7 7-7\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Left arrow"
+    },
+    "arrow-right": {
+      "name": "Arrow Right",
+      "aliases": ["forward", "next"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M5 12h14M12 5l7 7-7 7\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Right arrow"
+    },
+    "arrow-up": {
+      "name": "Arrow Up",
+      "aliases": ["up"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M12 19V5M5 12l7-7 7 7\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Up arrow"
+    },
+    "arrow-down": {
+      "name": "Arrow Down",
+      "aliases": ["down"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M12 5v14M5 12l7-7 7 7\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Down arrow"
+    },
+    "external-link": {
+      "name": "External Link",
+      "aliases": ["open", "new-window"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><path d=\"M15 3h6v6M10 14L21 3\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "External link icon"
+    },
+    "home": {
+      "name": "Home",
+      "aliases": ["house"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><path d=\"M9 22V12h6v10\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>",
+      "description": "Home icon"
+    },
+    "mail": {
+      "name": "Mail",
+      "aliases": ["email", "envelope"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M22 6l-10 7L2 6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Mail or email icon"
+    },
+    "bell": {
+      "name": "Bell",
+      "aliases": ["notification", "alert"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><path d=\"M13.73 21a2 2 0 0 1-3.46 0\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Bell or notification icon"
+    },
+    "lock": {
+      "name": "Lock",
+      "aliases": ["secure", "padlock"],
+      "viewBox": "0 0 24 24",
+      "path": "<rect x=\"3\" y=\"11\" width=\"18\" height=\"11\" rx=\"2\" ry=\"2\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M7 11V7a5 5 0 0 1 10 0v4\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Lock or padlock icon"
+    },
+    "unlock": {
+      "name": "Unlock",
+      "aliases": ["unlocked"],
+      "viewBox": "0 0 24 24",
+      "path": "<rect x=\"3\" y=\"11\" width=\"18\" height=\"11\" rx=\"2\" ry=\"2\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M7 11V7a5 5 0 0 1 9.9-1\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Unlock icon"
+    },
+    "eye": {
+      "name": "Eye",
+      "aliases": ["view", "visible"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"3\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/>",
+      "description": "Eye or view icon"
+    },
+    "eye-off": {
+      "name": "Eye Off",
+      "aliases": ["hide", "invisible"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><path d=\"M1 1l22 22\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Eye off or hide icon"
+    },
+    "star": {
+      "name": "Star",
+      "aliases": ["favorite", "rating"],
+      "viewBox": "0 0 24 24",
+      "path": "<polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>",
+      "description": "Star icon"
+    },
+    "star-filled": {
+      "name": "Star Filled",
+      "aliases": ["favorite-filled", "rating-filled"],
+      "viewBox": "0 0 24 24",
+      "path": "<polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\" fill=\"currentColor\"/>",
+      "description": "Filled star icon"
+    },
+    "copy": {
+      "name": "Copy",
+      "aliases": ["duplicate"],
+      "viewBox": "0 0 24 24",
+      "path": "<rect x=\"9\" y=\"9\" width=\"13\" height=\"13\" rx=\"2\" ry=\"2\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Copy or duplicate icon"
+    },
+    "refresh": {
+      "name": "Refresh",
+      "aliases": ["reload", "sync"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><path d=\"M21 3v5h-5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><path d=\"M3 21v-5h5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Refresh or reload icon"
+    },
+    "folder": {
+      "name": "Folder",
+      "aliases": ["directory"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>",
+      "description": "Folder icon"
+    },
+    "file": {
+      "name": "File",
+      "aliases": ["document"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><path d=\"M14 2v6h6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "File or document icon"
+    },
+    "image": {
+      "name": "Image",
+      "aliases": ["photo", "picture"],
+      "viewBox": "0 0 24 24",
+      "path": "<rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><circle cx=\"8.5\" cy=\"8.5\" r=\"1.5\" fill=\"currentColor\"/><path d=\"M21 15l-5-5L5 21\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Image or photo icon"
+    },
+    "camera": {
+      "name": "Camera",
+      "aliases": ["photo-camera"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><circle cx=\"12\" cy=\"13\" r=\"4\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/>",
+      "description": "Camera icon"
+    },
+    "link": {
+      "name": "Link",
+      "aliases": ["chain"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Link or chain icon"
+    },
+    "shopping-cart": {
+      "name": "Shopping Cart",
+      "aliases": ["cart"],
+      "viewBox": "0 0 24 24",
+      "path": "<circle cx=\"9\" cy=\"21\" r=\"1\" fill=\"currentColor\"/><circle cx=\"20\" cy=\"21\" r=\"1\" fill=\"currentColor\"/><path d=\"M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>",
+      "description": "Shopping cart icon"
+    },
+    "credit-card": {
+      "name": "Credit Card",
+      "aliases": ["card", "payment"],
+      "viewBox": "0 0 24 24",
+      "path": "<rect x=\"1\" y=\"4\" width=\"22\" height=\"16\" rx=\"2\" ry=\"2\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M1 10h22\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/>",
+      "description": "Credit card icon"
+    },
+    "map-pin": {
+      "name": "Map Pin",
+      "aliases": ["location", "pin"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><circle cx=\"12\" cy=\"10\" r=\"3\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/>",
+      "description": "Map pin or location icon"
+    },
+    "truck": {
+      "name": "Truck",
+      "aliases": ["delivery", "shipping"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M1 3h15v13H1zM16 8h4l3 3v5h-7V8z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><circle cx=\"5.5\" cy=\"18.5\" r=\"2.5\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><circle cx=\"18.5\" cy=\"18.5\" r=\"2.5\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/>",
+      "description": "Truck or delivery icon"
+    },
+    "flag": {
+      "name": "Flag",
+      "aliases": ["report"],
+      "viewBox": "0 0 24 24",
+      "path": "<path d=\"M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><path d=\"M4 22v-7\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+      "description": "Flag icon"
+    },
+    "flag-us": {
+      "name": "United States Flag",
+      "aliases": ["us-flag", "usa-flag", "united-states", "usa"],
+      "viewBox": "0 0 25 18",
+      "path": "<rect x=\"0\" y=\"0\" width=\"25\" height=\"18\" rx=\"2.5\" fill=\"white\"/><rect x=\"0\" y=\"0\" width=\"10.8\" height=\"9.6\" fill=\"#1A47B8\"/><rect x=\"10.8\" y=\"0\" width=\"14.2\" height=\"1.2\" fill=\"#F93939\"/><rect x=\"10.8\" y=\"2.4\" width=\"14.2\" height=\"1.2\" fill=\"#F93939\"/><rect x=\"10.8\" y=\"4.8\" width=\"14.2\" height=\"1.2\" fill=\"#F93939\"/><rect x=\"10.8\" y=\"7.2\" width=\"14.2\" height=\"1.2\" fill=\"#F93939\"/><rect x=\"0\" y=\"9.6\" width=\"25\" height=\"1.2\" fill=\"#F93939\"/><rect x=\"0\" y=\"12\" width=\"25\" height=\"1.2\" fill=\"#F93939\"/><rect x=\"0\" y=\"14.4\" width=\"25\" height=\"1.2\" fill=\"#F93939\"/><rect x=\"0\" y=\"16.8\" width=\"25\" height=\"1.2\" fill=\"#F93939\"/><rect x=\"1.35\" y=\"0.7\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"3.15\" y=\"0.7\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"4.95\" y=\"0.7\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"6.75\" y=\"0.7\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"2.25\" y=\"2.05\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"4.05\" y=\"2.05\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"5.85\" y=\"2.05\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"1.35\" y=\"3.4\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"3.15\" y=\"3.4\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"4.95\" y=\"3.4\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"6.75\" y=\"3.4\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"2.25\" y=\"4.75\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"4.05\" y=\"4.75\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"5.85\" y=\"4.75\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"1.35\" y=\"6.1\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"3.15\" y=\"6.1\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"4.95\" y=\"6.1\" width=\"1.2\" height=\"1.35\" fill=\"white\"/><rect x=\"6.75\" y=\"6.1\" width=\"1.2\" height=\"1.35\" fill=\"white\"/>",
+      "description": "United States flag icon"
+    },
+    "question-circle": {
+      "name": "Question Circle",
+      "aliases": ["help", "question"],
+      "viewBox": "0 0 24 24",
+      "path": "<circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/>",
+      "description": "Question mark in circle"
+    },
+    "check-square": {
+      "name": "Check Square",
+      "aliases": ["checked", "checkbox-checked"],
+      "viewBox": "0 0 24 24",
+      "path": "<polyline points=\"9 11 12 14 22 4\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><path d=\"M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>",
+      "description": "Check in square"
+    },
+    "square": {
+      "name": "Square",
+      "aliases": ["checkbox", "unchecked"],
+      "viewBox": "0 0 24 24",
+      "path": "<rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/>",
+      "description": "Empty square or unchecked checkbox"
+    }
+  },
+  "notes": {
+    "extraction": "Icons extracted from Figma Icon Library (Node ID: 854-2692)",
+    "usage": "Use icon names or aliases to reference icons. All icons use currentColor for stroke/fill to inherit text color.",
+    "viewBox": "All icons use viewBox=\"0 0 24 24\" for consistent sizing",
+    "strokeWidth": "Default stroke-width is 2 for outline icons",
+    "aliases": "Icons can be referenced by their name or any of their aliases"
+  }
+}

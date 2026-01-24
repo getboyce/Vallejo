@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Vallejo Design System - Spacing Tokens",
+  "description": "Spacing scale for consistent layout spacing, extracted from Figma Variables",
+  "version": "1.0",
+  "lastUpdated": "2024",
+  "spacing": {
+    "grid": {
+      "4": {
+        "name": "Grid 4",
+        "value": "4px",
+        "cssVariable": "--spacing-grid-4",
+        "usage": "Minimal spacing, tight gaps, shadow spread"
+      },
+      "12": {
+        "name": "Grid 12",
+        "value": "12px",
+        "cssVariable": "--spacing-grid-12",
+        "usage": "Small spacing, component padding, tight gaps"
+      },
+      "20": {
+        "name": "Grid 20",
+        "value": "20px",
+        "cssVariable": "--spacing-grid-20",
+        "usage": "Medium spacing, section gaps"
+      },
+      "24": {
+        "name": "Grid 24",
+        "value": "24px",
+        "cssVariable": "--spacing-grid-24",
+        "usage": "Standard spacing, card padding, section spacing"
+      },
+      "32": {
+        "name": "Grid 32",
+        "value": "32px",
+        "cssVariable": "--spacing-grid-32",
+        "usage": "Large spacing, major section gaps"
+      }
+    },
+    "common": {
+      "2": {
+        "name": "2px",
+        "value": "2px",
+        "cssVariable": "--spacing-2",
+        "usage": "Minimal spacing, icon gaps"
+      },
+      "4": {
+        "name": "4px",
+        "value": "4px",
+        "cssVariable": "--spacing-4",
+        "usage": "Tight spacing, minimal gaps"
+      },
+      "6": {
+        "name": "6px",
+        "value": "6px",
+        "cssVariable": "--spacing-6",
+        "usage": "Small gaps, related elements"
+      },
+      "8": {
+        "name": "8px",
+        "value": "8px",
+        "cssVariable": "--spacing-8",
+        "usage": "Small spacing, form field gaps"
+      },
+      "10": {
+        "name": "10px",
+        "value": "10px",
+        "cssVariable": "--spacing-10",
+        "usage": "Small-medium spacing"
+      },
+      "12": {
+        "name": "12px",
+        "value": "12px",
+        "cssVariable": "--spacing-12",
+        "usage": "Standard small spacing, component padding"
+      },
+      "16": {
+        "name": "16px",
+        "value": "16px",
+        "cssVariable": "--spacing-16",
+        "usage": "Standard spacing, button gaps, form spacing"
+      },
+      "20": {
+        "name": "20px",
+        "value": "20px",
+        "cssVariable": "--spacing-20",
+        "usage": "Medium spacing, section gaps, button small padding"
+      },
+      "24": {
+        "name": "24px",
+        "value": "24px",
+        "cssVariable": "--spacing-24",
+        "usage": "Standard spacing, card padding, form gaps, button default/large padding"
+      },
+      "32": {
+        "name": "32px",
+        "value": "32px",
+        "cssVariable": "--spacing-32",
+        "usage": "Large spacing, major section gaps, page padding, button x-large padding"
+      },
+      "34": {
+        "name": "34px",
+        "value": "34px",
+        "cssVariable": "--spacing-34",
+        "usage": "Button small height"
+      },
+      "40": {
+        "name": "40px",
+        "value": "40px",
+        "cssVariable": "--spacing-40",
+        "usage": "Extra large spacing, page sections"
+      },
+      "46": {
+        "name": "46px",
+        "value": "46px",
+        "cssVariable": "--spacing-46",
+        "usage": "Button default height"
+      },
+      "48": {
+        "name": "48px",
+        "value": "48px",
+        "cssVariable": "--spacing-48",
+        "usage": "Maximum spacing, hero sections"
+      },
+      "52": {
+        "name": "52px",
+        "value": "52px",
+        "cssVariable": "--spacing-52",
+        "usage": "Button large height"
+      },
+      "64": {
+        "name": "64px",
+        "value": "64px",
+        "cssVariable": "--spacing-64",
+        "usage": "Maximum spacing, large page sections"
+      }
+    }
+  },
+  "notes": {
+    "extraction": "Spacing tokens extracted from Figma Variables (size/grid/*) and common usage patterns",
+    "organization": "Organized by grid system and common values",
+    "cssVariables": "All spacing values have corresponding CSS variables following the pattern: --spacing-{value} or --spacing-grid-{value}",
+    "usage": "Use spacing tokens for consistent layout spacing. Prefer grid values when available."
+  }
+}

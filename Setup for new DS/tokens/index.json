@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Vallejo Design System - All Tokens",
+  "description": "Complete token reference for the Vallejo Design System",
+  "version": "1.0",
+  "tokenHierarchy": "See tokens/README.md for primitive → semantic → component architecture",
+  "tokens": {
+    "colors": "./colors.json",
+    "typography": "./typography.json",
+    "spacing": "./spacing.json",
+    "shadows": "./shadows.json",
+    "borderRadius": "./border-radius.json",
+    "icons": "./icons.json",
+    "logos": "./logos.json"
+  },
+  "usage": {
+    "description": "Import individual token files as needed, or reference this index for all available tokens",
+    "example": "import colors from './tokens/colors.json'"
+  },
+  "figmaIntegration": {
+    "fileKey": "ixkN3RSoiQc5aSlxZ21Hay",
+    "note": "Use Figma MCP tools to extract complete and up-to-date token definitions from Figma Variables"
+  }
+}

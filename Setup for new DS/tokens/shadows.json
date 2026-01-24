@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Vallejo Design System - Shadow Tokens",
+  "description": "Drop shadow definitions for elevation and depth, extracted from Dropshadows component",
+  "version": "1.0",
+  "lastUpdated": "2024",
+  "shadows": {
+    "dark": {
+      "name": "Drop Shadow Dark",
+      "description": "Drop shadow for things higher off the page",
+      "value": {
+        "type": "DROP_SHADOW",
+        "color": "#6C707333",
+        "offsetX": -4,
+        "offsetY": 6,
+        "radius": 30,
+        "spread": 4
+      },
+      "cssValue": "-4px 6px 30px 4px rgba(108, 112, 115, 0.2)",
+      "cssVariable": "--shadow-dark",
+      "usage": "Elevated elements, cards higher on the page, modals"
+    },
+    "medium": {
+      "name": "Drop Shadow Medium",
+      "description": "Drop shadow for things in the middle",
+      "value": {
+        "type": "DROP_SHADOW",
+        "color": "#46525D1F",
+        "offsetX": -2,
+        "offsetY": 3,
+        "radius": 30,
+        "spread": 0
+      },
+      "cssValue": "-2px 3px 30px 0px rgba(70, 82, 93, 0.12)",
+      "cssVariable": "--shadow-medium",
+      "usage": "Standard elevation, cards, buttons with elevation"
+    },
+    "light": {
+      "name": "Drop Shadow Light",
+      "description": "Drop shadow for things lower on the page",
+      "value": {
+        "type": "DROP_SHADOW",
+        "color": "#E6E6E6B2",
+        "offsetX": 0,
+        "offsetY": 3,
+        "radius": 30,
+        "spread": 0
+      },
+      "cssValue": "0px 3px 30px 0px rgba(230, 230, 230, 0.7)",
+      "cssVariable": "--shadow-light",
+      "usage": "Subtle elevation, input fields, subtle depth"
+    }
+  },
+  "notes": {
+    "extraction": "Shadows extracted from Dropshadows component (node-id: 755-588) in Figma",
+    "organization": "Organized by elevation level: dark (highest), medium, light (lowest)",
+    "cssVariables": "All shadows have corresponding CSS variables following the pattern: --shadow-{level}",
+    "usage": "Use shadow tokens to create visual hierarchy and depth. Dark for highest elevation, light for subtle depth.",
+    "colorFormat": "Shadow colors are in RGBA format with alpha transparency"
+  }
+}

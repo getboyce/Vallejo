@@ -1,0 +1,354 @@
+{
+  "designSystem": {
+    "name": "Vallejo Design System",
+    "version": "1.0",
+    "production": "https://www.copart.com",
+    "purpose": "Production design system for Copart.com UI",
+    "figmaFileKey": "ixkN3RSoiQc5aSlxZ21Hay",
+    "figmaUrl": "https://www.figma.com/design/ixkN3RSoiQc5aSlxZ21Hay/Vallejo-DS---Foundation"
+  },
+  "fileMap": {
+    "entryPoints": {
+      "howToReference": {
+        "path": "HOW-TO-REFERENCE-VALLEJO.md",
+        "description": "Complete guide for referencing Vallejo in Cursor, Claude, and Magic Patterns",
+        "priority": 1,
+        "useCase": "Understanding how to reference Vallejo when creating prototypes"
+      },
+      "newAgent": {
+        "path": "NEW-AGENT-PROMPT.md",
+        "description": "Full context handoff for new AI agents/sessions",
+        "priority": 1,
+        "useCase": "Starting new conversations or agent sessions"
+      },
+      "quickReference": {
+        "path": "AI-QUICK-REFERENCE.md",
+        "description": "All component CSS classes and HTML patterns - USE FIRST for implementation",
+        "priority": 1,
+        "useCase": "Quick component class lookups during implementation"
+      },
+      "cursorGuide": {
+        "path": "CURSOR-PROMPT.md",
+        "description": "Cursor-specific implementation strategy, accessibility, troubleshooting",
+        "priority": 2,
+        "useCase": "Cursor IDE-specific guidance"
+      },
+      "magicPatterns": {
+        "path": "MAGIC_PATTERNS_PROMPT.md",
+        "description": "Complete Magic Patterns specification",
+        "priority": 2,
+        "useCase": "Magic Patterns tool integration"
+      },
+      "layoutPatterns": {
+        "path": "LAYOUT-PATTERNS.md",
+        "description": "Common layout templates + Copart.com-specific patterns",
+        "priority": 2,
+        "useCase": "Page-level layouts and Copart.com patterns"
+      },
+      "readme": {
+        "path": "README.md",
+        "description": "System overview and quick start guide",
+        "priority": 3,
+        "useCase": "General overview and navigation"
+      }
+    },
+    "documentation": {
+      "designSystemGuide": {
+        "path": "docs/design-system-guide.md",
+        "description": "Usage guidelines, 'When to use' per component, anti-patterns",
+        "priority": 2,
+        "useCase": "Component selection decisions and best practices"
+      },
+      "iconSystemGuide": {
+        "path": "docs/icon-system-guide.md",
+        "description": "Icon usage guidelines",
+        "priority": 3,
+        "useCase": "Icon implementation"
+      },
+      "logosGuide": {
+        "path": "docs/logos-guide.md",
+        "description": "Logo usage guidelines",
+        "priority": 3,
+        "useCase": "Logo implementation"
+      }
+    },
+    "components": {
+      "catalog": {
+        "path": "components/catalog.json",
+        "description": "Component index with Figma node IDs and componentClasses mapping",
+        "priority": 2,
+        "useCase": "Component metadata and Figma references"
+      },
+      "individualDocs": {
+        "path": "components/*.md",
+        "description": "Individual component documentation files",
+        "components": [
+          "accordions.md",
+          "alerts.md",
+          "buttons.md",
+          "checkboxes.md",
+          "dashboard-cards.md",
+          "date-picker.md",
+          "filter-chips.md",
+          "header.md",
+          "input-dropdowns.md",
+          "inputs.md",
+          "mobile-date-picker.md",
+          "modals.md",
+          "pagination.md",
+          "progress-tracker.md",
+          "radio-buttons.md",
+          "search-bar.md",
+          "shelves.md",
+          "status-tokens.md",
+          "switcher.md",
+          "tabbed-navigation.md",
+          "tables.md",
+          "toasts.md",
+          "toggles.md",
+          "tooltips.md"
+        ],
+        "priority": 3,
+        "useCase": "Detailed component-specific documentation"
+      }
+    },
+    "tokens": {
+      "readme": {
+        "path": "tokens/README.md",
+        "description": "Token hierarchy (primitive → semantic → component)",
+        "priority": 2,
+        "useCase": "Understanding token architecture"
+      },
+      "index": {
+        "path": "tokens/index.json",
+        "description": "Token index and file references",
+        "priority": 2,
+        "useCase": "Token file navigation"
+      },
+      "colors": {
+        "path": "tokens/colors.json",
+        "description": "Complete color palette with hex values",
+        "priority": 2,
+        "useCase": "Color token lookups"
+      },
+      "typography": {
+        "path": "tokens/typography.json",
+        "description": "Font families, sizes, weights, line heights",
+        "priority": 2,
+        "useCase": "Typography token lookups"
+      },
+      "spacing": {
+        "path": "tokens/spacing.json",
+        "description": "4px-based spacing scale",
+        "priority": 2,
+        "useCase": "Spacing token lookups"
+      },
+      "shadows": {
+        "path": "tokens/shadows.json",
+        "description": "Elevation shadows",
+        "priority": 3,
+        "useCase": "Shadow token lookups"
+      },
+      "borderRadius": {
+        "path": "tokens/border-radius.json",
+        "description": "Border radius values",
+        "priority": 3,
+        "useCase": "Border radius token lookups"
+      },
+      "icons": {
+        "path": "tokens/icons.json",
+        "description": "58-icon library with SVG paths and data-icon names",
+        "priority": 2,
+        "useCase": "Icon lookups and implementation"
+      },
+      "logos": {
+        "path": "tokens/logos.json",
+        "description": "Logo definitions",
+        "priority": 3,
+        "useCase": "Logo references"
+      }
+    },
+    "examples": {
+      "allComponents": {
+        "path": "test-examples/all-components-demo.html",
+        "description": "Working implementations of all components - DEFAULT REFERENCE for implementation",
+        "priority": 1,
+        "useCase": "Exact HTML structure and behavior reference"
+      },
+      "headerDemo": {
+        "path": "test-examples/header-demo.html",
+        "description": "Header component demo",
+        "priority": 2,
+        "useCase": "Header implementation reference"
+      },
+      "logosDemo": {
+        "path": "test-examples/logos-demo.html",
+        "description": "Logo usage examples",
+        "priority": 3,
+        "useCase": "Logo implementation reference"
+      },
+      "loginForm": {
+        "path": "test-examples/LoginForm.tsx",
+        "description": "React example of login form",
+        "priority": 3,
+        "useCase": "React component reference"
+      }
+    },
+    "configuration": {
+      "cursorRules": {
+        "path": ".cursorrules",
+        "description": "Cursor IDE rules and quick reference",
+        "priority": 2,
+        "useCase": "Cursor IDE context"
+      },
+      "changelog": {
+        "path": "CHANGELOG.md",
+        "description": "Version history and breaking changes",
+        "priority": 3,
+        "useCase": "Version tracking and migration"
+      }
+    }
+  },
+  "componentQuickReference": {
+    "buttons": {
+      "primary": "btn btn-default btn-default-type",
+      "secondary": "btn btn-default btn-secondary",
+      "subtle": "btn btn-subtle",
+      "sizes": ["btn-small", "default", "btn-large", "btn-extra-large"],
+      "docPath": "components/buttons.md",
+      "demoPath": "test-examples/all-components-demo.html"
+    },
+    "inputs": {
+      "container": "input-group",
+      "label": "input-label",
+      "input": "input input-field",
+      "error": "input input-field input-error",
+      "docPath": "components/inputs.md",
+      "demoPath": "test-examples/all-components-demo.html"
+    },
+    "statusTokens": {
+      "success": "status-token status-token-success status-token-filled",
+      "warning": "status-token status-token-warning status-token-filled",
+      "error": "status-token status-token-error status-token-filled",
+      "neutral": "status-token status-token-neutral status-token-filled",
+      "docPath": "components/status-tokens.md",
+      "demoPath": "test-examples/all-components-demo.html"
+    },
+    "cards": {
+      "dashboard": "dashboard-card",
+      "header": "card-header",
+      "title": "card-title",
+      "content": "card-content",
+      "docPath": "components/dashboard-cards.md",
+      "demoPath": "test-examples/all-components-demo.html"
+    },
+    "modals": {
+      "overlay": "modal-overlay",
+      "modal": "modal",
+      "header": "modal-header",
+      "body": "modal-body",
+      "footer": "modal-footer",
+      "docPath": "components/modals.md",
+      "demoPath": "test-examples/all-components-demo.html"
+    },
+    "alerts": {
+      "success": "alert alert-success-light",
+      "warning": "alert alert-warning-light",
+      "error": "alert alert-error-light",
+      "info": "alert alert-info-light",
+      "docPath": "components/alerts.md",
+      "demoPath": "test-examples/all-components-demo.html"
+    },
+    "header": {
+      "root": "vallejo-header",
+      "docPath": "components/header.md",
+      "demoPath": "test-examples/header-demo.html",
+      "implementationPath": "components/header/Header.tsx"
+    }
+  },
+  "tokenQuickReference": {
+    "colors": {
+      "primary": "var(--color-brand-copart-blue)",
+      "value": "#2662D9",
+      "text": "var(--color-brand-copart-black)",
+      "textValue": "#2F333C",
+      "border": "var(--color-light-neutral-300)",
+      "borderValue": "#C5CCD3",
+      "file": "tokens/colors.json"
+    },
+    "spacing": {
+      "common": ["var(--spacing-8)", "var(--spacing-16)", "var(--spacing-24)", "var(--spacing-32)"],
+      "values": [8, 16, 24, 32],
+      "file": "tokens/spacing.json"
+    },
+    "typography": {
+      "fontFamily": "var(--typography-font-family-base)",
+      "value": "Inter",
+      "bodySize": "var(--typography-font-size-400)",
+      "bodyValue": "16px",
+      "file": "tokens/typography.json"
+    },
+    "icons": {
+      "common": ["check", "close", "search", "chevron-down", "chevron-up", "chevron-left", "chevron-right", "plus", "minus", "info", "warning", "error", "success", "clock"],
+      "total": 58,
+      "file": "tokens/icons.json",
+      "usage": "data-icon=\"icon-name\" data-icon-size=\"size\""
+    }
+  },
+  "searchKeywords": {
+    "components": [
+      "button", "input", "form", "field", "checkbox", "radio", "toggle", "switch",
+      "modal", "dialog", "alert", "toast", "tooltip", "status", "token", "badge",
+      "card", "dashboard", "table", "pagination", "tabs", "navigation", "header",
+      "search", "filter", "chip", "date", "picker", "accordion", "shelf", "panel",
+      "progress", "tracker", "dropdown", "select"
+    ],
+    "patterns": [
+      "login", "form", "dashboard", "grid", "layout", "responsive", "mobile",
+      "vehicle", "search", "results", "auction", "bid", "member", "account",
+      "watchlist", "listing", "card", "table", "modal", "confirmation"
+    ],
+    "tokens": [
+      "color", "spacing", "typography", "font", "size", "weight", "shadow",
+      "border", "radius", "icon", "logo", "token", "variable", "css"
+    ],
+    "tools": [
+      "cursor", "claude", "ai", "llm", "magic patterns", "figma", "mcp"
+    ]
+  },
+  "usageWorkflow": {
+    "step1": {
+      "action": "Read entry point",
+      "files": ["NEW-AGENT-PROMPT.md", "AI-QUICK-REFERENCE.md"],
+      "description": "Get system context and component classes"
+    },
+    "step2": {
+      "action": "Find component",
+      "files": ["AI-QUICK-REFERENCE.md", "components/catalog.json"],
+      "description": "Look up component classes and structure"
+    },
+    "step3": {
+      "action": "Check usage guidelines",
+      "files": ["docs/design-system-guide.md"],
+      "description": "Verify 'When to use' and anti-patterns"
+    },
+    "step4": {
+      "action": "Reference implementation",
+      "files": ["test-examples/all-components-demo.html"],
+      "description": "Copy exact HTML structure from working demo"
+    },
+    "step5": {
+      "action": "Apply tokens",
+      "files": ["tokens/*.json", "tokens/README.md"],
+      "description": "Use design tokens for colors, spacing, typography"
+    }
+  },
+  "metadata": {
+    "lastUpdated": "2025-01-23",
+    "totalComponents": 26,
+    "totalIcons": 58,
+    "totalTokens": 6,
+    "optimizedFor": ["Cursor", "Claude", "Magic Patterns", "LLM"],
+    "primaryUseCase": "Copart.com production UI"
+  }
+}

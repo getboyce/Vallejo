@@ -30,7 +30,7 @@ Vallejo powers the **Copart.com** UI: auctions, vehicle search, member dashboard
 
 **Start your prompts with:**
 ```
-Using the Vallejo Design System from https://github.com/[your-repo-url], create a [component/page]...
+Using the Vallejo Design System from https://github.com/getboyce/Vallejo, create a [component/page]...
 ```
 
 **Example Prompts (Copart.com UI):**

@@ -23,7 +23,7 @@
 
 1. **Create a new repository** on GitHub (e.g., `vallejo-design-system`)
 2. **Push your Vallejo files** to the repository
-3. **Get your repository URL**: `https://github.com/[username]/vallejo-design-system`
+3. **Get your repository URL**: `https://github.com/getboyce/Vallejo`
 
 **Benefits:**
 - LLMs can access files directly via URLs
@@ -70,12 +70,12 @@ Reference files:
 ### **Method 2: GitHub URL (If hosted elsewhere)**
 
 ```
-Using the Vallejo Design System from https://github.com/[username]/vallejo-design-system, 
+Using the Vallejo Design System from https://github.com/getboyce/Vallejo, 
 create a [component/page] for Copart.com.
 
 Reference these files:
-- https://github.com/[username]/vallejo-design-system/blob/main/SYSTEM-INDEX.json
-- https://github.com/[username]/vallejo-design-system/blob/main/AI-QUICK-REFERENCE.md
+- https://github.com/getboyce/Vallejo/blob/main/Vallejo%20DS/SYSTEM-INDEX.json
+- https://github.com/getboyce/Vallejo/blob/main/Vallejo%20DS/AI-QUICK-REFERENCE.md
 ```
 
 **Cursor can access GitHub files** if you provide the URLs in your prompt.
@@ -93,16 +93,16 @@ Claude can access GitHub files directly via URLs. Use **raw GitHub URLs**:
 Using the Vallejo Design System for Copart.com, create a login form.
 
 Reference these files:
-- System index: https://raw.githubusercontent.com/[username]/vallejo-design-system/main/SYSTEM-INDEX.json
-- Quick reference: https://raw.githubusercontent.com/[username]/vallejo-design-system/main/AI-QUICK-REFERENCE.md
-- Component demo: https://raw.githubusercontent.com/[username]/vallejo-design-system/main/test-examples/all-components-demo.html
+- System index: https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/SYSTEM-INDEX.json
+- Quick reference: https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/AI-QUICK-REFERENCE.md
+- Component demo: https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/test-examples/all-components-demo.html
 
 Use exact component classes and follow the structure from the demo.
 ```
 
 **Raw URL format:**
 ```
-https://raw.githubusercontent.com/[username]/[repo]/[branch]/[file-path]
+https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/[file-path]
 ```
 
 **Key files to reference:**
@@ -138,11 +138,11 @@ Magic Patterns can reference design systems via GitHub URLs:
 
 **In your Magic Patterns prompt:**
 ```
-Using the Vallejo Design System from https://github.com/[username]/vallejo-design-system, 
+Using the Vallejo Design System from https://github.com/getboyce/Vallejo, 
 create a [prototype] for Copart.com.
 
 Reference the Magic Patterns specification:
-https://raw.githubusercontent.com/[username]/vallejo-design-system/main/MAGIC_PATTERNS_PROMPT.md
+https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/MAGIC_PATTERNS_PROMPT.md
 ```
 
 ### **Method 2: Use MAGIC_PATTERNS_PROMPT.md**
@@ -157,7 +157,7 @@ The `MAGIC_PATTERNS_PROMPT.md` file is specifically formatted for Magic Patterns
 
 **Option B: Reference via URL**
 ```
-Reference: https://raw.githubusercontent.com/[username]/vallejo-design-system/main/MAGIC_PATTERNS_PROMPT.md
+Reference: https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/MAGIC_PATTERNS_PROMPT.md
 
 [Your specific prototype request]
 ```
@@ -179,12 +179,12 @@ Start with SYSTEM-INDEX.json to understand the structure, then reference:
 ### **For Claude (GitHub URLs)**
 ```
 Using the Vallejo Design System for Copart.com from:
-https://github.com/[username]/vallejo-design-system
+https://github.com/getboyce/Vallejo
 
 Reference these files:
-- https://raw.githubusercontent.com/[username]/vallejo-design-system/main/SYSTEM-INDEX.json
-- https://raw.githubusercontent.com/[username]/vallejo-design-system/main/AI-QUICK-REFERENCE.md
-- https://raw.githubusercontent.com/[username]/vallejo-design-system/main/test-examples/all-components-demo.html
+- https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/SYSTEM-INDEX.json
+- https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/AI-QUICK-REFERENCE.md
+- https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/test-examples/all-components-demo.html
 
 Create a [component/page] using exact Vallejo classes and structure.
 ```
@@ -192,7 +192,7 @@ Create a [component/page] using exact Vallejo classes and structure.
 ### **For Magic Patterns (GitHub URL)**
 ```
 Using the Vallejo Design System for Copart.com:
-https://raw.githubusercontent.com/[username]/vallejo-design-system/main/MAGIC_PATTERNS_PROMPT.md
+https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/MAGIC_PATTERNS_PROMPT.md
 
 Create a [prototype] following the specifications in that file.
 ```
@@ -247,15 +247,15 @@ Always point to:
 git init
 git add .
 git commit -m "Initial Vallejo Design System"
-git remote add origin https://github.com/[username]/vallejo-design-system.git
+git remote add origin https://github.com/getboyce/Vallejo.git
 git push -u origin main
 ```
 
 ### **Step 2: Get Your URLs**
 Your key files will be at:
-- `https://github.com/[username]/vallejo-design-system`
-- `https://raw.githubusercontent.com/[username]/vallejo-design-system/main/SYSTEM-INDEX.json`
-- `https://raw.githubusercontent.com/[username]/vallejo-design-system/main/AI-QUICK-REFERENCE.md`
+- `https://github.com/getboyce/Vallejo`
+- `https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/SYSTEM-INDEX.json`
+- `https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/AI-QUICK-REFERENCE.md`
 
 ### **Step 3: Use in Prompts**
 
@@ -266,15 +266,15 @@ Using Vallejo Design System in this workspace, create a login form for Copart.co
 
 **Claude:**
 ```
-Using Vallejo Design System from https://github.com/[username]/vallejo-design-system:
-- https://raw.githubusercontent.com/[username]/vallejo-design-system/main/AI-QUICK-REFERENCE.md
+Using Vallejo Design System from https://github.com/getboyce/Vallejo:
+- https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/AI-QUICK-REFERENCE.md
 
 Create a login form for Copart.com using exact Vallejo classes.
 ```
 
 **Magic Patterns:**
 ```
-Reference: https://raw.githubusercontent.com/[username]/vallejo-design-system/main/MAGIC_PATTERNS_PROMPT.md
+Reference: https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/MAGIC_PATTERNS_PROMPT.md
 
 Create a Copart.com login page prototype.
 ```
@@ -291,13 +291,13 @@ Reference SYSTEM-INDEX.json and AI-QUICK-REFERENCE.md.
 
 ### **For Claude (GitHub)**
 ```
-Using Vallejo from https://raw.githubusercontent.com/[username]/vallejo-design-system/main/AI-QUICK-REFERENCE.md,
+Using Vallejo from https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/AI-QUICK-REFERENCE.md,
 create [component] for Copart.com.
 ```
 
 ### **For Magic Patterns (GitHub)**
 ```
-Reference: https://raw.githubusercontent.com/[username]/vallejo-design-system/main/MAGIC_PATTERNS_PROMPT.md
+Reference: https://raw.githubusercontent.com/getboyce/Vallejo/main/Vallejo%20DS/MAGIC_PATTERNS_PROMPT.md
 Create [prototype] for Copart.com.
 ```
 
@@ -323,7 +323,7 @@ Create [prototype] for Copart.com.
 ### **Q: Can I use a specific version/branch?**
 **A:** Yes, reference specific branches or tags:
 ```
-https://raw.githubusercontent.com/[username]/vallejo-design-system/v1.0/AI-QUICK-REFERENCE.md
+https://raw.githubusercontent.com/getboyce/Vallejo/v1.0/Vallejo%20DS/AI-QUICK-REFERENCE.md
 ```
 
 ---

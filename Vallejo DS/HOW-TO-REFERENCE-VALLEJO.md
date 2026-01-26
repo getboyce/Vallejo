@@ -4,43 +4,6 @@
 
 ---
 
-## 🎯 **Recommended Approach: GitHub**
-
-**Yes, you should host Vallejo on GitHub.** This is the best solution because:
-
-✅ **Universal Access** - Works with Cursor, Claude, Magic Patterns, and any AI tool  
-✅ **Version Control** - Track changes and maintain history  
-✅ **Direct URLs** - LLMs can access files directly via GitHub URLs  
-✅ **Public/Private** - Choose visibility based on your needs  
-✅ **Free** -** GitHub is free for public and private repos  
-✅ **Easy Sharing** - Share with team members or AI tools instantly  
-
----
-
-## 📦 **Step 1: Host on GitHub**
-
-### **Option A: Public Repository (Recommended for AI Tools)**
-
-1. **Create a new repository** on GitHub (e.g., `vallejo-design-system`)
-2. **Push your Vallejo files** to the repository
-3. **Get your repository URL**: `https://github.com/getboyce/Vallejo`
-
-**Benefits:**
-- LLMs can access files directly via URLs
-- No authentication needed
-- Easy to share and reference
-- Works with all AI tools
-
-### **Option B: Private Repository**
-
-1. **Create a private repository** on GitHub
-2. **Push your Vallejo files**
-3. **Use GitHub's raw file URLs** (requires authentication for private repos)
-
-**Note:** Some AI tools may have limited access to private repos. Public repos work best.
-
----
-
 ## 🛠️ **Tool-Specific Instructions**
 
 ---
@@ -304,21 +267,6 @@ Create [prototype] for Copart.com.
 ---
 
 ## ❓ **FAQ**
-
-### **Q: Do I need to host on GitHub?**
-**A:** For Claude and Magic Patterns, yes. For Cursor, local files work fine, but GitHub makes it easier to share and version.
-
-### **Q: Can I use a private repository?**
-**A:** Yes, but some AI tools may have limited access. Public repos work best for AI tool access.
-
-### **Q: What if I don't want to use GitHub?**
-**A:** 
-- **Cursor**: Use local files
-- **Claude**: Paste content directly or use other hosting (GitLab, Bitbucket)
-- **Magic Patterns**: Paste `MAGIC_PATTERNS_PROMPT.md` content directly
-
-### **Q: How do I update the design system?**
-**A:** Push updates to GitHub, and reference the new commit or branch in your prompts.
 
 ### **Q: Can I use a specific version/branch?**
 **A:** Yes, reference specific branches or tags:

@@ -343,11 +343,12 @@ body {
 .type-specimen {
   padding: var(--space-4); border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg); background: var(--bg-primary); margin-bottom: var(--space-3);
-  display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4);
+  display: grid; grid-template-columns: 120px 1fr 100px; align-items: baseline; gap: var(--space-4);
 }
+.type-specimen span:nth-child(2) { text-align: center; }
 .type-specimen-label {
   font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
-  color: var(--interactive-primary); white-space: nowrap; min-width: 100px;
+  color: var(--interactive-primary); white-space: nowrap;
 }
 .type-specimen-meta {
   font-size: 11px; color: var(--text-tertiary); font-family: var(--font-mono);
@@ -748,8 +749,8 @@ tr.hot:hover td { background: var(--orange-100); }
 }
 .shelf-backdrop.visible .shelf-panel { transform: translateX(0); }
 /* Side variants */
-.shelf-right .shelf-panel { right: 0; border-radius: 16px 0 0 16px; }
-.shelf-left .shelf-panel { left: 0; transform: translateX(-100%); border-radius: 0 16px 16px 0; }
+.shelf-right .shelf-panel { right: 0; }
+.shelf-left .shelf-panel { left: 0; transform: translateX(-100%); }
 .shelf-left.visible .shelf-panel { transform: translateX(0); }
 /* Width variants */
 .shelf-narrow .shelf-panel { width: 360px; }
@@ -758,15 +759,25 @@ tr.hot:hover td { background: var(--orange-100); }
 .shelf-full .shelf-panel { width: 100vw; border-radius: 0; }
 /* Shelf internal layout */
 .shelf-header {
-  display: flex; justify-content: space-between; align-items: center;
+  display: grid; grid-template-columns: 32px 1fr 32px; align-items: center;
   padding: var(--space-5) var(--space-6); border-bottom: 1px solid var(--border-subtle);
-  flex-shrink: 0;
+  flex-shrink: 0; gap: var(--space-3);
 }
-.shelf-title { font-size: 20px; font-weight: 700; color: var(--text-primary); }
+.shelf-header .shelf-title { text-align: center; }
+.shelf-header-left-empty { width: 32px; }
+.shelf-title { font-size: 20px; font-weight: 700; color: var(--text-primary); line-height: 1; }
+.shelf-back {
+  width: 32px; height: 32px; border-radius: var(--radius-lg); border: none;
+  background: transparent; cursor: pointer; display: flex; align-items: center;
+  justify-content: center; color: var(--text-tertiary); flex-shrink: 0;
+  transition: background var(--dur-fast) ease;
+}
+.shelf-back:hover { background: var(--neutral-100); color: var(--text-primary); }
+.shelf-back svg { width: 20px; height: 20px; }
 .shelf-close {
   width: 32px; height: 32px; border-radius: var(--radius-lg); border: none;
   background: transparent; cursor: pointer; display: flex; align-items: center;
-  justify-content: center; color: var(--text-tertiary); font-size: 20px;
+  justify-content: center; color: var(--text-tertiary); font-size: 20px; line-height: 1;
   transition: background var(--dur-fast) ease;
 }
 .shelf-close:hover { background: var(--neutral-100); color: var(--text-primary); }
@@ -1414,10 +1425,10 @@ tr.hot:hover td { background: var(--orange-100); }
   .font-showcase-name { font-size: 40px !important; }
   .font-showcase-name-mono { font-size: 36px !important; }
 
-  /* Type scale — wrap and scale large specimens */
-  .type-specimen { flex-wrap: wrap; gap: var(--space-2); }
-  .type-specimen span:nth-child(2) { word-break: break-word; min-width: 0; flex: 1 1 100%; }
-  .type-specimen-label { min-width: 80px; }
+  /* Type scale — stack on small screens */
+  .type-specimen { grid-template-columns: 1fr; gap: var(--space-2); }
+  .type-specimen span:nth-child(2) { word-break: break-word; }
+  .type-specimen-meta { text-align: left; }
 
   /* Inline 2-col grids → stack */
   .responsive-grid-2 { grid-template-columns: 1fr !important; }
@@ -1500,8 +1511,7 @@ tr.hot:hover td { background: var(--orange-100); }
   font-size: 20px; line-height: 1.6; font-weight: 500; font-style: italic;
   color: var(--text-primary); max-width: 720px;
   padding: var(--space-8); margin: 0 0 var(--space-10) 0;
-  border-left: 4px solid var(--interactive-primary);
-  background: var(--bg-tertiary); border-radius: var(--radius-lg);
+  border-left: 2px solid var(--border-default);
 }
 .philosophy-quote cite {
   display: block; margin-top: var(--space-4);
@@ -1518,7 +1528,7 @@ tr.hot:hover td { background: var(--orange-100); }
 }
 .principle-card-number {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 28px; height: 28px; border-radius: var(--radius-full);
+  width: 28px; height: 28px; border-radius: var(--radius-sm);
   background: var(--interactive-primary); color: #fff;
   font-size: 13px; font-weight: 700; margin-bottom: var(--space-3);
 }
@@ -1603,12 +1613,7 @@ tr.hot:hover td { background: var(--orange-100); }
 <section class="demo-section" id="philosophy">
   <div class="section-label">Foundations</div>
   <div class="section-title">Design Philosophy</div>
-  <div class="section-desc">The principles that guide every design decision in Copart's digital experience.</div>
-
-  <blockquote class="philosophy-quote">
-    Every pixel in the Copart experience should earn trust, reduce friction, and move the user closer to the vehicle they need. We design for clarity first, beauty second — because when millions of dollars flow through an auction platform, confidence is the most valuable feature we ship.
-    <cite>— Vallejo Design System</cite>
-  </blockquote>
+  <div class="section-desc">Every pixel in the Copart experience should earn trust, reduce friction, and move the user closer to the vehicle they need. We design for clarity first, beauty second. Because when millions of dollars flow through an auction platform, confidence is the most valuable feature we ship.</div>
 
   <div class="subsection-title">Core Principles</div>
   <div class="grid-3">
@@ -2461,6 +2466,26 @@ tr.hot:hover td { background: var(--orange-100); }
     <button class="btn btn-md btn-tertiary"><svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.25 6.75L4.75 12L10.25 17.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.25 12H5"/></svg> Back to Results</button>
     <button class="btn btn-md btn-success"><svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.75 12.8665L8.33995 16.4138C9.15171 17.5256 10.8179 17.504 11.6006 16.3715L18.25 6.75"/></svg> Confirm Payment</button>
   </div>
+
+  <div class="subsection-title">Pairing Rules</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6)">
+    <div>
+      <div style="font-size:13px;font-weight:600;color:var(--success-text);margin-bottom:var(--space-3)">DO</div>
+      <div style="background:var(--bg-secondary);border-radius:var(--radius-lg);padding:var(--space-5);display:flex;justify-content:flex-end;gap:var(--space-3);margin-bottom:var(--space-3)">
+        <button class="btn btn-md btn-tertiary">Cancel</button>
+        <button class="btn btn-md btn-primary">Confirm</button>
+      </div>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.5">Use <strong>tertiary</strong> for Close/Cancel beside a primary action. The primary button should be the only visually prominent target.</div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:var(--error-text);margin-bottom:var(--space-3)">DON'T</div>
+      <div style="background:var(--bg-secondary);border-radius:var(--radius-lg);padding:var(--space-5);display:flex;justify-content:flex-end;gap:var(--space-3);margin-bottom:var(--space-3)">
+        <button class="btn btn-md btn-secondary">Cancel</button>
+        <button class="btn btn-md btn-primary">Confirm</button>
+      </div>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.5">Outlined buttons compete with the primary for attention. Two equally weighted buttons create decision friction — especially in financial flows.</div>
+    </div>
+  </div>
 </section>
 
 <!-- ============================================================ -->
@@ -2492,6 +2517,20 @@ tr.hot:hover td { background: var(--orange-100); }
         <label class="form-label">Disabled Field</label>
         <input class="form-input" type="text" value="Cannot edit" disabled>
       </div>
+
+      <div class="subsection-title">Toggles</div>
+      <div class="flex-col" style="gap:var(--space-4)">
+        <div class="toggle-wrap" onclick="toggleSwitch(this)"><div class="toggle-track on"><div class="toggle-thumb"></div></div><span class="toggle-label">Email notifications</span></div>
+        <div class="toggle-wrap" onclick="toggleSwitch(this)"><div class="toggle-track"><div class="toggle-thumb"></div></div><span class="toggle-label">SMS alerts for bids</span></div>
+        <div class="toggle-wrap" onclick="toggleSwitch(this)"><div class="toggle-track on"><div class="toggle-thumb"></div></div><span class="toggle-label">Auto-bid enabled</span></div>
+      </div>
+
+      <div class="subsection-title">Checkboxes</div>
+      <div class="flex-col">
+        <div class="checkbox-wrap" onclick="toggleCheck(this)"><div class="checkbox-box checked"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="checkbox-text">Salvage title</span></div>
+        <div class="checkbox-wrap" onclick="toggleCheck(this)"><div class="checkbox-box checked"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="checkbox-text">Clean title</span></div>
+        <div class="checkbox-wrap" onclick="toggleCheck(this)"><div class="checkbox-box"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="checkbox-text">Rebuilt title</span></div>
+      </div>
     </div>
 
     <div>
@@ -2511,20 +2550,6 @@ tr.hot:hover td { background: var(--orange-100); }
             <div class="dropdown-option" onclick="selectOption(this, 'BMW')">BMW</div>
           </div>
         </div>
-      </div>
-
-      <div class="subsection-title">Toggles</div>
-      <div class="flex-col" style="gap:var(--space-4)">
-        <div class="toggle-wrap" onclick="toggleSwitch(this)"><div class="toggle-track on"><div class="toggle-thumb"></div></div><span class="toggle-label">Email notifications</span></div>
-        <div class="toggle-wrap" onclick="toggleSwitch(this)"><div class="toggle-track"><div class="toggle-thumb"></div></div><span class="toggle-label">SMS alerts for bids</span></div>
-        <div class="toggle-wrap" onclick="toggleSwitch(this)"><div class="toggle-track on"><div class="toggle-thumb"></div></div><span class="toggle-label">Auto-bid enabled</span></div>
-      </div>
-
-      <div class="subsection-title">Checkboxes</div>
-      <div class="flex-col">
-        <div class="checkbox-wrap" onclick="toggleCheck(this)"><div class="checkbox-box checked"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="checkbox-text">Salvage title</span></div>
-        <div class="checkbox-wrap" onclick="toggleCheck(this)"><div class="checkbox-box checked"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="checkbox-text">Clean title</span></div>
-        <div class="checkbox-wrap" onclick="toggleCheck(this)"><div class="checkbox-box"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="checkbox-text">Rebuilt title</span></div>
       </div>
 
       <div class="subsection-title">Radio Buttons</div>
@@ -2660,6 +2685,7 @@ tr.hot:hover td { background: var(--orange-100); }
     <button class="btn btn-md btn-primary" onclick="openShelf('shelfRight')">Open Right Shelf</button>
     <button class="btn btn-md btn-secondary" onclick="openShelf('shelfLeft')">Open Left Shelf</button>
     <button class="btn btn-md btn-secondary" onclick="openShelf('shelfFull')">Open Full Shelf</button>
+    <button class="btn btn-md btn-secondary" onclick="openShelf('shelfBack')">Sub-flow (Back Button)</button>
   </div>
 
   <!-- Right Shelf: Vehicle Quick View (Medium) -->
@@ -2667,6 +2693,7 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="shelf-panel" onclick="event.stopPropagation()">
       <div class="shelf-handle"></div>
       <div class="shelf-header">
+        <div class="shelf-header-left-empty"></div>
         <span class="shelf-title">Vehicle Quick View</span>
         <button class="shelf-close" onclick="closeShelf(null,'shelfRight')">&times;</button>
       </div>
@@ -2687,7 +2714,7 @@ tr.hot:hover td { background: var(--orange-100); }
         </div>
       </div>
       <div class="shelf-footer">
-        <button class="btn btn-md btn-secondary" onclick="closeShelf(null,'shelfRight')">Close</button>
+        <button class="btn btn-md btn-tertiary" onclick="closeShelf(null,'shelfRight')">Close</button>
         <button class="btn btn-md btn-primary">Place Bid</button>
       </div>
     </div>
@@ -2698,6 +2725,7 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="shelf-panel" onclick="event.stopPropagation()">
       <div class="shelf-handle"></div>
       <div class="shelf-header">
+        <div class="shelf-header-left-empty"></div>
         <span class="shelf-title">Filters</span>
         <button class="shelf-close" onclick="closeShelf(null,'shelfLeft')">&times;</button>
       </div>
@@ -2746,6 +2774,7 @@ tr.hot:hover td { background: var(--orange-100); }
   <div class="shelf-backdrop shelf-right shelf-full" id="shelfFull" onclick="closeShelf(event,'shelfFull')">
     <div class="shelf-panel" onclick="event.stopPropagation()">
       <div class="shelf-header">
+        <div class="shelf-header-left-empty"></div>
         <span class="shelf-title">Search</span>
         <button class="shelf-close" onclick="closeShelf(null,'shelfFull')">&times;</button>
       </div>
@@ -2775,6 +2804,37 @@ tr.hot:hover td { background: var(--orange-100); }
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sub-flow Shelf with Back Button -->
+  <div class="shelf-backdrop shelf-right shelf-medium" id="shelfBack" onclick="closeShelf(event,'shelfBack')">
+    <div class="shelf-panel" onclick="event.stopPropagation()">
+      <div class="shelf-handle"></div>
+      <div class="shelf-header">
+        <button class="shelf-back" onclick="closeShelf(null,'shelfBack')"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.25 8.75L9.75 12l3.5 3.25"/></svg></button>
+        <span class="shelf-title">Select Payment</span>
+        <button class="shelf-close" onclick="closeShelf(null,'shelfBack')">&times;</button>
+      </div>
+      <div class="shelf-body">
+        <div style="font-size:14px;color:var(--text-secondary);margin-bottom:var(--space-5)">Choose a payment method for your bid deposit.</div>
+        <div style="border:1px solid var(--interactive-primary);border-radius:var(--radius-lg);padding:var(--space-4);margin-bottom:var(--space-3);display:flex;align-items:center;gap:var(--space-3)">
+          <div style="width:40px;height:28px;background:var(--blue-800);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700">VISA</div>
+          <div><div style="font-size:15px;font-weight:500">Visa ending in 4242</div><div style="font-size:12px;color:var(--text-tertiary)">Expires 08/27</div></div>
+        </div>
+        <div style="border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:var(--space-4);margin-bottom:var(--space-3);display:flex;align-items:center;gap:var(--space-3)">
+          <div style="width:40px;height:28px;background:var(--neutral-700);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700">MC</div>
+          <div><div style="font-size:15px;font-weight:500">Mastercard ending in 8371</div><div style="font-size:12px;color:var(--text-tertiary)">Expires 12/26</div></div>
+        </div>
+        <div style="border:1px dashed var(--border-default);border-radius:var(--radius-lg);padding:var(--space-4);display:flex;align-items:center;justify-content:center;gap:var(--space-2);color:var(--interactive-primary);font-size:14px;font-weight:500;cursor:pointer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 5.75v12.5M5.75 12h12.5"/></svg>
+          Add new payment method
+        </div>
+      </div>
+      <div class="shelf-footer">
+        <button class="btn btn-md btn-tertiary" onclick="closeShelf(null,'shelfBack')">Cancel</button>
+        <button class="btn btn-md btn-primary">Confirm</button>
       </div>
     </div>
   </div>
@@ -3495,7 +3555,7 @@ tr.hot:hover td { background: var(--orange-100); }
       <tr><td class="label-col">Card radius</td><td class="desktop-col">12px</td><td class="mobile-col">16px</td></tr>
       <tr><td class="label-col">Toggle track</td><td class="desktop-col">48 &times; 28px</td><td class="mobile-col">51 &times; 31px (iOS)</td></tr>
       <tr><td class="label-col">Modal style</td><td class="desktop-col">Centered panel, 16px radius</td><td class="mobile-col">Bottom sheet, 20px top radius</td></tr>
-      <tr><td class="label-col">Shelf style</td><td class="desktop-col">Side panel, right/left, 16px radius</td><td class="mobile-col">Bottom sheet, 4 heights (40/60/85/100vh)</td></tr>
+      <tr><td class="label-col">Shelf style</td><td class="desktop-col">Side panel, right/left, no radius</td><td class="mobile-col">Bottom sheet, 4 heights (40/60/85/100vh)</td></tr>
       <tr><td class="label-col">Touch target</td><td class="desktop-col">40px (mouse)</td><td class="mobile-col">44px min, 48px preferred</td></tr>
       <tr><td class="label-col">Page margin</td><td class="desktop-col">80px</td><td class="mobile-col">16px</td></tr>
       <tr><td class="label-col">Navigation</td><td class="desktop-col">Header + sidebar</td><td class="mobile-col">Bottom tab bar + nav stack</td></tr>
@@ -3555,6 +3615,7 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="shelf-panel" onclick="event.stopPropagation()">
       <div class="shelf-handle"></div>
       <div class="shelf-header">
+        <div class="shelf-header-left-empty"></div>
         <span class="shelf-title">Quick Actions</span>
         <button class="shelf-close" onclick="closeShelf(null,'shelfPeek')">&times;</button>
       </div>
@@ -3573,6 +3634,7 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="shelf-panel" onclick="event.stopPropagation()">
       <div class="shelf-handle"></div>
       <div class="shelf-header">
+        <div class="shelf-header-left-empty"></div>
         <span class="shelf-title">Filters</span>
         <button class="shelf-close" onclick="closeShelf(null,'shelfHalf')">&times;</button>
       </div>
@@ -3606,6 +3668,7 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="shelf-panel" onclick="event.stopPropagation()">
       <div class="shelf-handle"></div>
       <div class="shelf-header">
+        <div class="shelf-header-left-empty"></div>
         <span class="shelf-title">Vehicle Detail</span>
         <button class="shelf-close" onclick="closeShelf(null,'shelfTall')">&times;</button>
       </div>
@@ -3626,7 +3689,7 @@ tr.hot:hover td { background: var(--orange-100); }
         </div>
       </div>
       <div class="shelf-footer">
-        <button class="btn btn-md btn-secondary" onclick="closeShelf(null,'shelfTall')">Close</button>
+        <button class="btn btn-md btn-tertiary" onclick="closeShelf(null,'shelfTall')">Close</button>
         <button class="btn btn-md btn-primary">Place Bid</button>
       </div>
     </div>
@@ -3636,6 +3699,7 @@ tr.hot:hover td { background: var(--orange-100); }
   <div class="shelf-backdrop shelf-right shelf-full" id="shelfFullMobile" onclick="closeShelf(event,'shelfFullMobile')">
     <div class="shelf-panel" onclick="event.stopPropagation()">
       <div class="shelf-header">
+        <div class="shelf-header-left-empty"></div>
         <span class="shelf-title">Search</span>
         <button class="shelf-close" onclick="closeShelf(null,'shelfFullMobile')">&times;</button>
       </div>

@@ -23,9 +23,10 @@
 
 Vallejo is the production design system for [Copart.com](https://www.copart.com) — online vehicle auctions, salvage and wholesale marketplace, member dashboards, bidding flows, and all customer-facing interfaces.
 
-Two documentation tracks, one system:
+Three documentation tracks, one system:
 
 | Folder | Audience | Contents |
 |--------|----------|----------|
 | `/human/` | Designers, developers, stakeholders | Full specification with prose, rationale, and visual examples |
 | `/llm/` | AI agents, code generators, LLM tools | Structured data, CSS patterns, HTML snippets optimized for token efficiency |
+| `/demo/` | Everyone | Interactive visual demo (hostable on Vercel) |

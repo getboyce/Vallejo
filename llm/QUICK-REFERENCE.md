@@ -19,6 +19,7 @@
 - **Mobile platform:** set `data-platform="mobile"` on `<html>` for mobile-specific sizing overrides.
 - **Icons:** Inline SVG only (Iconic set). Always use `stroke="currentColor"` and `fill="none"`. No emoji, no icon fonts, no `<img>` tags. All 120 icon SVG paths are in `ICONS.json`.
 - **No pure red:** Error/destructive states use rose/magenta (`--error-*`), never `#FF0000` etc.
+- **Copart header required:** Always include the Copart header (`copart-header.html` for logged-out, `copart-header-loggedin.html` for logged-in) at the top of every prototype page unless explicitly told not to. Do not recreate or improvise a header — use the existing component files.
 
 ### Icon Names by Category
 
@@ -78,7 +79,9 @@
 --neutral-300: #C5CCD3;  /* dark: #3A4150 — borders */
 --neutral-500: #7A8691;  /* dark: #6E7A86 — placeholders */
 --neutral-700: #46525D;  /* dark: #A8B2BC — body copy */
+--neutral-800: #353A48;  /* dark: #C5CDD6 — secondary surfaces */
 --neutral-900: #2F333C;  /* dark: #F0F1F3 — headlines */
+--neutral-950: #23262F;  /* dark: #F8F9FA — darkest surface */
 ```
 
 ### Colors — Semantics (Feedback)
@@ -270,6 +273,48 @@ These change automatically when `data-platform="mobile"` is set:
 | `.btn-xl` | 56px | 32px | 18px | 10px |
 
 **States:** hover (`var(--interactive-hover)` bg for primary), active (`scale(0.98)`), disabled (`var(--neutral-200)` bg, `var(--neutral-500)` text), loading (`aria-busy="true"`), focus (`box-shadow: var(--shadow-focus)`)
+
+---
+
+### Search Bar (Header)
+
+```html
+<div class="header-search">
+  <svg class="header-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M19.25 19.25L15.5 15.5M4.75 11C4.75 7.54822 7.54822 4.75 11 4.75C14.4518 4.75 17.25 7.54822 17.25 11C17.25 14.4518 14.4518 17.25 11 17.25C7.54822 17.25 4.75 14.4518 4.75 11Z"/>
+  </svg>
+  <input type="search" class="header-search-input"
+         placeholder="Search vehicles, lots, VINs..."
+         aria-label="Search vehicles">
+  <button class="header-search-clear" aria-label="Clear search" type="button">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="2" d="M17.25 6.75L6.75 17.25"/>
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="2" d="M6.75 6.75L17.25 17.25"/>
+    </svg>
+  </button>
+</div>
+```
+
+**Specs:**
+
+| Property | Desktop | Mobile |
+|----------|---------|--------|
+| Height | 40px | 36px |
+| Max width | 420px | 100% |
+| Background | `rgba(255,255,255,0.1)` | same |
+| Border | `1.5px solid rgba(255,255,255,0.15)` | same |
+| Border radius | `var(--radius-pill)` / 9999px | same |
+| Text color | `#fff` | same |
+| Placeholder | `rgba(255,255,255,0.5)` | same |
+| Focus border | `rgba(91,142,240,0.7)` | same |
+| Focus shadow | `0 0 0 3px rgba(38,98,217,0.25)` | same |
+
+**Clear button:** Hidden by default. Appears when input has value (`:not(:placeholder-shown)`). Uses SVG x icon in a 20px circle with `rgba(255,255,255,0.15)` background. Native `type="search"` clear button is hidden via `-webkit-appearance: none`.
+
+**JS:** Clear button resets input value and refocuses.
 
 ---
 
@@ -1205,7 +1250,7 @@ Complete `[data-theme="dark"]` override block:
   /* Primitive Neutral */
   --neutral-50: #1A1D23;  --neutral-100: #22262E;  --neutral-200: #2E3340;
   --neutral-300: #3A4150;  --neutral-500: #6E7A86;
-  --neutral-700: #A8B2BC;  --neutral-900: #F0F1F3;
+  --neutral-700: #A8B2BC;  --neutral-800: #C5CDD6;  --neutral-900: #F0F1F3;  --neutral-950: #F8F9FA;
 
   /* Semantic Surfaces */
   --bg-primary: #1A1D23;  --bg-secondary: #22262E;  --bg-tertiary: #2E3340;

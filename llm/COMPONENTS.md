@@ -26,6 +26,7 @@
    - 2.5 [Checkbox](#25-checkbox)
    - 2.6 [Radio Button](#26-radio-button)
    - 2.7 [Slider / Range](#27-slider--range)
+   - 2.8 [Search Bar (Header)](#28-search-bar-header)
 3. [Feedback](#3-feedback)
    - 3.1 [Alert / Banner](#31-alert--banner)
    - 3.2 [Toast / Snackbar](#32-toast--snackbar)
@@ -113,6 +114,7 @@
 | CTA border-radius | var(--radius-lg) | var(--radius-lg) |
 
 **Usage Rules:**
+- **Always include the Copart header** at the top of every prototype page unless explicitly told not to. Use the existing component files (`copart-header.html` for logged-out, `copart-header-loggedin.html` for logged-in) — do not recreate or improvise a header.
 - Header background (Blue 900) stays dark in both light and dark themes — it is not theme-switched.
 - Nav link color is always white with 0.85 opacity, increasing to 1.0 on hover.
 - Mobile: hamburger replaces nav links at the tablet breakpoint (< 768px).
@@ -722,6 +724,54 @@ Same as Text Field states, plus:
 - Range variant: two thumbs, each with own aria attributes.
 - Keyboard: Arrow keys adjust by step, Page Up/Down by larger step, Home/End for min/max.
 - `aria-label` describing what the slider controls.
+
+---
+
+### 2.8 Search Bar (Header)
+
+**Anatomy:**
+1. `header-search` — Relative-positioned container
+2. `header-search-icon` — Magnifying glass SVG, absolutely positioned left
+3. `header-search-input` — `type="search"` input with pill border-radius
+4. `header-search-clear` — SVG x button, absolutely positioned right, hidden until input has value
+
+**Specs:**
+
+| Property | Desktop | Mobile |
+|----------|---------|--------|
+| Height | 40px | 36px |
+| Max width | 420px | 100% (full row) |
+| Background | rgba(255,255,255,0.1) | same |
+| Border | 1.5px solid rgba(255,255,255,0.15) | same |
+| Border-radius | var(--radius-pill) | same |
+| Padding | 0 var(--space-4) 0 40px | same |
+| Text color | #fff | same |
+| Placeholder color | rgba(255,255,255,0.5) | same |
+| Focus border | rgba(91,142,240,0.7) | same |
+| Focus ring | 0 0 0 3px rgba(38,98,217,0.25) | same |
+| Clear button size | 20px circle | same |
+| Clear button bg | rgba(255,255,255,0.15) | same |
+
+**States:**
+
+| State | Behavior |
+|-------|----------|
+| Default | Subtle translucent background, placeholder visible |
+| Hover | Background brightens to rgba(255,255,255,0.14) |
+| Focus | Blue focus ring, background rgba(255,255,255,0.18) |
+| Has value | Clear button (x) appears on right side |
+| Cleared | Input empties, clear button hides, input refocuses |
+
+**Usage Rules:**
+- Always use `type="search"` for semantic HTML
+- Native WebKit search clear button must be hidden with `-webkit-appearance: none`
+- Clear button uses Vallejo's close/x SVG icon — never an emoji or text character
+- On mobile (<=768px), icon positions use fixed `top: 18px` (half of 36px input) to center within the input, not the padded container
+
+**Accessibility:**
+- Input has `aria-label="Search vehicles"`
+- Clear button has `aria-label="Clear search"`
+- Both are keyboard-focusable
 
 ---
 

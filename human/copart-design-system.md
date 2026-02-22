@@ -718,47 +718,144 @@ All icons in the Vallejo Design System come exclusively from the **Iconic** icon
 
 ### Component: Header
 
-**Purpose:** Primary navigation and brand identity. Anchors the user's sense of place across all pages.
+**Purpose:** Primary navigation and brand identity. Anchors the user's sense of place across all pages. Always include the Copart header at the top of every page — use the existing component files (`demo/copart-header.html` for logged-out, `demo/copart-header-loggedin.html` for logged-in), never recreate from scratch.
 
-**Anatomy:**
-1. `header-container` — Full-width outer wrapper
-2. `header-brand` — Logo lockup (left-aligned)
-3. `header-search` — Search bar (center, desktop only)
-4. `header-nav` — Primary navigation links
-5. `header-actions` — Sign In / Register / Account buttons (right-aligned)
-6. `header-mobile-toggle` — Hamburger menu trigger (mobile/tablet only)
+**Anatomy — Three-Tier Structure:**
+
+| Tier | Element | Height | Background | Visibility |
+|------|---------|--------|------------|------------|
+| 1 — Utility bar | `header-utility-bar` | 36px | Neutral 950 (#23262F) | Desktop only (hidden on mobile) |
+| 2 — Primary bar | `header-container` | 80px (64px scrolled) | Neutral 900 (#2F333C) | Always visible |
+| 3 — Member nav | `member-nav` | 44px | Neutral 700 (#46525D) | Logged-in only (hidden on mobile) |
+
+**Tier 1 — Utility Bar:**
+- Left: "243 Live Auctions" with pulsing green dot (8px, #34C759)
+- Right: Get help link, language dropdown (6 languages), region dropdown (grouped by continent)
+- Text: 12px, weight 500, rgba(255,255,255,0.7)
+- Dividers: 1px rgba(255,255,255,0.15)
+
+**Tier 2 — Primary Bar Anatomy:**
+1. `header-brand` — Copart logo (44px height, 36px scrolled)
+2. `header-search` — Pill search bar (max-width 420px), magnifying glass icon left, SVG clear button right
+3. `header-nav` — Dropdown menus: Vehicles, Auctions, Sell, About Copart
+4. `header-actions` — Sign In + Register (logged-out) or Bell + Avatar (logged-in)
+5. `header-mobile-toggle` — Hamburger menu (mobile/tablet only)
+
+**Tier 3 — Member Nav Bar (Logged-In Only):**
+- Direct links: Dashboard, Feedback
+- Dropdown links: My Tools (Watchlist, Saved Searches, Alerts, VIN Check), Bid Status (Active Bids, Won, Lost, Pending), Payments (Payment Methods, Transaction History, Invoices)
+- Sticky at top: 80px (adjusts to 64px when primary bar scrolls)
+- Text: 13px, weight 600, rgba(255,255,255,0.7), hover white
+- z-index: 999
 
 **Variants:**
+
 | Variant | Context |
 |---------|---------|
-| Default | Logged-out state with Sign In + Register CTAs |
-| Authenticated | Replace CTAs with avatar + account dropdown |
-| Auction Live | Adds a persistent "Auction in Progress" banner below nav |
-| Compact | Scrolled state — reduced height, logo scales down, search collapses to icon |
+| Logged-out | Sign In link + Register CTA in actions. No member nav bar (two tiers). |
+| Logged-in | Bell icon (with orange badge) + Avatar button in actions. Full member nav bar (three tiers). |
+| Scrolled | Primary bar collapses 80px to 64px, logo scales, shadow appears. Desktop only. |
 
 **States:**
+
 | State | Behavior |
 |-------|----------|
-| Default | Full height (72px desktop, 56px mobile), transparent or gradient background |
-| Scrolled | Collapses to 56px, adds `box-shadow: 0 1px 3px rgba(0,0,0,0.08)`, background becomes solid |
-| Mobile Open | Hamburger transforms to X; overlay drawer slides from right |
+| Default | Full height (80px primary), no shadow |
+| Scrolled | 64px primary, shadow `0 2px 12px rgba(0,0,0,0.25)`, member nav `top` adjusts. Desktop only (>768px). |
+| Mobile | Utility bar hidden. Search moves below logo (full width, 36px). Nav hidden, replaced by hamburger drawer. |
 
-**Specs:**
+**Search Bar Specs:**
 ```
-Height: 72px (desktop) / 56px (mobile)
-Background: Blue 900 (#0F2757) solid
-Padding: 0 space-20 (desktop) / 0 space-4 (mobile)
-Logo height: 32px (desktop) / 28px (mobile)
-Nav link: type-subheadline, color #FFFFFF, opacity 0.85 → 1.0 on hover
-CTA button: 40px height, 16px padding-x, border-radius 8px
-z-index: 1000
+Height: 40px (desktop) / 36px (mobile)
+Max-width: 420px (desktop) / 100% (mobile)
+Background: rgba(255,255,255,0.1) → 0.14 hover → 0.18 focus
+Border: 1.5px rgba(255,255,255,0.15) → blue-600 on focus
+Border-radius: pill (9999px)
+Font: 14px, white text, rgba(255,255,255,0.5) placeholder
+Search icon: 18px, left 12px
+Clear button: 20px circle, right 12px, visible only when input has text
+Focus ring: 0 0 0 3px rgba(38,98,217,0.25)
 ```
+
+**Navigation Dropdown Specs:**
+```
+Trigger: 14px, weight 600, rgba(255,255,255,0.85), hover white
+Trigger padding: 8px 12px, border-radius 6px
+Panel: white bg, 1px border (neutral-200), border-radius 12px, shadow-lg
+Panel min-width: 220px
+Item: 14px, weight 500, padding 12px 16px
+Item hover: blue-50 bg, blue-600 text
+Item icons: 18px, stroke-width 1.5
+Chevron: 14px, rotates 180deg on open
+```
+
+**Avatar Dropdown (Logged-In):**
+```
+Min-width: 260px, anchored right
+Header: 44px avatar (editable with pencil badge) + name (14px/600) + email (12px) + member # (11px)
+Section labels: 11px, weight 700, uppercase, 0.05em letter-spacing
+Sections: Account settings, Preference center, Notifications, Member fees
+Sign Out: orange-600 text, hover orange-800
+Dividers: 1px neutral-200, margin 8px 0
+```
+
+**Button Specs:**
+```
+Sign In: 36px height, border 1.5px rgba(255,255,255,0.3), radius 8px, 14px/600 white
+Register: 36px height, bg orange-600, hover orange-800, radius 8px, 14px/600 white
+Icon button (bell): 36px square, radius 6px, rgba(255,255,255,0.75) → white on hover
+Badge: 8px circle, orange-600, 2px header-bg border, top-right offset
+```
+
+**Mobile Drawer:**
+```
+Overlay: fixed inset, rgba(0,0,0,0.5), z-index 1200
+Panel: 320px (max 85vw), right-aligned, white bg, z-index 1300
+Transition: translateX(100%) → translateX(0), 300ms ease-out
+Close button: 36px, top-right
+Sections: 16px padding, 1px bottom border
+Link text: 16px, weight 600
+Footer: neutral-100 bg, language + region selects
+```
+
+**Mobile Drawer — Logged-In Additions:**
+- User info section at top: 48px avatar (editable) + name (16px/700) + email (13px) + member # (12px)
+- Member nav sections (blue-50 bg): Account settings, Preference center, Notifications, Member fees
+- Sign Out link at bottom (orange-600)
+
+**Responsive Breakpoints:**
+
+| Breakpoint | Horizontal padding | Key changes |
+|------------|--------------------|-------------|
+| > 1280px | 80px | Full layout |
+| 1024–1280px | 32px | Search 320px max, nav 13px, tighter gaps |
+| < 768px | 16px | Utility bar hidden, search full-width below logo, nav → hamburger drawer, member nav hidden |
+
+**z-index Hierarchy:**
+```
+--z-header: 1000 (primary bar)
+Member nav: 999
+--z-dropdown: 1100
+--z-overlay: 1200
+--z-drawer: 1300
+```
+
+**JavaScript Behavior:**
+- Scroll: > 20px adds `.scrolled` class (desktop only, >768px). Shrinks primary bar and logo, adjusts member nav top.
+- Dropdowns: Click to toggle, click outside or Escape to close. `aria-expanded` toggled.
+- Mobile drawer: Toggle opens/closes with overlay. Focus trap, body scroll lock, Escape to close.
+- Search clear: Shows when input has text (CSS `:not(:placeholder-shown)`), clears value and refocuses.
 
 **Accessibility:**
-- `<header role="banner">` with `<nav role="navigation" aria-label="Main navigation">`
-- All nav items keyboard-focusable with visible focus ring (`2px solid #5B8EF0, offset 2px`)
-- Mobile menu: `aria-expanded="true|false"` on toggle, focus trap within open drawer
 - Skip-to-content link as first focusable element
+- `<header role="banner">` with `<nav role="navigation" aria-label="Main navigation">`
+- Utility bar: `role="complementary"`, `aria-label="Site utilities"`
+- All nav items keyboard-focusable with visible focus ring (2px solid blue, 2px offset)
+- Dropdown triggers: `aria-haspopup="true"`, `aria-expanded="true|false"`
+- Dropdown panels: `role="menu"`, items `role="menuitem"`
+- Mobile drawer: `role="dialog"`, `aria-modal="true"`, focus trap, `aria-controls` on toggle
+- Bell icon: `aria-label="Notifications"`
+- Avatar edit: `aria-label="Edit avatar"`
 
 ---
 

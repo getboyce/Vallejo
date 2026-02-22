@@ -1,0 +1,687 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "copart": {
+    "$description": "Vallejo Design System 1.1 Tokens",
+
+    "color": {
+      "primitive": {
+        "blue": {
+          "50":  { "$value": "#F6F9FD", "$type": "color", "$description": "Brand tint — page backgrounds" },
+          "100": { "$value": "#EEF2FC", "$type": "color", "$description": "Brand lightest — hover backgrounds" },
+          "200": { "$value": "#E1E9FA", "$type": "color", "$description": "Brand light — selected rows, info fills" },
+          "600": { "$value": "#2662D9", "$type": "color", "$description": "Brand primary — CTAs, active links" },
+          "800": { "$value": "#063598", "$type": "color", "$description": "Brand dark — hover states" },
+          "900": { "$value": "#0F2757", "$type": "color", "$description": "Brand darkest — titles, critical text" }
+        },
+        "neutral": {
+          "50":  { "$value": "#FFFFFF", "$type": "color", "$description": "Page background — base canvas" },
+          "100": { "$value": "#F4F5F6", "$type": "color", "$description": "Surface — backgrounds, alt rows" },
+          "200": { "$value": "#E2E5E9", "$type": "color", "$description": "Muted — disabled, subtle dividers" },
+          "300": { "$value": "#C5CCD3", "$type": "color", "$description": "Border — form fields, separators" },
+          "500": { "$value": "#7A8691", "$type": "color", "$description": "Subtle — placeholders, captions" },
+          "700": { "$value": "#46525D", "$type": "color", "$description": "Body — body copy, descriptions" },
+          "900": { "$value": "#2F333C", "$type": "color", "$description": "Ink — headlines, primary text" }
+        },
+        "success": {
+          "light":  { "$value": "#D7E8D1", "$type": "color" },
+          "main":   { "$value": "#4CA830", "$type": "color" },
+          "dark":   { "$value": "#1B6600", "$type": "color" },
+          "icon":   { "$value": "#238202", "$type": "color" }
+        },
+        "warning": {
+          "light":  { "$value": "#FFF7D1", "$type": "color" },
+          "main":   { "$value": "#EC9C0D", "$type": "color" },
+          "dark":   { "$value": "#705700", "$type": "color" },
+          "icon":   { "$value": "#B07800", "$type": "color" }
+        },
+        "error": {
+          "light":  { "$value": "#FCE5E9", "$type": "color" },
+          "main":   { "$value": "#D42A54", "$type": "color" },
+          "dark":   { "$value": "#8C1D35", "$type": "color" },
+          "icon":   { "$value": "#C22248", "$type": "color" }
+        },
+        "orange": {
+          "50":  { "$value": "#FDF7F2", "$type": "color", "$description": "Accent tint — promo surfaces, warm page backgrounds" },
+          "100": { "$value": "#FAEEE5", "$type": "color", "$description": "Accent lightest — hover fills, subtle warm highlights" },
+          "200": { "$value": "#F8E2D3", "$type": "color", "$description": "Accent light — badge fills, selected states, featured backgrounds" },
+          "600": { "$value": "#D86518", "$type": "color", "$description": "Accent primary — secondary CTAs, badges, urgency indicators" },
+          "800": { "$value": "#933C06", "$type": "color", "$description": "Accent dark — hover/pressed states on accent elements" },
+          "900": { "$value": "#50250B", "$type": "color", "$description": "Accent darkest — text on warm surfaces, headings in warm contexts" }
+        },
+        "white":  { "$value": "#FFFFFF", "$type": "color" },
+        "black":  { "$value": "#000000", "$type": "color" }
+      },
+
+      "semantic": {
+        "background": {
+          "primary":   { "$value": "{copart.color.primitive.white}", "$type": "color" },
+          "secondary": { "$value": "{copart.color.primitive.neutral.100}", "$type": "color" },
+          "tertiary":  { "$value": "{copart.color.primitive.blue.50}", "$type": "color" },
+          "inverse":   { "$value": "{copart.color.primitive.neutral.900}", "$type": "color" }
+        },
+        "text": {
+          "primary":   { "$value": "{copart.color.primitive.neutral.900}", "$type": "color" },
+          "secondary": { "$value": "{copart.color.primitive.neutral.700}", "$type": "color" },
+          "tertiary":  { "$value": "{copart.color.primitive.neutral.500}", "$type": "color" },
+          "disabled":  { "$value": "{copart.color.primitive.neutral.300}", "$type": "color" },
+          "inverse":   { "$value": "{copart.color.primitive.white}", "$type": "color" },
+          "link":      { "$value": "{copart.color.primitive.blue.600}", "$type": "color" },
+          "link-hover": { "$value": "{copart.color.primitive.blue.800}", "$type": "color" }
+        },
+        "border": {
+          "default":  { "$value": "{copart.color.primitive.neutral.300}", "$type": "color" },
+          "subtle":   { "$value": "{copart.color.primitive.neutral.200}", "$type": "color" },
+          "strong":   { "$value": "{copart.color.primitive.neutral.500}", "$type": "color" },
+          "focus":    { "$value": "{copart.color.primitive.blue.600}", "$type": "color" },
+          "error":    { "$value": "{copart.color.primitive.error.main}", "$type": "color" },
+          "success":  { "$value": "{copart.color.primitive.success.main}", "$type": "color" }
+        },
+        "interactive": {
+          "primary":          { "$value": "{copart.color.primitive.blue.600}", "$type": "color" },
+          "primary-hover":    { "$value": "{copart.color.primitive.blue.800}", "$type": "color" },
+          "primary-active":   { "$value": "#042D7A", "$type": "color" },
+          "secondary":        { "$value": "{copart.color.primitive.blue.100}", "$type": "color" },
+          "secondary-hover":  { "$value": "{copart.color.primitive.blue.200}", "$type": "color" },
+          "accent":           { "$value": "{copart.color.primitive.orange.600}", "$type": "color", "$description": "Secondary CTA, registration, urgency" },
+          "accent-hover":     { "$value": "{copart.color.primitive.orange.800}", "$type": "color" },
+          "accent-surface":   { "$value": "{copart.color.primitive.orange.200}", "$type": "color", "$description": "Badge fills, featured content backgrounds" },
+          "destructive":      { "$value": "{copart.color.primitive.error.icon}", "$type": "color" },
+          "destructive-hover": { "$value": "{copart.color.primitive.error.dark}", "$type": "color" },
+          "disabled":         { "$value": "{copart.color.primitive.neutral.200}", "$type": "color" }
+        },
+        "feedback": {
+          "success-bg":     { "$value": "{copart.color.primitive.success.light}", "$type": "color" },
+          "success-text":   { "$value": "{copart.color.primitive.success.dark}", "$type": "color" },
+          "success-border": { "$value": "{copart.color.primitive.success.main}", "$type": "color" },
+          "success-icon":   { "$value": "{copart.color.primitive.success.icon}", "$type": "color" },
+          "warning-bg":     { "$value": "{copart.color.primitive.warning.light}", "$type": "color" },
+          "warning-text":   { "$value": "{copart.color.primitive.warning.dark}", "$type": "color" },
+          "warning-border": { "$value": "{copart.color.primitive.warning.main}", "$type": "color" },
+          "warning-icon":   { "$value": "{copart.color.primitive.warning.icon}", "$type": "color" },
+          "error-bg":       { "$value": "{copart.color.primitive.error.light}", "$type": "color" },
+          "error-text":     { "$value": "{copart.color.primitive.error.dark}", "$type": "color" },
+          "error-border":   { "$value": "{copart.color.primitive.error.main}", "$type": "color" },
+          "error-icon":     { "$value": "{copart.color.primitive.error.icon}", "$type": "color" },
+          "info-bg":        { "$value": "#E0EBFF", "$type": "color" },
+          "info-text":      { "$value": "{copart.color.primitive.blue.900}", "$type": "color" },
+          "info-border":    { "$value": "{copart.color.primitive.blue.600}", "$type": "color" },
+          "info-icon":      { "$value": "{copart.color.primitive.blue.600}", "$type": "color" }
+        }
+      },
+
+      "primitive-dark": {
+        "$description": "Dark mode primitive color ramps — same hue families with adjusted lightness for dark surfaces. Tints (50-200) become dark backgrounds; core values (600-900) become lighter for contrast.",
+        "blue": {
+          "50":  { "$value": "#0D1117", "$type": "color", "$description": "Brand tint — subtle blue-tinted dark backgrounds" },
+          "100": { "$value": "#141E33", "$type": "color", "$description": "Brand lightest — info backgrounds, hover fills" },
+          "200": { "$value": "#1E2A45", "$type": "color", "$description": "Brand light — selected rows, active backgrounds" },
+          "600": { "$value": "#5B8EF0", "$type": "color", "$description": "Brand primary — CTAs, active links (5.8:1 on #1A1D23)" },
+          "800": { "$value": "#7AAAF5", "$type": "color", "$description": "Brand hover — hover states, high emphasis" },
+          "900": { "$value": "#B8D4FA", "$type": "color", "$description": "Brand text — titles, critical text on dark surfaces" }
+        },
+        "orange": {
+          "50":  { "$value": "#1A1008", "$type": "color", "$description": "Accent tint — warm dark page backgrounds" },
+          "100": { "$value": "#221710", "$type": "color", "$description": "Accent lightest — warm hover fills" },
+          "200": { "$value": "#2E1F14", "$type": "color", "$description": "Accent light — badge fills, featured backgrounds" },
+          "600": { "$value": "#E8873F", "$type": "color", "$description": "Accent primary — secondary CTAs, badges (4.1:1 on #1A1D23)" },
+          "800": { "$value": "#F0A566", "$type": "color", "$description": "Accent hover — hover/pressed states" },
+          "900": { "$value": "#F8C99A", "$type": "color", "$description": "Accent text — text on dark warm surfaces" }
+        },
+        "neutral": {
+          "50":  { "$value": "#1A1D23", "$type": "color", "$description": "Page background — base dark canvas" },
+          "100": { "$value": "#22262E", "$type": "color", "$description": "Surface — elevated backgrounds, cards" },
+          "200": { "$value": "#2E3340", "$type": "color", "$description": "Muted — subtle dividers, disabled" },
+          "300": { "$value": "#3A4150", "$type": "color", "$description": "Border — form fields, separators" },
+          "500": { "$value": "#6E7A86", "$type": "color", "$description": "Subtle — placeholders, captions" },
+          "700": { "$value": "#A8B2BC", "$type": "color", "$description": "Body — body copy, descriptions" },
+          "900": { "$value": "#F0F1F3", "$type": "color", "$description": "Ink — headlines, primary text" }
+        },
+        "success": {
+          "light":  { "$value": "#1A2E14", "$type": "color" },
+          "main":   { "$value": "#6ABF4D", "$type": "color" },
+          "dark":   { "$value": "#6ABF4D", "$type": "color" },
+          "icon":   { "$value": "#6ABF4D", "$type": "color" }
+        },
+        "warning": {
+          "light":  { "$value": "#2E2510", "$type": "color" },
+          "main":   { "$value": "#E8B830", "$type": "color" },
+          "dark":   { "$value": "#E8B830", "$type": "color" },
+          "icon":   { "$value": "#E8B830", "$type": "color" }
+        },
+        "error": {
+          "light":  { "$value": "#2E1219", "$type": "color" },
+          "main":   { "$value": "#F06080", "$type": "color" },
+          "dark":   { "$value": "#F06080", "$type": "color" },
+          "icon":   { "$value": "#F06080", "$type": "color" }
+        }
+      },
+
+      "dark": {
+        "$description": "Dark mode semantic tokens — reference primitive-dark values",
+        "background": {
+          "primary":   { "$value": "#1A1D23", "$type": "color" },
+          "secondary": { "$value": "{copart.color.primitive-dark.neutral.100}", "$type": "color" },
+          "tertiary":  { "$value": "{copart.color.primitive-dark.neutral.200}", "$type": "color" },
+          "overlay":   { "$value": "rgba(0,0,0,0.7)", "$type": "color" }
+        },
+        "text": {
+          "primary":   { "$value": "{copart.color.primitive-dark.neutral.900}", "$type": "color" },
+          "secondary": { "$value": "{copart.color.primitive-dark.neutral.700}", "$type": "color" },
+          "tertiary":  { "$value": "{copart.color.primitive-dark.neutral.500}", "$type": "color" },
+          "disabled":  { "$value": "#454D58", "$type": "color" }
+        },
+        "border": {
+          "default":  { "$value": "{copart.color.primitive-dark.neutral.300}", "$type": "color" },
+          "subtle":   { "$value": "{copart.color.primitive-dark.neutral.200}", "$type": "color" },
+          "focus":    { "$value": "{copart.color.primitive-dark.blue.600}", "$type": "color" }
+        },
+        "interactive": {
+          "primary":          { "$value": "{copart.color.primitive-dark.blue.600}", "$type": "color" },
+          "primary-hover":    { "$value": "{copart.color.primitive-dark.blue.800}", "$type": "color" },
+          "primary-active":   { "$value": "#4A7DE0", "$type": "color" },
+          "selected-bg":      { "$value": "{copart.color.primitive-dark.blue.200}", "$type": "color" },
+          "accent":           { "$value": "{copart.color.primitive-dark.orange.600}", "$type": "color", "$description": "Orange accent lightened for dark backgrounds (4.1:1 on #1A1D23)" },
+          "accent-hover":     { "$value": "{copart.color.primitive-dark.orange.800}", "$type": "color" },
+          "accent-surface":   { "$value": "{copart.color.primitive-dark.orange.200}", "$type": "color", "$description": "Warm tinted surface for dark mode badges/features" }
+        },
+        "feedback": {
+          "success-bg":     { "$value": "{copart.color.primitive-dark.success.light}", "$type": "color" },
+          "success-text":   { "$value": "{copart.color.primitive-dark.success.main}", "$type": "color" },
+          "success-border": { "$value": "#4CA830", "$type": "color" },
+          "success-icon":   { "$value": "{copart.color.primitive-dark.success.icon}", "$type": "color" },
+          "warning-bg":     { "$value": "{copart.color.primitive-dark.warning.light}", "$type": "color" },
+          "warning-text":   { "$value": "{copart.color.primitive-dark.warning.main}", "$type": "color" },
+          "warning-border": { "$value": "{copart.color.primitive-dark.warning.main}", "$type": "color" },
+          "warning-icon":   { "$value": "{copart.color.primitive-dark.warning.icon}", "$type": "color" },
+          "error-bg":       { "$value": "{copart.color.primitive-dark.error.light}", "$type": "color" },
+          "error-text":     { "$value": "{copart.color.primitive-dark.error.main}", "$type": "color" },
+          "error-border":   { "$value": "{copart.color.primitive-dark.error.main}", "$type": "color" },
+          "error-icon":     { "$value": "{copart.color.primitive-dark.error.icon}", "$type": "color" },
+          "info-bg":        { "$value": "{copart.color.primitive-dark.blue.100}", "$type": "color" },
+          "info-text":      { "$value": "{copart.color.primitive-dark.blue.800}", "$type": "color" },
+          "info-border":    { "$value": "{copart.color.primitive-dark.blue.600}", "$type": "color" },
+          "info-icon":      { "$value": "{copart.color.primitive-dark.blue.600}", "$type": "color" }
+        }
+      }
+    },
+
+    "typography": {
+      "font-family": {
+        "primary":   { "$value": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif", "$type": "fontFamily" },
+        "monospace": { "$value": "'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', monospace", "$type": "fontFamily" }
+      },
+      "font-weight": {
+        "thin":       { "$value": 100, "$type": "fontWeight" },
+        "extralight": { "$value": 200, "$type": "fontWeight" },
+        "light":      { "$value": 300, "$type": "fontWeight" },
+        "regular":    { "$value": 400, "$type": "fontWeight" },
+        "medium":     { "$value": 500, "$type": "fontWeight" },
+        "semibold":   { "$value": 600, "$type": "fontWeight" },
+        "bold":       { "$value": 700, "$type": "fontWeight" },
+        "extrabold":  { "$value": 800, "$type": "fontWeight" },
+        "black":      { "$value": 900, "$type": "fontWeight" }
+      },
+      "scale": {
+        "display-lg": {
+          "desktop": { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.black}", "fontSize": "64px", "lineHeight": "72px", "letterSpacing": "-0.02em" }, "$type": "typography" },
+          "tablet":  { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.black}", "fontSize": "48px", "lineHeight": "56px", "letterSpacing": "-0.02em" }, "$type": "typography" },
+          "mobile":  { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.extrabold}", "fontSize": "36px", "lineHeight": "44px", "letterSpacing": "-0.015em" }, "$type": "typography" }
+        },
+        "display-sm": {
+          "desktop": { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.extrabold}", "fontSize": "48px", "lineHeight": "56px", "letterSpacing": "-0.02em" }, "$type": "typography" },
+          "tablet":  { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.extrabold}", "fontSize": "36px", "lineHeight": "44px", "letterSpacing": "-0.015em" }, "$type": "typography" },
+          "mobile":  { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.bold}", "fontSize": "28px", "lineHeight": "36px", "letterSpacing": "-0.01em" }, "$type": "typography" }
+        },
+        "headline": {
+          "desktop": { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.extrabold}", "fontSize": "40px", "lineHeight": "48px", "letterSpacing": "-0.015em" }, "$type": "typography" },
+          "tablet":  { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.extrabold}", "fontSize": "32px", "lineHeight": "40px", "letterSpacing": "-0.01em" }, "$type": "typography" },
+          "mobile":  { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.bold}", "fontSize": "28px", "lineHeight": "36px", "letterSpacing": "-0.01em" }, "$type": "typography" }
+        },
+        "title-1": {
+          "desktop": { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.bold}", "fontSize": "28px", "lineHeight": "36px", "letterSpacing": "-0.01em" }, "$type": "typography" },
+          "mobile":  { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.bold}", "fontSize": "22px", "lineHeight": "30px", "letterSpacing": "0em" }, "$type": "typography" }
+        },
+        "title-2": {
+          "desktop": { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.bold}", "fontSize": "22px", "lineHeight": "30px", "letterSpacing": "0em" }, "$type": "typography" },
+          "mobile":  { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.semibold}", "fontSize": "18px", "lineHeight": "26px", "letterSpacing": "0em" }, "$type": "typography" }
+        },
+        "title-3": {
+          "desktop": { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.semibold}", "fontSize": "18px", "lineHeight": "26px", "letterSpacing": "0em" }, "$type": "typography" },
+          "mobile":  { "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.semibold}", "fontSize": "16px", "lineHeight": "24px", "letterSpacing": "0em" }, "$type": "typography" }
+        },
+        "body-lg": {
+          "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.regular}", "fontSize": "18px", "lineHeight": "28px", "letterSpacing": "0em" },
+          "$type": "typography"
+        },
+        "body": {
+          "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.regular}", "fontSize": "16px", "lineHeight": "24px", "letterSpacing": "0em" },
+          "$type": "typography"
+        },
+        "body-emphasis": {
+          "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.medium}", "fontSize": "16px", "lineHeight": "24px", "letterSpacing": "0em" },
+          "$type": "typography"
+        },
+        "callout": {
+          "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.medium}", "fontSize": "16px", "lineHeight": "24px", "letterSpacing": "0em" },
+          "$type": "typography"
+        },
+        "subheadline": {
+          "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.semibold}", "fontSize": "14px", "lineHeight": "20px", "letterSpacing": "0.005em" },
+          "$type": "typography"
+        },
+        "footnote": {
+          "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.regular}", "fontSize": "13px", "lineHeight": "18px", "letterSpacing": "0.01em" },
+          "$type": "typography"
+        },
+        "caption-1": {
+          "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.medium}", "fontSize": "12px", "lineHeight": "16px", "letterSpacing": "0.015em" },
+          "$type": "typography"
+        },
+        "caption-2": {
+          "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.medium}", "fontSize": "11px", "lineHeight": "14px", "letterSpacing": "0.02em" },
+          "$type": "typography"
+        },
+        "overline": {
+          "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.bold}", "fontSize": "11px", "lineHeight": "16px", "letterSpacing": "0.08em", "textTransform": "uppercase" },
+          "$type": "typography"
+        }
+      }
+    },
+
+    "spacing": {
+      "0":  { "$value": "0px",   "$type": "dimension" },
+      "1":  { "$value": "4px",   "$type": "dimension", "$description": "Inline icon gap, tight padding" },
+      "2":  { "$value": "8px",   "$type": "dimension", "$description": "Default icon-to-label gap" },
+      "3":  { "$value": "12px",  "$type": "dimension", "$description": "Form field padding-x, small card padding" },
+      "4":  { "$value": "16px",  "$type": "dimension", "$description": "Default component padding" },
+      "5":  { "$value": "20px",  "$type": "dimension", "$description": "List item padding-y" },
+      "6":  { "$value": "24px",  "$type": "dimension", "$description": "Default card padding, gutters" },
+      "8":  { "$value": "32px",  "$type": "dimension", "$description": "Section gaps, sidebar padding" },
+      "10": { "$value": "40px",  "$type": "dimension", "$description": "Major section separators" },
+      "12": { "$value": "48px",  "$type": "dimension", "$description": "Page section margins" },
+      "16": { "$value": "64px",  "$type": "dimension", "$description": "Large section breaks" },
+      "20": { "$value": "80px",  "$type": "dimension", "$description": "Desktop outer margins" },
+      "24": { "$value": "96px",  "$type": "dimension", "$description": "Hero section padding" },
+      "32": { "$value": "128px", "$type": "dimension", "$description": "Full-page section spacing" }
+    },
+
+    "borderRadius": {
+      "none":  { "$value": "0px",  "$type": "dimension" },
+      "sm":    { "$value": "4px",  "$type": "dimension", "$description": "Checkboxes, small tags" },
+      "md":    { "$value": "6px",  "$type": "dimension", "$description": "Buttons (sm), inputs" },
+      "lg":    { "$value": "8px",  "$type": "dimension", "$description": "Buttons (md+), cards, alerts" },
+      "xl":    { "$value": "12px", "$type": "dimension", "$description": "Cards, image containers" },
+      "2xl":   { "$value": "16px", "$type": "dimension", "$description": "Modals, panels" },
+      "pill":  { "$value": "9999px", "$type": "dimension", "$description": "Toggles, badges, pills" },
+      "full":  { "$value": "50%",  "$type": "dimension", "$description": "Avatars, radio buttons" }
+    },
+
+    "shadow": {
+      "xs":   { "$value": "0 1px 2px rgba(0,0,0,0.05)", "$type": "shadow" },
+      "sm":   { "$value": "0 1px 3px rgba(0,0,0,0.06)", "$type": "shadow", "$description": "Cards default" },
+      "md":   { "$value": "0 4px 12px rgba(0,0,0,0.08)", "$type": "shadow", "$description": "Cards hover, dropdowns" },
+      "lg":   { "$value": "0 8px 24px rgba(0,0,0,0.12)", "$type": "shadow", "$description": "Floating elements, tooltips" },
+      "xl":   { "$value": "0 16px 48px rgba(0,0,0,0.16)", "$type": "shadow", "$description": "Modals, overlays" },
+      "focus": { "$value": "0 0 0 3px rgba(38,98,217,0.4)", "$type": "shadow", "$description": "Focus ring" },
+      "focus-error": { "$value": "0 0 0 3px rgba(212,42,84,0.3)", "$type": "shadow", "$description": "Error focus ring" },
+      "button-primary": { "$value": "0 1px 2px rgba(38,98,217,0.24)", "$type": "shadow" }
+    },
+
+    "motion": {
+      "duration": {
+        "instant":  { "$value": "50ms",  "$type": "duration" },
+        "fast":     { "$value": "100ms", "$type": "duration", "$description": "Micro-interactions (checkbox, toggle)" },
+        "normal":   { "$value": "150ms", "$type": "duration", "$description": "Button states, border changes" },
+        "moderate": { "$value": "200ms", "$type": "duration", "$description": "Tooltips, dropdowns, sidebar" },
+        "slow":     { "$value": "300ms", "$type": "duration", "$description": "Page transitions, modals" },
+        "slower":   { "$value": "500ms", "$type": "duration", "$description": "Skeleton shimmer cycle" }
+      },
+      "easing": {
+        "default":     { "$value": "ease",            "$type": "cubicBezier" },
+        "ease-in":     { "$value": "ease-in",         "$type": "cubicBezier", "$description": "Exit animations" },
+        "ease-out":    { "$value": "ease-out",        "$type": "cubicBezier", "$description": "Enter animations" },
+        "ease-in-out": { "$value": "ease-in-out",     "$type": "cubicBezier", "$description": "State changes" },
+        "spring":      { "$value": "cubic-bezier(0.175, 0.885, 0.32, 1.275)", "$type": "cubicBezier", "$description": "Delight animations — overshoot for heart pop, bid pulse" },
+        "enter":       { "$value": "cubic-bezier(0, 0, 0.2, 1)", "$type": "cubicBezier", "$description": "Elements entering screen" },
+        "exit":        { "$value": "cubic-bezier(0.4, 0, 1, 1)", "$type": "cubicBezier", "$description": "Elements leaving screen" }
+      },
+      "delight": {
+        "$description": "Delight animation specifications for key user moments",
+        "watchlist-heart":   { "$value": "500ms", "$type": "duration", "$description": "Heart pop spring on watchlist add" },
+        "check-circle":      { "$value": "400ms", "$type": "duration", "$description": "SVG circle draw on success" },
+        "check-path":        { "$value": "300ms", "$type": "duration", "$description": "SVG checkmark draw (250ms delay after circle)" },
+        "bid-pulse":         { "$value": "600ms", "$type": "duration", "$description": "Price pulse on competing bid" },
+        "counter-tick":      { "$value": "400ms", "$type": "duration", "$description": "Number slide on stat update" },
+        "toast-enter":       { "$value": "250ms", "$type": "duration", "$description": "Toast slide up" },
+        "toast-exit":        { "$value": "200ms", "$type": "duration", "$description": "Toast fade out" },
+        "card-stagger":      { "$value": "50ms",  "$type": "duration", "$description": "Delay between staggered card entrances" },
+        "loading-dots":      { "$value": "1400ms","$type": "duration", "$description": "Dot pulse cycle (0.16s stagger)" }
+      }
+    },
+
+    "breakpoint": {
+      "mobile-sm":  { "$value": "320px",  "$type": "dimension" },
+      "mobile":     { "$value": "375px",  "$type": "dimension" },
+      "tablet":     { "$value": "768px",  "$type": "dimension" },
+      "desktop-sm": { "$value": "1024px", "$type": "dimension" },
+      "desktop":    { "$value": "1280px", "$type": "dimension" },
+      "desktop-lg": { "$value": "1440px", "$type": "dimension" },
+      "desktop-xl": { "$value": "1920px", "$type": "dimension" }
+    },
+
+    "grid": {
+      "desktop": {
+        "columns":      { "$value": 12, "$type": "number" },
+        "gutter":       { "$value": "24px", "$type": "dimension" },
+        "margin":       { "$value": "80px", "$type": "dimension" },
+        "max-width":    { "$value": "1280px", "$type": "dimension" }
+      },
+      "tablet": {
+        "columns":      { "$value": 8, "$type": "number" },
+        "gutter":       { "$value": "16px", "$type": "dimension" },
+        "margin":       { "$value": "32px", "$type": "dimension" },
+        "max-width":    { "$value": "704px", "$type": "dimension" }
+      },
+      "mobile": {
+        "columns":      { "$value": 4, "$type": "number" },
+        "gutter":       { "$value": "16px", "$type": "dimension" },
+        "margin":       { "$value": "16px", "$type": "dimension" },
+        "max-width":    { "$value": "343px", "$type": "dimension" }
+      }
+    },
+
+    "component": {
+      "button": {
+        "height": {
+          "xs": { "$value": "28px", "$type": "dimension" },
+          "sm": { "$value": "32px", "$type": "dimension" },
+          "md": { "$value": "40px", "$type": "dimension" },
+          "lg": { "$value": "48px", "$type": "dimension" },
+          "xl": { "$value": "56px", "$type": "dimension" }
+        },
+        "padding-x": {
+          "xs": { "$value": "10px", "$type": "dimension" },
+          "sm": { "$value": "12px", "$type": "dimension" },
+          "md": { "$value": "16px", "$type": "dimension" },
+          "lg": { "$value": "24px", "$type": "dimension" },
+          "xl": { "$value": "32px", "$type": "dimension" }
+        },
+        "border-radius": {
+          "xs": { "$value": "{copart.borderRadius.md}", "$type": "dimension" },
+          "sm": { "$value": "{copart.borderRadius.md}", "$type": "dimension" },
+          "md": { "$value": "{copart.borderRadius.lg}", "$type": "dimension" },
+          "lg": { "$value": "{copart.borderRadius.lg}", "$type": "dimension" },
+          "xl": { "$value": "10px", "$type": "dimension" }
+        },
+        "min-width": { "$value": "64px", "$type": "dimension" }
+      },
+      "input": {
+        "height":        { "$value": "44px", "$type": "dimension" },
+        "border-radius": { "$value": "{copart.borderRadius.lg}", "$type": "dimension" },
+        "padding-x":     { "$value": "{copart.spacing.3}", "$type": "dimension" },
+        "border-width":  { "$value": "1.5px", "$type": "dimension" },
+        "focus-border-width": { "$value": "2px", "$type": "dimension" }
+      },
+      "card": {
+        "border-radius": { "$value": "{copart.borderRadius.xl}", "$type": "dimension" },
+        "padding":       { "$value": "{copart.spacing.4}", "$type": "dimension" },
+        "gap":           { "$value": "{copart.spacing.6}", "$type": "dimension" }
+      },
+      "modal": {
+        "border-radius": { "$value": "{copart.borderRadius.2xl}", "$type": "dimension" },
+        "width-sm":      { "$value": "400px", "$type": "dimension" },
+        "width-md":      { "$value": "560px", "$type": "dimension" },
+        "width-lg":      { "$value": "720px", "$type": "dimension" }
+      },
+      "header": {
+        "height-desktop": { "$value": "72px", "$type": "dimension" },
+        "height-mobile":  { "$value": "56px", "$type": "dimension" },
+        "z-index":        { "$value": 1000, "$type": "number" }
+      },
+      "sidebar": {
+        "width-expanded":  { "$value": "280px", "$type": "dimension" },
+        "width-collapsed": { "$value": "56px", "$type": "dimension" },
+        "width-overlay":   { "$value": "320px", "$type": "dimension" }
+      },
+      "avatar": {
+        "xs": { "$value": "24px", "$type": "dimension" },
+        "sm": { "$value": "32px", "$type": "dimension" },
+        "md": { "$value": "40px", "$type": "dimension" },
+        "lg": { "$value": "56px", "$type": "dimension" },
+        "xl": { "$value": "80px", "$type": "dimension" }
+      },
+      "touch-target": {
+        "minimum": { "$value": "44px", "$type": "dimension", "$description": "WCAG 2.5.8 minimum target size" }
+      }
+    },
+
+    "zIndex": {
+      "dropdown":  { "$value": 1100, "$type": "number" },
+      "sticky":    { "$value": 1000, "$type": "number" },
+      "header":    { "$value": 1000, "$type": "number" },
+      "overlay":   { "$value": 1300, "$type": "number" },
+      "modal":     { "$value": 1500, "$type": "number" },
+      "toast":     { "$value": 2000, "$type": "number" },
+      "tooltip":   { "$value": 2500, "$type": "number" }
+    },
+
+    "platform": {
+      "$description": "Platform-specific overrides. Desktop tokens are the defaults above. Mobile tokens below are the complete mobile/app layer — use these for iOS, Android, and mobile web.",
+
+      "mobile": {
+        "touch-target": {
+          "minimum":   { "$value": "44px", "$type": "dimension", "$description": "Apple HIG / WCAG 2.5.5 minimum" },
+          "comfortable": { "$value": "48px", "$type": "dimension", "$description": "Preferred touch target for primary actions" },
+          "spacing":   { "$value": "8px", "$type": "dimension", "$description": "Minimum gap between adjacent touch targets" }
+        },
+
+        "component": {
+          "button": {
+            "height": {
+              "sm": { "$value": "36px", "$type": "dimension", "$description": "Small button — secondary actions in toolbars" },
+              "md": { "$value": "44px", "$type": "dimension", "$description": "Default mobile button" },
+              "lg": { "$value": "50px", "$type": "dimension", "$description": "Large mobile button — primary CTAs" },
+              "xl": { "$value": "56px", "$type": "dimension", "$description": "Full-width hero CTAs" }
+            },
+            "padding-x": {
+              "sm": { "$value": "14px", "$type": "dimension" },
+              "md": { "$value": "20px", "$type": "dimension" },
+              "lg": { "$value": "28px", "$type": "dimension" },
+              "xl": { "$value": "32px", "$type": "dimension" }
+            },
+            "border-radius": {
+              "sm": { "$value": "8px", "$type": "dimension" },
+              "md": { "$value": "10px", "$type": "dimension" },
+              "lg": { "$value": "12px", "$type": "dimension" },
+              "xl": { "$value": "14px", "$type": "dimension" }
+            },
+            "font-size": {
+              "sm": { "$value": "14px", "$type": "dimension" },
+              "md": { "$value": "16px", "$type": "dimension" },
+              "lg": { "$value": "17px", "$type": "dimension" },
+              "xl": { "$value": "18px", "$type": "dimension" }
+            }
+          },
+          "input": {
+            "height":        { "$value": "48px", "$type": "dimension", "$description": "Taller inputs for finger targeting" },
+            "font-size":     { "$value": "16px", "$type": "dimension", "$description": "16px prevents iOS auto-zoom" },
+            "border-radius": { "$value": "10px", "$type": "dimension" },
+            "padding-x":     { "$value": "16px", "$type": "dimension" }
+          },
+          "card": {
+            "border-radius": { "$value": "16px", "$type": "dimension", "$description": "Larger radius for mobile cards (iOS-inspired)" },
+            "padding":       { "$value": "16px", "$type": "dimension" },
+            "gap":           { "$value": "16px", "$type": "dimension" }
+          },
+          "modal": {
+            "border-radius": { "$value": "20px 20px 0 0", "$type": "dimension", "$description": "Bottom sheet style — rounded top only" },
+            "handle-width":  { "$value": "36px", "$type": "dimension", "$description": "Drag handle pill width" },
+            "handle-height": { "$value": "4px", "$type": "dimension" }
+          },
+          "header": {
+            "height":      { "$value": "56px", "$type": "dimension" },
+            "title-size":  { "$value": "17px", "$type": "dimension", "$description": "iOS-style centered navigation title" }
+          },
+          "tab-bar": {
+            "height":      { "$value": "56px", "$type": "dimension", "$description": "Excludes safe area inset" },
+            "icon-size":   { "$value": "24px", "$type": "dimension" },
+            "label-size":  { "$value": "10px", "$type": "dimension" },
+            "gap":         { "$value": "2px", "$type": "dimension", "$description": "Icon to label gap" }
+          },
+          "list-item": {
+            "min-height":  { "$value": "44px", "$type": "dimension" },
+            "padding-x":   { "$value": "16px", "$type": "dimension" },
+            "separator-inset": { "$value": "16px", "$type": "dimension", "$description": "Left inset of separator lines" }
+          },
+          "toggle": {
+            "track-width":  { "$value": "51px", "$type": "dimension", "$description": "iOS-standard toggle size" },
+            "track-height": { "$value": "31px", "$type": "dimension" },
+            "thumb-size":   { "$value": "27px", "$type": "dimension" }
+          },
+          "checkbox": {
+            "size": { "$value": "22px", "$type": "dimension" }
+          },
+          "slider-thumb": {
+            "size": { "$value": "28px", "$type": "dimension" }
+          },
+          "search-bar": {
+            "height":        { "$value": "36px", "$type": "dimension", "$description": "iOS-style compact search bar" },
+            "border-radius": { "$value": "10px", "$type": "dimension" },
+            "font-size":     { "$value": "16px", "$type": "dimension" }
+          },
+          "avatar": {
+            "sm": { "$value": "32px", "$type": "dimension" },
+            "md": { "$value": "44px", "$type": "dimension" },
+            "lg": { "$value": "64px", "$type": "dimension" },
+            "xl": { "$value": "96px", "$type": "dimension" }
+          },
+          "badge": {
+            "min-width":    { "$value": "20px", "$type": "dimension" },
+            "height":       { "$value": "20px", "$type": "dimension" },
+            "font-size":    { "$value": "11px", "$type": "dimension" },
+            "border-radius": { "$value": "10px", "$type": "dimension" }
+          }
+        },
+
+        "spacing": {
+          "$description": "Mobile spacing adjustments — tighter to preserve screen real estate",
+          "page-margin":     { "$value": "16px", "$type": "dimension" },
+          "section-gap":     { "$value": "24px", "$type": "dimension", "$description": "Between major page sections" },
+          "card-gap":        { "$value": "12px", "$type": "dimension", "$description": "Between cards in a list/grid" },
+          "component-gap":   { "$value": "12px", "$type": "dimension", "$description": "Between sibling components" },
+          "card-padding":    { "$value": "16px", "$type": "dimension" },
+          "safe-area-bottom": { "$value": "env(safe-area-inset-bottom)", "$type": "dimension", "$description": "Dynamic — accounts for home indicator" }
+        },
+
+        "typography": {
+          "$description": "Mobile type scale — adjusted for readability at arm's length",
+          "scale": {
+            "large-title": {
+              "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.bold}", "fontSize": "34px", "lineHeight": "41px", "letterSpacing": "0.01em" },
+              "$type": "typography", "$description": "iOS Large Title — top of scrollable views"
+            },
+            "title-1": {
+              "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.bold}", "fontSize": "28px", "lineHeight": "34px", "letterSpacing": "0.01em" },
+              "$type": "typography"
+            },
+            "title-2": {
+              "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.bold}", "fontSize": "22px", "lineHeight": "28px", "letterSpacing": "0em" },
+              "$type": "typography"
+            },
+            "title-3": {
+              "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.semibold}", "fontSize": "20px", "lineHeight": "25px", "letterSpacing": "0em" },
+              "$type": "typography"
+            },
+            "headline": {
+              "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.semibold}", "fontSize": "17px", "lineHeight": "22px", "letterSpacing": "-0.005em" },
+              "$type": "typography", "$description": "Bold inline label in lists/cells"
+            },
+            "body": {
+              "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.regular}", "fontSize": "17px", "lineHeight": "22px", "letterSpacing": "-0.005em" },
+              "$type": "typography", "$description": "Default mobile body — 17px per iOS HIG"
+            },
+            "callout": {
+              "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.regular}", "fontSize": "16px", "lineHeight": "21px", "letterSpacing": "0em" },
+              "$type": "typography"
+            },
+            "subheadline": {
+              "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.regular}", "fontSize": "15px", "lineHeight": "20px", "letterSpacing": "0em" },
+              "$type": "typography"
+            },
+            "footnote": {
+              "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.regular}", "fontSize": "13px", "lineHeight": "18px", "letterSpacing": "0em" },
+              "$type": "typography"
+            },
+            "caption-1": {
+              "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.regular}", "fontSize": "12px", "lineHeight": "16px", "letterSpacing": "0em" },
+              "$type": "typography"
+            },
+            "caption-2": {
+              "$value": { "fontFamily": "{copart.typography.font-family.primary}", "fontWeight": "{copart.typography.font-weight.regular}", "fontSize": "11px", "lineHeight": "13px", "letterSpacing": "0.01em" },
+              "$type": "typography"
+            }
+          }
+        },
+
+        "borderRadius": {
+          "$description": "Mobile radii — slightly larger for softer feel on small screens",
+          "sm":   { "$value": "6px",  "$type": "dimension" },
+          "md":   { "$value": "8px",  "$type": "dimension" },
+          "lg":   { "$value": "10px", "$type": "dimension" },
+          "xl":   { "$value": "14px", "$type": "dimension" },
+          "2xl":  { "$value": "20px", "$type": "dimension" },
+          "pill": { "$value": "9999px", "$type": "dimension" }
+        },
+
+        "motion": {
+          "$description": "Mobile motion — slightly faster for responsive feel, iOS spring curves",
+          "duration": {
+            "fast":     { "$value": "100ms", "$type": "duration" },
+            "normal":   { "$value": "200ms", "$type": "duration" },
+            "moderate": { "$value": "300ms", "$type": "duration" },
+            "slow":     { "$value": "350ms", "$type": "duration" },
+            "sheet":    { "$value": "400ms", "$type": "duration", "$description": "Bottom sheet present/dismiss" }
+          },
+          "easing": {
+            "default":    { "$value": "cubic-bezier(0.2, 0, 0, 1)", "$type": "cubicBezier", "$description": "iOS standard curve" },
+            "spring":     { "$value": "cubic-bezier(0.175, 0.885, 0.32, 1.275)", "$type": "cubicBezier", "$description": "Slight overshoot — toggle, switch" },
+            "sheet-in":   { "$value": "cubic-bezier(0.32, 0.72, 0, 1)", "$type": "cubicBezier", "$description": "Bottom sheet slide up" },
+            "sheet-out":  { "$value": "cubic-bezier(0.32, 0.72, 0, 1)", "$type": "cubicBezier", "$description": "Bottom sheet slide down" }
+          }
+        },
+
+        "navigation": {
+          "$description": "Mobile navigation patterns",
+          "tab-bar": {
+            "items-max":    { "$value": 5, "$type": "number", "$description": "Maximum items in bottom tab bar" },
+            "safe-area":    { "$value": "env(safe-area-inset-bottom)", "$type": "dimension" }
+          },
+          "nav-bar": {
+            "height":       { "$value": "44px", "$type": "dimension", "$description": "iOS-standard nav bar (excludes status bar)" },
+            "title-size":   { "$value": "17px", "$type": "dimension" },
+            "title-weight": { "$value": 600, "$type": "fontWeight" },
+            "back-icon":    { "$value": "24px", "$type": "dimension" },
+            "action-min":   { "$value": "44px", "$type": "dimension", "$description": "Min touch target for nav bar actions" }
+          },
+          "status-bar": {
+            "height":       { "$value": "env(safe-area-inset-top)", "$type": "dimension", "$description": "Dynamic — 20px standard, 44-59px notch/island" }
+          }
+        },
+
+        "gestures": {
+          "$description": "Gesture thresholds for native/web app interactions",
+          "swipe-dismiss": { "$value": "150px", "$type": "dimension", "$description": "Vertical distance to dismiss bottom sheet" },
+          "swipe-action":  { "$value": "80px", "$type": "dimension", "$description": "Horizontal swipe for delete/archive in lists" },
+          "pull-to-refresh": { "$value": "64px", "$type": "dimension", "$description": "Pull distance to trigger refresh" }
+        },
+
+        "grid": {
+          "columns":    { "$value": 4, "$type": "number" },
+          "gutter":     { "$value": "16px", "$type": "dimension" },
+          "margin":     { "$value": "16px", "$type": "dimension" },
+          "max-width":  { "$value": "100%", "$type": "dimension" }
+        }
+      }
+    }
+  }
+}

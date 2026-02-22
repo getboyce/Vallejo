@@ -1,0 +1,14 @@
+node_modules/
+.DS_Store
+*.log
+.claude/
+
+# Temp / utility files
+iconic-grid-html.txt
+iconic-svg-data.json
+new-icon-grid.txt
+plan.md
+replace-svgs.js
+package.json
+package-lock.json
+src/

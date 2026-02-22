@@ -1,0 +1,2903 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lot Search Results — Copart | Vallejo v1.1 Redesign</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       VALLEJO v1.1 — Design Tokens
+       ============================================================ */
+    :root {
+      /* Primitives — Blue */
+      --blue-50:  #F6F9FD;
+      --blue-100: #EEF2FC;
+      --blue-200: #E1E9FA;
+      --blue-600: #2662D9;
+      --blue-800: #063598;
+      --blue-900: #0F2757;
+
+      /* Primitives — Orange */
+      --orange-50:  #FDF7F2;
+      --orange-100: #FAEEE5;
+      --orange-200: #F8E2D3;
+      --orange-600: #D86518;
+      --orange-800: #933C06;
+      --orange-900: #50250B;
+
+      /* Primitives — Neutral */
+      --neutral-50:  #FFFFFF;
+      --neutral-100: #F4F5F6;
+      --neutral-200: #E2E5E9;
+      --neutral-300: #C5CCD3;
+      --neutral-500: #7A8691;
+      --neutral-700: #46525D;
+      --neutral-800: #353A48;
+      --neutral-900: #2F333C;
+      --neutral-950: #23262F;
+
+      /* Semantic — Surfaces */
+      --bg-primary:   #FFFFFF;
+      --bg-secondary: #F4F5F6;
+      --bg-tertiary:  #F6F9FD;
+
+      /* Semantic — Text */
+      --text-primary:   #2F333C;
+      --text-secondary: #46525D;
+      --text-tertiary:  #7A8691;
+      --text-disabled:  #C5CCD3;
+
+      /* Semantic — Borders */
+      --border-default: #C5CCD3;
+      --border-subtle:  #E2E5E9;
+      --border-focus:   #2662D9;
+
+      /* Semantic — Interactive */
+      --interactive-primary:        #2662D9;
+      --interactive-hover:          #063598;
+      --interactive-active:         #042D7A;
+      --interactive-accent:         #D86518;
+      --interactive-accent-hover:   #933C06;
+      --interactive-accent-surface: #F8E2D3;
+
+      /* Semantic — Feedback */
+      --success-bg: #D7E8D1; --success-text: #1B6600; --success-border: #4CA830; --success-icon: #238202;
+      --warning-bg: #FFF7D1; --warning-text: #705700; --warning-border: #EC9C0D; --warning-icon: #B07800;
+      --error-bg: #FCE5E9; --error-text: #8C1D35; --error-border: #D42A54; --error-icon: #C22248;
+      --info-bg: #E0EBFF; --info-text: #0F2757; --info-border: #2662D9; --info-icon: #2662D9;
+
+      /* Header */
+      --header-bg: #0F2757;
+
+      /* Typography */
+      --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+
+      /* Spacing */
+      --space-0: 0px;  --space-1: 4px;  --space-2: 8px;
+      --space-3: 12px; --space-4: 16px; --space-5: 20px;
+      --space-6: 24px; --space-8: 32px; --space-10: 40px;
+      --space-12: 48px; --space-16: 64px; --space-20: 80px;
+
+      /* Radius */
+      --radius-none: 0px; --radius-sm: 4px;  --radius-md: 6px;
+      --radius-lg: 8px;   --radius-xl: 12px; --radius-2xl: 16px;
+      --radius-pill: 9999px; --radius-full: 50%;
+
+      /* Shadows */
+      --shadow-xs:  0 1px 2px rgba(0,0,0,0.05);
+      --shadow-sm:  0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md:  0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg:  0 8px 24px rgba(0,0,0,0.12);
+      --shadow-xl:  0 16px 48px rgba(0,0,0,0.16);
+      --shadow-focus: 0 0 0 3px rgba(38,98,217,0.4);
+
+      /* Motion */
+      --dur-fast: 100ms; --dur-normal: 150ms; --dur-moderate: 200ms;
+      --dur-slow: 300ms; --dur-deliberate: 400ms;
+      --ease-out: ease-out;
+      --ease-spring: cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* Component */
+      --input-h: 44px;
+      --card-r: 12px;
+      --card-p: 16px;
+
+      /* Z-index */
+      --z-header: 1000;
+      --z-dropdown: 1100;
+      --z-overlay: 1200;
+      --z-drawer: 1300;
+    }
+
+    /* ============================================================
+       Dark Mode
+       ============================================================ */
+    [data-theme="dark"] {
+      --blue-50: #0D1117; --blue-100: #141E33; --blue-200: #1E2A45;
+      --blue-600: #5B8EF0; --blue-800: #7AAAF5; --blue-900: #B8D4FA;
+      --orange-50: #1A1008; --orange-100: #221710; --orange-200: #2E1F14;
+      --orange-600: #E8873F; --orange-800: #F0A566; --orange-900: #F8C99A;
+      --neutral-50: #1A1D23; --neutral-100: #22262E; --neutral-200: #2E3340;
+      --neutral-300: #3A4150; --neutral-500: #6E7A86;
+      --neutral-700: #A8B2BC; --neutral-900: #F0F1F3;
+      --bg-primary: #1A1D23; --bg-secondary: #22262E; --bg-tertiary: #2E3340;
+      --text-primary: #F0F1F3; --text-secondary: #A8B2BC;
+      --text-tertiary: #6E7A86; --text-disabled: #454D58;
+      --border-default: #3A4150; --border-subtle: #2E3340; --border-focus: #5B8EF0;
+      --interactive-primary: #5B8EF0; --interactive-hover: #7AAAF5;
+      --interactive-active: #4A7DE0;
+      --interactive-accent: #E8873F; --interactive-accent-hover: #F0A566;
+      --interactive-accent-surface: #2E1F14;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
+      --shadow-focus: 0 0 0 3px rgba(91,142,240,0.4);
+      --success-bg: #1A2E14; --success-text: #6ABF4D; --success-border: #4CA830; --success-icon: #6ABF4D;
+      --warning-bg: #2E2510; --warning-text: #E8B830; --warning-border: #E8B830; --warning-icon: #E8B830;
+      --error-bg: #2E1219; --error-text: #F06080; --error-border: #F06080; --error-icon: #F06080;
+      --info-bg: #141E33; --info-text: #7AAAF5; --info-border: #5B8EF0; --info-icon: #5B8EF0;
+      --header-bg: #0F2757;
+    }
+
+    /* ============================================================
+       Reduced Motion
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ============================================================
+       Base Reset
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-family: var(--font-primary); font-size: 16px; line-height: 1.5; color: var(--text-primary); background: var(--blue-50); -webkit-font-smoothing: antialiased; }
+    body { min-height: 100vh; }
+    img { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; }
+    a { color: var(--interactive-primary); text-decoration: none; }
+    a:hover { color: var(--interactive-hover); }
+
+    /* ============================================================
+       Skip to content
+       ============================================================ */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: var(--space-4);
+      z-index: 9999;
+      padding: var(--space-2) var(--space-4);
+      background: var(--interactive-primary);
+      color: #fff;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      transition: top var(--dur-normal) var(--ease-out);
+    }
+    .skip-link:focus {
+      top: var(--space-2);
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
+    /* ============================================================
+       HEADER — Utility Bar (top strip)
+       ============================================================ */
+    .header-utility {
+      background: var(--neutral-950);
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 16px;
+      padding: 0 80px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-utility-left,
+    .header-utility-right {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .utility-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      color: rgba(255,255,255,0.7);
+      transition: color var(--dur-normal) var(--ease-out);
+      padding: var(--space-1) 0;
+      white-space: nowrap;
+    }
+    .utility-link:hover { color: #fff; }
+    .utility-link:focus-visible {
+      outline: 2px solid rgba(91,142,240,0.8);
+      outline-offset: 2px;
+      border-radius: var(--radius-sm);
+    }
+
+    .utility-link svg { flex-shrink: 0; }
+
+    /* Live auction status */
+    .utility-live-status {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      color: rgba(255,255,255,0.85);
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color var(--dur-normal) var(--ease-out);
+    }
+    .utility-live-status:hover { color: #fff; }
+    .utility-live-status:focus-visible {
+      outline: 2px solid rgba(91,142,240,0.8);
+      outline-offset: 2px;
+      border-radius: var(--radius-sm);
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background: #34C759;
+      animation: live-pulse 2s ease-in-out infinite;
+    }
+    @keyframes live-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .utility-divider {
+      width: 1px;
+      height: 16px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* Dropdown trigger */
+    .utility-dropdown {
+      position: relative;
+    }
+    .utility-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+      font-weight: 500;
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-sm);
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+    .utility-dropdown-trigger:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+    }
+    .utility-dropdown-trigger:focus-visible {
+      outline: 2px solid rgba(91,142,240,0.8);
+      outline-offset: 2px;
+    }
+    .utility-dropdown-trigger .chevron {
+      transition: transform var(--dur-moderate) var(--ease-out);
+    }
+    .utility-dropdown.open .utility-dropdown-trigger .chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Dropdown panel */
+    .utility-dropdown-panel {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      min-width: 180px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      z-index: var(--z-dropdown, 1100);
+      padding: var(--space-2) 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-4px);
+      transition: all var(--dur-moderate) var(--ease-out);
+    }
+    .utility-dropdown.open .utility-dropdown-panel {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-option {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      transition: background var(--dur-fast) var(--ease-out);
+      cursor: pointer;
+    }
+    .dropdown-option:hover { background: var(--blue-100); }
+    .dropdown-option.active {
+      color: var(--interactive-primary);
+      background: var(--blue-50);
+    }
+    .dropdown-option .check-icon {
+      width: 16px;
+      height: 16px;
+      opacity: 0;
+    }
+    .dropdown-option.active .check-icon { opacity: 1; }
+
+    .dropdown-section-label {
+      padding: var(--space-2) var(--space-4) var(--space-1);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background: var(--border-subtle);
+      margin: var(--space-2) 0;
+    }
+
+    /* ============================================================
+       HEADER — Primary Bar
+       ============================================================ */
+    .header-primary {
+      background: var(--header-bg);
+      height: 80px;
+      padding: 0 80px;
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      position: sticky;
+      top: 0;
+      z-index: var(--z-header, 1000);
+      transition: height var(--dur-moderate) var(--ease-out),
+                  box-shadow var(--dur-moderate) var(--ease-out);
+    }
+    .header-primary.scrolled {
+      height: 64px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+
+    /* Logo */
+    .header-logo {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      height: 44px;
+      text-decoration: none;
+    }
+    .header-logo svg {
+      height: 44px;
+      width: auto;
+    }
+    .header-logo:focus-visible {
+      outline: 2px solid rgba(91,142,240,0.8);
+      outline-offset: 4px;
+      border-radius: var(--radius-sm);
+    }
+    .header-primary.scrolled .header-logo svg { height: 36px; }
+
+    /* Search */
+    .header-search {
+      flex: 1;
+      max-width: 420px;
+      position: relative;
+    }
+    .header-search-input {
+      width: 100%;
+      height: 40px;
+      padding: 0 var(--space-4) 0 40px;
+      background: rgba(255,255,255,0.1);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-pill);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 400;
+      font-family: var(--font-primary);
+      outline: none;
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+    .header-search-input::placeholder {
+      color: rgba(255,255,255,0.5);
+    }
+    .header-search-input:hover {
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.25);
+    }
+    .header-search-input:focus {
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(91,142,240,0.7);
+      box-shadow: 0 0 0 3px rgba(38,98,217,0.25);
+    }
+    /* Hide native search clear button */
+    .header-search-input::-webkit-search-cancel-button,
+    .header-search-input::-webkit-search-decoration {
+      -webkit-appearance: none;
+      appearance: none;
+      display: none;
+    }
+    .header-search-clear {
+      position: absolute;
+      right: var(--space-3);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: var(--radius-full);
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      padding: 0;
+      transition: background var(--dur-fast) var(--ease-out);
+    }
+    .header-search-clear:hover {
+      background: rgba(255,255,255,0.25);
+      color: #fff;
+    }
+    .header-search-input:not(:placeholder-shown) ~ .header-search-clear {
+      display: flex;
+    }
+    .header-search-icon {
+      position: absolute;
+      left: var(--space-3);
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.5);
+      pointer-events: none;
+    }
+
+    /* Nav links */
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+    .header-nav-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      padding: var(--space-2) var(--space-3);
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      border-radius: var(--radius-md);
+      white-space: nowrap;
+      transition: all var(--dur-normal) var(--ease-out);
+      position: relative;
+    }
+    .header-nav-link:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+    }
+    .header-nav-link:focus-visible {
+      outline: 2px solid rgba(91,142,240,0.8);
+      outline-offset: 2px;
+    }
+    .header-nav-link .chevron {
+      transition: transform var(--dur-moderate) var(--ease-out);
+    }
+
+    /* Nav dropdown */
+    .nav-dropdown {
+      position: relative;
+    }
+    .nav-dropdown-panel {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-4px);
+      min-width: 220px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      z-index: var(--z-dropdown, 1100);
+      padding: var(--space-2) 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--dur-moderate) var(--ease-out);
+    }
+    .nav-dropdown.open .nav-dropdown-panel {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown.open .header-nav-link .chevron {
+      transform: rotate(180deg);
+    }
+
+    .nav-dropdown-item {
+      display: flex;
+      align-items: center;
+      padding: var(--space-3) var(--space-4);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      transition: background var(--dur-fast) var(--ease-out);
+    }
+    .nav-dropdown-item:hover {
+      background: var(--blue-50);
+      color: var(--interactive-primary);
+    }
+    .nav-dropdown-item svg { display: none; }
+
+    /* Header actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-left: auto;
+    }
+
+    .header-icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      color: rgba(255,255,255,0.75);
+      transition: all var(--dur-normal) var(--ease-out);
+      position: relative;
+    }
+    .header-icon-btn:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+    }
+    .header-icon-btn:focus-visible {
+      outline: 2px solid rgba(91,142,240,0.8);
+      outline-offset: 2px;
+    }
+    .header-icon-btn .badge {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 8px;
+      height: 8px;
+      background: var(--interactive-accent);
+      border-radius: var(--radius-full);
+      border: 2px solid var(--header-bg);
+    }
+
+    .btn-signin {
+      height: 36px;
+      padding: 0 var(--space-4);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: var(--radius-lg);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      transition: all var(--dur-normal) var(--ease-out);
+      white-space: nowrap;
+    }
+    .btn-signin:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.5);
+    }
+    .btn-signin:focus-visible {
+      outline: 2px solid rgba(91,142,240,0.8);
+      outline-offset: 2px;
+    }
+
+    .btn-register {
+      height: 36px;
+      padding: 0 var(--space-5);
+      background: var(--interactive-accent);
+      border-radius: var(--radius-lg);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      transition: all var(--dur-normal) var(--ease-out);
+      white-space: nowrap;
+    }
+    .btn-register:hover {
+      background: var(--interactive-accent-hover);
+    }
+    .btn-register:focus-visible {
+      outline: 2px solid rgba(91,142,240,0.8);
+      outline-offset: 2px;
+    }
+
+    /* Mobile menu toggle */
+    .header-mobile-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      color: #fff;
+      transition: background var(--dur-normal) var(--ease-out);
+    }
+    .header-mobile-toggle:hover { background: rgba(255,255,255,0.08); }
+    .header-mobile-toggle:focus-visible {
+      outline: 2px solid rgba(91,142,240,0.8);
+      outline-offset: 2px;
+    }
+    .header-mobile-toggle .icon-close { display: none; }
+    .header-mobile-toggle[aria-expanded="true"] .icon-menu { display: none; }
+    .header-mobile-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+    /* ============================================================
+       MOBILE OVERLAY & DRAWER
+       ============================================================ */
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: var(--z-overlay, 1200);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--dur-slow) var(--ease-out);
+    }
+    .mobile-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 320px;
+      max-width: 85vw;
+      background: var(--bg-primary);
+      z-index: var(--z-drawer, 1300);
+      transform: translateX(100%);
+      transition: transform var(--dur-slow) var(--ease-out);
+      overflow: hidden;
+      pointer-events: none;
+      flex-direction: column;
+    }
+    .mobile-drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .mobile-drawer-footer {
+      display: flex;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-secondary);
+      flex-shrink: 0;
+    }
+    .mobile-footer-dropdown {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .mobile-footer-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+    .mobile-footer-select {
+      width: 100%;
+      height: 36px;
+      padding: 0 var(--space-6) 0 var(--space-3);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      background: var(--bg-primary) url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15.25 10.75L12 14.25L8.75 10.75'/%3E%3C/svg%3E") no-repeat right 8px center;
+      background-size: 16px 16px;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-family: var(--font-primary);
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      cursor: pointer;
+    }
+    .mobile-drawer.active {
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .mobile-drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-4);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .mobile-drawer-close {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+    .mobile-drawer-close:hover { background: var(--bg-secondary); }
+
+    .mobile-drawer-section {
+      padding: var(--space-4);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .mobile-drawer-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: var(--space-3);
+    }
+
+    .mobile-search-input {
+      width: 100%;
+      height: 44px;
+      padding: 0 var(--space-4) 0 40px;
+      background: var(--bg-secondary);
+      border: 1.5px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      color: var(--text-primary);
+      font-size: 16px;
+      font-family: var(--font-primary);
+      outline: none;
+      transition: border-color var(--dur-normal) var(--ease-out);
+    }
+    .mobile-search-input:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(38,98,217,0.15);
+    }
+    .mobile-search-icon {
+      position: absolute;
+      left: var(--space-3);
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-tertiary);
+      pointer-events: none;
+    }
+
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-3) 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      transition: color var(--dur-normal) var(--ease-out);
+    }
+    .mobile-nav-link:hover { color: var(--interactive-primary); }
+    .mobile-nav-link svg { color: var(--text-tertiary); width: 20px; height: 20px; flex-shrink: 0; }
+
+    .mobile-sub-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-2) 0 var(--space-2) var(--space-4);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .mobile-sub-link:hover { color: var(--interactive-primary); }
+    .mobile-sub-link svg { color: var(--text-tertiary); flex-shrink: 0; }
+
+    .mobile-cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      padding: var(--space-4);
+    }
+
+    .mobile-btn-signin {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      border: 1.5px solid var(--interactive-primary);
+      border-radius: var(--radius-lg);
+      color: var(--interactive-primary);
+      font-size: 16px;
+      font-weight: 600;
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+    .mobile-btn-signin:hover {
+      background: var(--blue-50);
+    }
+
+    .mobile-btn-register {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      background: var(--interactive-accent);
+      border-radius: var(--radius-lg);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+    .mobile-btn-register:hover { background: var(--interactive-accent-hover); }
+
+    .mobile-utility-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .mobile-utility-link:hover { color: var(--interactive-primary); }
+    .mobile-utility-link svg { flex-shrink: 0; color: var(--text-tertiary); }
+
+    /* Language chips in mobile */
+    .lang-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+    .lang-chip {
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      border: 1.5px solid transparent;
+      transition: all var(--dur-normal) var(--ease-out);
+      cursor: pointer;
+    }
+    .lang-chip:hover { border-color: var(--border-default); }
+    .lang-chip.active {
+      color: var(--interactive-primary);
+      background: var(--blue-100);
+      border-color: var(--interactive-primary);
+    }
+
+    /* ============================================================
+       Buttons
+       ============================================================ */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+      border: none; border-radius: var(--radius-lg); font-weight: 600;
+      transition: all var(--dur-normal) var(--ease-out);
+      white-space: nowrap; text-decoration: none;
+    }
+    .btn:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+    .btn:active { transform: scale(0.98); }
+    .btn-xs { height: 28px; padding: 0 10px; font-size: 12px; border-radius: var(--radius-md); }
+    .btn-sm { height: 32px; padding: 0 12px; font-size: 14px; border-radius: var(--radius-md); }
+    .btn-md { height: 40px; padding: 0 16px; font-size: 14px; }
+    .btn-lg { height: 48px; padding: 0 24px; font-size: 16px; }
+    .btn-primary { background: var(--interactive-primary); color: #fff; }
+    .btn-primary:hover { background: var(--interactive-hover); color: #fff; }
+    .btn-secondary {
+      background: var(--bg-primary); color: var(--interactive-primary);
+      border: 1.5px solid var(--interactive-primary);
+    }
+    .btn-secondary:hover { background: var(--blue-50); color: var(--interactive-hover); border-color: var(--interactive-hover); }
+    .btn-tertiary { background: transparent; color: var(--interactive-primary); }
+    .btn-tertiary:hover { background: var(--blue-50); color: var(--interactive-hover); }
+    .btn-cta { background: var(--interactive-accent); color: #fff; }
+    .btn-cta:hover { background: var(--interactive-accent-hover); color: #fff; }
+    .btn-ghost-white {
+      background: transparent; color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.3);
+    }
+    .btn-ghost-white:hover { border-color: rgba(255,255,255,0.6); }
+    .btn-icon-only {
+      width: 40px; height: 40px; padding: 0; border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      background: transparent; border: none; color: var(--text-tertiary);
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    .btn-icon-only:hover { background: var(--neutral-100); color: var(--text-primary); }
+    .btn-icon-only:focus-visible { box-shadow: var(--shadow-focus); outline: none; }
+    .btn-icon-only.active { color: var(--interactive-primary); background: var(--blue-50); }
+
+    /* ============================================================
+       Breadcrumbs
+       ============================================================ */
+    .breadcrumb {
+      display: flex; align-items: center; gap: var(--space-1);
+      font-size: 12px; font-weight: 500; padding: var(--space-3) 0;
+    }
+    .breadcrumb a { color: var(--text-tertiary); }
+    .breadcrumb a:hover { color: var(--interactive-primary); }
+    .breadcrumb .sep { color: var(--neutral-300); }
+    .breadcrumb .current { color: var(--text-primary); font-weight: 600; }
+
+    /* ============================================================
+       Page Layout
+       ============================================================ */
+    .page-container {
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 var(--space-6);
+    }
+    .search-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: var(--space-6);
+      padding-bottom: var(--space-16);
+    }
+
+    /* ============================================================
+       Filter Sidebar
+       ============================================================ */
+    .filter-sidebar {
+      position: sticky; top: 96px;
+      max-height: calc(100vh - 96px);
+      overflow-y: auto;
+      padding-right: var(--space-4);
+    }
+    .filter-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: var(--space-4);
+    }
+    .filter-header h2 {
+      font-size: 18px; font-weight: 700; color: var(--text-primary);
+      display: flex; align-items: center; gap: var(--space-2);
+    }
+    .filter-clear {
+      font-size: 13px; font-weight: 500; color: var(--interactive-primary);
+      background: none; border: none; cursor: pointer;
+    }
+    .filter-clear:hover { color: var(--interactive-hover); text-decoration: underline; }
+
+    .filter-section { margin-bottom: var(--space-5); }
+    .filter-section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; padding: var(--space-2) 0;
+      user-select: none;
+    }
+    .filter-section-title {
+      font-size: 13px; font-weight: 600; color: var(--text-primary);
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .filter-section-header svg {
+      color: var(--text-tertiary);
+      transition: transform var(--dur-normal) var(--ease-out);
+    }
+    .filter-section.collapsed .filter-section-header svg { transform: rotate(-90deg); }
+    .filter-section.collapsed .filter-section-body { display: none; }
+    .filter-section-body { padding-top: var(--space-2); }
+
+    .filter-option {
+      display: flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-1) 0; cursor: pointer;
+      font-size: 14px; color: var(--text-secondary);
+      transition: color var(--dur-fast) var(--ease-out);
+    }
+    .filter-option:hover { color: var(--text-primary); }
+    .filter-count {
+      margin-left: auto; font-size: 12px; font-weight: 500;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+    }
+
+    /* Checkbox inside filters */
+    .filter-checkbox {
+      width: 18px; height: 18px; border-radius: var(--radius-sm);
+      border: 1.5px solid var(--neutral-300); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--dur-fast) var(--ease-out);
+      background: var(--bg-primary);
+    }
+    .filter-checkbox.checked {
+      background: var(--interactive-primary); border-color: var(--interactive-primary);
+    }
+    .filter-checkbox svg { opacity: 0; }
+    .filter-checkbox.checked svg { opacity: 1; }
+
+    /* Range slider in filters */
+    .filter-range {
+      display: flex; flex-direction: column; gap: var(--space-2);
+      padding-top: var(--space-2);
+    }
+    .filter-range-labels {
+      display: flex; justify-content: space-between;
+      font-size: 13px; font-weight: 500; color: var(--text-secondary);
+      font-family: var(--font-mono);
+    }
+    .filter-range input[type="range"] {
+      width: 100%; height: 4px; -webkit-appearance: none; appearance: none;
+      background: var(--neutral-200); border-radius: 2px; outline: none;
+    }
+    .filter-range input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: #fff; border: 1.5px solid var(--interactive-primary);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: transform var(--dur-fast) var(--ease-out);
+    }
+    .filter-range input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.1); }
+
+    /* ============================================================
+       Toolbar
+       ============================================================ */
+    .toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: var(--space-5);
+    }
+    .toolbar-left {
+      display: flex; align-items: center; gap: var(--space-3);
+    }
+    .toolbar-count {
+      font-size: 14px; font-weight: 500; color: var(--text-secondary);
+    }
+    .toolbar-count strong {
+      font-weight: 700; color: var(--text-primary);
+      font-family: var(--font-mono);
+    }
+    .toolbar-right {
+      display: flex; align-items: center; gap: var(--space-3);
+    }
+    .toolbar-sort {
+      display: flex; align-items: center; gap: var(--space-2);
+      font-size: 13px; color: var(--text-tertiary);
+    }
+    .toolbar-sort select {
+      height: 32px; padding: 0 var(--space-8) 0 var(--space-3);
+      font-size: 13px; font-weight: 500; font-family: var(--font-primary);
+      border: 1.5px solid var(--border-default); border-radius: var(--radius-md);
+      background: var(--bg-primary); color: var(--text-primary);
+      cursor: pointer; outline: none;
+      -webkit-appearance: none; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237A8691' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.25 10.75L12 14.25L8.75 10.75'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 8px center;
+    }
+    .toolbar-sort select:focus { border-color: var(--border-focus); box-shadow: var(--shadow-focus); }
+    .toolbar-view {
+      display: flex; align-items: center;
+      border: 1.5px solid var(--border-default); border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .toolbar-view button {
+      width: 32px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg-primary); border: none; color: var(--text-tertiary);
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    .toolbar-view button + button { border-left: 1.5px solid var(--border-default); }
+    .toolbar-view button.active { background: var(--blue-100); color: var(--interactive-primary); }
+    .toolbar-view button:hover:not(.active) { background: var(--neutral-100); }
+
+    /* ============================================================
+       Vehicle Card Grid
+       ============================================================ */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-5);
+    }
+
+    .card {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--card-r);
+      overflow: hidden;
+      transition: transform var(--dur-normal) var(--ease-out), box-shadow var(--dur-normal) var(--ease-out);
+      display: flex; flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-media {
+      position: relative; aspect-ratio: 4/3; overflow: hidden;
+      background: var(--neutral-100);
+    }
+    .card-media img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform var(--dur-slow) var(--ease-out);
+    }
+    .card:hover .card-media img { transform: scale(1.03); }
+
+    .card-badge {
+      position: absolute; top: var(--space-3); left: var(--space-3);
+      padding: 3px 10px; border-radius: var(--radius-pill);
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.04em; line-height: 16px;
+    }
+    .badge-live { background: var(--success-icon); color: #fff; }
+    .badge-buy { background: var(--interactive-primary); color: #fff; }
+    .badge-upcoming { background: var(--interactive-accent); color: #fff; }
+    .badge-pure { background: var(--neutral-900); color: var(--neutral-50); }
+
+    .card-watchlist {
+      position: absolute; top: var(--space-3); right: var(--space-3);
+      width: 36px; height: 36px; border-radius: var(--radius-full);
+      background: rgba(255,255,255,0.9); border: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--neutral-500);
+      transition: all var(--dur-fast) var(--ease-out);
+      backdrop-filter: blur(4px);
+    }
+    .card-watchlist:hover { background: #fff; color: var(--error-icon); transform: scale(1.1); }
+    .card-watchlist.saved { color: var(--error-icon); }
+    .card-watchlist:focus-visible { box-shadow: var(--shadow-focus); outline: none; }
+
+    .card-image-count {
+      position: absolute; bottom: var(--space-2); right: var(--space-2);
+      background: rgba(0,0,0,0.6); color: #fff;
+      font-size: 11px; font-weight: 600;
+      padding: 2px 8px; border-radius: var(--radius-pill);
+      display: flex; align-items: center; gap: 4px;
+      backdrop-filter: blur(4px);
+    }
+
+    .card-body { padding: var(--card-p); flex: 1; display: flex; flex-direction: column; }
+    .card-title {
+      font-size: 16px; font-weight: 600; color: var(--text-primary);
+      line-height: 22px; margin-bottom: 2px;
+    }
+    .card-subtitle {
+      font-size: 13px; color: var(--text-tertiary); line-height: 18px;
+      margin-bottom: var(--space-3);
+      display: flex; align-items: center; gap: var(--space-1);
+    }
+    .card-subtitle .lot-num {
+      font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+    }
+
+    .card-specs {
+      display: flex; flex-wrap: wrap; gap: var(--space-1);
+      margin-bottom: var(--space-3);
+    }
+    .card-spec {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 12px; font-weight: 500; color: var(--text-secondary);
+      background: var(--bg-secondary); padding: 3px 8px;
+      border-radius: var(--radius-sm); line-height: 16px;
+    }
+    .card-spec svg { color: var(--text-tertiary); }
+
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--space-3) var(--card-p);
+      border-top: 1px solid var(--border-subtle);
+      margin-top: auto;
+    }
+    .card-price-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--text-tertiary);
+      line-height: 16px;
+    }
+    .card-price {
+      font-family: var(--font-mono); font-size: 18px; font-weight: 700;
+      color: var(--text-primary); line-height: 24px;
+    }
+    .card-price.buy-now { color: var(--interactive-accent); }
+
+    /* Featured card variant */
+    .card.featured { border: 2px solid var(--interactive-accent); }
+    .card.featured .card-footer { border-top-color: var(--orange-200); }
+
+    /* ============================================================
+       Table View (alternate results display)
+       ============================================================ */
+    .results-grid { display: none; }
+    .results-grid.active { display: grid; }
+    .results-table { display: none; }
+    .results-table.active { display: block; }
+
+    .table-container {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+    .table-container table {
+      width: 100%; border-collapse: collapse;
+      table-layout: fixed;
+    }
+    .table-container th {
+      background: var(--neutral-100);
+      font-size: 11px; font-weight: 600; color: var(--text-secondary);
+      text-transform: uppercase; letter-spacing: 0.05em;
+      padding: var(--space-2) var(--space-3);
+      text-align: left; border-bottom: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+    .table-container th.sortable { cursor: pointer; }
+    .table-container th.sortable:hover { color: var(--interactive-primary); }
+    .table-container td {
+      padding: var(--space-3) var(--space-3);
+      font-size: 13px; color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
+    }
+    .table-container tr:last-child td { border-bottom: none; }
+    .table-container tr:hover td { background: var(--neutral-50); }
+    .table-container .mono {
+      font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+    }
+    /* Lot info cell */
+    .table-lot {
+      display: flex; align-items: flex-start; gap: var(--space-3);
+      min-width: 0; overflow: hidden;
+    }
+    .table-thumb {
+      width: 80px; height: 60px; border-radius: var(--radius-sm);
+      object-fit: cover; background: var(--neutral-100); flex-shrink: 0;
+      min-width: 80px; max-width: 80px;
+    }
+    .table-thumb.vehicle-placeholder {
+      width: 80px; height: 60px;
+    }
+    .table-lot-details {
+      display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; overflow: hidden;
+    }
+    .table-lot-name {
+      font-size: 13px; font-weight: 600; color: var(--text-primary);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      line-height: 1.3;
+    }
+    .table-lot-name a { color: inherit; text-decoration: none; }
+    .table-lot-name a:hover { color: var(--interactive-primary); text-decoration: underline; }
+    .table-lot-meta {
+      font-size: 12px; color: var(--text-tertiary); line-height: 1.4;
+    }
+    .table-lot-meta .mono { font-size: 11px; }
+    /* Stacked cell data */
+    .cell-stack {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .cell-stack .cell-label {
+      font-size: 11px; color: var(--text-tertiary); line-height: 1.3;
+    }
+    .cell-stack .cell-value {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.3;
+    }
+    .cell-stack .cell-value.mono {
+      font-family: var(--font-mono); font-size: 12px;
+    }
+    .cell-stack .cell-value.primary {
+      color: var(--text-primary); font-weight: 600;
+    }
+    /* Bidding cell */
+    .bid-cell {
+      display: flex; flex-direction: column; gap: var(--space-2); align-items: flex-start;
+    }
+    .bid-amount {
+      font-family: var(--font-mono); font-size: 14px; font-weight: 700;
+      color: var(--text-primary); line-height: 1.2;
+    }
+    .bid-amount.accent { color: var(--interactive-accent); }
+    .bid-label {
+      font-size: 11px; color: var(--text-tertiary); text-transform: uppercase;
+      letter-spacing: 0.03em; line-height: 1;
+    }
+    /* ============================================================
+       Pagination
+       ============================================================ */
+    .pagination {
+      display: flex; align-items: center; justify-content: center;
+      gap: var(--space-1); padding: var(--space-8) 0;
+    }
+    .pagination button {
+      min-width: 36px; height: 36px; padding: 0 var(--space-2);
+      border: none; border-radius: var(--radius-md);
+      background: transparent; color: var(--text-secondary);
+      font-size: 14px; font-weight: 500; font-family: var(--font-primary);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    .pagination button:hover { background: var(--neutral-100); color: var(--text-primary); }
+    .pagination button.active {
+      background: var(--interactive-primary); color: #fff; font-weight: 600;
+    }
+    .pagination button:disabled {
+      color: var(--text-disabled); cursor: default;
+    }
+    .pagination button:disabled:hover { background: transparent; }
+    .pagination button:focus-visible { box-shadow: var(--shadow-focus); outline: none; }
+    .pagination .ellipsis {
+      color: var(--text-tertiary); font-size: 14px;
+      padding: 0 var(--space-1); user-select: none;
+    }
+
+    /* ============================================================
+       Info Banner
+       ============================================================ */
+    .alert {
+      display: flex; align-items: flex-start; gap: var(--space-3);
+      padding: var(--space-4); border-radius: var(--radius-lg);
+      border-left: 3px solid;
+      margin-bottom: var(--space-5);
+    }
+    .alert-info { background: var(--info-bg); border-color: var(--info-border); }
+    .alert-info .alert-icon { color: var(--info-icon); }
+    .alert-info .alert-title { color: var(--info-text); }
+    .alert-icon { flex-shrink: 0; margin-top: 1px; }
+    .alert-content { flex: 1; }
+    .alert-title { font-size: 14px; font-weight: 600; }
+    .alert-desc { font-size: 14px; color: var(--text-secondary); margin-top: 2px; }
+
+    /* ============================================================
+       Theme Toggle
+       ============================================================ */
+    .theme-toggle {
+      position: fixed; bottom: var(--space-6); right: var(--space-6);
+      width: 48px; height: 48px; border-radius: var(--radius-full);
+      background: var(--bg-primary); border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-md); cursor: pointer; z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary);
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+    .theme-toggle:hover { box-shadow: var(--shadow-lg); color: var(--text-primary); }
+    .theme-toggle:focus-visible { box-shadow: var(--shadow-focus); outline: none; }
+    .theme-toggle .icon-sun { display: none; }
+    [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+    [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+
+    /* ============================================================
+       Responsive — Header (Tablet)
+       ============================================================ */
+    @media (max-width: 1280px) {
+      .header-utility { padding: 0 var(--space-8); }
+      .header-primary { padding: 0 var(--space-8); gap: var(--space-4); }
+      .header-search { max-width: 420px; }
+    }
+
+    /* ============================================================
+       Responsive — Header (Small desktop / large tablet)
+       ============================================================ */
+    @media (max-width: 1024px) {
+      .header-utility { padding: 0 var(--space-4); }
+      .header-primary { padding: 0 var(--space-4); gap: var(--space-3); }
+      .header-search { max-width: 320px; }
+      .header-nav-link { padding: var(--space-2) var(--space-2); font-size: 13px; }
+      .search-layout { grid-template-columns: 220px 1fr; }
+    }
+
+    /* ============================================================
+       Responsive — Header (Mobile) + Page Layout
+       ============================================================ */
+    @media (max-width: 768px) {
+      .header-utility { display: none; }
+
+      .header-primary {
+        padding: var(--space-3) var(--space-4);
+        height: auto;
+        gap: var(--space-3);
+        flex-wrap: wrap;
+        align-items: center;
+        position: relative;
+      }
+
+      .header-logo {
+        display: flex;
+        align-items: center;
+      }
+      .header-logo svg { height: 32px; }
+
+      .header-search {
+        order: 10;
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding-bottom: var(--space-2);
+      }
+      .header-search-input {
+        height: 36px;
+        font-size: 14px;
+      }
+      .header-search-icon,
+      .header-search-clear {
+        top: 18px;
+      }
+
+      .header-nav { display: none; }
+      .btn-register { display: none; }
+
+      .btn-signin {
+        height: 32px;
+        padding: 0 var(--space-3);
+        font-size: 13px;
+      }
+
+      .header-mobile-toggle { display: flex; align-items: center; }
+      .mobile-overlay { display: block; }
+      .mobile-drawer { display: flex; }
+
+      .header-actions { gap: var(--space-2); align-items: center; }
+
+      .page-container { padding: 0 var(--space-4); }
+      .search-layout {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+      }
+      .filter-sidebar {
+        position: static; max-height: none;
+        padding-right: 0;
+        border-bottom: 1px solid var(--border-subtle);
+        padding-bottom: var(--space-4);
+        margin-bottom: var(--space-4);
+      }
+      .results-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: var(--space-4);
+      }
+    }
+
+    /* ============================================================
+       Vehicle placeholder images
+       ============================================================ */
+    .vehicle-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--neutral-100) 0%, var(--neutral-200) 100%);
+      color: var(--neutral-300);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Skip Link -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ============================================================
+     Utility Bar (top strip)
+     ============================================================ -->
+<div class="header-utility" role="complementary" aria-label="Utility navigation">
+  <div class="header-utility-left">
+    <!-- Live Auctions Status -->
+    <a href="#auctions" class="utility-live-status" aria-label="View live auctions">
+      <span class="live-dot"></span>
+      <span><strong>243</strong> Live Auctions</span>
+    </a>
+  </div>
+
+  <div class="header-utility-right">
+    <!-- Get help -->
+    <a href="#help" class="utility-link" aria-label="Get help">
+      <span>Get help</span>
+    </a>
+
+    <div class="utility-divider"></div>
+
+    <!-- Language -->
+    <div class="utility-dropdown" data-dropdown="language">
+      <button class="utility-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-label="Select language: English">
+        <span>EN</span>
+        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
+      </button>
+      <div class="utility-dropdown-panel" role="listbox" aria-label="Select language">
+        <div class="dropdown-option active" role="option" aria-selected="true" data-value="en"><span>English</span><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.25 10C14.25 10 12.3214 12.0893 11.3571 14.5L9.75 12.5714M19.25 12.25C19.25 16.2541 16.0041 19.5 12 19.5C7.99594 19.5 4.75 16.2541 4.75 12.25C4.75 8.24594 7.99594 5 12 5C16.0041 5 19.25 8.24594 19.25 12.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="dropdown-option" role="option" data-value="es"><span>Espa&ntilde;ol</span><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.25 10C14.25 10 12.3214 12.0893 11.3571 14.5L9.75 12.5714M19.25 12.25C19.25 16.2541 16.0041 19.5 12 19.5C7.99594 19.5 4.75 16.2541 4.75 12.25C4.75 8.24594 7.99594 5 12 5C16.0041 5 19.25 8.24594 19.25 12.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="dropdown-option" role="option" data-value="fr"><span>Fran&ccedil;ais</span><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.25 10C14.25 10 12.3214 12.0893 11.3571 14.5L9.75 12.5714M19.25 12.25C19.25 16.2541 16.0041 19.5 12 19.5C7.99594 19.5 4.75 16.2541 4.75 12.25C4.75 8.24594 7.99594 5 12 5C16.0041 5 19.25 8.24594 19.25 12.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="dropdown-option" role="option" data-value="ar"><span>&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</span><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.25 10C14.25 10 12.3214 12.0893 11.3571 14.5L9.75 12.5714M19.25 12.25C19.25 16.2541 16.0041 19.5 12 19.5C7.99594 19.5 4.75 16.2541 4.75 12.25C4.75 8.24594 7.99594 5 12 5C16.0041 5 19.25 8.24594 19.25 12.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="dropdown-option" role="option" data-value="ru"><span>&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</span><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.25 10C14.25 10 12.3214 12.0893 11.3571 14.5L9.75 12.5714M19.25 12.25C19.25 16.2541 16.0041 19.5 12 19.5C7.99594 19.5 4.75 16.2541 4.75 12.25C4.75 8.24594 7.99594 5 12 5C16.0041 5 19.25 8.24594 19.25 12.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="dropdown-option" role="option" data-value="pl"><span>Polski</span><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.25 10C14.25 10 12.3214 12.0893 11.3571 14.5L9.75 12.5714M19.25 12.25C19.25 16.2541 16.0041 19.5 12 19.5C7.99594 19.5 4.75 16.2541 4.75 12.25C4.75 8.24594 7.99594 5 12 5C16.0041 5 19.25 8.24594 19.25 12.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+
+    <div class="utility-divider"></div>
+
+    <!-- Region -->
+    <div class="utility-dropdown" data-dropdown="region">
+      <button class="utility-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-label="Select region: United States">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="7.25" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 12C15.25 16.5 13.2426 19.25 12 19.25C10.7574 19.25 8.75 16.5 8.75 12C8.75 7.5 10.7574 4.75 12 4.75C13.2426 4.75 15.25 7.5 15.25 12Z"/>
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12H12H19"/>
+        </svg>
+        <span>United States</span>
+        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
+      </button>
+      <div class="utility-dropdown-panel" role="listbox" aria-label="Select region" style="right:0; left:auto;">
+        <div class="dropdown-section-label">Americas</div>
+        <div class="dropdown-option active" role="option" aria-selected="true" data-value="us">
+          <span>United States</span>
+          <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.25 10C14.25 10 12.3214 12.0893 11.3571 14.5L9.75 12.5714M19.25 12.25C19.25 16.2541 16.0041 19.5 12 19.5C7.99594 19.5 4.75 16.2541 4.75 12.25C4.75 8.24594 7.99594 5 12 5C16.0041 5 19.25 8.24594 19.25 12.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="dropdown-option" role="option" data-value="ca"><span>Canada</span><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.25 10C14.25 10 12.3214 12.0893 11.3571 14.5L9.75 12.5714M19.25 12.25C19.25 16.2541 16.0041 19.5 12 19.5C7.99594 19.5 4.75 16.2541 4.75 12.25C4.75 8.24594 7.99594 5 12 5C16.0041 5 19.25 8.24594 19.25 12.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="dropdown-option" role="option" data-value="br"><span>Brazil</span><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.25 10C14.25 10 12.3214 12.0893 11.3571 14.5L9.75 12.5714M19.25 12.25C19.25 16.2541 16.0041 19.5 12 19.5C7.99594 19.5 4.75 16.2541 4.75 12.25C4.75 8.24594 7.99594 5 12 5C16.0041 5 19.25 8.24594 19.25 12.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-section-label">Europe</div>
+        <div class="dropdown-option" role="option" data-value="uk"><span>United Kingdom</span><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.25 10C14.25 10 12.3214 12.0893 11.3571 14.5L9.75 12.5714M19.25 12.25C19.25 16.2541 16.0041 19.5 12 19.5C7.99594 19.5 4.75 16.2541 4.75 12.25C4.75 8.24594 7.99594 5 12 5C16.0041 5 19.25 8.24594 19.25 12.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="dropdown-option" role="option" data-value="de"><span>Germany</span><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.25 10C14.25 10 12.3214 12.0893 11.3571 14.5L9.75 12.5714M19.25 12.25C19.25 16.2541 16.0041 19.5 12 19.5C7.99594 19.5 4.75 16.2541 4.75 12.25C4.75 8.24594 7.99594 5 12 5C16.0041 5 19.25 8.24594 19.25 12.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="dropdown-option" role="option" data-value="es"><span>Spain</span><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.25 10C14.25 10 12.3214 12.0893 11.3571 14.5L9.75 12.5714M19.25 12.25C19.25 16.2541 16.0041 19.5 12 19.5C7.99594 19.5 4.75 16.2541 4.75 12.25C4.75 8.24594 7.99594 5 12 5C16.0041 5 19.25 8.24594 19.25 12.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-section-label">Middle East & Other</div>
+        <div class="dropdown-option" role="option" data-value="ae"><span>UAE</span><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.25 10C14.25 10 12.3214 12.0893 11.3571 14.5L9.75 12.5714M19.25 12.25C19.25 16.2541 16.0041 19.5 12 19.5C7.99594 19.5 4.75 16.2541 4.75 12.25C4.75 8.24594 7.99594 5 12 5C16.0041 5 19.25 8.24594 19.25 12.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="dropdown-option" role="option" data-value="fi"><span>Finland</span><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.25 10C14.25 10 12.3214 12.0893 11.3571 14.5L9.75 12.5714M19.25 12.25C19.25 16.2541 16.0041 19.5 12 19.5C7.99594 19.5 4.75 16.2541 4.75 12.25C4.75 8.24594 7.99594 5 12 5C16.0041 5 19.25 8.24594 19.25 12.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     Primary Header Bar
+     ============================================================ -->
+<header class="header-primary" role="banner">
+  <!-- Logo -->
+  <a href="/" class="header-logo" aria-label="Copart home">
+    <svg width="126" height="48" viewBox="0 0 126 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M124.696 23.9844C118.268 37.2054 89.82 48 61.3722 48C32.9245 48 14.8869 36.8228 21.3156 23.6018C27.7443 10.4119 53.0056 0 84.6957 0C113.143 0 131.125 10.7946 124.696 23.9844Z" fill="#23262F"/><path fill-rule="evenodd" clip-rule="evenodd" d="M83.6397 1.18211C110.938 1.18211 128.175 11.2923 121.994 23.6111C115.814 35.9922 88.5467 46.0713 61.248 46.0713C33.9493 46.0713 16.713 35.9922 22.8932 23.6111C29.0424 11.2923 56.3411 1.18211 83.6397 1.18211Z" fill="#757F8F"/><path fill-rule="evenodd" clip-rule="evenodd" d="M79.2918 3.29747C103.951 3.29747 119.51 12.3189 113.889 23.3934C108.299 34.4679 83.6087 43.4893 58.9809 43.4893C34.3531 43.4893 18.7627 34.4368 24.3529 23.3934C27.9865 16.2696 39.4774 10.0168 53.7634 6.4394C54.7882 6.15943 55.8131 5.94167 56.869 5.72391C63.981 4.19961 71.6519 3.32858 79.2918 3.32858V3.29747Z" fill="#23262F"/><path fill-rule="evenodd" clip-rule="evenodd" d="M111.584 14.3284C112.811 16.3412 113.038 18.6058 112.066 20.9825C111.156 22.7806 110.112 24.2271 108.559 25.6518C100.494 33.0121 81.5124 38.2725 63.3878 38.2725C42.0147 38.2725 29.3685 30.8749 34.2382 21.5207C37.5829 15.0813 48.9217 9.2267 62.4965 6.33674C64.0928 5.99766 65.717 5.73013 67.363 5.48749C64.1704 5.80479 61.043 6.26519 57.9715 6.92158C42.9185 10.2035 30.1542 15.4981 26.4399 22.8366C21.0547 33.5036 35.1512 41.9681 58.8629 41.9681C78.2887 41.9681 98.5748 36.3686 107.92 28.3769C108.976 27.481 110.212 26.2118 111.181 24.8617C111.581 24.3142 111.929 23.7605 112.224 23.2036C113.898 19.9964 113.578 16.9602 111.584 14.3347V14.3284Z" fill="#0072BC"/><path d="M105.755 8.52054L105.752 8.52339H105.758L105.755 8.52054Z" fill="#23262F"/><path d="M103.814 13.6876L104.684 11.3732L105.752 8.52365L102.826 9.32625L96.2425 11.1305L95.4226 11.3545L95.1679 12.1664L94.7021 13.6565H92.5778L92.0126 13.5507C91.8138 13.5134 91.1306 13.3921 90.6834 13.3921C89.9007 13.3921 89.2113 13.4916 88.6026 13.6565H80.0154L79.6738 14.7453L78.8229 17.461C78.7111 16.59 78.3695 15.8279 77.826 15.2368L77.3663 14.736H77.2173C76.5433 14.1885 75.6706 13.8152 74.652 13.6441C73.6706 13.4294 72.3693 13.3361 70.3196 13.3361V13.3454C69.0991 13.3454 68.0307 13.4232 67.0462 13.5787C65.9903 13.7218 65.0493 13.9769 64.3195 14.316C63.2915 14.7391 62.4437 15.2772 61.7977 15.915C61.3443 16.3256 60.9188 16.8451 60.4902 17.5046L59.9529 16.3536C59.3132 14.9786 57.8597 13.3392 54.5709 13.3392V13.3454C53.0149 13.3454 52.4093 13.4605 51.7385 13.7498L51.7571 13.6876H43.1824L42.8408 14.7764L41.9806 17.5077C41.8315 17.1282 41.6607 16.7953 41.4868 16.5122V16.506L41.4774 16.4998C40.1575 14.4156 37.6948 13.3548 34.1636 13.3517V13.3454C31.235 13.3454 28.6294 14.1325 26.4181 15.6785L26.4119 15.6848L26.4057 15.691C25.8281 16.1047 25.3001 16.5465 24.8187 17.0162V16.3878C24.8187 13.3579 24.0051 11.2238 22.328 9.86753C20.8466 8.6232 18.6851 8.0197 15.7192 8.0197V8.02592C13.0049 8.02592 9.04204 8.91562 6.29975 10.9034C3.63511 12.8601 1.7624 15.6008 0.722007 19.0569C-0.135152 21.81 -0.231427 24.1275 0.445604 25.9318C1.14748 27.845 2.29968 29.22 3.86803 30.0101C5.31526 30.7505 7.24076 31.1113 9.75634 31.1113C11.9862 31.1113 13.4303 30.8811 15.0794 30.2683C16.5795 29.7084 17.9801 28.8715 19.2472 27.7796L19.7876 27.313V27.2041C20.3435 26.6504 20.9336 25.9723 21.474 25.2412C21.6634 26.8868 22.4336 28.0814 23.2038 28.8902L23.2162 28.9027L23.2286 28.9151C24.7442 30.4332 26.6511 31.0802 29.6077 31.0802C32.5642 31.0802 35.2102 30.2839 37.4525 28.716C37.937 28.3707 38.3842 27.9974 38.8004 27.6086L36.5954 34.6172L35.9587 36.6393H44.9527L45.3005 35.5598L46.9465 30.4456C46.9869 30.4643 47.0272 30.483 47.0707 30.5016C47.903 30.8749 48.9062 31.074 49.9745 31.074C52.1298 31.074 54.1547 30.3461 55.9932 28.9089C56.4715 28.5325 56.9156 28.1125 57.3256 27.6521C57.5212 28.38 57.8877 28.94 58.2604 29.3444C59.3722 30.5981 61.5648 31.0429 63.1114 31.0429C64.658 31.0429 66.0742 30.8127 67.3258 30.3616C67.6115 30.2621 67.9034 30.1408 68.2109 29.9977L68.4531 30.7287H74.6644V30.7349H83.6646L84.0031 29.643L85.4628 24.9457C86.2361 22.485 86.941 21.4367 87.3945 20.9918C87.5373 20.8518 87.9845 20.631 88.5808 20.631C88.9349 20.631 89.2641 20.7087 89.5374 20.8581L91.1709 21.7478L91.5188 20.687H92.5219L91.6244 23.5863C91.0188 25.4839 90.8231 26.7157 90.9815 27.677C91.143 28.8031 91.7517 29.7426 92.6989 30.3212C93.5437 30.8376 94.758 31.0771 96.522 31.0771C97.7456 31.0771 98.727 31.1113 99.5127 30.6416C100.003 30.3461 100.469 30.3803 100.876 30.3025L101.802 29.8172L102.075 28.2929L102.82 25.8354L103.659 23.0699L100.892 23.8911C100.739 23.9378 100.6 23.9751 100.475 24.0093L101.51 20.7181H104.653L104.991 19.6231L106.202 15.7034L106.827 13.6876H103.814ZM30.5518 22.7215L30.5642 22.6872L30.5735 22.653C30.822 21.7509 31.1946 21.1038 31.7164 20.6683C32.1015 20.351 32.6139 20.1581 33.0829 20.1581C33.3624 20.1581 33.3903 20.211 33.4152 20.2546L33.4556 20.323L33.4804 20.3572C33.499 20.4288 33.5611 20.7896 33.2785 21.6824C32.968 22.6841 32.5704 23.3872 32.0922 23.7822L31.8251 24.0031C31.4524 24.2426 31.1015 24.3577 30.7505 24.3577C30.4679 24.3577 30.3965 24.2955 30.3654 24.2489H30.3685C30.3344 24.1711 30.207 23.7854 30.5518 22.7215ZM22.3529 20.5314H14.7254L14.2657 21.2345C13.9428 21.7322 13.449 22.4353 12.9241 22.8117L12.9024 22.8272L12.8806 22.8428C12.3278 23.269 11.6228 23.4836 10.7843 23.4836C10.1725 23.4836 9.72839 23.3405 9.59174 23.0979L9.58553 23.0885L9.57932 23.0792C9.57932 23.0792 9.25012 22.4601 10.0265 19.9373C10.5079 18.4378 11.0669 17.3864 11.6818 16.8171L11.7036 16.7953L11.7253 16.7736C12.5173 15.9803 13.4303 15.579 14.4459 15.579C14.7533 15.579 14.9366 15.5852 15.0453 15.5914C15.1105 15.6381 15.1912 15.691 15.2906 15.747C15.4552 15.8403 15.6322 15.9367 15.6974 16.5527L15.8465 17.9432H23.9647C23.3032 18.7396 22.7659 19.6044 22.3529 20.5314Z" fill="#23262F"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13.8247 24.0778C13.0173 24.6999 11.9924 25.0421 10.7812 25.0421C9.57 25.0421 8.66936 24.6377 8.23457 23.86C7.76872 23.0512 7.89295 21.5891 8.54513 19.4737C9.10415 17.7317 9.78739 16.4562 10.6259 15.6785C11.7129 14.5898 13.0173 14.0298 14.4459 14.0298C15.8745 14.0298 15.626 14.1542 16.0608 14.4031C16.8372 14.8386 17.1478 15.523 17.241 16.394H23.2659C23.2659 14.4964 22.9243 12.35 21.3404 11.0745C20.1603 10.0791 18.2969 9.58133 15.7192 9.58133C13.1415 9.58133 9.57 10.4524 7.2097 12.1633C4.88047 13.8743 3.17236 16.3007 2.20961 19.5049C1.46425 21.9002 1.34003 23.8911 1.89904 25.3843C2.45806 26.9086 3.32764 27.9974 4.5699 28.6196C5.78111 29.2417 7.52027 29.5528 9.75634 29.5528C11.9924 29.5528 13.2036 29.3039 14.539 28.8062C15.8745 28.3085 17.1167 27.5619 18.2348 26.5975V26.5353C19.446 25.4465 20.9056 23.6111 21.5578 22.0868H15.5639C15.0359 22.8957 14.4769 23.6111 13.8247 24.0778Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M40.1606 17.3273C39.1389 15.7128 37.1575 14.9039 34.1574 14.9008C31.5518 14.9008 29.2598 15.5852 27.3033 16.954C25.3467 18.3538 24.0113 20.127 23.3591 22.2424C22.6137 24.5444 22.9553 26.3798 24.3218 27.8108C25.4399 28.9306 26.8995 29.5217 29.6014 29.5217C32.3033 29.5217 34.6015 28.8062 36.5581 27.4375C38.4836 26.0687 39.788 24.2955 40.4712 22.1491C41.0923 20.2515 40.9681 18.6338 40.1606 17.3273ZM34.7568 22.1491C34.3531 23.4556 33.7941 24.3888 33.0798 24.9799V25.011C32.3344 25.6021 31.558 25.9131 30.7505 25.9131C29.9431 25.9131 29.353 25.6021 29.0114 25.011C28.6697 24.3888 28.6697 23.4867 29.0735 22.2424C29.4151 20.998 29.9741 20.0959 30.7195 19.4737C31.4338 18.8827 32.3034 18.6027 33.0798 18.6027C33.8562 18.6027 34.4152 18.8827 34.7568 19.4737C35.1605 20.0337 35.1295 20.9669 34.7568 22.1491Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M76.6831 16.3007H76.5899C76.093 15.7096 75.3166 15.3363 74.3538 15.1808C73.3911 14.9631 72.0246 14.9008 70.3165 14.9008C69.2606 14.9008 68.2357 14.963 67.273 15.1186C66.3413 15.243 65.5338 15.4608 64.9437 15.7408C64.1052 16.0829 63.3909 16.5185 62.8629 17.0473C62.3039 17.545 61.807 18.2605 61.3101 19.1627L66.5897 19.6915C67.0245 19.0693 67.4282 18.6649 67.863 18.4472C68.4221 18.1983 69.3537 18.0428 70.0991 18.0428C70.8445 18.0428 71.3103 18.1672 71.5277 18.4472C71.714 18.7271 71.714 19.1938 71.5277 19.847C70.7513 20.0648 70.0059 20.2826 69.3227 20.4692C68.6084 20.5936 67.1487 20.9047 64.8816 21.3091C62.9872 21.6513 61.5896 22.1491 60.72 22.8334C59.8505 23.5178 59.2293 24.3888 58.9188 25.4465C58.5771 26.5975 58.7324 27.5619 59.4157 28.3085C60.0989 29.0862 61.776 29.4906 63.1114 29.4906C64.4468 29.4906 65.6891 29.3039 66.8071 28.8995C67.6146 28.6196 68.5152 28.1218 69.478 27.4686C69.4159 27.8419 69.4159 28.1218 69.4159 28.3396C69.4159 28.5573 69.4469 28.8062 69.5711 29.1795H74.9129C74.7886 28.5885 74.7886 28.1218 74.7886 27.7485C74.8197 27.4063 74.9439 26.8775 75.1303 26.2242L77.0558 20.0337C77.3042 19.3804 77.3663 18.696 77.3042 17.9494C77.2732 17.2651 77.0558 16.7051 76.6831 16.3007ZM70.4718 23.3934C70.2233 24.0778 69.9749 24.6377 69.6022 25.0421L69.6643 25.011C69.2916 25.4465 68.7947 25.7887 68.1736 26.0687C67.5525 26.3487 66.8692 26.5042 66.2481 26.5042C65.627 26.5042 65.2232 26.3798 65.0058 26.0998C64.7574 25.8198 64.6953 25.4776 64.8506 25.0732C64.9437 24.731 65.2232 24.3888 65.627 24.1089C65.9997 23.8289 66.8382 23.5489 68.0804 23.2689C69.0121 23.0512 69.8817 22.8334 70.7513 22.5535L70.4718 23.3934Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M85.7826 17.4828L86.4969 15.2119H81.1552L76.7762 29.1795H82.5217L83.9814 24.4822C84.6957 22.2113 85.4627 20.7087 86.3106 19.8781C87.1584 19.0476 88.9007 18.7365 90.2796 19.4893L91.7299 15.0781C91.7299 15.0781 91.0219 14.9475 90.6833 14.9475C87.8168 14.9475 86.6212 16.5185 85.7826 17.4828Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M100.379 19.1627H103.516L104.727 15.243H101.621L101.59 15.2119L103.236 9.89241L96.6524 12.6299L95.8449 15.2119H93.0499L91.8387 19.1316H94.6337L93.112 24.0467C92.6151 25.6021 92.3977 26.722 92.5219 27.4375C92.6151 28.1218 92.9567 28.6507 93.5157 28.9929C94.0747 29.3351 95.0685 29.5217 96.5282 29.5217C97.9878 29.5217 99.1059 29.3662 100.597 29.0862L101.342 25.3843C100.503 25.6332 99.8823 25.7576 99.4785 25.7576C99.0748 25.7576 98.7332 25.571 98.64 25.291C98.5779 25.1043 98.64 24.6999 98.8264 24.1089L100.379 19.1627Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M58.5461 17.0162C57.8939 15.6163 56.5585 14.9008 54.5709 14.9008C51.7168 14.9008 50.0677 16.394 49.0428 17.2962L49.6639 15.243H44.3222L38.0768 35.0839H43.8222L46.1545 27.8419C46.5583 28.4018 47.0862 28.8062 47.7074 29.0862C48.3285 29.3662 49.1049 29.5217 49.9745 29.5217C51.7758 29.5217 53.4839 28.8995 55.0367 27.6863C56.6206 26.442 57.7697 24.6688 58.484 22.3668C59.5585 18.7209 58.5461 17.0162 58.5461 17.0162ZM52.8628 22.1179C52.4901 23.3623 51.9932 24.2022 51.372 24.731C50.7509 25.2599 50.1298 25.5087 49.4776 25.5087C48.8254 25.5087 48.1732 25.2288 47.8316 24.6999C47.49 24.1711 47.521 23.3312 47.8316 22.2424C48.2043 21.0603 48.7012 20.1581 49.3844 19.6604C50.0366 19.1316 50.7199 18.8516 51.4652 18.8516C52.2106 18.8516 52.6143 19.1004 52.8938 19.6293C53.2044 20.1581 53.1733 20.998 52.8317 22.1179H52.8628Z" fill="white"/></svg>
+  </a>
+
+  <!-- Navigation -->
+  <nav class="header-nav" role="navigation" aria-label="Main navigation">
+    <!-- Vehicles dropdown -->
+    <div class="nav-dropdown" data-nav-dropdown>
+      <button class="header-nav-link" aria-expanded="false" aria-haspopup="true">
+        Vehicles
+        <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
+      </button>
+      <div class="nav-dropdown-panel" role="menu">
+        <a href="#" class="nav-dropdown-item" role="menuitem">Search Inventory</a>
+        <a href="#" class="nav-dropdown-item" role="menuitem">Find a Location</a>
+        <a href="#" class="nav-dropdown-item" role="menuitem">Auction Calendar</a>
+        <a href="#" class="nav-dropdown-item" role="menuitem">Watchlist</a>
+      </div>
+    </div>
+
+    <!-- Auctions dropdown -->
+    <div class="nav-dropdown" data-nav-dropdown>
+      <button class="header-nav-link" aria-expanded="false" aria-haspopup="true">
+        Auctions
+        <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
+      </button>
+      <div class="nav-dropdown-panel" role="menu">
+        <a href="#" class="nav-dropdown-item" role="menuitem">Auction Calendar</a>
+        <a href="#" class="nav-dropdown-item" role="menuitem">How to Buy</a>
+        <a href="#" class="nav-dropdown-item" role="menuitem">Membership Plans</a>
+        <a href="#" class="nav-dropdown-item" role="menuitem">Bidding & Payment</a>
+      </div>
+    </div>
+
+    <!-- Sell dropdown -->
+    <div class="nav-dropdown" data-nav-dropdown>
+      <button class="header-nav-link" aria-expanded="false" aria-haspopup="true">
+        Sell
+        <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
+      </button>
+      <div class="nav-dropdown-panel" role="menu">
+        <a href="#" class="nav-dropdown-item" role="menuitem">Sell Your Vehicle</a>
+        <a href="#" class="nav-dropdown-item" role="menuitem">Dealer Services</a>
+        <a href="#" class="nav-dropdown-item" role="menuitem">Insurance Partners</a>
+      </div>
+    </div>
+
+    <!-- About Copart dropdown -->
+    <div class="nav-dropdown" data-nav-dropdown>
+      <button class="header-nav-link" aria-expanded="false" aria-haspopup="true">
+        About Copart
+        <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
+      </button>
+      <div class="nav-dropdown-panel" role="menu">
+        <a href="#" class="nav-dropdown-item" role="menuitem">Locations</a>
+        <a href="#" class="nav-dropdown-item" role="menuitem">Brokers</a>
+        <a href="#" class="nav-dropdown-item" role="menuitem">Licensing</a>
+        <a href="#" class="nav-dropdown-item" role="menuitem">Company Info</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Search -->
+  <div class="header-search">
+    <svg class="header-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.25 19.25L15.5 15.5M4.75 11C4.75 7.54822 7.54822 4.75 11 4.75C14.4518 4.75 17.25 7.54822 17.25 11C17.25 14.4518 14.4518 17.25 11 17.25C7.54822 17.25 4.75 14.4518 4.75 11Z"/>
+    </svg>
+    <input type="search" class="header-search-input" placeholder="Search vehicles, lots, VINs..." aria-label="Search vehicles">
+    <button class="header-search-clear" aria-label="Clear search" type="button">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 6.75L6.75 17.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.75 6.75L17.25 17.25"/></svg>
+    </button>
+  </div>
+
+  <!-- Actions -->
+  <div class="header-actions">
+    <!-- Sign In -->
+    <a href="#" class="btn-signin">Sign In</a>
+
+    <!-- Register CTA -->
+    <button class="btn-register">Register</button>
+
+    <!-- Mobile menu toggle -->
+    <button class="header-mobile-toggle" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open menu">
+      <svg class="icon-menu" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 5.75H19.25"/>
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 18.25H19.25"/>
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 12H19.25"/>
+      </svg>
+      <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L6.75 17.25"/>
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75 6.75L17.25 17.25"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- ============================================================
+     Mobile Drawer
+     ============================================================ -->
+<div class="mobile-overlay" id="mobile-overlay"></div>
+<aside class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <div class="mobile-drawer-header">
+    <span style="font-size:16px; font-weight:700; color:var(--text-primary);">Menu</span>
+    <button class="mobile-drawer-close" aria-label="Close menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L6.75 17.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75 6.75L17.25 17.25"/></svg>
+    </button>
+  </div>
+
+  <!-- Mobile CTA -->
+  <div class="mobile-cta-group">
+    <button class="mobile-btn-register">Register Now</button>
+  </div>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-drawer-body">
+    <div class="mobile-drawer-section">
+      <div class="mobile-drawer-section-label">Vehicles</div>
+      <a href="#" class="mobile-nav-link">Search Inventory<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+      <a href="#" class="mobile-nav-link">Find a Location<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+      <a href="#" class="mobile-nav-link">Auction Calendar<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+      <a href="#" class="mobile-nav-link">Watchlist<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+    </div>
+
+    <div class="mobile-drawer-section">
+      <div class="mobile-drawer-section-label">Auctions</div>
+      <a href="#" class="mobile-nav-link">Auction Calendar<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+      <a href="#" class="mobile-nav-link">How to Buy<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+      <a href="#" class="mobile-nav-link">Membership Plans<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+      <a href="#" class="mobile-nav-link">Bidding &amp; Payment<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+    </div>
+
+    <div class="mobile-drawer-section">
+      <div class="mobile-drawer-section-label">Sell</div>
+      <a href="#" class="mobile-nav-link">Sell Your Vehicle<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+      <a href="#" class="mobile-nav-link">Dealer Services<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+      <a href="#" class="mobile-nav-link">Insurance Partners<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+    </div>
+
+    <div class="mobile-drawer-section">
+      <div class="mobile-drawer-section-label">About Copart</div>
+      <a href="#" class="mobile-nav-link">Locations<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+      <a href="#" class="mobile-nav-link">Brokers<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+      <a href="#" class="mobile-nav-link">Licensing<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+      <a href="#" class="mobile-nav-link">Company Info<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+    </div>
+
+    <div class="mobile-drawer-section">
+      <a href="#help" class="mobile-nav-link">Get help<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></a>
+    </div>
+  </div>
+
+  <!-- Sticky Region & Language footer -->
+  <div class="mobile-drawer-footer">
+    <div class="mobile-footer-dropdown">
+      <label class="mobile-footer-label">Region</label>
+      <select class="mobile-footer-select" aria-label="Select region">
+        <option selected>United States</option>
+        <option>Canada</option>
+        <option>United Kingdom</option>
+        <option>Germany</option>
+        <option>Brazil</option>
+        <option>United Arab Emirates</option>
+        <option>Spain</option>
+        <option>Ireland</option>
+        <option>Finland</option>
+        <option>Oman</option>
+        <option>Bahrain</option>
+      </select>
+    </div>
+    <div class="mobile-footer-dropdown">
+      <label class="mobile-footer-label">Language</label>
+      <select class="mobile-footer-select" aria-label="Select language">
+        <option selected>English</option>
+        <option>Espa&ntilde;ol</option>
+        <option>Fran&ccedil;ais</option>
+        <option>&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</option>
+        <option>&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</option>
+        <option>Polski</option>
+      </select>
+    </div>
+  </div>
+</aside>
+
+<!-- ============================================================
+     Page Content
+     ============================================================ -->
+<main id="main-content" class="page-container">
+
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="#">Home</a>
+    <span class="sep" aria-hidden="true">&rsaquo;</span>
+    <a href="#">Search</a>
+    <span class="sep" aria-hidden="true">&rsaquo;</span>
+    <span class="current" aria-current="page">All Vehicles</span>
+  </nav>
+
+  <div class="search-layout">
+
+    <!-- ========================================================
+         Filter Sidebar
+         ======================================================== -->
+    <aside class="filter-sidebar" role="complementary" aria-label="Filters">
+      <div class="filter-header">
+        <h2>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.25 4.75H4.75L9.31174 10.4522C9.59544 10.8068 9.75 11.2474 9.75 11.7016V18.25C9.75 18.8023 10.1977 19.25 10.75 19.25H13.25C13.8023 19.25 14.25 18.8023 14.25 18.25V11.7016C14.25 11.2474 14.4046 10.8068 14.6883 10.4522L19.25 4.75Z"/>
+          </svg>
+          Filters
+        </h2>
+        <button class="filter-clear">Clear All</button>
+      </div>
+
+      <!-- Sale Status -->
+      <div class="filter-section">
+        <div class="filter-section-header" role="button" tabindex="0" aria-expanded="true">
+          <span class="filter-section-title">Sale Status</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 10.75L12 14.25L8.75 10.75"/>
+          </svg>
+        </div>
+        <div class="filter-section-body">
+          <label class="filter-option"><div class="filter-checkbox checked"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>On Approval<span class="filter-count">4,280</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Future Sale<span class="filter-count">1,842</span></label>
+          <label class="filter-option"><div class="filter-checkbox checked"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Pure Sale<span class="filter-count">3,104</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Buy It Now<span class="filter-count">956</span></label>
+        </div>
+      </div>
+
+      <!-- Vehicle Type -->
+      <div class="filter-section">
+        <div class="filter-section-header" role="button" tabindex="0" aria-expanded="true">
+          <span class="filter-section-title">Vehicle Type</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 10.75L12 14.25L8.75 10.75"/>
+          </svg>
+        </div>
+        <div class="filter-section-body">
+          <label class="filter-option"><div class="filter-checkbox checked"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Automobiles<span class="filter-count">8,392</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>SUVs / Trucks<span class="filter-count">5,104</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Motorcycles<span class="filter-count">1,247</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Industrial Equip.<span class="filter-count">382</span></label>
+        </div>
+      </div>
+
+      <!-- Make -->
+      <div class="filter-section">
+        <div class="filter-section-header" role="button" tabindex="0" aria-expanded="true">
+          <span class="filter-section-title">Make</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 10.75L12 14.25L8.75 10.75"/>
+          </svg>
+        </div>
+        <div class="filter-section-body">
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Toyota<span class="filter-count">2,841</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Honda<span class="filter-count">2,103</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Ford<span class="filter-count">1,892</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Chevrolet<span class="filter-count">1,744</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>BMW<span class="filter-count">987</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Mercedes-Benz<span class="filter-count">856</span></label>
+        </div>
+      </div>
+
+      <!-- Year Range -->
+      <div class="filter-section">
+        <div class="filter-section-header" role="button" tabindex="0" aria-expanded="true">
+          <span class="filter-section-title">Year</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 10.75L12 14.25L8.75 10.75"/>
+          </svg>
+        </div>
+        <div class="filter-section-body">
+          <div class="filter-range">
+            <div class="filter-range-labels"><span>2010</span><span>2026</span></div>
+            <input type="range" min="2000" max="2026" value="2010" aria-label="Minimum year">
+          </div>
+        </div>
+      </div>
+
+      <!-- Damage Type -->
+      <div class="filter-section">
+        <div class="filter-section-header" role="button" tabindex="0" aria-expanded="true">
+          <span class="filter-section-title">Damage Type</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 10.75L12 14.25L8.75 10.75"/>
+          </svg>
+        </div>
+        <div class="filter-section-body">
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Front End<span class="filter-count">3,401</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Rear End<span class="filter-count">2,156</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Side<span class="filter-count">1,892</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>All Over<span class="filter-count">1,104</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Minor Dents / Scratches<span class="filter-count">2,847</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Normal Wear<span class="filter-count">1,623</span></label>
+        </div>
+      </div>
+
+      <!-- Price Range -->
+      <div class="filter-section">
+        <div class="filter-section-header" role="button" tabindex="0" aria-expanded="true">
+          <span class="filter-section-title">Bid Range</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 10.75L12 14.25L8.75 10.75"/>
+          </svg>
+        </div>
+        <div class="filter-section-body">
+          <div class="filter-range">
+            <div class="filter-range-labels"><span>$0</span><span>$50,000</span></div>
+            <input type="range" min="0" max="50000" value="25000" step="500" aria-label="Maximum bid price" aria-valuetext="$25,000">
+          </div>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="filter-section collapsed">
+        <div class="filter-section-header" role="button" tabindex="0" aria-expanded="false">
+          <span class="filter-section-title">Location</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 10.75L12 14.25L8.75 10.75"/>
+          </svg>
+        </div>
+        <div class="filter-section-body">
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>CA - Sacramento<span class="filter-count">412</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>TX - Dallas<span class="filter-count">389</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>FL - Miami<span class="filter-count">356</span></label>
+        </div>
+      </div>
+
+      <!-- Drivability -->
+      <div class="filter-section collapsed">
+        <div class="filter-section-header" role="button" tabindex="0" aria-expanded="false">
+          <span class="filter-section-title">Drivability</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 10.75L12 14.25L8.75 10.75"/>
+          </svg>
+        </div>
+        <div class="filter-section-body">
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Run &amp; Drive<span class="filter-count">6,104</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Starts<span class="filter-count">2,412</span></label>
+          <label class="filter-option"><div class="filter-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7.75 12.75L10 15.25L16.25 8.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Stationary<span class="filter-count">1,892</span></label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ========================================================
+         Main Results
+         ======================================================== -->
+    <div class="results-main">
+
+      <!-- Info Banner -->
+      <div class="alert alert-info" role="status">
+        <div class="alert-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M12 13.75V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="12" cy="9.5" r="0.75" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="alert-content">
+          <div class="alert-title">Free search results</div>
+          <div class="alert-desc">Showing all available lots. Register for a free account to save searches, set alerts, and place bids.</div>
+        </div>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <span class="toolbar-count">Showing <strong>1&ndash;24</strong> of <strong>10,182</strong> vehicles</span>
+        </div>
+        <div class="toolbar-right">
+          <div class="toolbar-sort">
+            <label for="sort-select">Sort by</label>
+            <select id="sort-select">
+              <option>Best Match</option>
+              <option>Bid: Low to High</option>
+              <option>Bid: High to Low</option>
+              <option>Year: Newest</option>
+              <option>Year: Oldest</option>
+              <option>Mileage: Low to High</option>
+              <option>Sale Date: Soonest</option>
+            </select>
+          </div>
+          <div class="toolbar-view" role="group" aria-label="View mode">
+            <button class="active" aria-label="Grid view" aria-pressed="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 5.75C4.75 5.19772 5.19772 4.75 5.75 4.75H9.25C9.80228 4.75 10.25 5.19772 10.25 5.75V9.25C10.25 9.80228 9.80228 10.25 9.25 10.25H5.75C5.19772 10.25 4.75 9.80228 4.75 9.25V5.75Z"/>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 14.75C4.75 14.1977 5.19772 13.75 5.75 13.75H9.25C9.80228 13.75 10.25 14.1977 10.25 14.75V18.25C10.25 18.8023 9.80228 19.25 9.25 19.25H5.75C5.19772 19.25 4.75 18.8023 4.75 18.25V14.75Z"/>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.75 5.75C13.75 5.19772 14.1977 4.75 14.75 4.75H18.25C18.8023 4.75 19.25 5.19772 19.25 5.75V9.25C19.25 9.80228 18.8023 10.25 18.25 10.25H14.75C14.1977 10.25 13.75 9.80228 13.75 9.25V5.75Z"/>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.75 14.75C13.75 14.1977 14.1977 13.75 14.75 13.75H18.25C18.8023 13.75 19.25 14.1977 19.25 14.75V18.25C19.25 18.8023 18.8023 19.25 18.25 19.25H14.75C14.1977 19.25 13.75 18.8023 13.75 18.25V14.75Z"/>
+              </svg>
+            </button>
+            <button aria-label="List view" aria-pressed="false">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 5.75H19.25"/>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 18.25H19.25"/>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 12H19.25"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Grid -->
+      <div class="results-grid active" id="results-grid">
+
+        <!-- Card 1 — Featured -->
+        <article class="card featured">
+          <div class="card-media">
+            <div class="vehicle-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="card-badge badge-live">Live</span>
+            <button class="card-watchlist" aria-label="Add to watchlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div class="card-image-count">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 16L7.49619 12.5067C8.2749 11.5444 9.72752 11.5044 10.5602 12.4228L12.75 14.75M10.75 12.75L14.2488 8.75751C15.0539 7.82001 16.5608 7.82001 17.366 8.75751L19.25 11M6.75 19.25H17.25C18.3546 19.25 19.25 18.3546 19.25 17.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V17.25C4.75 18.3546 5.64543 19.25 6.75 19.25Z"/>
+              </svg>
+              12
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">2023 Tesla Model 3 Long Range</h3>
+            <div class="card-subtitle">
+              <span class="lot-num">#58291034</span> &middot; Sacramento, CA
+            </div>
+            <div class="card-specs">
+              <span class="card-spec">12,480 mi</span>
+              <span class="card-spec">Front End</span>
+              <span class="card-spec">Run &amp; Drive</span>
+              <span class="card-spec">Clean Title</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div>
+              <div class="card-price-label">Current Bid</div>
+              <div class="card-price">$14,200</div>
+            </div>
+            <button class="btn btn-primary btn-sm">Bid Now</button>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card">
+          <div class="card-media">
+            <div class="vehicle-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="card-badge badge-buy">Buy Now</span>
+            <button class="card-watchlist" aria-label="Add to watchlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div class="card-image-count">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 16L7.49619 12.5067C8.2749 11.5444 9.72752 11.5044 10.5602 12.4228L12.75 14.75M10.75 12.75L14.2488 8.75751C15.0539 7.82001 16.5608 7.82001 17.366 8.75751L19.25 11M6.75 19.25H17.25C18.3546 19.25 19.25 18.3546 19.25 17.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V17.25C4.75 18.3546 5.64543 19.25 6.75 19.25Z"/>
+              </svg>
+              8
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">2021 Honda Civic LX</h3>
+            <div class="card-subtitle">
+              <span class="lot-num">#48291077</span> &middot; Dallas, TX
+            </div>
+            <div class="card-specs">
+              <span class="card-spec">34,100 mi</span>
+              <span class="card-spec">Rear End</span>
+              <span class="card-spec">Run &amp; Drive</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div>
+              <div class="card-price-label">Buy It Now</div>
+              <div class="card-price buy-now">$8,900</div>
+            </div>
+            <button class="btn btn-cta btn-sm">Buy Now</button>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card">
+          <div class="card-media">
+            <div class="vehicle-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="card-badge badge-upcoming">Upcoming</span>
+            <button class="card-watchlist" aria-label="Add to watchlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div class="card-image-count">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 16L7.49619 12.5067C8.2749 11.5444 9.72752 11.5044 10.5602 12.4228L12.75 14.75M10.75 12.75L14.2488 8.75751C15.0539 7.82001 16.5608 7.82001 17.366 8.75751L19.25 11M6.75 19.25H17.25C18.3546 19.25 19.25 18.3546 19.25 17.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V17.25C4.75 18.3546 5.64543 19.25 6.75 19.25Z"/>
+              </svg>
+              6
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">2019 Toyota Camry SE</h3>
+            <div class="card-subtitle">
+              <span class="lot-num">#48291076</span> &middot; Sacramento, CA
+            </div>
+            <div class="card-specs">
+              <span class="card-spec">45,230 mi</span>
+              <span class="card-spec">Front End</span>
+              <span class="card-spec">Run &amp; Drive</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div>
+              <div class="card-price-label">Current Bid</div>
+              <div class="card-price">$4,500</div>
+            </div>
+            <button class="btn btn-primary btn-sm">Bid Now</button>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="card">
+          <div class="card-media">
+            <div class="vehicle-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="card-badge badge-live">Live</span>
+            <button class="card-watchlist saved" aria-label="Remove from watchlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div class="card-image-count">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 16L7.49619 12.5067C8.2749 11.5444 9.72752 11.5044 10.5602 12.4228L12.75 14.75M10.75 12.75L14.2488 8.75751C15.0539 7.82001 16.5608 7.82001 17.366 8.75751L19.25 11M6.75 19.25H17.25C18.3546 19.25 19.25 18.3546 19.25 17.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V17.25C4.75 18.3546 5.64543 19.25 6.75 19.25Z"/>
+              </svg>
+              15
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">2022 BMW 330i xDrive</h3>
+            <div class="card-subtitle">
+              <span class="lot-num">#51203487</span> &middot; Brookhaven, NY
+            </div>
+            <div class="card-specs">
+              <span class="card-spec">18,400 mi</span>
+              <span class="card-spec">Side</span>
+              <span class="card-spec">Run &amp; Drive</span>
+              <span class="card-spec">Salvage</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div>
+              <div class="card-price-label">Current Bid</div>
+              <div class="card-price">$11,750</div>
+            </div>
+            <button class="btn btn-primary btn-sm">Bid Now</button>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="card">
+          <div class="card-media">
+            <div class="vehicle-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="card-badge badge-pure">Pure Sale</span>
+            <button class="card-watchlist" aria-label="Add to watchlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div class="card-image-count">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 16L7.49619 12.5067C8.2749 11.5444 9.72752 11.5044 10.5602 12.4228L12.75 14.75M10.75 12.75L14.2488 8.75751C15.0539 7.82001 16.5608 7.82001 17.366 8.75751L19.25 11M6.75 19.25H17.25C18.3546 19.25 19.25 18.3546 19.25 17.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V17.25C4.75 18.3546 5.64543 19.25 6.75 19.25Z"/>
+              </svg>
+              10
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">2020 Ford F-150 XLT SuperCrew</h3>
+            <div class="card-subtitle">
+              <span class="lot-num">#49203841</span> &middot; Houston, TX
+            </div>
+            <div class="card-specs">
+              <span class="card-spec">62,100 mi</span>
+              <span class="card-spec">All Over</span>
+              <span class="card-spec">Starts</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div>
+              <div class="card-price-label">Current Bid</div>
+              <div class="card-price">$7,800</div>
+            </div>
+            <button class="btn btn-primary btn-sm">Bid Now</button>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="card">
+          <div class="card-media">
+            <div class="vehicle-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="card-badge badge-live">Live</span>
+            <button class="card-watchlist" aria-label="Add to watchlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div class="card-image-count">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 16L7.49619 12.5067C8.2749 11.5444 9.72752 11.5044 10.5602 12.4228L12.75 14.75M10.75 12.75L14.2488 8.75751C15.0539 7.82001 16.5608 7.82001 17.366 8.75751L19.25 11M6.75 19.25H17.25C18.3546 19.25 19.25 18.3546 19.25 17.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V17.25C4.75 18.3546 5.64543 19.25 6.75 19.25Z"/>
+              </svg>
+              9
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">2022 Mercedes-Benz C300</h3>
+            <div class="card-subtitle">
+              <span class="lot-num">#52018394</span> &middot; Miami, FL
+            </div>
+            <div class="card-specs">
+              <span class="card-spec">8,920 mi</span>
+              <span class="card-spec">Minor Dents</span>
+              <span class="card-spec">Run &amp; Drive</span>
+              <span class="card-spec">Clean Title</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div>
+              <div class="card-price-label">Current Bid</div>
+              <div class="card-price">$19,500</div>
+            </div>
+            <button class="btn btn-primary btn-sm">Bid Now</button>
+          </div>
+        </article>
+
+        <!-- Card 7 -->
+        <article class="card">
+          <div class="card-media">
+            <div class="vehicle-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="card-badge badge-buy">Buy Now</span>
+            <button class="card-watchlist" aria-label="Add to watchlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div class="card-image-count">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 16L7.49619 12.5067C8.2749 11.5444 9.72752 11.5044 10.5602 12.4228L12.75 14.75M10.75 12.75L14.2488 8.75751C15.0539 7.82001 16.5608 7.82001 17.366 8.75751L19.25 11M6.75 19.25H17.25C18.3546 19.25 19.25 18.3546 19.25 17.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V17.25C4.75 18.3546 5.64543 19.25 6.75 19.25Z"/>
+              </svg>
+              7
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">2018 Chevrolet Silverado 1500</h3>
+            <div class="card-subtitle">
+              <span class="lot-num">#47109283</span> &middot; Charlotte, NC
+            </div>
+            <div class="card-specs">
+              <span class="card-spec">78,400 mi</span>
+              <span class="card-spec">Rear End</span>
+              <span class="card-spec">Run &amp; Drive</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div>
+              <div class="card-price-label">Buy It Now</div>
+              <div class="card-price buy-now">$12,500</div>
+            </div>
+            <button class="btn btn-cta btn-sm">Buy Now</button>
+          </div>
+        </article>
+
+        <!-- Card 8 -->
+        <article class="card">
+          <div class="card-media">
+            <div class="vehicle-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="card-badge badge-upcoming">Upcoming</span>
+            <button class="card-watchlist" aria-label="Add to watchlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div class="card-image-count">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 16L7.49619 12.5067C8.2749 11.5444 9.72752 11.5044 10.5602 12.4228L12.75 14.75M10.75 12.75L14.2488 8.75751C15.0539 7.82001 16.5608 7.82001 17.366 8.75751L19.25 11M6.75 19.25H17.25C18.3546 19.25 19.25 18.3546 19.25 17.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V17.25C4.75 18.3546 5.64543 19.25 6.75 19.25Z"/>
+              </svg>
+              4
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">2024 Hyundai Tucson SEL</h3>
+            <div class="card-subtitle">
+              <span class="lot-num">#53018472</span> &middot; Portland, OR
+            </div>
+            <div class="card-specs">
+              <span class="card-spec">3,200 mi</span>
+              <span class="card-spec">Normal Wear</span>
+              <span class="card-spec">Run &amp; Drive</span>
+              <span class="card-spec">Clean Title</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div>
+              <div class="card-price-label">Current Bid</div>
+              <div class="card-price">$16,800</div>
+            </div>
+            <button class="btn btn-primary btn-sm">Bid Now</button>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- List / Table View -->
+      <div class="results-table" id="results-table">
+        <div class="table-container" style="overflow-x: auto;">
+          <table aria-label="Vehicle search results" style="min-width: 900px;">
+            <colgroup>
+              <col style="width: 34%;">
+              <col style="width: 15%;">
+              <col style="width: 17%;">
+              <col style="width: 17%;">
+              <col style="width: 17%;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col" class="sortable">Lot Info</th>
+                <th scope="col" class="sortable">Vehicle Info</th>
+                <th scope="col" class="sortable">Condition</th>
+                <th scope="col" class="sortable">Sale Info</th>
+                <th scope="col" class="sortable">Bidding Info</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1: Tesla -->
+              <tr>
+                <td>
+                  <div class="table-lot">
+                    <div class="table-thumb vehicle-placeholder" style="display:flex;align-items:center;justify-content:center;">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--neutral-300)"><path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="table-lot-details">
+                      <span class="table-lot-name"><a href="#">2023 Tesla Model 3 Long Range</a></span>
+                      <span class="table-lot-meta"><span class="mono">#58291034</span></span>
+                      <span class="table-lot-meta">Sacramento, CA</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">12,480 mi</span>
+                    <span class="cell-label">Est. Retail Value</span>
+                    <span class="cell-value mono">$28,500</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">Front End</span>
+                    <span class="cell-value">Run &amp; Drive</span>
+                    <span class="cell-value">Has Keys</span>
+                    <span class="cell-value">Clean Title</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value primary">Tue, Feb 24</span>
+                    <span class="cell-value">10:00 AM CT</span>
+                    <span class="cell-label">On Approval</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="bid-cell">
+                    <span class="bid-label">Current Bid</span>
+                    <span class="bid-amount">$14,200</span>
+                    <button class="btn btn-primary btn-xs">Bid Now</button>
+                  </div>
+                </td>
+              </tr>
+              <!-- Row 2: Honda -->
+              <tr>
+                <td>
+                  <div class="table-lot">
+                    <div class="table-thumb vehicle-placeholder" style="display:flex;align-items:center;justify-content:center;">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--neutral-300)"><path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="table-lot-details">
+                      <span class="table-lot-name"><a href="#">2021 Honda Civic LX</a></span>
+                      <span class="table-lot-meta"><span class="mono">#48291077</span></span>
+                      <span class="table-lot-meta">Dallas, TX</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">34,100 mi</span>
+                    <span class="cell-label">Est. Retail Value</span>
+                    <span class="cell-value mono">$18,200</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">Rear End</span>
+                    <span class="cell-value">Run &amp; Drive</span>
+                    <span class="cell-value">Has Keys</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value primary">Buy It Now</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="bid-cell">
+                    <span class="bid-label">Buy It Now</span>
+                    <span class="bid-amount accent">$8,900</span>
+                    <button class="btn btn-cta btn-xs">Buy Now</button>
+                  </div>
+                </td>
+              </tr>
+              <!-- Row 3: Toyota -->
+              <tr>
+                <td>
+                  <div class="table-lot">
+                    <div class="table-thumb vehicle-placeholder" style="display:flex;align-items:center;justify-content:center;">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--neutral-300)"><path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="table-lot-details">
+                      <span class="table-lot-name"><a href="#">2019 Toyota Camry SE</a></span>
+                      <span class="table-lot-meta"><span class="mono">#48291076</span></span>
+                      <span class="table-lot-meta">Sacramento, CA</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">45,230 mi</span>
+                    <span class="cell-label">Est. Retail Value</span>
+                    <span class="cell-value mono">$16,800</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">Front End</span>
+                    <span class="cell-value">Run &amp; Drive</span>
+                    <span class="cell-value">Has Keys</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value primary">Thu, Feb 26</span>
+                    <span class="cell-value">2:00 PM CT</span>
+                    <span class="cell-label">Future Sale</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="bid-cell">
+                    <span class="bid-label">Current Bid</span>
+                    <span class="bid-amount">$4,500</span>
+                    <button class="btn btn-primary btn-xs">Bid Now</button>
+                  </div>
+                </td>
+              </tr>
+              <!-- Row 4: BMW -->
+              <tr>
+                <td>
+                  <div class="table-lot">
+                    <div class="table-thumb vehicle-placeholder" style="display:flex;align-items:center;justify-content:center;">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--neutral-300)"><path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="table-lot-details">
+                      <span class="table-lot-name"><a href="#">2022 BMW 330i xDrive</a></span>
+                      <span class="table-lot-meta"><span class="mono">#51203487</span></span>
+                      <span class="table-lot-meta">Brookhaven, NY</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">18,400 mi</span>
+                    <span class="cell-label">Est. Retail Value</span>
+                    <span class="cell-value mono">$34,100</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">Side</span>
+                    <span class="cell-value">Run &amp; Drive</span>
+                    <span class="cell-value">Has Keys</span>
+                    <span class="cell-value">Salvage Title</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value primary">Tue, Feb 24</span>
+                    <span class="cell-value">10:00 AM CT</span>
+                    <span class="cell-label">On Approval</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="bid-cell">
+                    <span class="bid-label">Current Bid</span>
+                    <span class="bid-amount">$11,750</span>
+                    <button class="btn btn-primary btn-xs">Bid Now</button>
+                  </div>
+                </td>
+              </tr>
+              <!-- Row 5: Ford -->
+              <tr>
+                <td>
+                  <div class="table-lot">
+                    <div class="table-thumb vehicle-placeholder" style="display:flex;align-items:center;justify-content:center;">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--neutral-300)"><path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="table-lot-details">
+                      <span class="table-lot-name"><a href="#">2020 Ford F-150 XLT SuperCrew</a></span>
+                      <span class="table-lot-meta"><span class="mono">#49203841</span></span>
+                      <span class="table-lot-meta">Houston, TX</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">62,100 mi</span>
+                    <span class="cell-label">Est. Retail Value</span>
+                    <span class="cell-value mono">$26,400</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">All Over</span>
+                    <span class="cell-value">Starts</span>
+                    <span class="cell-value">No Keys</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value primary">Wed, Feb 25</span>
+                    <span class="cell-value">1:00 PM CT</span>
+                    <span class="cell-label">Pure Sale</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="bid-cell">
+                    <span class="bid-label">Current Bid</span>
+                    <span class="bid-amount">$7,800</span>
+                    <button class="btn btn-primary btn-xs">Bid Now</button>
+                  </div>
+                </td>
+              </tr>
+              <!-- Row 6: Mercedes -->
+              <tr>
+                <td>
+                  <div class="table-lot">
+                    <div class="table-thumb vehicle-placeholder" style="display:flex;align-items:center;justify-content:center;">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--neutral-300)"><path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="table-lot-details">
+                      <span class="table-lot-name"><a href="#">2022 Mercedes-Benz C300</a></span>
+                      <span class="table-lot-meta"><span class="mono">#52018394</span></span>
+                      <span class="table-lot-meta">Miami, FL</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">8,920 mi</span>
+                    <span class="cell-label">Est. Retail Value</span>
+                    <span class="cell-value mono">$38,200</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">Minor Dents</span>
+                    <span class="cell-value">Run &amp; Drive</span>
+                    <span class="cell-value">Has Keys</span>
+                    <span class="cell-value">Clean Title</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value primary">Tue, Feb 24</span>
+                    <span class="cell-value">10:00 AM CT</span>
+                    <span class="cell-label">On Approval</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="bid-cell">
+                    <span class="bid-label">Current Bid</span>
+                    <span class="bid-amount">$19,500</span>
+                    <button class="btn btn-primary btn-xs">Bid Now</button>
+                  </div>
+                </td>
+              </tr>
+              <!-- Row 7: Chevy -->
+              <tr>
+                <td>
+                  <div class="table-lot">
+                    <div class="table-thumb vehicle-placeholder" style="display:flex;align-items:center;justify-content:center;">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--neutral-300)"><path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="table-lot-details">
+                      <span class="table-lot-name"><a href="#">2018 Chevrolet Silverado 1500</a></span>
+                      <span class="table-lot-meta"><span class="mono">#47109283</span></span>
+                      <span class="table-lot-meta">Charlotte, NC</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">78,400 mi</span>
+                    <span class="cell-label">Est. Retail Value</span>
+                    <span class="cell-value mono">$22,100</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">Rear End</span>
+                    <span class="cell-value">Run &amp; Drive</span>
+                    <span class="cell-value">Has Keys</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value primary">Buy It Now</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="bid-cell">
+                    <span class="bid-label">Buy It Now</span>
+                    <span class="bid-amount accent">$12,500</span>
+                    <button class="btn btn-cta btn-xs">Buy Now</button>
+                  </div>
+                </td>
+              </tr>
+              <!-- Row 8: Hyundai -->
+              <tr>
+                <td>
+                  <div class="table-lot">
+                    <div class="table-thumb vehicle-placeholder" style="display:flex;align-items:center;justify-content:center;">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--neutral-300)"><path d="M18.2502 17.25H5.75C5.19772 17.25 4.75 16.8023 4.75 16.25V12.75C4.75 11.6454 5.64543 10.75 6.75 10.75H17.2502C18.3548 10.75 19.2502 11.6454 19.2502 12.75V16.25C19.2502 16.8023 18.8025 17.25 18.2502 17.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.2502 10.75H5.75L6.47147 6.4212C6.6322 5.45683 7.46657 4.75 8.44425 4.75H15.556C16.5337 4.75 17.368 5.45683 17.5288 6.4212L18.2502 10.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="table-lot-details">
+                      <span class="table-lot-name"><a href="#">2024 Hyundai Tucson SEL</a></span>
+                      <span class="table-lot-meta"><span class="mono">#53018472</span></span>
+                      <span class="table-lot-meta">Portland, OR</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">3,200 mi</span>
+                    <span class="cell-label">Est. Retail Value</span>
+                    <span class="cell-value mono">$29,800</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value">Normal Wear</span>
+                    <span class="cell-value">Run &amp; Drive</span>
+                    <span class="cell-value">Has Keys</span>
+                    <span class="cell-value">Clean Title</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <span class="cell-value primary">Fri, Feb 27</span>
+                    <span class="cell-value">9:00 AM CT</span>
+                    <span class="cell-label">Future Sale</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="bid-cell">
+                    <span class="bid-label">Current Bid</span>
+                    <span class="bid-amount">$16,800</span>
+                    <button class="btn btn-primary btn-xs">Bid Now</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <nav class="pagination" aria-label="Search results pages">
+        <button disabled aria-label="Previous page">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.25 8.75L9.75 12L13.25 15.25"/>
+          </svg>
+        </button>
+        <button class="active" aria-current="page">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+        <button>5</button>
+        <span class="ellipsis" aria-hidden="true">&hellip;</span>
+        <button>424</button>
+        <button aria-label="Next page">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/>
+          </svg>
+        </button>
+      </nav>
+
+    </div>
+
+  </div>
+</main>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle" aria-label="Toggle dark mode" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'">
+  <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.25 15.7499C17.2352 16.0812 16.1358 16.1584 15.0491 15.9481C12.5188 15.4597 10.5412 13.4821 10.0528 10.9518C9.84247 9.86504 9.91971 8.76567 10.251 7.75085C8.09002 8.55414 6.5 10.6006 6.5 13.0001C6.5 16.0377 8.96243 18.5001 12 18.5001C14.3995 18.5001 16.446 16.9101 17.2492 14.7491"/>
+  </svg>
+  <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="3.25" stroke="currentColor" stroke-width="1.5"/>
+    <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M12 2.75V4.25M12 19.75V21.25M21.25 12H19.75M4.25 12H2.75M18.4571 5.54289L17.3964 6.60355M6.60355 17.3964L5.54289 18.4571M18.4571 18.4571L17.3964 17.3964M6.60355 6.60355L5.54289 5.54289"/>
+  </svg>
+</button>
+
+<!-- Minimal JS for interactivity -->
+<script>
+  // --- Utility dropdowns ---
+  document.querySelectorAll('.utility-dropdown').forEach(dd => {
+    const trigger = dd.querySelector('.utility-dropdown-trigger');
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dd.classList.contains('open');
+      closeAllDropdowns();
+      if (!isOpen) {
+        dd.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    dd.querySelectorAll('.dropdown-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        dd.querySelectorAll('.dropdown-option').forEach(o => {
+          o.classList.remove('active');
+          o.setAttribute('aria-selected', 'false');
+        });
+        opt.classList.add('active');
+        opt.setAttribute('aria-selected', 'true');
+
+        const label = trigger.querySelector('span');
+        if (label) label.textContent = opt.querySelector('span').textContent;
+
+        dd.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  });
+
+  // --- Nav dropdowns ---
+  document.querySelectorAll('[data-nav-dropdown]').forEach(dd => {
+    const trigger = dd.querySelector('.header-nav-link');
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dd.classList.contains('open');
+      closeAllDropdowns();
+      if (!isOpen) {
+        dd.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  function closeAllDropdowns() {
+    document.querySelectorAll('.utility-dropdown, .nav-dropdown').forEach(dd => {
+      dd.classList.remove('open');
+      const trigger = dd.querySelector('[aria-expanded]');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  document.addEventListener('click', closeAllDropdowns);
+
+  // --- Search clear button ---
+  const searchClear = document.querySelector('.header-search-clear');
+  const searchInput = document.querySelector('.header-search-input');
+  if (searchClear && searchInput) {
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      searchInput.focus();
+    });
+  }
+
+  // --- Sticky header scroll behavior ---
+  const headerPrimary = document.querySelector('.header-primary');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    if (window.innerWidth <= 768) return;
+    if (window.scrollY > 20) {
+      headerPrimary.classList.add('scrolled');
+    } else {
+      headerPrimary.classList.remove('scrolled');
+    }
+    lastScroll = window.scrollY;
+  }, { passive: true });
+
+  // --- Mobile drawer ---
+  const mobileToggle = document.querySelector('.header-mobile-toggle');
+  const mobileOverlay = document.getElementById('mobile-overlay');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const mobileClose = mobileDrawer.querySelector('.mobile-drawer-close');
+
+  function openMobileMenu() {
+    mobileToggle.setAttribute('aria-expanded', 'true');
+    mobileOverlay.classList.add('active');
+    mobileDrawer.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => mobileClose.focus(), 300);
+  }
+
+  function closeMobileMenu() {
+    mobileToggle.setAttribute('aria-expanded', 'false');
+    mobileOverlay.classList.remove('active');
+    mobileDrawer.classList.remove('active');
+    document.body.style.overflow = '';
+    mobileToggle.focus();
+  }
+
+  mobileToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = mobileToggle.getAttribute('aria-expanded') === 'true';
+    isOpen ? closeMobileMenu() : openMobileMenu();
+  });
+
+  mobileOverlay.addEventListener('click', closeMobileMenu);
+  mobileClose.addEventListener('click', closeMobileMenu);
+  mobileDrawer.addEventListener('click', (e) => e.stopPropagation());
+
+  // Escape key closes drawer and dropdowns
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMobileMenu();
+      closeAllDropdowns();
+    }
+  });
+
+  // --- Language chips ---
+  document.querySelectorAll('.lang-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.lang-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+    });
+  });
+
+  // Filter section collapse toggle
+  document.querySelectorAll('.filter-section-header').forEach(header => {
+    header.addEventListener('click', () => {
+      header.closest('.filter-section').classList.toggle('collapsed');
+      const expanded = !header.closest('.filter-section').classList.contains('collapsed');
+      header.setAttribute('aria-expanded', expanded);
+    });
+    header.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        header.click();
+      }
+    });
+  });
+
+  // Checkbox toggle
+  document.querySelectorAll('.filter-checkbox').forEach(cb => {
+    cb.closest('.filter-option').addEventListener('click', () => {
+      cb.classList.toggle('checked');
+      cb.setAttribute('aria-checked', cb.classList.contains('checked'));
+    });
+  });
+
+  // View toggle (grid / list)
+  const gridView = document.getElementById('results-grid');
+  const tableView = document.getElementById('results-table');
+  const viewButtons = document.querySelectorAll('.toolbar-view button');
+  viewButtons.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+      viewButtons.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+      if (index === 0) {
+        gridView.classList.add('active');
+        tableView.classList.remove('active');
+      } else {
+        gridView.classList.remove('active');
+        tableView.classList.add('active');
+      }
+    });
+  });
+
+  // Watchlist toggle (cards)
+  document.querySelectorAll('.card-watchlist').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      btn.classList.toggle('saved');
+      const isSaved = btn.classList.contains('saved');
+      btn.setAttribute('aria-label', isSaved ? 'Remove from watchlist' : 'Add to watchlist');
+      // Fill heart when saved
+      const path = btn.querySelector('path');
+      if (isSaved) {
+        path.setAttribute('fill', 'currentColor');
+      } else {
+        path.setAttribute('fill', 'none');
+      }
+    });
+  });
+
+</script>
+
+</body>
+</html>

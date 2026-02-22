@@ -19,7 +19,7 @@
 - **Mobile platform:** set `data-platform="mobile"` on `<html>` for mobile-specific sizing overrides.
 - **Icons:** Inline SVG only (Iconic set). Always use `stroke="currentColor"` and `fill="none"`. No emoji, no icon fonts, no `<img>` tags. All 120 icon SVG paths are in `ICONS.json`.
 - **No pure red:** Error/destructive states use rose/magenta (`--error-*`), never `#FF0000` etc.
-- **Copart header required:** Always include the Copart header (`copart-header.html` for logged-out, `copart-header-loggedin.html` for logged-in) at the top of every prototype page unless explicitly told not to. Do not recreate or improvise a header — use the existing component files.
+- **Copart header required:** Always include the Copart header (`demo/copart-header.html` for logged-out, `demo/copart-header-loggedin.html` for logged-in) at the top of every prototype page unless explicitly told not to. Do not recreate or improvise a header — use the existing component files.
 
 ### Icon Names by Category
 

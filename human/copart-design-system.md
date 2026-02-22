@@ -718,7 +718,7 @@ All icons in the Vallejo Design System come exclusively from the **Iconic** icon
 
 ### Component: Header
 
-**Purpose:** Primary navigation and brand identity. Anchors the user's sense of place across all pages. Always include the Copart header at the top of every page — use the existing component files (`components/copart-header.html` for logged-out, `components/copart-header-loggedin.html` for logged-in), never recreate from scratch.
+**Purpose:** Primary navigation and brand identity. Anchors the user's sense of place across all pages. Always include the Copart header at the top of every page — use the existing component files (`components/header/index.html` for logged-out, `components/header/loggedin.html` for logged-in), never recreate from scratch. Shared design tokens live in `components/tokens.css`.
 
 **Anatomy — Three-Tier Structure:**
 

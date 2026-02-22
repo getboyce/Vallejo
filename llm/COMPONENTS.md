@@ -114,7 +114,7 @@
 | CTA border-radius | var(--radius-lg) | var(--radius-lg) |
 
 **Usage Rules:**
-- **Always include the Copart header** at the top of every prototype page unless explicitly told not to. Use the existing component files (`components/copart-header.html` for logged-out, `components/copart-header-loggedin.html` for logged-in) — do not recreate or improvise a header.
+- **Always include the Copart header** at the top of every prototype page unless explicitly told not to. Use the existing component files (`components/header/index.html` for logged-out, `components/header/loggedin.html` for logged-in) — do not recreate or improvise a header. Shared design tokens: `components/tokens.css`.
 - Header background (Blue 900) stays dark in both light and dark themes — it is not theme-switched.
 - Nav link color is always white with 0.85 opacity, increasing to 1.0 on hover.
 - Mobile: hamburger replaces nav links at the tablet breakpoint (< 768px).

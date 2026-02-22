@@ -17,8 +17,31 @@
 
 - **Dark mode:** set `data-theme="dark"` on `<html>`. Remove or set `"light"` for light mode.
 - **Mobile platform:** set `data-platform="mobile"` on `<html>` for mobile-specific sizing overrides.
-- **Icons:** Inline SVG only (Iconic set). Always use `stroke="currentColor"` and `fill="none"`. No emoji, no icon fonts, no `<img>` tags.
+- **Icons:** Inline SVG only (Iconic set). Always use `stroke="currentColor"` and `fill="none"`. No emoji, no icon fonts, no `<img>` tags. SVG path data for all 120 icons is in `ICONS.json` — search by name when you need an icon.
 - **No pure red:** Error/destructive states use rose/magenta (`--error-*`), never `#FF0000` etc.
+
+### Icon Names by Category
+
+When you need an icon, pick from this index, then search `ICONS.json` for the SVG path data.
+
+| Category | Icons |
+|----------|-------|
+| Navigation | home, search, menu, close, chevron-left, chevron-right, chevron-up, chevron-down, arrow-left, arrow-right, arrow-up, arrow-down, link, export |
+| Actions | check, checkmark, plus, minus, edit, trash, copy, upload, download, share, send, refresh, star, heart, bookmark, new |
+| Auction & Commerce | car, gavel, credit-card, dollar, tag, clock, calendar, location, pin, filter, sort-asc, sort-desc, grid, eye, eye-off, barcode, building-store, cart, add credit card, package, receipt, shipment, shopping-cart, wallet |
+| Vehicles & Shipping | car-battery, car-dashboard, car-door, car-engine, speed-gauge, steering-wheel, trailer, truck, shipment-up, shipment-down |
+| User & Account | user, user-edit, users, settings, wrench, sliders, bell, mail, phone, lock, lock-unlocked, shield, shield-tick, keys, flag-priority, voice-id, log-out |
+| Media & Files | camera, photo, video, file, file-text, folder, paperclip, play, pause, speaker, speaker-high, speaker-mute, hd |
+| Feedback & Status | information, warning, close-circle, check-circle, alert, target, activity, chart |
+| AI & Intelligence | ai, sparkles, pen-sparkles, doc-sparkle |
+| Device & System | smartphone, monitor, sun, moon, globe, message, annotation, wifi, battery, maximize, minimize, pin-tack, sidebar, cards |
+
+**Icon usage pattern:**
+```html
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- paste paths from ICONS.json -->
+</svg>
+```
 
 ---
 

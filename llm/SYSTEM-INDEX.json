@@ -11,7 +11,7 @@
       "2. Read QUICK-REFERENCE.md for CSS variables, HTML patterns, and component snippets — this is your primary implementation file.",
       "3. Read COMPONENTS.md only when you need detailed specs for a specific component (anatomy, variants, states, accessibility).",
       "4. Reference copart-design-tokens.json only when you need exact hex values, font stacks, or dark mode equivalents.",
-      "5. Search ICONS.json by name when you need SVG path data for a specific icon. Never read the full file."
+      "5. Read ICONS.json when you need to implement icons — it contains SVG path data for all 120 design system icons."
     ],
     "rules": [
       "No pure red anywhere. Use the rose/magenta error palette (error-border: #D42A54).",
@@ -41,10 +41,9 @@
       "readWhen": "Need exact hex values or dark mode mappings"
     },
     "ICONS.json": {
-      "priority": "P3",
-      "purpose": "SVG path data for all 120 design system icons (Iconic set), grouped by category",
-      "readWhen": "Need actual SVG markup to implement a specific icon. Do NOT read the whole file — search for the icon name.",
-      "size": "72KB — search by icon name, never load entirely into context"
+      "priority": "P1",
+      "purpose": "SVG path data for all 120 design system icons (Iconic set), organized by category with usage metadata",
+      "readWhen": "Building any UI that includes icons"
     }
   },
   "brandContext": {

@@ -17,12 +17,12 @@
 
 - **Dark mode:** set `data-theme="dark"` on `<html>`. Remove or set `"light"` for light mode.
 - **Mobile platform:** set `data-platform="mobile"` on `<html>` for mobile-specific sizing overrides.
-- **Icons:** Inline SVG only (Iconic set). Always use `stroke="currentColor"` and `fill="none"`. No emoji, no icon fonts, no `<img>` tags. SVG path data for all 120 icons is in `ICONS.json` — search by name when you need an icon.
+- **Icons:** Inline SVG only (Iconic set). Always use `stroke="currentColor"` and `fill="none"`. No emoji, no icon fonts, no `<img>` tags. All 120 icon SVG paths are in `ICONS.json`.
 - **No pure red:** Error/destructive states use rose/magenta (`--error-*`), never `#FF0000` etc.
 
 ### Icon Names by Category
 
-When you need an icon, pick from this index, then search `ICONS.json` for the SVG path data.
+120 icons across 9 categories. SVG path data for each is in `ICONS.json`.
 
 | Category | Icons |
 |----------|-------|

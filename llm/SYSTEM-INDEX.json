@@ -11,9 +11,13 @@
       "2. Read QUICK-REFERENCE.md for CSS variables, HTML patterns, and component snippets — this is your primary implementation file.",
       "3. Read COMPONENTS.md only when you need detailed specs for a specific component (anatomy, variants, states, accessibility).",
       "4. Reference copart-design-tokens.json only when you need exact hex values, font stacks, or dark mode equivalents.",
-      "5. Read ICONS.json when you need to implement icons — it contains SVG path data for all 120 design system icons."
+      "5. Read ICONS.json when you need to implement icons — it contains SVG path data for all 120 design system icons.",
+      "6. Use ../components/tokens.css for CSS variables — import it, never duplicate token definitions.",
+      "7. Use ../components/header/ for the Copart header — always include it at the top of every page unless told otherwise."
     ],
     "rules": [
+      "Always include the Copart header at the top of every prototype page unless told not to. Use components/header/index.html (logged-out) or components/header/loggedin.html (logged-in). Never recreate the header from scratch.",
+      "Shared CSS design tokens live in components/tokens.css. Import it rather than duplicating variables.",
       "No pure red anywhere. Use the rose/magenta error palette (error-border: #D42A54).",
       "No emoji in UI. Use Iconic icon set (inline SVG only, stroke=\"currentColor\").",
       "One Primary (blue) button per view. Secondary actions use Secondary or Tertiary variants.",
@@ -44,6 +48,16 @@
       "priority": "P1",
       "purpose": "SVG path data for all 120 design system icons (Iconic set), organized by category with usage metadata",
       "readWhen": "Building any UI that includes icons"
+    },
+    "../components/tokens.css": {
+      "priority": "P1",
+      "purpose": "Shared CSS design tokens — all CSS variables (colors, spacing, radius, shadows, motion, z-index). Single source of truth.",
+      "readWhen": "Building any UI — import this instead of duplicating CSS variables"
+    },
+    "../components/header/": {
+      "priority": "P1",
+      "purpose": "Working header component — header.css (styles, @imports tokens.css), header.js (behavior), index.html (logged-out), loggedin.html (logged-in)",
+      "readWhen": "Building any page — always include the header unless told not to"
     }
   },
   "brandContext": {
@@ -67,7 +81,7 @@
     "primitives": {
       "blue": "--blue-{50,100,200,600,800,900}",
       "orange": "--orange-{50,100,200,600,800,900}",
-      "neutral": "--neutral-{50,100,200,300,500,700,900}"
+      "neutral": "--neutral-{50,100,200,300,500,700,800,900,950}"
     },
     "semantic": {
       "backgrounds": ["--bg-primary", "--bg-secondary", "--bg-tertiary"],

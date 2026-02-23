@@ -1,6 +1,6 @@
 # Vallejo Design System
 
-**Version 1.1** | Copart Production Design System | February 2026
+**Version 1.1** | Copart Production Design System | Updated: February 23, 2026
 
 ---
 

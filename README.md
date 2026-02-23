@@ -31,3 +31,10 @@ Four folders, one system:
 | `/llm/` | AI agents, code generators, LLM tools | Structured data, CSS patterns, HTML snippets optimized for token efficiency |
 | `/components/` | Everyone | Working reference implementations (header, etc.) |
 | `/demo/` | Everyone | Interactive visual demos (hostable on Vercel) |
+
+## Demos
+
+| Demo | Path | Description |
+|------|------|-------------|
+| Design System Overview | [`/demo/index.html`](demo/index.html) | Foundations, tokens, and component showcase |
+| UX Writing Guide | [`/demo/ux-writing.html`](demo/ux-writing.html) | Voice & tone, terminology, microcopy patterns, do/don't examples |

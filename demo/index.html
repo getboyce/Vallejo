@@ -466,10 +466,10 @@ body {
 /* Button Icon */
 .btn-icon { display: inline-block; vertical-align: -0.15em; flex-shrink: 0; }
 /* Watchlist Active */
-.btn-watchlist-active { background: var(--blue-200); color: var(--interactive-primary); border: 1.5px solid var(--interactive-primary); }
-.btn-watchlist-active:hover { background: var(--blue-100); color: var(--interactive-hover); border-color: var(--interactive-hover); }
-[data-theme="dark"] .btn-watchlist-active { background: rgba(91,142,240,0.15); color: var(--interactive-primary); border-color: var(--interactive-primary); }
-[data-theme="dark"] .btn-watchlist-active:hover { background: rgba(91,142,240,0.1); }
+.btn-watchlist-active { background: var(--neutral-900); color: #fff; border: 1.5px solid var(--neutral-900); }
+.btn-watchlist-active:hover { background: var(--neutral-800); border-color: var(--neutral-800); }
+[data-theme="dark"] .btn-watchlist-active { background: var(--neutral-100); color: var(--text-primary); border-color: var(--neutral-300); }
+[data-theme="dark"] .btn-watchlist-active:hover { background: var(--neutral-200); }
 /* Disabled */
 .btn[disabled] { background: var(--neutral-200); color: var(--neutral-500); cursor: not-allowed; box-shadow: none; border-color: transparent; }
 .btn[disabled]:hover { transform: none; }
@@ -879,8 +879,14 @@ tr.hot:hover td { background: var(--orange-100); }
   50% { opacity: 1; transform: scale(1.2); }
   100% { opacity: 1; transform: scale(1); }
 }
-.heart-anim { display: inline-flex; align-items: center; }
-.heart-anim.pop { animation: heartPop 600ms cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.heart-anim { display: inline-flex; align-items: center; position: relative; width: 20px; height: 20px; }
+.heart-anim .icon-default,
+.heart-anim .icon-active { position: absolute; top: 0; left: 0; transition: opacity 200ms ease, transform 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.heart-anim .icon-default { opacity: 1; transform: scale(1); }
+.heart-anim .icon-active { opacity: 0; transform: scale(0.2) rotate(-45deg); }
+.heart-anim.active .icon-default { opacity: 0; transform: scale(0.2) rotate(45deg); }
+.heart-anim.active .icon-active { opacity: 1; transform: scale(1) rotate(0deg); }
+.heart-anim.pop .icon-active { animation: heartPop 600ms cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 .heart-anim .heart-filled { fill: #E53E3E; stroke: #E53E3E; }
 .btn-watchlist-active .heart-anim .heart-filled { fill: #E53E3E; stroke: #E53E3E; }
 
@@ -2471,8 +2477,8 @@ tr.hot:hover td { background: var(--orange-100); }
   <div class="subsection-title">With Icons</div>
   <div class="flex-row" style="gap:var(--space-3)">
     <button class="btn btn-md btn-primary"><svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.75V18.25"/><path d="M5.75 12H18.25"/></svg> Add to lot</button>
-    <button class="btn btn-md btn-secondary" onclick="toggleWatchlist(this)"><span class="heart-anim"><svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span> Watchlist</button>
-    <button class="btn btn-md btn-watchlist-active" onclick="toggleWatchlist(this)"><span class="heart-anim"><svg class="btn-icon heart-filled" width="20" height="20" viewBox="0 0 24 24" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span> Watching</button>
+    <button class="btn btn-md btn-secondary" onclick="toggleWatchlist(this)"><span class="heart-anim"><svg class="btn-icon icon-default" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.75V18.25"/><path d="M5.75 12H18.25"/></svg><svg class="btn-icon icon-active heart-filled" width="20" height="20" viewBox="0 0 24 24" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span> Watchlist</button>
+    <button class="btn btn-md btn-watchlist-active" onclick="toggleWatchlist(this)"><span class="heart-anim active"><svg class="btn-icon icon-default" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.75V18.25"/><path d="M5.75 12H18.25"/></svg><svg class="btn-icon icon-active heart-filled" width="20" height="20" viewBox="0 0 24 24" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span> Watching</button>
     <button class="btn btn-md btn-tertiary"><svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.25 6.75L4.75 12L10.25 17.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.25 12H5"/></svg> Back to Results</button>
     <button class="btn btn-md btn-success"><svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.75 12.8665L8.33995 16.4138C9.15171 17.5256 10.8179 17.504 11.6006 16.3715L18.25 6.75"/></svg> Confirm Payment</button>
   </div>
@@ -3436,14 +3442,14 @@ tr.hot:hover td { background: var(--orange-100); }
   <div class="grid-3" style="margin-bottom:var(--space-8)">
 
     <div class="anim-card">
-      <div class="anim-card-title">Watchlist Heart Fill</div>
-      <div class="anim-card-desc">Heart fills red with spring overshoot when adding to watchlist. Reverts to outline on removal.</div>
+      <div class="anim-card-title">Watchlist Plus → Heart</div>
+      <div class="anim-card-desc">Plus icon crossfades into a red filled heart with spring overshoot. Button shifts to dark solid active state. Reverts on removal.</div>
       <div class="anim-card-demo" style="flex-direction:column;gap:var(--space-3)">
         <button class="btn btn-md btn-secondary" id="watchlistDemo" onclick="playWatchlistAnim()">
-          <span class="heart-anim" id="heartIcon"><svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span> Watchlist
+          <span class="heart-anim" id="heartIcon"><svg class="btn-icon icon-default" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.75V18.25"/><path d="M5.75 12H18.25"/></svg><svg class="btn-icon icon-active heart-filled" width="20" height="20" viewBox="0 0 24 24" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span> Watchlist
         </button>
       </div>
-      <div class="anim-card-spec">600ms spring — scale 1 → 1.35 → 0.85 → 1.2 → 1 — fill #E53E3E</div>
+      <div class="anim-card-spec">300ms crossfade + 600ms spring pop — plus rotates out, heart scales in — fill #E53E3E</div>
     </div>
 
     <div class="anim-card">
@@ -3924,13 +3930,12 @@ function playWatchlistAnim() {
   if (isActive) {
     btn.classList.remove('btn-watchlist-active');
     btn.classList.add('btn-secondary');
-    heart.innerHTML = heartOutline;
+    heart.classList.remove('active', 'pop');
     btn.lastChild.textContent = ' Watchlist';
   } else {
-    heart.classList.add('pop');
+    heart.classList.add('active', 'pop');
     btn.classList.remove('btn-secondary');
     btn.classList.add('btn-watchlist-active');
-    heart.innerHTML = heartFilled;
     btn.lastChild.textContent = ' Watching';
     heart.addEventListener('animationend', function() { heart.classList.remove('pop'); }, { once: true });
   }
@@ -3983,17 +3988,15 @@ function playToastAnim() {
 function toggleWatchlist(btn) {
   const isActive = btn.classList.contains('btn-watchlist-active');
   const heart = btn.querySelector('.heart-anim');
-  const isSmall = btn.classList.contains('btn-sm');
   const textNode = btn.childNodes[btn.childNodes.length - 1];
   if (isActive) {
     btn.classList.remove('btn-watchlist-active');
     btn.classList.add('btn-secondary');
-    if (heart) heart.innerHTML = isSmall ? heartOutlineSm : heartOutline;
+    if (heart) heart.classList.remove('active', 'pop');
     textNode.textContent = ' Watchlist';
   } else {
     if (heart) {
-      heart.classList.add('pop');
-      heart.innerHTML = isSmall ? heartFilledSm : heartFilled;
+      heart.classList.add('active', 'pop');
       heart.addEventListener('animationend', function() { heart.classList.remove('pop'); }, { once: true });
     }
     btn.classList.remove('btn-secondary');

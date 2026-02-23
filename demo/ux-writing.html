@@ -459,7 +459,7 @@ tr:hover td { background: var(--bg-tertiary); }
       <div class="card">
         <div class="card-label">Confident</div>
         <div class="card-text">We know our platform. Statements, not hedging.</div>
-        <div class="copy-block">"Bidding closes at 2:30 PM ET."<br>not "Bidding should close around 2:30 PM ET."</div>
+        <div class="copy-block">"Bidding closes at 2:30 PM EST."<br>not "Bidding should close around 2:30 PM EST."</div>
       </div>
       <div class="card">
         <div class="card-label">Helpful</div>
@@ -552,7 +552,7 @@ tr:hover td { background: var(--bg-tertiary); }
           <tr><td>Current state</td><td>Present</td><td><span class="copy">3 items in your watchlist</span></td></tr>
           <tr><td>Completed action</td><td>Past</td><td><span class="copy">Bid placed successfully</span></td></tr>
           <tr><td>Instruction</td><td>Imperative</td><td><span class="copy">Enter your VIN</span></td></tr>
-          <tr><td>Future event</td><td>Future</td><td><span class="copy">Bidding opens tomorrow at 10:00 AM ET</span></td></tr>
+          <tr><td>Future event</td><td>Future</td><td><span class="copy">Bidding opens tomorrow at 10:00 AM EST</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -594,7 +594,7 @@ tr:hover td { background: var(--bg-tertiary); }
           <tr><td class="glossary-preferred">VIN</td><td class="glossary-never">Vehicle identification number (in UI)</td><td class="glossary-note">Always abbreviation in interface</td></tr>
           <tr><td class="glossary-preferred">Clean title</td><td class="glossary-never">Non-salvage, clear title</td><td class="glossary-note">Industry-standard term</td></tr>
           <tr><td class="glossary-preferred">Salvage</td><td class="glossary-never">Damaged, wrecked, total loss</td><td class="glossary-note">Legal/industry classification</td></tr>
-          <tr><td class="glossary-preferred">Preliminary bid</td><td class="glossary-never">Pre-bid, early bid</td><td class="glossary-note">Full term in UI; "pre-bid" for dense tables only</td></tr>
+          <tr><td class="glossary-preferred">Pre-bid</td><td class="glossary-never">Preliminary bid, early bid</td><td class="glossary-note">Canonical short form everywhere</td></tr>
           <tr><td class="glossary-preferred">Live auction</td><td class="glossary-never">Real-time auction, active auction</td><td class="glossary-note">"Live" is the canonical modifier</td></tr>
           <tr><td class="glossary-preferred">Buy it now</td><td class="glossary-never">Instant purchase, direct buy</td><td class="glossary-note">Capitalize first word only: "Buy it now"</td></tr>
           <tr><td class="glossary-preferred">Buyer fee</td><td class="glossary-never">Service fee, transaction fee</td><td class="glossary-note">Copart-specific term</td></tr>
@@ -609,7 +609,7 @@ tr:hover td { background: var(--bg-tertiary); }
           <tr><td class="glossary-preferred">Seller</td><td class="glossary-never">Consigner, provider, vendor</td><td class="glossary-note">Entity listing the vehicle</td></tr>
           <tr><td class="glossary-preferred">Storage fees</td><td class="glossary-never">Yard fees, holding fees</td><td class="glossary-note">Canonical term</td></tr>
           <tr><td class="glossary-preferred">Copart Alliance Gateway</td><td class="glossary-never">Lounge, Copart Lounge</td><td class="glossary-note">Official name for on-site member facilities</td></tr>
-          <tr><td class="glossary-preferred">Wholesale / Copart Wholesale</td><td class="glossary-never">Select, Copart Select</td><td class="glossary-note">Current brand. Full product name: "Copart Wholesale Auction"</td></tr>
+          <tr><td class="glossary-preferred">Wholesale / Copart Wholesale</td><td class="glossary-never">Select, Copart Select, Wholecar</td><td class="glossary-note">Current brand. Full product name: "Copart Wholesale Auction"</td></tr>
         </tbody>
       </table>
     </div>
@@ -780,6 +780,16 @@ tr:hover td { background: var(--bg-tertiary); }
       </div>
     </div>
 
+  </section>
+
+  <!-- ============================================================
+       8. DYNAMIC & ADAPTIVE COPY
+       ============================================================ -->
+  <section class="demo-section" id="dynamic">
+    <div class="section-label">Section 2.8</div>
+    <div class="section-title">Dynamic & adaptive copy</div>
+    <div class="section-desc">Rules for formatting dates, times, numbers, and handling pluralization and truncation.</div>
+
     <h3 class="subsection-title">Numbers & formats</h3>
     <div class="table-wrap">
       <table>
@@ -792,15 +802,6 @@ tr:hover td { background: var(--bg-tertiary); }
         </tbody>
       </table>
     </div>
-  </section>
-
-  <!-- ============================================================
-       8. DYNAMIC & ADAPTIVE COPY
-       ============================================================ -->
-  <section class="demo-section" id="dynamic">
-    <div class="section-label">Section 2.8</div>
-    <div class="section-title">Dynamic & adaptive copy</div>
-    <div class="section-desc">Rules for formatting dates, times, numbers, and handling pluralization and truncation.</div>
 
     <h3 class="subsection-title">Date & time formatting</h3>
     <div class="table-wrap">
@@ -809,7 +810,7 @@ tr:hover td { background: var(--bg-tertiary); }
         <tbody>
           <tr><td>Abbreviated date</td><td><span class="copy">Feb 22, 2026</span></td><td>Default for all dates in UI</td></tr>
           <tr><td>Relative date</td><td><span class="copy">Today</span>, <span class="copy">Yesterday</span>, <span class="copy">3 days ago</span></td><td>Use within 7 days; absolute after that</td></tr>
-          <tr><td>Time</td><td><span class="copy">2:30 PM ET</span></td><td>12-hour clock, timezone when relevant</td></tr>
+          <tr><td>Time</td><td><span class="copy">2:30 PM EST</span></td><td>12-hour clock, full timezone abbreviation (EST, CST, PST)</td></tr>
           <tr><td>Date range</td><td><span class="copy">Feb 22&ndash;28, 2026</span></td><td>En dash, no spaces around dash</td></tr>
         </tbody>
       </table>
@@ -1007,7 +1008,7 @@ tr:hover td { background: var(--bg-tertiary); }
     <div class="dodont-grid">
       <div class="dodont-card do">
         <div class="dodont-label">Do</div>
-        <div class="dodont-examples">"Bidding closes Feb 22 at 2:30 PM ET" / "Lot sold &mdash; final bid: $12,400"</div>
+        <div class="dodont-examples">"Bidding closes Feb 22 at 2:30 PM EST" / "Lot sold &mdash; final bid: $12,400"</div>
       </div>
       <div class="dodont-card dont">
         <div class="dodont-label">Don't</div>

@@ -11,16 +11,17 @@
 ## Table of Contents
 
 1. [Design Principles](#1-design-principles)
-2. [Foundations — Color](#2-foundations--color)
-3. [Foundations — Typography](#3-foundations--typography)
-4. [Foundations — Layout Grid](#4-foundations--layout-grid)
-5. [Foundations — Spacing](#5-foundations--spacing)
-6. [Components](#6-components)
-7. [Patterns](#7-patterns)
-8. [Animation & Motion](#8-animation--motion)
-9. [Mobile Platform](#9-mobile-platform)
-10. [Design Tokens](#10-design-tokens)
-11. [Documentation & Guidelines](#11-documentation--guidelines)
+2. [UX Writing](#2-ux-writing)
+3. [Foundations — Color](#3-foundations--color)
+4. [Foundations — Typography](#4-foundations--typography)
+5. [Foundations — Layout Grid](#5-foundations--layout-grid)
+6. [Foundations — Spacing](#6-foundations--spacing)
+7. [Components](#7-components)
+8. [Patterns](#8-patterns)
+9. [Animation & Motion](#9-animation--motion)
+10. [Mobile Platform](#10-mobile-platform)
+11. [Design Tokens](#11-design-tokens)
+12. [Documentation & Guidelines](#12-documentation--guidelines)
 
 ---
 
@@ -32,7 +33,7 @@ Three principles guide every decision in the Copart design system.
 
 Every element must communicate its purpose immediately. Users are making significant financial decisions — bidding on vehicles worth thousands of dollars. Ambiguity erodes confidence. Labels are explicit. States are visible. Actions are predictable.
 
-**Example — Do:** A bid button reads "Place Bid — $4,500" with a confirmation step.
+**Example — Do:** A bid button reads "Place bid" with the bid amount ($4,500) displayed in a summary line above the button, followed by a confirmation step.
 **Example — Don't:** A button reads "Submit" with no indication of the financial commitment.
 
 ## Principle 2: Progressive Disclosure
@@ -49,11 +50,400 @@ Every user — regardless of ability, device, or connectivity — deserves the s
 **Example — Do:** An auction status badge uses both color AND an icon plus label: [circle-icon] "Live Now."
 **Example — Don't:** A green dot with no label to indicate a live auction.
 
+# 2. UX Writing
+
+Words are interface. Every label, message, and instruction shapes how members understand and trust Copart. This section establishes the rules for writing all UI copy — from button labels to error messages to empty states. The same rigor we apply to color and spacing applies to language.
+
+## 2.1 Voice & Tone Charter
+
+### Brand Voice
+
+Copart's voice is consistent across every touchpoint. Four attributes define it:
+
+| Attribute | Definition | Example |
+|-----------|-----------|---------|
+| **Professional** | We respect the member's time and money. No fluff, no filler. | "Your bid of $4,500 has been placed." — not "Awesome! You just bid!" |
+| **Straightforward** | Say exactly what's happening. No jargon unless the audience expects it. | "This lot has a clean title." — not "This vehicle's documentation status is clear." |
+| **Confident** | We know our platform. Statements, not hedging. | "Bidding closes at 2:30 PM ET." — not "Bidding should close around 2:30 PM ET." |
+| **Helpful** | Every message moves the member toward their goal. | "Enter your VIN to check eligibility." — not "VIN required." |
+
+### Tone Spectrum
+
+Voice is constant. Tone adapts to context:
+
+| Context | Tone | Example |
+|---------|------|---------|
+| **Informational** | Neutral, factual | "This lot is located in Dallas, TX." |
+| **Encouraging** | Warm, supportive | "You're all set — your watchlist will notify you when bidding opens." |
+| **Urgent** | Direct, clear | "Bidding closes in 2 minutes. Place your bid now." |
+| **Error** | Calm, solution-focused | "Payment failed — update your payment method to continue." |
+
+**Rule:** Never use humor, sarcasm, or playful language in error states. Members may be frustrated or anxious — meet them with clarity, not cleverness.
+
+## 2.2 Capitalization & Punctuation
+
+### Sentence Case Everywhere
+
+All UI text uses **sentence case** — capitalize the first word and proper nouns only.
+
+| Element | Correct | Incorrect |
+|---------|---------|-----------|
+| Page headings | "My saved vehicles" | "My Saved Vehicles" |
+| Button labels | "Place bid" | "Place Bid" |
+| Nav items | "Find vehicles" | "Find Vehicles" |
+| Tab labels | "Bid history" | "Bid History" |
+| Table headers | "Sale date" | "Sale Date" |
+| Menu items | "Account settings" | "Account Settings" |
+
+**Exceptions — always capitalize:**
+- Proper nouns: Copart, CrashedToys, Copart Dealer Services (CDS), Copart Wholesale Auction, Copart Alliance Gateway
+- Acronyms: VIN, CDV, NMVTIS
+- Product names when used as proper nouns
+
+### Punctuation Rules
+
+| Rule | Example |
+|------|---------|
+| **No periods** on buttons, labels, table headers, nav items, badges | "Place bid" not "Place bid." |
+| **Periods** on full sentences in descriptions, helper text, tooltips, body copy | "Enter the 17-character VIN found on the vehicle dashboard." |
+| **Serial (Oxford) comma** required in all lists | "Year, make, and model" — not "Year, make and model" |
+| **Em dash (—)** for interruption or to join clauses | "Payment failed — update your payment method." |
+| **En dash (–)** for ranges | "$1,200–$3,500" or "Mon–Fri" |
+| **No exclamation marks** in UI copy | "Bid placed successfully" — not "Bid placed!" |
+| **Question marks** only in genuine questions | "Are you sure you want to remove this lot?" |
+
+## 2.3 Grammar & Tense Conventions
+
+### Active Voice Always
+
+| Correct (active) | Incorrect (passive) |
+|-------------------|---------------------|
+| "We saved your bid." | "Your bid has been saved." |
+| "Enter your lot number." | "The lot number should be entered." |
+| "Copart charges a buyer fee." | "A buyer fee is charged." |
+
+### Tense Rules
+
+| Context | Tense | Example |
+|---------|-------|---------|
+| Current state | Present | "3 items in your watchlist" |
+| Completed action | Past | "Bid placed successfully" |
+| Instruction | Imperative | "Enter your VIN" |
+| Future event | Future | "Bidding opens tomorrow at 10:00 AM ET" |
+
+### Person & Pronouns
+
+- **Second person** ("you/your") for addressing the member — never "the user" in UI copy
+- **First person plural** ("we") when Copart is the subject — "We'll notify you when bidding opens"
+- **Contractions allowed:** don't, won't, can't, it's, you'll, we'll, you're, we're, that's
+- **Contractions to avoid:** ain't, y'all, would've, could've (too informal or ambiguous)
+
+## 2.4 Terminology Glossary
+
+Use these terms consistently. Never alternate between synonyms within the same flow or page.
+
+| Preferred Term | Never Use | Notes |
+|---------------|-----------|-------|
+| **Lot** | Listing, item, product, vehicle (when referring to the auction entity) | "Lot" is Copart's canonical term for an auctioned vehicle |
+| **Vehicle** | Car, automobile, unit | Use when referring to the physical object, not the auction entity |
+| **Bid** | Offer, price, amount | "Bid" for the action and the value |
+| **Place bid** | Submit bid, make bid, enter bid | Canonical CTA verb |
+| **Watchlist** | Favorites, saved items, bookmarks | Single canonical term |
+| **Member** | User, customer, client, account holder | "Member" for all Copart users |
+| **Sign in** | Log in, login, sign on | Two words as verb ("Sign in"), one word as adjective ("sign-in page") |
+| **Sign out** | Log out, logout, sign off | Same pattern as "sign in" |
+| **Register** | Sign up, create account, join | "Register" is the canonical onboarding term |
+| **VIN** | Vehicle identification number (in UI) | Always abbreviation in interface; spell out only in help docs |
+| **Clean title** | Non-salvage, clear title | "Clean title" is the industry-standard term Copart uses |
+| **Salvage** | Damaged, wrecked, total loss | "Salvage" is the legal/industry classification |
+| **Preliminary bid** | Pre-bid, early bid, advance bid | Full term in UI; "pre-bid" acceptable in dense tables only |
+| **Live auction** | Real-time auction, active auction | "Live" is the canonical modifier |
+| **Buy it now** | Instant purchase, direct buy | Phrase used as-is; capitalize only first word: "Buy it now" |
+| **Buyer fee** | Service fee, transaction fee, premium | "Buyer fee" is the Copart-specific term |
+| **Sale date** | Auction date, event date | "Sale date" is canonical |
+| **Location** | Yard (internal only), facility, branch | "Location" is the public-facing term for Copart sites. "Yard" is internal only — never use in member-facing UI. |
+| **Item number** | Run number, lane number, sequence | "Item number" for auction ordering |
+| **Title type** | Title status, title category | "Title type" as the field label |
+| **Damage type** | Damage category, loss type | "Damage type" as the field label |
+| **Odometer** | Mileage, miles | "Odometer" as the field label; use "miles" in conversational copy |
+| **Highlights** | Features, specs, details | "Highlights" for the vehicle summary section |
+| **Condition** | Quality, grade | "Condition" as the vehicle state descriptor |
+| **Seller** | Consigner, provider, vendor | "Seller" for the entity listing the vehicle |
+| **Storage fees** | Yard fees, holding fees | "Storage fees" is canonical |
+| **Copart Alliance Gateway** | Lounge, Copart Lounge, waiting area | "Copart Alliance Gateway" is the official name for on-site member facilities (formerly Copart Lounges) |
+| **Wholesale** / **Copart Wholesale** | Select, Copart Select | "Wholesale" or "Copart Wholesale" is the current brand. "Select" / "Copart Select" are deprecated. Use "Copart Wholesale Auction" for the full product name. |
+
+**Rule:** If a term is not in this glossary, choose the simplest, most common word and use it consistently. Add new terms to the glossary when they appear in more than one flow.
+
+## 2.5 Copy Length Guidelines
+
+Every UI element has a character budget. These limits maintain scannability and prevent layout breakage.
+
+| Element | Word Count | Max Characters | Example |
+|---------|------------|----------------|---------|
+| Button label | 1–3 words | 20 chars | "Place bid" |
+| Field label | 1–4 words | 30 chars | "Lot number" |
+| Placeholder text | 2–5 words | 30 chars | "e.g., 12345678" |
+| Helper text | 1 sentence | 80 chars | "8-digit number found on the vehicle page." |
+| Error message | 1–2 sentences | 120 chars | "Enter a valid lot number (8 digits)." |
+| Toast message | 1 sentence | 60 chars | "Lot added to watchlist." |
+| Empty state heading | 3–8 words | 40 chars | "No saved lots yet" |
+| Empty state body | 1–2 sentences | 120 chars | "Search for vehicles and save them here." |
+| Modal title | 3–8 words | 50 chars | "Confirm your bid" |
+| Table header | 1–3 words | 20 chars | "Sale date" |
+| Badge / tag | 1–2 words | 15 chars | "Clean title" |
+| Tooltip | 1–2 sentences | 100 chars | "Your maximum bid. Copart bids on your behalf up to this amount." |
+| Breadcrumb segment | 1–3 words | 25 chars | "Search results" |
+| Nav item | 1–2 words | 15 chars | "My bids" |
+
+**Rule:** If copy exceeds the character budget, rewrite — don't just truncate. Truncation is a last resort for dynamic content only.
+
+## 2.6 Component Microcopy Patterns
+
+Specific copy patterns for every component type. These are rules, not suggestions.
+
+### Buttons
+
+- **Start with a verb.** The label describes the action: "Place bid", "Save to watchlist", "Remove lot"
+- **Be specific.** "Place bid" beats "Submit". "Remove from watchlist" beats "Delete"
+- **No numerical values in buttons.** Never put pricing, amounts, or counts inside button labels. Display pricing, bid amounts, and totals elsewhere in the UI (summary text, confirmation area, adjacent labels). Buttons are for actions only. Exception: only include a value if explicitly instructed to.
+- **Never use:** "Click here", "Submit", "OK", "Yes", "No" (except in confirmation dialogs where "Cancel" is the alternative)
+- **Destructive buttons:** State what will be destroyed — "Remove from watchlist", not "Delete"
+- **Loading state:** Change label to present participle — "Placing bid…", "Saving…"
+
+### Text Fields
+
+- **Labels** describe what to enter, not instructions: "Lot number" — not "Enter lot number here"
+- **Placeholders** show example format only: "e.g., 12345678" — never repeat the label
+- **Helper text** adds context the label can't: "8-digit number found on the vehicle page."
+- **Error messages** say what went wrong AND how to fix it: "Enter a valid lot number (8 digits)." — not "Invalid input"
+- **Success messages** confirm the value is accepted: "VIN verified." (optional — use only when verification is non-obvious)
+
+### Alerts & Banners
+
+- **Lead with what happened, then what to do.**
+- Success: "Bid placed — you'll receive a confirmation email."
+- Warning: "Your session expires in 5 minutes — save your work."
+- Error: "Payment failed — update your payment method to continue."
+- Info: "Auction for this lot starts tomorrow at 10:00 AM ET."
+- **Never use:** "Oops", "Uh oh", "Whoops", "Something went wrong" (be specific)
+- **Never blame the member:** "We couldn't process your payment" — not "You entered an invalid card"
+
+### Toasts & Snackbars
+
+- Confirmation of the action just taken. Past tense, one sentence.
+- "Lot added to watchlist."
+- "Bid placed successfully."
+- "Settings saved."
+- Include undo action where reversible: "Lot removed from watchlist. **Undo**"
+- Auto-dismiss after 5 seconds. No user action needed except undo.
+
+### Modals & Dialogs
+
+- **Title** = what this modal is about: "Confirm your bid", "Remove lot from watchlist"
+- **Body** = what the member needs to know to make a decision. Keep it to 1–3 sentences.
+- **Primary button** = the specific action: "Place bid", "Confirm purchase" — never "OK" or "Yes". Do not include pricing in the button — display amounts in the modal body or a summary line above the button.
+- **Secondary button** = "Cancel" — not "No", "Go back", "Dismiss"
+- **Destructive confirmation:** Repeat the consequence: "This will permanently remove the lot from your watchlist."
+
+### Empty States
+
+- **Heading:** Describe what's missing — "No saved lots yet", "No bid history"
+- **Body:** Explain how to fill it — "Search for vehicles and tap the heart icon to save them here."
+- **CTA:** Action to resolve — "Browse vehicles"
+- **Never say:** "No data", "Nothing to show", "Empty" (always provide context and a next step)
+
+### Tables
+
+- **Headers:** Short noun or noun phrase — "Sale date", "Current bid", "Damage type"
+- **No verbs** in table headers
+- **Null values:** Use em dash "—" — never "N/A", "null", "none", or leave blank
+- **Truncation:** Ellipsis (…) after last full word. Include tooltip with full value.
+- **Monospace** for VIN, lot numbers, bid amounts, timestamps
+
+### Badges & Tags
+
+- **1–2 words maximum**
+- **Status badges:** Past participle or adjective — "Sold", "Awarded", "Active", "Upcoming", "Ended"
+- **Category tags:** Nouns — "Clean title", "Salvage", "Flood damage"
+- **Count badges:** Numerals only — "3", "12", "99+"
+
+### Navigation
+
+- **Top-level items:** 1–2 word nouns — "Vehicles", "My bids", "Dashboard"
+- **Never use verbs** in primary navigation items
+- **Breadcrumbs** match the page title exactly — no abbreviations or rewording
+- **Tab labels:** Short nouns or noun phrases — "Details", "Bid history", "Similar lots"
+
+## 2.7 Inclusive Language
+
+### Gender & Identity
+- **Gender-neutral** by default: "they/them" for unknown members
+- "Member" — not "he or she", "his/her"
+- "Salesperson" — not "salesman/saleswoman"
+
+### Jargon & Accessibility
+- If a term needs explanation for a new member, add a tooltip or inline definition
+- **Reading level:** Aim for grade 8 (Flesch-Kincaid) for all member-facing copy
+- **Accessible descriptions:** Alt text on all images, aria-labels match visible text
+- No idioms, colloquialisms, or cultural references — Copart serves a global audience
+- "Accessible parking" — not "handicapped parking"
+- Person-first language where relevant: "members who use screen readers" — not "blind members"
+
+### Numbers & Formats
+- **Spell out 1–9** in body copy ("three vehicles") — numerals for 10+ ("42 results")
+- **Always use numerals** for prices, bids, lot numbers, counts in UI elements, data tables
+- **Currency:** "$1,200" format — no cents unless partial dollars ("$0.50")
+- **Thousands separator:** Always use commas — "$12,500" not "$12500"
+
+## 2.8 Dynamic & Adaptive Copy
+
+### Date & Time Formatting
+
+| Format | Example | Usage |
+|--------|---------|-------|
+| Abbreviated date | Feb 22, 2026 | Default for all dates in UI |
+| Relative date | Today, Yesterday, 3 days ago | Use within 7 days; absolute date after that |
+| Time | 2:30 PM ET | 12-hour clock, timezone when auctions cross time zones |
+| Date range | Feb 22–28, 2026 | En dash, no spaces around dash |
+
+### Pluralization
+
+Always handle three states: zero, one, and many.
+
+| Count | Copy |
+|-------|------|
+| 0 | "No results" or "No saved lots" |
+| 1 | "1 result" or "1 saved lot" |
+| 2+ | "24 results" or "8 saved lots" |
+
+Never show "0 results" — use the zero-state phrasing instead.
+
+### Truncation Rules
+
+- Ellipsis (…) after the last **full** word — never mid-word
+- Minimum 3 visible words before truncation
+- Always provide the full text via tooltip on hover
+- Vehicle titles: truncate after year + make + model if space is limited ("2024 Toyota Cam…" → show full in tooltip)
+
+### Number Formatting
+
+| Type | Format | Example |
+|------|--------|---------|
+| Currency | $X,XXX | $4,500 |
+| Large numbers | Comma-separated | 1,234,567 |
+| Percentages | No decimal unless needed | "85%" or "99.5%" |
+| Lot numbers | Monospace, no separators | `78901234` |
+| VIN | Monospace, uppercase | `1HGCM82633A004352` |
+
+## 2.9 Do / Don't Library
+
+Real examples of correct and incorrect copy across common patterns.
+
 ---
 
-# 2. Foundations — Color
+### Button Labels
 
-## 2.1 Primary Palette
+**Do:** "Place bid" / "Save to watchlist" / "Remove lot"
+**Don't:** "Submit" / "Click here" / "OK" / "Yes" / "Process"
+
+**Why:** Specific verbs tell the member exactly what will happen. Generic labels force them to guess.
+
+---
+
+### Error Messages
+
+**Do:** "Enter a valid email address (e.g., name@example.com)."
+**Don't:** "Invalid input." / "Error." / "Please try again."
+
+**Why:** Good error messages name the problem and show the fix. Bad ones make the member figure it out alone.
+
+---
+
+### Empty States
+
+**Do:** Heading: "No saved lots yet" / Body: "Search for vehicles and tap the heart icon to save them here." / CTA: "Browse vehicles"
+**Don't:** "No data." / "Nothing to show." / "Your list is empty."
+
+**Why:** Empty states are onboarding opportunities. Guide the member toward the next action.
+
+---
+
+### Confirmation Messages
+
+**Do:** "Your bid of $4,500 on Lot 78901234 has been placed."
+**Don't:** "Success!" / "Done!" / "Action completed."
+
+**Why:** Specific confirmations prove the system did what the member intended. Vague ones create doubt.
+
+---
+
+### Field Labels
+
+**Do:** "Lot number" / "Email address" / "Zip code"
+**Don't:** "Enter your lot number here" / "Type email" / "Input zip"
+
+**Why:** Labels name the field. Instructions belong in placeholder or helper text, not the label.
+
+---
+
+### Tone in Errors
+
+**Do:** "We couldn't process your payment. Update your payment method to try again."
+**Don't:** "Oops! Something went wrong. Please try again later!"
+
+**Why:** Members dealing with payment failures are already frustrated. Be calm and direct — never cute.
+
+---
+
+### Placeholder Text
+
+**Do:** "e.g., 12345678" / "Search by make, model, or VIN"
+**Don't:** "Enter lot number" / "Type here" / "Lot number"
+
+**Why:** Placeholders demonstrate format — they don't replace labels. Repeating the label wastes the placeholder.
+
+---
+
+### Modal Actions
+
+**Do:** Primary: "Place bid" / Secondary: "Cancel" (display bid amount in the modal body or summary line, not in the button)
+**Don't:** Primary: "OK" / "Yes" / Secondary: "No" / "Go back"
+
+**Why:** The member should understand what each button does without reading the modal body.
+
+---
+
+### Toast Messages
+
+**Do:** "Lot added to watchlist." / "Settings saved."
+**Don't:** "Success! Item has been added to your favorites list!" / "Your changes have been saved successfully."
+
+**Why:** Toasts are glanceable confirmations. Short, past tense, no exclamation marks.
+
+---
+
+### Navigation Labels
+
+**Do:** "Vehicles" / "My bids" / "Dashboard"
+**Don't:** "Find vehicles" / "View my bids" / "Go to dashboard"
+
+**Why:** Navigation items are nouns (destinations), not verbs (actions). Members click to go somewhere, not to do something.
+
+---
+
+### Status Communication
+
+**Do:** "Bidding closes Feb 22 at 2:30 PM ET" / "Lot sold — final bid: $12,400"
+**Don't:** "Auction ending soon!" / "This item has been sold."
+
+**Why:** Specific status copy includes the data the member needs. Vague status creates anxiety and follow-up questions.
+
+---
+
+# 3. Foundations — Color
+
+## 3.1 Primary Palette
 
 Built around the brand color `#2662D9`, expanded into a functional 6-color primary scale.
 
@@ -113,7 +503,7 @@ Built around the brand color `#2662D9`, expanded into a functional 6-color prima
 
 ---
 
-## 2.2 Secondary Accent — Orange
+## 3.2 Secondary Accent — Orange
 
 A warm counterweight to the blue primary. Orange provides urgency cues, promotional emphasis, and visual variety on data-dense pages without triggering the semantic connotations of success (green), warning (amber), or error (rose). It also serves as the registration/onboarding CTA, replacing the former standalone CTA Yellow.
 
@@ -175,7 +565,7 @@ A warm counterweight to the blue primary. Orange provides urgency cues, promotio
 
 ---
 
-## 2.3 Neutral Palette
+## 3.3 Neutral Palette
 
 ### Neutral 900 — Ink
 | **Hex** | **RGB** | **HSL** | **WCAG on White** | **Usage** |
@@ -209,7 +599,7 @@ A warm counterweight to the blue primary. Orange provides urgency cues, promotio
 
 ---
 
-## 2.4 Semantic Colors
+## 3.4 Semantic Colors
 
 > **Critical brand rule:** Red is prohibited in the Copart brand system. Error and destructive states use a deep rose/magenta tone instead of pure red.
 
@@ -247,7 +637,7 @@ A warm counterweight to the blue primary. Orange provides urgency cues, promotio
 
 ---
 
-## 2.5 Dark Mode
+## 3.5 Dark Mode
 
 Dark mode uses the same hue families with adjusted lightness and saturation to maintain readability and reduce eye strain. Each primitive color ramp has a full dark mode counterpart — tints (50-200) become dark tinted backgrounds, while core values (600-900) become lighter for contrast on dark surfaces.
 
@@ -308,7 +698,7 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 
 ---
 
-## 2.6 Color Usage Rules
+## 3.6 Color Usage Rules
 
 ### Hierarchy
 1. **Blue 600 (`#2662D9`)** is reserved for the single most important action on any screen. Do not use it decoratively.
@@ -333,9 +723,9 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 
 ---
 
-# 3. Foundations — Typography
+# 4. Foundations — Typography
 
-## 3.1 Primary Font Family: Inter
+## 4.1 Primary Font Family: Inter
 
 **Why Inter:** Inter was designed specifically for computer screens. Its tall x-height, open apertures, and tabular number support make it ideal for data-heavy auction interfaces. Copart's existing web design system has already adopted Inter, and it aligns with Apple's SF Pro philosophy — neutral, highly legible, optimized for UI.
 
@@ -359,7 +749,7 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 
 ---
 
-## 3.2 Type Scale
+## 4.2 Type Scale
 
 ### Display Styles (Marketing, Hero Sections)
 
@@ -510,7 +900,7 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 
 ---
 
-## 3.3 Font Pairing Strategy
+## 4.3 Font Pairing Strategy
 
 **Primary (95% of UI):** Inter — used for all interface text, from hero headings to caption labels.
 
@@ -522,7 +912,7 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 
 ---
 
-## 3.4 Accessibility — Minimum Sizes
+## 4.4 Accessibility — Minimum Sizes
 
 | Context | Minimum Size | Rationale |
 |---------|-------------|-----------|
@@ -539,9 +929,9 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 
 ---
 
-# 4. Foundations — Layout Grid
+# 5. Foundations — Layout Grid
 
-## 4.1 Responsive Grid System
+## 5.1 Responsive Grid System
 
 A 12-column grid adapts across three canonical breakpoints. All measurements use the 8px base unit.
 
@@ -577,7 +967,7 @@ A 12-column grid adapts across three canonical breakpoints. All measurements use
 
 ---
 
-## 4.2 Breakpoint Definitions
+## 5.2 Breakpoint Definitions
 
 | Name | Range | Columns | Behavior |
 |------|-------|---------|----------|
@@ -602,7 +992,7 @@ A 12-column grid adapts across three canonical breakpoints. All measurements use
 
 ---
 
-## 4.3 Safe Areas
+## 5.3 Safe Areas
 
 ### Notched / Dynamic Island Devices
 - Use `env(safe-area-inset-top)`, `env(safe-area-inset-bottom)`, `env(safe-area-inset-left)`, `env(safe-area-inset-right)`
@@ -617,9 +1007,9 @@ A 12-column grid adapts across three canonical breakpoints. All measurements use
 
 ---
 
-# 5. Foundations — Spacing
+# 6. Foundations — Spacing
 
-## 5.1 Spacing Scale
+## 6.1 Spacing Scale
 
 Based on an 8px unit with a 4px half-step for fine adjustments.
 
@@ -642,7 +1032,7 @@ Based on an 8px unit with a 4px half-step for fine adjustments.
 
 ---
 
-## 5.2 Spacing Usage Rules
+## 6.2 Spacing Usage Rules
 
 ### Component Internal Spacing
 - **Tight (4–8px):** Icon gaps, badge internals, inline element spacing
@@ -665,7 +1055,7 @@ Based on an 8px unit with a 4px half-step for fine adjustments.
 
 ---
 
-## 5.3 Iconography
+## 6.3 Iconography
 
 ### Icon Library: Iconic (iconic.app)
 
@@ -708,13 +1098,13 @@ All icons in the Vallejo Design System come exclusively from the **Iconic** icon
 
 ---
 
-# 6. Components
+# 7. Components
 
 > Every component follows Apple HIG principles: purposeful animation, clear affordances, consistent behavior across contexts. Components are documented with anatomy, states, usage, accessibility, and code-ready specs.
 
 ---
 
-## 6.1 Navigation Components
+## 7.1 Navigation Components
 
 ### Component: Header
 
@@ -995,7 +1385,7 @@ Overflow (mobile): horizontal scroll, no wrapping, fade-out mask on edges
 
 ---
 
-## 6.2 Input Components
+## 7.2 Input Components
 
 ### Component: Button
 
@@ -1392,7 +1782,7 @@ Value labels: same as single slider-value, displayed at left (low) and right (hi
 
 ---
 
-## 6.3 Feedback Components
+## 7.3 Feedback Components
 
 ### Component: Alert / Banner
 
@@ -1708,7 +2098,7 @@ Text skeleton width: varies (100%, 80%, 60%) to feel natural
 
 ---
 
-## 6.4 Data Display Components
+## 7.4 Data Display Components
 
 ### Component: Card
 
@@ -1918,7 +2308,7 @@ Responsive: reduce data point density on mobile, maintain touch target on intera
 
 ---
 
-## 6.5 Media Components
+## 7.5 Media Components
 
 ### Component: Image Container
 
@@ -2032,9 +2422,9 @@ Badge border: 2px solid White (to separate from avatar)
 
 ---
 
-# 7. Patterns
+# 8. Patterns
 
-## 7.1 Page Templates
+## 8.1 Page Templates
 
 ### Landing Page
 **Structure:** Full-width hero → value props (3-col grid) → featured vehicles carousel → how-it-works steps → CTA section → footer
@@ -2112,7 +2502,7 @@ Badge border: 2px solid White (to separate from avatar)
 
 ---
 
-## 7.2 User Flows
+## 8.2 User Flows
 
 ### Onboarding Flow
 1. **Welcome screen** — Brand hero + "Get Started" CTA button
@@ -2171,7 +2561,7 @@ Overall padding: space-12 (48px) vertical
 
 ---
 
-## 7.3 Feedback Patterns
+## 8.3 Feedback Patterns
 
 ### Success Pattern
 - **Immediate:** Toast appears ("Bid placed successfully") with green checkmark
@@ -2199,13 +2589,13 @@ Overall padding: space-12 (48px) vertical
 
 ---
 
-# 8. Animation & Motion
+# 9. Animation & Motion
 
 > Motion is functional, not decorative. Every animation in Vallejo serves a purpose — confirming an action, directing attention, or providing spatial context. We never animate for entertainment. All animations respect `prefers-reduced-motion` by reducing to instant state changes.
 
 ---
 
-## 8.1 Motion Tokens
+## 9.1 Motion Tokens
 
 | Token | Value | Usage |
 |-------|-------|-------|
@@ -2221,7 +2611,7 @@ Overall padding: space-12 (48px) vertical
 
 ---
 
-## 8.2 Micro-Interactions
+## 9.2 Micro-Interactions
 
 Small, functional animations that provide immediate feedback on user actions.
 
@@ -2246,7 +2636,7 @@ Small, functional animations that provide immediate feedback on user actions.
 
 ---
 
-## 8.3 Delight Animations
+## 9.3 Delight Animations
 
 Celebratory moments that reinforce positive actions and create emotional connection with the product.
 
@@ -2290,7 +2680,7 @@ Celebratory moments that reinforce positive actions and create emotional connect
 
 ---
 
-## 8.4 State Transitions
+## 9.4 State Transitions
 
 Full component enter/exit animations for complex UI elements.
 
@@ -2308,7 +2698,7 @@ Full component enter/exit animations for complex UI elements.
 
 ---
 
-## 8.5 When to Animate
+## 9.5 When to Animate
 
 ### Do Animate
 - **Action confirmation** — Heart fill, checkmark draw, success toast
@@ -2326,7 +2716,7 @@ Full component enter/exit animations for complex UI elements.
 
 ---
 
-## 8.6 Reduced Motion
+## 9.6 Reduced Motion
 
 All animations must be wrapped in a `prefers-reduced-motion` check:
 
@@ -2348,13 +2738,13 @@ When reduced motion is active:
 
 ---
 
-# 9. Mobile Platform
+# 10. Mobile Platform
 
 > **Vallejo Mobile** is a complete adaptation of the desktop design system for iOS, Android, and mobile web. It shares the same color palette, brand rules, and design principles — but with platform-optimized sizing, spacing, navigation, and interaction patterns. Think of it as a sibling system, not a responsive breakpoint.
 
 ---
 
-## 9.1 Philosophy: Two Systems, One Brand
+## 10.1 Philosophy: Two Systems, One Brand
 
 | Principle | Desktop | Mobile |
 |-----------|---------|--------|
@@ -2368,7 +2758,7 @@ When reduced motion is active:
 
 ---
 
-## 9.2 Mobile Type Scale
+## 10.2 Mobile Type Scale
 
 Based on the iOS Human Interface Guidelines type system, adapted with Inter.
 
@@ -2393,7 +2783,7 @@ Based on the iOS Human Interface Guidelines type system, adapted with Inter.
 
 ---
 
-## 9.3 Mobile Component Specs
+## 10.3 Mobile Component Specs
 
 ### Button
 
@@ -2460,7 +2850,7 @@ Modals become bottom sheets on mobile:
 
 ---
 
-## 9.4 Mobile Navigation
+## 10.4 Mobile Navigation
 
 ### Bottom Tab Bar
 
@@ -2504,7 +2894,7 @@ Focus: expands to full width, cancel button appears right
 
 ---
 
-## 9.5 Mobile Spacing
+## 10.5 Mobile Spacing
 
 | Token | Desktop | Mobile | Usage |
 |-------|---------|--------|-------|
@@ -2533,7 +2923,7 @@ padding-right: env(safe-area-inset-right);
 
 ---
 
-## 9.6 Mobile-Specific Patterns
+## 10.6 Mobile-Specific Patterns
 
 ### Pull-to-Refresh
 - Threshold: 64px pull distance
@@ -2559,7 +2949,7 @@ padding-right: env(safe-area-inset-right);
 
 ---
 
-## 9.7 Mobile Accessibility Additions
+## 10.7 Mobile Accessibility Additions
 
 | Requirement | Desktop | Mobile |
 |-------------|---------|--------|
@@ -2588,7 +2978,7 @@ Components must not clip or overlap at 1.65x scaling. Use flexible heights and `
 
 ---
 
-## 9.8 Platform Decision Map
+## 10.8 Platform Decision Map
 
 Use this to determine which system to apply:
 
@@ -2606,7 +2996,7 @@ Use this to determine which system to apply:
 
 ---
 
-# 10. Design Tokens
+# 11. Design Tokens
 
 A complete token file is provided at `copart-design-tokens.json` in DTCG (Design Tokens Community Group) format. The file now includes a `platform.mobile` section with all mobile-specific overrides for component sizing, typography, spacing, motion, navigation, and gestures. The file contains all primitive and semantic tokens for:
 
@@ -2634,9 +3024,9 @@ Tokens use reference syntax (`{copart.color.primitive.blue.600}`) for aliasing. 
 
 ---
 
-# 11. Documentation & Guidelines
+# 12. Documentation & Guidelines
 
-## 11.1 Design Principles (Expanded)
+## 12.1 Design Principles (Expanded)
 
 These three principles — introduced in Section 1 — are the foundation of every design decision at Copart.
 
@@ -2644,7 +3034,7 @@ These three principles — introduced in Section 1 — are the foundation of eve
 **Why it matters:** Copart users are making financial commitments — sometimes $50,000+ on a vehicle they may not have seen in person. Every ambiguous label, hidden fee, or unclear state erodes confidence. Clarity isn't just aesthetic; it's fiduciary.
 
 **How to apply:**
-- Label buttons with specific actions, not generic verbs. "Place Bid — $4,500" not "Submit."
+- Label buttons with specific actions, not generic verbs. "Place bid" not "Submit." Display pricing in a summary line, not in the button itself.
 - Show all fees before the confirmation step. No surprises at checkout.
 - Use consistent terminology. If it's called a "lot" on the search page, call it a "lot" everywhere.
 - Make system status visible. If an auction is live, show a pulsing indicator with "Live Now" text.
@@ -2670,7 +3060,7 @@ These three principles — introduced in Section 1 — are the foundation of eve
 
 ---
 
-## 11.2 Do's and Don'ts
+## 12.2 Do's and Don'ts
 
 ### 1. Color Usage
 **Do:** Use Blue 600 for the single primary action on a screen. Use Neutral 700 for body text. Use semantic colors only for their intended purpose (success = green, error = rose).
@@ -2742,7 +3132,7 @@ These three principles — introduced in Section 1 — are the foundation of eve
 
 ---
 
-## 11.3 Implementation Guide for Developers
+## 12.3 Implementation Guide for Developers
 
 ### Getting Started
 
@@ -2847,7 +3237,7 @@ Before shipping any component, verify:
 
 ---
 
-## 11.4 Component Inventory Summary
+## 12.4 Component Inventory Summary
 
 | Category | Component | Variants | States |
 |----------|-----------|----------|--------|

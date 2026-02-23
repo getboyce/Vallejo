@@ -234,6 +234,114 @@ These change automatically when `data-platform="mobile"` is set:
 
 ---
 
+## UX Writing
+
+### Voice
+
+| Attribute | Definition |
+|-----------|-----------|
+| Professional | Respect the member's time and money. No fluff. |
+| Straightforward | Say exactly what's happening. No jargon unless expected. |
+| Confident | Statements, not hedging. "Bidding closes at 2:30 PM ET." |
+| Helpful | Every message moves the member toward their goal. |
+
+Tone adapts: Informational (neutral) → Encouraging (warm) → Urgent (direct) → Error (calm, solution-focused). Never humorous in error states.
+
+### Capitalization
+
+**Sentence case everywhere.** Capitalize first word + proper nouns only.
+
+Applies to: headings, buttons, labels, nav items, tabs, menus, table headers, badges.
+
+Exceptions: Copart, CrashedToys, Copart Dealer Services (CDS), Copart Wholesale Auction, Copart Alliance Gateway, VIN, CDV, NMVTIS.
+
+### Punctuation
+
+- No periods on buttons, labels, table headers, nav items, badges
+- Periods on full sentences (descriptions, helper text, tooltips)
+- Serial (Oxford) comma required
+- Em dash (—) for clause joining: "Payment failed — update your payment method."
+- En dash (–) for ranges: "$1,200–$3,500"
+- No exclamation marks in UI copy
+
+### Grammar
+
+- Active voice always: "We saved your bid" not "Your bid has been saved"
+- Second person "you/your" — never "the user"
+- Contractions OK: don't, won't, can't, it's, you'll, we'll
+
+### Terminology Glossary
+
+| Preferred | Never Use |
+|-----------|-----------|
+| Lot | listing, item, product |
+| Vehicle | car, automobile, unit |
+| Bid | offer, price, amount |
+| Place bid | submit bid, make bid |
+| Watchlist | favorites, saved items, bookmarks |
+| Member | user, customer, client |
+| Sign in | log in, login |
+| Sign out | log out, logout |
+| Register | sign up, create account |
+| VIN | vehicle identification number (in UI) |
+| Clean title | non-salvage, clear title |
+| Salvage | damaged, wrecked, total loss |
+| Preliminary bid | pre-bid, early bid |
+| Live auction | real-time auction |
+| Buy it now | instant purchase |
+| Buyer fee | service fee, transaction fee |
+| Sale date | auction date |
+| Location | yard (internal only), facility |
+| Item number | run number, lane number |
+| Copart Alliance Gateway | lounge, Copart Lounge |
+| Wholesale / Copart Wholesale | Select, Copart Select |
+
+Rule: use glossary terms consistently — never alternate between synonyms.
+
+### Copy Patterns
+
+**Buttons:** Verb-first, 1–3 words, action only. "Place bid" not "Submit". No pricing/amounts in buttons — display values in summary text or adjacent UI. Destructive: state what's destroyed ("Remove from watchlist"). Loading: present participle ("Placing bid…").
+
+**Error messages:** `[What went wrong] — [how to fix it]`. "Enter a valid lot number (8 digits)." Never: "Invalid input", "Oops", "Something went wrong".
+
+**Empty states:** Heading (what's missing) + Body (how to fill) + CTA (action to resolve). "No saved lots yet" → "Search for vehicles and save them here." → "Browse vehicles"
+
+**Toasts:** Past-tense confirmation, 1 sentence, ≤ 60 chars. "Lot added to watchlist." Include undo where reversible.
+
+**Modals:** Title = topic. Primary button = specific action ("Place bid", "Confirm purchase"), never "OK"/"Yes". No pricing in buttons — display amounts in modal body. Secondary = "Cancel".
+
+**Tables:** Noun-phrase headers ("Sale date", "Current bid"). Null values: em dash "—", never "N/A" or blank. Monospace for VIN, lot numbers, bid amounts.
+
+**Badges:** 1–2 words. Status: past participle/adjective ("Sold", "Active"). Category: nouns ("Clean title", "Salvage").
+
+**Navigation:** 1–2 word nouns ("Vehicles", "My bids"). Never verbs. Breadcrumbs match page title exactly.
+
+### Copy Limits
+
+| Element | Max |
+|---------|-----|
+| Button label | 20 chars, 1–3 words |
+| Field label | 30 chars, 1–4 words |
+| Helper text | 80 chars, 1 sentence |
+| Error message | 120 chars, 1–2 sentences |
+| Toast | 60 chars, 1 sentence |
+| Empty state heading | 40 chars, 3–8 words |
+| Empty state body | 120 chars, 1–2 sentences |
+| Modal title | 50 chars, 3–8 words |
+| Table header | 20 chars, 1–3 words |
+| Badge / tag | 15 chars, 1–2 words |
+
+### Dynamic Copy
+
+- Numbers 1–9: spell out in body copy ("three vehicles"), numerals in UI elements
+- Currency: "$1,200" — commas, no cents unless partial
+- Dates: "Feb 22, 2026" — abbreviated month, no leading zeros
+- Times: "2:30 PM ET" — 12-hour, timezone when relevant
+- Pluralization: handle 0/1/many — "No results" / "1 result" / "24 results"
+- Truncation: ellipsis (…) after last full word, tooltip for full text
+
+---
+
 ## Components
 
 ---

@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UX Writing Guide — Vallejo 1.1</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ========================================
+   DESIGN TOKENS
+   ======================================== */
+:root {
+  --blue-50: #F6F9FD; --blue-100: #EEF2FC; --blue-200: #E1E9FA;
+  --blue-600: #2662D9; --blue-800: #063598; --blue-900: #0F2757;
+  --neutral-50: #FFFFFF; --neutral-100: #F4F5F6; --neutral-200: #E2E5E9;
+  --neutral-300: #C5CCD3; --neutral-500: #7A8691; --neutral-700: #46525D;
+  --neutral-800: #353A48; --neutral-900: #2F333C; --neutral-950: #23262F;
+  --orange-50: #FDF7F2; --orange-100: #FAEEE5; --orange-200: #F8E2D3;
+  --orange-600: #D86518; --orange-800: #933C06; --orange-900: #50250B;
+  --success-bg: #D7E8D1; --success-text: #1B6600; --success-border: #4CA830;
+  --warning-bg: #FFF7D1; --warning-text: #705700; --warning-border: #EC9C0D;
+  --error-bg: #FCE5E9; --error-text: #8C1D35; --error-border: #D42A54;
+  --info-bg: #E0EBFF; --info-text: #0F2757; --info-border: #2662D9;
+  --bg-primary: #FFFFFF; --bg-secondary: #F4F5F6; --bg-tertiary: #F6F9FD;
+  --text-primary: #2F333C; --text-secondary: #46525D; --text-tertiary: #7A8691; --text-disabled: #C5CCD3;
+  --border-default: #C5CCD3; --border-subtle: #E2E5E9; --border-focus: #2662D9;
+  --interactive-primary: #2662D9; --interactive-hover: #063598;
+  --header-bg: #2F333C;
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.05); --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08); --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+  --shadow-focus: 0 0 0 3px rgba(38,98,217,0.4);
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px;
+  --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px; --radius-xl: 12px; --radius-2xl: 16px; --radius-pill: 9999px;
+  --dur-fast: 100ms; --dur-normal: 150ms; --dur-moderate: 200ms; --dur-slow: 300ms;
+  --ease-out: ease-out; --ease-spring: cubic-bezier(0.4, 0, 0.2, 1);
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+}
+
+[data-theme="dark"] {
+  --blue-50: #0D1117; --blue-100: #141E33; --blue-200: #1E2A45;
+  --blue-600: #5B8EF0; --blue-800: #7AAAF5; --blue-900: #B8D4FA;
+  --orange-50: #1A1008; --orange-100: #221710; --orange-200: #2E1F14;
+  --orange-600: #E8873F; --orange-800: #F0A566; --orange-900: #F8C99A;
+  --neutral-50: #1A1D23; --neutral-100: #22262E; --neutral-200: #2E3340;
+  --neutral-300: #3A4150; --neutral-500: #6E7A86; --neutral-700: #A8B2BC; --neutral-900: #F0F1F3;
+  --header-bg: #2F333C;
+  --bg-primary: #1A1D23; --bg-secondary: #22262E; --bg-tertiary: #2E3340;
+  --text-primary: #F0F1F3; --text-secondary: #A8B2BC; --text-tertiary: #6E7A86; --text-disabled: #454D58;
+  --border-default: #3A4150; --border-subtle: #2E3340; --border-focus: #5B8EF0;
+  --interactive-primary: #5B8EF0; --interactive-hover: #7AAAF5;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.2); --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.4); --shadow-focus: 0 0 0 3px rgba(91,142,240,0.4);
+  --success-bg: #1A2E14; --success-text: #6ABF4D; --success-border: #4CA830;
+  --warning-bg: #2E2510; --warning-text: #E8B830; --warning-border: #E8B830;
+  --error-bg: #2E1219; --error-text: #F06080; --error-border: #F06080;
+  --info-bg: #141E33; --info-text: #7AAAF5; --info-border: #5B8EF0;
+}
+
+/* ========================================
+   RESET & BASE
+   ======================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 140px; }
+body {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+.demo-header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--header-bg);
+  height: 80px;
+  padding: 0 var(--space-6);
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: var(--shadow-md);
+}
+.demo-header-title { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; line-height: 24px; }
+.demo-header-subtitle { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 500; letter-spacing: 0.015em; line-height: 16px; }
+.demo-header-left { display: flex; align-items: center; gap: var(--space-3); }
+.demo-header-logo {
+  display: flex; align-items: center; flex-shrink: 0;
+}
+.demo-header-logo svg {
+  height: 36px; width: auto;
+}
+.demo-header-actions { display: flex; gap: var(--space-2); align-items: center; }
+.theme-toggle {
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
+  color: #fff; padding: 6px 14px; border-radius: var(--radius-pill);
+  font-size: 13px; font-weight: 500; cursor: pointer; font-family: var(--font-primary);
+  transition: all var(--dur-normal) ease;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.theme-toggle:hover { background: rgba(255,255,255,0.25); }
+.demo-nav-link {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  color: #fff; padding: 6px 12px; border-radius: var(--radius-pill);
+  font-size: 13px; font-weight: 500; cursor: pointer; font-family: var(--font-primary);
+  text-decoration: none;
+  transition: background var(--dur-normal) var(--ease-out);
+}
+.demo-nav-link:hover { background: rgba(255,255,255,0.22); color: #fff; }
+
+/* ========================================
+   SECTION NAV
+   ======================================== */
+.section-nav {
+  position: sticky; top: 80px; z-index: 99;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0 24px;
+  display: flex; gap: 0;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.section-nav::-webkit-scrollbar { display: none; }
+.section-nav a {
+  display: block; padding: 12px 16px;
+  font-size: 13px; font-weight: 500; color: var(--text-tertiary);
+  text-decoration: none; white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color var(--dur-normal), border-color var(--dur-normal);
+}
+.section-nav a:hover { color: var(--text-primary); }
+.section-nav a.active {
+  color: var(--interactive-primary);
+  border-bottom-color: var(--interactive-primary);
+}
+
+/* ========================================
+   MAIN LAYOUT
+   ======================================== */
+.demo-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-6) var(--space-16);
+}
+
+.demo-section {
+  margin-bottom: var(--space-16);
+}
+.section-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--interactive-primary);
+  margin-bottom: var(--space-2);
+}
+.section-title {
+  font-size: 28px; font-weight: 700; color: var(--text-primary);
+  letter-spacing: -0.02em; line-height: 1.2;
+  margin-bottom: var(--space-2);
+}
+.section-desc {
+  font-size: 16px; color: var(--text-secondary); line-height: 1.6;
+  margin-bottom: var(--space-8);
+  max-width: 680px;
+}
+
+/* ========================================
+   INTRO HERO
+   ======================================== */
+.hero {
+  background: linear-gradient(135deg, var(--blue-100), var(--bg-tertiary));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-10) var(--space-8);
+  margin-bottom: var(--space-12);
+  text-align: center;
+}
+.hero-title {
+  font-size: 36px; font-weight: 800; color: var(--text-primary);
+  letter-spacing: -0.03em; line-height: 1.15;
+  margin-bottom: var(--space-3);
+}
+.hero-subtitle {
+  font-size: 18px; color: var(--text-secondary); line-height: 1.5;
+  max-width: 560px; margin: 0 auto;
+}
+.hero-version {
+  display: inline-block; margin-top: var(--space-4);
+  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--interactive-primary); background: var(--blue-200);
+  padding: 4px 12px; border-radius: var(--radius-pill);
+}
+
+/* ========================================
+   CARDS
+   ======================================== */
+.card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  transition: box-shadow var(--dur-moderate) var(--ease-out);
+}
+.card:hover { box-shadow: var(--shadow-md); }
+.card-grid {
+  display: grid; gap: var(--space-4);
+}
+.card-grid-2 { grid-template-columns: 1fr 1fr; }
+.card-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+.card-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--interactive-primary);
+  margin-bottom: var(--space-1);
+}
+.card-heading {
+  font-size: 18px; font-weight: 700; color: var(--text-primary);
+  margin-bottom: var(--space-2); letter-spacing: -0.01em;
+}
+.card-text {
+  font-size: 14px; color: var(--text-secondary); line-height: 1.55;
+}
+
+/* ========================================
+   TABLES
+   ======================================== */
+.table-wrap {
+  overflow-x: auto;
+  margin-bottom: var(--space-6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: 14px;
+}
+thead {
+  background: var(--bg-secondary);
+}
+th {
+  text-align: left; font-weight: 600; color: var(--text-primary);
+  padding: 10px 16px; border-bottom: 1px solid var(--border-subtle);
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+td {
+  padding: 10px 16px; border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary); vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--bg-tertiary); }
+
+/* ========================================
+   CODE / COPY PILLS
+   ======================================== */
+.copy {
+  display: inline; font-family: var(--font-mono);
+  font-size: 13px; color: var(--success-text);
+  background: var(--success-bg); padding: 2px 7px;
+  border-radius: var(--radius-sm); white-space: nowrap;
+}
+.copy-block {
+  font-family: var(--font-mono); font-size: 13px;
+  background: var(--bg-secondary); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); padding: 12px 16px;
+  color: var(--text-primary); line-height: 1.6;
+  margin: var(--space-3) 0;
+}
+
+/* ========================================
+   DO / DON'T CARDS
+   ======================================== */
+.dodont-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.dodont-card {
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  border: 1px solid var(--border-subtle);
+}
+.dodont-card.do {
+  border-left: 4px solid var(--success-border);
+  background: var(--success-bg);
+}
+.dodont-card.dont {
+  border-left: 4px solid var(--error-border);
+  background: var(--error-bg);
+}
+.dodont-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; margin-bottom: var(--space-2);
+}
+.dodont-card.do .dodont-label { color: var(--success-text); }
+.dodont-card.dont .dodont-label { color: var(--error-text); }
+.dodont-examples {
+  font-size: 14px; line-height: 1.6;
+}
+.dodont-card.do .dodont-examples { color: var(--success-text); }
+.dodont-card.dont .dodont-examples { color: var(--error-text); }
+.dodont-why {
+  margin-top: var(--space-3);
+  font-size: 13px; color: var(--text-secondary);
+  font-style: italic; line-height: 1.5;
+}
+
+/* ========================================
+   RULE CALLOUTS
+   ======================================== */
+.rule {
+  background: var(--info-bg);
+  border: 1px solid var(--info-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+  margin: var(--space-4) 0 var(--space-6);
+  font-size: 14px; color: var(--info-text); line-height: 1.55;
+}
+.rule strong { font-weight: 700; }
+
+/* ========================================
+   SUBSECTION HEADINGS
+   ======================================== */
+.subsection-title {
+  font-size: 20px; font-weight: 700; color: var(--text-primary);
+  letter-spacing: -0.01em; margin: var(--space-8) 0 var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.subsection-title:first-child { margin-top: 0; }
+
+/* ========================================
+   GLOSSARY TABLE SPECIAL
+   ======================================== */
+.glossary-preferred {
+  font-weight: 600; color: var(--text-primary);
+}
+.glossary-never {
+  color: var(--error-text); font-style: italic;
+}
+.incorrect {
+  display: inline; font-family: var(--font-mono);
+  font-size: 13px; color: var(--error-text);
+  background: var(--error-bg); padding: 2px 7px;
+  border-radius: var(--radius-sm);
+}
+.glossary-note {
+  color: var(--text-tertiary); font-size: 13px;
+}
+
+/* ========================================
+   PATTERN CARDS
+   ======================================== */
+.pattern-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin-bottom: var(--space-4);
+}
+.pattern-card-title {
+  font-size: 16px; font-weight: 700; color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+.pattern-card ul {
+  list-style: none; padding: 0;
+}
+.pattern-card li {
+  font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+  padding: 4px 0 4px 20px;
+  position: relative;
+}
+.pattern-card li::before {
+  content: '';
+  position: absolute; left: 0; top: 11px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--interactive-primary);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  .demo-wrapper { padding: var(--space-6) var(--space-4) var(--space-12); }
+  .hero { padding: var(--space-8) var(--space-5); }
+  .hero-title { font-size: 28px; }
+  .hero-subtitle { font-size: 16px; }
+  .section-title { font-size: 24px; }
+  .card-grid-2 { grid-template-columns: 1fr; }
+  .card-grid-4 { grid-template-columns: 1fr 1fr; }
+  .dodont-grid { grid-template-columns: 1fr; }
+  .demo-header-subtitle { display: none; }
+}
+@media (max-width: 480px) {
+  .card-grid-4 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="demo-header">
+  <div class="demo-header-left">
+    <div class="demo-header-logo"><svg width="126" height="48" viewBox="0 0 126 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M124.696 23.9844C118.268 37.2054 89.82 48 61.3722 48C32.9245 48 14.8869 36.8228 21.3156 23.6018C27.7443 10.4119 53.0056 0 84.6957 0C113.143 0 131.125 10.7946 124.696 23.9844Z" fill="#23262F"/><path fill-rule="evenodd" clip-rule="evenodd" d="M83.6397 1.18211C110.938 1.18211 128.175 11.2923 121.994 23.6111C115.814 35.9922 88.5467 46.0713 61.248 46.0713C33.9493 46.0713 16.713 35.9922 22.8932 23.6111C29.0424 11.2923 56.3411 1.18211 83.6397 1.18211Z" fill="#757F8F"/><path fill-rule="evenodd" clip-rule="evenodd" d="M79.2918 3.29747C103.951 3.29747 119.51 12.3189 113.889 23.3934C108.299 34.4679 83.6087 43.4893 58.9809 43.4893C34.3531 43.4893 18.7627 34.4368 24.3529 23.3934C27.9865 16.2696 39.4774 10.0168 53.7634 6.4394C54.7882 6.15943 55.8131 5.94167 56.869 5.72391C63.981 4.19961 71.6519 3.32858 79.2918 3.32858V3.29747Z" fill="#23262F"/><path fill-rule="evenodd" clip-rule="evenodd" d="M111.584 14.3284C112.811 16.3412 113.038 18.6058 112.066 20.9825C111.156 22.7806 110.112 24.2271 108.559 25.6518C100.494 33.0121 81.5124 38.2725 63.3878 38.2725C42.0147 38.2725 29.3685 30.8749 34.2382 21.5207C37.5829 15.0813 48.9217 9.2267 62.4965 6.33674C64.0928 5.99766 65.717 5.73013 67.363 5.48749C64.1704 5.80479 61.043 6.26519 57.9715 6.92158C42.9185 10.2035 30.1542 15.4981 26.4399 22.8366C21.0547 33.5036 35.1512 41.9681 58.8629 41.9681C78.2887 41.9681 98.5748 36.3686 107.92 28.3769C108.976 27.481 110.212 26.2118 111.181 24.8617C111.581 24.3142 111.929 23.7605 112.224 23.2036C113.898 19.9964 113.578 16.9602 111.584 14.3347V14.3284Z" fill="#0072BC"/><path d="M105.755 8.52054L105.752 8.52339H105.758L105.755 8.52054Z" fill="#23262F"/><path d="M103.814 13.6876L104.684 11.3732L105.752 8.52365L102.826 9.32625L96.2425 11.1305L95.4226 11.3545L95.1679 12.1664L94.7021 13.6565H92.5778L92.0126 13.5507C91.8138 13.5134 91.1306 13.3921 90.6834 13.3921C89.9007 13.3921 89.2113 13.4916 88.6026 13.6565H80.0154L79.6738 14.7453L78.8229 17.461C78.7111 16.59 78.3695 15.8279 77.826 15.2368L77.3663 14.736H77.2173C76.5433 14.1885 75.6706 13.8152 74.652 13.6441C73.6706 13.4294 72.3693 13.3361 70.3196 13.3361V13.3454C69.0991 13.3454 68.0307 13.4232 67.0462 13.5787C65.9903 13.7218 65.0493 13.9769 64.3195 14.316C63.2915 14.7391 62.4437 15.2772 61.7977 15.915C61.3443 16.3256 60.9188 16.8451 60.4902 17.5046L59.9529 16.3536C59.3132 14.9786 57.8597 13.3392 54.5709 13.3392V13.3454C53.0149 13.3454 52.4093 13.4605 51.7385 13.7498L51.7571 13.6876H43.1824L42.8408 14.7764L41.9806 17.5077C41.8315 17.1282 41.6607 16.7953 41.4868 16.5122V16.506L41.4774 16.4998C40.1575 14.4156 37.6948 13.3548 34.1636 13.3517V13.3454C31.235 13.3454 28.6294 14.1325 26.4181 15.6785L26.4119 15.6848L26.4057 15.691C25.8281 16.1047 25.3001 16.5465 24.8187 17.0162V16.3878C24.8187 13.3579 24.0051 11.2238 22.328 9.86753C20.8466 8.6232 18.6851 8.0197 15.7192 8.0197V8.02592C13.0049 8.02592 9.04204 8.91562 6.29975 10.9034C3.63511 12.8601 1.7624 15.6008 0.722007 19.0569C-0.135152 21.81 -0.231427 24.1275 0.445604 25.9318C1.14748 27.845 2.29968 29.22 3.86803 30.0101C5.31526 30.7505 7.24076 31.1113 9.75634 31.1113C11.9862 31.1113 13.4303 30.8811 15.0794 30.2683C16.5795 29.7084 17.9801 28.8715 19.2472 27.7796L19.7876 27.313V27.2041C20.3435 26.6504 20.9336 25.9723 21.474 25.2412C21.6634 26.8868 22.4336 28.0814 23.2038 28.8902L23.2162 28.9027L23.2286 28.9151C24.7442 30.4332 26.6511 31.0802 29.6077 31.0802C32.5642 31.0802 35.2102 30.2839 37.4525 28.716C37.937 28.3707 38.3842 27.9974 38.8004 27.6086L36.5954 34.6172L35.9587 36.6393H44.9527L45.3005 35.5598L46.9465 30.4456C46.9869 30.4643 47.0272 30.483 47.0707 30.5016C47.903 30.8749 48.9062 31.074 49.9745 31.074C52.1298 31.074 54.1547 30.3461 55.9932 28.9089C56.4715 28.5325 56.9156 28.1125 57.3256 27.6521C57.5212 28.38 57.8877 28.94 58.2604 29.3444C59.3722 30.5981 61.5648 31.0429 63.1114 31.0429C64.658 31.0429 66.0742 30.8127 67.3258 30.3616C67.6115 30.2621 67.9034 30.1408 68.2109 29.9977L68.4531 30.7287H74.6644V30.7349H83.6646L84.0031 29.643L85.4628 24.9457C86.2361 22.485 86.941 21.4367 87.3945 20.9918C87.5373 20.8518 87.9845 20.631 88.5808 20.631C88.9349 20.631 89.2641 20.7087 89.5374 20.8581L91.1709 21.7478L91.5188 20.687H92.5219L91.6244 23.5863C91.0188 25.4839 90.8231 26.7157 90.9815 27.677C91.143 28.8031 91.7517 29.7426 92.6989 30.3212C93.5437 30.8376 94.758 31.0771 96.522 31.0771C97.7456 31.0771 98.727 31.1113 99.5127 30.6416C100.003 30.3461 100.469 30.3803 100.876 30.3025L101.802 29.8172L102.075 28.2929L102.82 25.8354L103.659 23.0699L100.892 23.8911C100.739 23.9378 100.6 23.9751 100.475 24.0093L101.51 20.7181H104.653L104.991 19.6231L106.202 15.7034L106.827 13.6876H103.814ZM30.5518 22.7215L30.5642 22.6872L30.5735 22.653C30.822 21.7509 31.1946 21.1038 31.7164 20.6683C32.1015 20.351 32.6139 20.1581 33.0829 20.1581C33.3624 20.1581 33.3903 20.211 33.4152 20.2546L33.4556 20.323L33.4804 20.3572C33.499 20.4288 33.5611 20.7896 33.2785 21.6824C32.968 22.6841 32.5704 23.3872 32.0922 23.7822L31.8251 24.0031C31.4524 24.2426 31.1015 24.3577 30.7505 24.3577C30.4679 24.3577 30.3965 24.2955 30.3654 24.2489H30.3685C30.3344 24.1711 30.207 23.7854 30.5518 22.7215ZM22.3529 20.5314H14.7254L14.2657 21.2345C13.9428 21.7322 13.449 22.4353 12.9241 22.8117L12.9024 22.8272L12.8806 22.8428C12.3278 23.269 11.6228 23.4836 10.7843 23.4836C10.1725 23.4836 9.72839 23.3405 9.59174 23.0979L9.58553 23.0885L9.57932 23.0792C9.57932 23.0792 9.25012 22.4601 10.0265 19.9373C10.5079 18.4378 11.0669 17.3864 11.6818 16.8171L11.7036 16.7953L11.7253 16.7736C12.5173 15.9803 13.4303 15.579 14.4459 15.579C14.7533 15.579 14.9366 15.5852 15.0453 15.5914C15.1105 15.6381 15.1912 15.691 15.2906 15.747C15.4552 15.8403 15.6322 15.9367 15.6974 16.5527L15.8465 17.9432H23.9647C23.3032 18.7396 22.7659 19.6044 22.3529 20.5314Z" fill="#23262F"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13.8247 24.0778C13.0173 24.6999 11.9924 25.0421 10.7812 25.0421C9.57 25.0421 8.66936 24.6377 8.23457 23.86C7.76872 23.0512 7.89295 21.5891 8.54513 19.4737C9.10415 17.7317 9.78739 16.4562 10.6259 15.6785C11.7129 14.5898 13.0173 14.0298 14.4459 14.0298C15.8745 14.0298 15.626 14.1542 16.0608 14.4031C16.8372 14.8386 17.1478 15.523 17.241 16.394H23.2659C23.2659 14.4964 22.9243 12.35 21.3404 11.0745C20.1603 10.0791 18.2969 9.58133 15.7192 9.58133C13.1415 9.58133 9.57 10.4524 7.2097 12.1633C4.88047 13.8743 3.17236 16.3007 2.20961 19.5049C1.46425 21.9002 1.34003 23.8911 1.89904 25.3843C2.45806 26.9086 3.32764 27.9974 4.5699 28.6196C5.78111 29.2417 7.52027 29.5528 9.75634 29.5528C11.9924 29.5528 13.2036 29.3039 14.539 28.8062C15.8745 28.3085 17.1167 27.5619 18.2348 26.5975V26.5353C19.446 25.4465 20.9056 23.6111 21.5578 22.0868H15.5639C15.0359 22.8957 14.4769 23.6111 13.8247 24.0778Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M40.1606 17.3273C39.1389 15.7128 37.1575 14.9039 34.1574 14.9008C31.5518 14.9008 29.2598 15.5852 27.3033 16.954C25.3467 18.3538 24.0113 20.127 23.3591 22.2424C22.6137 24.5444 22.9553 26.3798 24.3218 27.8108C25.4399 28.9306 26.8995 29.5217 29.6014 29.5217C32.3033 29.5217 34.6015 28.8062 36.5581 27.4375C38.4836 26.0687 39.788 24.2955 40.4712 22.1491C41.0923 20.2515 40.9681 18.6338 40.1606 17.3273ZM34.7568 22.1491C34.3531 23.4556 33.7941 24.3888 33.0798 24.9799V25.011C32.3344 25.6021 31.558 25.9131 30.7505 25.9131C29.9431 25.9131 29.353 25.6021 29.0114 25.011C28.6697 24.3888 28.6697 23.4867 29.0735 22.2424C29.4151 20.998 29.9741 20.0959 30.7195 19.4737C31.4338 18.8827 32.3034 18.6027 33.0798 18.6027C33.8562 18.6027 34.4152 18.8827 34.7568 19.4737C35.1605 20.0337 35.1295 20.9669 34.7568 22.1491Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M76.6831 16.3007H76.5899C76.093 15.7096 75.3166 15.3363 74.3538 15.1808C73.3911 14.9631 72.0246 14.9008 70.3165 14.9008C69.2606 14.9008 68.2357 14.963 67.273 15.1186C66.3413 15.243 65.5338 15.4608 64.9437 15.7408C64.1052 16.0829 63.3909 16.5185 62.8629 17.0473C62.3039 17.545 61.807 18.2605 61.3101 19.1627L66.5897 19.6915C67.0245 19.0693 67.4282 18.6649 67.863 18.4472C68.4221 18.1983 69.3537 18.0428 70.0991 18.0428C70.8445 18.0428 71.3103 18.1672 71.5277 18.4472C71.714 18.7271 71.714 19.1938 71.5277 19.847C70.7513 20.0648 70.0059 20.2826 69.3227 20.4692C68.6084 20.5936 67.1487 20.9047 64.8816 21.3091C62.9872 21.6513 61.5896 22.1491 60.72 22.8334C59.8505 23.5178 59.2293 24.3888 58.9188 25.4465C58.5771 26.5975 58.7324 27.5619 59.4157 28.3085C60.0989 29.0862 61.776 29.4906 63.1114 29.4906C64.4468 29.4906 65.6891 29.3039 66.8071 28.8995C67.6146 28.6196 68.5152 28.1218 69.478 27.4686C69.4159 27.8419 69.4159 28.1218 69.4159 28.3396C69.4159 28.5573 69.4469 28.8062 69.5711 29.1795H74.9129C74.7886 28.5885 74.7886 28.1218 74.7886 27.7485C74.8197 27.4063 74.9439 26.8775 75.1303 26.2242L77.0558 20.0337C77.3042 19.3804 77.3663 18.696 77.3042 17.9494C77.2732 17.2651 77.0558 16.7051 76.6831 16.3007ZM70.4718 23.3934C70.2233 24.0778 69.9749 24.6377 69.6022 25.0421L69.6643 25.011C69.2916 25.4465 68.7947 25.7887 68.1736 26.0687C67.5525 26.3487 66.8692 26.5042 66.2481 26.5042C65.627 26.5042 65.2232 26.3798 65.0058 26.0998C64.7574 25.8198 64.6953 25.4776 64.8506 25.0732C64.9437 24.731 65.2232 24.3888 65.627 24.1089C65.9997 23.8289 66.8382 23.5489 68.0804 23.2689C69.0121 23.0512 69.8817 22.8334 70.7513 22.5535L70.4718 23.3934Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M85.7826 17.4828L86.4969 15.2119H81.1552L76.7762 29.1795H82.5217L83.9814 24.4822C84.6957 22.2113 85.4627 20.7087 86.3106 19.8781C87.1584 19.0476 88.9007 18.7365 90.2796 19.4893L91.7299 15.0781C91.7299 15.0781 91.0219 14.9475 90.6833 14.9475C87.8168 14.9475 86.6212 16.5185 85.7826 17.4828Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M100.379 19.1627H103.516L104.727 15.243H101.621L101.59 15.2119L103.236 9.89241L96.6524 12.6299L95.8449 15.2119H93.0499L91.8387 19.1316H94.6337L93.112 24.0467C92.6151 25.6021 92.3977 26.722 92.5219 27.4375C92.6151 28.1218 92.9567 28.6507 93.5157 28.9929C94.0747 29.3351 95.0685 29.5217 96.5282 29.5217C97.9878 29.5217 99.1059 29.3662 100.597 29.0862L101.342 25.3843C100.503 25.6332 99.8823 25.7576 99.4785 25.7576C99.0748 25.7576 98.7332 25.571 98.64 25.291C98.5779 25.1043 98.64 24.6999 98.8264 24.1089L100.379 19.1627Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M58.5461 17.0162C57.8939 15.6163 56.5585 14.9008 54.5709 14.9008C51.7168 14.9008 50.0677 16.394 49.0428 17.2962L49.6639 15.243H44.3222L38.0768 35.0839H43.8222L46.1545 27.8419C46.5583 28.4018 47.0862 28.8062 47.7074 29.0862C48.3285 29.3662 49.1049 29.5217 49.9745 29.5217C51.7758 29.5217 53.4839 28.8995 55.0367 27.6863C56.6206 26.442 57.7697 24.6688 58.484 22.3668C59.5585 18.7209 58.5461 17.0162 58.5461 17.0162ZM52.8628 22.1179C52.4901 23.3623 51.9932 24.2022 51.372 24.731C50.7509 25.2599 50.1298 25.5087 49.4776 25.5087C48.8254 25.5087 48.1732 25.2288 47.8316 24.6999C47.49 24.1711 47.521 23.3312 47.8316 22.2424C48.2043 21.0603 48.7012 20.1581 49.3844 19.6604C50.0366 19.1316 50.7199 18.8516 51.4652 18.8516C52.2106 18.8516 52.6143 19.1004 52.8938 19.6293C53.2044 20.1581 53.1733 20.998 52.8317 22.1179H52.8628Z" fill="white"/></svg></div>
+    <div>
+      <div class="demo-header-title">UX Writing Guide</div>
+      <div class="demo-header-subtitle">Section 2 &mdash; Vallejo 1.1</div>
+    </div>
+  </div>
+  <div class="demo-header-actions">
+    <a href="index.html" class="demo-nav-link">Design system</a>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">Dark mode</button>
+  </div>
+</header>
+
+<!-- SECTION NAV -->
+<nav class="section-nav" id="sectionNav">
+  <a href="#voice" class="active">Voice & tone</a>
+  <a href="#capitalization">Capitalization</a>
+  <a href="#grammar">Grammar</a>
+  <a href="#terminology">Terminology</a>
+  <a href="#limits">Copy limits</a>
+  <a href="#microcopy">Microcopy</a>
+  <a href="#inclusive">Inclusive language</a>
+  <a href="#dynamic">Dynamic copy</a>
+  <a href="#dodont">Do / Don't</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="demo-wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-title">UX Writing Guide</div>
+    <div class="hero-subtitle">Words are interface. Every label, message, and instruction shapes how members understand and trust Copart. The same rigor we apply to color and spacing applies to language.</div>
+    <div class="hero-version">Vallejo 1.1 &mdash; February 2026</div>
+  </div>
+
+  <!-- ============================================================
+       1. VOICE & TONE
+       ============================================================ -->
+  <section class="demo-section" id="voice">
+    <div class="section-label">Section 2.1</div>
+    <div class="section-title">Voice & tone charter</div>
+    <div class="section-desc">Copart's voice is consistent across every touchpoint. Tone adapts to context &mdash; but the voice never changes.</div>
+
+    <h3 class="subsection-title">Brand voice</h3>
+    <div class="card-grid card-grid-2">
+      <div class="card">
+        <div class="card-label">Professional</div>
+        <div class="card-text">We respect the member's time and money. No fluff, no filler.</div>
+        <div class="copy-block">"Your bid of $4,500 has been placed."<br>not "Awesome! You just bid!"</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Straightforward</div>
+        <div class="card-text">Say exactly what's happening. No jargon unless the audience expects it.</div>
+        <div class="copy-block">"This lot has a clean title."<br>not "This vehicle's documentation status is clear."</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Confident</div>
+        <div class="card-text">We know our platform. Statements, not hedging.</div>
+        <div class="copy-block">"Bidding closes at 2:30 PM ET."<br>not "Bidding should close around 2:30 PM ET."</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Helpful</div>
+        <div class="card-text">Every message moves the member toward their goal.</div>
+        <div class="copy-block">"Enter your VIN to check eligibility."<br>not "VIN required."</div>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Tone spectrum</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Context</th><th>Tone</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Informational</strong></td><td>Neutral, factual</td><td><span class="copy">This lot is located in Dallas, TX.</span></td></tr>
+          <tr><td><strong>Encouraging</strong></td><td>Warm, supportive</td><td><span class="copy">You're all set &mdash; your watchlist will notify you when bidding opens.</span></td></tr>
+          <tr><td><strong>Urgent</strong></td><td>Direct, clear</td><td><span class="copy">Bidding closes in 2 minutes. Place your bid now.</span></td></tr>
+          <tr><td><strong>Error</strong></td><td>Calm, solution-focused</td><td><span class="copy">Payment failed &mdash; update your payment method to continue.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rule"><strong>Rule:</strong> Never use humor, sarcasm, or playful language in error states. Members may be frustrated or anxious &mdash; meet them with clarity, not cleverness.</div>
+  </section>
+
+  <!-- ============================================================
+       2. CAPITALIZATION & PUNCTUATION
+       ============================================================ -->
+  <section class="demo-section" id="capitalization">
+    <div class="section-label">Section 2.2</div>
+    <div class="section-title">Capitalization & punctuation</div>
+    <div class="section-desc">Sentence case everywhere. Capitalize the first word and proper nouns only.</div>
+
+    <h3 class="subsection-title">Sentence case examples</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Element</th><th>Correct</th><th>Incorrect</th></tr></thead>
+        <tbody>
+          <tr><td>Page headings</td><td><span class="copy">My saved vehicles</span></td><td><span class="incorrect">My Saved Vehicles</span></td></tr>
+          <tr><td>Button labels</td><td><span class="copy">Place bid</span></td><td><span class="incorrect">Place Bid</span></td></tr>
+          <tr><td>Nav items</td><td><span class="copy">Find vehicles</span></td><td><span class="incorrect">Find Vehicles</span></td></tr>
+          <tr><td>Tab labels</td><td><span class="copy">Bid history</span></td><td><span class="incorrect">Bid History</span></td></tr>
+          <tr><td>Table headers</td><td><span class="copy">Sale date</span></td><td><span class="incorrect">Sale Date</span></td></tr>
+          <tr><td>Menu items</td><td><span class="copy">Account settings</span></td><td><span class="incorrect">Account Settings</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="rule"><strong>Exceptions &mdash; always capitalize:</strong> Copart, CrashedToys, Copart Dealer Services (CDS), Copart Wholesale Auction, Copart Alliance Gateway, VIN, CDV, NMVTIS, and product names used as proper nouns.</div>
+
+    <h3 class="subsection-title">Punctuation rules</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Rule</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>No periods</strong> on buttons, labels, table headers, nav items, badges</td><td><span class="copy">Place bid</span> not <span class="incorrect">Place bid.</span></td></tr>
+          <tr><td><strong>Periods</strong> on full sentences in descriptions, helper text, tooltips</td><td><span class="copy">Enter the 17-character VIN found on the vehicle dashboard.</span></td></tr>
+          <tr><td><strong>Serial (Oxford) comma</strong> required</td><td><span class="copy">Year, make, and model</span> not <span class="incorrect">Year, make and model</span></td></tr>
+          <tr><td><strong>Em dash (&mdash;)</strong> for interruption or clause joining</td><td><span class="copy">Payment failed &mdash; update your payment method.</span></td></tr>
+          <tr><td><strong>En dash (&ndash;)</strong> for ranges</td><td><span class="copy">$1,200&ndash;$3,500</span> or <span class="copy">Mon&ndash;Fri</span></td></tr>
+          <tr><td><strong>No exclamation marks</strong> in UI copy</td><td><span class="copy">Bid placed successfully</span> not <span class="incorrect">Bid placed!</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. GRAMMAR & TENSE
+       ============================================================ -->
+  <section class="demo-section" id="grammar">
+    <div class="section-label">Section 2.3</div>
+    <div class="section-title">Grammar & tense conventions</div>
+    <div class="section-desc">Active voice always. Second person for the member. Contractions are fine &mdash; but not all of them.</div>
+
+    <h3 class="subsection-title">Active voice always</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Correct (active)</th><th>Incorrect (passive)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="copy">We saved your bid.</span></td><td><span class="incorrect">Your bid has been saved.</span></td></tr>
+          <tr><td><span class="copy">Enter your lot number.</span></td><td><span class="incorrect">The lot number should be entered.</span></td></tr>
+          <tr><td><span class="copy">Copart charges a buyer fee.</span></td><td><span class="incorrect">A buyer fee is charged.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-title">Tense rules</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Context</th><th>Tense</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Current state</td><td>Present</td><td><span class="copy">3 items in your watchlist</span></td></tr>
+          <tr><td>Completed action</td><td>Past</td><td><span class="copy">Bid placed successfully</span></td></tr>
+          <tr><td>Instruction</td><td>Imperative</td><td><span class="copy">Enter your VIN</span></td></tr>
+          <tr><td>Future event</td><td>Future</td><td><span class="copy">Bidding opens tomorrow at 10:00 AM ET</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-title">Person & pronouns</h3>
+    <div class="card-grid card-grid-2">
+      <div class="card">
+        <div class="card-label">Use</div>
+        <div class="card-text"><strong>Second person</strong> ("you/your") for addressing the member. <strong>First person plural</strong> ("we") when Copart is the subject.</div>
+        <div class="copy-block">"We'll notify you when bidding opens."</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Contractions</div>
+        <div class="card-text"><strong>Allowed:</strong> don't, won't, can't, it's, you'll, we'll, you're, we're, that's<br><strong>Avoid:</strong> ain't, y'all, would've, could've</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. TERMINOLOGY GLOSSARY
+       ============================================================ -->
+  <section class="demo-section" id="terminology">
+    <div class="section-label">Section 2.4</div>
+    <div class="section-title">Terminology glossary</div>
+    <div class="section-desc">Use these terms consistently. Never alternate between synonyms within the same flow or page.</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Preferred term</th><th>Never use</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="glossary-preferred">Lot</td><td class="glossary-never">Listing, item, product</td><td class="glossary-note">Copart's canonical term for an auctioned vehicle</td></tr>
+          <tr><td class="glossary-preferred">Vehicle</td><td class="glossary-never">Car, automobile, unit</td><td class="glossary-note">The physical object, not the auction entity</td></tr>
+          <tr><td class="glossary-preferred">Bid</td><td class="glossary-never">Offer, price, amount</td><td class="glossary-note">For both the action and the value</td></tr>
+          <tr><td class="glossary-preferred">Place bid</td><td class="glossary-never">Submit bid, make bid, enter bid</td><td class="glossary-note">Canonical CTA verb</td></tr>
+          <tr><td class="glossary-preferred">Watchlist</td><td class="glossary-never">Favorites, saved items, bookmarks</td><td class="glossary-note">Single canonical term</td></tr>
+          <tr><td class="glossary-preferred">Member</td><td class="glossary-never">User, customer, client</td><td class="glossary-note">For all Copart users</td></tr>
+          <tr><td class="glossary-preferred">Sign in / Sign out</td><td class="glossary-never">Log in, login, log out</td><td class="glossary-note">Two words as verb; one word as adjective ("sign-in page")</td></tr>
+          <tr><td class="glossary-preferred">Register</td><td class="glossary-never">Sign up, create account, join</td><td class="glossary-note">Canonical onboarding term</td></tr>
+          <tr><td class="glossary-preferred">VIN</td><td class="glossary-never">Vehicle identification number (in UI)</td><td class="glossary-note">Always abbreviation in interface</td></tr>
+          <tr><td class="glossary-preferred">Clean title</td><td class="glossary-never">Non-salvage, clear title</td><td class="glossary-note">Industry-standard term</td></tr>
+          <tr><td class="glossary-preferred">Salvage</td><td class="glossary-never">Damaged, wrecked, total loss</td><td class="glossary-note">Legal/industry classification</td></tr>
+          <tr><td class="glossary-preferred">Preliminary bid</td><td class="glossary-never">Pre-bid, early bid</td><td class="glossary-note">Full term in UI; "pre-bid" for dense tables only</td></tr>
+          <tr><td class="glossary-preferred">Live auction</td><td class="glossary-never">Real-time auction, active auction</td><td class="glossary-note">"Live" is the canonical modifier</td></tr>
+          <tr><td class="glossary-preferred">Buy it now</td><td class="glossary-never">Instant purchase, direct buy</td><td class="glossary-note">Capitalize first word only: "Buy it now"</td></tr>
+          <tr><td class="glossary-preferred">Buyer fee</td><td class="glossary-never">Service fee, transaction fee</td><td class="glossary-note">Copart-specific term</td></tr>
+          <tr><td class="glossary-preferred">Sale date</td><td class="glossary-never">Auction date, event date</td><td class="glossary-note">Canonical field label</td></tr>
+          <tr><td class="glossary-preferred">Location</td><td class="glossary-never">Yard (internal only), facility</td><td class="glossary-note">Public-facing term for Copart sites. "Yard" is internal only.</td></tr>
+          <tr><td class="glossary-preferred">Item number</td><td class="glossary-never">Run number, lane number</td><td class="glossary-note">For auction ordering</td></tr>
+          <tr><td class="glossary-preferred">Title type</td><td class="glossary-never">Title status, title category</td><td class="glossary-note">Field label</td></tr>
+          <tr><td class="glossary-preferred">Damage type</td><td class="glossary-never">Damage category, loss type</td><td class="glossary-note">Field label</td></tr>
+          <tr><td class="glossary-preferred">Odometer</td><td class="glossary-never">Mileage, miles</td><td class="glossary-note">Field label; "miles" in conversational copy</td></tr>
+          <tr><td class="glossary-preferred">Highlights</td><td class="glossary-never">Features, specs, details</td><td class="glossary-note">Vehicle summary section</td></tr>
+          <tr><td class="glossary-preferred">Condition</td><td class="glossary-never">Quality, grade</td><td class="glossary-note">Vehicle state descriptor</td></tr>
+          <tr><td class="glossary-preferred">Seller</td><td class="glossary-never">Consigner, provider, vendor</td><td class="glossary-note">Entity listing the vehicle</td></tr>
+          <tr><td class="glossary-preferred">Storage fees</td><td class="glossary-never">Yard fees, holding fees</td><td class="glossary-note">Canonical term</td></tr>
+          <tr><td class="glossary-preferred">Copart Alliance Gateway</td><td class="glossary-never">Lounge, Copart Lounge</td><td class="glossary-note">Official name for on-site member facilities</td></tr>
+          <tr><td class="glossary-preferred">Wholesale / Copart Wholesale</td><td class="glossary-never">Select, Copart Select</td><td class="glossary-note">Current brand. Full product name: "Copart Wholesale Auction"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="rule"><strong>Rule:</strong> If a term is not in this glossary, choose the simplest, most common word and use it consistently. Add new terms to the glossary when they appear in more than one flow.</div>
+  </section>
+
+  <!-- ============================================================
+       5. COPY LENGTH GUIDELINES
+       ============================================================ -->
+  <section class="demo-section" id="limits">
+    <div class="section-label">Section 2.5</div>
+    <div class="section-title">Copy length guidelines</div>
+    <div class="section-desc">Every UI element has a character budget. These limits maintain scannability and prevent layout breakage.</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Element</th><th>Word count</th><th>Max characters</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Button label</td><td>1&ndash;3 words</td><td>20 chars</td><td><span class="copy">Place bid</span></td></tr>
+          <tr><td>Field label</td><td>1&ndash;4 words</td><td>30 chars</td><td><span class="copy">Lot number</span></td></tr>
+          <tr><td>Placeholder text</td><td>2&ndash;5 words</td><td>30 chars</td><td><span class="copy">e.g., 12345678</span></td></tr>
+          <tr><td>Helper text</td><td>1 sentence</td><td>80 chars</td><td><span class="copy">8-digit number found on the vehicle page.</span></td></tr>
+          <tr><td>Error message</td><td>1&ndash;2 sentences</td><td>120 chars</td><td><span class="copy">Enter a valid lot number (8 digits).</span></td></tr>
+          <tr><td>Toast message</td><td>1 sentence</td><td>60 chars</td><td><span class="copy">Lot added to watchlist.</span></td></tr>
+          <tr><td>Empty state heading</td><td>3&ndash;8 words</td><td>40 chars</td><td><span class="copy">No saved lots yet</span></td></tr>
+          <tr><td>Empty state body</td><td>1&ndash;2 sentences</td><td>120 chars</td><td><span class="copy">Search for vehicles and save them here.</span></td></tr>
+          <tr><td>Modal title</td><td>3&ndash;8 words</td><td>50 chars</td><td><span class="copy">Confirm your bid</span></td></tr>
+          <tr><td>Table header</td><td>1&ndash;3 words</td><td>20 chars</td><td><span class="copy">Sale date</span></td></tr>
+          <tr><td>Badge / tag</td><td>1&ndash;2 words</td><td>15 chars</td><td><span class="copy">Clean title</span></td></tr>
+          <tr><td>Tooltip</td><td>1&ndash;2 sentences</td><td>100 chars</td><td><span class="copy">Your maximum bid. Copart bids on your behalf up to this amount.</span></td></tr>
+          <tr><td>Nav item</td><td>1&ndash;2 words</td><td>15 chars</td><td><span class="copy">My bids</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="rule"><strong>Rule:</strong> If copy exceeds the character budget, rewrite &mdash; don't just truncate. Truncation is a last resort for dynamic content only.</div>
+  </section>
+
+  <!-- ============================================================
+       6. COMPONENT MICROCOPY PATTERNS
+       ============================================================ -->
+  <section class="demo-section" id="microcopy">
+    <div class="section-label">Section 2.6</div>
+    <div class="section-title">Component microcopy patterns</div>
+    <div class="section-desc">Specific copy patterns for every component type. These are rules, not suggestions.</div>
+
+    <div class="pattern-card">
+      <div class="pattern-card-title">Buttons</div>
+      <ul>
+        <li><strong>Start with a verb.</strong> The label describes the action: <span class="copy">Place bid</span>, <span class="copy">Save to watchlist</span>, <span class="copy">Remove lot</span></li>
+        <li><strong>Be specific.</strong> <span class="copy">Place bid</span> beats <span class="incorrect">Submit</span>. <span class="copy">Remove from watchlist</span> beats <span class="incorrect">Delete</span>.</li>
+        <li><strong>No numerical values in buttons.</strong> Never put pricing, amounts, or counts inside button labels. Display values elsewhere in the UI. Buttons are for actions only.</li>
+        <li><strong>Never use:</strong> <span class="incorrect">Click here</span>, <span class="incorrect">Submit</span>, <span class="incorrect">OK</span>, <span class="incorrect">Yes</span>, <span class="incorrect">No</span></li>
+        <li><strong>Destructive:</strong> State what will be destroyed &mdash; <span class="copy">Remove from watchlist</span></li>
+        <li><strong>Loading state:</strong> Present participle &mdash; <span class="copy">Placing bid&hellip;</span>, <span class="copy">Saving&hellip;</span></li>
+      </ul>
+    </div>
+
+    <div class="pattern-card">
+      <div class="pattern-card-title">Text fields</div>
+      <ul>
+        <li><strong>Labels</strong> describe what to enter: <span class="copy">Lot number</span> &mdash; not <span class="incorrect">Enter lot number here</span></li>
+        <li><strong>Placeholders</strong> show example format only: <span class="copy">e.g., 12345678</span> &mdash; never repeat the label</li>
+        <li><strong>Helper text</strong> adds context the label can't: <span class="copy">8-digit number found on the vehicle page.</span></li>
+        <li><strong>Error messages</strong> say what went wrong AND how to fix it: <span class="copy">Enter a valid lot number (8 digits).</span> &mdash; not <span class="incorrect">Invalid input</span></li>
+      </ul>
+    </div>
+
+    <div class="pattern-card">
+      <div class="pattern-card-title">Alerts & banners</div>
+      <ul>
+        <li><strong>Lead with what happened, then what to do.</strong></li>
+        <li>Success: <span class="copy">Bid placed &mdash; you'll receive a confirmation email.</span></li>
+        <li>Warning: <span class="copy">Your session expires in 5 minutes &mdash; save your work.</span></li>
+        <li>Error: <span class="copy">Payment failed &mdash; update your payment method to continue.</span></li>
+        <li><strong>Never use:</strong> <span class="incorrect">Oops</span>, <span class="incorrect">Uh oh</span>, <span class="incorrect">Whoops</span>, <span class="incorrect">Something went wrong</span></li>
+        <li><strong>Never blame the member:</strong> <span class="copy">We couldn't process your payment</span> &mdash; not <span class="incorrect">You entered an invalid card</span></li>
+      </ul>
+    </div>
+
+    <div class="pattern-card">
+      <div class="pattern-card-title">Toasts & snackbars</div>
+      <ul>
+        <li>Confirmation of the action just taken. Past tense, one sentence.</li>
+        <li><span class="copy">Lot added to watchlist.</span> / <span class="copy">Bid placed successfully.</span> / <span class="copy">Settings saved.</span></li>
+        <li>Include undo where reversible: <span class="copy">Lot removed from watchlist. <strong>Undo</strong></span></li>
+        <li>Auto-dismiss after 5 seconds. No exclamation marks.</li>
+      </ul>
+    </div>
+
+    <div class="pattern-card">
+      <div class="pattern-card-title">Modals & dialogs</div>
+      <ul>
+        <li><strong>Title</strong> = what this modal is about: <span class="copy">Confirm your bid</span>, <span class="copy">Remove lot from watchlist</span></li>
+        <li><strong>Body</strong> = what the member needs to know. 1&ndash;3 sentences.</li>
+        <li><strong>Primary button</strong> = specific action: <span class="copy">Place bid</span>, <span class="copy">Confirm purchase</span> &mdash; never <span class="incorrect">OK</span> or <span class="incorrect">Yes</span>. No pricing in buttons &mdash; display amounts in the modal body.</li>
+        <li><strong>Secondary button</strong> = <span class="copy">Cancel</span> &mdash; not <span class="incorrect">No</span>, <span class="incorrect">Go back</span>, <span class="incorrect">Dismiss</span></li>
+        <li><strong>Destructive:</strong> Repeat the consequence &mdash; <span class="copy">This will permanently remove the lot from your watchlist.</span></li>
+      </ul>
+    </div>
+
+    <div class="pattern-card">
+      <div class="pattern-card-title">Empty states</div>
+      <ul>
+        <li><strong>Heading:</strong> Describe what's missing &mdash; <span class="copy">No saved lots yet</span></li>
+        <li><strong>Body:</strong> Explain how to fill it &mdash; <span class="copy">Search for vehicles and tap the heart icon to save them here.</span></li>
+        <li><strong>CTA:</strong> Action to resolve &mdash; <span class="copy">Browse vehicles</span></li>
+        <li><strong>Never say:</strong> <span class="incorrect">No data</span>, <span class="incorrect">Nothing to show</span>, <span class="incorrect">Empty</span></li>
+      </ul>
+    </div>
+
+    <div class="pattern-card">
+      <div class="pattern-card-title">Tables</div>
+      <ul>
+        <li><strong>Headers:</strong> Short noun or noun phrase &mdash; <span class="copy">Sale date</span>, <span class="copy">Current bid</span>, <span class="copy">Damage type</span></li>
+        <li><strong>No verbs</strong> in table headers</li>
+        <li><strong>Null values:</strong> Em dash "&mdash;" &mdash; never <span class="incorrect">N/A</span>, <span class="incorrect">null</span>, <span class="incorrect">none</span>, or blank</li>
+        <li><strong>Monospace</strong> for VIN, lot numbers, bid amounts, timestamps</li>
+      </ul>
+    </div>
+
+    <div class="pattern-card">
+      <div class="pattern-card-title">Badges & tags</div>
+      <ul>
+        <li><strong>1&ndash;2 words maximum</strong></li>
+        <li><strong>Status badges:</strong> Past participle or adjective &mdash; <span class="copy">Sold</span>, <span class="copy">Awarded</span>, <span class="copy">Active</span>, <span class="copy">Upcoming</span></li>
+        <li><strong>Category tags:</strong> Nouns &mdash; <span class="copy">Clean title</span>, <span class="copy">Salvage</span>, <span class="copy">Flood damage</span></li>
+        <li><strong>Count badges:</strong> Numerals only &mdash; <span class="copy">3</span>, <span class="copy">12</span>, <span class="copy">99+</span></li>
+      </ul>
+    </div>
+
+    <div class="pattern-card">
+      <div class="pattern-card-title">Navigation</div>
+      <ul>
+        <li><strong>Top-level items:</strong> 1&ndash;2 word nouns &mdash; <span class="copy">Vehicles</span>, <span class="copy">My bids</span>, <span class="copy">Dashboard</span></li>
+        <li><strong>Never use verbs</strong> in primary navigation items</li>
+        <li><strong>Breadcrumbs</strong> match the page title exactly &mdash; no abbreviations or rewording</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. INCLUSIVE LANGUAGE
+       ============================================================ -->
+  <section class="demo-section" id="inclusive">
+    <div class="section-label">Section 2.7</div>
+    <div class="section-title">Inclusive language</div>
+    <div class="section-desc">Copart serves a global audience. Write for everyone.</div>
+
+    <div class="card-grid card-grid-2">
+      <div class="card">
+        <div class="card-label">Gender & identity</div>
+        <ul style="list-style:none;padding:0;">
+          <li style="font-size:14px;color:var(--text-secondary);padding:4px 0;">Gender-neutral by default: "they/them" for unknown members</li>
+          <li style="font-size:14px;color:var(--text-secondary);padding:4px 0;"><span class="copy">Member</span> &mdash; not <span class="incorrect">he or she</span>, <span class="incorrect">his/her</span></li>
+          <li style="font-size:14px;color:var(--text-secondary);padding:4px 0;"><span class="copy">Salesperson</span> &mdash; not <span class="incorrect">salesman/saleswoman</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">Jargon & accessibility</div>
+        <ul style="list-style:none;padding:0;">
+          <li style="font-size:14px;color:var(--text-secondary);padding:4px 0;">If a term needs explanation, add a tooltip or inline definition</li>
+          <li style="font-size:14px;color:var(--text-secondary);padding:4px 0;"><strong>Reading level:</strong> Aim for grade 8 (Flesch-Kincaid)</li>
+          <li style="font-size:14px;color:var(--text-secondary);padding:4px 0;">No idioms, colloquialisms, or cultural references</li>
+          <li style="font-size:14px;color:var(--text-secondary);padding:4px 0;">Person-first language: "members who use screen readers"</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Numbers & formats</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Rule</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Spell out 1&ndash;9 in body copy</td><td><span class="copy">three vehicles</span></td></tr>
+          <tr><td>Numerals for 10+</td><td><span class="copy">42 results</span></td></tr>
+          <tr><td>Always numerals for prices, bids, lot numbers, counts in UI</td><td><span class="copy">$1,200</span> &middot; <span class="copy">Lot 78901234</span></td></tr>
+          <tr><td>Currency: commas, no cents unless partial</td><td><span class="copy">$12,500</span> &middot; <span class="copy">$0.50</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       8. DYNAMIC & ADAPTIVE COPY
+       ============================================================ -->
+  <section class="demo-section" id="dynamic">
+    <div class="section-label">Section 2.8</div>
+    <div class="section-title">Dynamic & adaptive copy</div>
+    <div class="section-desc">Rules for formatting dates, times, numbers, and handling pluralization and truncation.</div>
+
+    <h3 class="subsection-title">Date & time formatting</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Format</th><th>Example</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td>Abbreviated date</td><td><span class="copy">Feb 22, 2026</span></td><td>Default for all dates in UI</td></tr>
+          <tr><td>Relative date</td><td><span class="copy">Today</span>, <span class="copy">Yesterday</span>, <span class="copy">3 days ago</span></td><td>Use within 7 days; absolute after that</td></tr>
+          <tr><td>Time</td><td><span class="copy">2:30 PM ET</span></td><td>12-hour clock, timezone when relevant</td></tr>
+          <tr><td>Date range</td><td><span class="copy">Feb 22&ndash;28, 2026</span></td><td>En dash, no spaces around dash</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-title">Pluralization</h3>
+    <div class="section-desc">Always handle three states: zero, one, and many.</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Count</th><th>Copy</th></tr></thead>
+        <tbody>
+          <tr><td><strong>0</strong></td><td><span class="copy">No results</span> or <span class="copy">No saved lots</span></td></tr>
+          <tr><td><strong>1</strong></td><td><span class="copy">1 result</span> or <span class="copy">1 saved lot</span></td></tr>
+          <tr><td><strong>2+</strong></td><td><span class="copy">24 results</span> or <span class="copy">8 saved lots</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rule"><strong>Rule:</strong> Never show "0 results" &mdash; use the zero-state phrasing instead.</div>
+
+    <h3 class="subsection-title">Number formatting</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Type</th><th>Format</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Currency</td><td>$X,XXX</td><td><span class="copy">$4,500</span></td></tr>
+          <tr><td>Large numbers</td><td>Comma-separated</td><td><span class="copy">1,234,567</span></td></tr>
+          <tr><td>Percentages</td><td>No decimal unless needed</td><td><span class="copy">85%</span> or <span class="copy">99.5%</span></td></tr>
+          <tr><td>Lot numbers</td><td>Monospace, no separators</td><td><span class="copy" style="font-family:var(--font-mono)">78901234</span></td></tr>
+          <tr><td>VIN</td><td>Monospace, uppercase</td><td><span class="copy" style="font-family:var(--font-mono)">1HGCM82633A004352</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-title">Truncation rules</h3>
+    <div class="card">
+      <ul style="list-style:none;padding:0;">
+        <li style="font-size:14px;color:var(--text-secondary);padding:6px 0;">Ellipsis (&hellip;) after the last <strong>full</strong> word &mdash; never mid-word</li>
+        <li style="font-size:14px;color:var(--text-secondary);padding:6px 0;">Minimum 3 visible words before truncation</li>
+        <li style="font-size:14px;color:var(--text-secondary);padding:6px 0;">Always provide the full text via tooltip on hover</li>
+        <li style="font-size:14px;color:var(--text-secondary);padding:6px 0;">Vehicle titles: truncate after year + make + model &mdash; <span class="copy">2024 Toyota Cam&hellip;</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       9. DO / DON'T LIBRARY
+       ============================================================ -->
+  <section class="demo-section" id="dodont">
+    <div class="section-label">Section 2.9</div>
+    <div class="section-title">Do / Don't library</div>
+    <div class="section-desc">Real examples of correct and incorrect copy across common patterns.</div>
+
+    <!-- Button Labels -->
+    <h3 class="subsection-title">Button labels</h3>
+    <div class="dodont-grid">
+      <div class="dodont-card do">
+        <div class="dodont-label">Do</div>
+        <div class="dodont-examples">"Place bid" / "Save to watchlist" / "Remove lot"</div>
+      </div>
+      <div class="dodont-card dont">
+        <div class="dodont-label">Don't</div>
+        <div class="dodont-examples">"Submit" / "Click here" / "OK" / "Yes" / "Process"</div>
+      </div>
+    </div>
+    <div class="dodont-why">Specific verbs tell the member exactly what will happen. Generic labels force them to guess.</div>
+
+    <!-- Error Messages -->
+    <h3 class="subsection-title">Error messages</h3>
+    <div class="dodont-grid">
+      <div class="dodont-card do">
+        <div class="dodont-label">Do</div>
+        <div class="dodont-examples">"Enter a valid email address (e.g., name@example.com)."</div>
+      </div>
+      <div class="dodont-card dont">
+        <div class="dodont-label">Don't</div>
+        <div class="dodont-examples">"Invalid input." / "Error." / "Please try again."</div>
+      </div>
+    </div>
+    <div class="dodont-why">Good error messages name the problem and show the fix. Bad ones make the member figure it out alone.</div>
+
+    <!-- Empty States -->
+    <h3 class="subsection-title">Empty states</h3>
+    <div class="dodont-grid">
+      <div class="dodont-card do">
+        <div class="dodont-label">Do</div>
+        <div class="dodont-examples">"No saved lots yet" &rarr; "Search for vehicles and tap the heart icon to save them here." &rarr; "Browse vehicles"</div>
+      </div>
+      <div class="dodont-card dont">
+        <div class="dodont-label">Don't</div>
+        <div class="dodont-examples">"No data." / "Nothing to show." / "Your list is empty."</div>
+      </div>
+    </div>
+    <div class="dodont-why">Empty states are onboarding opportunities. Guide the member toward the next action.</div>
+
+    <!-- Confirmation Messages -->
+    <h3 class="subsection-title">Confirmation messages</h3>
+    <div class="dodont-grid">
+      <div class="dodont-card do">
+        <div class="dodont-label">Do</div>
+        <div class="dodont-examples">"Your bid of $4,500 on Lot 78901234 has been placed."</div>
+      </div>
+      <div class="dodont-card dont">
+        <div class="dodont-label">Don't</div>
+        <div class="dodont-examples">"Success!" / "Done!" / "Action completed."</div>
+      </div>
+    </div>
+    <div class="dodont-why">Specific confirmations prove the system did what the member intended. Vague ones create doubt.</div>
+
+    <!-- Field Labels -->
+    <h3 class="subsection-title">Field labels</h3>
+    <div class="dodont-grid">
+      <div class="dodont-card do">
+        <div class="dodont-label">Do</div>
+        <div class="dodont-examples">"Lot number" / "Email address" / "Zip code"</div>
+      </div>
+      <div class="dodont-card dont">
+        <div class="dodont-label">Don't</div>
+        <div class="dodont-examples">"Enter your lot number here" / "Type email" / "Input zip"</div>
+      </div>
+    </div>
+    <div class="dodont-why">Labels name the field. Instructions belong in placeholder or helper text, not the label.</div>
+
+    <!-- Tone in Errors -->
+    <h3 class="subsection-title">Tone in errors</h3>
+    <div class="dodont-grid">
+      <div class="dodont-card do">
+        <div class="dodont-label">Do</div>
+        <div class="dodont-examples">"We couldn't process your payment. Update your payment method to try again."</div>
+      </div>
+      <div class="dodont-card dont">
+        <div class="dodont-label">Don't</div>
+        <div class="dodont-examples">"Oops! Something went wrong. Please try again later!"</div>
+      </div>
+    </div>
+    <div class="dodont-why">Members dealing with payment failures are already frustrated. Be calm and direct &mdash; never cute.</div>
+
+    <!-- Placeholder Text -->
+    <h3 class="subsection-title">Placeholder text</h3>
+    <div class="dodont-grid">
+      <div class="dodont-card do">
+        <div class="dodont-label">Do</div>
+        <div class="dodont-examples">"e.g., 12345678" / "Search by make, model, or VIN"</div>
+      </div>
+      <div class="dodont-card dont">
+        <div class="dodont-label">Don't</div>
+        <div class="dodont-examples">"Enter lot number" / "Type here" / "Lot number"</div>
+      </div>
+    </div>
+    <div class="dodont-why">Placeholders demonstrate format &mdash; they don't replace labels. Repeating the label wastes the placeholder.</div>
+
+    <!-- Modal Actions -->
+    <h3 class="subsection-title">Modal actions</h3>
+    <div class="dodont-grid">
+      <div class="dodont-card do">
+        <div class="dodont-label">Do</div>
+        <div class="dodont-examples">Primary: "Place bid" / Secondary: "Cancel"<br><small>Display bid amount in modal body, not in the button.</small></div>
+      </div>
+      <div class="dodont-card dont">
+        <div class="dodont-label">Don't</div>
+        <div class="dodont-examples">Primary: "OK" / "Yes" / Secondary: "No" / "Go back"</div>
+      </div>
+    </div>
+    <div class="dodont-why">The member should understand what each button does without reading the modal body.</div>
+
+    <!-- Toast Messages -->
+    <h3 class="subsection-title">Toast messages</h3>
+    <div class="dodont-grid">
+      <div class="dodont-card do">
+        <div class="dodont-label">Do</div>
+        <div class="dodont-examples">"Lot added to watchlist." / "Settings saved."</div>
+      </div>
+      <div class="dodont-card dont">
+        <div class="dodont-label">Don't</div>
+        <div class="dodont-examples">"Success! Item has been added to your favorites list!" / "Your changes have been saved successfully."</div>
+      </div>
+    </div>
+    <div class="dodont-why">Toasts are glanceable confirmations. Short, past tense, no exclamation marks.</div>
+
+    <!-- Navigation Labels -->
+    <h3 class="subsection-title">Navigation labels</h3>
+    <div class="dodont-grid">
+      <div class="dodont-card do">
+        <div class="dodont-label">Do</div>
+        <div class="dodont-examples">"Vehicles" / "My bids" / "Dashboard"</div>
+      </div>
+      <div class="dodont-card dont">
+        <div class="dodont-label">Don't</div>
+        <div class="dodont-examples">"Find vehicles" / "View my bids" / "Go to dashboard"</div>
+      </div>
+    </div>
+    <div class="dodont-why">Navigation items are nouns (destinations), not verbs (actions). Members click to go somewhere, not to do something.</div>
+
+    <!-- Status Communication -->
+    <h3 class="subsection-title">Status communication</h3>
+    <div class="dodont-grid">
+      <div class="dodont-card do">
+        <div class="dodont-label">Do</div>
+        <div class="dodont-examples">"Bidding closes Feb 22 at 2:30 PM ET" / "Lot sold &mdash; final bid: $12,400"</div>
+      </div>
+      <div class="dodont-card dont">
+        <div class="dodont-label">Don't</div>
+        <div class="dodont-examples">"Auction ending soon!" / "This item has been sold."</div>
+      </div>
+    </div>
+    <div class="dodont-why">Specific status copy includes the data the member needs. Vague status creates anxiety and follow-up questions.</div>
+
+  </section>
+
+</main>
+
+<!-- ========================================
+     SCRIPTS
+     ======================================== -->
+<script>
+// Theme toggle
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = 'Dark mode';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = 'Light mode';
+  }
+}
+
+// Section nav active state on scroll
+const sections = document.querySelectorAll('.demo-section');
+const navLinks = document.querySelectorAll('.section-nav a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = document.querySelector(`.section-nav a[href="#${entry.target.id}"]`);
+      if (activeLink) activeLink.classList.add('active');
+    }
+  });
+}, { rootMargin: '-120px 0px -60% 0px', threshold: 0 });
+
+sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>

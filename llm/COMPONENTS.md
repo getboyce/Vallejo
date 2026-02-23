@@ -401,6 +401,13 @@ Single variant with up to 5 items.
 - Icon-only buttons: require `aria-label` describing the action.
 - Focus ring: var(--shadow-focus) — 3px at 40% opacity, 2px offset.
 
+**Copy Rules:**
+- Label = verb-first, 1–3 words, specific action: "Place bid", "Save to watchlist", "Remove lot".
+- Never: "Click here", "Submit", "OK", "Yes", "No".
+- Destructive: state what's destroyed — "Remove from watchlist", not "Delete".
+- Loading state: present participle — "Placing bid…", "Saving…".
+- Max 20 characters.
+
 ---
 
 ### 2.2 Text Field
@@ -457,6 +464,13 @@ Single variant with up to 5 items.
 - `aria-invalid="true"` when in error state.
 - `aria-required="true"` for mandatory fields.
 - Placeholder text is NOT a substitute for labels.
+
+**Copy Rules:**
+- Label = what to enter (noun): "Lot number", "Email address". Not instructions ("Enter lot number here").
+- Placeholder = example format only: "e.g., 12345678". Never repeat the label.
+- Helper text = context the label can't provide: "8-digit number found on the vehicle page."
+- Error = problem + fix: "Enter a valid lot number (8 digits)." Never: "Invalid input."
+- Max label: 30 chars. Max helper: 80 chars. Max error: 120 chars.
 
 ---
 
@@ -522,6 +536,12 @@ Same as Text Field states, plus:
 - Options: `role="option"`, `aria-selected`
 - Keyboard: Arrow keys navigate, Enter selects, Escape closes, type-ahead supported
 - Multi-select: `aria-multiselectable="true"` on listbox
+
+**Copy Rules:**
+- Label = what to select (noun phrase): "Title type", "Damage type", "Yard".
+- Placeholder = "Select…" — never repeat the label.
+- "No results" text when search yields nothing: "No results for '[query]'."
+- Option text: use glossary terms consistently. Max 40 chars per option.
 
 ---
 
@@ -832,6 +852,14 @@ Same as Text Field states, plus:
 - Dismiss button: `aria-label="Dismiss alert"`.
 - Focus should not automatically move to alerts.
 
+**Copy Rules:**
+- Pattern: "[What happened] — [what to do]."
+- Success: "Bid placed — you'll receive a confirmation email."
+- Warning: "Your session expires in 5 minutes — save your work."
+- Error: "Payment failed — update your payment method to continue."
+- Never: "Oops", "Uh oh", "Something went wrong". Be specific.
+- Never blame the member: "We couldn't process your payment" not "You entered an invalid card."
+
 ---
 
 ### 3.2 Toast / Snackbar
@@ -886,6 +914,12 @@ Same as Text Field states, plus:
 - Error toasts: `role="alert"`, `aria-live="assertive"`.
 - Action link must be keyboard-focusable before auto-dismiss.
 - Hover pauses the auto-dismiss timer.
+
+**Copy Rules:**
+- Past-tense confirmation, 1 sentence, max 60 chars.
+- "Lot added to watchlist." / "Settings saved." / "Bid placed successfully."
+- Include "Undo" action where reversible: "Lot removed from watchlist. **Undo**"
+- Never: exclamation marks, "Successfully!" as standalone, verbose confirmations.
 
 ---
 
@@ -946,6 +980,13 @@ Same as Text Field states, plus:
 - On close: focus returns to the element that triggered the modal.
 - Escape key closes the modal.
 - Backdrop click closes (unless `persistent` variant).
+
+**Copy Rules:**
+- Title = topic of the modal: "Confirm your bid", "Remove lot from watchlist". Max 50 chars.
+- Body = what the member needs to know (1–3 sentences).
+- Primary button = specific action: "Place $2,400 bid". Never "OK" or "Yes".
+- Secondary button = "Cancel". Never "No" or "Go back".
+- Destructive: repeat the consequence — "This will permanently remove the lot from your watchlist."
 
 ---
 
@@ -1176,6 +1217,12 @@ Placeholder shapes matching the component they replace.
 - Images: `alt` text describing vehicle (e.g., "2019 Toyota Camry SE, front-left view, minor front damage").
 - Badge: include text content, not just color.
 
+**Copy Rules:**
+- Title: max 60 chars, truncate with ellipsis (…) + tooltip for full text.
+- Badge overlay: 1–2 words — "Live", "Buy it now", "Sold".
+- Metadata: use glossary terms (Lot, Sale date, Damage type).
+- Monospace for lot numbers, VIN, bid amounts.
+
 ---
 
 ### 4.2 Table
@@ -1230,6 +1277,13 @@ Placeholder shapes matching the component they replace.
 - `aria-label` on table describing its content.
 - Row selection: `aria-selected="true"` on selected rows.
 - Caption: `<caption>` with table description (can be visually hidden).
+
+**Copy Rules:**
+- Headers: short noun/noun phrase — "Sale date", "Current bid", "Damage type". Max 20 chars, 1–3 words.
+- No verbs in headers.
+- Null values: em dash "—" — never "N/A", "null", "none", or blank.
+- Monospace for VIN, lot numbers, bid amounts, timestamps.
+- Truncation: ellipsis (…) after last full word, tooltip with full value.
 
 ---
 
@@ -1374,6 +1428,13 @@ Placeholder shapes matching the component they replace.
 - Include descriptive text, not just color.
 - `aria-label` if badge text is abbreviated or unclear.
 - Status dot: `aria-hidden="true"` (text conveys the state).
+
+**Copy Rules:**
+- 1–2 words max, 15 chars max.
+- Status badges: past participle or adjective — "Sold", "Awarded", "Active", "Upcoming", "Ended".
+- Category tags: nouns — "Clean title", "Salvage", "Flood damage".
+- Count badges: numerals only — "3", "12", "99+".
+- Sentence case (capitalize first word only).
 
 ---
 

@@ -253,7 +253,7 @@ Tone adapts: Informational (neutral) → Encouraging (warm) → Urgent (direct) 
 
 Applies to: headings, buttons, labels, nav items, tabs, menus, table headers, badges.
 
-Exceptions: Copart, CrashedToys, VIN, CDV, NMVTIS, CDS.
+Exceptions: Copart, CrashedToys, Copart Dealer Services (CDS), Copart Wholesale Auction, Copart Alliance Gateway, VIN, CDV, NMVTIS.
 
 ### Punctuation
 
@@ -291,13 +291,16 @@ Exceptions: Copart, CrashedToys, VIN, CDV, NMVTIS, CDS.
 | Buy it now | instant purchase |
 | Buyer fee | service fee, transaction fee |
 | Sale date | auction date |
-| Yard | location, facility |
+| Location | yard (internal only), facility |
+| Item number | run number, lane number |
+| Copart Alliance Gateway | lounge, Copart Lounge |
+| Wholesale / Copart Wholesale | Select, Copart Select |
 
 Rule: use glossary terms consistently — never alternate between synonyms.
 
 ### Copy Patterns
 
-**Buttons:** Verb-first, 1–3 words, specific action. "Place bid" not "Submit". Destructive: state what's destroyed ("Remove from watchlist"). Loading: present participle ("Placing bid…").
+**Buttons:** Verb-first, 1–3 words, action only. "Place bid" not "Submit". No pricing/amounts in buttons — display values in summary text or adjacent UI. Destructive: state what's destroyed ("Remove from watchlist"). Loading: present participle ("Placing bid…").
 
 **Error messages:** `[What went wrong] — [how to fix it]`. "Enter a valid lot number (8 digits)." Never: "Invalid input", "Oops", "Something went wrong".
 
@@ -305,7 +308,7 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 
 **Toasts:** Past-tense confirmation, 1 sentence, ≤ 60 chars. "Lot added to watchlist." Include undo where reversible.
 
-**Modals:** Title = topic. Primary button = specific action ("Place $2,400 bid"), never "OK"/"Yes". Secondary = "Cancel".
+**Modals:** Title = topic. Primary button = specific action ("Place bid", "Confirm purchase"), never "OK"/"Yes". No pricing in buttons — display amounts in modal body. Secondary = "Cancel".
 
 **Tables:** Noun-phrase headers ("Sale date", "Current bid"). Null values: em dash "—", never "N/A" or blank. Monospace for VIN, lot numbers, bid amounts.
 

@@ -33,7 +33,7 @@ Three principles guide every decision in the Copart design system.
 
 Every element must communicate its purpose immediately. Users are making significant financial decisions — bidding on vehicles worth thousands of dollars. Ambiguity erodes confidence. Labels are explicit. States are visible. Actions are predictable.
 
-**Example — Do:** A bid button reads "Place Bid — $4,500" with a confirmation step.
+**Example — Do:** A bid button reads "Place bid" with the bid amount ($4,500) displayed in a summary line above the button, followed by a confirmation step.
 **Example — Don't:** A button reads "Submit" with no indication of the financial commitment.
 
 ## Principle 2: Progressive Disclosure
@@ -96,7 +96,7 @@ All UI text uses **sentence case** — capitalize the first word and proper noun
 | Menu items | "Account settings" | "Account Settings" |
 
 **Exceptions — always capitalize:**
-- Proper nouns: Copart, CrashedToys, Copart Dealer Services (CDS)
+- Proper nouns: Copart, CrashedToys, Copart Dealer Services (CDS), Copart Wholesale Auction, Copart Alliance Gateway
 - Acronyms: VIN, CDV, NMVTIS
 - Product names when used as proper nouns
 
@@ -161,17 +161,17 @@ Use these terms consistently. Never alternate between synonyms within the same f
 | **Buy it now** | Instant purchase, direct buy | Phrase used as-is; capitalize only first word: "Buy it now" |
 | **Buyer fee** | Service fee, transaction fee, premium | "Buyer fee" is the Copart-specific term |
 | **Sale date** | Auction date, event date | "Sale date" is canonical |
-| **Yard** | Location, facility, branch | "Yard" is the Copart term for physical locations |
-| **Run number** | Lane number, sequence | "Run number" for auction ordering |
-| **Tow** | Transport, haul, ship | "Tow" for vehicle movement services |
+| **Location** | Yard (internal only), facility, branch | "Location" is the public-facing term for Copart sites. "Yard" is internal only — never use in member-facing UI. |
+| **Item number** | Run number, lane number, sequence | "Item number" for auction ordering |
 | **Title type** | Title status, title category | "Title type" as the field label |
 | **Damage type** | Damage category, loss type | "Damage type" as the field label |
 | **Odometer** | Mileage, miles | "Odometer" as the field label; use "miles" in conversational copy |
 | **Highlights** | Features, specs, details | "Highlights" for the vehicle summary section |
 | **Condition** | Quality, grade | "Condition" as the vehicle state descriptor |
 | **Seller** | Consigner, provider, vendor | "Seller" for the entity listing the vehicle |
-| **Gate release** | Vehicle pickup, release | "Gate release" is the Copart process term |
 | **Storage fees** | Yard fees, holding fees | "Storage fees" is canonical |
+| **Copart Alliance Gateway** | Lounge, Copart Lounge, waiting area | "Copart Alliance Gateway" is the official name for on-site member facilities (formerly Copart Lounges) |
+| **Wholesale** / **Copart Wholesale** | Select, Copart Select | "Wholesale" or "Copart Wholesale" is the current brand. "Select" / "Copart Select" are deprecated. Use "Copart Wholesale Auction" for the full product name. |
 
 **Rule:** If a term is not in this glossary, choose the simplest, most common word and use it consistently. Add new terms to the glossary when they appear in more than one flow.
 
@@ -205,7 +205,8 @@ Specific copy patterns for every component type. These are rules, not suggestion
 ### Buttons
 
 - **Start with a verb.** The label describes the action: "Place bid", "Save to watchlist", "Remove lot"
-- **Be specific.** "Place $2,400 bid" beats "Submit". "Remove from watchlist" beats "Delete"
+- **Be specific.** "Place bid" beats "Submit". "Remove from watchlist" beats "Delete"
+- **No numerical values in buttons.** Never put pricing, amounts, or counts inside button labels. Display pricing, bid amounts, and totals elsewhere in the UI (summary text, confirmation area, adjacent labels). Buttons are for actions only. Exception: only include a value if explicitly instructed to.
 - **Never use:** "Click here", "Submit", "OK", "Yes", "No" (except in confirmation dialogs where "Cancel" is the alternative)
 - **Destructive buttons:** State what will be destroyed — "Remove from watchlist", not "Delete"
 - **Loading state:** Change label to present participle — "Placing bid…", "Saving…"
@@ -241,7 +242,7 @@ Specific copy patterns for every component type. These are rules, not suggestion
 
 - **Title** = what this modal is about: "Confirm your bid", "Remove lot from watchlist"
 - **Body** = what the member needs to know to make a decision. Keep it to 1–3 sentences.
-- **Primary button** = the specific action: "Place $2,400 bid" — never "OK" or "Yes"
+- **Primary button** = the specific action: "Place bid", "Confirm purchase" — never "OK" or "Yes". Do not include pricing in the button — display amounts in the modal body or a summary line above the button.
 - **Secondary button** = "Cancel" — not "No", "Go back", "Dismiss"
 - **Destructive confirmation:** Repeat the consequence: "This will permanently remove the lot from your watchlist."
 
@@ -406,7 +407,7 @@ Real examples of correct and incorrect copy across common patterns.
 
 ### Modal Actions
 
-**Do:** Primary: "Place $2,400 bid" / Secondary: "Cancel"
+**Do:** Primary: "Place bid" / Secondary: "Cancel" (display bid amount in the modal body or summary line, not in the button)
 **Don't:** Primary: "OK" / "Yes" / Secondary: "No" / "Go back"
 
 **Why:** The member should understand what each button does without reading the modal body.
@@ -3033,7 +3034,7 @@ These three principles — introduced in Section 1 — are the foundation of eve
 **Why it matters:** Copart users are making financial commitments — sometimes $50,000+ on a vehicle they may not have seen in person. Every ambiguous label, hidden fee, or unclear state erodes confidence. Clarity isn't just aesthetic; it's fiduciary.
 
 **How to apply:**
-- Label buttons with specific actions, not generic verbs. "Place Bid — $4,500" not "Submit."
+- Label buttons with specific actions, not generic verbs. "Place bid" not "Submit." Display pricing in a summary line, not in the button itself.
 - Show all fees before the confirmation step. No surprises at checkout.
 - Use consistent terminology. If it's called a "lot" on the search page, call it a "lot" everywhere.
 - Make system status visible. If an auction is live, show a pulsing indicator with "Live Now" text.

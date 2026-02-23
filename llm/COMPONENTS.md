@@ -402,7 +402,8 @@ Single variant with up to 5 items.
 - Focus ring: var(--shadow-focus) — 3px at 40% opacity, 2px offset.
 
 **Copy Rules:**
-- Label = verb-first, 1–3 words, specific action: "Place bid", "Save to watchlist", "Remove lot".
+- Label = verb-first, 1–3 words, action only: "Place bid", "Save to watchlist", "Remove lot".
+- No pricing or numerical values in buttons. Display amounts in summary text, confirmation areas, or adjacent UI. Buttons are for actions only.
 - Never: "Click here", "Submit", "OK", "Yes", "No".
 - Destructive: state what's destroyed — "Remove from watchlist", not "Delete".
 - Loading state: present participle — "Placing bid…", "Saving…".
@@ -984,7 +985,7 @@ Same as Text Field states, plus:
 **Copy Rules:**
 - Title = topic of the modal: "Confirm your bid", "Remove lot from watchlist". Max 50 chars.
 - Body = what the member needs to know (1–3 sentences).
-- Primary button = specific action: "Place $2,400 bid". Never "OK" or "Yes".
+- Primary button = specific action: "Place bid", "Confirm purchase". Never "OK" or "Yes". No pricing in buttons — display amounts in modal body.
 - Secondary button = "Cancel". Never "No" or "Go back".
 - Destructive: repeat the consequence — "This will permanently remove the lot from your watchlist."
 

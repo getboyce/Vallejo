@@ -26,7 +26,7 @@
       "Monospace font (JetBrains Mono) for VIN numbers, lot numbers, bid amounts, timestamps.",
       "Minimum touch target: 44px (WCAG 2.5.8).",
       "Always pair color with icon + label for state indication.",
-      "UX Writing: sentence case everywhere, active voice, verb-first button labels, error format is '[what happened] — [how to fix]', use canonical terminology (Lot not listing, Bid not offer, Watchlist not favorites, Member not user). See QUICK-REFERENCE.md § UX Writing."
+      "UX Writing: sentence case everywhere, active voice, verb-first button labels with no pricing/amounts (actions only), error format is '[what happened] — [how to fix]', use canonical terminology (Lot not listing, Bid not offer, Watchlist not favorites, Member not user, Location not yard, Wholesale not Select). See QUICK-REFERENCE.md § UX Writing."
     ]
   },
   "files": {

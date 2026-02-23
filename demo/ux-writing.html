@@ -62,7 +62,7 @@
    RESET & BASE
    ======================================== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 120px; }
+html { scroll-behavior: smooth; scroll-padding-top: 140px; }
 body {
   font-family: var(--font-primary);
   font-size: 16px;
@@ -78,7 +78,8 @@ body {
 .demo-header {
   position: sticky; top: 0; z-index: 100;
   background: var(--header-bg);
-  padding: var(--space-4) var(--space-6);
+  height: 80px;
+  padding: 0 var(--space-6);
   display: flex; align-items: center; justify-content: space-between;
   box-shadow: var(--shadow-md);
 }
@@ -89,7 +90,7 @@ body {
   display: flex; align-items: center; flex-shrink: 0;
 }
 .demo-header-logo svg {
-  height: 28px; width: auto;
+  height: 36px; width: auto;
 }
 .demo-header-actions { display: flex; gap: var(--space-2); align-items: center; }
 .theme-toggle {
@@ -113,7 +114,7 @@ body {
    SECTION NAV
    ======================================== */
 .section-nav {
-  position: sticky; top: 53px; z-index: 99;
+  position: sticky; top: 80px; z-index: 99;
   background: var(--bg-primary);
   border-bottom: 1px solid var(--border-subtle);
   padding: 0 24px;
@@ -340,7 +341,10 @@ tr:hover td { background: var(--bg-tertiary); }
   color: var(--error-text); font-style: italic;
 }
 .incorrect {
-  color: var(--error-text);
+  display: inline; font-family: var(--font-mono);
+  font-size: 13px; color: var(--error-text);
+  background: var(--error-bg); padding: 2px 7px;
+  border-radius: var(--radius-sm);
 }
 .glossary-note {
   color: var(--text-tertiary); font-size: 13px;

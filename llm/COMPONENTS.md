@@ -1,4 +1,4 @@
-# Vallejo v1.1 — Component Specifications
+# Vallejo v1.1.1 — Component Specifications
 
 > **Design philosophy:** See the [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault) for the "why" behind all decisions. Components execute the Vault's triad: Precision (alignment, spacing, typographic discipline), Institutional Confidence (restrained interaction, one primary action per view), Vitality (purposeful motion, live data, real urgency). When a spec contradicts a Vault principle, the Vault wins.
 >
@@ -6,8 +6,8 @@
 > For exact token values, see copart-design-tokens.json.
 > For system overview and file routing, see SYSTEM-INDEX.json.
 
-**Version:** 1.1
-**Last Updated:** February 2026
+**Version:** 1.1.1
+**Last Updated:** March 2026
 **Total:** 31 components, 50+ variants, 100+ documented states
 
 ---
@@ -2214,5 +2214,5 @@ Viewport meta tag: `<meta name="viewport" content="width=device-width, initial-s
 
 ---
 
-*Vallejo Design System 1.1 — Component Specifications*
+*Vallejo Design System 1.1.1 — Component Specifications*
 *For system overview: SYSTEM-INDEX.json | For quick patterns: QUICK-REFERENCE.md | For token values: copart-design-tokens.json*

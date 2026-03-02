@@ -3,10 +3,53 @@
     "name": "Vallejo Design System",
     "version": "1.1",
     "production": "https://www.copart.com",
-    "lastUpdated": "2026-02-21"
+    "lastUpdated": "2026-03-02"
+  },
+  "vault": {
+    "repo": "https://github.com/getboyce/Copart-Design-Vault",
+    "relationship": "Layer 1 — the Vault defines the 'why.' Read it first for design philosophy, principles, anti-patterns, interaction signatures, and voice. Vallejo (this system) is Layer 2 — the 'how.' When they conflict, the Vault wins.",
+    "keyFiles": {
+      "principles": "Copart Design/language/aesthetic-principles.md",
+      "northStar": "Copart Design/language/north-star.md",
+      "antiPatterns": "Copart Design/language/anti-patterns.md",
+      "progressiveMastery": "Copart Design/language/progressive-mastery.md",
+      "surfaceIntentions": "Copart Design/language/surface-intentions.md",
+      "density": "Copart Design/craft/density-philosophy.md",
+      "motion": "Copart Design/craft/motion-philosophy.md",
+      "typography": "Copart Design/craft/typography-voice.md",
+      "interactionSignatures": "Copart Design/craft/interaction-signatures.md",
+      "personas": "Copart Design/context/personas.md"
+    }
+  },
+  "designPrinciples": {
+    "source": "Vault > Copart Design/language/aesthetic-principles.md",
+    "triad": ["Precision", "Institutional Confidence", "Vitality"],
+    "precision": "The warmth of competence. Obsessive alignment, spacing, typographic discipline. When members stake five figures on vehicles they may never have touched, visual sloppiness signals institutional carelessness.",
+    "institutionalConfidence": "The quiet authority of a platform that has moved millions of vehicles. We don't hedge, over-explain, or decorate. One primary action per view. Verb-first labels. No exclamation marks. No 'Oops.'",
+    "vitality": "Auctions are alive. Bidding is competitive, time-bound, consequential. The design channels that energy — motion confirms action, status is always visible, urgency is real. But vitality never becomes chaos."
+  },
+  "designFilter": {
+    "source": "Vault > Copart Design/language/north-star.md",
+    "questions": [
+      "Does this build trust?",
+      "Does this respect expertise?",
+      "Does this read at multiple depths?"
+    ],
+    "rule": "If the answer to any question is no, the design is wrong."
+  },
+  "antiPatterns": {
+    "source": "Vault > Copart Design/language/anti-patterns.md",
+    "critical": [
+      "The blue flood — everything is blue so nothing has emphasis. Blue earns authority through restraint.",
+      "Bootstrap-default aesthetics — generic card-with-border, badge-pill, muted-gray signals 'we didn't think about this.'",
+      "Tables as default layout — tables are a last resort. Spacing and typography create structure, not borders.",
+      "AI-generated defaults — purple accent, border-box foundation, emoji/icon overuse, generic typography, the 'helpful default' that feels machine-generated.",
+      "The 'it just needs to function' mentality — craft IS communication. Precision signals trustworthiness."
+    ]
   },
   "instructions": {
     "readOrder": [
+      "0. Read the Copart Design Vault (https://github.com/getboyce/Copart-Design-Vault) for design philosophy, principles, and anti-patterns. This is the 'why' — Vallejo is the 'how.' When they conflict, the Vault wins.",
       "1. You are reading this file (SYSTEM-INDEX.json) — the manifest and context primer.",
       "2. Read QUICK-REFERENCE.md for CSS variables, HTML patterns, and component snippets — this is your primary implementation file.",
       "3. Read COMPONENTS.md only when you need detailed specs for a specific component (anatomy, variants, states, accessibility).",
@@ -20,13 +63,15 @@
       "Shared CSS design tokens live in components/tokens.css. Import it rather than duplicating variables.",
       "No pure red anywhere. Use the rose/magenta error palette (error-border: #D42A54).",
       "No emoji in UI. Use Iconic icon set (inline SVG only, stroke=\"currentColor\").",
-      "One Primary (blue) button per view. Secondary actions use Secondary or Tertiary variants.",
-      "Orange accent is for registration/onboarding CTAs and urgency badges only. Never for primary actions.",
+      "One Primary (blue) button per view — this executes Institutional Confidence. Secondary actions use Secondary or Tertiary variants.",
+      "Orange accent is for registration/onboarding CTAs and urgency badges only. Never for primary actions. Orange channels Vitality — genuine urgency, not decoration.",
       "Dark mode: toggle via data-theme=\"dark\" attribute on <html>. Semantic tokens swap automatically.",
-      "Monospace font (JetBrains Mono) for VIN numbers, lot numbers, bid amounts, timestamps.",
+      "Monospace font (JetBrains Mono) for VIN numbers, lot numbers, bid amounts, timestamps. Numbers are first-class citizens — see Vault > craft/typography-voice.md.",
       "Minimum touch target: 44px (WCAG 2.5.8).",
       "Always pair color with icon + label for state indication.",
-      "UX Writing: sentence case everywhere, active voice, verb-first button labels with no pricing/amounts (actions only), error format is '[what happened] — [how to fix]', use canonical terminology (Lot not listing, Bid not offer, Watchlist not favorites, Member not user, Location not yard, Wholesale not Select). See QUICK-REFERENCE.md § UX Writing."
+      "UX Writing: sentence case everywhere, active voice, verb-first button labels with no pricing/amounts (actions only), error format is '[what happened] — [how to fix]', use canonical terminology (Lot not listing, Bid not offer, Watchlist not favorites, Member not user, Location not yard, Wholesale not Select, Pre-bid not preliminary bid). See QUICK-REFERENCE.md § UX Writing.",
+      "Tables are a last resort. Prefer cards, lists, or stat blocks. Use tables only when comparison across multiple simultaneous dimensions is the primary task. See Vault > craft/density-philosophy.md.",
+      "Watch for AI-generated anti-patterns: purple accent, border-box foundations, emoji/icon overuse, generic typography ignoring the type scale. See Vault > language/anti-patterns.md."
     ]
   },
   "files": {
@@ -63,10 +108,10 @@
   },
   "brandContext": {
     "domain": "Online vehicle auctions — salvage, wholesale, clean title marketplace",
-    "users": ["Individual buyers", "Licensed dealers", "Insurance companies", "Fleet managers"],
+    "members": ["Individual buyers", "Licensed dealers", "Insurance companies", "Fleet managers", "Dismantlers", "Exporters", "Brokers"],
     "criticalFlows": [
       "Vehicle search & filtering",
-      "Auction bidding (live + preliminary)",
+      "Auction bidding (live + pre-bid)",
       "Registration & onboarding",
       "Watchlist management",
       "Member dashboard & account"
@@ -100,7 +145,7 @@
     "navigation": ["Header", "Tab Bar (mobile bottom nav)", "Sidebar", "Breadcrumbs"],
     "input": ["Button (6 variants × 5 sizes)", "Text Field", "Dropdown / Select", "Toggle Switch", "Checkbox", "Radio Button", "Slider / Range"],
     "feedback": ["Alert / Banner (4 severity types)", "Toast / Snackbar", "Modal / Dialog (3 sizes + mobile bottom sheet)", "Shelf / Drawer (right, left, full)", "Progress Indicator (spinner, bar, steps)", "Skeleton Screen"],
-    "dataDisplay": ["Card (vertical, horizontal, compact, featured, stat)", "Table (sortable, responsive)", "List (simple, two-line, three-line, action)", "Stat / KPI", "Badge / Tag"],
+    "dataDisplay": ["Card (vertical, horizontal, compact, featured, stat)", "Table (sortable, responsive — last resort, prefer cards/lists)", "List (simple, two-line, three-line, action)", "Stat / KPI", "Badge / Tag"],
     "media": ["Image Container", "Avatar (5 sizes)", "Video Player"]
   }
 }

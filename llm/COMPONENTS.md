@@ -1,6 +1,7 @@
 # Vallejo v1.1 — Component Specifications
 
-> Detailed specs for all components in the Vallejo Design System.
+> **Design philosophy:** See the [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault) for the "why" behind all decisions. Components execute the Vault's triad: Precision (alignment, spacing, typographic discipline), Institutional Confidence (restrained interaction, one primary action per view), Vitality (purposeful motion, live data, real urgency). When a spec contradicts a Vault principle, the Vault wins.
+>
 > For quick HTML patterns, see QUICK-REFERENCE.md.
 > For exact token values, see copart-design-tokens.json.
 > For system overview and file routing, see SYSTEM-INDEX.json.
@@ -47,7 +48,7 @@
    - 5.3 [Video Player](#53-video-player)
 6. [Patterns](#6-patterns)
    - 6.1 [Page Templates](#61-page-templates)
-   - 6.2 [User Flows](#62-user-flows)
+   - 6.2 [Member Flows](#62-user-flows)
    - 6.3 [Feedback Patterns](#63-feedback-patterns)
    - 6.4 [Empty States](#64-empty-states)
 7. [Animation & Motion](#7-animation--motion)
@@ -1228,6 +1229,8 @@ Placeholder shapes matching the component they replace.
 
 ### 4.2 Table
 
+> **Tables are a last resort.** Prefer cards, lists, or stat blocks when data permits. Use tables only when comparison across multiple simultaneous dimensions is the primary task (e.g., dismantler scanning a sale list across yard, make, damage, bid). The Vault's density philosophy: spacing does the work, not borders. If you remove every border and background and structure is still readable, the density is well-designed. See Vault > craft/density-philosophy.md.
+
 **Anatomy:**
 1. `table-container` — Scrollable wrapper
 2. `table-header` — Fixed header row
@@ -1732,7 +1735,7 @@ Order summary sidebar (sticky on desktop, collapsed accordion on mobile):
 
 ---
 
-### 6.2 User Flows
+### 6.2 Member Flows
 
 #### Onboarding Flow
 1. **Welcome screen** — Brand hero + "Get Started" CTA button
@@ -1793,7 +1796,7 @@ Pattern: Step indicator throughout. "Back" (tertiary) + "Continue" (primary) in 
 | No search results | Magnifying glass (48px) | "No vehicles match your filters" | "Try adjusting your search criteria or clearing some filters." | "Clear all filters" (secondary) |
 | Empty watchlist | Heart (48px) | "Your watchlist is empty" | "Save vehicles you're interested in to keep track of upcoming auctions." | "Browse vehicles" (primary) |
 | No bid history | Gavel (48px) | "No bids yet" | "Once you place your first bid, it'll appear here." | "Find vehicles" (primary) |
-| Error loading | Warning triangle (48px) | "Something went wrong" | "We couldn't load this content. Please try again." | "Retry" (primary) |
+| Error loading | Warning triangle (48px) | "We couldn't load this page" | "Check your connection and try again." | "Retry" (primary) |
 
 **Empty State Specs:**
 
@@ -1808,14 +1811,25 @@ Pattern: Step indicator throughout. "Back" (tertiary) + "Continue" (primary) in 
 
 **Rules:**
 - Always include: icon + headline + description + action button.
-- Tone: helpful and encouraging, never blaming the user.
+- Tone: helpful and encouraging, never blaming the member.
 - Always provide a clear next step.
 
 ---
 
 ## 7. Animation & Motion
 
-> Motion is functional, not decorative. Every animation serves a purpose — confirming an action, directing attention, or providing spatial context. All animations respect `prefers-reduced-motion`.
+> Motion channels the Vault's triad: **Precision** in timing (never approximate), **Institutional Confidence** in restraint (motion earns attention through scarcity), **Vitality** in auction energy (bidding is alive, competitive, time-bound). Every animation serves a purpose — confirming an action, directing attention, or providing spatial context. All animations respect `prefers-reduced-motion`.
+
+**Motion Registers** (from Vault > craft/motion-philosophy.md):
+
+| Register | Surface | Character | Duration Range |
+|----------|---------|-----------|----------------|
+| **Transactional** | copart.com | Stripe-like precision. Crisp, trustworthy, never playful. | 150–250ms |
+| **Live Auction** | VB.AI | Fluid, energetic, variable tempo. Mirrors bidding rhythm. | 100–350ms |
+| **Celebration** | Win/loss moments | Proportional to significance. Broadcast-quality for social sharing. | 500ms–1s |
+| **Ambient** | Background states | Subtle liveness. The system is alive but never distracting. | 2–4s |
+
+Each animation below is tagged with its register.
 
 ### 7.1 Duration Tokens
 
@@ -1843,19 +1857,19 @@ Pattern: Step indicator throughout. "Back" (tertiary) + "Continue" (primary) in 
 
 ### 7.3 Micro-Interactions
 
-#### Card Hover Lift
+#### Card Hover Lift `[Transactional]`
 - **Trigger:** Mouse hover on vehicle card
 - **Effect:** `translateY(-2px)` + shadow-md to shadow-lg
 - **Duration:** var(--duration-moderate) ease
 - **Purpose:** Confirms the card is interactive
 
-#### Button Press
+#### Button Press `[Transactional]`
 - **Trigger:** `mousedown` / `touchstart`
 - **Effect:** `scale(0.97)` + optional ripple from press point
 - **Duration:** var(--duration-fast) ease
 - **Purpose:** Tactile feedback simulating physical press
 
-#### Toggle Slide
+#### Toggle Slide `[Transactional]`
 - **Trigger:** Click/tap on toggle switch
 - **Effect:** Thumb slides with spring overshoot, background color cross-fades
 - **Duration:** var(--duration-slow) var(--ease-spring)
@@ -1863,34 +1877,34 @@ Pattern: Step indicator throughout. "Back" (tertiary) + "Continue" (primary) in 
 
 ### 7.4 Delight Animations
 
-#### Watchlist Heart Fill
+#### Watchlist Heart Fill `[Celebration]`
 - **Trigger:** Adding vehicle to watchlist
 - **Effect:** Heart pops with spring: scale(1 to 1.3 to 0.9 to 1.15 to 1), outline to filled
 - **Duration:** var(--duration-slower) var(--ease-spring)
 - **Reverse:** Subtle shrink scale(1 to 0.8 to 1) on removal
 - **Haptic:** Medium impact on add, light on remove
 
-#### Success Checkmark Draw
+#### Success Checkmark Draw `[Celebration]`
 - **Trigger:** Bid placed, payment confirmed, action completed
 - **Effect:** SVG circle draws (stroke-dashoffset), then checkmark path draws with staggered delay
 - **Duration:** Circle 400ms ease, check 300ms ease with 250ms delay
 
-#### Bid Price Pulse
+#### Bid Price Pulse `[Live Auction]`
 - **Trigger:** Competing bid on a watched vehicle
 - **Effect:** Price text pulses: scale(1 to 1.08 to 1 to 1.04 to 1) with color flash to brand blue
 - **Duration:** 600ms var(--ease-spring)
 
-#### Counter Tick
+#### Counter Tick `[Live Auction]`
 - **Trigger:** Stat number updates (active bids, watchlist count)
 - **Effect:** Old number slides out upward, new number slides in from below
 - **Duration:** 400ms ease
 
-#### Toast Notification
+#### Toast Notification `[Transactional]`
 - **Enter:** translateY(16px to 0) + fade in, 250ms ease-out
 - **Exit:** translateY(0 to 8px) + fade out, 200ms ease-in
 - **Auto-dismiss:** 5 seconds, or swipe on mobile
 
-#### Loading Dots
+#### Loading Dots `[Ambient]`
 - **Trigger:** Inline loading states (auction connecting, bid processing)
 - **Effect:** Three dots pulse in sequence: scale(0.6 to 1) + opacity(0.4 to 1)
 - **Duration:** 1.4s infinite, 0.16s stagger between dots
@@ -1951,7 +1965,7 @@ Mobile is not "desktop made smaller." It is a separate platform adaptation using
 |-----------|---------|--------|
 | Primary input | Mouse + keyboard | Touch (thumb) |
 | Touch targets | 40px default | 44px minimum, 48px preferred |
-| Information density | High — dense tables, multi-column | Low — single column, progressive disclosure |
+| Information density | High — dense tables, multi-column | Low — single column, progressive mastery |
 | Navigation | Header + sidebar | Bottom tab bar + navigation stack |
 | Content interaction | Hover + click | Tap + swipe + pull-to-refresh |
 | Modals | Centered floating panels | Bottom sheets with drag handles |

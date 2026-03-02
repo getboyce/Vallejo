@@ -1633,30 +1633,30 @@ tr.hot:hover td { background: var(--orange-100); }
 <section class="demo-section" id="philosophy">
   <div class="section-label">Foundations</div>
   <div class="section-title">Design Philosophy</div>
-  <div class="section-desc">Every pixel in the Copart experience should earn trust, reduce friction, and move the user closer to the vehicle they need. We design for clarity first, beauty second. Because when millions of dollars flow through an auction platform, confidence is the most valuable feature we ship.</div>
+  <div class="section-desc">Every decision in this system passes the <a href="https://github.com/getboyce/Copart-Design-Vault" style="color:var(--interactive-primary)">Copart Design Vault</a>'s design filter: Does this build trust? Does this respect expertise? Does this read at multiple depths? If the answer to any is no, the design is wrong. The Vault defines the "why" — Vallejo defines the "how."</div>
 
   <div class="subsection-title">Core Principles</div>
   <div class="grid-3">
     <div class="principle-card">
       <div class="principle-card-number">1</div>
-      <h3>Clarity Builds Trust</h3>
-      <p>Every element must communicate its purpose immediately. Users are making significant financial decisions — ambiguity erodes confidence.</p>
-      <div class="principle-example do"><strong>Do:</strong> A bid button reads "Place Bid" with a confirmation step.</div>
-      <div class="principle-example dont"><strong>Don't:</strong> A button reads "Submit" with no indication of commitment.</div>
+      <h3>Precision</h3>
+      <p>The warmth of competence. Obsessive alignment, spacing, typographic discipline. When members stake five figures on vehicles they may never have touched, visual sloppiness signals institutional carelessness.</p>
+      <div class="principle-example do"><strong>Do:</strong> Monospace type for VIN, lot numbers, bid amounts. Tabular figures in all data contexts.</div>
+      <div class="principle-example dont"><strong>Don't:</strong> Proportional fonts for prices, causing columns to misalign as numbers change.</div>
     </div>
     <div class="principle-card">
       <div class="principle-card-number">2</div>
-      <h3>Progressive Disclosure</h3>
-      <p>Show only what's needed at each step. Layer information so newcomers aren't overwhelmed and power users aren't slowed down.</p>
-      <div class="principle-example do"><strong>Do:</strong> Vehicle search shows key specs in the card; full details on the detail page.</div>
-      <div class="principle-example dont"><strong>Don't:</strong> A search results card showing 20+ data fields in 10pt type.</div>
+      <h3>Institutional Confidence</h3>
+      <p>The quiet authority of a platform that has moved millions of vehicles. We don't hedge, over-explain, or decorate. One primary action per view. Verb-first labels. No exclamation marks. No "Oops."</p>
+      <div class="principle-example do"><strong>Do:</strong> One "Place Bid" button per view. Secondary actions use secondary variants.</div>
+      <div class="principle-example dont"><strong>Don't:</strong> Three blue buttons competing for attention on the same surface.</div>
     </div>
     <div class="principle-card">
       <div class="principle-card-number">3</div>
-      <h3>Accessible by Default</h3>
-      <p>Every user deserves the same auction experience. WCAG 2.1 AA as a floor, not a ceiling.</p>
-      <div class="principle-example do"><strong>Do:</strong> An auction status badge uses color AND icon plus label.</div>
-      <div class="principle-example dont"><strong>Don't:</strong> A green dot with no label to indicate a live auction.</div>
+      <h3>Vitality</h3>
+      <p>Auctions are alive. Bidding is competitive, time-bound, consequential. The design channels that energy — motion confirms action, status is always visible, urgency is real. But vitality never becomes chaos.</p>
+      <div class="principle-example do"><strong>Do:</strong> Bid price pulses when outbid. Counter ticks animate. Status is always visible.</div>
+      <div class="principle-example dont"><strong>Don't:</strong> Flashy animations on static content. Urgency where there is none.</div>
     </div>
   </div>
 </section>
@@ -3373,7 +3373,7 @@ tr.hot:hover td { background: var(--orange-100); }
 <section class="demo-section" id="animations">
   <div class="section-label">Motion</div>
   <div class="section-title">Animation System</div>
-  <div class="section-desc">Every animation serves a purpose: confirm actions, guide attention, or communicate state changes. Respect <code style="font-family:var(--font-mono);font-size:13px;background:var(--bg-secondary);padding:1px 6px;border-radius:4px">prefers-reduced-motion</code> — disable non-essential animation when the user requests it.</div>
+  <div class="section-desc">Every animation serves a purpose: confirm actions, guide attention, or communicate state changes. Respect <code style="font-family:var(--font-mono);font-size:13px;background:var(--bg-secondary);padding:1px 6px;border-radius:4px">prefers-reduced-motion</code> — disable non-essential animation when the member requests it.</div>
 
   <!-- Motion Tokens -->
   <div class="subsection-title">Motion Tokens</div>

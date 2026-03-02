@@ -1,7 +1,13 @@
 # Vallejo v1.1 — LLM Quick Reference
 
+> **Design source of truth:** The [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault) defines the "why" — philosophy, principles, anti-patterns. Read the Vault first for context. This file defines the "how" — execution specs and patterns. When they conflict, the Vault wins.
+>
+> **Design filter:** Every decision passes three questions: Does this build trust? Does this respect expertise? Does this read at multiple depths?
+>
+> **Principles:** Precision / Institutional Confidence / Vitality. See Vault > `Copart Design/language/aesthetic-principles.md`.
+>
 > Primary implementation file for code generation. For exact token values in DTCG format, see `copart-design-tokens.json`.
-> For detailed component specs (anatomy, states, accessibility), see the full spec `copart-design-system.md`.
+> For detailed component specs (anatomy, states, accessibility), see COMPONENTS.md.
 
 ---
 
@@ -242,8 +248,10 @@ These change automatically when `data-platform="mobile"` is set:
 |-----------|-----------|
 | Professional | Respect the member's time and money. No fluff. |
 | Straightforward | Say exactly what's happening. No jargon unless expected. |
-| Confident | Statements, not hedging. "Bidding closes at 2:30 PM ET." |
+| Confident | Statements, not hedging. "Bidding closes at 2:30 PM EST." |
 | Helpful | Every message moves the member toward their goal. |
+
+**Triad mapping:** Professional + Straightforward = Precision. Confident = Institutional Confidence. Helpful = Vitality.
 
 Tone adapts: Informational (neutral) → Encouraging (warm) → Urgent (direct) → Error (calm, solution-focused). Never humorous in error states.
 
@@ -286,7 +294,7 @@ Exceptions: Copart, CrashedToys, Copart Dealer Services (CDS), Copart Wholesale 
 | VIN | vehicle identification number (in UI) |
 | Clean title | non-salvage, clear title |
 | Salvage | damaged, wrecked, total loss |
-| Preliminary bid | pre-bid, early bid |
+| Pre-bid | preliminary bid, early bid |
 | Live auction | real-time auction |
 | Buy it now | instant purchase |
 | Buyer fee | service fee, transaction fee |
@@ -294,7 +302,7 @@ Exceptions: Copart, CrashedToys, Copart Dealer Services (CDS), Copart Wholesale 
 | Location | yard (internal only), facility |
 | Item number | run number, lane number |
 | Copart Alliance Gateway | lounge, Copart Lounge |
-| Wholesale / Copart Wholesale | Select, Copart Select |
+| Wholesale / Copart Wholesale | Select, Copart Select, Wholecar |
 
 Rule: use glossary terms consistently — never alternate between synonyms.
 
@@ -336,7 +344,7 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 - Numbers 1–9: spell out in body copy ("three vehicles"), numerals in UI elements
 - Currency: "$1,200" — commas, no cents unless partial
 - Dates: "Feb 22, 2026" — abbreviated month, no leading zeros
-- Times: "2:30 PM ET" — 12-hour, timezone when relevant
+- Times: "2:30 PM EST" — 12-hour, full timezone abbreviation (EST, CST, PST)
 - Pluralization: handle 0/1/many — "No results" / "1 result" / "24 results"
 - Truncation: ellipsis (…) after last full word, tooltip for full text
 

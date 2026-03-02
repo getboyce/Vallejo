@@ -812,12 +812,12 @@ Same as Text Field states, plus:
 
 **Variants (by severity):**
 
-| Variant | Background | Border-Left | Icon | Icon Color | Text Color |
-|---------|-----------|-------------|------|-----------|------------|
-| Info | var(--feedback-info-bg) | 3px var(--feedback-info-border) | Info circle | var(--feedback-info-icon) | var(--feedback-info-text) |
-| Success | var(--feedback-success-bg) | 3px var(--feedback-success-border) | Checkmark circle | var(--feedback-success-icon) | var(--feedback-success-text) |
-| Warning | var(--feedback-warning-bg) | 3px var(--feedback-warning-border) | Triangle exclamation | var(--feedback-warning-icon) | var(--feedback-warning-text) |
-| Error | var(--feedback-error-bg) | 3px var(--feedback-error-border) | Octagon exclamation | var(--feedback-error-icon) | var(--feedback-error-text) |
+| Variant | Background | Icon | Icon Color | Text Color |
+|---------|-----------|------|-----------|------------|
+| Info | var(--feedback-info-bg) | Info circle | var(--feedback-info-icon) | var(--feedback-info-text) |
+| Success | var(--feedback-success-bg) | Checkmark circle | var(--feedback-success-icon) | var(--feedback-success-text) |
+| Warning | var(--feedback-warning-bg) | Triangle exclamation | var(--feedback-warning-icon) | var(--feedback-warning-text) |
+| Error | var(--feedback-error-bg) | Octagon exclamation | var(--feedback-error-icon) | var(--feedback-error-text) |
 
 **States:**
 

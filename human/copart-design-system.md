@@ -1850,12 +1850,12 @@ Value labels: same as single slider-value, displayed at left (low) and right (hi
 7. `alert-dismiss` — Close/X button (if dismissible)
 
 **Variants (by severity):**
-| Variant | Background | Border-Left | Icon | Icon Color |
-|---------|-----------|-------------|------|-----------|
-| Info | `info-bg` | 3px `info-border` | Info circle | `info-icon` |
-| Success | `success-bg` | 3px `success-border` | Checkmark circle | `success-icon` |
-| Warning | `warning-bg` | 3px `warning-border` | Triangle exclamation | `warning-icon` |
-| Error | `error-bg` | 3px `error-border` | Octagon exclamation | `error-icon` |
+| Variant | Background | Icon | Icon Color |
+|---------|-----------|------|-----------|
+| Info | `info-bg` | Info circle | `info-icon` |
+| Success | `success-bg` | Checkmark circle | `success-icon` |
+| Warning | `warning-bg` | Triangle exclamation | `warning-icon` |
+| Error | `error-bg` | Octagon exclamation | `error-icon` |
 
 **States:**
 | State | Behavior |

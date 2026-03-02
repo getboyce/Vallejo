@@ -656,14 +656,14 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 
 **4 Variants:**
 
-| Class | Background | Border-left | Text | Icon | Role |
-|-------|-----------|-------------|------|------|------|
-| `.alert-info` | `var(--info-bg)` | `var(--info-border)` | `var(--info-text)` | info circle | `status` |
-| `.alert-success` | `var(--success-bg)` | `var(--success-border)` | `var(--success-text)` | checkmark circle | `status` |
-| `.alert-warning` | `var(--warning-bg)` | `var(--warning-border)` | `var(--warning-text)` | triangle exclamation | `alert` |
-| `.alert-error` | `var(--error-bg)` | `var(--error-border)` | `var(--error-text)` | octagon exclamation | `alert` |
+| Class | Background | Text | Icon | Role |
+|-------|-----------|------|------|------|
+| `.alert-info` | `var(--info-bg)` | `var(--info-text)` | info circle | `status` |
+| `.alert-success` | `var(--success-bg)` | `var(--success-text)` | checkmark circle | `status` |
+| `.alert-warning` | `var(--warning-bg)` | `var(--warning-text)` | triangle exclamation | `alert` |
+| `.alert-error` | `var(--error-bg)` | `var(--error-text)` | octagon exclamation | `alert` |
 
-**Specs:** radius `var(--radius-lg)`, padding `var(--space-4)`, border-left 3px, icon 20px, gap `var(--space-3)`, title 14px/600, desc 14px/400.
+**Specs:** radius `var(--radius-lg)`, padding `var(--space-4)`, icon 20px, gap `var(--space-3)`, title 14px/600, desc 14px/400.
 
 ---
 

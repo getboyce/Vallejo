@@ -4,10 +4,30 @@
 
 ---
 
+## The Copart Design Vault — Read This First
+
+Vallejo does not exist in isolation. It executes the design language defined in the **[Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault)**.
+
+- **Vault (Layer 1)** — The "why." Philosophy, principles, anti-patterns, interaction signatures, and voice. The Vault defines what Copart design *is* and what it rejects.
+- **Vallejo (Layer 2)** — The "how." Tokens, components, specs, patterns, and code. Vallejo implements the Vault's convictions at the pixel level.
+
+**When the Vault and Vallejo conflict, the Vault wins.** If a component spec contradicts a design principle, the spec changes.
+
+Every decision in this system passes the Vault's design filter:
+
+1. **Does this build trust?**
+2. **Does this respect expertise?**
+3. **Does this read at multiple depths?**
+
+If the answer to any is no, the design is wrong. See [Vault > language/north-star.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/north-star.md) for the full case.
+
+---
+
 ## For AI / LLM Agents
 
-> **Read [`/llm/SYSTEM-INDEX.json`](llm/SYSTEM-INDEX.json) first.**
-> It contains the file manifest, reading order, brand context, and routing for all LLM-optimized documentation.
+> **Read the [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault) first** for design philosophy and context.
+>
+> Then read [`/llm/SYSTEM-INDEX.json`](llm/SYSTEM-INDEX.json) — the manifest and routing for all LLM-optimized documentation.
 >
 > **Do not read files in `/human/`.** They are formatted for human readers and will waste your context window. Everything you need is in `/llm/`.
 
@@ -21,13 +41,13 @@
 
 ## About Vallejo
 
-Vallejo is the production design system for [Copart.com](https://www.copart.com) — online vehicle auctions, salvage and wholesale marketplace, member dashboards, bidding flows, and all customer-facing interfaces.
+Vallejo is the production design system for [Copart.com](https://www.copart.com) — online vehicle auctions, salvage and wholesale marketplace, member dashboards, bidding flows, and all customer-facing interfaces. It implements the design philosophy defined in the [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault).
 
 Four folders, one system:
 
 | Folder | Audience | Contents |
 |--------|----------|----------|
-| `/human/` | Designers, developers, stakeholders | Full specification with prose, rationale, and visual examples |
+| `/human/` | Designers, developers, stakeholders | Full specification with execution rules and Vault cross-references |
 | `/llm/` | AI agents, code generators, LLM tools | Structured data, CSS patterns, HTML snippets optimized for token efficiency |
 | `/components/` | Everyone | Working reference implementations (header, etc.) |
 | `/demo/` | Everyone | Interactive visual demos (hostable on Vercel) |

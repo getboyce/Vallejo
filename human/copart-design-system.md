@@ -4,7 +4,9 @@
 
 ---
 
-> **Design Philosophy:** Every pixel in the Copart experience should earn trust, reduce friction, and move the user closer to the vehicle they need. We design for clarity first, beauty second — because when millions of dollars flow through an auction platform, confidence is the most valuable feature we ship.
+> **Source of Truth:** The [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault) defines *why* we design the way we do — philosophy, principles, anti-patterns, and language. This spec defines *how* — tokens, components, patterns, and execution rules. When they conflict, the Vault wins.
+>
+> Every decision in this system passes the Vault's design filter: **Does this build trust? Does this respect expertise? Does this read at multiple depths?** If the answer to any is no, the design is wrong. See [Vault > north-star.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/north-star.md).
 
 ---
 
@@ -27,32 +29,60 @@
 
 # 1. Design Principles
 
-Three principles guide every decision in the Copart design system.
+Three principles guide every decision in the Copart design system. They come from the [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/aesthetic-principles.md), which defines the full rationale. Vallejo executes them at the component level.
 
-## Principle 1: Clarity Builds Trust
+## Principle 1: Precision
 
-Every element must communicate its purpose immediately. Users are making significant financial decisions — bidding on vehicles worth thousands of dollars. Ambiguity erodes confidence. Labels are explicit. States are visible. Actions are predictable.
+*The warmth of competence.*
 
-**Example — Do:** A bid button reads "Place bid" with the bid amount ($4,500) displayed in a summary line above the button, followed by a confirmation step.
-**Example — Don't:** A button reads "Submit" with no indication of the financial commitment.
+Obsessive attention to alignment, spacing, and typographic discipline. Every pixel is intentional. When members stake five figures on vehicles they may never have touched, the interface's precision is itself a trust signal. Every misaligned element, every arbitrary spacing value, every inconsistent label whispers *we cut corners.*
 
-## Principle 2: Progressive Disclosure
+**Execution in Vallejo:**
+- 4px baseline grid. 8px spacing scale. No arbitrary values — every measurement comes from the token system.
+- Monospace numerals (`JetBrains Mono`) for all financial data, VINs, lot numbers, timestamps. Numbers are first-class citizens.
+- `font-variant-numeric: tabular-nums` in all data contexts so columns align.
+- Verb-first button labels. "Place bid" not "Submit." Specific verbs, not generic actions.
+- Consistent terminology from the [glossary](#24-terminology-glossary) everywhere. If it's a "lot" on the search page, it's a "lot" on the detail page.
 
-Show only what's needed at each step. Copart's inventory is vast and its auction mechanics are complex. We layer information so newcomers aren't overwhelmed and power users aren't slowed down.
+See [Vault > aesthetic-principles.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/aesthetic-principles.md) for the full case.
 
-**Example — Do:** Vehicle search shows key specs (year, make, model, damage type, current bid) in the card. Full VIN history, seller notes, and condition details are revealed on the detail page.
-**Example — Don't:** A search results card showing 20+ data fields in 10pt type.
+## Principle 2: Institutional Confidence
 
-## Principle 3: Accessible by Default
+*The quiet authority of a platform that has moved millions of vehicles.*
 
-Every user — regardless of ability, device, or connectivity — deserves the same auction experience. We meet WCAG 2.1 AA as a floor, not a ceiling. Color is never the sole indicator of state. Interactive targets are generous. Content reflows gracefully.
+We do not hedge, over-explain, or decorate. Copart knows what it is. The interface reflects that track record through restraint — one primary action per view, no exclamation marks, no "Oops," no hedging language ("should," "might," "try"). Confidence is expressed through what we choose *not* to show as much as what we show.
 
-**Example — Do:** An auction status badge uses both color AND an icon plus label: [circle-icon] "Live Now."
-**Example — Don't:** A green dot with no label to indicate a live auction.
+**Execution in Vallejo:**
+- One Primary (blue) button per view. The primary button represents the single most important action. Everything else is Secondary or Tertiary.
+- No humor, sarcasm, or playful language in error states. Members may be frustrated or anxious — meet them with calm directness.
+- Error format: "[what happened] — [how to fix]." Never blame the member. "We couldn't process your payment — update your payment method to continue."
+- No empty platitudes. "Your bid has been placed" — not "Awesome! You just bid!"
+- Blue earns authority through restraint. If everything on a surface is blue, nothing has emphasis. This is the "blue flood" anti-pattern.
+
+See [Vault > aesthetic-principles.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/aesthetic-principles.md) for the full case.
+
+## Principle 3: Vitality
+
+*Auctions are alive.*
+
+Bidding is competitive, time-bound, and consequential. The design channels that energy without letting it become chaos. Motion confirms action. Status is always visible. Urgency is real, not manufactured. The interface has a pulse — live auction indicators, counter ticks, bid price updates — but that pulse serves information, not decoration.
+
+**Execution in Vallejo:**
+- Live auction indicators with pulsing dot + "Live Now" label. Status is always visible, always current.
+- Orange 600 for genuine urgency only — registration CTAs, countdown timers, urgency badges. Never decorative, never for primary actions.
+- Motion registers match context: transactional interactions (150–250ms, Stripe-like), live auction events (100–350ms, fluid), celebration moments (500ms–1s, expressive). See [Section 9](#9-animation--motion).
+- Bid price pulse animation when competing bids land. Counter tick when stats update. The interface feels alive because the data is alive.
+- `prefers-reduced-motion` is always respected — vitality never comes at the cost of accessibility.
+
+See [Vault > aesthetic-principles.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/aesthetic-principles.md) for the full case.
+
+---
+
+**Baseline standard:** WCAG 2.1 AA compliance is not a principle — it is a non-negotiable engineering requirement. Every component in this system meets or exceeds it. Color is never the sole state indicator. Minimum touch target: 44px. All interactive elements have visible focus states. All content reflows at 200% zoom. See the [accessibility checklist](#123-implementation-guide-for-developers) for the full per-component requirements.
 
 # 2. UX Writing
 
-Words are interface. Every label, message, and instruction shapes how members understand and trust Copart. This section establishes the rules for writing all UI copy — from button labels to error messages to empty states. The same rigor we apply to color and spacing applies to language.
+Words are interface. Every label, message, and instruction shapes how members understand and trust Copart. This is the one section in Vallejo that carries both the "why" and the "how" — because language cannot be separated from its rationale. The same Precision we apply to spacing and alignment applies to every word. For all other design philosophy, see the [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault).
 
 ## 2.1 Voice & Tone Charter
 
@@ -64,8 +94,10 @@ Copart's voice is consistent across every touchpoint. Four attributes define it:
 |-----------|-----------|---------|
 | **Professional** | We respect the member's time and money. No fluff, no filler. | "Your bid of $4,500 has been placed." — not "Awesome! You just bid!" |
 | **Straightforward** | Say exactly what's happening. No jargon unless the audience expects it. | "This lot has a clean title." — not "This vehicle's documentation status is clear." |
-| **Confident** | We know our platform. Statements, not hedging. | "Bidding closes at 2:30 PM ET." — not "Bidding should close around 2:30 PM ET." |
+| **Confident** | We know our platform. Statements, not hedging. | "Bidding closes at 2:30 PM EST." — not "Bidding should close around 2:30 PM EST." |
 | **Helpful** | Every message moves the member toward their goal. | "Enter your VIN to check eligibility." — not "VIN required." |
+
+**Triad alignment:** Professional and Straightforward execute **Precision** — obsessive clarity in every word, no ambiguity, no filler. Confident executes **Institutional Confidence** — the voice of a platform that has moved millions of vehicles, stated as fact not hedging. Helpful executes **Vitality** — every message propels the member toward their next action. See [Vault > aesthetic-principles.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/aesthetic-principles.md).
 
 ### Tone Spectrum
 
@@ -156,7 +188,7 @@ Use these terms consistently. Never alternate between synonyms within the same f
 | **VIN** | Vehicle identification number (in UI) | Always abbreviation in interface; spell out only in help docs |
 | **Clean title** | Non-salvage, clear title | "Clean title" is the industry-standard term Copart uses |
 | **Salvage** | Damaged, wrecked, total loss | "Salvage" is the legal/industry classification |
-| **Preliminary bid** | Pre-bid, early bid, advance bid | Full term in UI; "pre-bid" acceptable in dense tables only |
+| **Pre-bid** | Preliminary bid, early bid, advance bid | Canonical short form everywhere |
 | **Live auction** | Real-time auction, active auction | "Live" is the canonical modifier |
 | **Buy it now** | Instant purchase, direct buy | Phrase used as-is; capitalize only first word: "Buy it now" |
 | **Buyer fee** | Service fee, transaction fee, premium | "Buyer fee" is the Copart-specific term |
@@ -171,7 +203,7 @@ Use these terms consistently. Never alternate between synonyms within the same f
 | **Seller** | Consigner, provider, vendor | "Seller" for the entity listing the vehicle |
 | **Storage fees** | Yard fees, holding fees | "Storage fees" is canonical |
 | **Copart Alliance Gateway** | Lounge, Copart Lounge, waiting area | "Copart Alliance Gateway" is the official name for on-site member facilities (formerly Copart Lounges) |
-| **Wholesale** / **Copart Wholesale** | Select, Copart Select | "Wholesale" or "Copart Wholesale" is the current brand. "Select" / "Copart Select" are deprecated. Use "Copart Wholesale Auction" for the full product name. |
+| **Wholesale** / **Copart Wholesale** | Select, Copart Select, Wholecar | "Wholesale" or "Copart Wholesale" is the current brand. "Select" / "Copart Select" / "Wholecar" are deprecated. Use "Copart Wholesale Auction" for the full product name. |
 
 **Rule:** If a term is not in this glossary, choose the simplest, most common word and use it consistently. Add new terms to the glossary when they appear in more than one flow.
 
@@ -290,13 +322,13 @@ Specific copy patterns for every component type. These are rules, not suggestion
 - "Accessible parking" — not "handicapped parking"
 - Person-first language where relevant: "members who use screen readers" — not "blind members"
 
+## 2.8 Dynamic & Adaptive Copy
+
 ### Numbers & Formats
 - **Spell out 1–9** in body copy ("three vehicles") — numerals for 10+ ("42 results")
 - **Always use numerals** for prices, bids, lot numbers, counts in UI elements, data tables
-- **Currency:** "$1,200" format — no cents unless partial dollars ("$0.50")
+- **Currency:** "$1,200" format — no cents unless partial dollars ("$0.50"). No cents on amounts over $100 — "$47,250" not "$47,250.00"
 - **Thousands separator:** Always use commas — "$12,500" not "$12500"
-
-## 2.8 Dynamic & Adaptive Copy
 
 ### Date & Time Formatting
 
@@ -304,7 +336,7 @@ Specific copy patterns for every component type. These are rules, not suggestion
 |--------|---------|-------|
 | Abbreviated date | Feb 22, 2026 | Default for all dates in UI |
 | Relative date | Today, Yesterday, 3 days ago | Use within 7 days; absolute date after that |
-| Time | 2:30 PM ET | 12-hour clock, timezone when auctions cross time zones |
+| Time | 2:30 PM EST | 12-hour clock, full timezone abbreviation (EST, CST, PST) |
 | Date range | Feb 22–28, 2026 | En dash, no spaces around dash |
 
 ### Pluralization
@@ -434,7 +466,7 @@ Real examples of correct and incorrect copy across common patterns.
 
 ### Status Communication
 
-**Do:** "Bidding closes Feb 22 at 2:30 PM ET" / "Lot sold — final bid: $12,400"
+**Do:** "Bidding closes Feb 22 at 2:30 PM EST" / "Lot sold — final bid: $12,400"
 **Don't:** "Auction ending soon!" / "This item has been sold."
 
 **Why:** Specific status copy includes the data the member needs. Vague status creates anxiety and follow-up questions.
@@ -507,7 +539,7 @@ Built around the brand color `#2662D9`, expanded into a functional 6-color prima
 
 A warm counterweight to the blue primary. Orange provides urgency cues, promotional emphasis, and visual variety on data-dense pages without triggering the semantic connotations of success (green), warning (amber), or error (rose). It also serves as the registration/onboarding CTA, replacing the former standalone CTA Yellow.
 
-**Why orange:** Copart is an auction platform — urgency is a core UX pattern ("Ending Soon", "Last Chance", "X people watching"). Orange communicates urgency without the danger tone of error/rose. It's complementary to blue on the color wheel, providing maximum contrast and breaking the "too blue" problem on complex pages.
+**Why orange:** Urgency without danger — complementary to blue, channels Vitality without the semantic weight of error/rose. Orange breaks the "blue flood" on complex pages. See [Vault > aesthetic-principles.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/aesthetic-principles.md).
 
 ### Orange 600 — Accent Primary
 | Property     | Value                          |
@@ -715,9 +747,10 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 
 ### Never
 - Never use Blue 600 for body text — it lacks sufficient contrast at small sizes.
+- **Never let blue dominate a surface.** If everything is Blue 600, nothing is primary. Blue earns its authority through restraint. This is the "blue flood" anti-pattern — when an entire page is blue, the hierarchy collapses and nothing reads as the primary action. See [Vault > anti-patterns.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/anti-patterns.md).
 - Never use pure red (`#FF0000`, `#E00000`, etc.) anywhere in the system. Use the rose/magenta error palette instead.
 - Never combine Warning amber and Error Rose in adjacent elements — it creates visual noise that damages trust.
-- Never use Orange 600 for body text or as a primary action — it is a secondary accent only.
+- Never use Orange 600 for body text or as a primary action — it is a secondary accent only. Orange channels Vitality — genuine urgency, not decoration.
 - Never place Orange and Warning elements adjacent to each other — despite different hues (24° vs 37°), they can blur at a glance in dense UIs.
 - Never use color as the sole indicator of state. Always pair with icons, labels, or patterns.
 
@@ -727,7 +760,7 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 
 ## 4.1 Primary Font Family: Inter
 
-**Why Inter:** Inter was designed specifically for computer screens. Its tall x-height, open apertures, and tabular number support make it ideal for data-heavy auction interfaces. Copart's existing web design system has already adopted Inter, and it aligns with Apple's SF Pro philosophy — neutral, highly legible, optimized for UI.
+**Why Inter:** Tall x-height, open apertures, tabular number support — optimized for data-heavy auction UI. See [Vault > typography-voice.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/craft/typography-voice.md) for the full design case.
 
 **Fallback stack:** `Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
 
@@ -900,7 +933,26 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 
 ---
 
-## 4.3 Font Pairing Strategy
+## 4.3 Numeric Typography
+
+Numbers are first-class citizens in the Vallejo type system. On an auction platform, numbers carry the most consequential information — bid amounts, lot counts, sale dates, VINs. They deserve the same design rigor as any other element. See [Vault > typography-voice.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/craft/typography-voice.md).
+
+**Core rules:**
+
+| Rule | Implementation |
+|------|---------------|
+| **Tabular figures always** | `font-variant-numeric: tabular-nums` in all data contexts — tables, cards, stat blocks, dashboards. Columns must align. |
+| **JetBrains Mono for precision data** | VIN numbers, lot numbers, bid amounts, timestamps, odometer readings — anywhere character-level precision matters. |
+| **Precision matches context** | No cents on amounts over $100 ("$47,250" not "$47,250.00"). Cents only for sub-dollar amounts ("$0.50"). |
+| **Size communicates importance** | Current bid amount is larger than metadata numbers. The winning bid is the biggest number on the lot detail page. |
+| **Color communicates state** | Winning/leading bid, outbid/losing position, and final sold price should each have distinct color treatment. Numbers don't just display data — they signal urgency and status. |
+| **Weight communicates hierarchy** | Primary numbers (bids, totals) use Bold (700) or Extra Bold (800). Secondary numbers (timestamps, lot numbers) use Regular (400) or Medium (500). |
+
+**Monospace sizing:** When using JetBrains Mono inline with Inter body text, reduce size by 1px to account for mono's wider set width. Match the semantic role (body, caption, etc.) for vertical rhythm.
+
+---
+
+## 4.4 Font Pairing Strategy
 
 **Primary (95% of UI):** Inter — used for all interface text, from hero headings to caption labels.
 
@@ -912,7 +964,7 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 
 ---
 
-## 4.4 Accessibility — Minimum Sizes
+## 4.5 Accessibility — Minimum Sizes
 
 | Context | Minimum Size | Rationale |
 |---------|-------------|-----------|
@@ -1100,7 +1152,7 @@ All icons in the Vallejo Design System come exclusively from the **Iconic** icon
 
 # 7. Components
 
-> Every component follows Apple HIG principles: purposeful animation, clear affordances, consistent behavior across contexts. Components are documented with anatomy, states, usage, accessibility, and code-ready specs.
+> Every component executes the Vault's triad — Precision in spacing and alignment, Institutional Confidence in restrained interaction, Vitality in purposeful motion. Components are documented with anatomy, states, usage rules, accessibility, and code-ready specs. For the design philosophy behind these components, see the [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault).
 
 ---
 
@@ -1108,7 +1160,7 @@ All icons in the Vallejo Design System come exclusively from the **Iconic** icon
 
 ### Component: Header
 
-**Purpose:** Primary navigation and brand identity. Anchors the user's sense of place across all pages. Always include the Copart header at the top of every page — use the existing component files (`components/header/index.html` for logged-out, `components/header/loggedin.html` for logged-in), never recreate from scratch. Shared design tokens live in `components/tokens.css`.
+**Purpose:** Primary navigation and brand identity. Anchors the member's sense of place across all pages. Always include the Copart header at the top of every page — use the existing component files (`components/header/index.html` for logged-out, `components/header/loggedin.html` for logged-in), never recreate from scratch. Shared design tokens live in `components/tokens.css`.
 
 **Anatomy — Three-Tier Structure:**
 
@@ -1348,7 +1400,7 @@ Transition: width 200ms ease-out
 
 ### Component: Breadcrumbs
 
-**Purpose:** Shows the user's location within the site hierarchy and enables upward navigation.
+**Purpose:** Shows the member's location within the site hierarchy and enables upward navigation.
 
 **Anatomy:**
 1. `breadcrumb-container` — Horizontal list wrapper
@@ -1471,7 +1523,7 @@ Icon-to-label gap: space-2 (8px)
 ```
 
 **Usage:**
-- **One Primary per view.** The primary button represents the single most important action.
+- **One Primary per view.** The primary button represents the single most important action. *(Institutional Confidence — restraint creates authority.)*
 - Use Secondary for competing actions (e.g., "Save Draft" next to "Publish").
 - Use Tertiary for low-emphasis actions (e.g., "Cancel", "Learn more").
 - Destructive is reserved for irreversible actions (e.g., "Delete Account").
@@ -1948,8 +2000,8 @@ Footer: border-top 1px Neutral 200, flex with justify-end, gap space-3 (12px)
 
 **Purpose:** Edge-anchored slide-in panels for secondary workflows, detail views, filters, and immersive experiences that maintain context with the underlying page.
 
-**When to use Shelf vs Modal:**
-- **Shelf** — User needs to reference the page behind it, content is browseable or scrollable (vehicle detail, filters, search), or the task involves multiple steps.
+**When to use Shelf vs Modal:** *(Progressive Mastery — information at the right depth.)*
+- **Shelf** — Member needs to reference the page behind it, content is browseable or scrollable (vehicle detail, filters, search), or the task involves multiple steps.
 - **Modal** — Focused, blocking confirmation (bid, delete, payment) that requires a single decision.
 
 **Anatomy:**
@@ -2164,6 +2216,8 @@ Gap between cards in grid: space-6 (24px)
 ### Component: Table
 
 **Purpose:** Dense, structured data display for lot listings, bid history, transaction records, and dashboards.
+
+> **Vault principle:** Tables are a last resort. Prefer cards, lists, or stat blocks when data permits. Use tables only when comparison across multiple simultaneous dimensions is the primary task — e.g., a dismantler scanning a sale list across yard, make, damage type, and bid amount. The Vault's density philosophy: spacing does the work, not borders. If you remove every border and background and the structure is still readable, the density is well-designed. See [Vault > density-philosophy.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/craft/density-philosophy.md).
 
 **Anatomy:**
 1. `table-container` — Scrollable wrapper
@@ -2424,6 +2478,26 @@ Badge border: 2px solid White (to separate from avatar)
 
 # 8. Patterns
 
+Every pattern in this section serves the Vault's Progressive Mastery approach: **one interface, many depths.** Copart serves seven buyer personas — Dismantlers, Dealers, Consumers, Exporters, Brokers, Hobbyists, Rebuilders — from the same surfaces. We never build separate "consumer mode" vs. "pro mode." Instead, patterns use hierarchy to create three information layers:
+
+1. **Primary** — What everyone sees. Scannable at a glance. Vehicle photo, year/make/model, current bid, sale date.
+2. **Secondary** — What engaged members read. Damage details, VIN, odometer, title type, location.
+3. **Tertiary** — What experts use. Full condition reports, seller notes, historical bid data, comparable sales.
+
+See [Vault > progressive-mastery.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/progressive-mastery.md) and [Vault > personas.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/context/personas.md).
+
+**Surface intentions** — different surfaces carry different emotional registers:
+
+| Surface | Register | Character |
+|---------|----------|-----------|
+| **copart.com** | Methodical Trust | Abundance and control in search, transparency on lot details, solid/clear/reassuring transactions |
+| **VB.AI** (live auction) | Competitive Vitality | Serious but vibrant during bidding, celebratory at win moments, broadcast-quality for social |
+| **Native mobile app** | Efficient Discovery | Speed, clear photography, first-impression institutional confidence |
+
+See [Vault > surface-intentions.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/surface-intentions.md).
+
+---
+
 ## 8.1 Page Templates
 
 ### Landing Page
@@ -2502,7 +2576,7 @@ Badge border: 2px solid White (to separate from avatar)
 
 ---
 
-## 8.2 User Flows
+## 8.2 Member Flows
 
 ### Onboarding Flow
 1. **Welcome screen** — Brand hero + "Get Started" CTA button
@@ -2547,7 +2621,7 @@ Badge border: 2px solid White (to separate from avatar)
 | No search results | Magnifying glass icon | "No vehicles match your filters" | "Try adjusting your search criteria or clearing some filters." | "Clear all filters" (secondary button) |
 | Empty watchlist | Heart icon | "Your watchlist is empty" | "Save vehicles you're interested in to keep track of upcoming auctions." | "Browse vehicles" (primary button) |
 | No bid history | Gavel icon | "No bids yet" | "Once you place your first bid, it'll appear here." | "Find vehicles" (primary button) |
-| Error loading | Warning icon | "Something went wrong" | "We couldn't load this content. Please try again." | "Retry" (primary button) |
+| Error loading | Warning icon | "We couldn't load this page" | "Something unexpected happened. Please try again." | "Retry" (primary button) |
 
 **Empty state specs:**
 ```
@@ -2584,14 +2658,35 @@ Overall padding: space-12 (48px) vertical
 
 ### Empty Pattern
 - Always include: icon + headline + description + action
-- Tone: Helpful and encouraging, never blaming the user
+- Tone: Helpful and encouraging, never blaming the member
 - Action: Always provide a clear next step
+
+---
+
+## 8.4 Interaction Signatures
+
+The Vault defines five critical design moments — the micro-interactions where design quality matters most, because they're the moments members are making decisions. Each signature references the Vault's full treatment and maps to VDS components and patterns. See [Vault > interaction-signatures.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/craft/interaction-signatures.md).
+
+### The Bid Moment
+The single most important interaction on the platform. Bid confirmation should provide contextual friction based on member experience — not one-size-fits-all. First-time bidders get a full confirmation modal with fee breakdown. Experienced members get a lightweight confirmation. VDS components: Button (Primary), Modal, Toast (success), Bid Price Pulse animation (Section 9.4).
+
+### Search & Filtering
+Each persona searches differently — dismantlers scan by yard and damage type, consumers browse by make/model, dealers filter by margin potential. VDS patterns must support filter hierarchy and context-aware surfacing. Result cards are decision aids, not just links. VDS components: Text Field (search), Sidebar (filters), Card (results), Chip/Badge (active filters).
+
+### Lot Details Page
+The trust surface. This is where Copart earns or loses credibility. Image gallery as evidence. Condition data as honesty made beautiful. Bid CTA unmistakable but not aggressive — Institutional Confidence, not hard-sell. VDS components: Image Container (gallery), Stat/KPI (condition data), Button (bid CTA), Table (bid history).
+
+### Eligibility & Onboarding
+The biggest consumer friction point. Eligibility requirements should be visible early, specific, actionable, and respectful. Never make a member complete a long form only to discover they're ineligible. VDS components: Progress Indicator (steps), Alert (eligibility status), Text Field (forms), Card (membership tiers).
+
+### Win/Loss Resolution
+Celebration proportional to significance. A $500 win gets a success toast. A $50,000 win should be broadcast-quality — worth sharing on social. Loss should be acknowledged without blame, with a clear next step. VDS components: Toast (confirmation), Success Checkmark animation (Section 9.4), Card (won vehicle details).
 
 ---
 
 # 9. Animation & Motion
 
-> Motion is functional, not decorative. Every animation in Vallejo serves a purpose — confirming an action, directing attention, or providing spatial context. We never animate for entertainment. All animations respect `prefers-reduced-motion` by reducing to instant state changes.
+> Motion expresses Vitality — the energy of live auctions — while Precision demands every animation earn its frame count. We confirm actions, direct attention, and provide spatial context. We never animate for decoration. Speed communicates confidence; motion never blocks interaction. All animations respect `prefers-reduced-motion`. See [Vault > motion-philosophy.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/craft/motion-philosophy.md).
 
 ---
 
@@ -2611,9 +2706,28 @@ Overall padding: space-12 (48px) vertical
 
 ---
 
-## 9.2 Micro-Interactions
+## 9.2 Motion Registers
 
-Small, functional animations that provide immediate feedback on user actions.
+The Vault defines four motion registers — each matched to a surface and emotional context. Every animation in this system belongs to one register. See [Vault > motion-philosophy.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/craft/motion-philosophy.md).
+
+| Register | Surface | Duration Range | Character | Examples |
+|----------|---------|---------------|-----------|----------|
+| **Transactional** | copart.com | 150–250ms | Stripe-like. Crisp, confident, immediate. | Button presses, dropdowns, tooltips, card hovers, form validation |
+| **Live Auction** | VB.AI | 100–350ms (variable) | Fluid, energetic. Responds to real-time data. | Bid price pulses, counter ticks, status updates, timer urgency shifts |
+| **Celebration** | Win/loss moments | 500ms–1s | Expressive, proportional to significance. | Success checkmark draws, watchlist heart fills, auction win confetti |
+| **Ambient** | Background states | 2–4s cycles | Subtle liveness. Proves the system is alive. | Loading dots, live auction pulsing indicators, "X people watching" |
+
+**Register rules:**
+- Transactional animations must never exceed 250ms — speed communicates confidence.
+- Live Auction register adapts to data velocity: faster animations when bids arrive rapidly, slower when the pace is steady.
+- Celebration animations are proportional to significance: a $500 win gets a checkmark, a $50,000 win could be broadcast-quality.
+- Ambient animations must be invisible to someone not looking for them. If they distract, they're too strong.
+
+---
+
+## 9.3 Micro-Interactions
+
+Small, functional animations that provide immediate feedback on member actions. *Register: Transactional.*
 
 ### Card Hover Lift
 - **Trigger:** Mouse hover on vehicle card
@@ -2636,9 +2750,9 @@ Small, functional animations that provide immediate feedback on user actions.
 
 ---
 
-## 9.3 Delight Animations
+## 9.4 Delight Animations
 
-Celebratory moments that reinforce positive actions and create emotional connection with the product.
+Celebratory moments that reinforce positive actions. *Register: Celebration* (proportional to significance). Bid Price Pulse and Counter Tick belong to the *Live Auction* register; Loading Dots belongs to *Ambient*.
 
 ### Watchlist Heart Fill
 - **Trigger:** Adding a vehicle to watchlist
@@ -2680,7 +2794,7 @@ Celebratory moments that reinforce positive actions and create emotional connect
 
 ---
 
-## 9.4 State Transitions
+## 9.5 State Transitions
 
 Full component enter/exit animations for complex UI elements.
 
@@ -2698,7 +2812,7 @@ Full component enter/exit animations for complex UI elements.
 
 ---
 
-## 9.5 When to Animate
+## 9.6 When to Animate
 
 ### Do Animate
 - **Action confirmation** — Heart fill, checkmark draw, success toast
@@ -2716,7 +2830,7 @@ Full component enter/exit animations for complex UI elements.
 
 ---
 
-## 9.6 Reduced Motion
+## 9.7 Reduced Motion
 
 All animations must be wrapped in a `prefers-reduced-motion` check:
 
@@ -2740,17 +2854,17 @@ When reduced motion is active:
 
 # 10. Mobile Platform
 
-> **Vallejo Mobile** is a complete adaptation of the desktop design system for iOS, Android, and mobile web. It shares the same color palette, brand rules, and design principles — but with platform-optimized sizing, spacing, navigation, and interaction patterns. Think of it as a sibling system, not a responsive breakpoint.
+> Mobile is a sibling platform, not a responsive breakpoint. Same principles — Precision, Institutional Confidence, Vitality — different input model. Same tokens, different sizing. The Vault's surface intention for native mobile is **"Efficient Discovery"** — speed, clear photography, first-impression institutional confidence. See [Vault > surface-intentions.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/surface-intentions.md).
 
 ---
 
-## 10.1 Philosophy: Two Systems, One Brand
+## 10.1 Two Systems, One Brand
 
 | Principle | Desktop | Mobile |
 |-----------|---------|--------|
 | **Primary input** | Mouse + keyboard | Touch (thumb) |
 | **Touch targets** | 40px default | 44px minimum, 48px preferred |
-| **Information density** | High — dense tables, multi-column | Low — single column, progressive disclosure |
+| **Information density** | High — dense tables, multi-column | Low — single column, progressive mastery |
 | **Navigation** | Header + sidebar | Bottom tab bar + navigation stack |
 | **Content interaction** | Hover + click | Tap + swipe + pull-to-refresh |
 | **Modals** | Centered floating panels | Bottom sheets with drag handles |
@@ -3026,37 +3140,9 @@ Tokens use reference syntax (`{copart.color.primitive.blue.600}`) for aliasing. 
 
 # 12. Documentation & Guidelines
 
-## 12.1 Design Principles (Expanded)
+## 12.1 Design Principles
 
-These three principles — introduced in Section 1 — are the foundation of every design decision at Copart.
-
-### Clarity Builds Trust
-**Why it matters:** Copart users are making financial commitments — sometimes $50,000+ on a vehicle they may not have seen in person. Every ambiguous label, hidden fee, or unclear state erodes confidence. Clarity isn't just aesthetic; it's fiduciary.
-
-**How to apply:**
-- Label buttons with specific actions, not generic verbs. "Place bid" not "Submit." Display pricing in a summary line, not in the button itself.
-- Show all fees before the confirmation step. No surprises at checkout.
-- Use consistent terminology. If it's called a "lot" on the search page, call it a "lot" everywhere.
-- Make system status visible. If an auction is live, show a pulsing indicator with "Live Now" text.
-
-### Progressive Disclosure
-**Why it matters:** Copart serves both first-time car buyers and professional dealers who process hundreds of vehicles daily. The interface must serve both without compromise.
-
-**How to apply:**
-- Default views show the 5 most important data points. Additional details are one click away.
-- Filters start collapsed on mobile, expanded on desktop.
-- Onboarding introduces concepts one at a time, with the option to skip for returning users.
-- Tooltips and info icons supplement, never replace, clear primary labels.
-
-### Accessible by Default
-**Why it matters:** Accessibility isn't an add-on — it's a quality signal. An auction platform that works for a user with low vision, motor impairment, or slow connectivity works better for everyone.
-
-**How to apply:**
-- Test all components at 200% zoom. Nothing should break or overlap.
-- All interactive elements have visible focus indicators.
-- All images have meaningful alt text (not "image" or "photo").
-- All video content has captions.
-- All forms announce errors to screen readers via `aria-live` regions.
+The three principles — **Precision, Institutional Confidence, Vitality** — are defined in [Section 1](#1-design-principles) with execution rules. For the full philosophical rationale, see the [Copart Design Vault > aesthetic-principles.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/aesthetic-principles.md).
 
 ---
 
@@ -3105,9 +3191,9 @@ These three principles — introduced in Section 1 — are the foundation of eve
 ---
 
 ### 7. Empty States
-**Do:** Include an icon, headline, description, and a clear action button. Use encouraging, helpful language. Guide the user toward their next step.
+**Do:** Include an icon, headline, description, and a clear action button. Use encouraging, helpful language. Guide the member toward their next step.
 
-**Don't:** Show "No data" with nothing else. Don't blame the user ("You haven't done anything"). Don't leave the page completely empty.
+**Don't:** Show "No data" with nothing else. Don't blame the member ("You haven't done anything"). Don't leave the page completely empty.
 
 ---
 
@@ -3126,9 +3212,25 @@ These three principles — introduced in Section 1 — are the foundation of eve
 ---
 
 ### 10. Motion and Animation
-**Do:** Use motion to provide feedback (button press, toggle flip), guide attention (new content entering), and communicate state changes (dropdown opening). Keep durations under 300ms for micro-interactions.
+**Do:** Use motion to provide feedback (button press, toggle flip), guide attention (new content entering), and communicate state changes (dropdown opening). Keep durations under 300ms for transactional micro-interactions. Match your motion register to the surface (Section 9.2).
 
-**Don't:** Animate for decoration without functional purpose. Don't use animation durations longer than 500ms for UI interactions. Don't block user input during animation. Always respect `prefers-reduced-motion` by reducing or removing non-essential animation.
+**Don't:** Animate for decoration without functional purpose. Don't use animation durations longer than 500ms for UI interactions (except Celebration register). Don't block member input during animation. Always respect `prefers-reduced-motion` by reducing or removing non-essential animation.
+
+---
+
+### 11. AI-Generated Design Defaults
+
+When using AI to generate UI, watch for these anti-patterns — they are the defaults that generic models produce and they contradict the Vault's convictions. See [Vault > anti-patterns.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/anti-patterns.md).
+
+**Do:** Use the Vallejo type scale, color tokens, and spacing system exactly as defined. Produce components that are visually indistinguishable from hand-crafted Vallejo components. Reference the Vault for design intent before generating.
+
+**Don't:**
+- **Purple accent** — AI models default to purple. Vallejo's accent is Orange 600 (`#D86518`).
+- **Border-box compositions** — AI loves wrapping everything in bordered boxes. Vallejo uses spacing and typography for structure, not borders.
+- **Emoji / icon overuse** — No emoji, ever. Icons are Iconic SVGs only, and only where they serve function.
+- **Generic typography** — AI ignores type scales and uses arbitrary sizes. Every text element must map to a Vallejo type token.
+- **The "helpful default"** — AI-generated UI feels like a machine trying not to offend: bland colors, excessive padding, generic copy ("Welcome! We're here to help!"). Vallejo is opinionated and specific.
+- **Bootstrap aesthetics** — Rounded badge pills, muted grays, card-with-thin-border. These signal "no one thought about this." Vallejo components are designed, not templated.
 
 ---
 
@@ -3271,4 +3373,4 @@ Before shipping any component, verify:
 
 ---
 
-*Vallejo Design System 1.1 — Desktop + Mobile platforms. Designed for trust, engineered for accessibility, scaled for a global auction platform.*
+*Vallejo Design System 1.1 — Precision, Institutional Confidence, Vitality. Executing the [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault) at the component level.*

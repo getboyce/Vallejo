@@ -7,8 +7,10 @@
       "primitive": {
         "blue": {
           "50":  { "$value": "#F6F9FD", "$type": "color", "$description": "Brand tint — page backgrounds" },
-          "100": { "$value": "#EEF2FC", "$type": "color", "$description": "Brand lightest — hover backgrounds" },
-          "200": { "$value": "#E1E9FA", "$type": "color", "$description": "Brand light — selected rows, info fills" },
+          "100": { "$value": "#EEF3FB", "$type": "color", "$description": "Brand lightest — hover backgrounds" },
+          "200": { "$value": "#E1ECF9", "$type": "color", "$description": "Brand light — selected rows, info fills" },
+          "300": { "$value": "#B9D6F4", "$type": "color", "$description": "Brand soft — section backgrounds, marketing bands" },
+          "400": { "$value": "#83B3E2", "$type": "color", "$description": "Brand mid — accent fills, icon backgrounds, decorative elements" },
           "600": { "$value": "#2662D9", "$type": "color", "$description": "Brand primary — CTAs, active links" },
           "800": { "$value": "#063598", "$type": "color", "$description": "Brand dark — hover states" },
           "900": { "$value": "#0F2757", "$type": "color", "$description": "Brand darkest — titles, critical text" }

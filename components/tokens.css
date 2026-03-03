@@ -2,8 +2,10 @@
 :root {
   /* Blue */
   --blue-50: #F6F9FD;
-  --blue-100: #EEF2FC;
-  --blue-200: #E1E9FA;
+  --blue-100: #EEF3FB;
+  --blue-200: #E1ECF9;
+  --blue-300: #B9D6F4;
+  --blue-400: #83B3E2;
   --blue-600: #2662D9;
   --blue-800: #063598;
   --blue-900: #0F2757;

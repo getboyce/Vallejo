@@ -58,8 +58,10 @@
 
 ```css
 --blue-50:  #F6F9FD;   /* dark: #0D1117 */
---blue-100: #EEF2FC;   /* dark: #141E33 */
---blue-200: #E1E9FA;   /* dark: #1E2A45 */
+--blue-100: #EEF3FB;   /* dark: #141E33 */
+--blue-200: #E1ECF9;   /* dark: #1E2A45 */
+--blue-300: #B9D6F4;   /* dark: #1A2D4A — section backgrounds, marketing bands */
+--blue-400: #83B3E2;   /* dark: #2A4A6E — accent fills, decorative elements */
 --blue-600: #2662D9;   /* dark: #5B8EF0 — primary brand */
 --blue-800: #063598;   /* dark: #7AAAF5 — hover */
 --blue-900: #0F2757;   /* dark: #B8D4FA — titles */
@@ -1357,6 +1359,7 @@ Complete `[data-theme="dark"]` override block:
 [data-theme="dark"] {
   /* Primitive Blue */
   --blue-50: #0D1117;  --blue-100: #141E33;  --blue-200: #1E2A45;
+  --blue-300: #1A2D4A; --blue-400: #2A4A6E;
   --blue-600: #5B8EF0; --blue-800: #7AAAF5;  --blue-900: #B8D4FA;
 
   /* Primitive Orange */

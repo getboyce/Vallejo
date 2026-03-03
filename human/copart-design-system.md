@@ -506,21 +506,39 @@ Built around the brand color `#2662D9`, expanded into a functional 6-color prima
 | **WCAG on White** | 13.52:1 — **AAA**        |
 | **Usage**   | Page titles, critical text on light backgrounds, info alert text |
 
+### Blue 400 — Brand Mid
+| Property     | Value                          |
+|-------------|--------------------------------|
+| **Hex**     | `#83B3E2`                      |
+| **RGB**     | 131, 179, 226                  |
+| **HSL**     | 210°, 62%, 70%                 |
+| **WCAG on White** | 2.43:1 (decorative only)  |
+| **Usage**   | Accent fills, icon backgrounds, decorative elements, marketing CTA bands, progress bars |
+
+### Blue 300 — Brand Soft
+| Property     | Value                          |
+|-------------|--------------------------------|
+| **Hex**     | `#B9D6F4`                      |
+| **RGB**     | 185, 214, 244                  |
+| **HSL**     | 210°, 72%, 84%                 |
+| **WCAG on Black** | 12.33:1 — **AAA**        |
+| **Usage**   | Section backgrounds on marketing/landing pages, branded content bands, soft info fills |
+
 ### Blue 200 — Brand Light
 | Property     | Value                          |
 |-------------|--------------------------------|
-| **Hex**     | `#E1E9FA`                      |
-| **RGB**     | 225, 233, 250                  |
-| **HSL**     | 221°, 69%, 93%                 |
+| **Hex**     | `#E1ECF9`                      |
+| **RGB**     | 225, 236, 249                  |
+| **HSL**     | 214°, 69%, 93%                 |
 | **WCAG on Black** | 17.42:1 — **AAA**        |
 | **Usage**   | Selected row backgrounds, info alert fills, active tab backgrounds |
 
 ### Blue 100 — Brand Lightest
 | Property     | Value                          |
 |-------------|--------------------------------|
-| **Hex**     | `#EEF2FC`                      |
-| **RGB**     | 238, 242, 252                  |
-| **HSL**     | 223°, 64%, 96%                 |
+| **Hex**     | `#EEF3FB`                      |
+| **RGB**     | 238, 243, 251                  |
+| **HSL**     | 216°, 64%, 96%                 |
 | **WCAG on Black** | 18.45:1 — **AAA**        |
 | **Usage**   | Hover backgrounds on secondary elements, subtle tinted surfaces |
 
@@ -693,8 +711,10 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | Token | Light Mode | Dark Mode | Notes |
 |-------|-----------|-----------|-------|
 | `blue-50` | `#F6F9FD` | `#0D1117` | Subtle blue-tinted dark backgrounds |
-| `blue-100` | `#EEF2FC` | `#141E33` | Info backgrounds, hover fills |
-| `blue-200` | `#E1E9FA` | `#1E2A45` | Selected/active backgrounds on dark |
+| `blue-100` | `#EEF3FB` | `#141E33` | Info backgrounds, hover fills |
+| `blue-200` | `#E1ECF9` | `#1E2A45` | Selected/active backgrounds on dark |
+| `blue-300` | `#B9D6F4` | `#1A2D4A` | Section backgrounds, marketing bands |
+| `blue-400` | `#83B3E2` | `#2A4A6E` | Accent fills, decorative elements |
 | `blue-600` | `#2662D9` | `#5B8EF0` | Primary — CTAs, active links (5.8:1 on `#1A1D23`) |
 | `blue-800` | `#063598` | `#7AAAF5` | Hover state on dark |
 | `blue-900` | `#0F2757` | `#B8D4FA` | High-contrast text on dark surfaces |

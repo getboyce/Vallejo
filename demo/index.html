@@ -12,8 +12,10 @@
 :root {
   /* Primary Blue Scale */
   --blue-50: #F6F9FD;
-  --blue-100: #EEF2FC;
-  --blue-200: #E1E9FA;
+  --blue-100: #EEF3FB;
+  --blue-200: #E1ECF9;
+  --blue-300: #B9D6F4;
+  --blue-400: #83B3E2;
   --blue-600: #2662D9;
   --blue-800: #063598;
   --blue-900: #0F2757;
@@ -90,6 +92,7 @@
 [data-theme="dark"] {
   /* Primitive Blue Scale — dark mode */
   --blue-50: #0D1117; --blue-100: #141E33; --blue-200: #1E2A45;
+  --blue-300: #1A2D4A; --blue-400: #2A4A6E;
   --blue-600: #5B8EF0; --blue-800: #7AAAF5; --blue-900: #B8D4FA;
 
   /* Primitive Orange Scale — dark mode */
@@ -290,15 +293,16 @@ body {
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
 .grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-4); }
+.grid-8 { display: grid; grid-template-columns: repeat(8, 1fr); gap: var(--space-3); }
 .flex-row { display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; }
 .flex-col { display: flex; flex-direction: column; gap: var(--space-3); }
 
 @media (max-width: 768px) {
-  .grid-2, .grid-3, .grid-4, .grid-6 { grid-template-columns: 1fr 1fr; }
+  .grid-2, .grid-3, .grid-4, .grid-6, .grid-8 { grid-template-columns: 1fr 1fr; }
   .section-title { font-size: 24px; }
 }
 @media (max-width: 480px) {
-  .grid-2, .grid-3, .grid-4, .grid-6 { grid-template-columns: 1fr; }
+  .grid-2, .grid-3, .grid-4, .grid-6, .grid-8 { grid-template-columns: 1fr; }
 }
 
 /* ========================================
@@ -1670,10 +1674,12 @@ tr.hot:hover td { background: var(--orange-100); }
   <div class="section-desc">Built around #2662D9. No pure red — error states use rose/magenta. Full dark mode support with maintained contrast ratios.</div>
 
   <div class="subsection-title">Primary Blue Scale</div>
-  <div class="grid-6">
+  <div class="grid-8">
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-50)"><span class="swatch-hex" data-light="#F6F9FD" data-dark="#0D1117">#F6F9FD</span></div><div class="swatch-info"><div class="swatch-name">Blue 50</div><div class="swatch-meta">Brand Tint</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-100)"><span class="swatch-hex" data-light="#EEF2FC" data-dark="#141E33">#EEF2FC</span></div><div class="swatch-info"><div class="swatch-name">Blue 100</div><div class="swatch-meta">Lightest</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-200)"><span class="swatch-hex" data-light="#E1E9FA" data-dark="#1E2A45">#E1E9FA</span></div><div class="swatch-info"><div class="swatch-name">Blue 200</div><div class="swatch-meta">Light</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-100)"><span class="swatch-hex" data-light="#EEF3FB" data-dark="#141E33">#EEF3FB</span></div><div class="swatch-info"><div class="swatch-name">Blue 100</div><div class="swatch-meta">Lightest</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-200)"><span class="swatch-hex" data-light="#E1ECF9" data-dark="#1E2A45">#E1ECF9</span></div><div class="swatch-info"><div class="swatch-name">Blue 200</div><div class="swatch-meta">Light</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-300)"><span class="swatch-hex" data-light="#B9D6F4" data-dark="#1A2D4A">#B9D6F4</span></div><div class="swatch-info"><div class="swatch-name">Blue 300</div><div class="swatch-meta">Soft &bull; Sections</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-400)"><span class="swatch-hex" data-light="#83B3E2" data-dark="#2A4A6E">#83B3E2</span></div><div class="swatch-info"><div class="swatch-name">Blue 400</div><div class="swatch-meta">Mid &bull; Accent</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-600)"><span class="swatch-hex" data-light="#2662D9" data-dark="#5B8EF0">#2662D9</span></div><div class="swatch-info"><div class="swatch-name">Blue 600</div><div class="swatch-meta">Primary &bull; AA Large</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-800)"><span class="swatch-hex" data-light="#063598" data-dark="#7AAAF5">#063598</span></div><div class="swatch-info"><div class="swatch-name">Blue 800</div><div class="swatch-meta">Dark &bull; AAA</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-900)"><span class="swatch-hex" data-light="#0F2757" data-dark="#B8D4FA">#0F2757</span></div><div class="swatch-info"><div class="swatch-name">Blue 900</div><div class="swatch-meta">Darkest &bull; AAA</div></div></div>

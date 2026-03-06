@@ -1101,19 +1101,6 @@ tr.hot:hover td { background: var(--orange-100); }
   color: var(--interactive-primary);
 }
 
-/* Tab bar demo */
-.tab-bar-demo {
-  display: flex; background: var(--bg-primary); border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xl); overflow: hidden;
-}
-.tab-item {
-  flex: 1; display: flex; flex-direction: column; align-items: center;
-  padding: var(--space-2) var(--space-1); gap: 2px; cursor: pointer;
-  transition: color var(--dur-fast) ease; color: var(--text-tertiary);
-}
-.tab-item.active { color: var(--interactive-primary); }
-.tab-item-icon { font-size: 20px; }
-.tab-item-label { font-size: 11px; font-weight: 500; }
 
 /* Sidebar Demo */
 .sidebar-demo {
@@ -2619,7 +2606,7 @@ tr.hot:hover td { background: var(--orange-100); }
 <section class="demo-section desktop-only" id="navigation">
   <div class="section-label">Components</div>
   <div class="section-title">Navigation</div>
-  <div class="section-desc">Header, tab bar, sidebar, and breadcrumbs. Consistent patterns across all breakpoints.</div>
+  <div class="section-desc">Header, sidebar, and breadcrumbs. Consistent patterns across all breakpoints.</div>
 
   <div class="subsection-title">Breadcrumbs</div>
   <nav class="breadcrumb">
@@ -2645,16 +2632,6 @@ tr.hot:hover td { background: var(--orange-100); }
         <div class="sidebar-item">Rear End</div>
         <div class="sidebar-item">Minor Dents</div>
         <div class="sidebar-item">Water/Flood</div>
-      </div>
-    </div>
-    <div>
-      <div class="subsection-title">Tab Bar (Mobile)</div>
-      <div class="tab-bar-demo" style="max-width:375px">
-        <div class="tab-item"><span class="tab-item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75024 19.2502H17.2502C18.3548 19.2502 19.2502 18.3548 19.2502 17.2502V9.75025L12.0002 4.75024L4.75024 9.75025V17.2502C4.75024 18.3548 5.64568 19.2502 6.75024 19.2502Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.74963 15.7493C9.74963 14.6447 10.6451 13.7493 11.7496 13.7493H12.2496C13.3542 13.7493 14.2496 14.6447 14.2496 15.7493V19.2493H9.74963V15.7493Z"/></svg></span><span class="tab-item-label">Home</span></div>
-        <div class="tab-item active"><span class="tab-item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.25 19.25L15.5 15.5M4.75 11C4.75 7.54822 7.54822 4.75 11 4.75C14.4518 4.75 17.25 7.54822 17.25 11C17.25 14.4518 14.4518 17.25 11 17.25C7.54822 17.25 4.75 14.4518 4.75 11Z"/></svg></span><span class="tab-item-label">Search</span></div>
-        <div class="tab-item"><span class="tab-item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span><span class="tab-item-label">Auctions</span></div>
-        <div class="tab-item"><span class="tab-item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span><span class="tab-item-label">Watchlist</span></div>
-        <div class="tab-item"><span class="tab-item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.25" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.8475 19.25H17.1525C18.2944 19.25 19.174 18.2681 18.6408 17.2584C17.8563 15.7731 16.068 14 12 14C7.93201 14 6.14367 15.7731 5.35924 17.2584C4.82597 18.2681 5.70558 19.25 6.8475 19.25Z"/></svg></span><span class="tab-item-label">Account</span></div>
       </div>
     </div>
   </div>
@@ -3580,7 +3557,7 @@ tr.hot:hover td { background: var(--orange-100); }
       <tr><td class="label-col">Shelf style</td><td class="desktop-col">Side panel, right/left, no radius</td><td class="mobile-col">Bottom sheet, 4 heights (40/60/85/100vh)</td></tr>
       <tr><td class="label-col">Touch target</td><td class="desktop-col">40px (mouse)</td><td class="mobile-col">44px min, 48px preferred</td></tr>
       <tr><td class="label-col">Page margin</td><td class="desktop-col">80px</td><td class="mobile-col">16px</td></tr>
-      <tr><td class="label-col">Navigation</td><td class="desktop-col">Header + sidebar</td><td class="mobile-col">Bottom tab bar + nav stack</td></tr>
+      <tr><td class="label-col">Navigation</td><td class="desktop-col">Header + sidebar</td><td class="mobile-col">Nav stack</td></tr>
       <tr><td class="label-col">Section gap</td><td class="desktop-col">48–64px</td><td class="mobile-col">24px</td></tr>
     </tbody>
   </table>

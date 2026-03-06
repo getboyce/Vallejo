@@ -2518,144 +2518,7 @@ See [Vault > surface-intentions.md](https://github.com/getboyce/Copart-Design-Va
 
 ---
 
-## 8.1 Page Templates
-
-### Landing Page
-**Structure:** Full-width hero → value props (3-col grid) → featured vehicles carousel → how-it-works steps → CTA section → footer
-
-| Section | Grid Span | Key Components |
-|---------|-----------|---------------|
-| Hero | 12 cols | Display Large heading, search bar, background image/gradient |
-| Value Props | 4+4+4 cols | Stat cards with icons |
-| Featured Vehicles | 12 cols | Horizontal card carousel (4 visible on desktop) |
-| How It Works | 3+3+3+3 cols | Step indicators + icon cards |
-| CTA Banner | 12 cols | Title 1 + Primary button, Blue 900 gradient background |
-| Footer | 12 cols, 4-col sub-grid | Nav links, legal, social icons |
-
-**Spacing:** space-16 (64px) between major sections (desktop), space-10 (40px) on mobile.
-
----
-
-### Dashboard (Authenticated)
-**Structure:** Header → sidebar (left, 280px) → main content area with widget grid
-
-| Area | Components |
-|------|-----------|
-| Sidebar | Navigation list: My Bids, Watchlist, Won Items, Payments, Settings |
-| Top bar | Breadcrumbs + page title + date range selector |
-| Widget row 1 | 4 Stat/KPI cards (active bids, watching, won, total spent) |
-| Widget row 2 | Auction calendar table (8 cols) + Upcoming auctions list (4 cols) |
-| Widget row 3 | Recent activity list (full-width) |
-
-**Spacing:** space-6 (24px) between widgets, space-8 (32px) between widget rows.
-
----
-
-### Settings Page
-**Structure:** Sidebar navigation (left) → settings form (center, max-width 640px)
-
-| Section | Components |
-|---------|-----------|
-| Profile | Avatar (XL) + text fields (name, email, phone) |
-| Notifications | Toggle switches grouped by category |
-| Payment Methods | Cards in a list with add/edit/delete actions |
-| Security | Password change form, 2FA toggle |
-| Preferences | Dropdowns (timezone, language, currency), radio groups (default view) |
-
-**Pattern:** Each section is a card with Title 2 header. Save button fixed at bottom on mobile or per-section on desktop. Unsaved changes trigger a warning banner.
-
----
-
-### Profile Page
-**Structure:** Profile header (avatar + name + membership tier) → tab bar → tab content
-
-| Tab | Content |
-|-----|---------|
-| Overview | Stat cards (member since, total purchases, rating) + recent activity list |
-| Bid History | Searchable/filterable table with lot#, vehicle, bid amount, result, date |
-| Won Vehicles | Card grid of won vehicles with status badges (Payment Due, In Transit, Picked Up) |
-| Documents | List of uploaded/required documents with status indicators |
-
----
-
-### Checkout / Payment Flow
-**Structure:** Step indicator (3 steps) → form content → order summary sidebar (right, 4 cols)
-
-| Step | Content |
-|------|---------|
-| 1. Review | Vehicle card (horizontal) + lot details + fees breakdown table |
-| 2. Payment | Payment method selection (radio cards) + billing address form |
-| 3. Confirm | Order summary + terms checkbox + "Confirm Payment" Primary button |
-
-**Order summary sidebar** (sticky on desktop, collapsed accordion on mobile):
-- Vehicle name + thumbnail
-- Winning bid amount
-- Buyer premium
-- Fees itemized
-- Total (highlighted in Title 1, Blue 900)
-
----
-
-## 8.2 Member Flows
-
-### Onboarding Flow
-1. **Welcome screen** — Brand hero + "Get Started" CTA button
-2. **Account type** — Radio card selection: "I'm buying for myself" / "I'm buying for a business"
-3. **Basic info** — Form: name, email, phone, password (with inline validation)
-4. **Verification** — Document upload: ID + proof of address (with accepted format hints)
-5. **Membership selection** — Pricing cards comparing Basic vs. Premier tiers
-6. **Deposit** — Payment form with deposit amount selector
-7. **Confirmation** — Success alert + "Start browsing" CTA + checklist of next steps
-
-**Pattern notes:**
-- Step indicator visible throughout
-- "Back" (tertiary button) + "Continue" (primary button) in footer
-- Progress auto-saves — users can resume later
-- Each step validates before allowing advance
-
-### Authentication Flow
-**Sign In:** Email + password fields → "Sign In" primary button → optional "Forgot password?" tertiary link → optional SSO buttons
-
-**Sign Up:** Redirects to onboarding flow
-
-**Password Reset:** Email field → "Send Reset Link" → confirmation screen → email opens reset form → new password + confirm → success redirect to sign in
-
-**Pattern notes:**
-- Single-column layout, max-width 400px, vertically centered
-- Logo above form
-- Error messages inline per field + summary alert at top
-- Social/SSO buttons separated by "or" divider
-
-### Search & Filter Flow
-1. **Entry:** Search bar in header or Vehicle Finder page
-2. **Quick search:** Type-ahead dropdown with recent searches + popular makes
-3. **Results page:** Sidebar filters (left) + results grid (right) + sort/view toggle bar
-4. **Filter interaction:** Checkboxes for multi-select (make, damage type), sliders for ranges (year, price), dropdowns for single-select (location)
-5. **Active filters:** Horizontal chip row above results showing applied filters with individual clear (X) + "Clear all" link
-6. **Detail navigation:** Click card → vehicle detail page → "Back to results" breadcrumb preserves filter state
-
-### Empty States
-
-| Context | Illustration | Headline | Body | Action |
-|---------|-------------|----------|------|--------|
-| No search results | Magnifying glass icon | "No vehicles match your filters" | "Try adjusting your search criteria or clearing some filters." | "Clear all filters" (secondary button) |
-| Empty watchlist | Heart icon | "Your watchlist is empty" | "Save vehicles you're interested in to keep track of upcoming auctions." | "Browse vehicles" (primary button) |
-| No bid history | Gavel icon | "No bids yet" | "Once you place your first bid, it'll appear here." | "Find vehicles" (primary button) |
-| Error loading | Warning icon | "We couldn't load this page" | "Something unexpected happened. Please try again." | "Retry" (primary button) |
-
-**Empty state specs:**
-```
-Container: centered, max-width 400px
-Icon: 64px, Neutral 300
-Headline: type-title-2 (22px / 700), Neutral 900
-Body: type-body (16px / 400), Neutral 500, text-align center
-Action button: margin-top space-6 (24px)
-Overall padding: space-12 (48px) vertical
-```
-
----
-
-## 8.3 Feedback Patterns
+## 8.1 Feedback Patterns
 
 ### Success Pattern
 - **Immediate:** Toast appears ("Bid placed successfully") with green checkmark
@@ -2683,7 +2546,7 @@ Overall padding: space-12 (48px) vertical
 
 ---
 
-## 8.4 Interaction Signatures
+## 8.2 Interaction Signatures
 
 The Vault defines five critical design moments — the micro-interactions where design quality matters most, because they're the moments members are making decisions. Each signature references the Vault's full treatment and maps to VDS components and patterns. See [Vault > interaction-signatures.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/craft/interaction-signatures.md).
 
@@ -2984,51 +2847,7 @@ Modals become bottom sheets on mobile:
 
 ---
 
-## 10.4 Mobile Navigation
-
-### Bottom Tab Bar
-
-The primary navigation on mobile. Fixed at the bottom edge.
-
-```
-Height: 56px + env(safe-area-inset-bottom)
-Background: #FFFFFF (light) / #1A1D23 (dark)
-Border-top: 0.5px solid Neutral 200
-Icon: 24px, centered
-Label: 10px / 500, 2px below icon
-Active: Blue 600 icon + label
-Inactive: Neutral 500 icon + label
-Max items: 5
-Touch target: 48×48px per item
-```
-
-### Navigation Bar (Top)
-
-iOS-style navigation bar for stack-based navigation.
-
-```
-Height: 44px (excludes status bar / safe area)
-Title: 17px / 600, centered
-Back button: chevron-left icon (24px) + "Back" label, left-aligned
-Right actions: up to 2 items, 44px touch targets
-Background: system blur or solid White/Dark
-Large title mode: 34px / 700, left-aligned, collapses on scroll
-```
-
-### Search Bar
-
-```
-Height: 36px (compact)
-Border radius: 10px
-Background: Neutral 100 (light) / Neutral 200 (dark)
-Icon: 16px magnifying glass, Neutral 500
-Placeholder: 16px, Neutral 500
-Focus: expands to full width, cancel button appears right
-```
-
----
-
-## 10.5 Mobile Spacing
+## 10.4 Mobile Spacing
 
 | Token | Desktop | Mobile | Usage |
 |-------|---------|--------|-------|
@@ -3057,7 +2876,7 @@ padding-right: env(safe-area-inset-right);
 
 ---
 
-## 10.6 Mobile-Specific Patterns
+## 10.5 Mobile-Specific Patterns
 
 ### Pull-to-Refresh
 - Threshold: 64px pull distance
@@ -3083,7 +2902,7 @@ padding-right: env(safe-area-inset-right);
 
 ---
 
-## 10.7 Mobile Accessibility Additions
+## 10.6 Mobile Accessibility Additions
 
 | Requirement | Desktop | Mobile |
 |-------------|---------|--------|
@@ -3112,7 +2931,7 @@ Components must not clip or overlap at 1.65x scaling. Use flexible heights and `
 
 ---
 
-## 10.8 Platform Decision Map
+## 10.7 Platform Decision Map
 
 Use this to determine which system to apply:
 

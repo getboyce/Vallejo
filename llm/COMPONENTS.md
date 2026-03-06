@@ -47,10 +47,8 @@
    - 5.2 [Avatar](#52-avatar)
    - 5.3 [Video Player](#53-video-player)
 6. [Patterns](#6-patterns)
-   - 6.1 [Page Templates](#61-page-templates)
-   - 6.2 [Member Flows](#62-user-flows)
-   - 6.3 [Feedback Patterns](#63-feedback-patterns)
-   - 6.4 [Empty States](#64-empty-states)
+   - 6.1 [Feedback Patterns](#61-feedback-patterns)
+   - 6.2 [Empty States](#62-empty-states)
 7. [Animation & Motion](#7-animation--motion)
    - 7.1 [Duration Tokens](#71-duration-tokens)
    - 7.2 [Easing](#72-easing)
@@ -63,9 +61,8 @@
    - 8.2 [Key Differences](#82-key-differences)
    - 8.3 [Mobile Type Scale](#83-mobile-type-scale)
    - 8.4 [Mobile Component Overrides](#84-mobile-component-overrides)
-   - 8.5 [Navigation Patterns](#85-navigation-patterns)
-   - 8.6 [Gestures](#86-gestures)
-   - 8.7 [Mobile Accessibility](#87-mobile-accessibility)
+   - 8.5 [Gestures](#85-gestures)
+   - 8.6 [Mobile Accessibility](#86-mobile-accessibility)
 
 ---
 
@@ -1643,130 +1640,7 @@ Placeholder shapes matching the component they replace.
 
 ## 6. Patterns
 
-### 6.1 Page Templates
-
-#### Landing Page
-
-| Section | Grid Span | Key Components |
-|---------|-----------|---------------|
-| Hero | 12 cols | Display Large heading, search bar, background image/gradient |
-| Value Props | 4+4+4 cols | Stat cards with icons |
-| Featured Vehicles | 12 cols | Horizontal card carousel (4 visible on desktop) |
-| How It Works | 3+3+3+3 cols | Step indicators + icon cards |
-| CTA Banner | 12 cols | Title 1 + Primary button, var(--color-blue-900) gradient bg |
-| Footer | 12 cols, 4-col sub-grid | Nav links, legal, social icons |
-
-Spacing: var(--space-16) between major sections (desktop), var(--space-10) on mobile.
-
-#### Search Results
-
-**Structure:** Header + filter sidebar (left, 280px) + results grid (right) + pagination
-
-| Area | Components |
-|------|-----------|
-| Filter sidebar | Checkbox groups, range sliders, dropdowns |
-| Sort/View bar | Sort dropdown + grid/list view toggle |
-| Results grid | Vertical cards (2-4 cols) or horizontal cards (list view) |
-| Active filters | Horizontal chip row above results with individual clear (X) + "Clear all" |
-| Pagination | Page numbers + prev/next arrows |
-
-#### Vehicle Detail
-
-**Structure:** Hero image gallery + specs grid + bidding panel + seller info
-
-| Area | Components |
-|------|-----------|
-| Gallery | Image container (Gallery variant) — hero + thumbnails |
-| Specs | Two-column grid of label/value pairs (type-subheadline / type-body) |
-| Bidding panel | Current bid (Stat), timer, bid input + Primary button, bid history list |
-| Seller info | Avatar + name + rating + "Contact" secondary button |
-
-#### Dashboard (Authenticated)
-
-| Area | Components |
-|------|-----------|
-| Sidebar | Navigation list: My Bids, Watchlist, Won Items, Payments, Settings |
-| Top bar | Breadcrumbs + page title + date range selector |
-| Widget row 1 | 4 Stat/KPI cards (active bids, watching, won, total spent) |
-| Widget row 2 | Auction calendar table (8 cols) + Upcoming auctions list (4 cols) |
-| Widget row 3 | Recent activity list (full-width) |
-
-Spacing: var(--space-6) between widgets, var(--space-8) between widget rows.
-
-#### Authentication
-
-**Structure:** Single-column layout, max-width 400px, vertically centered.
-
-| Area | Components |
-|------|-----------|
-| Header | Logo (centered) |
-| Form | Email + password text fields + "Sign In" primary button |
-| Links | "Forgot password?" tertiary link, SSO buttons separated by "or" divider |
-| Errors | Inline per field + summary alert at top |
-
-#### Settings
-
-| Section | Components |
-|---------|-----------|
-| Profile | Avatar (XL) + text fields (name, email, phone) |
-| Notifications | Toggle switches grouped by category |
-| Payment Methods | Cards in a list with add/edit/delete actions |
-| Security | Password change form, 2FA toggle |
-| Preferences | Dropdowns (timezone, language, currency), radio groups (default view) |
-
-Each section is a card with Title 2 header. Save button fixed at bottom on mobile or per-section on desktop. Unsaved changes trigger a warning banner.
-
-#### Checkout / Payment Flow
-
-**Structure:** Step indicator (3 steps) + form content + order summary sidebar (right, 4 cols)
-
-| Step | Content |
-|------|---------|
-| 1. Review | Vehicle card (horizontal) + lot details + fees breakdown table |
-| 2. Payment | Payment method selection (radio cards) + billing address form |
-| 3. Confirm | Order summary + terms checkbox + "Confirm Payment" Primary button |
-
-Order summary sidebar (sticky on desktop, collapsed accordion on mobile):
-- Vehicle name + thumbnail
-- Winning bid amount
-- Buyer premium
-- Fees itemized
-- Total: type-title-1, var(--color-blue-900)
-
----
-
-### 6.2 Member Flows
-
-#### Onboarding Flow
-1. **Welcome screen** — Brand hero + "Get Started" CTA button
-2. **Account type** — Radio card selection: personal vs. business
-3. **Basic info** — Form: name, email, phone, password (inline validation)
-4. **Verification** — Document upload: ID + proof of address
-5. **Membership selection** — Pricing cards comparing tiers
-6. **Deposit** — Payment form with deposit amount selector
-7. **Confirmation** — Success alert + "Start browsing" CTA + checklist
-
-Pattern: Step indicator throughout. "Back" (tertiary) + "Continue" (primary) in footer. Progress auto-saves.
-
-#### Bidding Flow
-1. **Search** — Find vehicle via search/filter
-2. **Select** — Review vehicle detail, specs, condition
-3. **Confirm** — Modal confirmation: "Place bid of $X?"
-4. **Receipt** — Success toast + updated bid panel
-
-#### Watchlist Flow
-- **Add:** Heart icon toggle (outline to filled, spring animation)
-- **Manage:** List view with swipe actions (mobile) or hover actions (desktop)
-- **Notify:** Toast confirmation on add/remove
-
-#### Authentication Flow
-- **Sign In:** Email + password + primary button + optional SSO
-- **Sign Up:** Redirects to onboarding flow
-- **Password Reset:** Email field + "Send Reset Link" + confirmation + reset form + success
-
----
-
-### 6.3 Feedback Patterns
+### 6.1 Feedback Patterns
 
 #### Success Pattern
 - **Immediate:** Toast appears with green checkmark
@@ -1789,7 +1663,7 @@ Pattern: Step indicator throughout. "Back" (tertiary) + "Continue" (primary) in 
 
 ---
 
-### 6.4 Empty States
+### 6.2 Empty States
 
 | Context | Icon | Headline | Body | Action |
 |---------|------|----------|------|--------|
@@ -2069,46 +1943,7 @@ Default is MD (44px) — meets WCAG 2.5.5 touch target. Full-width buttons for p
 | Chevron | 12px, var(--color-neutral-300), right-aligned |
 | Swipe actions | 80px reveal width |
 
-### 8.5 Navigation Patterns
-
-#### Bottom Tab Bar
-Primary navigation on mobile. Fixed at the bottom edge.
-
-| Property | Value |
-|----------|-------|
-| Height | 56px + env(safe-area-inset-bottom) |
-| Background | white (light) / var(--surface-primary-dark) (dark) |
-| Border-top | 0.5px solid var(--color-neutral-200) |
-| Icon size | 24px, centered |
-| Label | 10px / 500, 2px below icon |
-| Active | var(--interactive-primary) icon + label |
-| Inactive | var(--text-tertiary) icon + label |
-| Max items | 5 |
-| Touch target | 48x48px per item |
-
-#### Navigation Bar (iOS-style top bar)
-
-| Property | Value |
-|----------|-------|
-| Height | 44px (excludes status bar / safe area) |
-| Title | 17px / 600, centered |
-| Back button | chevron-left (24px) + "Back" label, left-aligned |
-| Right actions | up to 2 items, 44px touch targets |
-| Background | system blur or solid white/dark |
-| Large title mode | 34px / 700, left-aligned, collapses to inline (17px) on scroll |
-
-#### Search Bar (Mobile)
-
-| Property | Value |
-|----------|-------|
-| Height | 36px (compact) |
-| Border-radius | 10px |
-| Background | var(--bg-secondary) light / var(--color-neutral-200) dark |
-| Icon | 16px magnifying glass, var(--text-tertiary) |
-| Placeholder | 16px, var(--text-tertiary) |
-| Focus behavior | Expands to full width, cancel button appears right |
-
-### 8.6 Gestures
+### 8.5 Gestures
 
 | Gesture | Threshold | Action | Feedback |
 |---------|-----------|--------|----------|
@@ -2121,7 +1956,7 @@ Primary navigation on mobile. Fixed at the bottom edge.
 | Swipe from left edge | Edge gesture | Navigate back (iOS style) | Page transition |
 | Pinch (vehicle images) | Pinch gesture | Zoom in gallery | Smooth zoom |
 
-### 8.7 Mobile Accessibility
+### 8.6 Mobile Accessibility
 
 | Requirement | Desktop | Mobile |
 |-------------|---------|--------|

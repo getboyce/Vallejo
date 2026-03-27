@@ -2159,7 +2159,7 @@ tr.hot:hover td { background: var(--orange-100); }
 <section class="demo-section desktop-only" id="typography">
   <div class="section-label">Foundations</div>
   <div class="section-title">Typography</div>
-  <div class="section-desc">Inter is the primary typeface. JetBrains Mono for VINs, lot numbers, and financial data. 9 weights from 100 to 900.</div>
+  <div class="section-desc">Inter is the primary typeface. JetBrains Mono for numbers being <em>compared</em> (lists, cards, ladders). Inter for numbers being <em>read</em> (singular, dominant). 9 weights from 100 to 900.</div>
 
   <div class="subsection-title">Font Families</div>
   <div class="font-showcase-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);margin-bottom:var(--space-8)">
@@ -2183,11 +2183,12 @@ tr.hot:hover td { background: var(--orange-100); }
         <span style="font-size:12px;color:var(--text-tertiary);font-family:var(--font-mono)">var(--font-mono)</span>
       </div>
       <div class="font-showcase-name-mono" style="font-family:var(--font-mono);font-size:56px;font-weight:700;letter-spacing:-0.02em;line-height:1;margin-bottom:var(--space-4);color:var(--text-primary)">JetBrains Mono</div>
-      <div style="font-family:var(--font-mono);font-size:18px;font-weight:400;line-height:1.6;color:var(--text-secondary);margin-bottom:var(--space-5)">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789 !@#$%&amp;*()?.,:;</div>
+      <div style="font-family:var(--font-mono);font-size:18px;font-weight:400;line-height:1.6;color:var(--text-secondary);margin-bottom:var(--space-5);font-feature-settings:'zero' 0">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789 !@#$%&amp;*()?.,:;</div>
       <div style="font-family:var(--font-mono);font-size:15px;line-height:1.6;color:var(--text-secondary);border-top:1px solid var(--border-subtle);padding-top:var(--space-4)">
         <span style="font-weight:400">Regular, </span><span style="font-weight:500">Medium, </span><span style="font-weight:700">Bold</span>
       </div>
-      <div style="font-family:var(--font-mono);font-size:13px;color:var(--text-tertiary);margin-top:var(--space-3)">VINs, lot numbers, currency, bid amounts, timestamps, code</div>
+      <div style="font-family:var(--font-mono);font-size:13px;color:var(--text-tertiary);margin-top:var(--space-3)">Compare contexts: VINs, lot numbers, bid ladders, price columns, timers</div>
+      <div style="font-size:11px;color:var(--text-tertiary);margin-top:var(--space-2);font-family:var(--font-primary)"><code style="font-family:var(--font-mono);font-size:10px;background:var(--bg-secondary);padding:1px 4px;border-radius:3px">font-feature-settings: "zero" 0</code> &mdash; suppress dotted zero</div>
     </div>
   </div>
 
@@ -2208,10 +2209,12 @@ tr.hot:hover td { background: var(--orange-100); }
   <div class="type-specimen"><span class="type-specimen-label">Caption 2</span><span style="font-size:11px;font-weight:500;letter-spacing:0.02em;color:var(--text-tertiary)">Ends in 2h 14m</span><span class="type-specimen-meta">11px / 500</span></div>
   <div class="type-specimen"><span class="type-specimen-label">Overline</span><span style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary)">FEATURED VEHICLE</span><span class="type-specimen-meta">11px / 700 / UC</span></div>
 
-  <div class="subsection-title">Monospace (Data)</div>
-  <div class="type-specimen"><span class="type-specimen-label">VIN</span><span style="font-family:var(--font-mono);font-size:15px;font-weight:500">1HGBH41JXMN109186</span><span class="type-specimen-meta">JetBrains Mono</span></div>
-  <div class="type-specimen"><span class="type-specimen-label">Lot Number</span><span style="font-family:var(--font-mono);font-size:15px;font-weight:500">#48291076</span><span class="type-specimen-meta">JetBrains Mono</span></div>
-  <div class="type-specimen"><span class="type-specimen-label">Currency</span><span style="font-family:var(--font-mono);font-size:24px;font-weight:700">$12,450.00</span><span class="type-specimen-meta">JetBrains Mono</span></div>
+  <div class="subsection-title">Monospace — Compare Contexts</div>
+  <div class="type-specimen"><span class="type-specimen-label">VIN</span><span style="font-family:var(--font-mono);font-size:15px;font-weight:500;font-feature-settings:'zero' 0">1HGBH41JXMN109186</span><span class="type-specimen-meta">Mono · compare</span></div>
+  <div class="type-specimen"><span class="type-specimen-label">Lot Number</span><span style="font-family:var(--font-mono);font-size:15px;font-weight:500;font-feature-settings:'zero' 0">#48291076</span><span class="type-specimen-meta">Mono · compare</span></div>
+  <div class="type-specimen"><span class="type-specimen-label">Price (in list)</span><span style="font-family:var(--font-mono);font-size:24px;font-weight:700;font-feature-settings:'zero' 0">$12,450.00</span><span class="type-specimen-meta">Mono · compare</span></div>
+  <div class="type-specimen"><span class="type-specimen-label">Hero Bid (read)</span><span style="font-family:var(--font-primary);font-size:24px;font-weight:700">$12,450</span><span class="type-specimen-meta">Inter · read</span></div>
+  <div class="type-specimen"><span class="type-specimen-label">Timer</span><span style="font-family:var(--font-mono);font-size:20px;font-weight:700;font-feature-settings:'zero' 0">02:14:37</span><span class="type-specimen-meta">Mono · always (layout shift)</span></div>
 
   <div class="subsection-title">Font Weight Ramp</div>
   <div style="display:flex;flex-direction:column;gap:6px;">

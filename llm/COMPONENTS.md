@@ -1262,7 +1262,7 @@ Placeholder shapes matching the component they replace.
 | Cell min-height | 48px |
 | Cell padding-x | var(--space-3) |
 | Cell font | type-body (16px / 400), var(--text-secondary) |
-| Monospace cells (VIN, Lot#, Price) | JetBrains Mono, 15px |
+| Monospace cells (VIN, Lot#, Price) | JetBrains Mono, 15px, `font-feature-settings: "zero" 0` |
 | Row border | 1px solid var(--border-subtle) |
 | Sort icon | 12px, var(--color-neutral-300) (unsorted) / var(--interactive-primary) (sorted) |
 | Sticky first column | optional, with subtle shadow on scroll |
@@ -1367,7 +1367,8 @@ Placeholder shapes matching the component they replace.
 | Property | Value |
 |----------|-------|
 | Value font | type-display-sm or type-headline (responsive), var(--text-primary), weight 800 |
-| Value monospace (financial) | JetBrains Mono |
+| Value monospace (compare) | JetBrains Mono + `font-feature-settings: "zero" 0` |
+| Value Inter (read/hero) | Inter — for singular dominant numbers not competing with siblings |
 | Label font | type-caption-1 (12px / 500), var(--text-tertiary), uppercase, 0.08em tracking |
 | Trend font | type-subheadline (14px / 600) |
 | Period font | type-caption-2 (11px), var(--text-tertiary) |
@@ -1376,7 +1377,7 @@ Placeholder shapes matching the component they replace.
 
 **Usage Rules:**
 - Use in dashboard widget rows and auction summary cards.
-- Financial values should always use monospace (JetBrains Mono).
+- Financial values in compare contexts (dashboard rows, multi-stat cards) use JetBrains Mono + `font-feature-settings: "zero" 0`. Singular hero numbers (win amount, buy-it-now) use Inter.
 - Always provide a period/context label (e.g., "Last 30 days").
 
 **Accessibility:**

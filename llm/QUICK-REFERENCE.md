@@ -165,6 +165,8 @@
 ```css
 --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+/* Mono: always add font-feature-settings: "zero" 0 to suppress dotted zero */
+/* Inter tabular: font-feature-settings: "tnum" for alignment without font switch */
 ```
 
 | Token | Size | Weight | Line-Height | Use |
@@ -320,7 +322,7 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 
 **Modals:** Title = topic. Primary button = specific action ("Place bid", "Confirm purchase"), never "OK"/"Yes". No pricing in buttons — display amounts in modal body. Secondary = "Cancel".
 
-**Tables:** Noun-phrase headers ("Sale date", "Current bid"). Null values: em dash "—", never "N/A" or blank. Monospace for VIN, lot numbers, bid amounts.
+**Tables:** Noun-phrase headers ("Sale date", "Current bid"). Null values: em dash "—", never "N/A" or blank. Monospace (`var(--font-mono)` with `font-feature-settings: "zero" 0`) for VIN, lot numbers, bid amounts — any number being *compared* in rows. Mono never bleeds into labels or prose.
 
 **Badges:** 1–2 words. Status: past participle/adjective ("Sold", "Active"). Category: nouns ("Clean title", "Salvage").
 
@@ -1052,7 +1054,8 @@ Track: 6px, `var(--neutral-200)`, 3px radius. Fill: `var(--interactive-primary)`
 | Property | Value |
 |----------|-------|
 | Card | `var(--bg-primary)`, `1px solid var(--border-subtle)`, `var(--radius-xl)`, `var(--space-5)` padding |
-| Value | `var(--font-mono)`, 32px / 800, `var(--text-primary)` |
+| Value (compare) | `var(--font-mono)` + `font-feature-settings: "zero" 0`, 32px / 800, `var(--text-primary)` |
+| Value (read/hero) | `var(--font-primary)`, 32px / 800, `var(--text-primary)` — singular dominant number |
 | Label | 11px / 700, uppercase, `letter-spacing: 0.08em`, `var(--text-tertiary)` |
 | Trend up | `var(--success-icon)` |
 | Trend down | `var(--error-icon)` |
@@ -1506,7 +1509,7 @@ Set `data-platform="mobile"` on `<html>` to activate all CSS variable overrides 
 2. **No pure red.** Use `--error-*` (rose/magenta) for all error/destructive states.
 3. **No emoji.** Use Iconic SVG icons only.
 4. **Orange is secondary.** Never use CTA Orange as a primary action competing with Blue.
-5. **Monospace for data.** Use `var(--font-mono)` for VIN, lot numbers, prices in tables.
+5. **Read vs. Compare.** Numbers being *compared* (stacked in lists, cards, ladders) → `var(--font-mono)` + `font-feature-settings: "zero" 0`. Numbers being *read* (singular, dominant) → Inter. Prose-adjacent alignment → Inter + `font-feature-settings: "tnum"`. Mono never bleeds into labels. Timers always mono.
 6. **16px minimum** for body text. 11px absolute floor for non-essential metadata.
 7. **Labels are not placeholders.** Every input needs a visible `<label>`.
 8. **Color + icon + label.** Never use color alone to communicate state.

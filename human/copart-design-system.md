@@ -39,8 +39,8 @@ Obsessive attention to alignment, spacing, and typographic discipline. Every pix
 
 **Execution in Vallejo:**
 - 4px baseline grid. 8px spacing scale. No arbitrary values — every measurement comes from the token system.
-- Monospace numerals (`JetBrains Mono`) for all financial data, VINs, lot numbers, timestamps. Numbers are first-class citizens.
-- `font-variant-numeric: tabular-nums` in all data contexts so columns align.
+- Numbers are first-class citizens. JetBrains Mono for numbers being *compared* (stacked in lists, cards, ladders); Inter for numbers being *read* (singular, dominant, display-scale impact). Mono never bleeds into labels or prose.
+- Tabular alignment always — JetBrains Mono for compare contexts, Inter with `font-feature-settings: "tnum"` for prose-adjacent alignment. Columns must align regardless of typeface.
 - Verb-first button labels. "Place bid" not "Submit." Specific verbs, not generic actions.
 - Consistent terminology from the [glossary](#24-terminology-glossary) everywhere. If it's a "lot" on the search page, it's a "lot" on the detail page.
 
@@ -957,12 +957,51 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 
 Numbers are first-class citizens in the Vallejo type system. On an auction platform, numbers carry the most consequential information — bid amounts, lot counts, sale dates, VINs. They deserve the same design rigor as any other element. See [Vault > typography-voice.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/craft/typography-voice.md).
 
-**Core rules:**
+### The Governing Principle: Read vs. Compare
+
+The decision of whether to use JetBrains Mono or Inter for any number is determined by a single question: **is this number being read or compared?**
+
+- **Numbers being compared** — stacked in lists, cards, rows, ladders, or any context where a member is scanning multiple values against each other → **JetBrains Mono**
+- **Numbers being read** — singular, dominant, display scale, where the number stands alone and lands as impact → **Inter**
+
+This principle applies consistently across all surfaces — public browsing, search results, lot detail, bid box, live auction, and transaction flows. Surface type does not determine the rule; the nature of how the number is used does.
+
+**Compare contexts (mono):**
+- Price values in search result cards
+- Bidding increment row in the bid box
+- Bid ladder in live auction
+- VINs and lot numbers
+- Any numerical column where values stack vertically
+
+**Read contexts (Inter):**
+- Hero current bid amount in the bid box
+- Win amount confirmation
+- Buy-it-now price displayed at prominence
+- Any singular dominant number not competing with siblings
+
+### Timer Exception
+
+The auction countdown timer remains JetBrains Mono even at large display sizes. Unlike a hero bid amount, the timer is tabular by nature — digits must hold their horizontal position as values change to prevent layout shift. This is the explicit exception to the read = Inter rule.
+
+### Mono Never Bleeds into Labels or Prose
+
+Regardless of surface or context, JetBrains Mono is strictly limited to numerical values. Labels, descriptions, helper text, navigation, and any copy surrounding a mono number always uses Inter. This constraint is what prevents the font switch from reading as developer tooling on public-facing surfaces.
+
+### Browsing Surfaces — Tabular Figures Without Font Switch
+
+On surfaces where numerical values appear in prose-adjacent contexts — vehicle highlights, condition data, descriptive copy — and a font switch would feel incongruous, use Inter with tabular figures instead:
+
+```css
+font-feature-settings: "tnum";
+```
+
+This provides column alignment without switching typefaces. This is a fallback, not a replacement — if the number is clearly in a compare context, JetBrains Mono still applies.
+
+### Additional Rules
 
 | Rule | Implementation |
 |------|---------------|
-| **Tabular figures always** | `font-variant-numeric: tabular-nums` in all data contexts — tables, cards, stat blocks, dashboards. Columns must align. |
-| **JetBrains Mono for precision data** | VIN numbers, lot numbers, bid amounts, timestamps, odometer readings — anywhere character-level precision matters. |
+| **Tabular alignment always** | Numbers in compare contexts use JetBrains Mono. Prose-adjacent contexts where a font switch would jar use Inter with `font-feature-settings: "tnum"`. Either way, columns must align. |
 | **Precision matches context** | No cents on amounts over $100 ("$47,250" not "$47,250.00"). Cents only for sub-dollar amounts ("$0.50"). |
 | **Size communicates importance** | Current bid amount is larger than metadata numbers. The winning bid is the biggest number on the lot detail page. |
 | **Color communicates state** | Winning/leading bid, outbid/losing position, and final sold price should each have distinct color treatment. Numbers don't just display data — they signal urgency and status. |
@@ -974,13 +1013,20 @@ Numbers are first-class citizens in the Vallejo type system. On an auction platf
 
 ## 4.4 Font Pairing Strategy
 
-**Primary (95% of UI):** Inter — used for all interface text, from hero headings to caption labels.
+**Primary (95% of UI):** Inter — used for all interface text, from hero headings to caption labels. Also used for singular "read" numbers (hero bid amounts, win confirmations, buy-it-now prices).
 
-**Monospace (Data & Code):** `"JetBrains Mono", "SF Mono", "Fira Code", "Cascadia Code", monospace`
-- Used for: VIN numbers, lot numbers, bid amounts in tables, timestamps in auction logs
+**Monospace (Compare Data):** `"JetBrains Mono", "SF Mono", "Fira Code", "Cascadia Code", monospace`
+- Used for: numbers being *compared* — prices in search cards, bid ladders, VINs, lot numbers, timers, any stacked numerical column
+- Never used for: labels, descriptions, helper text, or any copy surrounding a number
 - Size: Match the semantic role (body, caption, etc.) but reduce by 1px to account for mono's wider set width
 
-**When to use monospace:** Any string where character alignment aids scanning — VIN (`1HGBH41JXMN109186`), lot numbers (`#48291076`), currency in data tables.
+**Suppress the dotted zero.** JetBrains Mono ships with a dotted zero (a code-editor convention). In a financial UI, the dot creates visual friction and serves no disambiguation need. Suppress it everywhere JetBrains Mono is specified:
+
+```css
+font-feature-settings: "zero" 0;
+```
+
+**When to use monospace vs. Inter:** The read/compare principle (§4.3) governs. If a number is being *compared* against siblings, it's mono. If it's being *read* as a standalone impact moment, it's Inter. Timers are the one exception — always mono regardless of size, because digits must hold position as values change.
 
 ---
 

@@ -210,7 +210,7 @@
     "typography": {
       "font-family": {
         "primary":   { "$value": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif", "$type": "fontFamily" },
-        "monospace": { "$value": "'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', monospace", "$type": "fontFamily" }
+        "monospace": { "$value": "'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', monospace", "$type": "fontFamily", "$description": "Compare contexts only. Always pair with font-feature-settings: \"zero\" 0 to suppress dotted zero." }
       },
       "font-weight": {
         "thin":       { "$value": 100, "$type": "fontWeight" },

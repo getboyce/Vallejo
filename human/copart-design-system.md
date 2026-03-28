@@ -1,6 +1,6 @@
 # Vallejo Design System
 
-**1.1.1** | Last updated: March 28, 2026
+**1.1.2** | Last updated: March 28, 2026
 
 ---
 
@@ -3748,4 +3748,4 @@ Before shipping any component, verify:
 
 ---
 
-*Vallejo Design System 1.1.1 — Precision, Institutional Confidence, Vitality. Executing the [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault) at the component level.*
+*Vallejo Design System 1.1.2 — Precision, Institutional Confidence, Vitality. Executing the [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault) at the component level.*

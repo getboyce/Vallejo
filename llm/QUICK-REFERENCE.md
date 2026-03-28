@@ -1,4 +1,4 @@
-# Vallejo v1.1.1 — LLM Quick Reference
+# Vallejo v1.1.2 — LLM Quick Reference
 
 > **Design source of truth:** The [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault) defines the "why" — philosophy, principles, anti-patterns. Read the Vault first for context. This file defines the "how" — execution specs and patterns. When they conflict, the Vault wins.
 >

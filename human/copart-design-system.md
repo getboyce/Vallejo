@@ -1,6 +1,6 @@
 # Vallejo Design System
 
-**1.1.1** | Last updated: March 2026
+**1.1.1** | Last updated: March 28, 2026
 
 ---
 

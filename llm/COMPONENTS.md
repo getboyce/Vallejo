@@ -7,7 +7,7 @@
 > For system overview and file routing, see SYSTEM-INDEX.json.
 
 **Version:** 1.1.1
-**Last Updated:** March 2026
+**Last Updated:** March 28, 2026
 **Total:** 37 components, 60+ variants, 120+ documented states
 
 ---

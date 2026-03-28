@@ -33,7 +33,7 @@ If the answer to any is no, the design is wrong. See [Vault > language/north-sta
 
 ## For Human Readers
 
-> See [`/human/copart-design-system.md`](human/copart-design-system.md) for the complete design system specification — principles, foundations, all 31 components, patterns, animation, and mobile platform.
+> See [`/human/copart-design-system.md`](human/copart-design-system.md) for the complete design system specification — principles, foundations, all 37 components, patterns, animation, and mobile platform.
 >
 > See [`/human/copart-design-tokens.json`](human/copart-design-tokens.json) for the machine-readable design token file (W3C DTCG format).
 

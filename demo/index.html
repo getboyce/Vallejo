@@ -47,6 +47,7 @@
   --border-default: #C5CCD3; --border-subtle: #E2E5E9; --border-focus: #2662D9;
   --interactive-primary: #2662D9; --interactive-hover: #063598; --interactive-active: #042D7A;
   --interactive-accent: #D86518; --interactive-accent-hover: #933C06; --interactive-accent-surface: #F8E2D3;
+  --text-link: #2662D9; --text-link-hover: #063598;
 
   /* Header background — stays dark in both themes */
   --header-bg: #2F333C;
@@ -65,12 +66,15 @@
   --space-12: 48px; --space-16: 64px;
 
   /* Radii */
-  --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px; --radius-xl: 12px; --radius-2xl: 16px; --radius-pill: 9999px;
+  --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px; --radius-xl: 12px; --radius-2xl: 16px; --radius-pill: 9999px; --radius-full: 50%;
 
   /* Motion */
   --dur-fast: 100ms; --dur-normal: 150ms; --dur-moderate: 200ms; --dur-slow: 300ms; --dur-deliberate: 400ms;
-  --ease-out: ease-out; --ease-spring: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: ease-out; --ease-in-out: ease-in-out; --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   --ease-enter: cubic-bezier(0.32, 0.72, 0, 1); --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Z-index */
+  --z-header: 1000; --z-dropdown: 1100; --z-overlay: 1200; --z-drawer: 1300;
 
   /* Fonts */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -113,6 +117,7 @@
   --border-default: #3A4150; --border-subtle: #2E3340; --border-focus: #5B8EF0;
   --interactive-primary: #5B8EF0; --interactive-hover: #7AAAF5; --interactive-active: #4A7DE0;
   --interactive-accent: #E8873F; --interactive-accent-hover: #F0A566; --interactive-accent-surface: #2E1F14;
+  --text-link: #5B8EF0; --text-link-hover: #7AAAF5;
 
   /* Shadows — dark mode */
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.2); --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
@@ -447,9 +452,16 @@ body {
 .btn-lg { height: 48px; padding: 0 24px; font-size: 16px; border-radius: var(--radius-lg); }
 .btn-xl { height: 56px; padding: 0 32px; font-size: 18px; font-weight: 600; border-radius: 10px; }
 
+/* Icon + Text — shave 2px from the icon side for optical balance */
+.btn-icon-text.btn-xs { padding: 0 10px 0 8px; }
+.btn-icon-text.btn-sm { padding: 0 12px 0 10px; }
+.btn-icon-text.btn-md { padding: 0 16px 0 14px; }
+.btn-icon-text.btn-lg { padding: 0 24px 0 22px; }
+.btn-icon-text.btn-xl { padding: 0 32px 0 30px; }
+
 /* Primary */
-.btn-primary { background: var(--interactive-primary); color: #fff; box-shadow: 0 1px 2px rgba(38,98,217,0.24); }
-.btn-primary:hover { background: var(--interactive-hover); box-shadow: 0 2px 4px rgba(6,53,152,0.32); }
+.btn-primary { background: var(--interactive-primary); color: #fff; }
+.btn-primary:hover { background: var(--interactive-hover); }
 /* Secondary */
 .btn-secondary { background: var(--bg-primary); color: var(--interactive-primary); border: 1.5px solid var(--interactive-primary); }
 .btn-secondary:hover { background: var(--blue-100); color: var(--interactive-hover); border-color: var(--interactive-hover); }
@@ -682,7 +694,6 @@ body {
 .stat-trend.up { color: var(--success-icon); }
 .stat-trend.down { color: var(--error-icon); }
 .stat-trend.urgent { color: var(--interactive-accent); }
-.stat-card.accent { border-top: 3px solid var(--interactive-accent); }
 .stat-card.accent .stat-value { color: var(--interactive-accent); }
 .stat-card.accent .stat-label { color: var(--orange-800); }
 
@@ -712,7 +723,7 @@ tr:last-child td { border-bottom: none; }
 tr:hover td { background: var(--neutral-100); }
 tr.hot td { background: var(--orange-50); }
 tr.hot:hover td { background: var(--orange-100); }
-.table-status { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: var(--radius-full); }
+.table-status { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: var(--radius-lg); }
 .table-status.status-hot { background: var(--orange-200); color: var(--orange-900); }
 .table-status.status-active { background: var(--blue-200); color: var(--blue-900); }
 .mono { font-family: var(--font-mono); font-size: 13px; }
@@ -883,7 +894,7 @@ tr.hot:hover td { background: var(--orange-100); }
   50% { opacity: 1; transform: scale(1.2); }
   100% { opacity: 1; transform: scale(1); }
 }
-.heart-anim { display: inline-flex; align-items: center; position: relative; width: 20px; height: 20px; }
+.heart-anim { display: inline-flex; align-items: center; position: relative; width: 18px; height: 18px; }
 .heart-anim .icon-default,
 .heart-anim .icon-active { position: absolute; top: 0; left: 0; transition: opacity 200ms ease, transform 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 .heart-anim .icon-default { opacity: 1; transform: scale(1); }
@@ -1040,8 +1051,14 @@ tr.hot:hover td { background: var(--orange-100); }
 .breadcrumb { display: flex; align-items: center; gap: var(--space-1); font-size: 12px; font-weight: 500; }
 .breadcrumb a { color: var(--text-tertiary); text-decoration: none; }
 .breadcrumb a:hover { color: var(--interactive-primary); }
-.breadcrumb .sep { color: var(--neutral-300); }
+.breadcrumb .sep { color: var(--neutral-500); display: inline-flex; align-items: center; }
 .breadcrumb .current { color: var(--text-primary); font-weight: 600; }
+
+/* Link */
+.link { color: var(--text-link); font-weight: 500; text-decoration: none; transition: color var(--dur-fast) ease, text-decoration var(--dur-fast) ease; }
+.link:hover { color: var(--text-link-hover); text-decoration: underline; }
+.link.disabled { color: var(--text-disabled); pointer-events: none; }
+.link-external-icon { display: inline-block; width: 14px; height: 14px; vertical-align: -0.15em; margin-left: 2px; }
 
 /* List */
 .list-item {
@@ -1068,7 +1085,7 @@ tr.hot:hover td { background: var(--orange-100); }
   transition: all var(--dur-normal) ease;
 }
 .dropdown-trigger:hover { border-color: var(--neutral-500); }
-.dropdown-trigger .chevron { color: var(--text-tertiary); transition: transform var(--dur-normal) ease; }
+.dropdown-trigger .chevron { color: var(--text-tertiary); transition: transform var(--dur-normal) ease; display: inline-flex; align-items: center; }
 .dropdown-menu {
   position: absolute; top: calc(100% + 4px); left: 0; right: 0;
   background: var(--bg-primary); border: 1px solid var(--border-subtle);
@@ -1228,7 +1245,7 @@ tr.hot:hover td { background: var(--orange-100); }
    ======================================== */
 .status-token {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 3px 10px; border-radius: var(--radius-pill);
+  padding: 4px 12px; border-radius: var(--radius-lg);
   font-size: 12px; font-weight: 600; letter-spacing: 0.01em;
 }
 .status-token .status-dot {
@@ -1344,7 +1361,7 @@ tr.hot:hover td { background: var(--orange-100); }
 .switcher-indicator {
   position: absolute; top: 3px; height: calc(100% - 6px);
   background: var(--bg-primary); border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-sm); transition: left var(--dur-moderate) var(--ease-spring), width var(--dur-moderate) var(--ease-spring);
+  box-shadow: var(--shadow-sm); transition: left var(--dur-moderate) var(--ease-out), width var(--dur-moderate) var(--ease-out);
 }
 .switcher-badge {
   display: inline-block; margin-left: 6px; padding: 1px 8px;
@@ -1587,10 +1604,10 @@ tr.hot:hover td { background: var(--orange-100); }
   <div class="demo-header-actions">
     <a href="ux-writing.html" class="demo-nav-link">UX Writing</a>
     <button class="platform-toggle" onclick="togglePlatform()">
-      <span id="platform-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H13.25C14.3546 4.75 15.25 5.64543 15.25 6.75V17.25C15.25 18.3546 14.3546 19.25 13.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.25 16.75H9.75"/></svg></span> <span id="platform-label">Mobile</span>
+      <span id="platform-icon"><svg width="16" height="16" viewBox="3 3 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H13.25C14.3546 4.75 15.25 5.64543 15.25 6.75V17.25C15.25 18.3546 14.3546 19.25 13.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.25 16.75H9.75"/></svg></span> <span id="platform-label">Mobile</span>
     </button>
     <button class="theme-toggle" onclick="toggleTheme()">
-      <span id="theme-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.25 15.7499C17.2352 16.2904 16.23 16.25 15 16.25C10.9959 16.25 7.75 13.0041 7.75 9.00001C7.75 7.77001 7.70951 6.76474 8.25 5.74994C5.96125 6.96891 4.75 9.2259 4.75 12C4.75 16.004 7.99594 19.25 12 19.25C14.7741 19.25 17.031 18.0387 18.25 15.7499Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 4.75C16 6.95914 14.9591 9 12.75 9C14.9591 9 16 11.0409 16 13.25C16 11.0409 17.0409 9 19.25 9C17.0409 9 16 6.95914 16 4.75Z"/></svg></span> <span id="theme-label">Dark Mode</span>
+      <span id="theme-icon"><svg width="16" height="16" viewBox="3 3 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.25 15.7499C17.2352 16.2904 16.23 16.25 15 16.25C10.9959 16.25 7.75 13.0041 7.75 9.00001C7.75 7.77001 7.70951 6.76474 8.25 5.74994C5.96125 6.96891 4.75 9.2259 4.75 12C4.75 16.004 7.99594 19.25 12 19.25C14.7741 19.25 17.031 18.0387 18.25 15.7499Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 4.75C16 6.95914 14.9591 9 12.75 9C14.9591 9 16 11.0409 16 13.25C16 11.0409 17.0409 9 19.25 9C17.0409 9 16 6.95914 16 4.75Z"/></svg></span> <span id="theme-label">Dark Mode</span>
     </button>
   </div>
 </header>
@@ -1612,6 +1629,7 @@ tr.hot:hover td { background: var(--orange-100); }
   <a href="#media" class="desktop-only">Media</a>
   <a href="#patterns" class="desktop-only">Patterns</a>
   <a href="#interactive" class="desktop-only">Interactive</a>
+  <a href="#micro-components" class="desktop-only">Micro Components</a>
   <a href="#animations">Animations</a>
   <a href="#mobile" class="mobile-only">Mobile</a>
 </nav>
@@ -1664,31 +1682,57 @@ tr.hot:hover td { background: var(--orange-100); }
   <div class="grid-8">
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-50)"><span class="swatch-hex" data-light="#F6F9FD" data-dark="#0D1117">#F6F9FD</span></div><div class="swatch-info"><div class="swatch-name">Blue 50</div><div class="swatch-meta">Brand Tint</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-100)"><span class="swatch-hex" data-light="#EEF3FB" data-dark="#141E33">#EEF3FB</span></div><div class="swatch-info"><div class="swatch-name">Blue 100</div><div class="swatch-meta">Lightest</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-200)"><span class="swatch-hex" data-light="#E1ECF9" data-dark="#1E2A45">#E1ECF9</span></div><div class="swatch-info"><div class="swatch-name">Blue 200</div><div class="swatch-meta">Light</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-300)"><span class="swatch-hex" data-light="#B9D6F4" data-dark="#1A2D4A">#B9D6F4</span></div><div class="swatch-info"><div class="swatch-name">Blue 300</div><div class="swatch-meta">Soft &bull; Sections</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-400)"><span class="swatch-hex" data-light="#83B3E2" data-dark="#2A4A6E">#83B3E2</span></div><div class="swatch-info"><div class="swatch-name">Blue 400</div><div class="swatch-meta">Mid &bull; Accent</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-200)"><span class="swatch-hex" data-light="#E1ECF9" data-dark="#1E2A45">#E1ECF9</span></div><div class="swatch-info"><div class="swatch-name">Blue 200</div><div class="swatch-meta">Selected rows, active backgrounds, pressed states</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-300)"><span class="swatch-hex" data-light="#B9D6F4" data-dark="#1A2D4A">#B9D6F4</span></div><div class="swatch-info"><div class="swatch-name">Blue 300</div><div class="swatch-meta">Marketing sections, branded content bands</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-400)"><span class="swatch-hex" data-light="#83B3E2" data-dark="#2A4A6E">#83B3E2</span></div><div class="swatch-info"><div class="swatch-name">Blue 400</div><div class="swatch-meta">Decorative fills, progress bars, icon backgrounds</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-600)"><span class="swatch-hex" data-light="#2662D9" data-dark="#5B8EF0">#2662D9</span></div><div class="swatch-info"><div class="swatch-name">Blue 600</div><div class="swatch-meta">Primary &bull; AA Large</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-800)"><span class="swatch-hex" data-light="#063598" data-dark="#7AAAF5">#063598</span></div><div class="swatch-info"><div class="swatch-name">Blue 800</div><div class="swatch-meta">Dark &bull; AAA</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-900)"><span class="swatch-hex" data-light="#0F2757" data-dark="#B8D4FA">#0F2757</span></div><div class="swatch-info"><div class="swatch-name">Blue 900</div><div class="swatch-meta">Darkest &bull; AAA</div></div></div>
   </div>
 
   <div class="subsection-title">Neutral Scale</div>
-  <div class="grid-6">
+  <div class="grid-8">
     <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-50)"><span class="swatch-hex" data-light="#FFFFFF" data-dark="#1A1D23">#FFFFFF</span></div><div class="swatch-info"><div class="swatch-name">Neutral 50</div><div class="swatch-meta">Page background</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-100)"><span class="swatch-hex" data-light="#F4F5F6" data-dark="#22262E">#F4F5F6</span></div><div class="swatch-info"><div class="swatch-name">Neutral 100</div><div class="swatch-meta">Surface</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-200)"><span class="swatch-hex" data-light="#E2E5E9" data-dark="#2E3340">#E2E5E9</span></div><div class="swatch-info"><div class="swatch-name">Neutral 200</div><div class="swatch-meta">Muted</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-300)"><span class="swatch-hex" data-light="#C5CCD3" data-dark="#3A4150">#C5CCD3</span></div><div class="swatch-info"><div class="swatch-name">Neutral 300</div><div class="swatch-meta">Border</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-500)"><span class="swatch-hex" data-light="#7A8691" data-dark="#6E7A86">#7A8691</span></div><div class="swatch-info"><div class="swatch-name">Neutral 500</div><div class="swatch-meta">Subtle</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-700)"><span class="swatch-hex" data-light="#46525D" data-dark="#A8B2BC">#46525D</span></div><div class="swatch-info"><div class="swatch-name">Neutral 700</div><div class="swatch-meta">Body</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-800)"><span class="swatch-hex" data-light="#353A48" data-dark="#A8B2BC">#353A48</span></div><div class="swatch-info"><div class="swatch-name">Neutral 800</div><div class="swatch-meta">Header bg, dark UI</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-900)"><span class="swatch-hex" data-light="#2F333C" data-dark="#F0F1F3">#2F333C</span></div><div class="swatch-info"><div class="swatch-name">Neutral 900</div><div class="swatch-meta">Ink &bull; AAA</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-950)"><span class="swatch-hex" data-light="#23262F" data-dark="#F0F1F3">#23262F</span></div><div class="swatch-info"><div class="swatch-name">Neutral 950</div><div class="swatch-meta">Deepest dark, toast bg</div></div></div>
   </div>
 
-  <div class="subsection-title">Semantic Colors</div>
+  <div class="subsection-title">Semantic Colors — Success</div>
   <div class="grid-4">
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-bg)"><span class="swatch-hex" data-light="#D7E8D1" data-dark="#1A2E14" style="background:rgba(0,0,0,0.5)">#D7E8D1</span></div><div class="swatch-info"><div class="swatch-name">Success</div><div class="swatch-meta" data-light="Text: #1B6600" data-dark="Text: #6ABF4D">Text: #1B6600</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-bg)"><span class="swatch-hex" data-light="#FFF7D1" data-dark="#2E2510" style="background:rgba(0,0,0,0.5)">#FFF7D1</span></div><div class="swatch-info"><div class="swatch-name">Warning</div><div class="swatch-meta" data-light="Text: #705700" data-dark="Text: #E8B830">Text: #705700</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-bg)"><span class="swatch-hex" data-light="#FCE5E9" data-dark="#2E1219" style="background:rgba(0,0,0,0.5)">#FCE5E9</span></div><div class="swatch-info"><div class="swatch-name">Error (Rose)</div><div class="swatch-meta" data-light="Text: #8C1D35" data-dark="Text: #F06080">Text: #8C1D35</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-bg)"><span class="swatch-hex" data-light="#E0EBFF" data-dark="#141E33" style="background:rgba(0,0,0,0.5)">#E0EBFF</span></div><div class="swatch-info"><div class="swatch-name">Info</div><div class="swatch-meta" data-light="Text: #0F2757" data-dark="Text: #7AAAF5">Text: #0F2757</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-bg)"><span class="swatch-hex" data-light="#D7E8D1" data-dark="#1A2E14" style="background:rgba(0,0,0,0.5)">#D7E8D1</span></div><div class="swatch-info"><div class="swatch-name">success-bg</div><div class="swatch-meta">Alert backgrounds, success banners</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-text)"><span class="swatch-hex" data-light="#1B6600" data-dark="#6ABF4D">#1B6600</span></div><div class="swatch-info"><div class="swatch-name">success-text</div><div class="swatch-meta">Message text on success-bg (AAA)</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-border)"><span class="swatch-hex" data-light="#4CA830" data-dark="#4CA830">#4CA830</span></div><div class="swatch-info"><div class="swatch-name">success-border</div><div class="swatch-meta">Alert borders, positive indicators</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-icon)"><span class="swatch-hex" data-light="#238202" data-dark="#6ABF4D">#238202</span></div><div class="swatch-info"><div class="swatch-name">success-icon</div><div class="swatch-meta">Checkmarks, auction-live indicators</div></div></div>
+  </div>
+
+  <div class="subsection-title">Semantic Colors — Warning</div>
+  <div class="grid-4">
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-bg)"><span class="swatch-hex" data-light="#FFF7D1" data-dark="#2E2510" style="background:rgba(0,0,0,0.5)">#FFF7D1</span></div><div class="swatch-info"><div class="swatch-name">warning-bg</div><div class="swatch-meta">Warning alert backgrounds</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-text)"><span class="swatch-hex" data-light="#705700" data-dark="#E8B830">#705700</span></div><div class="swatch-info"><div class="swatch-name">warning-text</div><div class="swatch-meta">Message text on warning-bg (AA)</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-border)"><span class="swatch-hex" data-light="#EC9C0D" data-dark="#E8B830">#EC9C0D</span></div><div class="swatch-info"><div class="swatch-name">warning-border</div><div class="swatch-meta">Warning borders, caution indicators</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-icon)"><span class="swatch-hex" data-light="#B07800" data-dark="#E8B830">#B07800</span></div><div class="swatch-info"><div class="swatch-name">warning-icon</div><div class="swatch-meta">Alert icons, time-sensitive badges</div></div></div>
+  </div>
+
+  <div class="subsection-title">Semantic Colors — Error (Rose)</div>
+  <div class="grid-4">
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-bg)"><span class="swatch-hex" data-light="#FCE5E9" data-dark="#2E1219" style="background:rgba(0,0,0,0.5)">#FCE5E9</span></div><div class="swatch-info"><div class="swatch-name">error-bg</div><div class="swatch-meta">Error alerts, destructive surfaces</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-text)"><span class="swatch-hex" data-light="#8C1D35" data-dark="#F06080">#8C1D35</span></div><div class="swatch-info"><div class="swatch-name">error-text</div><div class="swatch-meta">Error messages on error-bg (AAA)</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-border)"><span class="swatch-hex" data-light="#D42A54" data-dark="#F06080">#D42A54</span></div><div class="swatch-info"><div class="swatch-name">error-border</div><div class="swatch-meta">Validation outlines, error borders</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-icon)"><span class="swatch-hex" data-light="#C22248" data-dark="#F06080">#C22248</span></div><div class="swatch-info"><div class="swatch-name">error-icon</div><div class="swatch-meta">Error icons, destructive buttons</div></div></div>
+  </div>
+
+  <div class="subsection-title">Semantic Colors — Info</div>
+  <div class="grid-4">
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-bg)"><span class="swatch-hex" data-light="#E0EBFF" data-dark="#141E33" style="background:rgba(0,0,0,0.5)">#E0EBFF</span></div><div class="swatch-info"><div class="swatch-name">info-bg</div><div class="swatch-meta">Info alert backgrounds</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-text)"><span class="swatch-hex" data-light="#0F2757" data-dark="#7AAAF5">#0F2757</span></div><div class="swatch-info"><div class="swatch-name">info-text</div><div class="swatch-meta">Info message text on info-bg (AAA)</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-border)"><span class="swatch-hex" data-light="#2662D9" data-dark="#5B8EF0">#2662D9</span></div><div class="swatch-info"><div class="swatch-name">info-border</div><div class="swatch-meta">Info borders</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-icon)"><span class="swatch-hex" data-light="#2662D9" data-dark="#5B8EF0">#2662D9</span></div><div class="swatch-info"><div class="swatch-name">info-icon</div><div class="swatch-meta">Info icons</div></div></div>
   </div>
 
   <div class="subsection-title">Secondary Accent — Orange</div>
@@ -1699,6 +1743,12 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="swatch-card"><div class="swatch-color" style="background:var(--orange-600)"><span class="swatch-hex" data-light="#D86518" data-dark="#E8873F">#D86518</span></div><div class="swatch-info"><div class="swatch-name">Orange 600</div><div class="swatch-meta">Accent primary — CTAs, badges</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--orange-800)"><span class="swatch-hex" data-light="#933C06" data-dark="#F0A566">#933C06</span></div><div class="swatch-info"><div class="swatch-name">Orange 800</div><div class="swatch-meta">Hover/pressed</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--orange-900)"><span class="swatch-hex" data-light="#50250B" data-dark="#F8C99A">#50250B</span></div><div class="swatch-info"><div class="swatch-name">Orange 900</div><div class="swatch-meta">Text on warm surfaces</div></div></div>
+  </div>
+
+  <div class="subsection-title">Semantic — Link</div>
+  <div class="grid-4">
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--text-link)"><span class="swatch-hex" data-light="#2662D9" data-dark="#5B8EF0">#2662D9</span></div><div class="swatch-info"><div class="swatch-name">text-link</div><div class="swatch-meta">Default inline link</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--text-link-hover)"><span class="swatch-hex" data-light="#063598" data-dark="#7AAAF5">#063598</span></div><div class="swatch-info"><div class="swatch-name">text-link-hover</div><div class="swatch-meta">Hover + underline</div></div></div>
   </div>
 
 </section>
@@ -1792,9 +1842,9 @@ tr.hot:hover td { background: var(--orange-100); }
 
   <div style="display:flex;gap:var(--space-6);margin-bottom:var(--space-6);flex-wrap:wrap">
     <div style="display:flex;align-items:center;gap:var(--space-2);font-size:13px;color:var(--text-secondary)"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-md);background:var(--bg-secondary)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg></span>Stroke: 1.5px</div>
-    <div style="display:flex;align-items:center;gap:var(--space-2);font-size:13px;color:var(--text-secondary)"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-md);background:var(--bg-secondary)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1"/></svg></span>ViewBox: 0 0 24 24</div>
-    <div style="display:flex;align-items:center;gap:var(--space-2);font-size:13px;color:var(--text-secondary)"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-md);background:var(--bg-secondary)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>Caps: round</div>
-    <div style="display:flex;align-items:center;gap:var(--space-2);font-size:13px;color:var(--text-secondary)"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-md);background:var(--bg-secondary)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--interactive-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/></svg></span>currentColor</div>
+    <div style="display:flex;align-items:center;gap:var(--space-2);font-size:13px;color:var(--text-secondary)"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-md);background:var(--bg-secondary)"><svg width="20" height="20" viewBox="3 3 18 18" fill="none" stroke="var(--text-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1"/></svg></span>ViewBox: 0 0 24 24</div>
+    <div style="display:flex;align-items:center;gap:var(--space-2);font-size:13px;color:var(--text-secondary)"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-md);background:var(--bg-secondary)"><svg width="20" height="20" viewBox="3 3 18 18" fill="none" stroke="var(--text-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>Caps: round</div>
+    <div style="display:flex;align-items:center;gap:var(--space-2);font-size:13px;color:var(--text-secondary)"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-md);background:var(--bg-secondary)"><svg width="20" height="20" viewBox="3 3 18 18" fill="none" stroke="var(--interactive-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/></svg></span>currentColor</div>
   </div>
 
     <!-- Navigation -->
@@ -2183,12 +2233,11 @@ tr.hot:hover td { background: var(--orange-100); }
         <span style="font-size:12px;color:var(--text-tertiary);font-family:var(--font-mono)">var(--font-mono)</span>
       </div>
       <div class="font-showcase-name-mono" style="font-family:var(--font-mono);font-size:56px;font-weight:700;letter-spacing:-0.02em;line-height:1;margin-bottom:var(--space-4);color:var(--text-primary)">JetBrains Mono</div>
-      <div style="font-family:var(--font-mono);font-size:18px;font-weight:400;line-height:1.6;color:var(--text-secondary);margin-bottom:var(--space-5);font-feature-settings:'zero' 0">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789 !@#$%&amp;*()?.,:;</div>
+      <div style="font-family:var(--font-mono);font-size:18px;font-weight:400;line-height:1.6;color:var(--text-secondary);margin-bottom:var(--space-5)">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789 !@#$%&amp;*()?.,:;</div>
       <div style="font-family:var(--font-mono);font-size:15px;line-height:1.6;color:var(--text-secondary);border-top:1px solid var(--border-subtle);padding-top:var(--space-4)">
         <span style="font-weight:400">Regular, </span><span style="font-weight:500">Medium, </span><span style="font-weight:700">Bold</span>
       </div>
       <div style="font-family:var(--font-mono);font-size:13px;color:var(--text-tertiary);margin-top:var(--space-3)">Compare contexts: VINs, lot numbers, bid ladders, price columns, timers</div>
-      <div style="font-size:11px;color:var(--text-tertiary);margin-top:var(--space-2);font-family:var(--font-primary)"><code style="font-family:var(--font-mono);font-size:10px;background:var(--bg-secondary);padding:1px 4px;border-radius:3px">font-feature-settings: "zero" 0</code> &mdash; suppress dotted zero</div>
     </div>
   </div>
 
@@ -2206,15 +2255,15 @@ tr.hot:hover td { background: var(--orange-100); }
   <div class="type-specimen"><span class="type-specimen-label">Subheadline</span><span style="font-size:14px;font-weight:600;letter-spacing:0.005em;line-height:1.4">AUCTION SCHEDULE</span><span class="type-specimen-meta">14px / 600</span></div>
   <div class="type-specimen"><span class="type-specimen-label">Footnote</span><span style="font-size:13px;font-weight:400;letter-spacing:0.01em;color:var(--text-tertiary)">Last updated 2 hours ago</span><span class="type-specimen-meta">13px / 400</span></div>
   <div class="type-specimen"><span class="type-specimen-label">Caption 1</span><span style="font-size:12px;font-weight:500;letter-spacing:0.015em;color:var(--text-tertiary)">37,482 miles &bull; Clean title</span><span class="type-specimen-meta">12px / 500</span></div>
-  <div class="type-specimen"><span class="type-specimen-label">Caption 2</span><span style="font-size:11px;font-weight:500;letter-spacing:0.02em;color:var(--text-tertiary)">Ends in 2h 14m</span><span class="type-specimen-meta">11px / 500</span></div>
+  <div class="type-specimen"><span class="type-specimen-label">Caption 2</span><span style="font-size:12px;font-weight:500;letter-spacing:0.015em;color:var(--text-tertiary)">Ends in 2h 14m</span><span class="type-specimen-meta">12px / 500</span></div>
   <div class="type-specimen"><span class="type-specimen-label">Overline</span><span style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary)">FEATURED VEHICLE</span><span class="type-specimen-meta">11px / 700 / UC</span></div>
 
   <div class="subsection-title">Monospace — Compare Contexts</div>
-  <div class="type-specimen"><span class="type-specimen-label">VIN</span><span style="font-family:var(--font-mono);font-size:15px;font-weight:500;font-feature-settings:'zero' 0">1HGBH41JXMN109186</span><span class="type-specimen-meta">Mono · compare</span></div>
-  <div class="type-specimen"><span class="type-specimen-label">Lot Number</span><span style="font-family:var(--font-mono);font-size:15px;font-weight:500;font-feature-settings:'zero' 0">#48291076</span><span class="type-specimen-meta">Mono · compare</span></div>
-  <div class="type-specimen"><span class="type-specimen-label">Price (in list)</span><span style="font-family:var(--font-mono);font-size:24px;font-weight:700;font-feature-settings:'zero' 0">$12,450.00</span><span class="type-specimen-meta">Mono · compare</span></div>
+  <div class="type-specimen"><span class="type-specimen-label">VIN</span><span style="font-family:var(--font-mono);font-size:15px;font-weight:500">1HGBH41JXMN109186</span><span class="type-specimen-meta">Mono · compare</span></div>
+  <div class="type-specimen"><span class="type-specimen-label">Lot Number</span><span style="font-family:var(--font-mono);font-size:15px;font-weight:500">#48291076</span><span class="type-specimen-meta">Mono · compare</span></div>
+  <div class="type-specimen"><span class="type-specimen-label">Price (in list)</span><span style="font-family:var(--font-mono);font-size:24px;font-weight:700">$12,450.00</span><span class="type-specimen-meta">Mono · compare</span></div>
   <div class="type-specimen"><span class="type-specimen-label">Hero Bid (read)</span><span style="font-family:var(--font-primary);font-size:24px;font-weight:700">$12,450</span><span class="type-specimen-meta">Inter · read</span></div>
-  <div class="type-specimen"><span class="type-specimen-label">Timer</span><span style="font-family:var(--font-mono);font-size:20px;font-weight:700;font-feature-settings:'zero' 0">02:14:37</span><span class="type-specimen-meta">Mono · always (layout shift)</span></div>
+  <div class="type-specimen"><span class="type-specimen-label">Timer</span><span style="font-family:var(--font-mono);font-size:20px;font-weight:700">02:14:37</span><span class="type-specimen-meta">Mono · always</span></div>
 
   <div class="subsection-title">Font Weight Ramp</div>
   <div style="display:flex;flex-direction:column;gap:6px;">
@@ -2276,7 +2325,7 @@ tr.hot:hover td { background: var(--orange-100); }
         <!-- 8px example -->
         <div>
           <div style="font-size:11px;font-family:var(--font-mono);color:var(--text-tertiary);margin-bottom:6px">space-2 (8px) &mdash; icon-to-label gap in button</div>
-          <button class="btn btn-sm btn-primary" style="pointer-events:none">
+          <button class="btn btn-sm btn-primary btn-icon-text" style="pointer-events:none">
             <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 10.5l2.5 2.5 5-5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Confirm Bid
           </button>
@@ -2472,11 +2521,18 @@ tr.hot:hover td { background: var(--orange-100); }
 
   <div class="subsection-title">With Icons</div>
   <div class="flex-row" style="gap:var(--space-3)">
-    <button class="btn btn-md btn-primary"><svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.75V18.25"/><path d="M5.75 12H18.25"/></svg> Add to lot</button>
-    <button class="btn btn-md btn-secondary" onclick="toggleWatchlist(this)"><span class="heart-anim"><svg class="btn-icon icon-default" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.75V18.25"/><path d="M5.75 12H18.25"/></svg><svg class="btn-icon icon-active heart-filled" width="20" height="20" viewBox="0 0 24 24" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span> Watchlist</button>
-    <button class="btn btn-md btn-watchlist-active" onclick="toggleWatchlist(this)"><span class="heart-anim active"><svg class="btn-icon icon-default" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.75V18.25"/><path d="M5.75 12H18.25"/></svg><svg class="btn-icon icon-active heart-filled" width="20" height="20" viewBox="0 0 24 24" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span> Watching</button>
-    <button class="btn btn-md btn-tertiary"><svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.25 6.75L4.75 12L10.25 17.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.25 12H5"/></svg> Back to Results</button>
-    <button class="btn btn-md btn-success"><svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.75 12.8665L8.33995 16.4138C9.15171 17.5256 10.8179 17.504 11.6006 16.3715L18.25 6.75"/></svg> Confirm Payment</button>
+    <button class="btn btn-md btn-primary btn-icon-text"><svg class="btn-icon" width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.75V18.25"/><path d="M5.75 12H18.25"/></svg> Add to lot</button>
+    <button class="btn btn-md btn-secondary" onclick="toggleWatchlist(this)"><span class="heart-anim"><svg class="btn-icon icon-default" width="18" height="18" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z"/></svg><svg class="btn-icon icon-active heart-filled" width="18" height="18" viewBox="3 3 18 18" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span> Watchlist</button>
+    <button class="btn btn-md btn-watchlist-active" onclick="toggleWatchlist(this)"><span class="heart-anim active"><svg class="btn-icon icon-default" width="18" height="18" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z"/></svg><svg class="btn-icon icon-active heart-filled" width="18" height="18" viewBox="3 3 18 18" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span> Watching</button>
+    <button class="btn btn-md btn-tertiary btn-icon-text"><svg class="btn-icon" width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.25 6.75L4.75 12L10.25 17.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.25 12H5"/></svg> Back to Results</button>
+    <button class="btn btn-md btn-success btn-icon-text"><svg class="btn-icon" width="18" height="18" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> Confirm Payment</button>
+  </div>
+
+  <div class="subsection-title">Icon-Only Buttons</div>
+  <div class="flex-row" style="gap:var(--space-3);margin-bottom:var(--space-2)">
+    <button class="btn btn-md btn-secondary" style="width:40px;padding:0" onclick="toggleWatchlist(this)"><span class="heart-anim"><svg class="btn-icon icon-default" width="18" height="18" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z"/></svg><svg class="btn-icon icon-active heart-filled" width="18" height="18" viewBox="3 3 18 18" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span></button>
+    <button class="btn btn-md btn-watchlist-active" style="width:40px;padding:0" onclick="toggleWatchlist(this)"><span class="heart-anim active"><svg class="btn-icon icon-default" width="18" height="18" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z"/></svg><svg class="btn-icon icon-active heart-filled" width="18" height="18" viewBox="3 3 18 18" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span></button>
+    <span style="font-size:12px;color:var(--text-tertiary);margin-left:var(--space-2)">Watchlist icon-only — click to toggle</span>
   </div>
 
   <div class="subsection-title">Pairing Rules</div>
@@ -2496,6 +2552,22 @@ tr.hot:hover td { background: var(--orange-100); }
         <button class="btn btn-md btn-primary">Confirm</button>
       </div>
       <div style="font-size:13px;color:var(--text-secondary);line-height:1.5">Outlined buttons compete with the primary for attention. Two equally weighted buttons create decision friction — especially in financial flows.</div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:var(--success-text);margin-bottom:var(--space-3)">DO — Vertical Stack</div>
+      <div style="background:var(--bg-secondary);border-radius:var(--radius-lg);padding:var(--space-5);display:flex;flex-direction:column;gap:var(--space-3);max-width:240px;margin-bottom:var(--space-3)">
+        <button class="btn btn-md btn-primary" style="width:100%">Place Bid</button>
+        <button class="btn btn-md btn-tertiary" style="width:100%">Cancel</button>
+      </div>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.5">Vertical: primary on top, secondary/tertiary below. Good for narrow panels and mobile sheets.</div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:var(--error-text);margin-bottom:var(--space-3)">DON'T — Two Primaries</div>
+      <div style="background:var(--bg-secondary);border-radius:var(--radius-lg);padding:var(--space-5);display:flex;justify-content:flex-end;gap:var(--space-3);margin-bottom:var(--space-3)">
+        <button class="btn btn-md btn-primary">Save Draft</button>
+        <button class="btn btn-md btn-primary">Submit</button>
+      </div>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.5">Never pair two primary buttons. Max 2 buttons per group — one must be visually subordinate.</div>
     </div>
   </div>
 </section>
@@ -2552,7 +2624,7 @@ tr.hot:hover td { background: var(--orange-100); }
         <div class="dropdown-wrap">
           <div class="dropdown-trigger" onclick="toggleDropdown(this)">
             <span>Select a make...</span>
-            <span class="chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg></span>
+            <span class="chevron"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.25 10.75L12 14.25L8.75 10.75"/></svg></span>
           </div>
           <div class="dropdown-menu">
             <div class="dropdown-option" onclick="selectOption(this, 'Toyota')">Toyota</div>
@@ -2609,15 +2681,23 @@ tr.hot:hover td { background: var(--orange-100); }
 <section class="demo-section desktop-only" id="navigation">
   <div class="section-label">Components</div>
   <div class="section-title">Navigation</div>
-  <div class="section-desc">Header, sidebar, and breadcrumbs. Consistent patterns across all breakpoints.</div>
+  <div class="section-desc">Links, breadcrumbs, and sidebar. Consistent patterns across all breakpoints.</div>
 
   <div class="subsection-title">Breadcrumbs</div>
   <nav class="breadcrumb">
-    <a href="#">Home</a><span class="sep"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></span>
-    <a href="#">Vehicle Search</a><span class="sep"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></span>
-    <a href="#">Toyota</a><span class="sep"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></span>
+    <a href="#">Home</a><span class="sep"><svg width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></span>
+    <a href="#">Vehicle Search</a><span class="sep"><svg width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></span>
+    <a href="#">Toyota</a><span class="sep"><svg width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></span>
     <span class="current">2019 Camry SE</span>
   </nav>
+
+  <div class="subsection-title">Links</div>
+  <div style="display:flex;flex-direction:column;gap:var(--space-3);margin-bottom:var(--space-6)">
+    <div><a href="#" class="link" onclick="event.preventDefault()">View auction details</a> <span style="font-size:12px;color:var(--text-tertiary);margin-left:var(--space-3)">Default — Blue 600, weight 500, no underline</span></div>
+    <div><a href="#" class="link" style="color:var(--text-link-hover);text-decoration:underline" onclick="event.preventDefault()">View auction details</a> <span style="font-size:12px;color:var(--text-tertiary);margin-left:var(--space-3)">Hover — Blue 800, underline</span></div>
+    <div><a href="#" class="link" onclick="event.preventDefault()">Copart Member Agreement <svg class="link-external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.25 15.25V6.75H8.75"/><path d="M17 7L6.75 17.25"/></svg></a> <span style="font-size:12px;color:var(--text-tertiary);margin-left:var(--space-3)">External link with icon</span></div>
+    <div><span class="link disabled">Auction closed</span> <span style="font-size:12px;color:var(--text-tertiary);margin-left:var(--space-3)">Disabled — Neutral 300</span></div>
+  </div>
 
   <div class="grid-2" style="margin-top:var(--space-6)">
     <div>
@@ -2656,8 +2736,8 @@ tr.hot:hover td { background: var(--orange-100); }
 
   <div class="subsection-title">Toasts</div>
   <div class="flex-row" style="gap:var(--space-4)">
-    <div class="toast toast-neutral"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.75 12.8665L8.33995 16.4138C9.15171 17.5256 10.8179 17.504 11.6006 16.3715L18.25 6.75"/></svg> Vehicle added to Watchlist</div>
-    <div class="toast toast-success"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.75 12.8665L8.33995 16.4138C9.15171 17.5256 10.8179 17.504 11.6006 16.3715L18.25 6.75"/></svg> Payment confirmed</div>
+    <div class="toast toast-neutral"><svg width="20" height="20" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> Vehicle added to Watchlist</div>
+    <div class="toast toast-success"><svg width="20" height="20" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> Payment confirmed</div>
     <div class="toast toast-error"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 7l6 6M13 7l-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Connection lost. Retry</div>
   </div>
 
@@ -2677,7 +2757,7 @@ tr.hot:hover td { background: var(--orange-100); }
       </div>
       <div class="modal-footer">
         <button class="btn btn-md btn-tertiary" onclick="closeModal()">Cancel</button>
-        <button class="btn btn-md btn-primary" onclick="closeModal()"><svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.75 12.8665L8.33995 16.4138C9.15171 17.5256 10.8179 17.504 11.6006 16.3715L18.25 6.75"/></svg> Confirm Bid &mdash; $4,500</button>
+        <button class="btn btn-md btn-primary btn-icon-text" onclick="closeModal()"><svg class="btn-icon" width="18" height="18" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> Confirm Bid &mdash; $4,500</button>
       </div>
     </div>
   </div>
@@ -2830,7 +2910,7 @@ tr.hot:hover td { background: var(--orange-100); }
           <div><div style="font-size:15px;font-weight:500">Mastercard ending in 8371</div><div style="font-size:12px;color:var(--text-tertiary)">Expires 12/26</div></div>
         </div>
         <div style="border:1px dashed var(--border-default);border-radius:var(--radius-lg);padding:var(--space-4);display:flex;align-items:center;justify-content:center;gap:var(--space-2);color:var(--interactive-primary);font-size:14px;font-weight:500;cursor:pointer">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 5.75v12.5M5.75 12h12.5"/></svg>
+          <svg width="16" height="16" viewBox="3 3 18 18" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 5.75v12.5M5.75 12h12.5"/></svg>
           Add new payment method
         </div>
       </div>
@@ -2859,9 +2939,9 @@ tr.hot:hover td { background: var(--orange-100); }
     <div>
       <div class="subsection-title">Step Indicator</div>
       <div class="steps">
-        <div class="step-group"><div class="step-circle done"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.75 12.8665L8.33995 16.4138C9.15171 17.5256 10.8179 17.504 11.6006 16.3715L18.25 6.75"/></svg></div><div class="step-label">Account</div></div>
+        <div class="step-group"><div class="step-circle done"><svg width="18" height="18" viewBox="3 3 18 18" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.75 12.75L10 15.25L16.25 8.75"/></svg></div><div class="step-label">Account</div></div>
         <div class="step-line done"></div>
-        <div class="step-group"><div class="step-circle done"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.75 12.8665L8.33995 16.4138C9.15171 17.5256 10.8179 17.504 11.6006 16.3715L18.25 6.75"/></svg></div><div class="step-label">Verify</div></div>
+        <div class="step-group"><div class="step-circle done"><svg width="18" height="18" viewBox="3 3 18 18" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.75 12.75L10 15.25L16.25 8.75"/></svg></div><div class="step-label">Verify</div></div>
         <div class="step-line done"></div>
         <div class="step-group"><div class="step-circle current">3</div><div class="step-label">Payment</div></div>
         <div class="step-line upcoming"></div>
@@ -3011,8 +3091,8 @@ tr.hot:hover td { background: var(--orange-100); }
       <div class="subsection-title">Image Carousel (4:3)</div>
       <div class="image-container ratio-4-3">
         <div class="image-placeholder"><span class="image-placeholder-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M19.25 17.25V9.75C19.25 8.64543 18.3546 7.75 17.25 7.75H16.9167C16.513 7.75 16.1489 7.50726 15.9936 7.13462L15.2564 5.36538C15.1011 4.99274 14.737 4.75 14.3333 4.75H9.66667C9.26297 4.75 8.89886 4.99274 8.74359 5.36538L8.00641 7.13462C7.85114 7.50726 7.48703 7.75 7.08333 7.75H6.75C5.64543 7.75 4.75 8.64543 4.75 9.75V17.25C4.75 18.3546 5.64543 19.25 6.75 19.25H17.25C18.3546 19.25 19.25 18.3546 19.25 17.25Z"/><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M15.25 13C15.25 14.7949 13.7949 16.25 12 16.25C10.2051 16.25 8.75 14.7949 8.75 13C8.75 11.2051 10.2051 9.75 12 9.75C13.7949 9.75 15.25 11.2051 15.25 13Z"/></svg></span>Vehicle Hero Image</div>
-        <button class="gallery-arrow prev" aria-label="Previous image"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.25 8.75L9.75 12L13.25 15.25"/></svg></button>
-        <button class="gallery-arrow next" aria-label="Next image"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></button>
+        <button class="gallery-arrow prev" aria-label="Previous image"><svg width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.25 8.75L9.75 12L13.25 15.25"/></svg></button>
+        <button class="gallery-arrow next" aria-label="Next image"><svg width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.75 8.75L14.25 12L10.75 15.25"/></svg></button>
         <div class="gallery-dots"><div class="gallery-dot active"></div><div class="gallery-dot"></div><div class="gallery-dot"></div><div class="gallery-dot"></div><div class="gallery-dot"></div></div>
       </div>
     </div>
@@ -3021,7 +3101,7 @@ tr.hot:hover td { background: var(--orange-100); }
       <div class="video-player">
         <div class="video-play-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="#2662D9"><path fill="currentColor" d="M18.25 12L5.75 5.75V18.25L18.25 12Z"/></svg></div>
         <div class="video-controls">
-          <span style="color:#fff;cursor:pointer;display:flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path fill="currentColor" d="M18.25 12L5.75 5.75V18.25L18.25 12Z"/></svg></span>
+          <span style="color:#fff;cursor:pointer;display:flex"><svg width="16" height="16" viewBox="3 3 18 18" fill="#fff"><path fill="currentColor" d="M18.25 12L5.75 5.75V18.25L18.25 12Z"/></svg></span>
           <div class="video-scrubber"><div class="video-scrubber-fill"></div></div>
           <span class="video-time">1:24 / 4:02</span>
         </div>
@@ -3125,26 +3205,26 @@ tr.hot:hover td { background: var(--orange-100); }
     <div style="position:relative">
       <div class="filter-chip" onclick="toggleFilterChip(this)">
         <span>Year</span>
-        <span class="chip-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg></span>
+        <span class="chip-chevron"><svg width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg></span>
       </div>
       <div class="filter-chip-dropdown" id="yearFilterDrop">
-        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Year')"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.75 12.87L8.34 16.41C9.15 17.53 10.82 17.5 11.6 16.37L18.25 6.75"/></svg> 2020&ndash;2024</div>
-        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Year')"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.75 12.87L8.34 16.41C9.15 17.53 10.82 17.5 11.6 16.37L18.25 6.75"/></svg> 2015&ndash;2019</div>
-        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Year')"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.75 12.87L8.34 16.41C9.15 17.53 10.82 17.5 11.6 16.37L18.25 6.75"/></svg> 2010&ndash;2014</div>
-        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Year')"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.75 12.87L8.34 16.41C9.15 17.53 10.82 17.5 11.6 16.37L18.25 6.75"/></svg> Older than 2010</div>
+        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Year')"><svg class="check-icon" width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> 2020&ndash;2024</div>
+        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Year')"><svg class="check-icon" width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> 2015&ndash;2019</div>
+        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Year')"><svg class="check-icon" width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> 2010&ndash;2014</div>
+        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Year')"><svg class="check-icon" width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> Older than 2010</div>
       </div>
     </div>
     <div style="position:relative">
       <div class="filter-chip" onclick="toggleFilterChip(this)">
         <span>Damage Type</span>
-        <span class="chip-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg></span>
+        <span class="chip-chevron"><svg width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg></span>
       </div>
       <div class="filter-chip-dropdown" id="damageFilterDrop">
-        <div class="filter-chip-dropdown-item selected" onclick="selectFilterOption(this, 'Damage Type')"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.75 12.87L8.34 16.41C9.15 17.53 10.82 17.5 11.6 16.37L18.25 6.75"/></svg> Front End</div>
-        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Damage Type')"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.75 12.87L8.34 16.41C9.15 17.53 10.82 17.5 11.6 16.37L18.25 6.75"/></svg> Rear End</div>
-        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Damage Type')"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.75 12.87L8.34 16.41C9.15 17.53 10.82 17.5 11.6 16.37L18.25 6.75"/></svg> Side</div>
-        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Damage Type')"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.75 12.87L8.34 16.41C9.15 17.53 10.82 17.5 11.6 16.37L18.25 6.75"/></svg> Water/Flood</div>
-        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Damage Type')"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.75 12.87L8.34 16.41C9.15 17.53 10.82 17.5 11.6 16.37L18.25 6.75"/></svg> Hail</div>
+        <div class="filter-chip-dropdown-item selected" onclick="selectFilterOption(this, 'Damage Type')"><svg class="check-icon" width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> Front End</div>
+        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Damage Type')"><svg class="check-icon" width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> Rear End</div>
+        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Damage Type')"><svg class="check-icon" width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> Side</div>
+        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Damage Type')"><svg class="check-icon" width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> Water/Flood</div>
+        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Damage Type')"><svg class="check-icon" width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> Hail</div>
       </div>
     </div>
     <div style="position:relative">
@@ -3156,13 +3236,13 @@ tr.hot:hover td { background: var(--orange-100); }
     <div style="position:relative">
       <div class="filter-chip" onclick="toggleFilterChip(this)">
         <span>Location</span>
-        <span class="chip-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg></span>
+        <span class="chip-chevron"><svg width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg></span>
       </div>
       <div class="filter-chip-dropdown">
-        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Location')"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.75 12.87L8.34 16.41C9.15 17.53 10.82 17.5 11.6 16.37L18.25 6.75"/></svg> CA - San Diego</div>
-        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Location')"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.75 12.87L8.34 16.41C9.15 17.53 10.82 17.5 11.6 16.37L18.25 6.75"/></svg> TX - Dallas</div>
-        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Location')"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.75 12.87L8.34 16.41C9.15 17.53 10.82 17.5 11.6 16.37L18.25 6.75"/></svg> FL - Miami</div>
-        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Location')"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.75 12.87L8.34 16.41C9.15 17.53 10.82 17.5 11.6 16.37L18.25 6.75"/></svg> NJ - Newark</div>
+        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Location')"><svg class="check-icon" width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> CA - San Diego</div>
+        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Location')"><svg class="check-icon" width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> TX - Dallas</div>
+        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Location')"><svg class="check-icon" width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> FL - Miami</div>
+        <div class="filter-chip-dropdown-item" onclick="selectFilterOption(this, 'Location')"><svg class="check-icon" width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> NJ - Newark</div>
       </div>
     </div>
     <a href="#" style="font-size:13px;font-weight:600;color:var(--interactive-primary);text-decoration:none;margin-left:var(--space-2)" onclick="event.preventDefault()">Clear all</a>
@@ -3187,12 +3267,12 @@ tr.hot:hover td { background: var(--orange-100); }
   </div>
   <div style="font-size:13px;color:var(--text-tertiary);font-weight:500;margin-top:var(--space-6);margin-bottom:var(--space-3)">Icon variant (no dot)</div>
   <div class="flex-row" style="gap:var(--space-3)">
-    <span class="status-token status-token-success"><span class="status-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.75 12.87L8.34 16.41C9.15 17.53 10.82 17.5 11.6 16.37L18.25 6.75"/></svg></span>Approved</span>
-    <span class="status-token status-token-warning"><span class="status-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4" stroke-linecap="round"/><circle cx="12" cy="16" r="0.5" fill="currentColor" stroke="none"/></svg></span>Needs Attention</span>
-    <span class="status-token status-token-error"><span class="status-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M8 8l8 8M16 8l-8 8"/></svg></span>Failed</span>
-    <span class="status-token status-token-info"><span class="status-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5" stroke-linecap="round"/><circle cx="12" cy="8" r="0.5" fill="currentColor" stroke="none"/></svg></span>Info</span>
-    <span class="status-token status-token-neutral"><span class="status-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8" stroke-linecap="round"/></svg></span>Paused</span>
-    <span class="status-token status-token-accent"><span class="status-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ending Soon</span>
+    <span class="status-token status-token-success"><span class="status-icon"><svg width="16" height="16" viewBox="2 2 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.75 12.75L10 15.25L16.25 8.75"/></svg></span>Approved</span>
+    <span class="status-token status-token-warning"><span class="status-icon"><svg width="14" height="14" viewBox="2 2 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4" stroke-linecap="round"/><circle cx="12" cy="16" r="0.5" fill="currentColor" stroke="none"/></svg></span>Needs Attention</span>
+    <span class="status-token status-token-error"><span class="status-icon"><svg width="14" height="14" viewBox="2 2 20 20" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M8 8l8 8M16 8l-8 8"/></svg></span>Failed</span>
+    <span class="status-token status-token-info"><span class="status-icon"><svg width="14" height="14" viewBox="2 2 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5" stroke-linecap="round"/><circle cx="12" cy="8" r="0.5" fill="currentColor" stroke="none"/></svg></span>Info</span>
+    <span class="status-token status-token-neutral"><span class="status-icon"><svg width="14" height="14" viewBox="2 2 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8" stroke-linecap="round"/></svg></span>Paused</span>
+    <span class="status-token status-token-accent"><span class="status-icon"><svg width="14" height="14" viewBox="2 2 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ending Soon</span>
   </div>
 
   <div class="subsection-title">Tooltips</div>
@@ -3248,7 +3328,7 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="accordion-item open">
       <button class="accordion-trigger" onclick="toggleAccordion(this)">
         <span>How do I register to bid on vehicles?</span>
-        <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
+        <svg class="accordion-chevron" width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
       </button>
       <div class="accordion-panel">
         <div class="accordion-panel-inner">Create an account on Copart, verify your identity, and submit a refundable deposit. Once approved, you can bid on any vehicle in our inventory. The registration process takes 1&ndash;2 business days.</div>
@@ -3257,7 +3337,7 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="accordion-item">
       <button class="accordion-trigger" onclick="toggleAccordion(this)">
         <span>What happens after I win an auction?</span>
-        <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
+        <svg class="accordion-chevron" width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
       </button>
       <div class="accordion-panel">
         <div class="accordion-panel-inner">You'll receive a confirmation email with payment instructions. Full payment is due within 3 business days. Once payment clears, you can arrange vehicle pickup or delivery through our logistics partners.</div>
@@ -3266,7 +3346,7 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="accordion-item">
       <button class="accordion-trigger" onclick="toggleAccordion(this)">
         <span>Can I inspect a vehicle before bidding?</span>
-        <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
+        <svg class="accordion-chevron" width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
       </button>
       <div class="accordion-panel">
         <div class="accordion-panel-inner">Yes, in-person inspections are available at most Copart locations during business hours. You can also view detailed photos, damage reports, and vehicle history through the online listing.</div>
@@ -3275,7 +3355,7 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="accordion-item">
       <button class="accordion-trigger" onclick="toggleAccordion(this)">
         <span>What payment methods do you accept?</span>
-        <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
+        <svg class="accordion-chevron" width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
       </button>
       <div class="accordion-panel">
         <div class="accordion-panel-inner">We accept wire transfers, cashier's checks, and money orders. Credit cards are accepted for deposits and fees up to $7,500. All payments must be in U.S. dollars.</div>
@@ -3284,7 +3364,7 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="accordion-item">
       <button class="accordion-trigger" onclick="toggleAccordion(this)">
         <span>Is there a buyer's premium on purchases?</span>
-        <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
+        <svg class="accordion-chevron" width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>
       </button>
       <div class="accordion-panel">
         <div class="accordion-panel-inner">Yes, a buyer's premium is applied to all purchases. The premium varies based on your membership level and the final sale price. Premium members enjoy reduced rates. See our fee schedule for details.</div>
@@ -3310,9 +3390,9 @@ tr.hot:hover td { background: var(--orange-100); }
       <div style="font-size:13px;color:var(--text-tertiary);font-weight:500;margin-bottom:var(--space-3)">View mode</div>
       <div class="switcher" id="viewSwitcher">
         <div class="switcher-indicator" id="viewSwitcherIndicator"></div>
-        <div class="switcher-option active" onclick="switchOption(this, 'viewSwitcher')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><rect x="4" y="4" width="16" height="16" rx="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12h16M12 4v16" stroke-linecap="round"/></svg> Grid</div>
-        <div class="switcher-option" onclick="switchOption(this, 'viewSwitcher')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><path d="M4.75 7.75h14.5M4.75 12h14.5M4.75 16.25h14.5" stroke-linecap="round"/></svg> List</div>
-        <div class="switcher-option" onclick="switchOption(this, 'viewSwitcher')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><rect x="4" y="4" width="6" height="6" rx="1" stroke-linecap="round"/><rect x="14" y="4" width="6" height="6" rx="1" stroke-linecap="round"/><rect x="4" y="14" width="6" height="6" rx="1" stroke-linecap="round"/><rect x="14" y="14" width="6" height="6" rx="1" stroke-linecap="round"/></svg> Tile</div>
+        <div class="switcher-option active" onclick="switchOption(this, 'viewSwitcher')"><svg width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><rect x="4" y="4" width="16" height="16" rx="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12h16M12 4v16" stroke-linecap="round"/></svg> Grid</div>
+        <div class="switcher-option" onclick="switchOption(this, 'viewSwitcher')"><svg width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><path d="M4.75 7.75h14.5M4.75 12h14.5M4.75 16.25h14.5" stroke-linecap="round"/></svg> List</div>
+        <div class="switcher-option" onclick="switchOption(this, 'viewSwitcher')"><svg width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><rect x="4" y="4" width="6" height="6" rx="1" stroke-linecap="round"/><rect x="14" y="4" width="6" height="6" rx="1" stroke-linecap="round"/><rect x="4" y="14" width="6" height="6" rx="1" stroke-linecap="round"/><rect x="14" y="14" width="6" height="6" rx="1" stroke-linecap="round"/></svg> Tile</div>
       </div>
     </div>
   </div>
@@ -3340,17 +3420,189 @@ tr.hot:hover td { background: var(--orange-100); }
     <div style="display:flex;align-items:center;gap:var(--space-3)">
       <span class="pagination-info">1&ndash;5 of 248 vehicles</span>
       <div class="pagination">
-        <button class="pagination-btn" disabled aria-label="Previous page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 19.25L8.75 12L15.25 4.75"/></svg></button>
+        <button class="pagination-btn" disabled aria-label="Previous page"><svg width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 19.25L8.75 12L15.25 4.75"/></svg></button>
         <button class="pagination-btn active">1</button>
         <button class="pagination-btn" onclick="demoPagination(this)">2</button>
         <button class="pagination-btn" onclick="demoPagination(this)">3</button>
         <button class="pagination-btn" onclick="demoPagination(this)">4</button>
         <span class="pagination-ellipsis">&hellip;</span>
         <button class="pagination-btn" onclick="demoPagination(this)">50</button>
-        <button class="pagination-btn" aria-label="Next page" onclick="demoPagination(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.75 4.75L15.25 12L8.75 19.25"/></svg></button>
+        <button class="pagination-btn" aria-label="Next page" onclick="demoPagination(this)"><svg width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.75 4.75L15.25 12L8.75 19.25"/></svg></button>
       </div>
     </div>
   </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MICRO COMPONENTS -->
+<!-- ============================================================ -->
+<section class="demo-section desktop-only" id="micro-components">
+  <div class="section-label">Components</div>
+  <div class="section-title">Micro Components</div>
+  <div class="section-desc">Watchlist toggles, tooltips, popovers, navigation chips, content tabs, and date pickers. Small but critical interactive building blocks.</div>
+
+  <!-- Watchlist Toggle -->
+  <div class="subsection-title">Watchlist Toggle</div>
+  <div style="display:flex;gap:var(--space-8);flex-wrap:wrap;align-items:flex-start">
+    <!-- Icon + Label variant -->
+    <div>
+      <div style="font-size:13px;color:var(--text-tertiary);font-weight:500;margin-bottom:var(--space-3)">Icon + Label</div>
+      <div style="display:flex;gap:var(--space-4);align-items:center">
+        <button class="btn btn-md btn-secondary" onclick="toggleWatchlist(this)"><span class="heart-anim"><svg class="btn-icon icon-default" width="18" height="18" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z"/></svg><svg class="btn-icon icon-active heart-filled" width="18" height="18" viewBox="3 3 18 18" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span> Watchlist</button>
+        <button class="btn btn-md btn-watchlist-active" onclick="toggleWatchlist(this)"><span class="heart-anim active"><svg class="btn-icon icon-default" width="18" height="18" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z"/></svg><svg class="btn-icon icon-active heart-filled" width="18" height="18" viewBox="3 3 18 18" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span> Watching</button>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:13px;color:var(--text-tertiary);margin-top:var(--space-4)">Uses the same heart animation from the Buttons section. Default: plus icon in Secondary button. Active: filled heart in dark blue button. Click to toggle.</div>
+
+  <!-- Tooltip -->
+  <div class="subsection-title" style="margin-top:var(--space-8)">Tooltip</div>
+  <div style="display:flex;gap:var(--space-10);flex-wrap:wrap;align-items:flex-start">
+    <!-- Top tooltip -->
+    <div style="position:relative;display:inline-flex;flex-direction:column;align-items:center">
+      <div style="background:var(--neutral-900);color:#FFFFFF;font-size:12px;line-height:16px;font-family:var(--font-primary);padding:var(--space-2) var(--space-3);border-radius:var(--radius-sm);white-space:nowrap;box-shadow:var(--shadow-md)">Save to your watchlist</div>
+      <div style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid var(--neutral-900);margin-top:-1px"></div>
+      <div style="margin-top:var(--space-2)">
+        <button style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border-default);border-radius:var(--radius-md);background:var(--bg-primary);cursor:pointer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z"/></svg>
+        </button>
+      </div>
+      <div style="font-size:12px;color:var(--text-tertiary);margin-top:var(--space-2)">Top</div>
+    </div>
+    <!-- Right tooltip -->
+    <div style="position:relative;display:inline-flex;align-items:center;gap:0">
+      <button style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border-default);border-radius:var(--radius-md);background:var(--bg-primary);cursor:pointer">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="color:var(--text-tertiary)"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="6.5" r="1" fill="currentColor"/></svg>
+      </button>
+      <div style="display:flex;align-items:center;margin-left:-1px">
+        <div style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-right:5px solid var(--neutral-900)"></div>
+        <div style="background:var(--neutral-900);color:#FFFFFF;font-size:12px;line-height:16px;font-family:var(--font-primary);padding:var(--space-2) var(--space-3);border-radius:var(--radius-sm);white-space:nowrap;box-shadow:var(--shadow-md)">More information</div>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:13px;color:var(--text-tertiary);margin-top:var(--space-4)">Dark tooltip: Neutral 900 bg, white text, 4px radius, caption-1 (12px). Rendered statically for demo.</div>
+
+  <!-- Popover -->
+  <div class="subsection-title" style="margin-top:var(--space-8)">Popover</div>
+  <div style="display:flex;gap:var(--space-8);flex-wrap:wrap;align-items:flex-start">
+    <div style="position:relative;display:inline-block">
+      <div style="background:var(--bg-primary);border:1px solid var(--neutral-200);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:var(--space-5);width:300px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:var(--space-3)">
+          <div style="font-size:15px;font-weight:600;color:var(--text-primary)">Vehicle Details</div>
+          <button style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border:none;background:transparent;border-radius:var(--radius-sm);cursor:pointer;color:var(--text-tertiary)"><svg width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.25 6.75L6.75 17.25"/><path d="M6.75 6.75L17.25 17.25"/></svg></button>
+        </div>
+        <div style="font-size:14px;color:var(--text-secondary);line-height:1.5">This 2019 Toyota Camry SE has a clean title and runs &amp; drives. Located at the San Diego facility with an estimated retail value of $12,800.</div>
+      </div>
+      <div style="position:absolute;top:-6px;left:24px;width:12px;height:12px;background:var(--bg-primary);border-left:1px solid var(--neutral-200);border-top:1px solid var(--neutral-200);transform:rotate(45deg)"></div>
+    </div>
+  </div>
+  <div style="font-size:13px;color:var(--text-tertiary);margin-top:var(--space-4)">Light popover: white bg, 1px Neutral 200 border, 8px radius, shadow-lg. Includes title, body, and action buttons.</div>
+
+  <!-- Navigation Chips -->
+  <div class="subsection-title" style="margin-top:var(--space-8)">Navigation Chips</div>
+  <div style="display:flex;gap:var(--space-2);flex-wrap:wrap">
+    <button onclick="this.parentElement.querySelectorAll('.nav-chip').forEach(function(c){c.style.background='var(--bg-primary)';c.style.color='var(--text-secondary)';c.style.borderColor='var(--neutral-300)'});this.style.background='var(--blue-600)';this.style.color='#FFFFFF';this.style.borderColor='var(--blue-600)'" class="nav-chip" style="display:inline-flex;align-items:center;height:36px;padding:0 var(--space-5);border:1px solid var(--blue-600);border-radius:var(--radius-pill);background:var(--blue-600);color:#FFFFFF;font-family:var(--font-primary);font-size:14px;font-weight:500;cursor:pointer;transition:all var(--dur-normal) var(--ease-out);white-space:nowrap">All</button>
+    <button onclick="this.parentElement.querySelectorAll('.nav-chip').forEach(function(c){c.style.background='var(--bg-primary)';c.style.color='var(--text-secondary)';c.style.borderColor='var(--neutral-300)'});this.style.background='var(--blue-600)';this.style.color='#FFFFFF';this.style.borderColor='var(--blue-600)'" class="nav-chip" style="display:inline-flex;align-items:center;height:36px;padding:0 var(--space-5);border:1px solid var(--neutral-300);border-radius:var(--radius-pill);background:var(--bg-primary);color:var(--text-secondary);font-family:var(--font-primary);font-size:14px;font-weight:500;cursor:pointer;transition:all var(--dur-normal) var(--ease-out);white-space:nowrap">Cars</button>
+    <button onclick="this.parentElement.querySelectorAll('.nav-chip').forEach(function(c){c.style.background='var(--bg-primary)';c.style.color='var(--text-secondary)';c.style.borderColor='var(--neutral-300)'});this.style.background='var(--blue-600)';this.style.color='#FFFFFF';this.style.borderColor='var(--blue-600)'" class="nav-chip" style="display:inline-flex;align-items:center;height:36px;padding:0 var(--space-5);border:1px solid var(--neutral-300);border-radius:var(--radius-pill);background:var(--bg-primary);color:var(--text-secondary);font-family:var(--font-primary);font-size:14px;font-weight:500;cursor:pointer;transition:all var(--dur-normal) var(--ease-out);white-space:nowrap">Trucks</button>
+    <button onclick="this.parentElement.querySelectorAll('.nav-chip').forEach(function(c){c.style.background='var(--bg-primary)';c.style.color='var(--text-secondary)';c.style.borderColor='var(--neutral-300)'});this.style.background='var(--blue-600)';this.style.color='#FFFFFF';this.style.borderColor='var(--blue-600)'" class="nav-chip" style="display:inline-flex;align-items:center;height:36px;padding:0 var(--space-5);border:1px solid var(--neutral-300);border-radius:var(--radius-pill);background:var(--bg-primary);color:var(--text-secondary);font-family:var(--font-primary);font-size:14px;font-weight:500;cursor:pointer;transition:all var(--dur-normal) var(--ease-out);white-space:nowrap">SUVs</button>
+    <button onclick="this.parentElement.querySelectorAll('.nav-chip').forEach(function(c){c.style.background='var(--bg-primary)';c.style.color='var(--text-secondary)';c.style.borderColor='var(--neutral-300)'});this.style.background='var(--blue-600)';this.style.color='#FFFFFF';this.style.borderColor='var(--blue-600)'" class="nav-chip" style="display:inline-flex;align-items:center;height:36px;padding:0 var(--space-5);border:1px solid var(--neutral-300);border-radius:var(--radius-pill);background:var(--bg-primary);color:var(--text-secondary);font-family:var(--font-primary);font-size:14px;font-weight:500;cursor:pointer;transition:all var(--dur-normal) var(--ease-out);white-space:nowrap">Equipment</button>
+  </div>
+  <div style="font-size:13px;color:var(--text-tertiary);margin-top:var(--space-4)">Pill-shaped navigation chips. Selected: Blue 600 fill + white text. Default: white bg + Neutral 300 border. Click to select.</div>
+
+  <!-- Content Tabs -->
+  <div class="subsection-title" style="margin-top:var(--space-8)">Content Tabs</div>
+  <div id="ctabWrap" style="position:relative;display:flex;border-bottom:1px solid var(--border-subtle)">
+    <div id="ctabIndicator" style="position:absolute;bottom:-1px;left:0;height:2px;background:var(--blue-600);transition:left var(--dur-moderate) var(--ease-out),width var(--dur-moderate) var(--ease-out);border-radius:1px"></div>
+    <button onclick="switchCtab(this)" class="ctab active" style="padding:var(--space-3) var(--space-4);font-family:var(--font-primary);font-size:14px;font-weight:600;color:var(--blue-600);background:none;border:none;cursor:pointer;transition:color var(--dur-normal) var(--ease-out);margin-bottom:-1px">Overview</button>
+    <button onclick="switchCtab(this)" class="ctab" style="padding:var(--space-3) var(--space-4);font-family:var(--font-primary);font-size:14px;font-weight:600;color:var(--neutral-500);background:none;border:none;cursor:pointer;transition:color var(--dur-normal) var(--ease-out);margin-bottom:-1px">Bid History</button>
+    <button onclick="switchCtab(this)" class="ctab" style="padding:var(--space-3) var(--space-4);font-family:var(--font-primary);font-size:14px;font-weight:600;color:var(--neutral-500);background:none;border:none;cursor:pointer;transition:color var(--dur-normal) var(--ease-out);margin-bottom:-1px">Photos</button>
+    <button onclick="switchCtab(this)" class="ctab" style="padding:var(--space-3) var(--space-4);font-family:var(--font-primary);font-size:14px;font-weight:600;color:var(--neutral-500);background:none;border:none;cursor:pointer;transition:color var(--dur-normal) var(--ease-out);margin-bottom:-1px">Documents</button>
+  </div>
+  <div style="font-size:13px;color:var(--text-tertiary);margin-top:var(--space-4)">Underline-style tabs. Active: Blue 600 text + sliding 2px underline. All tabs use weight 600 to prevent layout shift. Click to switch.</div>
+
+  <!-- Date Picker -->
+  <div class="subsection-title" style="margin-top:var(--space-8)">Date Picker</div>
+  <div style="display:inline-block;background:var(--bg-primary);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);padding:var(--space-5);font-family:var(--font-primary)">
+    <!-- Month Header -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-4)">
+      <button style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:none;background:var(--bg-secondary);border-radius:var(--radius-sm);cursor:pointer;color:var(--text-secondary);font-size:16px">&lsaquo;</button>
+      <div style="font-size:15px;font-weight:600;color:var(--text-primary)">March 2026</div>
+      <button style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:none;background:var(--bg-secondary);border-radius:var(--radius-sm);cursor:pointer;color:var(--text-secondary);font-size:16px">&rsaquo;</button>
+    </div>
+    <!-- Weekday Headers -->
+    <div style="display:grid;grid-template-columns:repeat(7,36px);gap:2px;text-align:center;margin-bottom:var(--space-1)">
+      <div style="font-size:12px;font-weight:600;color:var(--text-tertiary);padding:var(--space-1) 0">S</div>
+      <div style="font-size:12px;font-weight:600;color:var(--text-tertiary);padding:var(--space-1) 0">M</div>
+      <div style="font-size:12px;font-weight:600;color:var(--text-tertiary);padding:var(--space-1) 0">T</div>
+      <div style="font-size:12px;font-weight:600;color:var(--text-tertiary);padding:var(--space-1) 0">W</div>
+      <div style="font-size:12px;font-weight:600;color:var(--text-tertiary);padding:var(--space-1) 0">T</div>
+      <div style="font-size:12px;font-weight:600;color:var(--text-tertiary);padding:var(--space-1) 0">F</div>
+      <div style="font-size:12px;font-weight:600;color:var(--text-tertiary);padding:var(--space-1) 0">S</div>
+    </div>
+    <!-- Day Grid -->
+    <div style="display:grid;grid-template-columns:repeat(7,36px);gap:2px;text-align:center">
+      <!-- Row 1: March starts on Sunday -->
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">1</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">2</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">3</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">4</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">5</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">6</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">7</div>
+      <!-- Row 2 -->
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">8</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">9</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">10</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">11</div>
+      <!-- Selected day: Blue 600 fill + white text -->
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#FFFFFF;background:var(--blue-600);border-radius:var(--radius-sm);cursor:pointer;font-weight:600">12</div>
+      <!-- Range days: Blue 100 bg -->
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);background:var(--blue-100);border-radius:var(--radius-sm);cursor:pointer">13</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);background:var(--blue-100);border-radius:var(--radius-sm);cursor:pointer">14</div>
+      <!-- Row 3 -->
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);background:var(--blue-100);border-radius:var(--radius-sm);cursor:pointer">15</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);background:var(--blue-100);border-radius:var(--radius-sm);cursor:pointer">16</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);background:var(--blue-100);border-radius:var(--radius-sm);cursor:pointer">17</div>
+      <!-- Range end: Blue 600 fill + white text -->
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#FFFFFF;background:var(--blue-600);border-radius:var(--radius-sm);cursor:pointer;font-weight:600">18</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">19</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">20</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">21</div>
+      <!-- Row 4 -->
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">22</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">23</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">24</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">25</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">26</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">27</div>
+      <!-- Today: Blue 600 ring -->
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--blue-600);border:2px solid var(--blue-600);border-radius:var(--radius-sm);cursor:pointer;font-weight:600">28</div>
+      <!-- Row 5 -->
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">29</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">30</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-primary);border-radius:var(--radius-sm);cursor:pointer">31</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-disabled);border-radius:var(--radius-sm)">1</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-disabled);border-radius:var(--radius-sm)">2</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-disabled);border-radius:var(--radius-sm)">3</div>
+      <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-disabled);border-radius:var(--radius-sm)">4</div>
+    </div>
+    <!-- Legend -->
+    <div style="display:flex;gap:var(--space-4);margin-top:var(--space-4);padding-top:var(--space-3);border-top:1px solid var(--border-subtle)">
+      <div style="display:flex;align-items:center;gap:var(--space-1)">
+        <div style="width:12px;height:12px;border:2px solid var(--blue-600);border-radius:2px"></div>
+        <span style="font-size:11px;color:var(--text-tertiary)">Today</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:var(--space-1)">
+        <div style="width:12px;height:12px;background:var(--blue-600);border-radius:2px"></div>
+        <span style="font-size:11px;color:var(--text-tertiary)">Selected</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:var(--space-1)">
+        <div style="width:12px;height:12px;background:var(--blue-100);border-radius:2px"></div>
+        <span style="font-size:11px;color:var(--text-tertiary)">Range</span>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <!-- ============================================================ -->
@@ -3377,8 +3629,8 @@ tr.hot:hover td { background: var(--orange-100); }
       <div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:var(--space-3)">Easing Curves</div>
       <div style="display:flex;flex-direction:column;gap:var(--space-2)">
         <div style="display:flex;align-items:center;gap:var(--space-3)"><code style="font-family:var(--font-mono);font-size:12px;color:var(--text-tertiary);width:110px">ease-out</code><span style="font-size:12px;color:var(--text-secondary)">Elements entering — decelerates to rest</span></div>
-        <div style="display:flex;align-items:center;gap:var(--space-3)"><code style="font-family:var(--font-mono);font-size:12px;color:var(--text-tertiary);width:110px">ease-in</code><span style="font-size:12px;color:var(--text-secondary)">Elements leaving — accelerates away</span></div>
-        <div style="display:flex;align-items:center;gap:var(--space-3)"><code style="font-family:var(--font-mono);font-size:12px;color:var(--text-tertiary);width:110px">ease-spring</code><span style="font-size:12px;color:var(--text-secondary)">Slight overshoot — toggles, delight moments</span></div>
+        <div style="display:flex;align-items:center;gap:var(--space-3)"><code style="font-family:var(--font-mono);font-size:12px;color:var(--text-tertiary);width:110px">ease-in-out</code><span style="font-size:12px;color:var(--text-secondary)">Symmetric — position changes, layout shifts</span></div>
+        <div style="display:flex;align-items:center;gap:var(--space-3)"><code style="font-family:var(--font-mono);font-size:12px;color:var(--text-tertiary);width:110px">ease-spring</code><span style="font-size:12px;color:var(--text-secondary)">Overshoot <code style="font-family:var(--font-mono);font-size:11px;color:var(--text-tertiary)">(0.175,0.885,0.32,1.275)</code> — toggles, delight</span></div>
         <div style="display:flex;align-items:center;gap:var(--space-3)"><code style="font-family:var(--font-mono);font-size:12px;color:var(--text-tertiary);width:110px">linear</code><span style="font-size:12px;color:var(--text-secondary)">Spinners, progress bars — continuous motion</span></div>
       </div>
     </div>
@@ -3432,7 +3684,7 @@ tr.hot:hover td { background: var(--orange-100); }
       <div class="anim-card-desc">Plus icon crossfades into a red filled heart with spring overshoot. Button shifts to dark solid active state. Reverts on removal.</div>
       <div class="anim-card-demo" style="flex-direction:column;gap:var(--space-3)">
         <button class="btn btn-md btn-secondary" id="watchlistDemo" onclick="playWatchlistAnim()">
-          <span class="heart-anim" id="heartIcon"><svg class="btn-icon icon-default" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.75V18.25"/><path d="M5.75 12H18.25"/></svg><svg class="btn-icon icon-active heart-filled" width="20" height="20" viewBox="0 0 24 24" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span> Watchlist
+          <span class="heart-anim" id="heartIcon"><svg class="btn-icon icon-default" width="18" height="18" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z"/></svg><svg class="btn-icon icon-active heart-filled" width="18" height="18" viewBox="3 3 18 18" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg></span> Watchlist
         </button>
       </div>
       <div class="anim-card-spec">300ms crossfade + 600ms spring pop — plus rotates out, heart scales in — fill #E53E3E</div>
@@ -3478,7 +3730,7 @@ tr.hot:hover td { background: var(--orange-100); }
       <div class="anim-card-title">Toast Notification</div>
       <div class="anim-card-desc">Slides up from bottom with gentle fade. Auto-dismisses after 5s or on swipe.</div>
       <div class="anim-card-demo" style="flex-direction:column;gap:var(--space-3);position:relative;min-height:80px">
-        <div id="toastDemo" style="display:none;position:absolute;bottom:0;left:50%;transform:translateX(-50%);white-space:nowrap;padding:10px 20px;background:var(--neutral-900);color:#fff;border-radius:10px;font-size:14px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,0.16)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:middle"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.75 12.8665L8.33995 16.4138C9.15171 17.5256 10.8179 17.504 11.6006 16.3715L18.25 6.75"/></svg> Added to Watchlist</div>
+        <div id="toastDemo" style="display:none;position:absolute;bottom:0;left:50%;transform:translateX(-50%);white-space:nowrap;padding:10px 20px;background:var(--neutral-900);color:#fff;border-radius:10px;font-size:14px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,0.16)"><svg width="20" height="20" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:middle"><path d="M7.75 12.75L10 15.25L16.25 8.75"/></svg> Added to Watchlist</div>
         <button class="anim-card-trigger" onclick="playToastAnim()">Show toast</button>
       </div>
       <div class="anim-card-spec">enter 250ms ease-out, exit 200ms ease-in</div>
@@ -3579,7 +3831,7 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="type-specimen"><span class="type-specimen-label">Subheadline</span><span style="font-size:15px;font-weight:400;line-height:1.33;color:var(--text-secondary)">Front End Damage &bull; Runs &amp; Drives</span><span class="type-specimen-meta">15px / 400</span></div>
     <div class="type-specimen"><span class="type-specimen-label">Footnote</span><span style="font-size:13px;font-weight:400;line-height:1.38;color:var(--text-tertiary)">Last updated 2 hours ago</span><span class="type-specimen-meta">13px / 400</span></div>
     <div class="type-specimen"><span class="type-specimen-label">Caption 1</span><span style="font-size:12px;font-weight:400;line-height:1.33;color:var(--text-tertiary)">37,482 miles &bull; Clean title</span><span class="type-specimen-meta">12px / 400</span></div>
-    <div class="type-specimen"><span class="type-specimen-label">Caption 2</span><span style="font-size:11px;font-weight:400;line-height:1.18;letter-spacing:0.01em;color:var(--text-tertiary)">Ends in 2h 14m</span><span class="type-specimen-meta">11px / 400</span></div>
+    <div class="type-specimen"><span class="type-specimen-label">Caption 2</span><span style="font-size:12px;font-weight:500;line-height:1.33;letter-spacing:0.015em;color:var(--text-tertiary)">Ends in 2h 14m</span><span class="type-specimen-meta">12px / 500</span></div>
   </div>
 
   <!-- Mobile-Specific Patterns -->
@@ -3772,8 +4024,8 @@ function togglePlatform() {
   const isMobile = html.getAttribute('data-platform') === 'mobile';
   html.setAttribute('data-platform', isMobile ? 'desktop' : 'mobile');
   document.getElementById('platform-icon').innerHTML = isMobile
-    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H13.25C14.3546 4.75 15.25 5.64543 15.25 6.75V17.25C15.25 18.3546 14.3546 19.25 13.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.25 16.75H9.75"/></svg>'
-    : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V14.25C19.25 15.3546 18.3546 16.25 17.25 16.25H6.75C5.64543 16.25 4.75 15.3546 4.75 14.25V6.75Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 19.25L12 17.25L8.75 19.25"/></svg>';
+    ? '<svg width="16" height="16" viewBox="3 3 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H13.25C14.3546 4.75 15.25 5.64543 15.25 6.75V17.25C15.25 18.3546 14.3546 19.25 13.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.25 16.75H9.75"/></svg>'
+    : '<svg width="16" height="16" viewBox="3 3 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V14.25C19.25 15.3546 18.3546 16.25 17.25 16.25H6.75C5.64543 16.25 4.75 15.3546 4.75 14.25V6.75Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 19.25L12 17.25L8.75 19.25"/></svg>';
   document.getElementById('platform-label').textContent = isMobile ? 'Mobile' : 'Desktop';
 }
 
@@ -3784,8 +4036,8 @@ function toggleTheme() {
   const newTheme = isDark ? 'light' : 'dark';
   html.setAttribute('data-theme', newTheme);
   document.getElementById('theme-icon').innerHTML = isDark
-    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.25 15.7499C17.2352 16.2904 16.23 16.25 15 16.25C10.9959 16.25 7.75 13.0041 7.75 9.00001C7.75 7.77001 7.70951 6.76474 8.25 5.74994C5.96125 6.96891 4.75 9.2259 4.75 12C4.75 16.004 7.99594 19.25 12 19.25C14.7741 19.25 17.031 18.0387 18.25 15.7499Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 4.75C16 6.95914 14.9591 9 12.75 9C14.9591 9 16 11.0409 16 13.25C16 11.0409 17.0409 9 19.25 9C17.0409 9 16 6.95914 16 4.75Z"/></svg>'
-    : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="3.25" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2.75V4.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L16.0659 7.93416"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.25 12.0001L19.75 12.0001"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 17.2501L16.0659 16.066"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19.75V21.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.9341 16.0659L6.74996 17.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.25 12.0001L2.75 12.0001"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.93405 7.93423L6.74991 6.75003"/></svg>';
+    ? '<svg width="16" height="16" viewBox="3 3 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.25 15.7499C17.2352 16.2904 16.23 16.25 15 16.25C10.9959 16.25 7.75 13.0041 7.75 9.00001C7.75 7.77001 7.70951 6.76474 8.25 5.74994C5.96125 6.96891 4.75 9.2259 4.75 12C4.75 16.004 7.99594 19.25 12 19.25C14.7741 19.25 17.031 18.0387 18.25 15.7499Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 4.75C16 6.95914 14.9591 9 12.75 9C14.9591 9 16 11.0409 16 13.25C16 11.0409 17.0409 9 19.25 9C17.0409 9 16 6.95914 16 4.75Z"/></svg>'
+    : '<svg width="16" height="16" viewBox="3 3 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="3.25" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2.75V4.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L16.0659 7.93416"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.25 12.0001L19.75 12.0001"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 17.2501L16.0659 16.066"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19.75V21.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.9341 16.0659L6.74996 17.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.25 12.0001L2.75 12.0001"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.93405 7.93423L6.74991 6.75003"/></svg>';
   document.getElementById('theme-label').textContent = isDark ? 'Dark Mode' : 'Light Mode';
   // Update swatch hex labels and meta text to reflect current theme
   updateSwatchLabels(newTheme);
@@ -3875,7 +4127,23 @@ function updateRangeSlider(container) {
 // Initialize range sliders on load
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.range-slider').forEach(function(s) { updateRangeSlider(s); });
+  // Init content tab indicator
+  var firstTab = document.querySelector('#ctabWrap .ctab.active');
+  if (firstTab) positionCtabIndicator(firstTab);
 });
+
+function positionCtabIndicator(tab) {
+  var indicator = document.getElementById('ctabIndicator');
+  if (!indicator) return;
+  indicator.style.left = tab.offsetLeft + 'px';
+  indicator.style.width = tab.offsetWidth + 'px';
+}
+function switchCtab(tab) {
+  tab.parentElement.querySelectorAll('.ctab').forEach(function(t) { t.style.color = 'var(--neutral-500)'; t.classList.remove('active'); });
+  tab.style.color = 'var(--blue-600)';
+  tab.classList.add('active');
+  positionCtabIndicator(tab);
+}
 
 // Modal
 function openModal() {
@@ -3904,10 +4172,10 @@ function closeShelf(e, id) {
 }
 
 // Animation Demos
-var heartOutline = '<svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg>';
-var heartFilled = '<svg class="btn-icon heart-filled" width="20" height="20" viewBox="0 0 24 24" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg>';
-var heartOutlineSm = '<svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg>';
-var heartFilledSm = '<svg class="btn-icon heart-filled" width="18" height="18" viewBox="0 0 24 24" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg>';
+var heartOutline = '<svg class="btn-icon" width="16" height="16" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg>';
+var heartFilled = '<svg class="btn-icon heart-filled" width="20" height="20" viewBox="3 3 18 18" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg>';
+var heartOutlineSm = '<svg class="btn-icon" width="18" height="18" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg>';
+var heartFilledSm = '<svg class="btn-icon heart-filled" width="18" height="18" viewBox="3 3 18 18" fill="#E53E3E" stroke="#E53E3E" stroke-width="1.5" stroke-linejoin="round"><path fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z" clip-rule="evenodd"/></svg>';
 
 function playWatchlistAnim() {
   const btn = document.getElementById('watchlistDemo');
@@ -3975,11 +4243,12 @@ function toggleWatchlist(btn) {
   const isActive = btn.classList.contains('btn-watchlist-active');
   const heart = btn.querySelector('.heart-anim');
   const textNode = btn.childNodes[btn.childNodes.length - 1];
+  const hasText = textNode && textNode.nodeType === 3 && textNode.textContent.trim().length > 0;
   if (isActive) {
     btn.classList.remove('btn-watchlist-active');
     btn.classList.add('btn-secondary');
     if (heart) heart.classList.remove('active', 'pop');
-    textNode.textContent = ' Watchlist';
+    if (hasText) textNode.textContent = ' Watchlist';
   } else {
     if (heart) {
       heart.classList.add('active', 'pop');
@@ -3987,7 +4256,7 @@ function toggleWatchlist(btn) {
     }
     btn.classList.remove('btn-secondary');
     btn.classList.add('btn-watchlist-active');
-    textNode.textContent = ' Watching';
+    if (hasText) textNode.textContent = ' Watching';
   }
 }
 
@@ -4030,7 +4299,7 @@ function selectFilterOption(item, label) {
     if (removeBtn) {
       var newChevron = document.createElement('span');
       newChevron.className = 'chip-chevron';
-      newChevron.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>';
+      newChevron.innerHTML = '<svg width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>';
       removeBtn.replaceWith(newChevron);
     }
   }
@@ -4047,7 +4316,7 @@ function removeFilterChip(chip) {
   if (removeBtn) {
     var newChevron = document.createElement('span');
     newChevron.className = 'chip-chevron';
-    newChevron.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>';
+    newChevron.innerHTML = '<svg width="14" height="14" viewBox="3 3 18 18" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.25 10.75L12 14.25L8.75 10.75"/></svg>';
     removeBtn.replaceWith(newChevron);
   }
 }

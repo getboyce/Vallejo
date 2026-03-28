@@ -300,6 +300,12 @@ Specific copy patterns for every component type. These are rules, not suggestion
 - **Category tags:** Nouns — "Clean title", "Salvage", "Flood damage"
 - **Count badges:** Numerals only — "3", "12", "99+"
 
+**Badge Shape Rules:**
+- **Round-rect** (`radius-lg`): Status badges inside tables — "Active", "Sold", "On Hold" in table cells. Padding 4px 12px. The rectangular shape with rounded corners fits cleanly inline with data rows.
+- **Round-rect** (`radius-md` or `radius-lg`): Standalone badges on cards, detail pages, and anywhere outside a table. The rectangular shape reads better with surrounding content when the badge has more visual room.
+- **Circle** (`radius-full`): Status dots / indicators with no text — color-only markers next to a label. The circle's fill color must match its accompanying text color.
+- **Don't mix shapes** for the same badge type in different contexts. If "Active" is a pill in a table, it should not be a round-rect on a card — choose one shape per badge label.
+
 ### Navigation
 
 - **Top-level items:** 1–2 word nouns — "Vehicles", "My bids", "Dashboard"
@@ -513,7 +519,7 @@ Built around the brand color `#2662D9`, expanded into a functional 6-color prima
 | **RGB**     | 131, 179, 226                  |
 | **HSL**     | 210°, 62%, 70%                 |
 | **WCAG on White** | 2.43:1 (decorative only)  |
-| **Usage**   | Accent fills, icon backgrounds, decorative elements, marketing CTA bands, progress bars |
+| **Usage**   | Decorative accent fills, icon circle backgrounds, progress bar fills, marketing CTA bands. **Use for:** non-interactive visual emphasis only — never as a text color or interactive state. |
 
 ### Blue 300 — Brand Soft
 | Property     | Value                          |
@@ -522,7 +528,7 @@ Built around the brand color `#2662D9`, expanded into a functional 6-color prima
 | **RGB**     | 185, 214, 244                  |
 | **HSL**     | 210°, 72%, 84%                 |
 | **WCAG on Black** | 12.33:1 — **AAA**        |
-| **Usage**   | Section backgrounds on marketing/landing pages, branded content bands, soft info fills |
+| **Usage**   | Marketing/landing page section backgrounds, branded content bands, soft info fills. **Use for:** large surface areas that need a branded feel without competing with Blue 600 interactive elements. **Don't use for:** component backgrounds in product UI — use Blue 100 or 200 instead. |
 
 ### Blue 200 — Brand Light
 | Property     | Value                          |
@@ -531,7 +537,7 @@ Built around the brand color `#2662D9`, expanded into a functional 6-color prima
 | **RGB**     | 225, 236, 249                  |
 | **HSL**     | 214°, 69%, 93%                 |
 | **WCAG on Black** | 17.42:1 — **AAA**        |
-| **Usage**   | Selected row backgrounds, info alert fills, active tab backgrounds |
+| **Usage**   | Selected/active row backgrounds (tables, lists), pressed button states (Secondary, Tertiary), active tab fills. **Use for:** interactive feedback — anywhere a member's action needs a visible "you selected this" state. **Don't use for:** static decorative backgrounds — use Blue 100 for hover fills and Blue 300 for marketing bands. |
 
 ### Blue 100 — Brand Lightest
 | Property     | Value                          |
@@ -815,6 +821,9 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Weight** | 900 (Black) | 900 (Black) | 800 (Extra Bold) |
 | **Token** | `type-display-lg` | | |
 
+**Use for:** Homepage hero banners, marketing landing page headlines, full-screen takeover titles, campaign splash screens.
+**Don't use for:** In-app page titles (use Headline), dashboard headers, or any element that repeats on multiple pages. Display Large should appear at most once per page.
+
 #### Display Small
 | Property | Desktop | Tablet | Mobile |
 |----------|---------|--------|--------|
@@ -823,6 +832,9 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Letter Spacing** | -0.02em | -0.015em | -0.01em |
 | **Weight** | 800 (Extra Bold) | 800 (Extra Bold) | 700 (Bold) |
 | **Token** | `type-display-sm` | | |
+
+**Use for:** Secondary marketing headlines, feature section titles on landing pages, stat/KPI hero numbers (Inter weight 800), empty-state hero text.
+**Don't use for:** In-app content headings — even on dashboards. If the text appears inside the logged-in product shell, use Headline or Title 1 instead.
 
 ### Heading Styles (Page Structure)
 
@@ -836,6 +848,9 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Color** | Neutral 900 (`#2F333C`) | | |
 | **Token** | `type-headline` | | |
 
+**Use for:** Top-level page titles in the product shell — "Search Results," "My Bids," "Lot #12345678," "Account Settings." One per page, always the first heading in the content area.
+**Don't use for:** Section headings within a page (use Title 1), card titles (use Title 2 or Title 3), or marketing hero text (use Display).
+
 #### Title 1 (H2)
 | Property | Desktop | Tablet | Mobile |
 |----------|---------|--------|--------|
@@ -844,6 +859,9 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Letter Spacing** | -0.01em | -0.005em | 0em |
 | **Weight** | 700 (Bold) | 700 (Bold) | 700 (Bold) |
 | **Token** | `type-title-1` | | |
+
+**Use for:** Major section headings within a page — "Vehicle Details," "Bid History," "Similar Vehicles." Also modal titles for large/complex modals and shelf panel headers.
+**Don't use for:** Card titles (use Title 2), sidebar section labels (use Subheadline), or anything that repeats more than 3-4 times on a single page.
 
 #### Title 2 (H3)
 | Property | Desktop | Tablet | Mobile |
@@ -854,6 +872,9 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Weight** | 700 (Bold) | 600 (Semi Bold) | 600 (Semi Bold) |
 | **Token** | `type-title-2` | | |
 
+**Use for:** Card titles, subsection headings, accordion headers, modal titles (standard-size modals), dashboard widget titles, shelf panel titles.
+**Don't use for:** Inline emphasis within body text (use Body Emphasis), or button labels. If you have more than 6 Title 2s on one page, the hierarchy may be flat — consider promoting one to Title 1.
+
 #### Title 3 (H4)
 | Property | Desktop | Tablet | Mobile |
 |----------|---------|--------|--------|
@@ -862,6 +883,9 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Letter Spacing** | 0em | 0em | 0em |
 | **Weight** | 600 (Semi Bold) | 600 (Semi Bold) | 600 (Semi Bold) |
 | **Token** | `type-title-3` | | |
+
+**Use for:** Tertiary headings within cards or sections, list group headers, sidebar navigation section labels, small modal titles, alert titles, stat labels when the stat has a title-level heading.
+**Don't use for:** Form field labels (use Subheadline), metadata labels (use Caption 1), or body text that just needs emphasis (use Body Emphasis).
 
 ### Body Styles (Content)
 
@@ -875,6 +899,9 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Color** | Neutral 700 (`#46525D`) | | |
 | **Token** | `type-body-lg` | | |
 
+**Use for:** Lead paragraphs (first paragraph of a page or section), lot detail descriptions, marketing body copy, empty-state descriptions, onboarding explanation text.
+**Don't use for:** Standard body copy in product UI (use Body), form field values, or table cell content. Body Large is for moments that deserve more breathing room.
+
 #### Body (Default)
 | Property | Desktop | Tablet | Mobile |
 |----------|---------|--------|--------|
@@ -885,12 +912,18 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Color** | Neutral 700 (`#46525D`) | | |
 | **Token** | `type-body` | | |
 
+**Use for:** All standard body text — descriptions, paragraphs, form field values, table cell text, list item content, alert descriptions, toast messages, modal body text. This is the default for any text that isn't a heading, label, or utility text.
+**Don't use for:** Labels (use Subheadline or Caption 1), small metadata (use Footnote or Caption), or anything that needs emphasis over surrounding body text (use Body Emphasis or Callout).
+
 #### Body Emphasis
 | Property | All Breakpoints |
 |----------|----------------|
 | **Size** | Same as Body |
 | **Weight** | 500 (Medium) |
 | **Token** | `type-body-emphasis` |
+
+**Use for:** Inline emphasis within body text — key terms, important values, selected filter labels, "bold" content within a paragraph without breaking to a heading. Also for button labels at body size.
+**Don't use for:** Headings or titles (too subtle — use a Title style). If an entire paragraph needs emphasis, the hierarchy is wrong — promote the section or add a heading.
 
 #### Callout
 | Property | Desktop | Tablet | Mobile |
@@ -901,6 +934,9 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Weight** | 500 (Medium) | 500 (Medium) | 500 (Medium) |
 | **Token** | `type-callout` | | |
 
+**Use for:** Secondary content that sits between body and label — card subtitles, alert titles (when short), navigation item labels, dropdown menu items, tag/chip text, breadcrumb links.
+**Don't use for:** Primary body text (use Body), form field labels (use Subheadline), or very small metadata (use Footnote). Callout is the "in-between" weight — use it when Body feels too light and Subheadline feels too small.
+
 #### Subheadline
 | Property | Desktop | Tablet | Mobile |
 |----------|---------|--------|--------|
@@ -909,6 +945,9 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Letter Spacing** | 0.005em | 0.005em | 0.005em |
 | **Weight** | 600 (Semi Bold) | 600 (Semi Bold) | 600 (Semi Bold) |
 | **Token** | `type-subheadline` | | |
+
+**Use for:** Form field labels, alert titles, table column headers, small button labels (SM/XS buttons), sidebar section labels, stat component labels, card metadata labels ("Make:", "Year:", "Damage:").
+**Don't use for:** Body text or descriptions (too small and heavy), page headings (use Title styles), or decorative labels (use Overline).
 
 ### Utility Styles (Small Text, Labels)
 
@@ -922,6 +961,9 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Color** | Neutral 500 (`#7A8691`) |
 | **Token** | `type-footnote` |
 
+**Use for:** Helper text below form fields, timestamps in feeds/activity logs, "Last updated" lines, legal disclaimers, character counts, secondary metadata that doesn't need the weight of Caption 1.
+**Don't use for:** Primary labels (use Subheadline or Caption 1), body text, or anything the member must read to complete a task. Footnote is for supplementary context only.
+
 #### Caption 1
 | Property | All Breakpoints |
 |----------|----------------|
@@ -932,14 +974,20 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Color** | Neutral 500 (`#7A8691`) |
 | **Token** | `type-caption-1` |
 
+**Use for:** Axis labels on charts, step indicator labels, stat component labels (uppercase with 0.08em tracking in stat context), badge text, table footer totals labels, image captions.
+**Don't use for:** Form field labels (too small — use Subheadline), primary content, or anything that needs to be read at arm's length on mobile.
+
 #### Caption 2
 | Property | All Breakpoints |
 |----------|----------------|
-| **Size** | 11px / 0.6875rem |
-| **Line Height** | 14px / 1.273 |
-| **Letter Spacing** | 0.02em |
+| **Size** | 12px / 0.75rem |
+| **Line Height** | 16px / 1.333 |
+| **Letter Spacing** | 0.015em |
 | **Weight** | 500 (Medium) |
 | **Token** | `type-caption-2` |
+
+**Use for:** Stat time period labels ("Last 30 days"), secondary metadata in dense layouts, chart legend text, tooltip detail lines. Identical specs to Caption 1 but used as a semantic distinction — Caption 2 is always subordinate to a Caption 1 on the same component.
+**Don't use for:** Anything that stands alone without a larger context element nearby. If Caption 2 text is the only thing a member sees, promote it to Caption 1 or Footnote.
 
 #### Overline
 | Property | All Breakpoints |
@@ -950,6 +998,9 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Weight** | 700 (Bold) |
 | **Text Transform** | Uppercase |
 | **Token** | `type-overline` |
+
+**Use for:** Section labels above content groups ("VEHICLE DETAILS", "BID HISTORY"), card category labels, tab group labels, stat component category labels. Always uppercase — the wide tracking + caps + bold weight makes 11px legible at this size.
+**Don't use for:** Body text, form labels, or any sentence-case text. Overline is purely a structural/decorative label — never for content the member reads as prose. Do not use for interactive labels (buttons, links).
 
 ---
 
@@ -1037,7 +1088,7 @@ font-feature-settings: "zero" 0;
 | **Body text** | 16px | WCAG recommendation for comfortable reading |
 | **Interactive labels** (buttons, links) | 14px | Minimum for touch-target legibility |
 | **Form labels** | 14px | Must be clearly associated with input |
-| **Caption / metadata** | 11px | Absolute floor — only for non-essential info |
+| **Caption / metadata** | 12px | Absolute floor for body-cased text. Overline stays 11px — uppercase + 0.08em tracking = legible at smaller size. |
 | **Touch target text** | 14px | Paired with minimum 44×44px touch area |
 
 ### Line Length
@@ -1158,7 +1209,7 @@ Based on an 8px unit with a 4px half-step for fine adjustments.
 - **Comfortable (20–24px):** Card body padding, sidebar content padding
 
 ### Component External Spacing (Between Elements)
-- **Related items** (label to input, title to description): `space-2` (8px) or `space-3` (12px)
+- **Related items** (label to input, title to description): `space-3` (12px) default. Use `space-2` (8px) only for tight card layouts or inline label-value pairs.
 - **Sibling components** (card to card, field to field): `space-4` (16px) or `space-6` (24px)
 - **Content sections** (form group to form group): `space-8` (32px) or `space-10` (40px)
 - **Page sections** (hero to content, content to footer): `space-12` (48px) to `space-16` (64px)
@@ -1187,8 +1238,8 @@ All icons in the Vallejo Design System come exclusively from the **Iconic** icon
 | **Format** | Inline SVG (not font icons, not `<img>` tags) |
 | **Stroke width** | 1.5px (default), 2px (emphasis), 2.5px (small icons ≤14px) |
 | **Stroke style** | `stroke-linecap: round; stroke-linejoin: round` |
-| **Default size** | 20px (navigation), 16px (buttons/inline), 24px (standalone) |
-| **ViewBox** | `0 0 24 24` (all icons) |
+| **Default size** | 20px (navigation), 18px (buttons/inline), 24px (standalone) |
+| **ViewBox** | `0 0 24 24` (base), `3 3 18 18` (inline/button — crops whitespace for tighter optical fit). Exception: icons with large circles (r ≥ 8) or off-center geometry (search, info circle) keep `0 0 24 24` — stroke bleeds outside the 3–21 crop zone |
 | **Color** | `currentColor` (inherits from parent text color) |
 
 ### Size Scale
@@ -1196,8 +1247,9 @@ All icons in the Vallejo Design System come exclusively from the **Iconic** icon
 | Token | Size | Usage |
 |-------|------|-------|
 | `icon-xs` | 12px | Chevrons, breadcrumb separators, trend arrows |
-| `icon-sm` | 14px | Small button icons, step indicators |
-| `icon-md` | 16px | Default button icons, toast icons, inline icons |
+| `icon-sm` | 16px | Small button icons, status token icons, compact inline icons |
+| `icon-md` | 18px | Default button icons, step indicator checkmarks, inline icons |
+| `icon-toast` | 20px | Toast icons, alert icons |
 | `icon-nav` | 20px | Tab bar icons, navigation icons |
 | `icon-lg` | 24px | Standalone icons, card placeholders, video controls |
 | `icon-xl` | 28px | Gesture pattern icons, mobile card media |
@@ -1211,8 +1263,9 @@ All icons in the Vallejo Design System come exclusively from the **Iconic** icon
 3. **Inline SVG only** — Embed SVGs directly in HTML for color inheritance and animation support. No font icons, no `<img>` tags, no icon fonts.
 4. **currentColor** — All icons inherit their parent's text color via `stroke="currentColor"` or `fill="currentColor"`
 5. **Filled vs. Outline** — Use outline (stroke) as default. Use filled only for active/selected states (e.g., filled heart = watching, outlined heart = not watching)
-6. **Alignment** — Use `.btn-icon` class with `vertical-align: -0.15em` for inline text alignment
-7. **Accessibility** — Decorative icons get `aria-hidden="true"`. Functional icons need `aria-label` or visible text
+6. **Directional arrows are always stroke carets** — All chevrons, dropdown arrows, expand/collapse indicators, breadcrumb separators, and sort indicators use stroke-style caret icons from the VDS set. Never use filled triangles, CSS borders-as-arrows, or Unicode arrows (▼, ▶, etc.)
+7. **Alignment** — Use `.btn-icon` class with `vertical-align: -0.15em` for inline text alignment
+8. **Accessibility** — Decorative icons get `aria-hidden="true"`. Functional icons need `aria-label` or visible text
 
 ---
 
@@ -1400,7 +1453,7 @@ Height: 56px + env(safe-area-inset-bottom)
 Background: #FFFFFF (light) / #1A1D23 (dark)
 Border-top: 1px solid Neutral 200
 Icon size: 24px
-Label: type-caption-2 (11px)
+Label: type-caption-2 (12px)
 Gap (icon to label): space-1 (4px)
 Item min-width: 64px
 Touch target: 48×48px minimum per item
@@ -1479,13 +1532,13 @@ Transition: width 200ms ease-out
 |---------|---------|-------|--------|
 | Link items | Neutral 500, type-caption-1 | Blue 600, underline | Blue 800 |
 | Current item | Neutral 900, font-weight 600 | N/A (non-interactive) | N/A |
-| Separator | Neutral 300 | N/A | N/A |
+| Separator | Neutral 500 | N/A | N/A |
 
 **Specs:**
 ```
 Height: 32px (container)
 Item font: type-caption-1 (12px, medium)
-Separator: 12px chevron-right icon, Neutral 300, margin 0 space-2
+Separator: 16px chevron-right stroke icon (from VDS icon set), Neutral 500, margin 0 space-2
 Current item: type-caption-1, font-weight 600, Neutral 900
 Gap between items: space-1 (4px)
 Overflow (mobile): horizontal scroll, no wrapping, fade-out mask on edges
@@ -1500,6 +1553,54 @@ Overflow (mobile): horizontal scroll, no wrapping, fade-out mask on edges
 - `<nav aria-label="Breadcrumb">` with `<ol>` list
 - Current page: `aria-current="page"`
 - Separators: `aria-hidden="true"` (decorative)
+
+---
+
+### Component: Link
+
+**Purpose:** Navigates to another page, section, or resource. Links are the primary text-based navigation element — distinct from buttons (which trigger actions).
+
+**When to use Link vs Button:** Links navigate. Buttons act. If clicking takes the member to a new URL or scrolls to an anchor, it's a link. If clicking triggers an in-page action (submit, toggle, open modal), it's a button.
+
+**Variants:**
+
+#### Inline Link (within body text)
+| State | Color | Weight | Decoration |
+|-------|-------|--------|------------|
+| Default | Blue 600 (`#2662D9`) | 500 (Medium) | None |
+| Hover | Blue 800 (`#063598`) | 500 (Medium) | Underline |
+| Active | Blue 800 (`#063598`) | 500 (Medium) | Underline |
+| Visited | Blue 900 (`#0F2757`) | 500 (Medium) | None |
+| Disabled | Neutral 500 (`#7A8691`) | 500 (Medium) | None |
+
+#### Standalone Link (on its own line, e.g., "View all results")
+| State | Color | Weight | Decoration |
+|-------|-------|--------|------------|
+| Default | Blue 600 | 500 (Medium) | None |
+| Hover | Blue 800 | 500 (Medium) | Underline |
+| Active | Blue 800 | 500 (Medium) | Underline |
+
+**Specs:**
+```
+Font: inherits parent size, weight 500 (Medium)
+Color: var(--text-link) / Blue 600
+Hover color: var(--text-link-hover) / Blue 800
+Transition: color 150ms ease, text-decoration-color 150ms ease
+Cursor: pointer
+Focus: 3px Blue 600 @ 40% opacity ring, 2px offset
+```
+
+**Usage:**
+- **Use for:** "View details," "See all results," "Learn more," inline references within body text, breadcrumb links, footer navigation.
+- **Don't use for:** Primary actions (use Button), destructive actions (use Destructive Button), or actions that don't navigate (use Tertiary Button styled as text).
+- Links inside alerts or toasts should match the alert's text color but add underline to distinguish them.
+- Never rely on color alone to distinguish links from body text — the medium weight (500 vs body's 400) provides a secondary signal.
+
+**Accessibility:**
+- Always use `<a href>` for navigation, never `<span>` or `<div>` with click handlers
+- `aria-label` when link text is generic ("View details" → `aria-label="View details for Lot #12345678"`)
+- External links: append `aria-label` with "(opens in new tab)" and use trailing external-link icon
+- Skip-navigation link: first focusable element on every page
 
 ---
 
@@ -1519,14 +1620,14 @@ Overflow (mobile): horizontal scroll, no wrapping, fade-out mask on edges
 **6 Variants:**
 
 #### Primary (Filled)
-| State | Background | Text | Border | Shadow |
-|-------|-----------|------|--------|--------|
-| Default | Blue 600 | White | None | `0 1px 2px rgba(38,98,217,0.24)` |
-| Hover | Blue 800 | White | None | `0 2px 4px rgba(6,53,152,0.32)` |
-| Active/Pressed | `#042D7A` | White | None | `0 0 0 transparent` (inset feel) |
-| Disabled | Neutral 200 | Neutral 500 | None | None |
-| Loading | Blue 600 @ 70% opacity | Hidden | None | None (spinner visible) |
-| Focus | Blue 600 | White | None | `0 0 0 3px rgba(38,98,217,0.4)` ring |
+| State | Background | Text | Border |
+|-------|-----------|------|--------|
+| Default | Blue 600 | White | None |
+| Hover | Blue 800 | White | None |
+| Active/Pressed | `#042D7A` | White | None |
+| Disabled | Neutral 200 | Neutral 500 | None |
+| Loading | Blue 600 @ 70% opacity | Hidden | None |
+| Focus | Blue 600 | White | `0 0 0 3px rgba(38,98,217,0.4)` ring |
 
 #### Secondary (Outlined)
 | State | Background | Text | Border |
@@ -1578,14 +1679,21 @@ Overflow (mobile): horizontal scroll, no wrapping, fade-out mask on edges
 | LG | 48px | 24px | 16px / 500 | 8px | 20px |
 | XL | 56px | 32px | 18px / 600 | 10px | 22px |
 
+**Icon-Only Variant:**
+Square button — same height and width (e.g., MD = 40×40px). Used for Tertiary actions with universally understood icons: close (X), more (…), expand, collapse, watchlist heart. Always requires `aria-label`.
+
 **Specs (all sizes):**
 ```
 Font family: Inter
 Cursor: pointer (default), not-allowed (disabled)
-Transition: background 150ms ease, box-shadow 150ms ease, transform 100ms ease
+Transition: background 150ms ease, transform 100ms ease
 Active transform: scale(0.98)
-Min-width: 64px (prevent tiny buttons)
+Min-width: 64px (label buttons), height×height (icon-only)
 Icon-to-label gap: space-2 (8px)
+Optical icon padding: .btn-icon-text class reduces left padding by 2px
+  (e.g., MD with leading icon: 14px left, 16px right)
+  This compensates for the icon's visual weight sitting closer to the edge.
+No shadow on any button variant — color change alone signals state.
 ```
 
 **Usage:**
@@ -1636,7 +1744,7 @@ Height: 44px (input only)
 Border-radius: 8px
 Padding: space-3 (12px) horizontal, centered vertical
 Font: type-body (16px / 400)
-Label: type-subheadline (14px / 600), margin-bottom space-2 (8px)
+Label: type-subheadline (14px / 600), margin-bottom space-3 (12px)
 Helper/Error text: type-caption-1 (12px / 500), margin-top space-1 (4px)
 Leading icon: 20px, Neutral 500, 12px from left edge
 Trailing action: 20px touch target within input
@@ -1668,9 +1776,10 @@ Focus shadow: 0 0 0 3px rgba(38,98,217,0.15)
 8. `dropdown-empty` — "No results" message when search yields nothing
 
 **States (Trigger):**
-Same as Text Field states, plus:
+Same as Text Field states, with these overrides:
 | State | Additional Visual |
 |-------|------------------|
+| Hover | Border changes to 1.5px Neutral 500 (no shadow — border only) |
 | Open | Blue 600 border, chevron rotated 180°, menu visible |
 | Has value | Display selected value in Neutral 900 (not placeholder color) |
 
@@ -1685,6 +1794,8 @@ Same as Text Field states, plus:
 **Specs:**
 ```
 Trigger: same as Text Field (44px height, 8px radius)
+Chevron icon: `chevron-down` from VDS icon set, 24px, Neutral 700, stroke style (not filled)
+  Rotates 180° when open, transition 150ms ease
 Menu: background White, border 1px Neutral 200, border-radius 12px
 Menu shadow: 0 4px 16px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.06)
 Menu max-height: 320px (scrollable)
@@ -1730,7 +1841,7 @@ z-index: 1100
 Track: 48px × 28px, border-radius 14px (pill)
 Thumb: 22px × 22px circle, 3px inset from track edge
 Thumb shadow: 0 1px 3px rgba(0,0,0,0.15)
-Transition: background 200ms ease, transform 200ms cubic-bezier(0.4, 0, 0.2, 1)
+Transition: background 200ms ease, transform 200ms var(--ease-spring)
 Gap (toggle to label): space-3 (12px)
 ```
 
@@ -1744,6 +1855,58 @@ Gap (toggle to label): space-3 (12px)
 - `aria-label` or associated `<label>` required
 - Keyboard: Space/Enter toggles state
 - Minimum touch target: 44×44px (expand hit area beyond visual track)
+
+---
+
+### Component: Watchlist Toggle
+
+**Purpose:** Lets users save or remove a lot from their watchlist. Appears on lot cards, lot detail pages, and search results.
+
+**Anatomy:**
+1. `watchlist-toggle` — Clickable wrapper (button semantics)
+2. `watchlist-icon` — Heart outline (default) or filled heart (saved)
+3. `watchlist-label` — Optional visible text ("Save" / "Saved")
+
+**Variants:**
+| Variant | Shows | Use for |
+|---------|-------|---------|
+| Icon + Label | Heart icon + text label | Lot detail page, anywhere space permits |
+| Icon-Only | Heart icon only, no label | Lot cards in grid, compact table rows, toolbar actions |
+
+**States:**
+| State | Icon | Label | Behavior |
+|-------|------|-------|----------|
+| Default (unsaved) | Heart outline, Neutral 500 | "Save" | — |
+| Hover (unsaved) | Heart outline, Blue 600 | "Save" | Cursor pointer |
+| Saving | Spinner replacing icon | "Saving…" | Disable interaction |
+| Saved | Filled heart, error-icon (#C22248) | "Saved" | Scale bounce (celebration) |
+| Hover (saved) | Filled heart, Neutral 500 | "Remove" | Label changes to remove action |
+| Removing | Spinner replacing icon | "Removing…" | Disable interaction |
+| Disabled | Heart outline, Neutral 300 | "Save" (Neutral 300) | Opacity 0.5 |
+
+**Specs:**
+```
+Icon size: 24px (default), 20px (compact/card)
+Icon-only button: 40px × 40px (MD), 32px × 32px (SM)
+Icon + Label gap: space-2 (8px)
+Label: type-subheadline (14px / 600)
+Touch target: 44×44px minimum
+Saved heart color: error-icon (#C22248) — red/rose heart convention
+Save animation: scale(1.2) → scale(1), 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275)
+Spinner: 16px, currentColor
+```
+
+**Usage:**
+- Use Icon + Label on lot detail pages and anywhere the action needs to be explicit.
+- Use Icon-Only on lot cards, search result grids, and compact table rows.
+- Hover on a saved item changes label to "Remove" to clearly communicate the toggle action.
+- Save animation uses the celebration register (scale bounce) — keep it subtle but rewarding.
+
+**Accessibility:**
+- `<button>` element with `aria-pressed="true|false"`.
+- `aria-label="Save lot [number] to watchlist"` / `"Remove lot [number] from watchlist"`.
+- Loading state: `aria-busy="true"`, `aria-label="Saving to watchlist"`.
+- Icon is `aria-hidden="true"` — the button label conveys meaning.
 
 ---
 
@@ -1817,7 +1980,8 @@ Outer circle: 20px × 20px
 Inner dot: 10px × 10px (centered)
 Border-radius: 50% (both)
 Gap (circle to label): space-2 (8px)
-Label: type-body (16px / 400)
+Label (unselected): type-body (16px / 400)
+Label (selected): type-body-emphasis (16px / 600) — bold signals active choice
 Group spacing: space-3 (12px) vertical between options
 Touch target: 44px minimum height
 ```
@@ -1923,6 +2087,14 @@ Value labels: same as single slider-value, displayed at left (low) and right (hi
 | Warning | `warning-bg` | Triangle exclamation | `warning-icon` |
 | Error | `error-bg` | Octagon exclamation | `error-icon` |
 
+**Behavior Variants:**
+| Variant | Description |
+|---------|-------------|
+| Static | No dismiss button. Persists until the condition resolves (e.g., system-wide maintenance banner). |
+| Dismissible | Includes close/X button (`alert-dismiss`). User can remove. Use for non-critical info and success alerts. |
+| With Link | Includes an inline text link in the description for "Learn more", "View details", or navigating to a related page. Link uses `text-link` color, underline on hover. |
+| Dismissible + Link | Both dismiss button and inline link. Most common pattern for info alerts with optional follow-up. |
+
 **States:**
 | State | Behavior |
 |-------|----------|
@@ -1940,6 +2112,7 @@ Gap (icon to content): space-3 (12px)
 Title: type-subheadline (14px / 600), matching text color per variant
 Description: type-body (16px / 400), matching text color per variant
 Dismiss button: 20px icon, Neutral 500, 8px from top-right
+Inline link: type-body (16px / 500), text-link color, underline on hover
 Min-height: 48px
 ```
 
@@ -2125,7 +2298,7 @@ Close button: 32px, Neutral 500 → Neutral 900 on hover
 Body padding: space-5 (20px) vertical, space-6 (24px) horizontal
 Body: flex 1, overflow-y auto
 Footer: sticky bottom, border-top 1px Neutral 200
-Footer padding: space-4 (16px) space-6 (24px), flex with justify-end, gap space-3
+Footer padding: space-4 (16px) space-6 (24px). Primary button spans full width. When two buttons, stack vertically — primary on top, secondary below.
 Open animation: 300ms ease-enter (desktop), 400ms ease-enter (mobile)
 Close animation: 200ms ease-exit
 Mobile handle: 36 x 4px, Neutral 300, border-radius 2px, centered, 8px top margin
@@ -2258,9 +2431,12 @@ Background: White (light) / surface-secondary (dark)
 Padding (body): space-4 (16px)
 Media aspect ratio: 4:3 (all lot images — vehicles and equipment)
 Title: type-title-3 (18px / 600)
+Gap (title to subtitle): space-1 (4px)
 Subtitle: type-body (16px / 400), Neutral 700
+Gap (subtitle to meta): space-2 (8px)
 Meta: type-caption-1 (12px / 500), Neutral 500
 Footer: border-top 1px Neutral 200, padding space-3 (12px) space-4 (16px)
+Button group in footer: space-3 (12px) gap between buttons, max 2 buttons
 Hover transition: transform 200ms ease, box-shadow 200ms ease
 Gap between cards in grid: space-6 (24px)
 ```
@@ -2388,10 +2564,16 @@ Label: type-caption-1 (12px / 500), Neutral 500, uppercase with 0.08em tracking
 Trend up: success-icon color, up arrow
 Trend down: error-icon color, down arrow
 Trend font: type-subheadline (14px / 600)
-Period: type-caption-2 (11px), Neutral 500
+Period: type-caption-2 (12px), Neutral 500
 Gap (value to trend): space-2 (8px)
 Gap (value to label): space-1 (4px)
 ```
+
+**Usage Rules:**
+- No decorative accent bars, lines, or "toenails." The stat component is value + label + optional trend — no visual ornamentation.
+- Use in dashboard widget rows and auction summary cards.
+- Financial values in compare contexts (dashboard rows, multi-stat cards) use JetBrains Mono. Singular hero numbers (win amount, buy-it-now) use Inter.
+- Always provide a period/context label (e.g., "Last 30 days").
 
 ---
 
@@ -2425,6 +2607,100 @@ Responsive: reduce data point density on mobile, maintain touch target on intera
 - Provide `<table>` fallback for screen readers with the same data
 - All colors must be distinguishable by pattern/shape, not just hue
 - Interactive tooltips keyboard-accessible via arrow keys
+
+---
+
+### Component: Tooltip
+
+**Purpose:** Brief contextual hint that appears on hover or keyboard focus. Dark background, no interaction inside. Use for supplementary info that doesn't warrant permanent screen space.
+
+**Anatomy:**
+1. `tooltip-trigger` — The element being hovered/focused (icon, text, truncated label)
+2. `tooltip-bubble` — The dark floating container
+3. `tooltip-arrow` — Directional pointer toward the trigger
+4. `tooltip-text` — 1–2 lines of plain text (no links, no buttons)
+
+**Placement:** Top (default), Bottom, Left, Right — auto-flip when near viewport edge.
+
+**Specs:**
+```
+Background: Neutral 900 (#2F333C)
+Text: White (#FFFFFF), type-caption-1 (12px / 500)
+Padding: space-2 (8px) horizontal, space-1 (4px) vertical
+Border-radius: radius-sm (4px)
+Max-width: 240px
+Arrow: 6px equilateral triangle, same color as background
+Shadow: shadow-md
+Show delay: 300ms hover, 0ms focus
+Hide delay: 100ms
+Animation: fade in, 100ms ease-out
+Z-index: z-dropdown (1100)
+```
+
+**Usage:**
+- **Use for:** Explaining an icon's meaning, showing full text for a truncated label, clarifying a form field, brief definition of a term.
+- **Don't use for:** Content longer than 2 short sentences, interactive content (links, buttons), critical information the user must see. Use a Popover instead.
+- Trigger on hover (mouse) and focus (keyboard). Never trigger on click — that's a Popover.
+- Dismiss on mouse-out and blur.
+
+**Accessibility:**
+- `role="tooltip"` on the bubble, `aria-describedby` on the trigger.
+- Must be keyboard-accessible (visible on focus, not just hover).
+- Content must be plain text — no interactive elements.
+
+---
+
+### Component: Popover
+
+**Purpose:** Light-background floating panel for richer contextual content — 1–3 paragraphs, links, or small forms. Click-triggered, with a close button. Use when content is too long or interactive for a Tooltip but doesn't warrant a Modal.
+
+**Anatomy:**
+1. `popover-trigger` — The element being clicked (button, icon, link)
+2. `popover-panel` — White floating container
+3. `popover-arrow` — Directional pointer toward the trigger
+4. `popover-header` — Optional title (type-subheadline)
+5. `popover-body` — Paragraph text, links, or small form elements
+6. `popover-close` — Close/X button (always present)
+
+**Placement:** Top, Bottom, Left, Right — auto-flip when near viewport edge.
+
+**Specs:**
+```
+Background: White (#FFFFFF)
+Border: 1px Neutral 200
+Border-radius: radius-lg (8px)
+Padding: space-4 (16px)
+Shadow: shadow-lg
+Max-width: 320px
+Min-width: 200px
+Header: type-subheadline (14px / 600), Neutral 900
+Body: type-body (16px / 400), Neutral 700
+Close button: 20×20 SVG X icon, Neutral 500, top-right, transparent background
+Animation: scale(0.95) + fade → scale(1), 150ms ease-out
+Z-index: z-dropdown (1100)
+```
+
+**Usage:**
+- **Use for:** Help text longer than 2 sentences, "Learn more" expansions, small inline forms (e.g., quick filter), contextual actions.
+- **Don't use for:** Single-line hints (use Tooltip), full-page blocking content (use Modal), navigation (use Dropdown).
+- Click to open, click outside or X to close.
+- Only one Popover open at a time — opening a new one closes the previous.
+
+**When to use Tooltip vs. Popover:**
+| | Tooltip | Popover |
+|---|---------|---------|
+| **Trigger** | Hover / focus | Click |
+| **Background** | Dark (Neutral 900) | Light (White) |
+| **Content** | Plain text, 1–2 lines | Rich text, links, small forms |
+| **Interactive** | No | Yes |
+| **Close** | Auto on mouse-out/blur | Manual (X button or click outside) |
+| **Max lines** | 2 | No hard limit (keep concise) |
+
+**Accessibility:**
+- `aria-haspopup="dialog"` on trigger, `role="dialog"` on panel.
+- Focus trap inside open popover.
+- Escape to close, returns focus to trigger.
+- Close button: `aria-label="Close popover"`.
 
 ---
 
@@ -2561,6 +2837,207 @@ See [Vault > progressive-mastery.md](https://github.com/getboyce/Copart-Design-V
 | **Native mobile app** | Efficient Discovery | Speed, clear photography, first-impression institutional confidence |
 
 See [Vault > surface-intentions.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/surface-intentions.md).
+
+---
+
+## 7.6 Navigation & Selection Components
+
+### Component: Navigation Chips
+
+**Purpose:** Horizontal scrollable pill buttons for filtering or category selection. Used in search, browse, and dashboard contexts to let users quickly narrow results by a single dimension.
+
+**Anatomy:**
+1. `chip-container` — Horizontal scrollable wrapper
+2. `chip-item` — Individual chip button
+3. `chip-icon` — Optional leading icon (16px)
+4. `chip-label` — Text label
+5. `chip-count` — Optional trailing count badge
+
+**Variants:**
+| Variant | Use |
+|---------|-----|
+| Single-select | One chip active at a time (radio behavior) |
+| Multi-select | Multiple chips can be active simultaneously (checkbox behavior) |
+
+**States:**
+| State | Background | Text | Border |
+|-------|-----------|------|--------|
+| Default | White | Neutral 700 | 1px Neutral 300 |
+| Hover | Neutral 100 | Neutral 900 | 1px Neutral 500 |
+| Selected | Blue 600 | White | None |
+| Selected + Hover | Blue 800 | White | None |
+| Disabled | Neutral 100 | Neutral 300 | 1px Neutral 200 |
+
+**Specs:**
+```
+Height: 36px
+Padding: space-2 (8px) vertical, space-5 (20px) horizontal
+Border-radius: radius-pill (9999px)
+Font: type-subheadline (14px / 600)
+Gap between chips: space-2 (8px)
+Icon size: 16px, space-2 gap to label
+Count badge: type-caption-1 (12px / 500), space-2 gap, Neutral 500 text (default), White text (selected)
+Container: horizontal scroll, no visible scrollbar, fade gradient on overflow edges
+Touch target: 44px minimum height via padding expansion
+Transition: background 150ms ease, color 150ms ease
+```
+
+**Copart Context:**
+- Vehicle type filters: "All", "Cars", "Trucks", "SUVs", "Motorcycles", "Equipment"
+- Auction type: "All Auctions", "Live", "Buy Now", "Upcoming"
+- Damage type: "All Damage", "Front End", "Rear End", "Side", "Flood", "Hail"
+
+**Usage:**
+- Use for a single dimension of filtering with ≤12 options.
+- For more than 12 options, use a Dropdown or filter panel.
+- Always include an "All" chip as the first option (default selected).
+- Scroll indicators (fade gradient) required when chips overflow viewport.
+
+**Accessibility:**
+- `role="radiogroup"` (single-select) or `role="group"` (multi-select) on container.
+- Each chip: `role="radio"` or `role="checkbox"` with `aria-checked`.
+- Keyboard: Arrow keys navigate between chips, Space/Enter selects.
+- Overflow: ensure all chips reachable via keyboard even if scrolled.
+
+---
+
+### Component: Content Tabs (Underline Style)
+
+**Purpose:** Switch between content panels within the same view. Text labels with an underline indicator for the active tab. Used for lot detail sections, dashboard views, and settings pages.
+
+**Anatomy:**
+1. `tabbar-container` — Horizontal bar wrapper
+2. `tabbar-item` — Individual tab button
+3. `tabbar-label` — Tab text
+4. `tabbar-badge` — Optional count or status indicator
+5. `tabbar-indicator` — Active underline bar (absolutely positioned div, JS-repositioned on tab switch via offsetLeft/offsetWidth)
+
+**States:**
+| State | Text Color | Weight | Underline |
+|-------|-----------|--------|-----------|
+| Default | Neutral 500 | 600 | None |
+| Hover | Neutral 900 | 600 | None (cursor pointer) |
+| Active | Blue 600 | 600 | 2px Blue 600, bottom-aligned |
+| Disabled | Neutral 300 | 600 | None |
+| Focus | Current color | 600 | Focus ring on tab item |
+
+**Implementation note:** All tabs use font-weight 600 in every state. This prevents layout shift when switching between tabs (bold text is wider than regular text, which would cause the indicator width to jump).
+
+**Specs:**
+```
+Tab height: 48px (includes padding + underline space)
+Tab padding: space-4 (16px) horizontal
+Label: type-subheadline (14px / 600 all states — consistent weight prevents layout shift)
+Gap between tabs: 0 (tabs butt against each other, separated by padding)
+Active underline: 2px height, Blue 600, bottom of tab, matches label width (not tab width)
+Underline animation: slide horizontally to new tab, 200ms ease-out
+Badge: type-caption-1 (12px / 500), Neutral 500, space-2 gap after label
+Container: border-bottom 1px Neutral 200 (full width baseline)
+```
+
+**Copart Context:**
+- Lot details: "Overview", "Bid History", "Photos", "Documents", "Similar Lots"
+- Dashboard: "Active Bids", "Won", "Lost", "Watchlist"
+- Account: "Profile", "Payment Methods", "Notifications", "Preferences"
+
+**Usage:**
+- Use for 2–7 tabs. For more, consider a Dropdown or side navigation.
+- Tab content should load without a full page reload — swap the panel content.
+- First tab is selected by default unless deep-linked.
+- **Don't use for:** navigation to different pages (use Navigation Chips or a nav bar). Tabs switch content within the same page.
+
+**Accessibility:**
+- `role="tablist"` on container, `role="tab"` on each tab, `role="tabpanel"` on content.
+- `aria-selected="true"` on active tab, `aria-controls` pointing to panel ID.
+- Keyboard: Arrow keys navigate tabs, Enter/Space activates, Home/End jump to first/last.
+- Tab panels: `tabindex="0"` for keyboard users to Tab into the content.
+
+---
+
+### Component: Date Picker
+
+**Purpose:** Input control for selecting a single date or date range. Used for auction date filters, sale schedules, report date ranges, and bid deadline awareness.
+
+**Anatomy:**
+1. `datepicker-trigger` — Text input that opens the calendar (same visual as Text Field)
+2. `datepicker-dropdown` — Floating calendar panel
+3. `datepicker-header` — Month/year display + prev/next navigation arrows
+4. `datepicker-grid` — 7-column day grid (Sun–Sat headers + day cells)
+5. `datepicker-day` — Individual day button
+6. `datepicker-range-highlight` — Background highlight for range selection between start and end
+7. `datepicker-footer` — Optional action buttons (Clear, Apply for ranges)
+
+**Variants:**
+| Variant | Use |
+|---------|-----|
+| Single Date | Select one date (auction filter, start date) |
+| Date Range | Select start + end date with range highlight (report filters, sale period) |
+
+**States (Day Cell):**
+| State | Background | Text | Border |
+|-------|-----------|------|--------|
+| Default | None | Neutral 900 | None |
+| Hover | Blue 50 | Blue 600 | None |
+| Today | None | Blue 600 | 1px Blue 600 (ring) |
+| Selected | Blue 600 | White | None |
+| Range: In-Between | Blue 100 | Blue 900 | None |
+| Range: Start/End | Blue 600 | White | None (pill ends) |
+| Disabled (past/unavailable) | None | Neutral 300 | None |
+| Focus | — | — | Focus ring (shadow-focus) |
+
+**States (Trigger Input):**
+Same as Text Field states (default, hover, focus, filled, error, disabled).
+
+**Specs:**
+```
+Trigger input: matches Text Field spec exactly (height, radius, padding, font)
+Trailing icon: calendar icon, 20px, Neutral 500
+
+Calendar dropdown:
+  Background: White
+  Border: 1px Neutral 200
+  Border-radius: radius-lg (8px)
+  Shadow: shadow-lg
+  Padding: space-4 (16px)
+  Width: 320px (single), 640px (dual-month range)
+  Z-index: z-dropdown (1100)
+
+Header:
+  Month/year: type-subheadline (14px / 600)
+  Nav arrows: 32×32px buttons, bg-secondary, radius-sm, stroke caret icon, Neutral 700
+  Month-year clickable for year picker
+
+Day grid:
+  Day headers: type-caption-1 (12px / 500), Neutral 500, uppercase
+  Day cell: 36px × 36px
+  Day text: 13px / 400 (selected: 600)
+  Grid gap: 2px
+
+Footer (range only):
+  Clear button: Tertiary, left-aligned
+  Apply button: Primary, right-aligned
+  Gap: space-3 (12px)
+```
+
+**Copart Context:**
+- Auction date filters: "Sale Date From / To"
+- Report generation: "Select date range for export"
+- Bid deadline awareness: showing auction close dates in calendar view
+- Sale schedule browsing: highlight dates with scheduled sales
+
+**Usage:**
+- Single date: calendar closes on selection, value populates input.
+- Date range: first click = start, second click = end, "Apply" confirms. Clear button resets.
+- Always show current month by default, allow navigation to past/future months.
+- Disable dates that are not selectable (past dates for future-only pickers).
+- Mobile: full-screen calendar takeover or native date input fallback.
+
+**Accessibility:**
+- `role="dialog"` on calendar dropdown, `aria-label="Choose date"`.
+- Day cells: `role="gridcell"`, `aria-selected`, `aria-disabled`.
+- Keyboard: Arrow keys navigate day grid, Enter selects, Escape closes.
+- Screen reader: announce "Selected [date]" on selection, "Range: [start] to [end]" for ranges.
+- Input: `aria-haspopup="dialog"`, `aria-expanded` on open.
 
 ---
 
@@ -2817,7 +3294,7 @@ Based on the iOS Human Interface Guidelines type system, adapted with Inter.
 | **Subheadline** | 15px | 400 | 20px | 0em | Secondary labels |
 | **Footnote** | 13px | 400 | 18px | 0em | Timestamps, metadata |
 | **Caption 1** | 12px | 400 | 16px | 0em | Tertiary info, badges |
-| **Caption 2** | 11px | 400 | 13px | 0.01em | Tab bar labels, tiny metadata |
+| **Caption 2** | 12px | 500 | 16px | 0.015em | Tab bar labels, tiny metadata |
 
 **Key differences from desktop:**
 - Body text is 17px (not 16px) — Apple's research shows this is the optimal reading size at arm's length
@@ -3043,6 +3520,12 @@ The three principles — **Precision, Institutional Confidence, Vitality** — a
 ### 2. Button Hierarchy
 **Do:** Place one Primary button per view. Pair it with a Secondary or Tertiary button for alternative actions. Maintain consistent sizing within a button group.
 
+**Button Group Rules:**
+- Gap between buttons: `space-3` (12px).
+- Max 2 buttons per group. If you need a third action, move it to a text link or overflow menu.
+- In horizontal groups, Primary goes right (action position), Secondary/Tertiary goes left.
+- In vertical groups (e.g., shelf footer), Primary goes top, Secondary below.
+
 **Don't:** Place two Primary buttons side by side. Don't use Destructive style for non-destructive actions. Don't use CTA Orange outside of registration, onboarding, or urgency contexts. Don't place an Orange CTA adjacent to a Blue Primary — demote one.
 
 ---
@@ -3252,8 +3735,15 @@ Before shipping any component, verify:
 | **Media** | Image Container | 5 (Hero, Thumbnail, Document, Avatar, Gallery) | Loaded, Loading, Error |
 | | Video Player | 1 | Poster, Playing, Paused, Controls Visible |
 | | Avatar | 5 sizes (XS–XL) | Image, Fallback, Badge |
+| **Overlay** | Tooltip | 1 | Hidden, Visible |
+| | Popover | 1 | Hidden, Visible |
+| **Navigation & Selection** | Navigation Chips | 2 (Single, Multi) | Default, Hover, Selected, Disabled |
+| | Content Tabs | 1 | Default, Hover, Active, Disabled |
+| | Date Picker | 2 (Single, Range) | Default, Open, Selected, Range, Disabled |
+| **Input** | Watchlist Toggle | 2 (Icon+Label, Icon-Only) | Default, Hover, Saving, Saved, Removing, Disabled |
+| | Link | 2 (Inline, Standalone) | Default, Hover, Active, Visited, Disabled |
 
-**Total: 31 components, 50+ variants, 100+ documented states.**
+**Total: 37 components, 60+ variants, 120+ documented states.**
 **Mobile platform: All components adapted with touch-optimized sizing, plus 4 mobile-specific components (Bottom Tab Bar, Navigation Bar, Search Bar, Bottom Sheet).**
 
 ---

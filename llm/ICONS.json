@@ -7,10 +7,13 @@
     "usage": "<svg width=\"SIZE\" height=\"SIZE\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">{paths}</svg>",
     "sizes": {
       "default": 24,
-      "button": 16,
-      "small": 12,
+      "inline": 18,
+      "button": 18,
+      "small": 16,
+      "toast": 20,
       "empty_state": 64
     },
+    "viewBoxCrop": "Use viewBox=\"3 3 18 18\" for inline/button icons (sub-24px). Exception: icons with large circles (r>=8) or off-center geometry (search, info) keep viewBox=\"0 0 24 24\".",
     "notes": "All icons use stroke=currentColor for color inheritance. Never use fill icons, emoji, or icon fonts. Search this file by icon name to get SVG path data.",
     "count": 120
   },

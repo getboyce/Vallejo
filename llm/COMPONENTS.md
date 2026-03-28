@@ -8,7 +8,7 @@
 
 **Version:** 1.1.1
 **Last Updated:** March 2026
-**Total:** 31 components, 50+ variants, 100+ documented states
+**Total:** 37 components, 60+ variants, 120+ documented states
 
 ---
 
@@ -24,10 +24,11 @@
    - 2.2 [Text Field](#22-text-field)
    - 2.3 [Dropdown / Select](#23-dropdown--select)
    - 2.4 [Toggle Switch](#24-toggle-switch)
-   - 2.5 [Checkbox](#25-checkbox)
-   - 2.6 [Radio Button](#26-radio-button)
-   - 2.7 [Slider / Range](#27-slider--range)
-   - 2.8 [Search Bar (Header)](#28-search-bar-header)
+   - 2.5 [Watchlist Toggle](#25-watchlist-toggle)
+   - 2.6 [Checkbox](#26-checkbox)
+   - 2.7 [Radio Button](#27-radio-button)
+   - 2.8 [Slider / Range](#28-slider--range)
+   - 2.9 [Search Bar (Header)](#29-search-bar-header)
 3. [Feedback](#3-feedback)
    - 3.1 [Alert / Banner](#31-alert--banner)
    - 3.2 [Toast / Snackbar](#32-toast--snackbar)
@@ -42,10 +43,15 @@
    - 4.4 [Stat / KPI](#44-stat--kpi)
    - 4.5 [Badge / Tag](#45-badge--tag)
    - 4.6 [Chart](#46-chart)
+   - 4.7 [Tooltip](#47-tooltip)
+   - 4.8 [Popover](#48-popover)
 5. [Media](#5-media)
    - 5.1 [Image Container](#51-image-container)
    - 5.2 [Avatar](#52-avatar)
    - 5.3 [Video Player](#53-video-player)
+   - 5.5 [Navigation Chips](#55-navigation-chips)
+   - 5.6 [Content Tabs](#56-content-tabs-underline-style)
+   - 5.7 [Date Picker](#57-date-picker)
 6. [Patterns](#6-patterns)
    - 6.1 [Feedback Patterns](#61-feedback-patterns)
    - 6.2 [Empty States](#62-empty-states)
@@ -162,7 +168,7 @@ Single variant with up to 5 items.
 | Background | var(--bg-primary) light / var(--surface-primary-dark) dark |
 | Border-top | 1px solid var(--color-neutral-200) |
 | Icon size | 24px |
-| Label font | type-caption-2 (11px) |
+| Label font | type-caption-2 (12px) |
 | Gap (icon to label) | var(--space-1) |
 | Item min-width | 64px |
 | Touch target | 48x48px minimum per item |
@@ -256,7 +262,7 @@ Single variant with up to 5 items.
 |---------|---------|-------|--------|
 | Link items | var(--color-neutral-500), type-caption-1 | var(--color-blue-600), underline | var(--color-blue-800) |
 | Current item | var(--color-neutral-900), weight 600 | N/A (non-interactive) | N/A |
-| Separator | var(--color-neutral-300) | N/A | N/A |
+| Separator | var(--color-neutral-500) | N/A | N/A |
 
 **Specs:**
 
@@ -264,7 +270,7 @@ Single variant with up to 5 items.
 |----------|-------|
 | Container height | 32px |
 | Item font | type-caption-1 (12px, medium) |
-| Separator | 12px chevron-right icon, var(--color-neutral-300), margin 0 var(--space-2) |
+| Separator | 16px chevron-right stroke icon, var(--color-neutral-500), margin 0 var(--space-2) |
 | Current item | type-caption-1, weight 600, var(--color-neutral-900) |
 | Gap between items | var(--space-1) |
 | Overflow (mobile) | horizontal scroll, no wrapping, fade-out mask on edges |
@@ -278,6 +284,43 @@ Single variant with up to 5 items.
 - `<nav aria-label="Breadcrumb">` with `<ol>` list
 - Current page: `aria-current="page"`
 - Separators: `aria-hidden="true"` (decorative)
+
+---
+
+### 1.5 Link
+
+**Anatomy:** `<a>` element with `href`. Inline within body text or standalone on its own line.
+
+**Variants:** Inline (within text), Standalone (own line).
+
+**States:**
+
+| State | Color | Weight | Decoration |
+|-------|-------|--------|------------|
+| Default | Blue 600 | 500 (Medium) | None |
+| Hover | Blue 800 | 500 (Medium) | Underline |
+| Active | Blue 800 | 500 (Medium) | Underline |
+| Visited | Blue 900 | 500 (Medium) | None |
+| Disabled | Neutral 500 | 500 (Medium) | None |
+
+**Specs:**
+
+| Property | Value |
+|----------|-------|
+| Color | `var(--text-link)` / Blue 600 |
+| Hover color | `var(--text-link-hover)` / Blue 800 |
+| Weight | 500 (Medium) — distinguishes from body 400 |
+| Transition | `color 150ms ease, text-decoration-color 150ms ease` |
+| Focus ring | 3px Blue 600 @ 40%, 2px offset |
+
+**Usage Rules:**
+- Links navigate. Buttons act. If clicking goes to a URL, use `<a>`. If it triggers an action, use `<button>`.
+- Never rely on color alone — medium weight (500) provides secondary signal vs body (400).
+- External links: trailing icon + `aria-label` with "(opens in new tab)".
+
+**Accessibility:**
+- Always `<a href>`, never `<span>` with click handler
+- Generic text gets `aria-label`: "View details" → `aria-label="View details for Lot #12345678"`
 
 ---
 
@@ -305,16 +348,16 @@ Single variant with up to 5 items.
 
 **States per Variant:**
 
-**Primary:**
+**Primary (no shadow — color change alone signals state):**
 
-| State | Background | Text | Shadow |
+| State | Background | Text | Border |
 |-------|-----------|------|--------|
-| Default | var(--interactive-primary) | white | var(--shadow-button-primary) |
-| Hover | var(--interactive-primary-hover) | white | 0 2px 4px rgba(6,53,152,0.32) |
-| Active | var(--interactive-primary-active) | white | none (inset feel) |
+| Default | var(--interactive-primary) | white | none |
+| Hover | var(--interactive-primary-hover) | white | none |
+| Active | var(--interactive-primary-active) | white | none |
 | Disabled | var(--interactive-disabled) | var(--color-neutral-500) | none |
 | Loading | var(--interactive-primary) @ 70% opacity | hidden | none (spinner visible) |
-| Focus | var(--interactive-primary) | white | var(--shadow-focus) |
+| Focus | var(--interactive-primary) | white | var(--shadow-focus) ring |
 
 **Secondary:**
 
@@ -377,8 +420,12 @@ Single variant with up to 5 items.
 | Cursor | pointer (default), not-allowed (disabled) |
 | Transition | background var(--duration-normal) ease, box-shadow var(--duration-normal) ease, transform var(--duration-fast) ease |
 | Active transform | scale(0.98) |
-| Min-width | 64px |
+| Min-width | 64px (label buttons), height×height (icon-only) |
 | Icon-to-label gap | var(--space-2) |
+| Optical icon padding | `.btn-icon-text` class: reduces left padding by 2px (e.g., MD: 14px left, 16px right) |
+| No shadow | Color change alone signals state — no box-shadow on any variant |
+
+**Icon-Only Variant:** Square button (height = width). Used for close (X), more (…), expand, collapse, watchlist. Requires `aria-label`.
 
 **Usage Rules:**
 - **ONE Primary button per view.** The primary button represents the single most important action.
@@ -388,6 +435,7 @@ Single variant with up to 5 items.
 - CTA Orange is reserved for registration, onboarding, and urgency/promotional emphasis.
 - Never stack Primary + CTA Orange in same button group.
 - Never place two Primary buttons side by side. Demote lesser actions.
+- **Button group rules:** var(--space-3) gap between buttons, max 2 buttons per group. Horizontal: Primary right, Secondary left. Vertical: Primary top, Secondary below. Third actions → text link or overflow menu.
 - Icon-only buttons require `aria-label`.
 - Loading state: disable interactions, show spinner, maintain button width.
 
@@ -511,7 +559,8 @@ Same as Text Field states, plus:
 
 | Property | Value |
 |----------|-------|
-| Trigger | Same as Text Field (44px height, var(--radius-lg)) |
+| Trigger | Same as Text Field (44px height, var(--radius-lg)). Hover = border color change only (no shadow). |
+| Chevron icon | `chevron-down` stroke icon, 24px, var(--text-secondary). Rotates 180° on open. |
 | Menu background | white |
 | Menu border | 1px var(--border-subtle) |
 | Menu border-radius | var(--radius-xl) |
@@ -576,7 +625,7 @@ Same as Text Field states, plus:
 | Thumb inset | 3px from track edge | 2px from track edge |
 | Thumb shadow | 0 1px 3px rgba(0,0,0,0.15) | same |
 | Gap to label | var(--space-3) | var(--space-3) |
-| Transition | background var(--duration-moderate) ease, transform var(--duration-moderate) var(--easing-enter) | same |
+| Transition | background var(--duration-moderate) ease, transform var(--duration-moderate) var(--ease-spring) | same |
 
 **Usage Rules:**
 - Use for settings that take effect immediately (no "Save" button needed).
@@ -591,7 +640,60 @@ Same as Text Field states, plus:
 
 ---
 
-### 2.5 Checkbox
+### 2.5 Watchlist Toggle
+
+**Anatomy:**
+1. `watchlist-toggle` — Clickable wrapper (button semantics)
+2. `watchlist-icon` — Heart outline (default) or filled heart (saved)
+3. `watchlist-label` — Optional visible text ("Save" / "Saved")
+
+**Variants:**
+
+| Variant | Shows | Use for |
+|---------|-------|---------|
+| Icon + Label | Heart icon + text label | Lot detail page, anywhere space permits |
+| Icon-Only | Heart icon only | Lot cards in grid, compact table rows, toolbar actions |
+
+**States:**
+
+| State | Icon | Label | Behavior |
+|-------|------|-------|----------|
+| Default (unsaved) | Heart outline, var(--text-tertiary) | "Save" | — |
+| Hover (unsaved) | Heart outline, var(--interactive-primary) | "Save" | Cursor pointer |
+| Saving | Spinner replacing icon | "Saving…" | Disable interaction |
+| Saved | Filled heart, var(--error-icon) | "Saved" | Scale bounce |
+| Hover (saved) | Filled heart, var(--text-tertiary) | "Remove" | Label changes |
+| Removing | Spinner replacing icon | "Removing…" | Disable interaction |
+| Disabled | Heart outline, var(--color-neutral-300) | "Save" | Opacity 0.5 |
+
+**Specs:**
+
+| Property | Value |
+|----------|-------|
+| Icon size (default) | 24px |
+| Icon size (compact) | 20px |
+| Icon-only button (MD) | 40px × 40px |
+| Icon-only button (SM) | 32px × 32px |
+| Icon + Label gap | var(--space-2) |
+| Label font | type-subheadline (14px / 600) |
+| Touch target | 44×44px minimum |
+| Saved heart color | var(--error-icon) (#C22248) |
+| Save animation | scale(1.2) → scale(1), var(--duration-moderate) var(--ease-spring) |
+| Spinner size | 16px, currentColor |
+
+**Usage Rules:**
+- Use Icon + Label on lot detail pages. Use Icon-Only on cards and compact rows.
+- Hover on saved item changes label to "Remove" to clearly communicate toggle action.
+- Save animation uses celebration register (scale bounce) — subtle but rewarding.
+
+**Accessibility:**
+- `<button>` with `aria-pressed="true|false"`.
+- `aria-label="Save lot [number] to watchlist"` / `"Remove lot [number] from watchlist"`.
+- Loading: `aria-busy="true"`.
+
+---
+
+### 2.6 Checkbox
 
 **Anatomy:**
 1. `checkbox-container` — Wrapper for input + label
@@ -621,7 +723,7 @@ Same as Text Field states, plus:
 |----------|-------|
 | Box size | 20px x 20px |
 | Border-radius | var(--radius-sm) |
-| Checkmark icon | 14px, stroke-width 2px |
+| Checkmark icon | 16px, stroke-width 2px, viewBox 3 3 18 18 |
 | Gap (box to label) | var(--space-2) |
 | Label font | type-body (16px / 400) |
 | Group spacing (vertical) | var(--space-3) between checkboxes |
@@ -641,7 +743,7 @@ Same as Text Field states, plus:
 
 ---
 
-### 2.6 Radio Button
+### 2.7 Radio Button
 
 **Anatomy:**
 1. `radio-container` — Wrapper for input + label
@@ -671,7 +773,8 @@ Same as Text Field states, plus:
 | Inner dot | 10px x 10px (centered) |
 | Border-radius | 50% (both) |
 | Gap (circle to label) | var(--space-2) |
-| Label font | type-body (16px / 400) |
+| Label font (unselected) | type-body (16px / 400) |
+| Label font (selected) | type-body-emphasis (16px / 600) — bold signals active choice |
 | Group spacing | var(--space-3) vertical between options |
 | Touch target | 44px minimum height |
 
@@ -687,7 +790,7 @@ Same as Text Field states, plus:
 
 ---
 
-### 2.7 Slider / Range
+### 2.8 Slider / Range
 
 **Anatomy:**
 1. `slider-container` — Full component wrapper
@@ -746,7 +849,7 @@ Same as Text Field states, plus:
 
 ---
 
-### 2.8 Search Bar (Header)
+### 2.9 Search Bar (Header)
 
 **Anatomy:**
 1. `header-search` — Relative-positioned container
@@ -816,6 +919,15 @@ Same as Text Field states, plus:
 | Warning | var(--feedback-warning-bg) | Triangle exclamation | var(--feedback-warning-icon) | var(--feedback-warning-text) |
 | Error | var(--feedback-error-bg) | Octagon exclamation | var(--feedback-error-icon) | var(--feedback-error-text) |
 
+**Behavior Variants:**
+
+| Variant | Description |
+|---------|-------------|
+| Static | No dismiss button. Persists until condition resolves. |
+| Dismissible | Includes close/X button. Use for non-critical info and success alerts. |
+| With Link | Inline text link in description ("Learn more", "View details"). Link uses var(--text-link), underline on hover. |
+| Dismissible + Link | Both dismiss button and inline link. Most common for info alerts. |
+
 **States:**
 
 | State | Behavior |
@@ -835,6 +947,7 @@ Same as Text Field states, plus:
 | Gap (icon to content) | var(--space-3) |
 | Title font | type-subheadline (14px / 600) |
 | Description font | type-body (16px / 400) |
+| Inline link | type-body (16px / 500), var(--text-link), underline on hover |
 | Dismiss button | 20px icon, var(--text-tertiary), 8px from top-right |
 | Min-height | 48px |
 
@@ -897,6 +1010,7 @@ Same as Text Field states, plus:
 | Padding | var(--space-3) vertical, var(--space-4) horizontal |
 | Border-radius | 10px |
 | Shadow | var(--shadow-lg) |
+| Icon size | 20px, viewBox 3 3 18 18 |
 | Font | type-body (16px / 400), white |
 | Auto-dismiss | 5s default, 8s with action link, indefinite for errors |
 | Z-index | 2000 |
@@ -1054,7 +1168,7 @@ Left shelf mirrors X direction: translateX(-100%) to 0 on open.
 | Close button | 32px, var(--text-tertiary) to var(--text-primary) on hover |
 | Body padding | var(--space-5) vertical, var(--space-6) horizontal, flex 1, overflow-y auto |
 | Footer | sticky bottom, border-top 1px var(--border-subtle) |
-| Footer padding | var(--space-4) var(--space-6), flex, justify-end, gap var(--space-3) |
+| Footer padding | var(--space-4) var(--space-6). Primary button spans full width. When two buttons, stack vertically — primary on top, secondary below. |
 | Mobile handle | 36 x 4px, var(--color-neutral-300), radius 2px, centered, 8px top margin |
 
 **Usage Rules:**
@@ -1103,7 +1217,7 @@ Left shelf mirrors X direction: translateX(-100%) to 0 on open.
 | Property | Value |
 |----------|-------|
 | Step circles | 28px diameter |
-| Completed step | var(--interactive-primary) fill, white checkmark |
+| Completed step | var(--interactive-primary) fill, white checkmark (18px, viewBox 3 3 18 18) |
 | Current step | var(--interactive-primary) border, var(--interactive-primary) number |
 | Upcoming step | var(--color-neutral-300) border, var(--text-tertiary) number |
 | Connector | 2px line, var(--interactive-primary) (completed) or var(--color-neutral-200) (upcoming) |
@@ -1197,9 +1311,12 @@ Placeholder shapes matching the component they replace.
 | Media aspect ratio | 4:3 (all lot images) | 4:3 |
 | Media height | 180px | 200px (full card width) |
 | Title font | type-title-3 (18px / 600) | same |
+| Gap (title to subtitle) | var(--space-1) / 4px | same |
 | Subtitle font | type-body (16px / 400), var(--text-secondary) | same |
+| Gap (subtitle to meta) | var(--space-2) / 8px | same |
 | Meta font | type-caption-1 (12px / 500), var(--text-tertiary) | same |
 | Footer | border-top 1px var(--border-subtle), padding var(--space-3) var(--space-4) | same |
+| Button group in footer | var(--space-3) gap, max 2 buttons | same |
 | Hover transition | transform var(--duration-moderate) ease, box-shadow var(--duration-moderate) ease | N/A (no hover on mobile) |
 | Grid gap | var(--space-6) | 12px |
 
@@ -1371,11 +1488,12 @@ Placeholder shapes matching the component they replace.
 | Value Inter (read/hero) | Inter — for singular dominant numbers not competing with siblings |
 | Label font | type-caption-1 (12px / 500), var(--text-tertiary), uppercase, 0.08em tracking |
 | Trend font | type-subheadline (14px / 600) |
-| Period font | type-caption-2 (11px), var(--text-tertiary) |
+| Period font | type-caption-2 (12px), var(--text-tertiary) |
 | Gap (value to trend) | var(--space-2) |
 | Gap (value to label) | var(--space-1) |
 
 **Usage Rules:**
+- No decorative accent bars, lines, or "toenails." The stat component is value + label + optional trend — no visual ornamentation.
 - Use in dashboard widget rows and auction summary cards.
 - Financial values in compare contexts (dashboard rows, multi-stat cards) use JetBrains Mono + `font-feature-settings: "zero" 0`. Singular hero numbers (win amount, buy-it-now) use Inter.
 - Always provide a period/context label (e.g., "Last 30 days").
@@ -1420,6 +1538,12 @@ Placeholder shapes matching the component they replace.
 | Border-radius | var(--radius-pill) |
 | Icon-to-label gap | var(--space-1) |
 | Dot indicator | 6px circle, matching variant color |
+
+**Shape Rules:**
+- **Round-rect** (`radius-lg`): Status badges in tables — 4px 12px padding, inline with data rows. Use for: "Active", "Sold", "On Hold" in table cells.
+- **Round-rect** (`radius-md` or `radius-lg`): Standalone badges on cards, detail pages, anywhere outside a table. Use for: card overlays, detail page status, sidebar badges.
+- **Circle** (`radius-full`): Status dots with no text — color-only indicator next to a label. Circle fill color must match its accompanying text color.
+- Don't mix shapes for the same badge label across contexts.
 
 **Usage Rules:**
 - Always use text + icon/dot for status badges — never color alone.
@@ -1482,6 +1606,88 @@ Placeholder shapes matching the component they replace.
 - Provide `<table>` fallback for screen readers with the same data.
 - Interactive tooltips keyboard-accessible via arrow keys.
 - All chart colors should be supplemented with patterns for colorblind users.
+
+---
+
+### 4.7 Tooltip
+
+**Anatomy:**
+1. `tooltip-trigger` — Element being hovered/focused
+2. `tooltip-bubble` — Dark floating container
+3. `tooltip-arrow` — Directional pointer
+4. `tooltip-text` — 1–2 lines of plain text
+
+**Specs:**
+
+| Property | Value |
+|----------|-------|
+| Background | var(--color-neutral-900) |
+| Text | white, type-caption-1 (12px / 500) |
+| Padding | var(--space-2) horiz, var(--space-1) vert |
+| Radius | var(--radius-sm) |
+| Max-width | 240px |
+| Arrow | 6px triangle, same color as bg |
+| Shadow | var(--shadow-md) |
+| Show delay | 300ms hover, 0ms focus |
+| Animation | fade in, var(--duration-fast) ease-out |
+| Z-index | var(--z-dropdown) |
+
+**Usage Rules:**
+- Trigger on hover + focus. Never on click (that's a Popover).
+- Plain text only — no links, buttons, or interactive content.
+- Max 2 short sentences. For longer content, use Popover.
+
+**Accessibility:**
+- `role="tooltip"`, `aria-describedby` on trigger.
+- Keyboard-accessible (visible on focus).
+
+---
+
+### 4.8 Popover
+
+**Anatomy:**
+1. `popover-trigger` — Element being clicked
+2. `popover-panel` — White floating container
+3. `popover-arrow` — Directional pointer
+4. `popover-header` — Optional title
+5. `popover-body` — Rich text, links, small forms
+6. `popover-close` — Close/X button (always present)
+
+**Specs:**
+
+| Property | Value |
+|----------|-------|
+| Background | white |
+| Border | 1px var(--border-subtle) |
+| Radius | var(--radius-lg) |
+| Padding | var(--space-4) |
+| Shadow | var(--shadow-lg) |
+| Max-width | 320px |
+| Min-width | 200px |
+| Header | type-subheadline (14px / 600), var(--text-primary) |
+| Body | type-body (16px / 400), var(--text-secondary) |
+| Close button | 20×20 SVG X icon, var(--text-tertiary), top-right, transparent background |
+| Animation | scale(0.95) + fade → scale(1), var(--duration-normal) ease-out |
+| Z-index | var(--z-dropdown) |
+
+**Tooltip vs. Popover:**
+
+| | Tooltip | Popover |
+|---|---------|---------|
+| Trigger | Hover / focus | Click |
+| Background | Dark | Light |
+| Content | Plain text, 1–2 lines | Rich text, links, forms |
+| Interactive | No | Yes |
+| Close | Auto | Manual (X / click outside) |
+
+**Usage Rules:**
+- Click to open, click outside or X to close.
+- Only one Popover open at a time.
+- Use for: help text, "Learn more" expansions, small inline forms.
+
+**Accessibility:**
+- `aria-haspopup="dialog"` on trigger, `role="dialog"` on panel.
+- Focus trap inside open popover. Escape to close.
 
 ---
 
@@ -1639,6 +1845,153 @@ Placeholder shapes matching the component they replace.
 
 ---
 
+## 5.4 Navigation & Selection
+
+### 5.5 Navigation Chips
+
+**Anatomy:**
+1. `chip-container` — Horizontal scrollable wrapper
+2. `chip-item` — Individual chip button
+3. `chip-icon` — Optional leading icon (16px)
+4. `chip-label` — Text label
+5. `chip-count` — Optional trailing count badge
+
+**Variants:** Single-select (radio) | Multi-select (checkbox)
+
+**States:**
+
+| State | Background | Text | Border |
+|-------|-----------|------|--------|
+| Default | white | var(--text-secondary) | 1px var(--border-default) |
+| Hover | var(--bg-secondary) | var(--text-primary) | 1px var(--color-neutral-500) |
+| Selected | var(--interactive-primary) | white | none |
+| Selected + Hover | var(--interactive-hover) | white | none |
+| Disabled | var(--bg-secondary) | var(--color-neutral-300) | 1px var(--border-subtle) |
+
+**Specs:**
+
+| Property | Value |
+|----------|-------|
+| Height | 36px |
+| Padding | var(--space-2) vert, var(--space-5) horiz |
+| Radius | var(--radius-pill) |
+| Font | type-subheadline (14px / 600) |
+| Chip gap | var(--space-2) |
+| Icon size | 16px, var(--space-2) gap to label |
+| Count badge | type-caption-1 (12px / 500) |
+| Touch target | 44px min height |
+| Transition | background var(--duration-normal) ease |
+
+**Usage Rules:**
+- Use for ≤12 filter options in one dimension. More → use Dropdown.
+- Always include "All" chip as first option (default selected).
+- Scroll with fade gradient on overflow edges.
+
+**Accessibility:**
+- `role="radiogroup"` (single) or `role="group"` (multi) on container.
+- Each chip: `role="radio"` or `role="checkbox"`, `aria-checked`.
+- Arrow keys navigate, Space/Enter selects.
+
+---
+
+### 5.6 Content Tabs (Underline Style)
+
+**Anatomy:**
+1. `tabbar-container` — Horizontal bar wrapper
+2. `tabbar-item` — Individual tab button
+3. `tabbar-label` — Tab text
+4. `tabbar-badge` — Optional count/status indicator
+5. `tabbar-indicator` — Active underline bar (absolutely positioned div, JS-repositioned on tab switch via offsetLeft/offsetWidth)
+
+**States:**
+
+| State | Text Color | Weight | Underline |
+|-------|-----------|--------|-----------|
+| Default | var(--text-tertiary) | 600 | None |
+| Hover | var(--text-primary) | 600 | None |
+| Active | var(--interactive-primary) | 600 | 2px var(--interactive-primary), bottom |
+| Disabled | var(--color-neutral-300) | 400 | None |
+
+**Specs:**
+
+| Property | Value |
+|----------|-------|
+| Tab height | 48px |
+| Tab padding | var(--space-4) horizontal |
+| Label | type-subheadline (14px / 600 all states — consistent weight prevents layout shift) |
+| Underline | 2px, var(--interactive-primary), matches label width |
+| Underline animation | slide horizontal, var(--duration-moderate) ease-out |
+| Badge | type-caption-1 (12px / 500), var(--text-tertiary), var(--space-2) gap |
+| Container border | border-bottom 1px var(--border-subtle) |
+
+**Usage Rules:**
+- 2–7 tabs. More → Dropdown or side nav.
+- Tab content swaps without page reload.
+- Don't use for page-level navigation — use Navigation Chips or nav bar.
+
+**Accessibility:**
+- `role="tablist"` / `role="tab"` / `role="tabpanel"`.
+- `aria-selected`, `aria-controls`.
+- Arrow keys navigate, Enter/Space activates.
+
+---
+
+### 5.7 Date Picker
+
+**Anatomy:**
+1. `datepicker-trigger` — Text input (matches Text Field visual)
+2. `datepicker-dropdown` — Floating calendar panel
+3. `datepicker-header` — Month/year + prev/next navigation
+4. `datepicker-grid` — 7-column day grid
+5. `datepicker-day` — Individual day button
+6. `datepicker-range-highlight` — Range background (start to end)
+7. `datepicker-footer` — Clear + Apply buttons (range variant only)
+
+**Variants:** Single Date | Date Range
+
+**States (Day Cell):**
+
+| State | Background | Text | Border |
+|-------|-----------|------|--------|
+| Default | none | var(--text-primary) | none |
+| Hover | var(--color-blue-50) | var(--interactive-primary) | none |
+| Today | none | var(--interactive-primary) | 1px var(--interactive-primary) ring |
+| Selected | var(--interactive-primary) | white | none |
+| In-Range | var(--color-blue-100) | var(--color-blue-900) | none |
+| Range End | var(--interactive-primary) | white | none (pill ends) |
+| Disabled | none | var(--color-neutral-300) | none |
+
+**Specs:**
+
+| Property | Value |
+|----------|-------|
+| Trigger | matches Text Field spec, trailing calendar icon 20px |
+| Dropdown bg | white |
+| Dropdown border | 1px var(--border-subtle) |
+| Dropdown radius | var(--radius-lg) |
+| Dropdown shadow | var(--shadow-lg) |
+| Dropdown padding | var(--space-4) |
+| Width | 320px (single), 640px (dual-month range) |
+| Z-index | var(--z-dropdown) |
+| Nav arrows | 32×32px buttons, var(--bg-secondary) bg, var(--radius-sm), stroke caret icon |
+| Day headers | type-caption-1 (12px / 500), var(--text-tertiary), uppercase |
+| Day cell | 36px × 36px |
+| Day text | 13px / 400 (selected: 600) |
+| Footer | Clear (Tertiary, left) + Apply (Primary, right), var(--space-3) gap |
+
+**Usage Rules:**
+- Single: calendar closes on selection. Range: click start → click end → Apply.
+- Show current month by default. Disable unavailable dates.
+- Mobile: full-screen takeover or native date input fallback.
+
+**Accessibility:**
+- `role="dialog"` on calendar, `aria-label="Choose date"`.
+- Day cells: `role="gridcell"`, `aria-selected`, `aria-disabled`.
+- Arrow keys navigate grid, Enter selects, Escape closes.
+- Input: `aria-haspopup="dialog"`, `aria-expanded`.
+
+---
+
 ## 6. Patterns
 
 ### 6.1 Feedback Patterns
@@ -1726,7 +2079,7 @@ Each animation below is tagged with its register.
 | --ease-out | ease-out | Enter animations |
 | --ease-in-out | ease-in-out | State changes |
 | --ease-spring | cubic-bezier(0.175, 0.885, 0.32, 1.275) | Delight — overshoot for playful feel |
-| --ease-enter | cubic-bezier(0, 0, 0.2, 1) | Elements appearing |
+| --ease-enter | cubic-bezier(0.32, 0.72, 0, 1) | Elements appearing |
 | --ease-exit | cubic-bezier(0.4, 0, 1, 1) | Elements leaving |
 | --ease-standard | cubic-bezier(0.25, 0.1, 0.25, 1) | Default for most transitions |
 
@@ -1887,7 +2240,7 @@ Based on iOS Human Interface Guidelines, adapted with Inter.
 | Subheadline | 15px | 400 | 20px | 0em | Secondary labels |
 | Footnote | 13px | 400 | 18px | 0em | Timestamps, metadata |
 | Caption 1 | 12px | 400 | 16px | 0em | Tertiary info, badges |
-| Caption 2 | 11px | 400 | 13px | 0.01em | Tab bar labels |
+| Caption 2 | 12px | 500 | 16px | 0.015em | Stat periods, secondary metadata |
 
 Key differences: Body is 17px (not 16px). No Display styles — Large Title (34px) is maximum. Tighter line heights for small screens.
 
@@ -2026,6 +2379,7 @@ Viewport meta tag: `<meta name="viewport" content="width=device-width, initial-s
 | | Text Field | 1 | Default, Hover, Focus, Filled, Disabled, Error, Success, Read-only |
 | | Dropdown | 3 (Single, Multi, Searchable) | Default, Hover, Focus, Open, Has Value, Disabled, Error |
 | | Toggle Switch | 1 | Off, On, Hover (both), Disabled (both), Focus |
+| | Watchlist Toggle | 2 (Icon+Label, Icon-Only) | Default, Hover, Saving, Saved, Hover (saved), Removing, Disabled |
 | | Checkbox | 1 | Unchecked, Checked, Indeterminate, Hover, Disabled, Error, Focus |
 | | Radio Button | 1 | Unselected, Selected, Hover, Disabled, Focus |
 | | Slider | 2 (Single, Range) | Default, Hover, Active, Disabled, Focus |
@@ -2044,8 +2398,13 @@ Viewport meta tag: `<meta name="viewport" content="width=device-width, initial-s
 | **Media** | Image Container | 5 (Hero, Thumbnail, Document, Avatar, Gallery) | Loaded, Loading, Error |
 | | Avatar | 5 sizes (XS-XL) | Image, Fallback, Badge |
 | | Video Player | 1 | Poster, Playing, Paused, Controls Visible |
+| **Navigation & Selection** | Navigation Chips | 2 (Single-select, Multi-select) | Default, Hover, Selected, Disabled |
+| | Content Tabs | 1 | Default, Hover, Active, Disabled |
+| | Date Picker | 2 (Single, Range) | Default, Open, Selected, Range, Disabled, Error |
+| **Overlay** | Tooltip | 1 | Hidden, Visible |
+| | Popover | 1 | Hidden, Visible |
 
-**Total: 31 components, 50+ variants, 100+ documented states.**
+**Total: 37 components, 60+ variants, 120+ documented states.**
 **Mobile platform: All components adapted with touch-optimized sizing, plus 4 mobile-specific components (Bottom Tab Bar, Navigation Bar, Search Bar, Bottom Sheet).**
 
 ---

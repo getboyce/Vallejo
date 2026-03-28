@@ -3,7 +3,7 @@
     "name": "Vallejo Design System",
     "version": "1.1.1",
     "production": "https://www.copart.com",
-    "lastUpdated": "2026-03-02"
+    "lastUpdated": "2026-03-28"
   },
   "vault": {
     "repo": "https://github.com/getboyce/Copart-Design-Vault",
@@ -125,7 +125,7 @@
   },
   "tokenVariableNaming": {
     "primitives": {
-      "blue": "--blue-{50,100,200,600,800,900}",
+      "blue": "--blue-{50,100,200,300,400,600,800,900}",
       "orange": "--orange-{50,100,200,600,800,900}",
       "neutral": "--neutral-{50,100,200,300,500,700,800,900,950}"
     },
@@ -133,19 +133,25 @@
       "backgrounds": ["--bg-primary", "--bg-secondary", "--bg-tertiary"],
       "text": ["--text-primary", "--text-secondary", "--text-tertiary", "--text-disabled"],
       "borders": ["--border-default", "--border-subtle", "--border-focus"],
-      "interactive": ["--interactive-primary", "--interactive-hover", "--interactive-active", "--interactive-accent", "--interactive-accent-hover"],
+      "interactive": ["--interactive-primary", "--interactive-hover", "--interactive-active", "--interactive-accent", "--interactive-accent-hover", "--interactive-accent-surface"],
+      "surface": ["--header-bg"],
+      "links": ["--text-link", "--text-link-hover"],
       "feedback": "For each severity (success, warning, error, info): --{severity}-bg, --{severity}-text, --{severity}-border, --{severity}-icon"
     },
     "spacing": "--space-{0,1,2,3,4,5,6,8,10,12,16,20,24,32} = 0px to 128px",
     "radius": "--radius-{none,sm,md,lg,xl,2xl,pill,full}",
     "shadows": "--shadow-{xs,sm,md,lg,xl,focus,focus-error}",
-    "motion": "--duration-{instant,fast,normal,moderate,slow,slower}"
+    "motion": {
+      "duration": "--dur-{fast,normal,moderate,slow,deliberate}",
+      "easing": "--ease-{out,in-out,spring,enter,exit}"
+    }
   },
   "componentIndex": {
-    "navigation": ["Header", "Tab Bar (mobile bottom nav)", "Sidebar", "Breadcrumbs"],
-    "input": ["Button (6 variants × 5 sizes)", "Text Field", "Dropdown / Select", "Toggle Switch", "Checkbox", "Radio Button", "Slider / Range"],
-    "feedback": ["Alert / Banner (4 severity types)", "Toast / Snackbar", "Modal / Dialog (3 sizes + mobile bottom sheet)", "Shelf / Drawer (right, left, full)", "Progress Indicator (spinner, bar, steps)", "Skeleton Screen"],
-    "dataDisplay": ["Card (vertical, horizontal, compact, featured, stat)", "Table (sortable, responsive — last resort, prefer cards/lists)", "List (simple, two-line, three-line, action)", "Stat / KPI", "Badge / Tag"],
-    "media": ["Image Container", "Avatar (5 sizes)", "Video Player"]
+    "navigation": ["Header", "Tab Bar (mobile bottom nav)", "Sidebar", "Breadcrumbs", "Link"],
+    "input": ["Button (6 variants × 5 sizes)", "Text Field", "Dropdown / Select", "Toggle Switch", "Watchlist Toggle (icon+label, icon-only)", "Checkbox", "Radio Button", "Slider / Range", "Date Picker (single, range)"],
+    "feedback": ["Alert / Banner (4 severity types + dismissible/link variants)", "Toast / Snackbar", "Modal / Dialog (3 sizes + mobile bottom sheet)", "Shelf / Drawer (right, left, full)", "Progress Indicator (spinner, bar, steps)", "Skeleton Screen"],
+    "dataDisplay": ["Card (vertical, horizontal, compact, featured, stat)", "Table (sortable, responsive — last resort, prefer cards/lists)", "List (simple, two-line, three-line, action)", "Stat / KPI", "Badge / Tag", "Tooltip (dark, hover)", "Popover (light, click)"],
+    "media": ["Image Container", "Avatar (5 sizes)", "Video Player"],
+    "navigationSelection": ["Navigation Chips (single/multi-select filter pills)", "Content Tabs (underline style)"]
   }
 }

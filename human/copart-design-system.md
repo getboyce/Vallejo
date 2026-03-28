@@ -1761,6 +1761,54 @@ Focus shadow: 0 0 0 3px rgba(38,98,217,0.15)
 
 ---
 
+### Component: Textarea
+
+**Purpose:** Multi-line text input for longer-form content — notes, descriptions, dispute explanations, seller comments. Shares the same visual language as the Text Field so the two feel like siblings in any form.
+
+**Anatomy:**
+1. `textarea-container` — Wrapper for the full input group
+2. `textarea-label` — Text label above input
+3. `textarea-input` — The `<textarea>` element
+4. `textarea-counter` — Character count below the field (right-aligned)
+5. `textarea-error` — Error message below input (replaces counter position when active)
+
+**States:**
+| State | Border | Background | Shadow |
+|-------|--------|-----------|--------|
+| Default | 1.5px border-default | White | None |
+| Hover | 1.5px Neutral 500 | White | None |
+| Focus | 2px interactive-primary | White | shadow-focus |
+| Error | 2px error-text | `#FFF8F9` | shadow-focus-error |
+| Disabled | 1.5px Neutral 200 | bg-secondary | None, cursor not-allowed |
+
+Disabled textareas use text-disabled for both the value text and the label. The field cannot be focused or resized.
+
+**Specs:**
+```
+Border: 1.5px, border-default
+Border-radius: radius-lg (12px)
+Font: 16px / font-primary (Inter)
+Padding: space-3 (12px) all sides
+Min-height: 100px
+Line-height: 1.5
+Resize: vertical — user can grab the bottom-right corner to change height, horizontal resize disabled
+Label: type-subheadline (14px / 600), margin-bottom space-3 (12px)
+Focus shadow: 0 0 0 3px rgba(38,98,217,0.15)
+Error shadow: 0 0 0 3px rgba(220,38,38,0.15)
+Transition: border-color 150ms ease, box-shadow 150ms ease
+```
+
+**Character Count:** Displayed below the field, right-aligned. Format: "123 / 500" (current count, space, slash, space, max). Styled at 13px in text-tertiary color. When the count reaches 90% or more of the limit, the text switches to error-text to warn the member they are approaching the cap. If the field has no max length, omit the counter entirely.
+
+**Accessibility:**
+- Every textarea requires a visible `<label>` linked via `for`/`id`
+- `aria-describedby` pointing to the character counter and/or error message
+- `aria-invalid="true"` when in error state
+- `aria-required="true"` for mandatory fields
+- Placeholder text is NOT a substitute for labels
+
+---
+
 ### Component: Dropdown / Select
 
 **Purpose:** Single or multi-option selection from a predefined list. Used for Make, Model, Year, Location filters.
@@ -1805,6 +1853,16 @@ Search input inside menu: 36px height, full-width, border-bottom divider
 Animation: opacity 0→1, translateY(-4px→0), 150ms ease-out
 z-index: 1100
 ```
+
+**Variant: Multi-Select**
+
+For cases where the user can pick more than one option (e.g., damage types, auction locations). Each option row includes a checkbox to the left of the label. The menu stays open on selection so members can pick several items without re-opening. The trigger displays the selected values as a comma-separated list; when the list overflows, it truncates with an ellipsis and shows a count badge to the LEFT of the label text. The trigger uses a `.trigger-label` flex wrapper with `align-items: center` for vertical centering. The count badge uses a gray background (Neutral 200) with text-primary text, 12px/600, `margin-right: space-2`, `flex-shrink: 0`.
+
+Checkbox styling inside the menu: 18x18px box, radius-sm, 1.5px border. In the unselected state the box uses Neutral 300 border on a white background. In the selected state the box fills with interactive-primary and displays a white checkmark icon. These checkboxes follow the same hover behavior as standalone checkboxes (border darkens to Neutral 500 on hover when unchecked, background darkens to interactive-hover when checked).
+
+**Variant: Searchable**
+
+For long option lists (makes, models, locations) where scrolling alone is impractical. A search input is pinned to the top of the menu, separated from the option list by a border-bottom (1px Neutral 200). The input is 36px tall, uses 14px type at font-primary weight, has a #F8F8F9 background (hardcoded, not a token), and radius-md corners. A 14x14px search icon sits inside the input on the left. Below the search input, options render in a scrollable container with a max-height of 220px. The search input has an `oninput` handler that filters options by case-insensitive text match; options that don't match are hidden with `display: none`. When the search query yields no matches, the `dropdown-empty` slot displays "No results" in Neutral 500, centered.
 
 **Accessibility:**
 - Trigger: `role="combobox"`, `aria-expanded`, `aria-haspopup="listbox"`
@@ -1924,14 +1982,16 @@ Spinner: 16px, currentColor
 | State | Box Border | Box BG | Icon |
 |-------|-----------|--------|------|
 | Unchecked | 1.5px Neutral 300 | White | None |
-| Unchecked Hover | 1.5px Blue 600 | White | None |
+| Unchecked Hover | 1.5px Neutral 500 | Neutral 50 | None |
 | Checked | None | Blue 600 | White checkmark |
-| Checked Hover | None | Blue 800 | White checkmark |
+| Checked Hover | None | interactive-hover | White checkmark |
 | Indeterminate | None | Blue 600 | White minus line |
 | Disabled Unchecked | 1.5px Neutral 200 | Neutral 100 | None |
 | Disabled Checked | None | Neutral 300 | White checkmark |
 | Error | 1.5px error-border | White or Blue 600 | — |
 | Focus | — | — | `0 0 0 3px rgba(38,98,217,0.4)` ring |
+
+**Hover Behavior:** When the user hovers an unchecked checkbox, the border darkens from Neutral 300 to Neutral 500 and the box picks up a subtle Neutral 50 background fill, giving a soft "I'm interactive" cue without jumping to the brand color. When the user hovers a checked checkbox, both the background fill and border darken to interactive-hover, reinforcing that the control is active and clickable.
 
 **Specs:**
 ```
@@ -1967,12 +2027,14 @@ Transition: background 100ms ease, border-color 100ms ease
 | State | Border | Fill | Dot |
 |-------|--------|------|-----|
 | Unselected | 1.5px Neutral 300 | White | None |
-| Unselected Hover | 1.5px Blue 600 | White | None |
+| Unselected Hover | 1.5px Neutral 500 | Neutral 50 | None |
 | Selected | 1.5px Blue 600 | White | Blue 600 (10px) |
-| Selected Hover | 1.5px Blue 800 | White | Blue 800 |
+| Selected Hover | 1.5px interactive-hover | White | interactive-hover |
 | Disabled Unselected | 1.5px Neutral 200 | Neutral 100 | None |
 | Disabled Selected | 1.5px Neutral 300 | Neutral 100 | Neutral 300 |
 | Focus | — | — | Focus ring on outer circle |
+
+**Hover Behavior:** When the user hovers an unselected radio, the border darkens from Neutral 300 to Neutral 500 and the circle gets a subtle Neutral 50 background fill — a gentle affordance without committing to the brand color. When the user hovers a selected radio, the border darkens to interactive-hover, signaling the control is re-clickable (useful in group contexts where changing selection is common).
 
 **Specs:**
 ```
@@ -2103,17 +2165,25 @@ Value labels: same as single slider-value, displayed at left (low) and right (hi
 | Dismissing | Fade out + collapse height, 200ms ease-in |
 | Dismissed | `display: none`, removed from flow |
 
+**Layout:** The alert uses `display: flex` with `align-items: flex-start` (not center). This keeps the icon pinned to the top of the first text line rather than floating to the vertical middle when the description wraps to multiple lines. The icon gets `margin-top: 1px` to visually align its optical center with the title baseline.
+
+**Dismissible Variant Details:** The close button is the last flex child, pushed to the top-right of the container. It has a 20x20px hit target containing a 16x16px SVG X icon. The icon uses `currentColor` at 50% opacity by default, rising to 80% opacity on hover. The button has no background, no border, and no visible chrome — just the icon.
+
+**Dismiss Animation:** When a member clicks dismiss, the alert runs an `alertOut` keyframe over 300ms with ease timing. The keyframe fades opacity from 1 to 0 while simultaneously collapsing the element's height, padding, and margin to zero, smoothly removing the alert from document flow without a jarring layout shift.
+
 **Specs:**
 ```
 Border-radius: 8px
 Padding: space-4 (16px)
-Icon: 20px, flex-shrink 0
+Layout: display flex, align-items flex-start, gap space-3 (12px)
+Icon: 20px, flex-shrink 0, margin-top 1px
 Gap (icon to content): space-3 (12px)
 Title: type-subheadline (14px / 600), matching text color per variant
 Description: type-body (16px / 400), matching text color per variant
-Dismiss button: 20px icon, Neutral 500, 8px from top-right
+Dismiss button: last flex child, 20×20 hit target, 16×16 SVG X icon, currentColor at 50% opacity (80% on hover), no background, no border
 Inline link: type-body (16px / 500), text-link color, underline on hover
 Min-height: 48px
+Dismiss animation: alertOut keyframe, 300ms ease — opacity 1→0, height/padding/margin collapse to 0
 ```
 
 **Usage:**
@@ -2298,7 +2368,8 @@ Close button: 32px, Neutral 500 → Neutral 900 on hover
 Body padding: space-5 (20px) vertical, space-6 (24px) horizontal
 Body: flex 1, overflow-y auto
 Footer: sticky bottom, border-top 1px Neutral 200
-Footer padding: space-4 (16px) space-6 (24px). Primary button spans full width. When two buttons, stack vertically — primary on top, secondary below.
+Footer padding: space-4 (16px) space-6 (24px)
+Footer layout: display flex, justify-content flex-end, gap space-3 (12px). All action buttons group together on the right — tertiary and primary sit side by side, right-aligned. Never use space-between to float the secondary or tertiary action to the left. When a single primary button is present, it spans full width.
 Open animation: 300ms ease-enter (desktop), 400ms ease-enter (mobile)
 Close animation: 200ms ease-exit
 Mobile handle: 36 x 4px, Neutral 300, border-radius 2px, centered, 8px top margin
@@ -2475,7 +2546,7 @@ Gap between cards in grid: space-6 (24px)
 |---------|---------|-------|----------|--------|
 | Header cell | Neutral 100 bg, Neutral 900 text, 600 weight | — | — | Blue 600 text + sort arrow |
 | Body row | White bg | Neutral 100 bg | Blue 200 bg | — |
-| Alternating row | Neutral 100 bg (optional) | Neutral 200 bg | Blue 200 bg | — |
+| Alternating row | Neutral 50 bg | Neutral 100 bg | Blue 200 bg | — |
 | Cell | Neutral 700 text | — | — | — |
 
 **Specs:**
@@ -2489,6 +2560,8 @@ Border: 1px solid Neutral 200 between rows
 Sort icon: 12px, Neutral 300 (unsorted) / Blue 600 (sorted)
 Horizontal scroll: on mobile/tablet when columns exceed viewport
 Sticky first column: optional, with subtle shadow on scroll
+Zebra striping: tr:nth-child(even) td { background: #F8F8F9; } — intentional hardcoded value (not a token) for subtlety
+Hover overrides zebra: var(--neutral-100)
 ```
 
 **Responsive behavior:**
@@ -2536,6 +2609,8 @@ Subtitle: type-caption-1 (12px / 400), Neutral 500
 Divider: 1px solid Neutral 200, inset from leading edge
 Hover: Neutral 100 background
 Active: Neutral 200 background
+Zebra striping: .list-item:nth-child(even) { background: #F8F8F9; } — intentional hardcoded value (not a token) for subtlety
+Hover overrides zebra: var(--neutral-100)
 ```
 
 **Accessibility:**

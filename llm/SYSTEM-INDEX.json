@@ -148,8 +148,8 @@
   },
   "componentIndex": {
     "navigation": ["Header", "Tab Bar (mobile bottom nav)", "Sidebar", "Breadcrumbs", "Link"],
-    "input": ["Button (6 variants × 5 sizes)", "Text Field", "Dropdown / Select", "Toggle Switch", "Watchlist Toggle (icon+label, icon-only)", "Checkbox", "Radio Button", "Slider / Range", "Date Picker (single, range)"],
-    "feedback": ["Alert / Banner (4 severity types + dismissible/link variants)", "Toast / Snackbar", "Modal / Dialog (3 sizes + mobile bottom sheet)", "Shelf / Drawer (right, left, full)", "Progress Indicator (spinner, bar, steps)", "Skeleton Screen"],
+    "input": ["Button (6 variants × 5 sizes)", "Text Field", "Textarea (resizable, char count)", "Dropdown / Select (single, multi-select, searchable)", "Toggle Switch", "Watchlist Toggle (icon+label, icon-only)", "Checkbox", "Radio Button", "Slider / Range", "Date Picker (single, range)"],
+    "feedback": ["Alert / Banner (4 severity types + dismissible close button)", "Toast / Snackbar", "Modal / Dialog (3 sizes + mobile bottom sheet)", "Shelf / Drawer (right, left, full — footer buttons always right-aligned)", "Progress Indicator (spinner, bar, steps)", "Skeleton Screen"],
     "dataDisplay": ["Card (vertical, horizontal, compact, featured, stat)", "Table (sortable, responsive — last resort, prefer cards/lists)", "List (simple, two-line, three-line, action)", "Stat / KPI", "Badge / Tag", "Tooltip (dark, hover)", "Popover (light, click)"],
     "media": ["Image Container", "Avatar (5 sizes)", "Video Player"],
     "navigationSelection": ["Navigation Chips (single/multi-select filter pills)", "Content Tabs (underline style)"]

@@ -535,7 +535,9 @@ body {
   display: flex; align-items: center; justify-content: center;
   transition: all var(--dur-fast) ease; flex-shrink: 0;
 }
+.checkbox-box:hover { border-color: var(--neutral-500); background: var(--neutral-50); }
 .checkbox-box.checked { background: var(--interactive-primary); border-color: var(--interactive-primary); }
+.checkbox-box.checked:hover { background: var(--interactive-hover); border-color: var(--interactive-hover); }
 .checkbox-box.checked svg { display: block; }
 .checkbox-box svg { display: none; }
 .checkbox-text { font-size: 16px; color: var(--text-primary); }
@@ -547,7 +549,9 @@ body {
   display: flex; align-items: center; justify-content: center;
   transition: all var(--dur-fast) ease; flex-shrink: 0;
 }
+.radio-circle:hover { border-color: var(--neutral-500); background: var(--neutral-50); }
 .radio-circle.selected { border-color: var(--interactive-primary); }
+.radio-circle.selected:hover { border-color: var(--interactive-hover); }
 .radio-dot {
   width: 10px; height: 10px; border-radius: 50%; background: var(--interactive-primary);
   transform: scale(0); transition: transform var(--dur-fast) var(--ease-spring);
@@ -618,12 +622,19 @@ body {
    ALERTS
    ======================================== */
 .alert {
-  display: flex; gap: var(--space-3); padding: var(--space-4);
+  display: flex; align-items: flex-start; gap: var(--space-3); padding: var(--space-4);
   border-radius: var(--radius-lg);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-3); position: relative;
 }
-.alert-icon { flex-shrink: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+.alert-icon { flex-shrink: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
 .alert-content { flex: 1; }
+.alert-close {
+  flex-shrink: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
+  background: none; border: none; cursor: pointer; color: currentColor; opacity: 0.5;
+  padding: 0; border-radius: var(--radius-sm);
+  transition: opacity var(--dur-fast) ease;
+}
+.alert-close:hover { opacity: 0.8; }
 .alert-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
 .alert-desc { font-size: 14px; }
 .alert-info { background: var(--info-bg); color: var(--info-text); }
@@ -720,6 +731,7 @@ td {
   border-bottom: 1px solid var(--border-subtle);
 }
 tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: #F8F8F9; }
 tr:hover td { background: var(--neutral-100); }
 tr.hot td { background: var(--orange-50); }
 tr.hot:hover td { background: var(--orange-100); }
@@ -1067,6 +1079,7 @@ tr.hot:hover td { background: var(--orange-100); }
   cursor: pointer;
 }
 .list-item:last-child { border-bottom: none; }
+.list-item:nth-child(even) { background: #F8F8F9; }
 .list-item:hover { background: var(--neutral-100); }
 .list-item-content { flex: 1; }
 .list-item-title { font-size: 15px; font-weight: 500; color: var(--text-primary); }
@@ -1102,6 +1115,73 @@ tr.hot:hover td { background: var(--orange-100); }
 .dropdown-option.selected { background: var(--blue-200); color: var(--interactive-hover); font-weight: 500; }
 [data-theme="dark"] .dropdown-option.selected { background: rgba(91,142,240,0.15); }
 .dropdown-wrap { position: relative; }
+
+/* Dropdown: Multi-select */
+.dropdown-option-multi {
+  padding: var(--space-2) var(--space-3); font-size: 15px; color: var(--text-secondary);
+  cursor: pointer; transition: background var(--dur-fast) ease;
+  display: flex; align-items: center; gap: var(--space-2);
+}
+.dropdown-option-multi:hover { background: var(--blue-100); color: var(--text-primary); }
+[data-theme="dark"] .dropdown-option-multi:hover { background: rgba(91,142,240,0.1); }
+.dropdown-option-multi .multi-check {
+  width: 18px; height: 18px; border-radius: var(--radius-sm); border: 1.5px solid var(--neutral-300);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: all var(--dur-fast) ease;
+}
+.dropdown-option-multi .multi-check:hover { border-color: var(--neutral-500); background: var(--neutral-50); }
+.dropdown-option-multi.selected .multi-check { background: var(--interactive-primary); border-color: var(--interactive-primary); }
+.dropdown-option-multi.selected .multi-check svg { display: block; }
+.dropdown-option-multi .multi-check svg { display: none; }
+.multi-count {
+  background: var(--neutral-200); color: var(--text-primary); font-size: 12px; font-weight: 600;
+  border-radius: 10px; padding: 1px 8px; margin-right: var(--space-2); flex-shrink: 0;
+}
+.dropdown-trigger .trigger-label {
+  display: flex; align-items: center; flex: 1; min-width: 0;
+}
+.dropdown-trigger .trigger-label span:last-child {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* Dropdown: Searchable */
+.dropdown-search-wrap {
+  padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--border-subtle);
+}
+.dropdown-search-input {
+  width: 100%; height: 36px; padding: 0 var(--space-3) 0 var(--space-8);
+  font-size: 14px; font-family: var(--font-primary); color: var(--text-primary);
+  background: #F8F8F9; border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md); outline: none;
+  transition: border-color var(--dur-normal) ease;
+}
+.dropdown-search-input:focus { border-color: var(--interactive-primary); }
+.dropdown-search-icon {
+  position: absolute; left: var(--space-5); top: 50%; transform: translateY(-50%);
+  color: var(--text-tertiary); pointer-events: none;
+}
+.dropdown-search-wrap { position: relative; }
+.dropdown-options-scroll { max-height: 220px; overflow-y: auto; }
+
+/* Textarea */
+.form-textarea {
+  width: 100%; min-height: 100px; padding: var(--space-3);
+  font-size: 16px; font-family: var(--font-primary); color: var(--text-primary);
+  background: var(--bg-primary); border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-lg); outline: none; resize: vertical;
+  transition: border-color var(--dur-normal) ease, box-shadow var(--dur-normal) ease;
+  line-height: 1.5;
+}
+.form-textarea:hover { border-color: var(--neutral-500); }
+.form-textarea:focus { border-color: var(--interactive-primary); box-shadow: var(--shadow-focus); }
+.form-textarea.error { border-color: var(--error-text); }
+.form-textarea.error:focus { box-shadow: var(--shadow-focus-error); }
+.form-textarea:disabled { background: var(--bg-secondary); color: var(--text-disabled); cursor: not-allowed; border-color: var(--border-subtle); }
+.textarea-footer {
+  display: flex; justify-content: flex-end; margin-top: var(--space-1);
+  font-size: 13px; color: var(--text-tertiary);
+}
+.textarea-footer.over-limit { color: var(--error-text); }
 
 /* Empty State */
 .empty-state { text-align: center; padding: var(--space-12) var(--space-6); }
@@ -2602,6 +2682,18 @@ tr.hot:hover td { background: var(--orange-100); }
         <input class="form-input" type="text" value="Cannot edit" disabled>
       </div>
 
+      <div class="subsection-title">Text Area</div>
+      <div class="form-group">
+        <label class="form-label">Seller Notes</label>
+        <textarea class="form-textarea" maxlength="500" placeholder="Describe the vehicle condition, known issues, or other details for potential buyers..." oninput="updateCharCount(this)"></textarea>
+        <div class="textarea-footer"><span class="char-count">0 / 500</span></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Dispute Reason <span style="color:var(--text-tertiary);font-weight:400">(required)</span></label>
+        <textarea class="form-textarea" maxlength="200" placeholder="Please explain the issue..." oninput="updateCharCount(this)" style="min-height:80px">Vehicle arrived with damage not shown in auction photos. Left quarter panel has significant dent not visible in any listed image.</textarea>
+        <div class="textarea-footer"><span class="char-count">131 / 200</span></div>
+      </div>
+
       <div class="subsection-title">Toggles</div>
       <div class="flex-col" style="gap:var(--space-4)">
         <div class="toggle-wrap" onclick="toggleSwitch(this)"><div class="toggle-track on"><div class="toggle-thumb"></div></div><span class="toggle-label">Email notifications</span></div>
@@ -2632,6 +2724,52 @@ tr.hot:hover td { background: var(--orange-100); }
             <div class="dropdown-option" onclick="selectOption(this, 'Ford')">Ford</div>
             <div class="dropdown-option" onclick="selectOption(this, 'Chevrolet')">Chevrolet</div>
             <div class="dropdown-option" onclick="selectOption(this, 'BMW')">BMW</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection-title">Multi-Select Dropdown</div>
+      <div class="form-group">
+        <label class="form-label">Damage Types</label>
+        <div class="dropdown-wrap">
+          <div class="dropdown-trigger" onclick="toggleDropdown(this)">
+            <span class="trigger-label"><span class="multi-count">2</span><span>Front End, Rear End</span></span>
+            <span class="chevron"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.25 10.75L12 14.25L8.75 10.75"/></svg></span>
+          </div>
+          <div class="dropdown-menu">
+            <div class="dropdown-option-multi selected" onclick="toggleMultiOption(this)"><span class="multi-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Front End</span></div>
+            <div class="dropdown-option-multi selected" onclick="toggleMultiOption(this)"><span class="multi-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Rear End</span></div>
+            <div class="dropdown-option-multi" onclick="toggleMultiOption(this)"><span class="multi-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Side</span></div>
+            <div class="dropdown-option-multi" onclick="toggleMultiOption(this)"><span class="multi-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Rollover</span></div>
+            <div class="dropdown-option-multi" onclick="toggleMultiOption(this)"><span class="multi-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Vandalism</span></div>
+            <div class="dropdown-option-multi" onclick="toggleMultiOption(this)"><span class="multi-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Flood / Water</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection-title">Searchable Dropdown</div>
+      <div class="form-group">
+        <label class="form-label">Location</label>
+        <div class="dropdown-wrap">
+          <div class="dropdown-trigger" onclick="toggleDropdown(this)">
+            <span>Dallas, TX</span>
+            <span class="chevron"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.25 10.75L12 14.25L8.75 10.75"/></svg></span>
+          </div>
+          <div class="dropdown-menu">
+            <div class="dropdown-search-wrap">
+              <svg class="dropdown-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.25 19.25L15.5 15.5M4.75 11C4.75 7.54822 7.54822 4.75 11 4.75C14.4518 4.75 17.25 7.54822 17.25 11C17.25 14.4518 14.4518 17.25 11 17.25C7.54822 17.25 4.75 14.4518 4.75 11Z"/></svg>
+              <input class="dropdown-search-input" type="text" placeholder="Search locations..." onclick="event.stopPropagation()" oninput="filterDropdownOptions(this)">
+            </div>
+            <div class="dropdown-options-scroll">
+              <div class="dropdown-option selected" onclick="selectOption(this, 'Dallas, TX')">Dallas, TX</div>
+              <div class="dropdown-option" onclick="selectOption(this, 'Houston, TX')">Houston, TX</div>
+              <div class="dropdown-option" onclick="selectOption(this, 'Los Angeles, CA')">Los Angeles, CA</div>
+              <div class="dropdown-option" onclick="selectOption(this, 'Chicago, IL')">Chicago, IL</div>
+              <div class="dropdown-option" onclick="selectOption(this, 'Miami, FL')">Miami, FL</div>
+              <div class="dropdown-option" onclick="selectOption(this, 'Portland, OR')">Portland, OR</div>
+              <div class="dropdown-option" onclick="selectOption(this, 'Atlanta, GA')">Atlanta, GA</div>
+              <div class="dropdown-option" onclick="selectOption(this, 'Phoenix, AZ')">Phoenix, AZ</div>
+            </div>
           </div>
         </div>
       </div>
@@ -2729,10 +2867,10 @@ tr.hot:hover td { background: var(--orange-100); }
   <div class="section-desc">Alerts, toasts, modals, progress indicators, skeleton screens, and step indicators.</div>
 
   <div class="subsection-title">Alerts</div>
-  <div class="alert alert-info"><div class="alert-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="6.5" r="1" fill="currentColor"/></svg></div><div class="alert-content"><div class="alert-title">Auction schedule updated</div><div class="alert-desc">Tomorrow's auction has been moved to 10:00 AM ET.</div></div></div>
-  <div class="alert alert-success"><div class="alert-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 10.5l2.5 2.5 5-5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="alert-content"><div class="alert-title">Bid placed successfully</div><div class="alert-desc">Your bid of $4,500 on Lot #48291076 has been recorded.</div></div></div>
-  <div class="alert alert-warning"><div class="alert-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2.5L1.5 17.5h17L10 2.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 8v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="14.5" r="0.75" fill="currentColor"/></svg></div><div class="alert-content"><div class="alert-title">Deposit limit reached</div><div class="alert-desc">Your deposit covers bids up to $2,000. Increase your deposit to bid higher.</div></div></div>
-  <div class="alert alert-error"><div class="alert-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 7l6 6M13 7l-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="alert-content"><div class="alert-title">Bid could not be submitted</div><div class="alert-desc">The auction has ended. Please check other available vehicles.</div></div></div>
+  <div class="alert alert-info"><div class="alert-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="6.5" r="1" fill="currentColor"/></svg></div><div class="alert-content"><div class="alert-title">Auction schedule updated</div><div class="alert-desc">Tomorrow's auction has been moved to 10:00 AM ET.</div></div><button class="alert-close" aria-label="Dismiss"><svg width="16" height="16" viewBox="3 3 18 18" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 6.75L6.75 17.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.75 6.75L17.25 17.25"/></svg></button></div>
+  <div class="alert alert-success"><div class="alert-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 10.5l2.5 2.5 5-5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="alert-content"><div class="alert-title">Bid placed successfully</div><div class="alert-desc">Your bid of $4,500 on Lot #48291076 has been recorded.</div></div><button class="alert-close" aria-label="Dismiss"><svg width="16" height="16" viewBox="3 3 18 18" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 6.75L6.75 17.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.75 6.75L17.25 17.25"/></svg></button></div>
+  <div class="alert alert-warning"><div class="alert-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2.5L1.5 17.5h17L10 2.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 8v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="14.5" r="0.75" fill="currentColor"/></svg></div><div class="alert-content"><div class="alert-title">Deposit limit reached</div><div class="alert-desc">Your deposit covers bids up to $2,000. Increase your deposit to bid higher.</div></div><button class="alert-close" aria-label="Dismiss"><svg width="16" height="16" viewBox="3 3 18 18" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 6.75L6.75 17.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.75 6.75L17.25 17.25"/></svg></button></div>
+  <div class="alert alert-error"><div class="alert-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 7l6 6M13 7l-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="alert-content"><div class="alert-title">Bid could not be submitted</div><div class="alert-desc">The auction has ended. Please check other available vehicles.</div></div><button class="alert-close" aria-label="Dismiss"><svg width="16" height="16" viewBox="3 3 18 18" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 6.75L6.75 17.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.75 6.75L17.25 17.25"/></svg></button></div>
 
   <div class="subsection-title">Toasts</div>
   <div class="flex-row" style="gap:var(--space-4)">
@@ -2845,7 +2983,7 @@ tr.hot:hover td { background: var(--orange-100); }
           <label style="display:flex;align-items:center;gap:var(--space-3);font-size:15px;cursor:pointer"><span style="width:18px;height:18px;border:2px solid var(--neutral-400);border-radius:4px;display:inline-block"></span> Rebuilt Title</label>
         </div>
       </div>
-      <div class="shelf-footer" style="justify-content:space-between">
+      <div class="shelf-footer">
         <button class="btn btn-md btn-tertiary" onclick="closeShelf(null,'shelfLeft')">Clear All</button>
         <button class="btn btn-md btn-primary" onclick="closeShelf(null,'shelfLeft')">Apply Filters</button>
       </div>
@@ -4067,6 +4205,48 @@ document.addEventListener('click', function(e) {
     document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('open'));
     document.querySelectorAll('.chevron').forEach(c => c.style.transform = '');
   }
+});
+
+// Multi-select dropdown
+function toggleMultiOption(el) {
+  el.classList.toggle('selected');
+  const wrap = el.closest('.dropdown-wrap');
+  const selected = wrap.querySelectorAll('.dropdown-option-multi.selected');
+  const trigger = wrap.querySelector('.dropdown-trigger span');
+  if (selected.length === 0) {
+    trigger.innerHTML = 'Select...';
+  } else {
+    const names = Array.from(selected).map(o => o.querySelector('span:last-child').textContent);
+    trigger.innerHTML = '<span class="trigger-label"><span class="multi-count">' + selected.length + '</span><span>' + names.join(', ') + '</span></span>';
+  }
+}
+
+// Searchable dropdown filter
+function filterDropdownOptions(input) {
+  const query = input.value.toLowerCase();
+  const scroll = input.closest('.dropdown-menu').querySelector('.dropdown-options-scroll');
+  scroll.querySelectorAll('.dropdown-option').forEach(opt => {
+    opt.style.display = opt.textContent.toLowerCase().includes(query) ? '' : 'none';
+  });
+}
+
+// Textarea character count
+function updateCharCount(textarea) {
+  const max = textarea.getAttribute('maxlength');
+  const current = textarea.value.length;
+  const footer = textarea.closest('.form-group').querySelector('.textarea-footer');
+  const counter = footer.querySelector('.char-count');
+  counter.textContent = current + ' / ' + max;
+  if (current >= max * 0.9) { footer.classList.add('over-limit'); } else { footer.classList.remove('over-limit'); }
+}
+
+// Alert dismiss
+document.querySelectorAll('.alert-close').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const alert = this.closest('.alert');
+    alert.style.animation = 'alertOut 300ms ease forwards';
+    setTimeout(() => alert.remove(), 300);
+  });
 });
 
 // Toggle Switch

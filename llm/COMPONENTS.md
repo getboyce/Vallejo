@@ -521,6 +521,57 @@ Single variant with up to 5 items.
 
 ---
 
+### 2.2.1 Textarea
+
+**Anatomy:**
+1. `textarea-container` — Wrapper for textarea + label + helper
+2. `textarea-label` — Text label above textarea (required)
+3. `textarea-input` — The `<textarea>` element
+4. `textarea-helper` — Helper text below (left-aligned)
+5. `textarea-count` — Character count below (right-aligned)
+6. `textarea-error` — Error message (replaces helper when active)
+
+**Variants:** Single variant with contextual states.
+
+**States:**
+
+| State | Border | Background | Additional |
+|-------|--------|-----------|------------|
+| Default | 1.5px var(--border-default) | white | — |
+| Hover | 1.5px var(--neutral-500) | white | — |
+| Focus | 2px var(--interactive-primary) | white | var(--shadow-focus) |
+| Error | 2px var(--error-text) | white | var(--shadow-focus-error) |
+| Disabled | 1.5px var(--border-subtle) | var(--bg-secondary) | cursor: not-allowed, var(--text-disabled) text |
+
+**Specs:**
+
+| Property | Value |
+|----------|-------|
+| Font | type-body (16px / 400), var(--font-primary) |
+| Line-height | 1.5 |
+| Border | 1.5px solid var(--border-default) |
+| Border-radius | var(--radius-lg) |
+| Padding | var(--space-3) |
+| Min-height | 100px |
+| Resize | vertical (user can grab bottom-right corner to resize height) |
+| Transition | border-color var(--duration-normal) ease, box-shadow var(--duration-normal) ease |
+| Character count font | 13px, var(--text-tertiary), aligned right below field |
+| Character count format | "current / max" — turns var(--error-text) color at 90%+ of limit |
+
+**Usage Rules:**
+- Use for multi-line free-form text input (comments, descriptions, notes).
+- Styling matches form-input (Text Field) for consistency — same border, radius, padding, and font.
+- Always show character count when a max length is enforced.
+- Do NOT use for single-line inputs — use Text Field instead.
+
+**Accessibility:**
+- `<textarea>` with visible `<label>` linked via `for`/`id`.
+- `aria-describedby` linking to helper text and character count.
+- `aria-invalid="true"` when in error state.
+- Character count announced to screen readers via `aria-live="polite"` region.
+
+---
+
 ### 2.3 Dropdown / Select
 
 **Anatomy:**
@@ -584,6 +635,21 @@ Same as Text Field states, plus:
 - Options: `role="option"`, `aria-selected`
 - Keyboard: Arrow keys navigate, Enter selects, Escape closes, type-ahead supported
 - Multi-select: `aria-multiselectable="true"` on listbox
+
+**Variant Detail: Multi-Select Dropdown**
+- Each option row includes a checkbox (uses standard checkbox component).
+- Menu stays open on option click (does not auto-close; user closes via outside click or trigger click).
+- Trigger uses `.trigger-label` flex wrapper with `align-items: center` for vertical centering of badge and text.
+- Count badge appears to the LEFT of the label text when 1+ items selected: gray pill, `background: var(--neutral-200); color: var(--text-primary); border-radius: var(--radius-full); padding: 2px 8px; font: 12px/600; margin-right: var(--space-2); flex-shrink: 0`.
+- When nothing is selected, trigger shows placeholder "Select...".
+- **Dark mode:** `[data-theme="dark"] .dropdown-option-multi:hover { background: rgba(91,142,240,0.1) }`
+
+**Variant Detail: Searchable Dropdown**
+- Search input pinned to the top of the menu: 36px height, 14px font, `background: #F8F8F9` (hardcoded, not a token), `border-radius: var(--radius-md)`, `border: 1px solid var(--border-default)`. On focus: `border-color: var(--interactive-primary)`.
+- Search icon: 14x14px, positioned inside the input on the left with `padding-left: var(--space-8)` on the input to make room.
+- Options render below the search input in a scrollable container: `max-height: 220px; overflow-y: auto`.
+- "No results" empty state shown when search yields nothing.
+- **Filtering behavior:** Search input has an `oninput` handler that filters options by case-insensitive text match. Options that don't match are hidden with `display: none`.
 
 **Copy Rules:**
 - Label = what to select (noun phrase): "Title type", "Damage type", "Yard".
@@ -708,9 +774,9 @@ Same as Text Field states, plus:
 | State | Box Border | Box BG | Icon |
 |-------|-----------|--------|------|
 | Unchecked | 1.5px var(--border-default) | white | none |
-| Unchecked Hover | 1.5px var(--interactive-primary) | white | none |
+| Unchecked Hover | 1.5px var(--neutral-500) | var(--neutral-50) | none |
 | Checked | none | var(--interactive-primary) | white checkmark |
-| Checked Hover | none | var(--interactive-primary-hover) | white checkmark |
+| Checked Hover | none | var(--interactive-hover) | white checkmark |
 | Indeterminate | none | var(--interactive-primary) | white minus line |
 | Disabled Unchecked | 1.5px var(--border-subtle) | var(--bg-secondary) | none |
 | Disabled Checked | none | var(--color-neutral-300) | white checkmark |
@@ -758,9 +824,9 @@ Same as Text Field states, plus:
 | State | Border | Fill | Dot |
 |-------|--------|------|-----|
 | Unselected | 1.5px var(--border-default) | white | none |
-| Unselected Hover | 1.5px var(--interactive-primary) | white | none |
+| Unselected Hover | 1.5px var(--neutral-500) | var(--neutral-50) | none |
 | Selected | 1.5px var(--interactive-primary) | white | var(--interactive-primary) (10px) |
-| Selected Hover | 1.5px var(--interactive-primary-hover) | white | var(--interactive-primary-hover) |
+| Selected Hover | 1.5px var(--interactive-hover) | white | var(--interactive-primary) |
 | Disabled Unselected | 1.5px var(--border-subtle) | var(--bg-secondary) | none |
 | Disabled Selected | 1.5px var(--color-neutral-300) | var(--bg-secondary) | var(--color-neutral-300) |
 | Focus | any state | any state | focus ring on outer circle |
@@ -941,14 +1007,16 @@ Same as Text Field states, plus:
 
 | Property | Value |
 |----------|-------|
+| Layout | `display: flex; align-items: flex-start` |
 | Border-radius | var(--radius-lg) |
 | Padding | var(--space-4) |
-| Icon size | 20px, flex-shrink 0 |
+| Icon size | 20px, flex-shrink 0, `margin-top: 1px` (aligns with title baseline) |
 | Gap (icon to content) | var(--space-3) |
 | Title font | type-subheadline (14px / 600) |
 | Description font | type-body (16px / 400) |
 | Inline link | type-body (16px / 500), var(--text-link), underline on hover |
-| Dismiss button | 20px icon, var(--text-tertiary), 8px from top-right |
+| Close button | 20x20px, no background, no border, `color: currentColor; opacity: 0.5`, hover `opacity: 0.8`. Uses 16x16 X SVG icon (`viewBox="3 3 18 18"`, `stroke-width: 2`). Positioned as last flex child (`margin-left: auto`). |
+| Dismissal animation | `animation: alertOut 300ms ease` — existing alertOut keyframe (fade out + collapse height) |
 | Min-height | 48px |
 
 **Usage Rules:**
@@ -1168,7 +1236,7 @@ Left shelf mirrors X direction: translateX(-100%) to 0 on open.
 | Close button | 32px, var(--text-tertiary) to var(--text-primary) on hover |
 | Body padding | var(--space-5) vertical, var(--space-6) horizontal, flex 1, overflow-y auto |
 | Footer | sticky bottom, border-top 1px var(--border-subtle) |
-| Footer padding | var(--space-4) var(--space-6). Primary button spans full width. When two buttons, stack vertically — primary on top, secondary below. |
+| Footer padding | var(--space-4) var(--space-6). Footer uses `justify-content: flex-end` — buttons always group right, never space-between. Both tertiary and primary actions sit together on the right side. When two buttons, use var(--space-3) gap between them. |
 | Mobile handle | 36 x 4px, var(--color-neutral-300), radius 2px, centered, 8px top margin |
 
 **Usage Rules:**
@@ -1366,7 +1434,7 @@ Placeholder shapes matching the component they replace.
 |---------|---------|-------|----------|--------|
 | Header cell | var(--bg-secondary) bg, var(--text-primary), weight 600 | — | — | var(--interactive-primary) text + sort arrow |
 | Body row | white bg | var(--bg-secondary) bg | var(--color-blue-200) bg | — |
-| Alternating row | var(--bg-secondary) bg (optional) | var(--color-neutral-200) bg | var(--color-blue-200) bg | — |
+| Alternating row | var(--bg-secondary) bg | var(--neutral-100) bg | var(--color-blue-200) bg | — |
 | Cell | var(--text-secondary) text | — | — | — |
 
 **Specs:**
@@ -1383,6 +1451,10 @@ Placeholder shapes matching the component they replace.
 | Row border | 1px solid var(--border-subtle) |
 | Sort icon | 12px, var(--color-neutral-300) (unsorted) / var(--interactive-primary) (sorted) |
 | Sticky first column | optional, with subtle shadow on scroll |
+
+**Zebra Striping:**
+- `tr:nth-child(even) td { background: #F8F8F9; }` — alternating even rows get lightest gray background. This is an intentional hardcoded value (not a token) for subtlety.
+- Hover overrides zebra striping: `var(--neutral-100)` on hover.
 
 **Responsive Behavior:**
 - Desktop: Full table with all columns.
@@ -1430,8 +1502,13 @@ Placeholder shapes matching the component they replace.
 |-------|-----------|
 | Default | transparent |
 | Hover | var(--bg-secondary) |
+| Zebra (even rows) | #F8F8F9 (hardcoded, not a token) |
 | Active | var(--color-neutral-200) |
 | Selected | var(--color-blue-200) |
+
+**Zebra Striping:**
+- `.list-item:nth-child(even) { background: #F8F8F9; }` — alternating even items get lightest gray background. This is an intentional hardcoded value (not a token) for subtlety.
+- Hover overrides zebra striping: `var(--neutral-100)` on hover.
 
 **Specs:**
 

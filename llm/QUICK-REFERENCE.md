@@ -496,6 +496,25 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 
 ---
 
+### Textarea
+
+```html
+<div class="form-group">
+  <label class="form-label">Label</label>
+  <textarea class="form-textarea" maxlength="500" placeholder="..."></textarea>
+  <div class="textarea-footer"><span class="char-count">0 / 500</span></div>
+</div>
+```
+
+| Property | Value |
+|----------|-------|
+| Tokens | matches `form-input` (border, radius, padding, font) |
+| Resize | `vertical` |
+| Min height | 100px |
+| Counter | `char-count` turns `var(--error-text)` at 90% of maxlength |
+
+---
+
 ### Dropdown / Select
 
 ```html
@@ -532,6 +551,39 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 | z-index | 1100 |
 
 **Variants:** single-select (default), multi-select (`aria-multiselectable="true"`), searchable (add search input inside menu)
+
+**Multi-Select variant:**
+
+```html
+<div class="dropdown-wrap">
+  <div class="dropdown-trigger">
+    <span class="trigger-label"><span class="multi-count">2</span> Front End, Rear End</span>
+    <span class="chevron">...</span>
+  </div>
+  <div class="dropdown-menu">
+    <div class="dropdown-option-multi selected"><span class="multi-check"><svg>...</svg></span><span>Front End</span></div>
+    <div class="dropdown-option-multi"><span class="multi-check"><svg>...</svg></span><span>Side</span></div>
+  </div>
+</div>
+```
+
+Key CSS: `.dropdown-option-multi` uses flex with gap, `.multi-check` is 18x18 checkbox. Count badge: positioned LEFT of label text inside `.trigger-label` flex wrapper (`align-items: center`). Badge uses gray background (`var(--neutral-200)`) with `var(--text-primary)` text, `margin-right: var(--space-2)`, `flex-shrink: 0`.
+
+**Searchable variant:**
+
+```html
+<div class="dropdown-menu">
+  <div class="dropdown-search-wrap">
+    <svg class="dropdown-search-icon">...</svg>
+    <input class="dropdown-search-input" placeholder="Search...">
+  </div>
+  <div class="dropdown-options-scroll">
+    <div class="dropdown-option">...</div>
+  </div>
+</div>
+```
+
+Key CSS: `.dropdown-search-input` 36px height, 14px, `#F8F8F9` (hardcoded, not a token), `var(--radius-md)`. `.dropdown-options-scroll` max-height 220px overflow-y auto. **Filtering:** Search input has `oninput` handler that filters options by case-insensitive text match; non-matching options are hidden with `display: none`.
 
 ---
 
@@ -625,6 +677,13 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 | Indeterminate | `aria-checked="mixed"`, minus icon instead of check |
 | Group spacing | `var(--space-3)` vertical |
 
+**Hover states:**
+
+```css
+.checkbox-box:hover { border-color: var(--neutral-500); background: var(--neutral-50); }
+.checkbox-box.checked:hover { background: var(--interactive-hover); border-color: var(--interactive-hover); }
+```
+
 ---
 
 ### Radio Button
@@ -655,6 +714,13 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 | Selected border | `1.5px solid var(--interactive-primary)` |
 | Selected label weight | 600 (Semi Bold) — bold signals active choice |
 | Group spacing | `var(--space-3)` vertical |
+
+**Hover states:**
+
+```css
+.radio-circle:hover { border-color: var(--neutral-500); background: var(--neutral-50); }
+.radio-circle.selected:hover { border-color: var(--interactive-hover); }
+```
 
 ---
 
@@ -784,6 +850,12 @@ Rule: use glossary terms consistently — never alternate between synonyms.
     <div class="alert-title">Auction Schedule Updated</div>
     <div class="alert-desc">Auction times have been adjusted for your timezone.</div>
   </div>
+  <button class="alert-close" aria-label="Dismiss">
+    <svg width="16" height="16" viewBox="3 3 18 18" fill="none"
+         stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <!-- X icon path -->
+    </svg>
+  </button>
 </div>
 ```
 
@@ -796,7 +868,9 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 | `.alert-warning` | `var(--warning-bg)` | `var(--warning-text)` | triangle exclamation | `alert` |
 | `.alert-error` | `var(--error-bg)` | `var(--error-text)` | octagon exclamation | `alert` |
 
-**Specs:** radius `var(--radius-lg)`, padding `var(--space-4)`, icon 20px, gap `var(--space-3)`, title 14px/600, desc 14px/400.
+**Specs:** radius `var(--radius-lg)`, padding `var(--space-4)`, icon 20px, gap `var(--space-3)`, title 14px/600, desc 14px/400. Layout: `align-items: flex-start`, icon gets `margin-top: 1px`.
+
+**Close button (`.alert-close`):** 20x20, no background/border, `color: currentColor`, `opacity: 0.5` -> `0.8` on hover. Placed as last child of `.alert`.
 
 ---
 
@@ -999,6 +1073,8 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 | Open anim | desktop: `translateX(100%)->0`, `var(--dur-slow) var(--ease-enter)` |
 | Mobile open | `translateY(100%)->0`, `var(--dur-deliberate) var(--ease-enter)` |
 
+**Footer:** Always uses `justify-content: flex-end`. Both buttons group right. Never use `space-between`.
+
 ---
 
 ### Progress Indicator
@@ -1176,7 +1252,7 @@ Track: 6px, `var(--neutral-200)`, 3px radius. Fill: `var(--interactive-primary)`
 | Cell padding | `var(--space-3)` |
 | Cell font | 14px / 400, `var(--text-secondary)` |
 | Row hover | `var(--neutral-100)` bg |
-| Alternating | `var(--neutral-100)` (optional) |
+| Zebra striping | `tr:nth-child(even) td { background: #F8F8F9; }` — intentional hardcoded value (not a token) for subtlety; hover overrides to `var(--neutral-100)` |
 | Hot row | `var(--orange-50)` bg |
 | Sort icon | 12px, `var(--interactive-primary)` when sorted |
 | `.mono` class | `var(--font-mono)`, 13px (for VIN, lot#, price) |
@@ -1223,6 +1299,7 @@ Track: 6px, `var(--neutral-200)`, 3px radius. Fill: `var(--interactive-primary)`
 |----------|-------|
 | Padding | `var(--space-3) var(--space-4)` |
 | Hover bg | `var(--neutral-100)` |
+| Zebra striping | `.list-item:nth-child(even) { background: #F8F8F9; }` — intentional hardcoded value (not a token) for subtlety; hover overrides to `var(--neutral-100)` |
 | Divider | `1px solid var(--border-subtle)` |
 | Title | 15px / 500, `var(--text-primary)` |
 | Subtitle | 12px, `var(--text-tertiary)` |

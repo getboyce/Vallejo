@@ -64,8 +64,6 @@
 --blue-50:  #F6F9FD;   /* dark: #0D1117 */
 --blue-100: #EEF3FB;   /* dark: #141E33 */
 --blue-200: #E1ECF9;   /* dark: #1E2A45 — selected rows, active/pressed states, "you picked this" feedback */
---blue-300: #B9D6F4;   /* dark: #1A2D4A — marketing section backgrounds, branded content bands (not product UI) */
---blue-400: #83B3E2;   /* dark: #2A4A6E — decorative fills, progress bars, icon backgrounds (non-interactive only) */
 --blue-600: #2662D9;   /* dark: #5B8EF0 — primary brand */
 --blue-800: #063598;   /* dark: #7AAAF5 — hover */
 --blue-900: #0F2757;   /* dark: #B8D4FA — titles */
@@ -91,7 +89,6 @@
 --neutral-300: #C5CCD3;  /* dark: #3A4150 — borders */
 --neutral-500: #7A8691;  /* dark: #6E7A86 — placeholders */
 --neutral-700: #46525D;  /* dark: #A8B2BC — body copy */
---neutral-800: #353A48;  /* dark: #C5CDD6 — secondary surfaces */
 --neutral-900: #2F333C;  /* dark: #F0F1F3 — headlines */
 --neutral-950: #23262F;  /* dark: #F8F9FA — darkest surface */
 ```
@@ -102,26 +99,22 @@
 /* Success */
 --success-bg:     #D7E8D1;  /* dark: #1A2E14 */
 --success-text:   #1B6600;  /* dark: #6ABF4D */
---success-border: #4CA830;  /* dark: #4CA830 */
---success-icon:   #238202;  /* dark: #6ABF4D */
+--success-accent: #4CA830;  /* dark: #6ABF4D — borders, icons, indicators */
 
 /* Warning */
 --warning-bg:     #FFF7D1;  /* dark: #2E2510 */
 --warning-text:   #705700;  /* dark: #E8B830 */
---warning-border: #EC9C0D;  /* dark: #E8B830 */
---warning-icon:   #B07800;  /* dark: #E8B830 */
+--warning-accent: #EC9C0D;  /* dark: #E8B830 — borders, icons, indicators */
 
 /* Error (rose — no pure red) */
 --error-bg:     #FCE5E9;  /* dark: #2E1219 */
 --error-text:   #8C1D35;  /* dark: #F06080 */
---error-border: #D42A54;  /* dark: #F06080 */
---error-icon:   #C22248;  /* dark: #F06080 */
+--error-accent: #D42A54;  /* dark: #F06080 — borders, icons, indicators */
 
 /* Info */
 --info-bg:     #E0EBFF;  /* dark: #141E33 */
 --info-text:   #0F2757;  /* dark: #7AAAF5 */
---info-border: #2662D9;  /* dark: #5B8EF0 */
---info-icon:   #2662D9;  /* dark: #5B8EF0 */
+--info-accent: #2662D9;  /* dark: #5B8EF0 — borders, icons, indicators */
 ```
 
 ### Colors — Semantics (Surface / Text / Border / Interactive)
@@ -393,8 +386,8 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 | `.btn-primary` | `var(--interactive-primary)` | `#fff` | none |
 | `.btn-secondary` | `var(--bg-primary)` | `var(--interactive-primary)` | `1.5px solid var(--interactive-primary)` |
 | `.btn-tertiary` | `transparent` | `var(--interactive-primary)` | none |
-| `.btn-destructive` | `var(--error-icon)` | `#fff` | none |
-| `.btn-success` | `var(--success-icon)` | `#fff` | none |
+| `.btn-destructive` | `var(--error-accent)` | `#fff` | none |
+| `.btn-success` | `var(--success-accent)` | `#fff` | none |
 | `.btn-cta` | `var(--interactive-accent)` | `#fff` | none |
 
 **Sizes:**
@@ -642,7 +635,7 @@ Key CSS: `.dropdown-search-input` 36px height, 14px, `#F8F8F9` (hardcoded, not a
 | Property | Value |
 |----------|-------|
 | Icon | 24px heart outline (default), filled heart (saved), viewBox 3 3 18 18 for inline buttons |
-| Saved color | `var(--error-icon)` (#C22248) — filled heart |
+| Saved color | `var(--error-accent)` (#D42A54) — filled heart |
 | Default color | `var(--text-secondary)` — stroke outline |
 | Icon-Only size | 40×40px touch target |
 | Label font | 14px / 500 |
@@ -1337,8 +1330,8 @@ Track: 6px, `var(--neutral-200)`, 3px radius. Fill: `var(--interactive-primary)`
 | Value (compare) | `var(--font-mono)` + `font-feature-settings: "zero" 0`, 32px / 800, `var(--text-primary)` |
 | Value (read/hero) | `var(--font-primary)`, 32px / 800, `var(--text-primary)` — singular dominant number |
 | Label | 11px / 700, uppercase, `letter-spacing: 0.08em`, `var(--text-tertiary)` |
-| Trend up | `var(--success-icon)` |
-| Trend down | `var(--error-icon)` |
+| Trend up | `var(--success-accent)` |
+| Trend down | `var(--error-accent)` |
 | Trend urgent | `var(--interactive-accent)` |
 | `.accent` variant | `border-top: 3px solid var(--interactive-accent)` |
 
@@ -1352,7 +1345,7 @@ Specification only (use a chart library). Color sequence for multi-series:
 2. `#5B8EF0` (light blue)
 3. `var(--blue-900)` (#0F2757)
 4. `#EC9C0D` (amber)
-5. `#238202` (green)
+5. `#4CA830` (green)
 6. `var(--neutral-500)` (#7A8691)
 
 Axis labels: 12px/500, `var(--text-tertiary)`. Grid: 1px dashed `var(--neutral-200)`. Tooltip: white bg, 8px radius, `var(--shadow-md)`.
@@ -1377,7 +1370,7 @@ Axis labels: 12px/500, `var(--text-tertiary)`. Grid: 1px dashed `var(--neutral-2
 | Padding | `3px 10px` (card badge) / `2px 8px` (table status) |
 | Radius | `var(--radius-lg)` (table status) / `var(--radius-pill)` (card/standalone badges) |
 | Font | 11px / 700, uppercase, `letter-spacing: 0.04em` |
-| `.badge-live` | `var(--success-icon)` bg, white text |
+| `.badge-live` | `var(--success-accent)` bg, white text |
 | `.badge-buy` | `var(--interactive-primary)` bg, white text |
 | `.badge-upcoming` | `var(--interactive-accent)` bg, white text |
 | `.status-active` | `var(--blue-200)` bg, `var(--blue-900)` text |
@@ -1728,7 +1721,6 @@ Complete `[data-theme="dark"]` override block:
 [data-theme="dark"] {
   /* Primitive Blue */
   --blue-50: #0D1117;  --blue-100: #141E33;  --blue-200: #1E2A45;
-  --blue-300: #1A2D4A; --blue-400: #2A4A6E;
   --blue-600: #5B8EF0; --blue-800: #7AAAF5;  --blue-900: #B8D4FA;
 
   /* Primitive Orange */
@@ -1738,7 +1730,7 @@ Complete `[data-theme="dark"]` override block:
   /* Primitive Neutral */
   --neutral-50: #1A1D23;  --neutral-100: #22262E;  --neutral-200: #2E3340;
   --neutral-300: #3A4150;  --neutral-500: #6E7A86;
-  --neutral-700: #A8B2BC;  --neutral-800: #C5CDD6;  --neutral-900: #F0F1F3;  --neutral-950: #F8F9FA;
+  --neutral-700: #A8B2BC;  --neutral-900: #F0F1F3;  --neutral-950: #F8F9FA;
 
   /* Semantic Surfaces */
   --bg-primary: #1A1D23;  --bg-secondary: #22262E;  --bg-tertiary: #2E3340;
@@ -1764,13 +1756,13 @@ Complete `[data-theme="dark"]` override block:
 
   /* Feedback */
   --success-bg: #1A2E14;  --success-text: #6ABF4D;
-  --success-border: #4CA830;  --success-icon: #6ABF4D;
+  --success-accent: #6ABF4D;
   --warning-bg: #2E2510;  --warning-text: #E8B830;
-  --warning-border: #E8B830;  --warning-icon: #E8B830;
+  --warning-accent: #E8B830;
   --error-bg: #2E1219;  --error-text: #F06080;
-  --error-border: #F06080;  --error-icon: #F06080;
+  --error-accent: #F06080;
   --info-bg: #141E33;  --info-text: #7AAAF5;
-  --info-border: #5B8EF0;  --info-icon: #5B8EF0;
+  --info-accent: #5B8EF0;
 
   /* Header stays dark */
   --header-bg: #2F333C;

@@ -14,8 +14,6 @@
   --blue-50: #F6F9FD;
   --blue-100: #EEF3FB;
   --blue-200: #E1ECF9;
-  --blue-300: #B9D6F4;
-  --blue-400: #83B3E2;
   --blue-600: #2662D9;
   --blue-800: #063598;
   --blue-900: #0F2757;
@@ -26,15 +24,14 @@
   --neutral-300: #C5CCD3;
   --neutral-500: #7A8691;
   --neutral-700: #46525D;
-  --neutral-800: #353A48;
   --neutral-900: #2F333C;
   --neutral-950: #23262F;
 
   /* Semantic */
-  --success-bg: #D7E8D1; --success-text: #1B6600; --success-border: #4CA830; --success-icon: #238202;
-  --warning-bg: #FFF7D1; --warning-text: #705700; --warning-border: #EC9C0D; --warning-icon: #B07800;
-  --error-bg: #FCE5E9; --error-text: #8C1D35; --error-border: #D42A54; --error-icon: #C22248;
-  --info-bg: #E0EBFF; --info-text: #0F2757; --info-border: #2662D9; --info-icon: #2662D9;
+  --success-bg: #D7E8D1; --success-text: #1B6600; --success-accent: #4CA830;
+  --warning-bg: #FFF7D1; --warning-text: #705700; --warning-accent: #EC9C0D;
+  --error-bg: #FCE5E9; --error-text: #8C1D35; --error-accent: #D42A54;
+  --info-bg: #E0EBFF; --info-text: #0F2757; --info-accent: #2662D9;
   --orange-50: #FDF7F2; --orange-100: #FAEEE5; --orange-200: #F8E2D3;
   --orange-600: #D86518; --orange-800: #933C06; --orange-900: #50250B;
 
@@ -96,7 +93,6 @@
 [data-theme="dark"] {
   /* Primitive Blue Scale — dark mode */
   --blue-50: #0D1117; --blue-100: #141E33; --blue-200: #1E2A45;
-  --blue-300: #1A2D4A; --blue-400: #2A4A6E;
   --blue-600: #5B8EF0; --blue-800: #7AAAF5; --blue-900: #B8D4FA;
 
   /* Primitive Orange Scale — dark mode */
@@ -124,10 +120,10 @@
   --shadow-lg: 0 8px 24px rgba(0,0,0,0.4); --shadow-focus: 0 0 0 3px rgba(91,142,240,0.4);
 
   /* Semantic Feedback — dark mode */
-  --success-bg: #1A2E14; --success-text: #6ABF4D; --success-border: #4CA830; --success-icon: #6ABF4D;
-  --warning-bg: #2E2510; --warning-text: #E8B830; --warning-border: #E8B830; --warning-icon: #E8B830;
-  --error-bg: #2E1219; --error-text: #F06080; --error-border: #F06080; --error-icon: #F06080;
-  --info-bg: #141E33; --info-text: #7AAAF5; --info-border: #5B8EF0; --info-icon: #5B8EF0;
+  --success-bg: #1A2E14; --success-text: #6ABF4D; --success-accent: #4CA830;
+  --warning-bg: #2E2510; --warning-text: #E8B830; --warning-accent: #E8B830;
+  --error-bg: #2E1219; --error-text: #F06080; --error-accent: #F06080;
+  --info-bg: #141E33; --info-text: #7AAAF5; --info-accent: #5B8EF0;
 }
 
 /* ========================================
@@ -411,17 +407,17 @@ body {
   position: relative; display: flex; align-items: center;
 }
 .spacing-ruler-line {
-  height: 1px; background: var(--error-border); flex: 1; position: relative;
+  height: 1px; background: var(--error-accent); flex: 1; position: relative;
 }
 .spacing-ruler-line::before, .spacing-ruler-line::after {
-  content: ''; position: absolute; top: -4px; width: 1px; height: 9px; background: var(--error-border);
+  content: ''; position: absolute; top: -4px; width: 1px; height: 9px; background: var(--error-accent);
 }
 .spacing-ruler-line::before { left: 0; }
 .spacing-ruler-line::after { right: 0; }
 .spacing-ruler-value {
   position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
   font-size: 10px; font-family: var(--font-mono); font-weight: 600;
-  color: var(--error-border); white-space: nowrap;
+  color: var(--error-accent); white-space: nowrap;
 }
 .example-inner-box {
   background: var(--bg-secondary); border: 1px dashed var(--border-default);
@@ -471,10 +467,10 @@ body {
 .btn-tertiary:hover { background: var(--blue-100); }
 [data-theme="dark"] .btn-tertiary:hover { background: rgba(91,142,240,0.1); }
 /* Destructive */
-.btn-destructive { background: #C22248; color: #fff; }
+.btn-destructive { background: #D42A54; color: #fff; }
 .btn-destructive:hover { background: #8C1D35; }
 /* Success */
-.btn-success { background: #238202; color: #fff; }
+.btn-success { background: #4CA830; color: #fff; }
 .btn-success:hover { background: #1B6600; }
 /* CTA / Accent */
 .btn-cta { background: var(--orange-600); color: #fff; }
@@ -507,7 +503,7 @@ body {
 .form-input::placeholder { color: var(--text-tertiary); }
 .form-input:hover { border-color: var(--neutral-500); }
 .form-input:focus { outline: none; border-color: var(--border-focus); border-width: 2px; box-shadow: 0 0 0 3px rgba(38,98,217,0.15); }
-.form-input.error { border-color: var(--error-border); background: #FFF8F9; }
+.form-input.error { border-color: var(--error-accent); background: #FFF8F9; }
 [data-theme="dark"] .form-input.error { background: var(--error-bg); }
 .form-input[disabled] { background: var(--neutral-100); border-color: var(--neutral-200); color: var(--text-disabled); cursor: not-allowed; }
 .form-helper { font-size: 12px; font-weight: 500; color: var(--text-tertiary); margin-top: var(--space-1); }
@@ -674,7 +670,7 @@ body {
   padding: 3px 10px; border-radius: var(--radius-pill); font-size: 11px; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.04em;
 }
-.badge-live { background: var(--success-icon); color: #fff; }
+.badge-live { background: var(--success-accent); color: #fff; }
 .badge-buy { background: var(--interactive-primary); color: #fff; }
 .badge-upcoming { background: var(--interactive-accent); color: #fff; }
 .card-body { padding: var(--space-4); }
@@ -702,8 +698,8 @@ body {
 .stat-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-tertiary); }
 .stat-value { font-family: var(--font-mono); font-size: 32px; font-weight: 800; color: var(--text-primary); margin: var(--space-1) 0; }
 .stat-trend { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 4px; }
-.stat-trend.up { color: var(--success-icon); }
-.stat-trend.down { color: var(--error-icon); }
+.stat-trend.up { color: var(--success-accent); }
+.stat-trend.down { color: var(--error-accent); }
 .stat-trend.urgent { color: var(--interactive-accent); }
 .stat-card.accent .stat-value { color: var(--interactive-accent); }
 .stat-card.accent .stat-label { color: var(--orange-800); }
@@ -1332,13 +1328,13 @@ tr.hot:hover td { background: var(--orange-100); }
   width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
 }
 .status-token-success { background: var(--success-bg); color: var(--success-text); }
-.status-token-success .status-dot { background: var(--success-icon); }
+.status-token-success .status-dot { background: var(--success-accent); }
 .status-token-warning { background: var(--warning-bg); color: var(--warning-text); }
-.status-token-warning .status-dot { background: var(--warning-icon); }
+.status-token-warning .status-dot { background: var(--warning-accent); }
 .status-token-error { background: var(--error-bg); color: var(--error-text); }
-.status-token-error .status-dot { background: var(--error-icon); }
+.status-token-error .status-dot { background: var(--error-accent); }
 .status-token-info { background: var(--info-bg); color: var(--info-text); }
-.status-token-info .status-dot { background: var(--info-icon); }
+.status-token-info .status-dot { background: var(--info-accent); }
 .status-token-neutral { background: var(--neutral-200); color: var(--neutral-700); }
 .status-token-neutral .status-dot { background: var(--neutral-500); }
 .status-token-accent { background: var(--orange-100); color: var(--orange-900); }
@@ -1763,8 +1759,6 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-50)"><span class="swatch-hex" data-light="#F6F9FD" data-dark="#0D1117">#F6F9FD</span></div><div class="swatch-info"><div class="swatch-name">Blue 50</div><div class="swatch-meta">Brand Tint</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-100)"><span class="swatch-hex" data-light="#EEF3FB" data-dark="#141E33">#EEF3FB</span></div><div class="swatch-info"><div class="swatch-name">Blue 100</div><div class="swatch-meta">Lightest</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-200)"><span class="swatch-hex" data-light="#E1ECF9" data-dark="#1E2A45">#E1ECF9</span></div><div class="swatch-info"><div class="swatch-name">Blue 200</div><div class="swatch-meta">Selected rows, active backgrounds, pressed states</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-300)"><span class="swatch-hex" data-light="#B9D6F4" data-dark="#1A2D4A">#B9D6F4</span></div><div class="swatch-info"><div class="swatch-name">Blue 300</div><div class="swatch-meta">Marketing sections, branded content bands</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-400)"><span class="swatch-hex" data-light="#83B3E2" data-dark="#2A4A6E">#83B3E2</span></div><div class="swatch-info"><div class="swatch-name">Blue 400</div><div class="swatch-meta">Decorative fills, progress bars, icon backgrounds</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-600)"><span class="swatch-hex" data-light="#2662D9" data-dark="#5B8EF0">#2662D9</span></div><div class="swatch-info"><div class="swatch-name">Blue 600</div><div class="swatch-meta">Primary &bull; AA Large</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-800)"><span class="swatch-hex" data-light="#063598" data-dark="#7AAAF5">#063598</span></div><div class="swatch-info"><div class="swatch-name">Blue 800</div><div class="swatch-meta">Dark &bull; AAA</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--blue-900)"><span class="swatch-hex" data-light="#0F2757" data-dark="#B8D4FA">#0F2757</span></div><div class="swatch-info"><div class="swatch-name">Blue 900</div><div class="swatch-meta">Darkest &bull; AAA</div></div></div>
@@ -1778,41 +1772,8 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-300)"><span class="swatch-hex" data-light="#C5CCD3" data-dark="#3A4150">#C5CCD3</span></div><div class="swatch-info"><div class="swatch-name">Neutral 300</div><div class="swatch-meta">Border</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-500)"><span class="swatch-hex" data-light="#7A8691" data-dark="#6E7A86">#7A8691</span></div><div class="swatch-info"><div class="swatch-name">Neutral 500</div><div class="swatch-meta">Subtle</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-700)"><span class="swatch-hex" data-light="#46525D" data-dark="#A8B2BC">#46525D</span></div><div class="swatch-info"><div class="swatch-name">Neutral 700</div><div class="swatch-meta">Body</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-800)"><span class="swatch-hex" data-light="#353A48" data-dark="#A8B2BC">#353A48</span></div><div class="swatch-info"><div class="swatch-name">Neutral 800</div><div class="swatch-meta">Header bg, dark UI</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-900)"><span class="swatch-hex" data-light="#2F333C" data-dark="#F0F1F3">#2F333C</span></div><div class="swatch-info"><div class="swatch-name">Neutral 900</div><div class="swatch-meta">Ink &bull; AAA</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--neutral-950)"><span class="swatch-hex" data-light="#23262F" data-dark="#F0F1F3">#23262F</span></div><div class="swatch-info"><div class="swatch-name">Neutral 950</div><div class="swatch-meta">Deepest dark, toast bg</div></div></div>
-  </div>
-
-  <div class="subsection-title">Semantic Colors — Success</div>
-  <div class="grid-4">
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-bg)"><span class="swatch-hex" data-light="#D7E8D1" data-dark="#1A2E14" style="background:rgba(0,0,0,0.5)">#D7E8D1</span></div><div class="swatch-info"><div class="swatch-name">success-bg</div><div class="swatch-meta">Alert backgrounds, success banners</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-text)"><span class="swatch-hex" data-light="#1B6600" data-dark="#6ABF4D">#1B6600</span></div><div class="swatch-info"><div class="swatch-name">success-text</div><div class="swatch-meta">Message text on success-bg (AAA)</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-border)"><span class="swatch-hex" data-light="#4CA830" data-dark="#4CA830">#4CA830</span></div><div class="swatch-info"><div class="swatch-name">success-border</div><div class="swatch-meta">Alert borders, positive indicators</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-icon)"><span class="swatch-hex" data-light="#238202" data-dark="#6ABF4D">#238202</span></div><div class="swatch-info"><div class="swatch-name">success-icon</div><div class="swatch-meta">Checkmarks, auction-live indicators</div></div></div>
-  </div>
-
-  <div class="subsection-title">Semantic Colors — Warning</div>
-  <div class="grid-4">
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-bg)"><span class="swatch-hex" data-light="#FFF7D1" data-dark="#2E2510" style="background:rgba(0,0,0,0.5)">#FFF7D1</span></div><div class="swatch-info"><div class="swatch-name">warning-bg</div><div class="swatch-meta">Warning alert backgrounds</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-text)"><span class="swatch-hex" data-light="#705700" data-dark="#E8B830">#705700</span></div><div class="swatch-info"><div class="swatch-name">warning-text</div><div class="swatch-meta">Message text on warning-bg (AA)</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-border)"><span class="swatch-hex" data-light="#EC9C0D" data-dark="#E8B830">#EC9C0D</span></div><div class="swatch-info"><div class="swatch-name">warning-border</div><div class="swatch-meta">Warning borders, caution indicators</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-icon)"><span class="swatch-hex" data-light="#B07800" data-dark="#E8B830">#B07800</span></div><div class="swatch-info"><div class="swatch-name">warning-icon</div><div class="swatch-meta">Alert icons, time-sensitive badges</div></div></div>
-  </div>
-
-  <div class="subsection-title">Semantic Colors — Error (Rose)</div>
-  <div class="grid-4">
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-bg)"><span class="swatch-hex" data-light="#FCE5E9" data-dark="#2E1219" style="background:rgba(0,0,0,0.5)">#FCE5E9</span></div><div class="swatch-info"><div class="swatch-name">error-bg</div><div class="swatch-meta">Error alerts, destructive surfaces</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-text)"><span class="swatch-hex" data-light="#8C1D35" data-dark="#F06080">#8C1D35</span></div><div class="swatch-info"><div class="swatch-name">error-text</div><div class="swatch-meta">Error messages on error-bg (AAA)</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-border)"><span class="swatch-hex" data-light="#D42A54" data-dark="#F06080">#D42A54</span></div><div class="swatch-info"><div class="swatch-name">error-border</div><div class="swatch-meta">Validation outlines, error borders</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-icon)"><span class="swatch-hex" data-light="#C22248" data-dark="#F06080">#C22248</span></div><div class="swatch-info"><div class="swatch-name">error-icon</div><div class="swatch-meta">Error icons, destructive buttons</div></div></div>
-  </div>
-
-  <div class="subsection-title">Semantic Colors — Info</div>
-  <div class="grid-4">
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-bg)"><span class="swatch-hex" data-light="#E0EBFF" data-dark="#141E33" style="background:rgba(0,0,0,0.5)">#E0EBFF</span></div><div class="swatch-info"><div class="swatch-name">info-bg</div><div class="swatch-meta">Info alert backgrounds</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-text)"><span class="swatch-hex" data-light="#0F2757" data-dark="#7AAAF5">#0F2757</span></div><div class="swatch-info"><div class="swatch-name">info-text</div><div class="swatch-meta">Info message text on info-bg (AAA)</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-border)"><span class="swatch-hex" data-light="#2662D9" data-dark="#5B8EF0">#2662D9</span></div><div class="swatch-info"><div class="swatch-name">info-border</div><div class="swatch-meta">Info borders</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-icon)"><span class="swatch-hex" data-light="#2662D9" data-dark="#5B8EF0">#2662D9</span></div><div class="swatch-info"><div class="swatch-name">info-icon</div><div class="swatch-meta">Info icons</div></div></div>
   </div>
 
   <div class="subsection-title">Secondary Accent — Orange</div>
@@ -1829,6 +1790,34 @@ tr.hot:hover td { background: var(--orange-100); }
   <div class="grid-4">
     <div class="swatch-card"><div class="swatch-color" style="background:var(--text-link)"><span class="swatch-hex" data-light="#2662D9" data-dark="#5B8EF0">#2662D9</span></div><div class="swatch-info"><div class="swatch-name">text-link</div><div class="swatch-meta">Default inline link</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--text-link-hover)"><span class="swatch-hex" data-light="#063598" data-dark="#7AAAF5">#063598</span></div><div class="swatch-info"><div class="swatch-name">text-link-hover</div><div class="swatch-meta">Hover + underline</div></div></div>
+  </div>
+
+  <div class="subsection-title">Semantic Colors — Success</div>
+  <div class="grid-3">
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-bg)"><span class="swatch-hex" data-light="#D7E8D1" data-dark="#1A2E14" style="background:rgba(0,0,0,0.5)">#D7E8D1</span></div><div class="swatch-info"><div class="swatch-name">success-bg</div><div class="swatch-meta">Alert backgrounds, success banners</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-text)"><span class="swatch-hex" data-light="#1B6600" data-dark="#6ABF4D">#1B6600</span></div><div class="swatch-info"><div class="swatch-name">success-text</div><div class="swatch-meta">Message text on success-bg (AAA)</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-accent)"><span class="swatch-hex" data-light="#4CA830" data-dark="#4CA830">#4CA830</span></div><div class="swatch-info"><div class="swatch-name">success-accent</div><div class="swatch-meta">Borders, icons, checkmarks, live indicators</div></div></div>
+  </div>
+
+  <div class="subsection-title">Semantic Colors — Warning</div>
+  <div class="grid-3">
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-bg)"><span class="swatch-hex" data-light="#FFF7D1" data-dark="#2E2510" style="background:rgba(0,0,0,0.5)">#FFF7D1</span></div><div class="swatch-info"><div class="swatch-name">warning-bg</div><div class="swatch-meta">Warning alert backgrounds</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-text)"><span class="swatch-hex" data-light="#705700" data-dark="#E8B830">#705700</span></div><div class="swatch-info"><div class="swatch-name">warning-text</div><div class="swatch-meta">Message text on warning-bg (AA)</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-accent)"><span class="swatch-hex" data-light="#EC9C0D" data-dark="#E8B830">#EC9C0D</span></div><div class="swatch-info"><div class="swatch-name">warning-accent</div><div class="swatch-meta">Borders, icons, time-sensitive badges</div></div></div>
+  </div>
+
+  <div class="subsection-title">Semantic Colors — Error (Rose)</div>
+  <div class="grid-3">
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-bg)"><span class="swatch-hex" data-light="#FCE5E9" data-dark="#2E1219" style="background:rgba(0,0,0,0.5)">#FCE5E9</span></div><div class="swatch-info"><div class="swatch-name">error-bg</div><div class="swatch-meta">Error alerts, destructive surfaces</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-text)"><span class="swatch-hex" data-light="#8C1D35" data-dark="#F06080">#8C1D35</span></div><div class="swatch-info"><div class="swatch-name">error-text</div><div class="swatch-meta">Error messages on error-bg (AAA)</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-accent)"><span class="swatch-hex" data-light="#D42A54" data-dark="#F06080">#D42A54</span></div><div class="swatch-info"><div class="swatch-name">error-accent</div><div class="swatch-meta">Borders, icons, validation, destructive buttons</div></div></div>
+  </div>
+
+  <div class="subsection-title">Semantic Colors — Info</div>
+  <div class="grid-3">
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-bg)"><span class="swatch-hex" data-light="#E0EBFF" data-dark="#141E33" style="background:rgba(0,0,0,0.5)">#E0EBFF</span></div><div class="swatch-info"><div class="swatch-name">info-bg</div><div class="swatch-meta">Info alert backgrounds</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-text)"><span class="swatch-hex" data-light="#0F2757" data-dark="#7AAAF5">#0F2757</span></div><div class="swatch-info"><div class="swatch-name">info-text</div><div class="swatch-meta">Info message text on info-bg (AAA)</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-accent)"><span class="swatch-hex" data-light="#2662D9" data-dark="#5B8EF0">#2662D9</span></div><div class="swatch-info"><div class="swatch-name">info-accent</div><div class="swatch-meta">Borders, icons, info indicators</div></div></div>
   </div>
 
 </section>
@@ -1920,12 +1909,6 @@ tr.hot:hover td { background: var(--orange-100); }
   <div class="section-title">Icon Library</div>
   <div class="section-desc">All icons sourced exclusively from <strong>Iconic</strong> (iconic.app). Inline SVG format with <code style="font-family:var(--font-mono);font-size:13px">currentColor</code> inheritance. No emojis or alternative icon sets permitted.</div>
 
-  <div style="display:flex;gap:var(--space-6);margin-bottom:var(--space-6);flex-wrap:wrap">
-    <div style="display:flex;align-items:center;gap:var(--space-2);font-size:13px;color:var(--text-secondary)"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-md);background:var(--bg-secondary)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg></span>Stroke: 1.5px</div>
-    <div style="display:flex;align-items:center;gap:var(--space-2);font-size:13px;color:var(--text-secondary)"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-md);background:var(--bg-secondary)"><svg width="20" height="20" viewBox="3 3 18 18" fill="none" stroke="var(--text-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1"/></svg></span>ViewBox: 0 0 24 24</div>
-    <div style="display:flex;align-items:center;gap:var(--space-2);font-size:13px;color:var(--text-secondary)"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-md);background:var(--bg-secondary)"><svg width="20" height="20" viewBox="3 3 18 18" fill="none" stroke="var(--text-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>Caps: round</div>
-    <div style="display:flex;align-items:center;gap:var(--space-2);font-size:13px;color:var(--text-secondary)"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-md);background:var(--bg-secondary)"><svg width="20" height="20" viewBox="3 3 18 18" fill="none" stroke="var(--interactive-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/></svg></span>currentColor</div>
-  </div>
 
     <!-- Navigation -->
   <div class="icon-category">Navigation</div>
@@ -3905,7 +3888,7 @@ tr.hot:hover td { background: var(--orange-100); }
   <!-- When to Animate -->
   <div class="subsection-title">When to Animate</div>
   <div class="grid-2">
-    <div style="background:var(--success-bg);border:1px solid var(--success-border);border-radius:var(--radius-xl);padding:var(--space-6)">
+    <div style="background:var(--success-bg);border:1px solid var(--success-accent);border-radius:var(--radius-xl);padding:var(--space-6)">
       <div style="font-size:15px;font-weight:600;color:var(--success-text);margin-bottom:var(--space-3)">Do Animate</div>
       <div style="display:flex;flex-direction:column;gap:var(--space-2);font-size:14px;color:var(--text-secondary)">
         <div><strong style="color:var(--text-primary)">Action confirmation</strong> — Heart fill, checkmark draw, success toast</div>
@@ -3915,7 +3898,7 @@ tr.hot:hover td { background: var(--orange-100); }
         <div><strong style="color:var(--text-primary)">Spatial context</strong> — Page transitions, tab switches, card grid stagger</div>
       </div>
     </div>
-    <div style="background:var(--error-bg);border:1px solid var(--error-border);border-radius:var(--radius-xl);padding:var(--space-6)">
+    <div style="background:var(--error-bg);border:1px solid var(--error-accent);border-radius:var(--radius-xl);padding:var(--space-6)">
       <div style="font-size:15px;font-weight:600;color:var(--error-text);margin-bottom:var(--space-3)">Don't Animate</div>
       <div style="display:flex;flex-direction:column;gap:var(--space-2);font-size:14px;color:var(--text-secondary)">
         <div><strong style="color:var(--text-primary)">Decoration</strong> — Bouncing logos, floating elements, ambient motion</div>

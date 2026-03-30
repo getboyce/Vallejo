@@ -9,8 +9,6 @@
           "50":  { "$value": "#F6F9FD", "$type": "color", "$description": "Brand tint — page backgrounds" },
           "100": { "$value": "#EEF3FB", "$type": "color", "$description": "Brand lightest — hover backgrounds" },
           "200": { "$value": "#E1ECF9", "$type": "color", "$description": "Brand light — selected rows, info fills" },
-          "300": { "$value": "#B9D6F4", "$type": "color", "$description": "Brand soft — section backgrounds, marketing bands" },
-          "400": { "$value": "#83B3E2", "$type": "color", "$description": "Brand mid — accent fills, icon backgrounds, decorative elements" },
           "600": { "$value": "#2662D9", "$type": "color", "$description": "Brand primary — CTAs, active links" },
           "800": { "$value": "#063598", "$type": "color", "$description": "Brand dark — hover states" },
           "900": { "$value": "#0F2757", "$type": "color", "$description": "Brand darkest — titles, critical text" }
@@ -28,19 +26,19 @@
           "light":  { "$value": "#D7E8D1", "$type": "color" },
           "main":   { "$value": "#4CA830", "$type": "color" },
           "dark":   { "$value": "#1B6600", "$type": "color" },
-          "icon":   { "$value": "#238202", "$type": "color" }
+          "accent": { "$value": "#4CA830", "$type": "color", "$description": "Borders, icons, indicators" }
         },
         "warning": {
           "light":  { "$value": "#FFF7D1", "$type": "color" },
           "main":   { "$value": "#EC9C0D", "$type": "color" },
           "dark":   { "$value": "#705700", "$type": "color" },
-          "icon":   { "$value": "#B07800", "$type": "color" }
+          "accent": { "$value": "#EC9C0D", "$type": "color", "$description": "Borders, icons, indicators" }
         },
         "error": {
           "light":  { "$value": "#FCE5E9", "$type": "color" },
           "main":   { "$value": "#D42A54", "$type": "color" },
           "dark":   { "$value": "#8C1D35", "$type": "color" },
-          "icon":   { "$value": "#C22248", "$type": "color" }
+          "accent": { "$value": "#D42A54", "$type": "color", "$description": "Borders, icons, indicators" }
         },
         "orange": {
           "50":  { "$value": "#FDF7F2", "$type": "color", "$description": "Accent tint — promo surfaces, warm page backgrounds" },
@@ -101,20 +99,16 @@
         "feedback": {
           "success-bg":     { "$value": "{copart.color.primitive.success.light}", "$type": "color" },
           "success-text":   { "$value": "{copart.color.primitive.success.dark}", "$type": "color" },
-          "success-border": { "$value": "{copart.color.primitive.success.main}", "$type": "color" },
-          "success-icon":   { "$value": "{copart.color.primitive.success.icon}", "$type": "color" },
+          "success-accent":  { "$value": "{copart.color.primitive.success.accent}", "$type": "color", "$description": "Borders, icons, indicators" },
           "warning-bg":     { "$value": "{copart.color.primitive.warning.light}", "$type": "color" },
           "warning-text":   { "$value": "{copart.color.primitive.warning.dark}", "$type": "color" },
-          "warning-border": { "$value": "{copart.color.primitive.warning.main}", "$type": "color" },
-          "warning-icon":   { "$value": "{copart.color.primitive.warning.icon}", "$type": "color" },
+          "warning-accent":  { "$value": "{copart.color.primitive.warning.accent}", "$type": "color", "$description": "Borders, icons, indicators" },
           "error-bg":       { "$value": "{copart.color.primitive.error.light}", "$type": "color" },
           "error-text":     { "$value": "{copart.color.primitive.error.dark}", "$type": "color" },
-          "error-border":   { "$value": "{copart.color.primitive.error.main}", "$type": "color" },
-          "error-icon":     { "$value": "{copart.color.primitive.error.icon}", "$type": "color" },
+          "error-accent":    { "$value": "{copart.color.primitive.error.accent}", "$type": "color", "$description": "Borders, icons, indicators" },
           "info-bg":        { "$value": "#E0EBFF", "$type": "color" },
           "info-text":      { "$value": "{copart.color.primitive.blue.900}", "$type": "color" },
-          "info-border":    { "$value": "{copart.color.primitive.blue.600}", "$type": "color" },
-          "info-icon":      { "$value": "{copart.color.primitive.blue.600}", "$type": "color" }
+          "info-accent":     { "$value": "{copart.color.primitive.blue.600}", "$type": "color", "$description": "Borders, icons, indicators" }
         }
       },
 
@@ -149,19 +143,19 @@
           "light":  { "$value": "#1A2E14", "$type": "color" },
           "main":   { "$value": "#6ABF4D", "$type": "color" },
           "dark":   { "$value": "#6ABF4D", "$type": "color" },
-          "icon":   { "$value": "#6ABF4D", "$type": "color" }
+          "accent": { "$value": "#6ABF4D", "$type": "color", "$description": "Borders, icons, indicators" }
         },
         "warning": {
           "light":  { "$value": "#2E2510", "$type": "color" },
           "main":   { "$value": "#E8B830", "$type": "color" },
           "dark":   { "$value": "#E8B830", "$type": "color" },
-          "icon":   { "$value": "#E8B830", "$type": "color" }
+          "accent": { "$value": "#E8B830", "$type": "color", "$description": "Borders, icons, indicators" }
         },
         "error": {
           "light":  { "$value": "#2E1219", "$type": "color" },
           "main":   { "$value": "#F06080", "$type": "color" },
           "dark":   { "$value": "#F06080", "$type": "color" },
-          "icon":   { "$value": "#F06080", "$type": "color" }
+          "accent": { "$value": "#F06080", "$type": "color", "$description": "Borders, icons, indicators" }
         }
       },
 
@@ -196,20 +190,16 @@
         "feedback": {
           "success-bg":     { "$value": "{copart.color.primitive-dark.success.light}", "$type": "color" },
           "success-text":   { "$value": "{copart.color.primitive-dark.success.main}", "$type": "color" },
-          "success-border": { "$value": "#4CA830", "$type": "color" },
-          "success-icon":   { "$value": "{copart.color.primitive-dark.success.icon}", "$type": "color" },
+          "success-accent":  { "$value": "{copart.color.primitive-dark.success.accent}", "$type": "color", "$description": "Borders, icons, indicators" },
           "warning-bg":     { "$value": "{copart.color.primitive-dark.warning.light}", "$type": "color" },
           "warning-text":   { "$value": "{copart.color.primitive-dark.warning.main}", "$type": "color" },
-          "warning-border": { "$value": "{copart.color.primitive-dark.warning.main}", "$type": "color" },
-          "warning-icon":   { "$value": "{copart.color.primitive-dark.warning.icon}", "$type": "color" },
+          "warning-accent":  { "$value": "{copart.color.primitive-dark.warning.accent}", "$type": "color", "$description": "Borders, icons, indicators" },
           "error-bg":       { "$value": "{copart.color.primitive-dark.error.light}", "$type": "color" },
           "error-text":     { "$value": "{copart.color.primitive-dark.error.main}", "$type": "color" },
-          "error-border":   { "$value": "{copart.color.primitive-dark.error.main}", "$type": "color" },
-          "error-icon":     { "$value": "{copart.color.primitive-dark.error.icon}", "$type": "color" },
+          "error-accent":    { "$value": "{copart.color.primitive-dark.error.accent}", "$type": "color", "$description": "Borders, icons, indicators" },
           "info-bg":        { "$value": "{copart.color.primitive-dark.blue.100}", "$type": "color" },
           "info-text":      { "$value": "{copart.color.primitive-dark.blue.800}", "$type": "color" },
-          "info-border":    { "$value": "{copart.color.primitive-dark.blue.600}", "$type": "color" },
-          "info-icon":      { "$value": "{copart.color.primitive-dark.blue.600}", "$type": "color" }
+          "info-accent":     { "$value": "{copart.color.primitive-dark.blue.600}", "$type": "color", "$description": "Borders, icons, indicators" }
         }
       }
     },

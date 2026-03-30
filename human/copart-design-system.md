@@ -512,24 +512,6 @@ Built around the brand color `#2662D9`, expanded into a functional 6-color prima
 | **WCAG on White** | 13.52:1 — **AAA**        |
 | **Usage**   | Page titles, critical text on light backgrounds, info alert text |
 
-### Blue 400 — Brand Mid
-| Property     | Value                          |
-|-------------|--------------------------------|
-| **Hex**     | `#83B3E2`                      |
-| **RGB**     | 131, 179, 226                  |
-| **HSL**     | 210°, 62%, 70%                 |
-| **WCAG on White** | 2.43:1 (decorative only)  |
-| **Usage**   | Decorative accent fills, icon circle backgrounds, progress bar fills, marketing CTA bands. **Use for:** non-interactive visual emphasis only — never as a text color or interactive state. |
-
-### Blue 300 — Brand Soft
-| Property     | Value                          |
-|-------------|--------------------------------|
-| **Hex**     | `#B9D6F4`                      |
-| **RGB**     | 185, 214, 244                  |
-| **HSL**     | 210°, 72%, 84%                 |
-| **WCAG on Black** | 12.33:1 — **AAA**        |
-| **Usage**   | Marketing/landing page section backgrounds, branded content bands, soft info fills. **Use for:** large surface areas that need a branded feel without competing with Blue 600 interactive elements. **Don't use for:** component backgrounds in product UI — use Blue 100 or 200 instead. |
-
 ### Blue 200 — Brand Light
 | Property     | Value                          |
 |-------------|--------------------------------|
@@ -664,32 +646,28 @@ A warm counterweight to the blue primary. Orange provides urgency cues, promotio
 |-------|-----|-------|
 | `success-bg` | `#D7E8D1` | Alert backgrounds, success banners |
 | `success-text` | `#1B6600` | Success message text (9.03:1 on success-bg — **AAA**) |
-| `success-border` | `#4CA830` | Success alert borders, positive indicators |
-| `success-icon` | `#238202` | Checkmarks, auction-live indicators |
+| `success-accent` | `#4CA830` | Borders, icons, indicators (checkmarks, auction-live) |
 
 ### Warning
 | Token | Hex | Usage |
 |-------|-----|-------|
 | `warning-bg` | `#FFF7D1` | Warning alert backgrounds |
 | `warning-text` | `#705700` | Warning message text (5.64:1 on warning-bg — **AA**) |
-| `warning-border` | `#EC9C0D` | Warning borders, caution indicators |
-| `warning-icon` | `#B07800` | Alert icons, time-sensitive badges |
+| `warning-accent` | `#EC9C0D` | Borders, icons, indicators (caution, time-sensitive) |
 
 ### Error (Rose — No Pure Red)
 | Token | Hex | Usage |
 |-------|-----|-------|
 | `error-bg` | `#FCE5E9` | Error alert backgrounds, destructive action surfaces |
 | `error-text` | `#8C1D35` | Error message text (7.12:1 on error-bg — **AAA**) |
-| `error-border` | `#D42A54` | Error borders, validation outlines |
-| `error-icon` | `#C22248` | Error icons, form validation indicators |
+| `error-accent` | `#D42A54` | Borders, icons, indicators (validation, form errors) |
 
 ### Info
 | Token | Hex | Usage |
 |-------|-----|-------|
 | `info-bg` | `#E0EBFF` | Info alert backgrounds |
 | `info-text` | `#0F2757` | Info message text (11.23:1 on info-bg — **AAA**) |
-| `info-border` | `#2662D9` | Info borders |
-| `info-icon` | `#2662D9` | Info icons |
+| `info-accent` | `#2662D9` | Borders, icons, indicators |
 
 ---
 
@@ -719,8 +697,6 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | `blue-50` | `#F6F9FD` | `#0D1117` | Subtle blue-tinted dark backgrounds |
 | `blue-100` | `#EEF3FB` | `#141E33` | Info backgrounds, hover fills |
 | `blue-200` | `#E1ECF9` | `#1E2A45` | Selected/active backgrounds on dark |
-| `blue-300` | `#B9D6F4` | `#1A2D4A` | Section backgrounds, marketing bands |
-| `blue-400` | `#83B3E2` | `#2A4A6E` | Accent fills, decorative elements |
 | `blue-600` | `#2662D9` | `#5B8EF0` | Primary — CTAs, active links (5.8:1 on `#1A1D23`) |
 | `blue-800` | `#063598` | `#7AAAF5` | Hover state on dark |
 | `blue-900` | `#0F2757` | `#B8D4FA` | High-contrast text on dark surfaces |
@@ -1445,7 +1421,7 @@ Member nav: 999
 | Default | Neutral 500 | Neutral 500 | Transparent |
 | Active | Blue 600 | Blue 600 | Transparent |
 | Pressed | Blue 800 | Blue 800 | Blue 100 |
-| Badge | — | — | `error-icon` (#C22248) dot or count |
+| Badge | — | — | `error-accent` (#D42A54) dot or count |
 
 **Specs:**
 ```
@@ -1648,7 +1624,7 @@ Focus: 3px Blue 600 @ 40% opacity ring, 2px offset
 #### Destructive
 | State | Background | Text | Border |
 |-------|-----------|------|--------|
-| Default | `#C22248` | White | None |
+| Default | `#D42A54` | White | None |
 | Hover | `#8C1D35` | White | None |
 | Active | `#6B1528` | White | None |
 | Disabled | Neutral 200 | Neutral 500 | None |
@@ -1656,7 +1632,7 @@ Focus: 3px Blue 600 @ 40% opacity ring, 2px offset
 #### Success / Confirm
 | State | Background | Text | Border |
 |-------|-----------|------|--------|
-| Default | `#238202` | White | None |
+| Default | `#4CA830` | White | None |
 | Hover | `#1B6600` | White | None |
 | Active | `#145200` | White | None |
 | Disabled | Neutral 200 | Neutral 500 | None |
@@ -1734,8 +1710,8 @@ No shadow on any button variant — color change alone signals state.
 | Focus | 2px Blue 600 | White | Blue 600 | Neutral 500 |
 | Filled | 1.5px Neutral 300 | White | Neutral 700 | Neutral 500 |
 | Disabled | 1.5px Neutral 200 | Neutral 100 | Neutral 300 | Neutral 300 |
-| Error | 2px `error-border` | `#FFF8F9` | `error-text` | `error-text` |
-| Success | 2px `success-border` | White | Neutral 700 | `success-text` |
+| Error | 2px `error-accent` | `#FFF8F9` | `error-text` | `error-text` |
+| Success | 2px `success-accent` | White | Neutral 700 | `success-text` |
 | Read-only | 1.5px Neutral 200 | Neutral 100 | Neutral 700 | Neutral 500 |
 
 **Specs:**
@@ -1937,7 +1913,7 @@ Gap (toggle to label): space-3 (12px)
 | Default (unsaved) | Heart outline, Neutral 500 | "Save" | — |
 | Hover (unsaved) | Heart outline, Blue 600 | "Save" | Cursor pointer |
 | Saving | Spinner replacing icon | "Saving…" | Disable interaction |
-| Saved | Filled heart, error-icon (#C22248) | "Saved" | Scale bounce (celebration) |
+| Saved | Filled heart, error-accent (#D42A54) | "Saved" | Scale bounce (celebration) |
 | Hover (saved) | Filled heart, Neutral 500 | "Remove" | Label changes to remove action |
 | Removing | Spinner replacing icon | "Removing…" | Disable interaction |
 | Disabled | Heart outline, Neutral 300 | "Save" (Neutral 300) | Opacity 0.5 |
@@ -1949,7 +1925,7 @@ Icon-only button: 40px × 40px (MD), 32px × 32px (SM)
 Icon + Label gap: space-2 (8px)
 Label: type-subheadline (14px / 600)
 Touch target: 44×44px minimum
-Saved heart color: error-icon (#C22248) — red/rose heart convention
+Saved heart color: error-accent (#D42A54) — red/rose heart convention
 Save animation: scale(1.2) → scale(1), 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275)
 Spinner: 16px, currentColor
 ```
@@ -1988,7 +1964,7 @@ Spinner: 16px, currentColor
 | Indeterminate | None | Blue 600 | White minus line |
 | Disabled Unchecked | 1.5px Neutral 200 | Neutral 100 | None |
 | Disabled Checked | None | Neutral 300 | White checkmark |
-| Error | 1.5px error-border | White or Blue 600 | — |
+| Error | 1.5px error-accent | White or Blue 600 | — |
 | Focus | — | — | `0 0 0 3px rgba(38,98,217,0.4)` ring |
 
 **Hover Behavior:** When the user hovers an unchecked checkbox, the border darkens from Neutral 300 to Neutral 500 and the box picks up a subtle Neutral 50 background fill, giving a soft "I'm interactive" cue without jumping to the brand color. When the user hovers a checked checkbox, both the background fill and border darken to interactive-hover, reinforcing that the control is active and clickable.
@@ -2144,10 +2120,10 @@ Value labels: same as single slider-value, displayed at left (low) and right (hi
 **Variants (by severity):**
 | Variant | Background | Icon | Icon Color |
 |---------|-----------|------|-----------|
-| Info | `info-bg` | Info circle | `info-icon` |
-| Success | `success-bg` | Checkmark circle | `success-icon` |
-| Warning | `warning-bg` | Triangle exclamation | `warning-icon` |
-| Error | `error-bg` | Octagon exclamation | `error-icon` |
+| Info | `info-bg` | Info circle | `info-accent` |
+| Success | `success-bg` | Checkmark circle | `success-accent` |
+| Warning | `warning-bg` | Triangle exclamation | `warning-accent` |
+| Error | `error-bg` | Octagon exclamation | `error-accent` |
 
 **Behavior Variants:**
 | Variant | Description |
@@ -2636,8 +2612,8 @@ Hover overrides zebra: var(--neutral-100)
 Value: type-display-sm or type-headline (responsive), Neutral 900, font-weight 800
   Monospace for financial values: JetBrains Mono
 Label: type-caption-1 (12px / 500), Neutral 500, uppercase with 0.08em tracking
-Trend up: success-icon color, up arrow
-Trend down: error-icon color, down arrow
+Trend up: success-accent color, up arrow
+Trend down: error-accent color, down arrow
 Trend font: type-subheadline (14px / 600)
 Period: type-caption-2 (12px), Neutral 500
 Gap (value to trend): space-2 (8px)
@@ -2663,7 +2639,7 @@ Gap (value to label): space-1 (4px)
 2. `#5B8EF0` (Light Blue)
 3. `#0F2757` (Dark Navy)
 4. `#EC9C0D` (Amber)
-5. `#238202` (Green)
+5. `#4CA830` (Green)
 6. `#7A8691` (Gray)
 
 **Specs:**
@@ -2882,7 +2858,7 @@ Border: 2px solid White (when on colored background)
 Fallback background: Blue 600 (first letter A-M), Blue 800 (N-Z)
 Fallback text: White, centered
 Badge position: bottom-right, overlapping edge
-Badge: success-icon green (online), Blue 600 (verified), Neutral 300 (offline)
+Badge: success-accent green (online), Blue 600 (verified), Neutral 300 (offline)
 Badge border: 2px solid White (to separate from avatar)
 ```
 
@@ -3125,7 +3101,7 @@ Footer (range only):
 - **Transition:** Button briefly shows checkmark before returning to default
 
 ### Error Pattern
-- **Field-level:** Inline error text below input, border turns error-border, icon appears
+- **Field-level:** Inline error text below input, border turns error-accent, icon appears
 - **Form-level:** Error alert banner above form listing all issues
 - **Network:** Toast with retry action ("Connection lost. Retry")
 - **Fatal:** Full-page error with illustration, message, and "Go home" button
@@ -3778,7 +3754,7 @@ Before shipping any component, verify:
 
 ### Critical Brand Rule for Developers
 
-**No red.** The color red (`#FF0000`, `#E00000`, `#CC0000`, or any hue between 345°–15°) is prohibited in the Copart brand. Use the rose/magenta error palette (`#C22248`, `#D42A54`, `#8C1D35`) for all error, destructive, and negative states. If a third-party library injects red (e.g., form validation, chart libraries), override it with the error tokens.
+**No red.** The color red (`#FF0000`, `#E00000`, `#CC0000`, or any hue between 345°–15°) is prohibited in the Copart brand. Use the rose/magenta error palette (`#D42A54`, `#D42A54`, `#8C1D35`) for all error, destructive, and negative states. If a third-party library injects red (e.g., form validation, chart libraries), override it with the error tokens.
 
 ---
 

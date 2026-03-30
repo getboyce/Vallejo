@@ -158,7 +158,7 @@ Single variant with up to 5 items.
 | Default | var(--color-neutral-500) | var(--color-neutral-500) | transparent |
 | Active | var(--color-blue-600) | var(--color-blue-600) | transparent |
 | Pressed | var(--color-blue-800) | var(--color-blue-800) | var(--color-blue-100) |
-| Badge | — | — | var(--feedback-error-icon) dot or count |
+| Badge | — | — | var(--feedback-error-accent) dot or count |
 
 **Specs:**
 
@@ -343,7 +343,7 @@ Single variant with up to 5 items.
 | Secondary | transparent | var(--interactive-primary) | 1.5px solid var(--interactive-primary) | Supporting actions |
 | Tertiary | transparent | var(--interactive-primary) | none | Low-emphasis actions |
 | Destructive | var(--interactive-destructive) | white | none | Delete, remove, cancel |
-| Success | var(--feedback-success-icon) | white | none | Confirm, approve, complete |
+| Success | var(--feedback-success-accent) | white | none | Confirm, approve, complete |
 | CTA Orange | var(--interactive-accent) | white | none | Registration, urgency, promotions ONLY |
 
 **States per Variant:**
@@ -390,7 +390,7 @@ Single variant with up to 5 items.
 
 | State | Background | Text |
 |-------|-----------|------|
-| Default | var(--feedback-success-icon) | white |
+| Default | var(--feedback-success-accent) | white |
 | Hover | var(--feedback-success-text) | white |
 | Disabled | var(--interactive-disabled) | var(--color-neutral-500) |
 
@@ -727,7 +727,7 @@ Same as Text Field states, plus:
 | Default (unsaved) | Heart outline, var(--text-tertiary) | "Save" | — |
 | Hover (unsaved) | Heart outline, var(--interactive-primary) | "Save" | Cursor pointer |
 | Saving | Spinner replacing icon | "Saving…" | Disable interaction |
-| Saved | Filled heart, var(--error-icon) | "Saved" | Scale bounce |
+| Saved | Filled heart, var(--error-accent) | "Saved" | Scale bounce |
 | Hover (saved) | Filled heart, var(--text-tertiary) | "Remove" | Label changes |
 | Removing | Spinner replacing icon | "Removing…" | Disable interaction |
 | Disabled | Heart outline, var(--color-neutral-300) | "Save" | Opacity 0.5 |
@@ -743,7 +743,7 @@ Same as Text Field states, plus:
 | Icon + Label gap | var(--space-2) |
 | Label font | type-subheadline (14px / 600) |
 | Touch target | 44×44px minimum |
-| Saved heart color | var(--error-icon) (#C22248) |
+| Saved heart color | var(--error-accent) (#D42A54) |
 | Save animation | scale(1.2) → scale(1), var(--duration-moderate) var(--ease-spring) |
 | Spinner size | 16px, currentColor |
 
@@ -980,10 +980,10 @@ Same as Text Field states, plus:
 
 | Variant | Background | Icon | Icon Color | Text Color |
 |---------|-----------|------|-----------|------------|
-| Info | var(--feedback-info-bg) | Info circle | var(--feedback-info-icon) | var(--feedback-info-text) |
-| Success | var(--feedback-success-bg) | Checkmark circle | var(--feedback-success-icon) | var(--feedback-success-text) |
-| Warning | var(--feedback-warning-bg) | Triangle exclamation | var(--feedback-warning-icon) | var(--feedback-warning-text) |
-| Error | var(--feedback-error-bg) | Octagon exclamation | var(--feedback-error-icon) | var(--feedback-error-text) |
+| Info | var(--feedback-info-bg) | Info circle | var(--feedback-info-accent) | var(--feedback-info-text) |
+| Success | var(--feedback-success-bg) | Checkmark circle | var(--feedback-success-accent) | var(--feedback-success-text) |
+| Warning | var(--feedback-warning-bg) | Triangle exclamation | var(--feedback-warning-accent) | var(--feedback-warning-text) |
+| Error | var(--feedback-error-bg) | Octagon exclamation | var(--feedback-error-accent) | var(--feedback-error-text) |
 
 **Behavior Variants:**
 
@@ -1552,8 +1552,8 @@ Placeholder shapes matching the component they replace.
 
 | Trend | Arrow Direction | Color |
 |-------|----------------|-------|
-| Up (positive) | Up arrow | var(--feedback-success-icon) |
-| Down (negative) | Down arrow | var(--feedback-error-icon) |
+| Up (positive) | Up arrow | var(--feedback-success-accent) |
+| Down (negative) | Down arrow | var(--feedback-error-accent) |
 | Neutral | No arrow | var(--text-tertiary) |
 
 **Specs:**
@@ -1657,8 +1657,8 @@ Placeholder shapes matching the component they replace.
 1. var(--interactive-primary)
 2. var(--color-blue-600-dark) — light blue (#5B8EF0)
 3. var(--color-blue-900) — dark navy
-4. var(--feedback-warning-border) — amber
-5. var(--feedback-success-icon) — green
+4. var(--feedback-warning-accent) — amber
+5. var(--feedback-success-accent) — green
 6. var(--text-tertiary) — gray
 
 **Specs:**
@@ -1857,7 +1857,7 @@ Placeholder shapes matching the component they replace.
 | Fallback bg | var(--interactive-primary) (A-M), var(--interactive-primary-hover) (N-Z) |
 | Fallback text | white, centered |
 | Badge position | bottom-right, overlapping edge |
-| Badge colors | var(--feedback-success-icon) (online), var(--interactive-primary) (verified), var(--color-neutral-300) (offline) |
+| Badge colors | var(--feedback-success-accent) (online), var(--interactive-primary) (verified), var(--color-neutral-300) (offline) |
 | Badge border | 2px solid white (to separate from avatar) |
 
 **Usage Rules:**

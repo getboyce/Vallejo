@@ -4,8 +4,6 @@
   --blue-50: #F6F9FD;
   --blue-100: #EEF3FB;
   --blue-200: #E1ECF9;
-  --blue-300: #B9D6F4;
-  --blue-400: #83B3E2;
   --blue-600: #2662D9;
   --blue-800: #063598;
   --blue-900: #0F2757;
@@ -25,7 +23,6 @@
   --neutral-300: #C5CCD3;
   --neutral-500: #7A8691;
   --neutral-700: #46525D;
-  --neutral-800: #353A48;
   --neutral-900: #2F333C;
   --neutral-950: #23262F;
 
@@ -53,26 +50,22 @@
   /* Semantic — Status: Success */
   --success-bg: #D7E8D1;
   --success-text: #1B6600;
-  --success-border: #4CA830;
-  --success-icon: #238202;
+  --success-accent: #4CA830;
 
   /* Semantic — Status: Warning */
   --warning-bg: #FFF7D1;
   --warning-text: #705700;
-  --warning-border: #EC9C0D;
-  --warning-icon: #B07800;
+  --warning-accent: #EC9C0D;
 
   /* Semantic — Status: Error (Rose — no pure red) */
   --error-bg: #FCE5E9;
   --error-text: #8C1D35;
-  --error-border: #D42A54;
-  --error-icon: #C22248;
+  --error-accent: #D42A54;
 
   /* Semantic — Status: Info */
   --info-bg: #E0EBFF;
   --info-text: #0F2757;
-  --info-border: #2662D9;
-  --info-icon: #2662D9;
+  --info-accent: #2662D9;
 
   /* Typography */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;

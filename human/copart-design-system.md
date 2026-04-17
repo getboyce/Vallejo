@@ -69,7 +69,7 @@ Bidding is competitive, time-bound, and consequential. The design channels that 
 
 **Execution in Vallejo:**
 - Live auction indicators with pulsing dot + "Live Now" label. Status is always visible, always current.
-- Orange 600 for genuine urgency only — registration CTAs, countdown timers, urgency badges. Never decorative, never for primary actions.
+- Orange 600 for genuine urgency accents only — countdown timers, urgency badges, featured borders. Never as a button background (fails WCAG AA), never decorative, never for primary actions.
 - Motion registers match context: transactional interactions (150–250ms, Stripe-like), live auction events (100–350ms, fluid), celebration moments (500ms–1s, expressive). See [Section 9](#9-animation--motion).
 - Bid price pulse animation when competing bids land. Counter tick when stats update. The interface feels alive because the data is alive.
 - `prefers-reduced-motion` is always respected — vitality never comes at the cost of accessibility.
@@ -543,9 +543,11 @@ Built around the brand color `#2662D9`, expanded into a functional 6-color prima
 
 ## 3.2 Secondary Accent — Orange
 
-A warm counterweight to the blue primary. Orange provides urgency cues, promotional emphasis, and visual variety on data-dense pages without triggering the semantic connotations of success (green), warning (amber), or error (rose). It also serves as the registration/onboarding CTA, replacing the former standalone CTA Yellow.
+A warm counterweight to the blue primary. Orange provides accent emphasis and visual variety on data-dense pages without triggering the semantic connotations of success (green), warning (amber), or error (rose).
 
 **Why orange:** Urgency without danger — complementary to blue, channels Vitality without the semantic weight of error/rose. Orange breaks the "blue flood" on complex pages. See [Vault > aesthetic-principles.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/aesthetic-principles.md).
+
+> **Never used as a button background.** Orange 600 on white (3.62:1) fails WCAG AA for small body text. All button CTAs — including registration, onboarding, and urgency — use Blue Primary. Orange is an accent color only.
 
 ### Orange 600 — Accent Primary
 | Property     | Value                          |
@@ -553,8 +555,8 @@ A warm counterweight to the blue primary. Orange provides urgency cues, promotio
 | **Hex**     | `#D86518`                      |
 | **RGB**     | 216, 101, 24                   |
 | **HSL**     | 24°, 80%, 47%                  |
-| **WCAG on White** | 3.62:1 — **AA (large text)** |
-| **Usage**   | Secondary CTAs (registration, onboarding), urgency badges, featured indicators, data visualization accent |
+| **WCAG on White** | 3.62:1 — **AA large text only (fails AA body, unsafe for button fills)** |
+| **Usage**   | Accent badges, featured indicators, urgency indicators (non-button), data visualization accent. **Never a button background.** |
 
 ### Orange 800 — Accent Dark
 | Property     | Value                          |
@@ -641,31 +643,37 @@ A warm counterweight to the blue primary. Orange provides urgency cues, promotio
 
 > **Critical brand rule:** Red is prohibited in the Copart brand system. Error and destructive states use a deep rose/magenta tone instead of pure red.
 
+> **`-bg` vs `-bg-subtle`:** Two tinted background levels per status. `-bg-subtle` is the lighter tint — use for filter chips, badge fills, and anywhere a quiet status surface is needed. `-bg` is the slightly deeper tint — reserved for toasts, alerts, and banners where the surface carries communicative weight.
+
 ### Success
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `success-bg` | `#D7E8D1` | Alert backgrounds, success banners |
+| `success-bg-subtle` | `#EFF6ED` | Filter chips, badge fills, quiet success surfaces |
+| `success-bg` | `#D7E8D1` | Toasts, alerts, banners |
 | `success-text` | `#1B6600` | Success message text (9.03:1 on success-bg — **AAA**) |
 | `success-accent` | `#4CA830` | Borders, icons, indicators (checkmarks, auction-live) |
 
 ### Warning
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `warning-bg` | `#FFF7D1` | Warning alert backgrounds |
+| `warning-bg-subtle` | `#FFFCED` | Filter chips, badge fills, quiet warning surfaces |
+| `warning-bg` | `#FFF7D1` | Toasts, alerts, banners |
 | `warning-text` | `#705700` | Warning message text (5.64:1 on warning-bg — **AA**) |
 | `warning-accent` | `#EC9C0D` | Borders, icons, indicators (caution, time-sensitive) |
 
 ### Error (Rose — No Pure Red)
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `error-bg` | `#FCE5E9` | Error alert backgrounds, destructive action surfaces |
+| `error-bg-subtle` | `#FEF5F6` | Filter chips, badge fills, quiet error surfaces |
+| `error-bg` | `#FCE5E9` | Toasts, alerts, banners, destructive action surfaces |
 | `error-text` | `#8C1D35` | Error message text (7.12:1 on error-bg — **AAA**) |
 | `error-accent` | `#D42A54` | Borders, icons, indicators (validation, form errors) |
 
 ### Info
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `info-bg` | `#E0EBFF` | Info alert backgrounds |
+| `info-bg-subtle` | `#F3F7FF` | Filter chips, badge fills, quiet info surfaces |
+| `info-bg` | `#E0EBFF` | Toasts, alerts, banners |
 | `info-text` | `#0F2757` | Info message text (11.23:1 on info-bg — **AAA**) |
 | `info-accent` | `#2662D9` | Borders, icons, indicators |
 
@@ -707,8 +715,8 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | `orange-50` | `#FDF7F2` | `#1A1008` | Warm dark page tint |
 | `orange-100` | `#FAEEE5` | `#221710` | Warm hover fills |
 | `orange-200` | `#F8E2D3` | `#2E1F14` | Badge fills, featured backgrounds |
-| `orange-600` | `#D86518` | `#E8873F` | Accent primary — CTAs, badges (4.1:1 on `#1A1D23`) |
-| `orange-800` | `#933C06` | `#F0A566` | Hover/pressed state on dark |
+| `orange-600` | `#D86518` | `#E8873F` | Accent — badges, featured borders (not buttons) |
+| `orange-800` | `#933C06` | `#F0A566` | Hover/pressed on accent elements (not buttons) |
 | `orange-900` | `#50250B` | `#F8C99A` | Text on dark warm surfaces |
 
 ### Dark Mode — Neutral (Full Ramp)
@@ -738,8 +746,8 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 1. **Blue 600 (`#2662D9`)** is reserved for the single most important action on any screen. Do not use it decoratively.
 2. **Blue 800 (`#063598`)** is used exclusively for hover/pressed states of Blue 600 elements.
 3. **Blue 900 (`#0F2757`)** is for text that needs authority — page titles, modal headings, critical labels.
-4. **Orange 600 (`#D86518`)** is reserved for secondary emphasis: registration CTAs, urgency badges, and promotional highlights. Do not use for primary actions.
-5. **Orange 800 (`#933C06`)** is used exclusively for hover/pressed states of Orange 600 elements.
+4. **Orange 600 (`#D86518`)** is reserved for accent badges, featured borders, and urgency indicators — **never as a button background** (fails WCAG AA on white). Do not use for primary actions.
+5. **Orange 800 (`#933C06`)** is used exclusively for hover/pressed states of Orange 600 accent elements.
 
 ### Backgrounds
 - **White (`#FFFFFF`)** for primary content areas.
@@ -1593,7 +1601,7 @@ Focus: 3px Blue 600 @ 40% opacity ring, 2px offset
 4. `button-icon-trailing` — Optional icon after label (e.g., arrow, dropdown chevron)
 5. `button-loader` — Spinner replacing label during loading state
 
-**6 Variants:**
+**5 Variants:**
 
 #### Primary (Filled)
 | State | Background | Text | Border |
@@ -1601,7 +1609,7 @@ Focus: 3px Blue 600 @ 40% opacity ring, 2px offset
 | Default | Blue 600 | White | None |
 | Hover | Blue 800 | White | None |
 | Active/Pressed | `#042D7A` | White | None |
-| Disabled | Neutral 200 | Neutral 500 | None |
+| Disabled | Neutral 200 | Neutral 700 | None |
 | Loading | Blue 600 @ 70% opacity | Hidden | None |
 | Focus | Blue 600 | White | `0 0 0 3px rgba(38,98,217,0.4)` ring |
 
@@ -1611,7 +1619,7 @@ Focus: 3px Blue 600 @ 40% opacity ring, 2px offset
 | Default | White | Blue 600 | 1.5px solid Blue 600 |
 | Hover | Blue 100 | Blue 800 | 1.5px solid Blue 800 |
 | Active | Blue 200 | Blue 800 | 1.5px solid Blue 800 |
-| Disabled | White | Neutral 300 | 1.5px solid Neutral 200 |
+| Disabled | Neutral 200 | Neutral 700 | None |
 
 #### Tertiary (Ghost/Text)
 | State | Background | Text | Border |
@@ -1619,7 +1627,7 @@ Focus: 3px Blue 600 @ 40% opacity ring, 2px offset
 | Default | Transparent | Blue 600 | None |
 | Hover | Blue 100 | Blue 800 | None |
 | Active | Blue 200 | Blue 800 | None |
-| Disabled | Transparent | Neutral 300 | None |
+| Disabled | Neutral 200 | Neutral 700 | None |
 
 #### Destructive
 | State | Background | Text | Border |
@@ -1627,23 +1635,21 @@ Focus: 3px Blue 600 @ 40% opacity ring, 2px offset
 | Default | `#D42A54` | White | None |
 | Hover | `#8C1D35` | White | None |
 | Active | `#6B1528` | White | None |
-| Disabled | Neutral 200 | Neutral 500 | None |
+| Disabled | Neutral 200 | Neutral 700 | None |
 
 #### Success / Confirm
 | State | Background | Text | Border |
 |-------|-----------|------|--------|
-| Default | `#4CA830` | White | None |
-| Hover | `#1B6600` | White | None |
-| Active | `#145200` | White | None |
-| Disabled | Neutral 200 | Neutral 500 | None |
+| Default | `#1B6600` (success-text) | White | None |
+| Hover | `#145200` | White | None |
+| Active | `#0F3D00` | White | None |
+| Disabled | Neutral 200 | Neutral 700 | None |
 
-#### CTA / Register (Orange Accent)
-| State | Background | Text | Border |
-|-------|-----------|------|--------|
-| Default | `#D86518` (Orange 600) | White | None |
-| Hover | `#933C06` (Orange 800) | White | None |
-| Active | `#7A3205` | White | None |
-| Disabled | Neutral 200 | Neutral 500 | None |
+> **Unified disabled state:** All button variants render the same disabled appearance — Neutral 200 background, Neutral 700 text, no border — so disabled affordance reads consistently regardless of variant. Neutral 700 on Neutral 200 hits 6.1:1 (AA) while clearly signalling "not clickable."
+
+> **Why `#1B6600` for buttons, not `#4CA830`:** The lighter `success-accent` (#4CA830) is reserved for borders, icons, and indicators — it only achieves 3.38:1 with white text, failing WCAG AA. Button backgrounds use `success-text` (#1B6600, 9.03:1 — AAA) for safe contrast on white text.
+
+> **No Orange button variant.** Orange 600 on white fails WCAG AA for small text (3.78:1). Registration and other primary CTAs use the Blue Primary button. Orange is reserved for badges and featured accents — never button backgrounds.
 
 **Sizes:**
 
@@ -1677,7 +1683,7 @@ No shadow on any button variant — color change alone signals state.
 - Use Secondary for competing actions (e.g., "Save Draft" next to "Publish").
 - Use Tertiary for low-emphasis actions (e.g., "Cancel", "Learn more").
 - Destructive is reserved for irreversible actions (e.g., "Delete Account").
-- CTA Orange is reserved for registration, onboarding flows, and urgency/promotional emphasis. It should never compete with the Blue primary on the same surface.
+- Orange is **never** used as a button background (fails WCAG AA contrast on white). Registration and urgency CTAs use the Blue Primary button. Orange is reserved for accent badges, featured borders, and non-button accent decoration.
 - **Do NOT** stack multiple Primary buttons in a row. Demote lesser actions.
 
 **Accessibility:**
@@ -3577,7 +3583,7 @@ The three principles — **Precision, Institutional Confidence, Vitality** — a
 - In horizontal groups, Primary goes right (action position), Secondary/Tertiary goes left.
 - In vertical groups (e.g., shelf footer), Primary goes top, Secondary below.
 
-**Don't:** Place two Primary buttons side by side. Don't use Destructive style for non-destructive actions. Don't use CTA Orange outside of registration, onboarding, or urgency contexts. Don't place an Orange CTA adjacent to a Blue Primary — demote one.
+**Don't:** Place two Primary buttons side by side. Don't use Destructive style for non-destructive actions. Don't use Orange as a button background — it fails WCAG AA on white. Orange is reserved for accent badges and featured borders.
 
 ---
 
@@ -3727,7 +3733,7 @@ components/
 **Props pattern example (Button):**
 ```typescript
 interface ButtonProps {
-  variant: 'primary' | 'secondary' | 'tertiary' | 'destructive' | 'success' | 'cta';
+  variant: 'primary' | 'secondary' | 'tertiary' | 'destructive' | 'success';
   size: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   disabled?: boolean;
   loading?: boolean;
@@ -3766,7 +3772,7 @@ Before shipping any component, verify:
 | | Tab Bar | 1 | Default, Active, Pressed, Badge |
 | | Sidebar | 3 (Nav, Filter, Collapsible) | Expanded, Collapsed, Hidden, Section Open/Closed |
 | | Breadcrumbs | 1 | Default, Hover, Active, Current |
-| **Input** | Button | 6 (Primary, Secondary, Tertiary, Destructive, Success, CTA) × 5 sizes | Default, Hover, Active, Disabled, Loading, Focus |
+| **Input** | Button | 5 (Primary, Secondary, Tertiary, Destructive, Success) × 5 sizes | Default, Hover, Active, Disabled, Loading, Focus |
 | | Text Field | 1 | Default, Hover, Focus, Filled, Disabled, Error, Success, Read-only |
 | | Dropdown | 1 (with search variant) | Default, Hover, Focus, Open, Has Value, Disabled, Error |
 | | Toggle Switch | 1 | Off, On, Hover (both), Disabled (both), Focus |

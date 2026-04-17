@@ -339,12 +339,15 @@ Single variant with up to 5 items.
 
 | Variant | Background | Text | Border | Use Case |
 |---------|-----------|------|--------|----------|
-| Primary | var(--interactive-primary) | white | none | Main page CTA — ONE per view |
+| Primary | var(--interactive-primary) | white | none | Main page CTA — ONE per view (includes registration, onboarding, urgency) |
 | Secondary | transparent | var(--interactive-primary) | 1.5px solid var(--interactive-primary) | Supporting actions |
 | Tertiary | transparent | var(--interactive-primary) | none | Low-emphasis actions |
 | Destructive | var(--interactive-destructive) | white | none | Delete, remove, cancel |
-| Success | var(--feedback-success-accent) | white | none | Confirm, approve, complete |
-| CTA Orange | var(--interactive-accent) | white | none | Registration, urgency, promotions ONLY |
+| Success | var(--success-text) — #1B6600 | white | none | Confirm, approve, complete |
+
+> **No Orange button variant.** Orange 600 (#D86518) on white fails WCAG AA for small text (3.62:1). Orange is reserved for accent badges and featured borders — never button backgrounds. All CTAs use Primary.
+
+> **Success button uses `success-text` (#1B6600), not `success-accent` (#4CA830).** The lighter accent green only achieves 3.38:1 with white text — fails WCAG AA. Button backgrounds require the AAA-contrast darker green.
 
 **States per Variant:**
 
@@ -355,7 +358,7 @@ Single variant with up to 5 items.
 | Default | var(--interactive-primary) | white | none |
 | Hover | var(--interactive-primary-hover) | white | none |
 | Active | var(--interactive-primary-active) | white | none |
-| Disabled | var(--interactive-disabled) | var(--color-neutral-500) | none |
+| Disabled | var(--neutral-200) | var(--neutral-700) | none |
 | Loading | var(--interactive-primary) @ 70% opacity | hidden | none (spinner visible) |
 | Focus | var(--interactive-primary) | white | var(--shadow-focus) ring |
 
@@ -366,7 +369,7 @@ Single variant with up to 5 items.
 | Default | white | var(--interactive-primary) | 1.5px solid var(--interactive-primary) |
 | Hover | var(--color-blue-100) | var(--interactive-primary-hover) | 1.5px solid var(--interactive-primary-hover) |
 | Active | var(--color-blue-200) | var(--interactive-primary-hover) | 1.5px solid var(--interactive-primary-hover) |
-| Disabled | white | var(--color-neutral-300) | 1.5px solid var(--color-neutral-200) |
+| Disabled | var(--neutral-200) | var(--neutral-700) | none |
 
 **Tertiary:**
 
@@ -375,7 +378,7 @@ Single variant with up to 5 items.
 | Default | transparent | var(--interactive-primary) | none |
 | Hover | var(--color-blue-100) | var(--interactive-primary-hover) | none |
 | Active | var(--color-blue-200) | var(--interactive-primary-hover) | none |
-| Disabled | transparent | var(--color-neutral-300) | none |
+| Disabled | var(--neutral-200) | var(--neutral-700) | none |
 
 **Destructive:**
 
@@ -384,23 +387,18 @@ Single variant with up to 5 items.
 | Default | var(--interactive-destructive) | white |
 | Hover | var(--interactive-destructive-hover) | white |
 | Active | darker destructive | white |
-| Disabled | var(--interactive-disabled) | var(--color-neutral-500) |
+| Disabled | var(--neutral-200) | var(--neutral-700) |
 
 **Success:**
 
 | State | Background | Text |
 |-------|-----------|------|
-| Default | var(--feedback-success-accent) | white |
-| Hover | var(--feedback-success-text) | white |
-| Disabled | var(--interactive-disabled) | var(--color-neutral-500) |
+| Default | var(--success-text) — #1B6600 (9.03:1 AAA on white) | white |
+| Hover | #145200 | white |
+| Active | #0F3D00 | white |
+| Disabled | var(--neutral-200) | var(--neutral-700) |
 
-**CTA Orange:**
-
-| State | Background | Text |
-|-------|-----------|------|
-| Default | var(--interactive-accent) | white |
-| Hover | var(--interactive-accent-hover) | white |
-| Disabled | var(--interactive-disabled) | var(--color-neutral-500) |
+> **Unified disabled state:** All button variants share one disabled appearance — `background: var(--neutral-200); color: var(--neutral-700); border-color: transparent;` — set by the global `.btn[disabled]` rule. Neutral 700 on Neutral 200 = 6.1:1 (AA).
 
 **Sizes:**
 
@@ -432,8 +430,7 @@ Single variant with up to 5 items.
 - Use Secondary for competing actions (e.g., "Save Draft" next to "Publish").
 - Use Tertiary for low-emphasis actions (e.g., "Cancel", "Learn more").
 - Destructive is reserved for irreversible actions (e.g., "Delete Account").
-- CTA Orange is reserved for registration, onboarding, and urgency/promotional emphasis.
-- Never stack Primary + CTA Orange in same button group.
+- Orange is **never** a button background (fails WCAG AA). Registration, urgency, and promotional CTAs use Primary.
 - Never place two Primary buttons side by side. Demote lesser actions.
 - **Button group rules:** var(--space-3) gap between buttons, max 2 buttons per group. Horizontal: Primary right, Secondary left. Vertical: Primary top, Secondary below. Third actions → text link or overflow menu.
 - Icon-only buttons require `aria-label`.
@@ -1593,10 +1590,10 @@ Placeholder shapes matching the component they replace.
 
 | Variant | Background | Text | Border | Use Case |
 |---------|-----------|------|--------|----------|
-| Info | var(--feedback-info-bg) | var(--feedback-info-text) | none | General metadata |
-| Success | var(--feedback-success-bg) | var(--feedback-success-text) | none | "Live", "Active", "Approved" |
-| Warning | var(--feedback-warning-bg) | var(--feedback-warning-text) | none | "Ending Soon", "Pending" |
-| Error | var(--feedback-error-bg) | var(--feedback-error-text) | none | "Closed", "Rejected", "Expired" |
+| Info | var(--info-bg-subtle) | var(--info-text) | none | General metadata |
+| Success | var(--success-bg-subtle) | var(--success-text) | none | "Live", "Active", "Approved" |
+| Warning | var(--warning-bg-subtle) | var(--warning-text) | none | "Ending Soon", "Pending" |
+| Error | var(--error-bg-subtle) | var(--error-text) | none | "Closed", "Rejected", "Expired" |
 | Neutral | var(--bg-secondary) | var(--text-secondary) | none | Default metadata tags |
 | Accent | var(--interactive-accent-surface) | var(--color-orange-900) | none | "Featured", "Promoted" |
 

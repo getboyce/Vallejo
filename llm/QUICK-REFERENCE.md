@@ -75,9 +75,9 @@
 --orange-50:  #FDF7F2;  /* dark: #1A1008 */
 --orange-100: #FAEEE5;  /* dark: #221710 */
 --orange-200: #F8E2D3;  /* dark: #2E1F14 */
---orange-600: #D86518;  /* dark: #E8873F — accent primary */
---orange-800: #933C06;  /* dark: #F0A566 — accent hover */
---orange-900: #50250B;  /* dark: #F8C99A — accent text */
+--orange-600: #D86518;  /* dark: #E8873F — accent (badges, featured borders). NEVER a button background (fails WCAG AA) */
+--orange-800: #933C06;  /* dark: #F0A566 — accent hover/pressed */
+--orange-900: #50250B;  /* dark: #F8C99A — accent text on warm surfaces */
 ```
 
 ### Colors — Primitives (Neutral)
@@ -97,25 +97,31 @@
 
 ```css
 /* Success */
---success-bg:     #D7E8D1;  /* dark: #1A2E14 */
---success-text:   #1B6600;  /* dark: #6ABF4D */
---success-accent: #4CA830;  /* dark: #6ABF4D — borders, icons, indicators */
+--success-bg-subtle: #EFF6ED;  /* dark: #0F1F0A — filter chips, badge fills */
+--success-bg:        #D7E8D1;  /* dark: #1A2E14 — toasts, alerts, banners */
+--success-text:      #1B6600;  /* dark: #6ABF4D */
+--success-accent:    #4CA830;  /* dark: #4CA830 — borders, icons, indicators */
 
 /* Warning */
---warning-bg:     #FFF7D1;  /* dark: #2E2510 */
---warning-text:   #705700;  /* dark: #E8B830 */
---warning-accent: #EC9C0D;  /* dark: #E8B830 — borders, icons, indicators */
+--warning-bg-subtle: #FFFCED;  /* dark: #1F1A08 — filter chips, badge fills */
+--warning-bg:        #FFF7D1;  /* dark: #2E2510 — toasts, alerts, banners */
+--warning-text:      #705700;  /* dark: #E8B830 */
+--warning-accent:    #EC9C0D;  /* dark: #E8B830 — borders, icons, indicators */
 
 /* Error (rose — no pure red) */
---error-bg:     #FCE5E9;  /* dark: #2E1219 */
---error-text:   #8C1D35;  /* dark: #F06080 */
---error-accent: #D42A54;  /* dark: #F06080 — borders, icons, indicators */
+--error-bg-subtle:   #FEF5F6;  /* dark: #1F0A10 — filter chips, badge fills */
+--error-bg:          #FCE5E9;  /* dark: #2E1219 — toasts, alerts, banners */
+--error-text:        #8C1D35;  /* dark: #F06080 */
+--error-accent:      #D42A54;  /* dark: #F06080 — borders, icons, indicators */
 
 /* Info */
---info-bg:     #E0EBFF;  /* dark: #141E33 */
---info-text:   #0F2757;  /* dark: #7AAAF5 */
---info-accent: #2662D9;  /* dark: #5B8EF0 — borders, icons, indicators */
+--info-bg-subtle:    #F3F7FF;  /* dark: #0D1528 — filter chips, badge fills */
+--info-bg:           #E0EBFF;  /* dark: #141E33 — toasts, alerts, banners */
+--info-text:         #0F2757;  /* dark: #7AAAF5 */
+--info-accent:       #2662D9;  /* dark: #5B8EF0 — borders, icons, indicators */
 ```
+
+> **`-bg` vs `-bg-subtle`:** Use `-bg-subtle` for filter chips and badges (quiet tint). Use `-bg` for toasts, alerts, and banners (communicative tint).
 
 ### Colors — Semantics (Surface / Text / Border / Interactive)
 
@@ -144,9 +150,9 @@
 --interactive-primary:      #2662D9; /* dark: #5B8EF0 */
 --interactive-hover:        #063598; /* dark: #7AAAF5 */
 --interactive-active:       #042D7A; /* dark: #4A7DE0 */
---interactive-accent:       #D86518; /* dark: #E8873F */
---interactive-accent-hover: #933C06; /* dark: #F0A566 */
---interactive-accent-surface: #F8E2D3; /* dark: #2E1F14 */
+--interactive-accent:       #D86518; /* dark: #E8873F — badges/borders only, NOT button backgrounds */
+--interactive-accent-hover: #933C06; /* dark: #F0A566 — accent hover on badges/borders */
+--interactive-accent-surface: #F8E2D3; /* dark: #2E1F14 — featured surface fills */
 
 /* Header — stays dark in both themes */
 --header-bg: #2F333C;
@@ -387,8 +393,7 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 | `.btn-secondary` | `var(--bg-primary)` | `var(--interactive-primary)` | `1.5px solid var(--interactive-primary)` |
 | `.btn-tertiary` | `transparent` | `var(--interactive-primary)` | none |
 | `.btn-destructive` | `var(--error-accent)` | `#fff` | none |
-| `.btn-success` | `var(--success-accent)` | `#fff` | none |
-| `.btn-cta` | `var(--interactive-accent)` | `#fff` | none |
+| `.btn-success` | `var(--success-text)` (#1B6600, AAA) | `#fff` | none |
 
 **Sizes:**
 
@@ -400,7 +405,7 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 | `.btn-lg` | 48px | 24px | 16px | `var(--radius-lg)` |
 | `.btn-xl` | 56px | 32px | 18px | 10px |
 
-**States:** hover (`var(--interactive-hover)` bg for primary), active (`scale(0.98)`), disabled (`var(--neutral-200)` bg, `var(--neutral-500)` text), loading (`aria-busy="true"`), focus (`box-shadow: var(--shadow-focus)`)
+**States:** hover (`var(--interactive-hover)` bg for primary), active (`scale(0.98)`), disabled (`var(--neutral-200)` bg, `var(--neutral-700)` text — unified across all variants), loading (`aria-busy="true"`), focus (`box-shadow: var(--shadow-focus)`)
 
 **Icon + Text:** Add `.btn-icon-text` when a button has a leading icon. Reduces left padding by 2px for optical balance (e.g., MD: `14px` left, `16px` right).
 
@@ -1394,7 +1399,7 @@ Axis labels: 12px/500, `var(--text-tertiary)`. Grid: 1px dashed `var(--neutral-2
   </nav>
   <div class="demo-header-actions">
     <button class="btn btn-secondary btn-sm" style="color:#fff; border-color: rgba(255,255,255,0.3)">Sign In</button>
-    <button class="btn btn-cta btn-sm">Register</button>
+    <button class="btn btn-primary btn-sm">Register</button>
   </div>
 </header>
 ```
@@ -1755,14 +1760,14 @@ Complete `[data-theme="dark"]` override block:
   --shadow-focus: 0 0 0 3px rgba(91,142,240,0.4);
 
   /* Feedback */
-  --success-bg: #1A2E14;  --success-text: #6ABF4D;
-  --success-accent: #6ABF4D;
-  --warning-bg: #2E2510;  --warning-text: #E8B830;
-  --warning-accent: #E8B830;
-  --error-bg: #2E1219;  --error-text: #F06080;
-  --error-accent: #F06080;
-  --info-bg: #141E33;  --info-text: #7AAAF5;
-  --info-accent: #5B8EF0;
+  --success-bg-subtle: #0F1F0A;  --success-bg: #1A2E14;
+  --success-text: #6ABF4D;  --success-accent: #4CA830;
+  --warning-bg-subtle: #1F1A08;  --warning-bg: #2E2510;
+  --warning-text: #E8B830;  --warning-accent: #E8B830;
+  --error-bg-subtle: #1F0A10;  --error-bg: #2E1219;
+  --error-text: #F06080;  --error-accent: #F06080;
+  --info-bg-subtle: #0D1528;  --info-bg: #141E33;
+  --info-text: #7AAAF5;  --info-accent: #5B8EF0;
 
   /* Header stays dark */
   --header-bg: #2F333C;

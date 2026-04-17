@@ -136,7 +136,7 @@
       "interactive": ["--interactive-primary", "--interactive-hover", "--interactive-active", "--interactive-accent", "--interactive-accent-hover", "--interactive-accent-surface"],
       "surface": ["--header-bg"],
       "links": ["--text-link", "--text-link-hover"],
-      "feedback": "For each severity (success, warning, error, info): --{severity}-bg, --{severity}-text, --{severity}-border, --{severity}-icon"
+      "feedback": "For each severity (success, warning, error, info): --{severity}-bg-subtle (filter chips, badges), --{severity}-bg (toasts, alerts, banners), --{severity}-text, --{severity}-accent (borders, icons, indicators)"
     },
     "spacing": "--space-{0,1,2,3,4,5,6,8,10,12,16,20,24,32} = 0px to 128px",
     "radius": "--radius-{none,sm,md,lg,xl,2xl,pill,full}",
@@ -148,7 +148,7 @@
   },
   "componentIndex": {
     "navigation": ["Header", "Tab Bar (mobile bottom nav)", "Sidebar", "Breadcrumbs", "Link"],
-    "input": ["Button (6 variants × 5 sizes)", "Text Field", "Textarea (resizable, char count)", "Dropdown / Select (single, multi-select, searchable)", "Toggle Switch", "Watchlist Toggle (icon+label, icon-only)", "Checkbox", "Radio Button", "Slider / Range", "Date Picker (single, range)"],
+    "input": ["Button (5 variants × 5 sizes — Primary, Secondary, Tertiary, Destructive, Success. No Orange/CTA variant; Orange fails WCAG AA as button bg)", "Text Field", "Textarea (resizable, char count)", "Dropdown / Select (single, multi-select, searchable)", "Toggle Switch", "Watchlist Toggle (icon+label, icon-only)", "Checkbox", "Radio Button", "Slider / Range", "Date Picker (single, range)"],
     "feedback": ["Alert / Banner (4 severity types + dismissible close button)", "Toast / Snackbar", "Modal / Dialog (3 sizes + mobile bottom sheet)", "Shelf / Drawer (right, left, full — footer buttons always right-aligned)", "Progress Indicator (spinner, bar, steps)", "Skeleton Screen"],
     "dataDisplay": ["Card (vertical, horizontal, compact, featured, stat)", "Table (sortable, responsive — last resort, prefer cards/lists)", "List (simple, two-line, three-line, action)", "Stat / KPI", "Badge / Tag", "Tooltip (dark, hover)", "Popover (light, click)"],
     "media": ["Image Container", "Avatar (5 sizes)", "Video Player"],

@@ -698,14 +698,14 @@ ul, ol { list-style: none; }
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  background: var(--interactive-accent);
+  background: var(--interactive-primary);
   border-radius: var(--radius-lg);
   color: #fff;
   font-size: 16px;
   font-weight: 600;
   transition: all var(--dur-normal) var(--ease-out);
 }
-.mobile-btn-register:hover { background: var(--interactive-accent-hover); }
+.mobile-btn-register:hover { background: var(--interactive-hover); }
 
 .mobile-utility-link {
   display: flex;

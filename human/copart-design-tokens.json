@@ -23,19 +23,22 @@
           "900": { "$value": "#2F333C", "$type": "color", "$description": "Ink — headlines, primary text" }
         },
         "success": {
-          "light":  { "$value": "#D7E8D1", "$type": "color" },
+          "subtle": { "$value": "#EFF6ED", "$type": "color", "$description": "Filter chips, badge fills" },
+          "light":  { "$value": "#D7E8D1", "$type": "color", "$description": "Toasts, alerts, banners" },
           "main":   { "$value": "#4CA830", "$type": "color" },
           "dark":   { "$value": "#1B6600", "$type": "color" },
           "accent": { "$value": "#4CA830", "$type": "color", "$description": "Borders, icons, indicators" }
         },
         "warning": {
-          "light":  { "$value": "#FFF7D1", "$type": "color" },
+          "subtle": { "$value": "#FFFCED", "$type": "color", "$description": "Filter chips, badge fills" },
+          "light":  { "$value": "#FFF7D1", "$type": "color", "$description": "Toasts, alerts, banners" },
           "main":   { "$value": "#EC9C0D", "$type": "color" },
           "dark":   { "$value": "#705700", "$type": "color" },
           "accent": { "$value": "#EC9C0D", "$type": "color", "$description": "Borders, icons, indicators" }
         },
         "error": {
-          "light":  { "$value": "#FCE5E9", "$type": "color" },
+          "subtle": { "$value": "#FEF5F6", "$type": "color", "$description": "Filter chips, badge fills" },
+          "light":  { "$value": "#FCE5E9", "$type": "color", "$description": "Toasts, alerts, banners" },
           "main":   { "$value": "#D42A54", "$type": "color" },
           "dark":   { "$value": "#8C1D35", "$type": "color" },
           "accent": { "$value": "#D42A54", "$type": "color", "$description": "Borders, icons, indicators" }
@@ -44,7 +47,7 @@
           "50":  { "$value": "#FDF7F2", "$type": "color", "$description": "Accent tint — promo surfaces, warm page backgrounds" },
           "100": { "$value": "#FAEEE5", "$type": "color", "$description": "Accent lightest — hover fills, subtle warm highlights" },
           "200": { "$value": "#F8E2D3", "$type": "color", "$description": "Accent light — badge fills, selected states, featured backgrounds" },
-          "600": { "$value": "#D86518", "$type": "color", "$description": "Accent primary — secondary CTAs, badges, urgency indicators" },
+          "600": { "$value": "#D86518", "$type": "color", "$description": "Accent — badges, featured borders, urgency indicators. NEVER a button background (3.62:1 on white fails WCAG AA)." },
           "800": { "$value": "#933C06", "$type": "color", "$description": "Accent dark — hover/pressed states on accent elements" },
           "900": { "$value": "#50250B", "$type": "color", "$description": "Accent darkest — text on warm surfaces, headings in warm contexts" }
         },
@@ -97,16 +100,20 @@
           "header-bg": { "$value": "#2F333C", "$type": "color", "$description": "Header background — stays dark in both themes" }
         },
         "feedback": {
-          "success-bg":     { "$value": "{copart.color.primitive.success.light}", "$type": "color" },
+          "success-bg-subtle": { "$value": "{copart.color.primitive.success.subtle}", "$type": "color", "$description": "Filter chips, badge fills" },
+          "success-bg":     { "$value": "{copart.color.primitive.success.light}", "$type": "color", "$description": "Toasts, alerts, banners" },
           "success-text":   { "$value": "{copart.color.primitive.success.dark}", "$type": "color" },
           "success-accent":  { "$value": "{copart.color.primitive.success.accent}", "$type": "color", "$description": "Borders, icons, indicators" },
-          "warning-bg":     { "$value": "{copart.color.primitive.warning.light}", "$type": "color" },
+          "warning-bg-subtle": { "$value": "{copart.color.primitive.warning.subtle}", "$type": "color", "$description": "Filter chips, badge fills" },
+          "warning-bg":     { "$value": "{copart.color.primitive.warning.light}", "$type": "color", "$description": "Toasts, alerts, banners" },
           "warning-text":   { "$value": "{copart.color.primitive.warning.dark}", "$type": "color" },
           "warning-accent":  { "$value": "{copart.color.primitive.warning.accent}", "$type": "color", "$description": "Borders, icons, indicators" },
-          "error-bg":       { "$value": "{copart.color.primitive.error.light}", "$type": "color" },
+          "error-bg-subtle": { "$value": "{copart.color.primitive.error.subtle}", "$type": "color", "$description": "Filter chips, badge fills" },
+          "error-bg":       { "$value": "{copart.color.primitive.error.light}", "$type": "color", "$description": "Toasts, alerts, banners" },
           "error-text":     { "$value": "{copart.color.primitive.error.dark}", "$type": "color" },
           "error-accent":    { "$value": "{copart.color.primitive.error.accent}", "$type": "color", "$description": "Borders, icons, indicators" },
-          "info-bg":        { "$value": "#E0EBFF", "$type": "color" },
+          "info-bg-subtle": { "$value": "#F3F7FF", "$type": "color", "$description": "Filter chips, badge fills" },
+          "info-bg":        { "$value": "#E0EBFF", "$type": "color", "$description": "Toasts, alerts, banners" },
           "info-text":      { "$value": "{copart.color.primitive.blue.900}", "$type": "color" },
           "info-accent":     { "$value": "{copart.color.primitive.blue.600}", "$type": "color", "$description": "Borders, icons, indicators" }
         }
@@ -126,7 +133,7 @@
           "50":  { "$value": "#1A1008", "$type": "color", "$description": "Accent tint — warm dark page backgrounds" },
           "100": { "$value": "#221710", "$type": "color", "$description": "Accent lightest — warm hover fills" },
           "200": { "$value": "#2E1F14", "$type": "color", "$description": "Accent light — badge fills, featured backgrounds" },
-          "600": { "$value": "#E8873F", "$type": "color", "$description": "Accent primary — secondary CTAs, badges (4.1:1 on #1A1D23)" },
+          "600": { "$value": "#E8873F", "$type": "color", "$description": "Accent — badges, featured borders. NEVER a button background." },
           "800": { "$value": "#F0A566", "$type": "color", "$description": "Accent hover — hover/pressed states" },
           "900": { "$value": "#F8C99A", "$type": "color", "$description": "Accent text — text on dark warm surfaces" }
         },
@@ -140,19 +147,22 @@
           "900": { "$value": "#F0F1F3", "$type": "color", "$description": "Ink — headlines, primary text" }
         },
         "success": {
-          "light":  { "$value": "#1A2E14", "$type": "color" },
+          "subtle": { "$value": "#0F1F0A", "$type": "color", "$description": "Filter chips, badge fills (dark)" },
+          "light":  { "$value": "#1A2E14", "$type": "color", "$description": "Toasts, alerts, banners (dark)" },
           "main":   { "$value": "#6ABF4D", "$type": "color" },
           "dark":   { "$value": "#6ABF4D", "$type": "color" },
-          "accent": { "$value": "#6ABF4D", "$type": "color", "$description": "Borders, icons, indicators" }
+          "accent": { "$value": "#4CA830", "$type": "color", "$description": "Borders, icons, indicators" }
         },
         "warning": {
-          "light":  { "$value": "#2E2510", "$type": "color" },
+          "subtle": { "$value": "#1F1A08", "$type": "color", "$description": "Filter chips, badge fills (dark)" },
+          "light":  { "$value": "#2E2510", "$type": "color", "$description": "Toasts, alerts, banners (dark)" },
           "main":   { "$value": "#E8B830", "$type": "color" },
           "dark":   { "$value": "#E8B830", "$type": "color" },
           "accent": { "$value": "#E8B830", "$type": "color", "$description": "Borders, icons, indicators" }
         },
         "error": {
-          "light":  { "$value": "#2E1219", "$type": "color" },
+          "subtle": { "$value": "#1F0A10", "$type": "color", "$description": "Filter chips, badge fills (dark)" },
+          "light":  { "$value": "#2E1219", "$type": "color", "$description": "Toasts, alerts, banners (dark)" },
           "main":   { "$value": "#F06080", "$type": "color" },
           "dark":   { "$value": "#F06080", "$type": "color" },
           "accent": { "$value": "#F06080", "$type": "color", "$description": "Borders, icons, indicators" }
@@ -188,16 +198,20 @@
           "accent-surface":   { "$value": "{copart.color.primitive-dark.orange.200}", "$type": "color", "$description": "Warm tinted surface for dark mode badges/features" }
         },
         "feedback": {
-          "success-bg":     { "$value": "{copart.color.primitive-dark.success.light}", "$type": "color" },
+          "success-bg-subtle": { "$value": "{copart.color.primitive-dark.success.subtle}", "$type": "color", "$description": "Filter chips, badge fills" },
+          "success-bg":     { "$value": "{copart.color.primitive-dark.success.light}", "$type": "color", "$description": "Toasts, alerts, banners" },
           "success-text":   { "$value": "{copart.color.primitive-dark.success.main}", "$type": "color" },
           "success-accent":  { "$value": "{copart.color.primitive-dark.success.accent}", "$type": "color", "$description": "Borders, icons, indicators" },
-          "warning-bg":     { "$value": "{copart.color.primitive-dark.warning.light}", "$type": "color" },
+          "warning-bg-subtle": { "$value": "{copart.color.primitive-dark.warning.subtle}", "$type": "color", "$description": "Filter chips, badge fills" },
+          "warning-bg":     { "$value": "{copart.color.primitive-dark.warning.light}", "$type": "color", "$description": "Toasts, alerts, banners" },
           "warning-text":   { "$value": "{copart.color.primitive-dark.warning.main}", "$type": "color" },
           "warning-accent":  { "$value": "{copart.color.primitive-dark.warning.accent}", "$type": "color", "$description": "Borders, icons, indicators" },
-          "error-bg":       { "$value": "{copart.color.primitive-dark.error.light}", "$type": "color" },
+          "error-bg-subtle": { "$value": "{copart.color.primitive-dark.error.subtle}", "$type": "color", "$description": "Filter chips, badge fills" },
+          "error-bg":       { "$value": "{copart.color.primitive-dark.error.light}", "$type": "color", "$description": "Toasts, alerts, banners" },
           "error-text":     { "$value": "{copart.color.primitive-dark.error.main}", "$type": "color" },
           "error-accent":    { "$value": "{copart.color.primitive-dark.error.accent}", "$type": "color", "$description": "Borders, icons, indicators" },
-          "info-bg":        { "$value": "{copart.color.primitive-dark.blue.100}", "$type": "color" },
+          "info-bg-subtle": { "$value": "#0D1528", "$type": "color", "$description": "Filter chips, badge fills" },
+          "info-bg":        { "$value": "{copart.color.primitive-dark.blue.100}", "$type": "color", "$description": "Toasts, alerts, banners" },
           "info-text":      { "$value": "{copart.color.primitive-dark.blue.800}", "$type": "color" },
           "info-accent":     { "$value": "{copart.color.primitive-dark.blue.600}", "$type": "color", "$description": "Borders, icons, indicators" }
         }

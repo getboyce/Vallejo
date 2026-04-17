@@ -28,10 +28,10 @@
   --neutral-950: #23262F;
 
   /* Semantic */
-  --success-bg: #D7E8D1; --success-text: #1B6600; --success-accent: #4CA830;
-  --warning-bg: #FFF7D1; --warning-text: #705700; --warning-accent: #EC9C0D;
-  --error-bg: #FCE5E9; --error-text: #8C1D35; --error-accent: #D42A54;
-  --info-bg: #E0EBFF; --info-text: #0F2757; --info-accent: #2662D9;
+  --success-bg: #D7E8D1; --success-bg-subtle: #EFF6ED; --success-text: #1B6600; --success-accent: #4CA830;
+  --warning-bg: #FFF7D1; --warning-bg-subtle: #FFFCED; --warning-text: #705700; --warning-accent: #EC9C0D;
+  --error-bg: #FCE5E9; --error-bg-subtle: #FEF5F6; --error-text: #8C1D35; --error-accent: #D42A54;
+  --info-bg: #E0EBFF; --info-bg-subtle: #F3F7FF; --info-text: #0F2757; --info-accent: #2662D9;
   --orange-50: #FDF7F2; --orange-100: #FAEEE5; --orange-200: #F8E2D3;
   --orange-600: #D86518; --orange-800: #933C06; --orange-900: #50250B;
 
@@ -120,10 +120,10 @@
   --shadow-lg: 0 8px 24px rgba(0,0,0,0.4); --shadow-focus: 0 0 0 3px rgba(91,142,240,0.4);
 
   /* Semantic Feedback — dark mode */
-  --success-bg: #1A2E14; --success-text: #6ABF4D; --success-accent: #4CA830;
-  --warning-bg: #2E2510; --warning-text: #E8B830; --warning-accent: #E8B830;
-  --error-bg: #2E1219; --error-text: #F06080; --error-accent: #F06080;
-  --info-bg: #141E33; --info-text: #7AAAF5; --info-accent: #5B8EF0;
+  --success-bg: #1A2E14; --success-bg-subtle: #0F1F0A; --success-text: #6ABF4D; --success-accent: #4CA830;
+  --warning-bg: #2E2510; --warning-bg-subtle: #1F1A08; --warning-text: #E8B830; --warning-accent: #E8B830;
+  --error-bg: #2E1219; --error-bg-subtle: #1F0A10; --error-text: #F06080; --error-accent: #F06080;
+  --info-bg: #141E33; --info-bg-subtle: #0D1528; --info-text: #7AAAF5; --info-accent: #5B8EF0;
 }
 
 /* ========================================
@@ -470,11 +470,8 @@ body {
 .btn-destructive { background: #D42A54; color: #fff; }
 .btn-destructive:hover { background: #8C1D35; }
 /* Success */
-.btn-success { background: #4CA830; color: #fff; }
-.btn-success:hover { background: #1B6600; }
-/* CTA / Accent */
-.btn-cta { background: var(--orange-600); color: #fff; }
-.btn-cta:hover { background: var(--orange-800); }
+.btn-success { background: var(--success-text); color: #fff; }
+.btn-success:hover { background: #145200; }
 /* Button Icon */
 .btn-icon { display: inline-block; vertical-align: -0.15em; flex-shrink: 0; }
 /* Watchlist Active */
@@ -483,7 +480,7 @@ body {
 [data-theme="dark"] .btn-watchlist-active { background: var(--blue-200); color: var(--text-primary); border-color: var(--blue-200); }
 [data-theme="dark"] .btn-watchlist-active:hover { background: var(--blue-100); }
 /* Disabled */
-.btn[disabled] { background: var(--neutral-200); color: var(--neutral-500); cursor: not-allowed; box-shadow: none; border-color: transparent; }
+.btn[disabled] { background: var(--neutral-200); color: var(--neutral-700); cursor: not-allowed; box-shadow: none; border-color: transparent; }
 .btn[disabled]:hover { transform: none; }
 
 /* ========================================
@@ -1781,7 +1778,7 @@ tr.hot:hover td { background: var(--orange-100); }
     <div class="swatch-card"><div class="swatch-color" style="background:var(--orange-50)"><span class="swatch-hex" data-light="#FDF7F2" data-dark="#1A1008" style="background:rgba(0,0,0,0.5)">#FDF7F2</span></div><div class="swatch-info"><div class="swatch-name">Orange 50</div><div class="swatch-meta">Promo surfaces</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--orange-100)"><span class="swatch-hex" data-light="#FAEEE5" data-dark="#221710" style="background:rgba(0,0,0,0.5)">#FAEEE5</span></div><div class="swatch-info"><div class="swatch-name">Orange 100</div><div class="swatch-meta">Hover fills</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--orange-200)"><span class="swatch-hex" data-light="#F8E2D3" data-dark="#2E1F14" style="background:rgba(0,0,0,0.5)">#F8E2D3</span></div><div class="swatch-info"><div class="swatch-name">Orange 200</div><div class="swatch-meta">Badge fills, featured</div></div></div>
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--orange-600)"><span class="swatch-hex" data-light="#D86518" data-dark="#E8873F">#D86518</span></div><div class="swatch-info"><div class="swatch-name">Orange 600</div><div class="swatch-meta">Accent primary — CTAs, badges</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--orange-600)"><span class="swatch-hex" data-light="#D86518" data-dark="#E8873F">#D86518</span></div><div class="swatch-info"><div class="swatch-name">Orange 600</div><div class="swatch-meta">Accent — badges, featured borders (not buttons)</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--orange-800)"><span class="swatch-hex" data-light="#933C06" data-dark="#F0A566">#933C06</span></div><div class="swatch-info"><div class="swatch-name">Orange 800</div><div class="swatch-meta">Hover/pressed</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--orange-900)"><span class="swatch-hex" data-light="#50250B" data-dark="#F8C99A">#50250B</span></div><div class="swatch-info"><div class="swatch-name">Orange 900</div><div class="swatch-meta">Text on warm surfaces</div></div></div>
   </div>
@@ -1793,29 +1790,33 @@ tr.hot:hover td { background: var(--orange-100); }
   </div>
 
   <div class="subsection-title">Semantic Colors — Success</div>
-  <div class="grid-3">
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-bg)"><span class="swatch-hex" data-light="#D7E8D1" data-dark="#1A2E14" style="background:rgba(0,0,0,0.5)">#D7E8D1</span></div><div class="swatch-info"><div class="swatch-name">success-bg</div><div class="swatch-meta">Alert backgrounds, success banners</div></div></div>
+  <div class="grid-4">
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-bg-subtle)"><span class="swatch-hex" data-light="#EFF6ED" data-dark="#0F1F0A" style="background:rgba(0,0,0,0.5)">#EFF6ED</span></div><div class="swatch-info"><div class="swatch-name">success-bg-subtle</div><div class="swatch-meta">Filter chips, badge fills</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--success-bg)"><span class="swatch-hex" data-light="#D7E8D1" data-dark="#1A2E14" style="background:rgba(0,0,0,0.5)">#D7E8D1</span></div><div class="swatch-info"><div class="swatch-name">success-bg</div><div class="swatch-meta">Toasts, alerts, banners</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--success-text)"><span class="swatch-hex" data-light="#1B6600" data-dark="#6ABF4D">#1B6600</span></div><div class="swatch-info"><div class="swatch-name">success-text</div><div class="swatch-meta">Message text on success-bg (AAA)</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--success-accent)"><span class="swatch-hex" data-light="#4CA830" data-dark="#4CA830">#4CA830</span></div><div class="swatch-info"><div class="swatch-name">success-accent</div><div class="swatch-meta">Borders, icons, checkmarks, live indicators</div></div></div>
   </div>
 
   <div class="subsection-title">Semantic Colors — Warning</div>
-  <div class="grid-3">
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-bg)"><span class="swatch-hex" data-light="#FFF7D1" data-dark="#2E2510" style="background:rgba(0,0,0,0.5)">#FFF7D1</span></div><div class="swatch-info"><div class="swatch-name">warning-bg</div><div class="swatch-meta">Warning alert backgrounds</div></div></div>
+  <div class="grid-4">
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-bg-subtle)"><span class="swatch-hex" data-light="#FFFCED" data-dark="#1F1A08" style="background:rgba(0,0,0,0.5)">#FFFCED</span></div><div class="swatch-info"><div class="swatch-name">warning-bg-subtle</div><div class="swatch-meta">Filter chips, badge fills</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-bg)"><span class="swatch-hex" data-light="#FFF7D1" data-dark="#2E2510" style="background:rgba(0,0,0,0.5)">#FFF7D1</span></div><div class="swatch-info"><div class="swatch-name">warning-bg</div><div class="swatch-meta">Toasts, alerts, banners</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-text)"><span class="swatch-hex" data-light="#705700" data-dark="#E8B830">#705700</span></div><div class="swatch-info"><div class="swatch-name">warning-text</div><div class="swatch-meta">Message text on warning-bg (AA)</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--warning-accent)"><span class="swatch-hex" data-light="#EC9C0D" data-dark="#E8B830">#EC9C0D</span></div><div class="swatch-info"><div class="swatch-name">warning-accent</div><div class="swatch-meta">Borders, icons, time-sensitive badges</div></div></div>
   </div>
 
   <div class="subsection-title">Semantic Colors — Error (Rose)</div>
-  <div class="grid-3">
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-bg)"><span class="swatch-hex" data-light="#FCE5E9" data-dark="#2E1219" style="background:rgba(0,0,0,0.5)">#FCE5E9</span></div><div class="swatch-info"><div class="swatch-name">error-bg</div><div class="swatch-meta">Error alerts, destructive surfaces</div></div></div>
+  <div class="grid-4">
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-bg-subtle)"><span class="swatch-hex" data-light="#FEF5F6" data-dark="#1F0A10" style="background:rgba(0,0,0,0.5)">#FEF5F6</span></div><div class="swatch-info"><div class="swatch-name">error-bg-subtle</div><div class="swatch-meta">Filter chips, badge fills</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--error-bg)"><span class="swatch-hex" data-light="#FCE5E9" data-dark="#2E1219" style="background:rgba(0,0,0,0.5)">#FCE5E9</span></div><div class="swatch-info"><div class="swatch-name">error-bg</div><div class="swatch-meta">Toasts, alerts, banners</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--error-text)"><span class="swatch-hex" data-light="#8C1D35" data-dark="#F06080">#8C1D35</span></div><div class="swatch-info"><div class="swatch-name">error-text</div><div class="swatch-meta">Error messages on error-bg (AAA)</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--error-accent)"><span class="swatch-hex" data-light="#D42A54" data-dark="#F06080">#D42A54</span></div><div class="swatch-info"><div class="swatch-name">error-accent</div><div class="swatch-meta">Borders, icons, validation, destructive buttons</div></div></div>
   </div>
 
   <div class="subsection-title">Semantic Colors — Info</div>
-  <div class="grid-3">
-    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-bg)"><span class="swatch-hex" data-light="#E0EBFF" data-dark="#141E33" style="background:rgba(0,0,0,0.5)">#E0EBFF</span></div><div class="swatch-info"><div class="swatch-name">info-bg</div><div class="swatch-meta">Info alert backgrounds</div></div></div>
+  <div class="grid-4">
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-bg-subtle)"><span class="swatch-hex" data-light="#F3F7FF" data-dark="#0D1528" style="background:rgba(0,0,0,0.5)">#F3F7FF</span></div><div class="swatch-info"><div class="swatch-name">info-bg-subtle</div><div class="swatch-meta">Filter chips, badge fills</div></div></div>
+    <div class="swatch-card"><div class="swatch-color" style="background:var(--info-bg)"><span class="swatch-hex" data-light="#E0EBFF" data-dark="#141E33" style="background:rgba(0,0,0,0.5)">#E0EBFF</span></div><div class="swatch-info"><div class="swatch-name">info-bg</div><div class="swatch-meta">Toasts, alerts, banners</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--info-text)"><span class="swatch-hex" data-light="#0F2757" data-dark="#7AAAF5">#0F2757</span></div><div class="swatch-info"><div class="swatch-name">info-text</div><div class="swatch-meta">Info message text on info-bg (AAA)</div></div></div>
     <div class="swatch-card"><div class="swatch-color" style="background:var(--info-accent)"><span class="swatch-hex" data-light="#2662D9" data-dark="#5B8EF0">#2662D9</span></div><div class="swatch-info"><div class="swatch-name">info-accent</div><div class="swatch-meta">Borders, icons, info indicators</div></div></div>
   </div>
@@ -2569,7 +2570,6 @@ tr.hot:hover td { background: var(--orange-100); }
     <button class="btn btn-md btn-tertiary">Tertiary</button>
     <button class="btn btn-md btn-destructive">Destructive</button>
     <button class="btn btn-md btn-success">Confirm</button>
-    <button class="btn btn-md btn-cta">Register Now</button>
     <button class="btn btn-md btn-primary" disabled>Disabled</button>
   </div>
 
@@ -3142,7 +3142,7 @@ tr.hot:hover td { background: var(--orange-100); }
       </div>
       <div class="card-footer">
         <div><div class="card-price-label">Starting Bid</div><div class="card-price">$8,200</div></div>
-        <button class="btn btn-sm btn-cta">Register to Bid</button>
+        <button class="btn btn-sm btn-primary">Register to Bid</button>
       </div>
     </div>
     <div class="card">

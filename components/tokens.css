@@ -49,21 +49,25 @@
 
   /* Semantic — Status: Success */
   --success-bg: #D7E8D1;
+  --success-bg-subtle: #EFF6ED;
   --success-text: #1B6600;
   --success-accent: #4CA830;
 
   /* Semantic — Status: Warning */
   --warning-bg: #FFF7D1;
+  --warning-bg-subtle: #FFFCED;
   --warning-text: #705700;
   --warning-accent: #EC9C0D;
 
   /* Semantic — Status: Error (Rose — no pure red) */
   --error-bg: #FCE5E9;
+  --error-bg-subtle: #FEF5F6;
   --error-text: #8C1D35;
   --error-accent: #D42A54;
 
   /* Semantic — Status: Info */
   --info-bg: #E0EBFF;
+  --info-bg-subtle: #F3F7FF;
   --info-text: #0F2757;
   --info-accent: #2662D9;
 

@@ -61,7 +61,7 @@
     "rules": [
       "Always include the Copart header at the top of every prototype page unless told not to. Use components/header/index.html (logged-out) or components/header/loggedin.html (logged-in). Never recreate the header from scratch.",
       "Shared CSS design tokens live in components/tokens.css. Import it rather than duplicating variables.",
-      "No pure red anywhere. Use the rose/magenta error palette (error-accent: #D42A54).",
+      "Error and destructive states use the --error-* token ramp (error-accent: #D42A3D). Never hard-code red hex values.",
       "No emoji in UI. Use Iconic icon set (inline SVG only, stroke=\"currentColor\").",
       "One Primary (blue) button per view — this executes Institutional Confidence. Secondary actions use Secondary or Tertiary variants.",
       "Orange accent is for registration/onboarding CTAs and urgency badges only. Never for primary actions. Orange channels Vitality — genuine urgency, not decoration.",
@@ -118,7 +118,7 @@
     ],
     "brandColor": "#2662D9 (Blue 600)",
     "accentColor": "#D86518 (Orange 600)",
-    "errorColor": "#D42A54 (rose/magenta — NO pure red)",
+    "errorColor": "#D42A3D",
     "fontPrimary": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
     "fontMono": "'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', monospace",
     "darkModeToggle": "data-theme='dark' on <html>"

@@ -59,11 +59,11 @@
   --warning-text: #705700;
   --warning-accent: #EC9C0D;
 
-  /* Semantic — Status: Error (Rose — no pure red) */
-  --error-bg: #FCE5E9;
-  --error-bg-subtle: #FEF5F6;
-  --error-text: #8C1D35;
-  --error-accent: #D42A54;
+  /* Semantic — Status: Error */
+  --error-bg: #FCE5E5;
+  --error-bg-subtle: #FEF5F5;
+  --error-text: #8C1D28;
+  --error-accent: #D42A3D;
 
   /* Semantic — Status: Info */
   --info-bg: #E0EBFF;

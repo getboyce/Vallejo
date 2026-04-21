@@ -24,7 +24,7 @@
 - **Dark mode:** set `data-theme="dark"` on `<html>`. Remove or set `"light"` for light mode.
 - **Mobile platform:** set `data-platform="mobile"` on `<html>` for mobile-specific sizing overrides.
 - **Icons:** Inline SVG only (Iconic set). Always use `stroke="currentColor"` and `fill="none"`. No emoji, no icon fonts, no `<img>` tags. All 120 icon SVG paths are in `ICONS.json`.
-- **No pure red:** Error/destructive states use rose/magenta (`--error-*`), never `#FF0000` etc.
+- **Error color:** Use the `--error-*` tokens for all error/destructive states. Never hard-code red hex values.
 - **Copart header required:** Always include the Copart header (`components/header/index.html` for logged-out, `components/header/loggedin.html` for logged-in) at the top of every prototype page unless explicitly told not to. Do not recreate or improvise a header — use the existing component files. Shared design tokens live in `components/tokens.css`.
 
 ### Icon Names by Category
@@ -108,11 +108,11 @@
 --warning-text:      #705700;  /* dark: #E8B830 */
 --warning-accent:    #EC9C0D;  /* dark: #E8B830 — borders, icons, indicators */
 
-/* Error (rose — no pure red) */
---error-bg-subtle:   #FEF5F6;  /* dark: #1F0A10 — filter chips, badge fills */
---error-bg:          #FCE5E9;  /* dark: #2E1219 — toasts, alerts, banners */
---error-text:        #8C1D35;  /* dark: #F06080 */
---error-accent:      #D42A54;  /* dark: #F06080 — borders, icons, indicators */
+/* Error */
+--error-bg-subtle:   #FEF5F5;  /* dark: #1F0A0D — filter chips, badge fills */
+--error-bg:          #FCE5E5;  /* dark: #2E1215 — toasts, alerts, banners */
+--error-text:        #8C1D28;  /* dark: #F06070 */
+--error-accent:      #D42A3D;  /* dark: #F06070 — borders, icons, indicators */
 
 /* Info */
 --info-bg-subtle:    #F3F7FF;  /* dark: #0D1528 — filter chips, badge fills */
@@ -640,7 +640,7 @@ Key CSS: `.dropdown-search-input` 36px height, 14px, `#F8F8F9` (hardcoded, not a
 | Property | Value |
 |----------|-------|
 | Icon | 24px heart outline (default), filled heart (saved), viewBox 3 3 18 18 for inline buttons |
-| Saved color | `var(--error-accent)` (#D42A54) — filled heart |
+| Saved color | `var(--error-accent)` (#D42A3D) — filled heart |
 | Default color | `var(--text-secondary)` — stroke outline |
 | Icon-Only size | 40×40px touch target |
 | Label font | 14px / 500 |
@@ -1764,8 +1764,8 @@ Complete `[data-theme="dark"]` override block:
   --success-text: #6ABF4D;  --success-accent: #4CA830;
   --warning-bg-subtle: #1F1A08;  --warning-bg: #2E2510;
   --warning-text: #E8B830;  --warning-accent: #E8B830;
-  --error-bg-subtle: #1F0A10;  --error-bg: #2E1219;
-  --error-text: #F06080;  --error-accent: #F06080;
+  --error-bg-subtle: #1F0A0D;  --error-bg: #2E1215;
+  --error-text: #F06070;  --error-accent: #F06070;
   --info-bg-subtle: #0D1528;  --info-bg: #141E33;
   --info-text: #7AAAF5;  --info-accent: #5B8EF0;
 
@@ -1869,7 +1869,7 @@ Set `data-platform="mobile"` on `<html>` to activate all CSS variable overrides 
 ## Key Rules Summary
 
 1. **One Primary button per view.** Demote alternatives to Secondary/Tertiary.
-2. **No pure red.** Use `--error-*` (rose/magenta) for all error/destructive states.
+2. **Use `--error-*` tokens** for all error/destructive states. Never hard-code red hex values.
 3. **No emoji.** Use Iconic SVG icons only.
 4. **Orange is secondary.** Never use CTA Orange as a primary action competing with Blue.
 5. **Read vs. Compare.** Numbers being *compared* (stacked in lists, cards, ladders) → `var(--font-mono)` + `font-feature-settings: "zero" 0`. Numbers being *read* (singular, dominant) → Inter. Prose-adjacent alignment → Inter + `font-feature-settings: "tnum"`. Mono never bleeds into labels. Timers always mono.

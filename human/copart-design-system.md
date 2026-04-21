@@ -543,9 +543,9 @@ Built around the brand color `#2662D9`, expanded into a functional 6-color prima
 
 ## 3.2 Secondary Accent — Orange
 
-A warm counterweight to the blue primary. Orange provides accent emphasis and visual variety on data-dense pages without triggering the semantic connotations of success (green), warning (amber), or error (rose).
+A warm counterweight to the blue primary. Orange provides accent emphasis and visual variety on data-dense pages without triggering the semantic connotations of success (green), warning (amber), or error (red).
 
-**Why orange:** Urgency without danger — complementary to blue, channels Vitality without the semantic weight of error/rose. Orange breaks the "blue flood" on complex pages. See [Vault > aesthetic-principles.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/aesthetic-principles.md).
+**Why orange:** Urgency without danger — complementary to blue, channels Vitality without the semantic weight of error. Orange breaks the "blue flood" on complex pages. See [Vault > aesthetic-principles.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/aesthetic-principles.md).
 
 > **Never used as a button background.** Orange 600 on white (3.62:1) fails WCAG AA for small body text. All button CTAs — including registration, onboarding, and urgency — use Blue Primary. Orange is an accent color only.
 
@@ -641,8 +641,6 @@ A warm counterweight to the blue primary. Orange provides accent emphasis and vi
 
 ## 3.4 Semantic Colors
 
-> **Critical brand rule:** Red is prohibited in the Copart brand system. Error and destructive states use a deep rose/magenta tone instead of pure red.
-
 > **`-bg` vs `-bg-subtle`:** Two tinted background levels per status. `-bg-subtle` is the lighter tint — use for filter chips, badge fills, and anywhere a quiet status surface is needed. `-bg` is the slightly deeper tint — reserved for toasts, alerts, and banners where the surface carries communicative weight.
 
 ### Success
@@ -661,13 +659,13 @@ A warm counterweight to the blue primary. Orange provides accent emphasis and vi
 | `warning-text` | `#705700` | Warning message text (5.64:1 on warning-bg — **AA**) |
 | `warning-accent` | `#EC9C0D` | Borders, icons, indicators (caution, time-sensitive) |
 
-### Error (Rose — No Pure Red)
+### Error
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `error-bg-subtle` | `#FEF5F6` | Filter chips, badge fills, quiet error surfaces |
-| `error-bg` | `#FCE5E9` | Toasts, alerts, banners, destructive action surfaces |
-| `error-text` | `#8C1D35` | Error message text (7.12:1 on error-bg — **AAA**) |
-| `error-accent` | `#D42A54` | Borders, icons, indicators (validation, form errors) |
+| `error-bg-subtle` | `#FEF5F5` | Filter chips, badge fills, quiet error surfaces |
+| `error-bg` | `#FCE5E5` | Toasts, alerts, banners, destructive action surfaces |
+| `error-text` | `#8C1D28` | Error message text on error-bg — **AAA** |
+| `error-accent` | `#D42A3D` | Borders, icons, indicators (validation, form errors) |
 
 ### Info
 | Token | Hex | Usage |
@@ -735,7 +733,7 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 |-------|--------------------|-----------------------|-------------|-----------|
 | Success | `#D7E8D1` → `#1A2E14` | `#1B6600` → `#6ABF4D` | `#4CA830` | `#6ABF4D` |
 | Warning | `#FFF7D1` → `#2E2510` | `#705700` → `#E8B830` | `#E8B830` | `#E8B830` |
-| Error | `#FCE5E9` → `#2E1219` | `#8C1D35` → `#F06080` | `#F06080` | `#F06080` |
+| Error | `#FCE5E5` → `#2E1215` | `#8C1D28` → `#F06070` | `#F06070` | `#F06070` |
 | Info | `#E0EBFF` → `#141E33` | `#0F2757` → `#7AAAF5` | `#5B8EF0` | `#5B8EF0` |
 
 ---
@@ -758,8 +756,7 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 ### Never
 - Never use Blue 600 for body text — it lacks sufficient contrast at small sizes.
 - **Never let blue dominate a surface.** If everything is Blue 600, nothing is primary. Blue earns its authority through restraint. This is the "blue flood" anti-pattern — when an entire page is blue, the hierarchy collapses and nothing reads as the primary action. See [Vault > anti-patterns.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/anti-patterns.md).
-- Never use pure red (`#FF0000`, `#E00000`, etc.) anywhere in the system. Use the rose/magenta error palette instead.
-- Never combine Warning amber and Error Rose in adjacent elements — it creates visual noise that damages trust.
+- Never combine Warning amber and Error red in adjacent elements — it creates visual noise that damages trust.
 - Never use Orange 600 for body text or as a primary action — it is a secondary accent only. Orange channels Vitality — genuine urgency, not decoration.
 - Never place Orange and Warning elements adjacent to each other — despite different hues (24° vs 37°), they can blur at a glance in dense UIs.
 - Never use color as the sole indicator of state. Always pair with icons, labels, or patterns.
@@ -1429,7 +1426,7 @@ Member nav: 999
 | Default | Neutral 500 | Neutral 500 | Transparent |
 | Active | Blue 600 | Blue 600 | Transparent |
 | Pressed | Blue 800 | Blue 800 | Blue 100 |
-| Badge | — | — | `error-accent` (#D42A54) dot or count |
+| Badge | — | — | `error-accent` (#D42A3D) dot or count |
 
 **Specs:**
 ```
@@ -1632,9 +1629,9 @@ Focus: 3px Blue 600 @ 40% opacity ring, 2px offset
 #### Destructive
 | State | Background | Text | Border |
 |-------|-----------|------|--------|
-| Default | `#D42A54` | White | None |
-| Hover | `#8C1D35` | White | None |
-| Active | `#6B1528` | White | None |
+| Default | `#D42A3D` | White | None |
+| Hover | `#8C1D28` | White | None |
+| Active | `#6B1520` | White | None |
 | Disabled | Neutral 200 | Neutral 700 | None |
 
 #### Success / Confirm
@@ -1919,7 +1916,7 @@ Gap (toggle to label): space-3 (12px)
 | Default (unsaved) | Heart outline, Neutral 500 | "Save" | — |
 | Hover (unsaved) | Heart outline, Blue 600 | "Save" | Cursor pointer |
 | Saving | Spinner replacing icon | "Saving…" | Disable interaction |
-| Saved | Filled heart, error-accent (#D42A54) | "Saved" | Scale bounce (celebration) |
+| Saved | Filled heart, error-accent (#D42A3D) | "Saved" | Scale bounce (celebration) |
 | Hover (saved) | Filled heart, Neutral 500 | "Remove" | Label changes to remove action |
 | Removing | Spinner replacing icon | "Removing…" | Disable interaction |
 | Disabled | Heart outline, Neutral 300 | "Save" (Neutral 300) | Opacity 0.5 |
@@ -1931,7 +1928,7 @@ Icon-only button: 40px × 40px (MD), 32px × 32px (SM)
 Icon + Label gap: space-2 (8px)
 Label: type-subheadline (14px / 600)
 Touch target: 44×44px minimum
-Saved heart color: error-accent (#D42A54) — red/rose heart convention
+Saved heart color: error-accent (#D42A3D) — red heart convention
 Save animation: scale(1.2) → scale(1), 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275)
 Spinner: 16px, currentColor
 ```
@@ -2199,7 +2196,7 @@ Dismiss animation: alertOut keyframe, 300ms ease — opacity 1→0, height/paddi
 |---------|-----------|------|------|
 | Neutral | Neutral 900 | White | None |
 | Success | `#1B6600` | White | Checkmark |
-| Error | `#8C1D35` | White | Exclamation |
+| Error | `#8C1D28` | White | Exclamation |
 
 **Specs:**
 ```
@@ -3467,7 +3464,7 @@ padding-right: env(safe-area-inset-right);
 - Swipe left: Destructive action (Remove from Watchlist, Delete)
 - Swipe right: Positive action (Mark as Read, Archive)
 - Reveal width: 80px
-- Background: Error rose (destructive) or Success green (positive)
+- Background: Error red (destructive) or Success green (positive)
 - Confirm: Full swipe to execute, partial swipe reveals button
 
 ### Bottom Sheet Stack
@@ -3568,9 +3565,9 @@ The three principles — **Precision, Institutional Confidence, Vitality** — a
 ## 12.2 Do's and Don'ts
 
 ### 1. Color Usage
-**Do:** Use Blue 600 for the single primary action on a screen. Use Neutral 700 for body text. Use semantic colors only for their intended purpose (success = green, error = rose).
+**Do:** Use Blue 600 for the single primary action on a screen. Use Neutral 700 for body text. Use semantic colors only for their intended purpose (success = green, error = red).
 
-**Don't:** Use Blue 600 for decorative elements, large background fills, or body text. Don't use pure red anywhere. Don't use color alone to convey meaning.
+**Don't:** Use Blue 600 for decorative elements, large background fills, or body text. Don't use color alone to convey meaning.
 
 ---
 
@@ -3758,9 +3755,9 @@ Before shipping any component, verify:
 - [ ] `prefers-reduced-motion` is respected
 - [ ] `prefers-color-scheme` triggers dark mode appropriately
 
-### Critical Brand Rule for Developers
+### Error Color Usage for Developers
 
-**No red.** The color red (`#FF0000`, `#E00000`, `#CC0000`, or any hue between 345°–15°) is prohibited in the Copart brand. Use the rose/magenta error palette (`#D42A54`, `#D42A54`, `#8C1D35`) for all error, destructive, and negative states. If a third-party library injects red (e.g., form validation, chart libraries), override it with the error tokens.
+Use the error color tokens (`--error-bg`, `--error-bg-subtle`, `--error-text`, `--error-accent`) for all error, destructive, and negative states. Never hard-code red hex values in components. If a third-party library injects its own red (e.g., form validation, chart libraries), override it with the error tokens to keep the palette consistent.
 
 ---
 

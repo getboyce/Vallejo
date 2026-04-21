@@ -740,7 +740,7 @@ Same as Text Field states, plus:
 | Icon + Label gap | var(--space-2) |
 | Label font | type-subheadline (14px / 600) |
 | Touch target | 44×44px minimum |
-| Saved heart color | var(--error-accent) (#D42A54) |
+| Saved heart color | var(--error-accent) (#D42A3D) |
 | Save animation | scale(1.2) → scale(1), var(--duration-moderate) var(--ease-spring) |
 | Spinner size | 16px, currentColor |
 

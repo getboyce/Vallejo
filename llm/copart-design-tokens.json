@@ -37,11 +37,11 @@
           "accent": { "$value": "#EC9C0D", "$type": "color", "$description": "Borders, icons, indicators" }
         },
         "error": {
-          "subtle": { "$value": "#FEF5F6", "$type": "color", "$description": "Filter chips, badge fills" },
-          "light":  { "$value": "#FCE5E9", "$type": "color", "$description": "Toasts, alerts, banners" },
-          "main":   { "$value": "#D42A54", "$type": "color" },
-          "dark":   { "$value": "#8C1D35", "$type": "color" },
-          "accent": { "$value": "#D42A54", "$type": "color", "$description": "Borders, icons, indicators" }
+          "subtle": { "$value": "#FEF5F5", "$type": "color", "$description": "Filter chips, badge fills" },
+          "light":  { "$value": "#FCE5E5", "$type": "color", "$description": "Toasts, alerts, banners" },
+          "main":   { "$value": "#D42A3D", "$type": "color" },
+          "dark":   { "$value": "#8C1D28", "$type": "color" },
+          "accent": { "$value": "#D42A3D", "$type": "color", "$description": "Borders, icons, indicators" }
         },
         "orange": {
           "50":  { "$value": "#FDF7F2", "$type": "color", "$description": "Accent tint — promo surfaces, warm page backgrounds" },
@@ -161,11 +161,11 @@
           "accent": { "$value": "#E8B830", "$type": "color", "$description": "Borders, icons, indicators" }
         },
         "error": {
-          "subtle": { "$value": "#1F0A10", "$type": "color", "$description": "Filter chips, badge fills (dark)" },
-          "light":  { "$value": "#2E1219", "$type": "color", "$description": "Toasts, alerts, banners (dark)" },
-          "main":   { "$value": "#F06080", "$type": "color" },
-          "dark":   { "$value": "#F06080", "$type": "color" },
-          "accent": { "$value": "#F06080", "$type": "color", "$description": "Borders, icons, indicators" }
+          "subtle": { "$value": "#1F0A0D", "$type": "color", "$description": "Filter chips, badge fills (dark)" },
+          "light":  { "$value": "#2E1215", "$type": "color", "$description": "Toasts, alerts, banners (dark)" },
+          "main":   { "$value": "#F06070", "$type": "color" },
+          "dark":   { "$value": "#F06070", "$type": "color" },
+          "accent": { "$value": "#F06070", "$type": "color", "$description": "Borders, icons, indicators" }
         }
       },
 

@@ -659,12 +659,19 @@ Same as Text Field states, plus:
 ### 2.4 Toggle Switch
 
 **Anatomy:**
-1. `toggle-container` — Wrapper with label
+1. `toggle-container` — Wrapper with optional label
 2. `toggle-track` — The elongated background pill
 3. `toggle-thumb` — The circular sliding indicator
-4. `toggle-label` — Descriptive text (always required)
+4. `toggle-label` — Optional descriptive text (see Label rules below)
 
-**Variants:** Single variant.
+**Variants:**
+
+| Variant | Track | Thumb | Label font |
+|---------|-------|-------|-----------|
+| Default | 48×28 | 22px | 16px |
+| Small (`.sm`) | 40×24 | 18px | 14px |
+
+Plus a boolean `label` option — toggle can render with or without the adjacent text label.
 
 **States:**
 
@@ -680,20 +687,21 @@ Same as Text Field states, plus:
 
 **Specs:**
 
-| Property | Desktop | Mobile |
-|----------|---------|--------|
-| Track size | 48px x 28px | 51px x 31px (iOS standard) |
-| Track radius | 14px (pill) | 15.5px (pill) |
-| Thumb diameter | 22px | 27px |
-| Thumb inset | 3px from track edge | 2px from track edge |
-| Thumb shadow | 0 1px 3px rgba(0,0,0,0.15) | same |
-| Gap to label | var(--space-3) | var(--space-3) |
-| Transition | background var(--duration-moderate) ease, transform var(--duration-moderate) var(--ease-spring) | same |
+| Property | Default (Desktop) | Small | Mobile |
+|----------|-------------------|-------|--------|
+| Track size | 48×28 | 40×24 | 51×31 (iOS) |
+| Track radius | 14px (pill) | 12px (pill) | 15.5px (pill) |
+| Thumb diameter | 22px | 18px | 27px |
+| Thumb inset | 3px | 3px | 2px |
+| Thumb shadow | 0 1px 3px rgba(0,0,0,0.15) | same | same |
+| Gap to label | var(--space-3) | var(--space-3) | var(--space-3) |
+| Transition | background var(--duration-moderate) ease, transform var(--duration-moderate) var(--ease-spring) | same | same |
 
 **Usage Rules:**
 - Use for settings that take effect immediately (no "Save" button needed).
 - Do NOT use for form fields that require submission — use checkboxes instead.
-- Always pair with a visible label. Never use a toggle without explanatory text.
+- Prefer the Default size. Use Small (`.sm`) only for dense UI: toolbars, compact table filter rows, or contexts where space is at a premium.
+- Labels are preferred but optional. When the toggle's meaning is obvious from surrounding context (table column headers, adjacent icon-labeled UI, form field titles), the label can be omitted. Always provide `aria-label` when the visible label is removed.
 
 **Accessibility:**
 - `role="switch"`, `aria-checked="true|false"`

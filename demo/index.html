@@ -507,10 +507,10 @@ body {
 .form-error { font-size: 12px; font-weight: 500; color: var(--error-text); margin-top: var(--space-1); }
 
 /* Toggle */
-.toggle-wrap { display: flex; align-items: center; gap: var(--space-3); cursor: pointer; }
+.toggle-wrap { display: inline-flex; align-items: center; gap: var(--space-3); cursor: pointer; }
 .toggle-track {
   width: 48px; height: 28px; border-radius: 14px; background: var(--neutral-300);
-  position: relative; transition: background var(--dur-moderate) var(--ease-spring);
+  position: relative; transition: background var(--dur-moderate) var(--ease-spring); flex-shrink: 0;
 }
 .toggle-track.on { background: var(--interactive-primary); }
 .toggle-thumb {
@@ -520,6 +520,11 @@ body {
 }
 .toggle-track.on .toggle-thumb { transform: translateX(20px); }
 .toggle-label { font-size: 16px; color: var(--text-primary); }
+/* Toggle — Small size */
+.toggle-track.sm { width: 40px; height: 24px; border-radius: 12px; }
+.toggle-track.sm .toggle-thumb { top: 3px; left: 3px; width: 18px; height: 18px; }
+.toggle-track.sm.on .toggle-thumb { transform: translateX(16px); }
+.toggle-wrap.sm .toggle-label { font-size: 14px; }
 
 /* Checkbox */
 .checkbox-wrap { display: flex; align-items: center; gap: var(--space-2); cursor: pointer; padding: 4px 0; }
@@ -2682,6 +2687,17 @@ tr.hot:hover td { background: var(--orange-100); }
         <div class="toggle-wrap" onclick="toggleSwitch(this)"><div class="toggle-track on"><div class="toggle-thumb"></div></div><span class="toggle-label">Email notifications</span></div>
         <div class="toggle-wrap" onclick="toggleSwitch(this)"><div class="toggle-track"><div class="toggle-thumb"></div></div><span class="toggle-label">SMS alerts for bids</span></div>
         <div class="toggle-wrap" onclick="toggleSwitch(this)"><div class="toggle-track on"><div class="toggle-thumb"></div></div><span class="toggle-label">Auto-bid enabled</span></div>
+      </div>
+
+      <div class="subsection-title" style="margin-top:var(--space-5)">Toggles — Small</div>
+      <div class="flex-col" style="gap:var(--space-3)">
+        <div class="toggle-wrap sm" onclick="toggleSwitch(this)"><div class="toggle-track sm on"><div class="toggle-thumb"></div></div><span class="toggle-label">Compact rows, toolbars</span></div>
+        <div class="toggle-wrap sm" onclick="toggleSwitch(this)"><div class="toggle-track sm"><div class="toggle-thumb"></div></div><span class="toggle-label">Dense table filters</span></div>
+      </div>
+      <div class="flex-row" style="gap:var(--space-4);margin-top:var(--space-3);align-items:center">
+        <div class="toggle-wrap sm" onclick="toggleSwitch(this)"><div class="toggle-track sm on"><div class="toggle-thumb"></div></div></div>
+        <div class="toggle-wrap sm" onclick="toggleSwitch(this)"><div class="toggle-track sm"><div class="toggle-thumb"></div></div></div>
+        <span style="font-size:12px;color:var(--text-tertiary)">Small, no label — for table cells &amp; dense UI</span>
       </div>
 
       <div class="subsection-title">Checkboxes</div>

@@ -588,6 +588,7 @@ Key CSS: `.dropdown-search-input` 36px height, 14px, `#F8F8F9` (hardcoded, not a
 ### Toggle Switch
 
 ```html
+<!-- Default size with label -->
 <label class="toggle-wrap">
   <div class="toggle-track" role="switch" aria-checked="false"
        tabindex="0" aria-label="Enable notifications">
@@ -596,17 +597,28 @@ Key CSS: `.dropdown-search-input` 36px height, 14px, `#F8F8F9` (hardcoded, not a
   <span class="toggle-label">Email Notifications</span>
 </label>
 
+<!-- Small size, no visible label (aria-label required) -->
+<label class="toggle-wrap sm">
+  <div class="toggle-track sm" role="switch" aria-checked="false"
+       tabindex="0" aria-label="Mute alerts">
+    <div class="toggle-thumb"></div>
+  </div>
+</label>
+
 <!-- On state: add class "on" to toggle-track, set aria-checked="true" -->
 ```
 
-| Property | Desktop | Mobile |
-|----------|---------|--------|
-| Track | `var(--toggle-w)` x `var(--toggle-h)` (48x28) | 51x31 |
-| Thumb | `var(--toggle-thumb)` (22px) | 27px |
-| Inset | 3px | 2px |
-| Off bg | `var(--neutral-300)` |
-| On bg | `var(--interactive-primary)` |
-| Transition | `var(--dur-moderate) var(--ease-spring)` |
+| Property | Default | Small (`.sm`) | Mobile |
+|----------|---------|---------------|--------|
+| Track | 48×28 | 40×24 | 51×31 |
+| Thumb | 22px | 18px | 27px |
+| Inset | 3px | 3px | 2px |
+| Label font | 16px | 14px | 16px |
+| Off bg | `var(--neutral-300)` | same | same |
+| On bg | `var(--interactive-primary)` | same | same |
+| Transition | `var(--dur-moderate) var(--ease-spring)` | same | same |
+
+Use Small only for dense UI (toolbars, compact rows). Labels are preferred; omit only when meaning is clear from context. Always provide `aria-label` when the visible label is removed.
 
 ---
 

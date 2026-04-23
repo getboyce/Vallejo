@@ -1857,10 +1857,16 @@ For long option lists (makes, models, locations) where scrolling alone is imprac
 **Purpose:** Binary on/off control for settings and preferences (e.g., email notifications, dark mode).
 
 **Anatomy:**
-1. `toggle-container` — Wrapper with label
+1. `toggle-container` — Wrapper with optional label
 2. `toggle-track` — The elongated background pill
 3. `toggle-thumb` — The circular sliding indicator
-4. `toggle-label` — Descriptive text (always required)
+4. `toggle-label` — Optional descriptive text (see Label rules below)
+
+**Sizes:**
+| Size | Track | Thumb | Label font |
+|------|-------|-------|-----------|
+| Default | 48×28 | 22px | 16px |
+| Small (`.sm`) | 40×24 | 18px | 14px |
 
 **States:**
 | State | Track BG | Thumb | Label |
@@ -1875,8 +1881,8 @@ For long option lists (makes, models, locations) where scrolling alone is imprac
 
 **Specs:**
 ```
-Track: 48px × 28px, border-radius 14px (pill)
-Thumb: 22px × 22px circle, 3px inset from track edge
+Default — Track: 48×28, border-radius 14px (pill); Thumb: 22×22, 3px inset
+Small   — Track: 40×24, border-radius 12px (pill); Thumb: 18×18, 3px inset
 Thumb shadow: 0 1px 3px rgba(0,0,0,0.15)
 Transition: background 200ms ease, transform 200ms var(--ease-spring)
 Gap (toggle to label): space-3 (12px)
@@ -1885,7 +1891,8 @@ Gap (toggle to label): space-3 (12px)
 **Usage:**
 - Use for settings that take effect immediately (no "Save" button needed).
 - Do NOT use for form fields that require submission — use checkboxes instead.
-- Always pair with a visible label. Never use a toggle without explanatory text.
+- Prefer the Default size. Use Small only for dense UI: toolbars, compact table rows, inline filters.
+- Labels are preferred but optional. When the toggle's meaning is obvious from surrounding context (column headers, adjacent labeled UI), the label can be omitted. Always provide `aria-label` when the visible label is removed.
 
 **Accessibility:**
 - `role="switch"`, `aria-checked="true|false"`
@@ -3384,11 +3391,11 @@ Based on the iOS Human Interface Guidelines type system, adapted with Inter.
 
 ### Toggle Switch
 
-| Property | Desktop | Mobile |
-|----------|---------|--------|
-| Track size | 48 × 28px | 51 × 31px (iOS standard) |
-| Thumb | 22px | 27px |
-| Gap to label | 12px | 12px |
+| Property | Desktop (Default) | Desktop (Small) | Mobile |
+|----------|-------------------|-----------------|--------|
+| Track size | 48 × 28px | 40 × 24px | 51 × 31px (iOS standard) |
+| Thumb | 22px | 18px | 27px |
+| Gap to label | 12px | 12px | 12px |
 
 ### Card
 
@@ -3772,7 +3779,7 @@ Use the error color tokens (`--error-bg`, `--error-bg-subtle`, `--error-text`, `
 | **Input** | Button | 5 (Primary, Secondary, Tertiary, Destructive, Success) × 5 sizes | Default, Hover, Active, Disabled, Loading, Focus |
 | | Text Field | 1 | Default, Hover, Focus, Filled, Disabled, Error, Success, Read-only |
 | | Dropdown | 1 (with search variant) | Default, Hover, Focus, Open, Has Value, Disabled, Error |
-| | Toggle Switch | 1 | Off, On, Hover (both), Disabled (both), Focus |
+| | Toggle Switch | 2 sizes (Default, Small) + optional label | Off, On, Hover (both), Disabled (both), Focus |
 | | Checkbox | 1 | Unchecked, Checked, Indeterminate, Hover, Disabled, Error, Focus |
 | | Radio Button | 1 | Unselected, Selected, Hover, Disabled, Focus |
 | | Slider | 1 (single + range) | Default, Hover, Active, Disabled, Focus |

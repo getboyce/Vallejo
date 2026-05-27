@@ -24,7 +24,7 @@
 - **Dark mode:** set `data-theme="dark"` on `<html>`. Remove or set `"light"` for light mode.
 - **Mobile platform:** set `data-platform="mobile"` on `<html>` for mobile-specific sizing overrides.
 - **Icons:** Inline SVG only (Iconic set). Always use `stroke="currentColor"` and `fill="none"`. No emoji, no icon fonts, no `<img>` tags. All 120 icon SVG paths are in `ICONS.json`.
-- **No pure red:** Error/destructive states use rose/magenta (`--error-*`), never `#FF0000` etc.
+- **Error states:** Use the `--error-*` token ramp for error/destructive states.
 - **Copart header required:** Always include the Copart header (`components/header/index.html` for logged-out, `components/header/loggedin.html` for logged-in) at the top of every prototype page unless explicitly told not to. Do not recreate or improvise a header — use the existing component files. Shared design tokens live in `components/tokens.css`.
 
 ### Icon Names by Category
@@ -83,7 +83,8 @@
 ### Colors — Primitives (Neutral)
 
 ```css
---neutral-50:  #FFFFFF;  /* dark: #1A1D23 — page bg */
+--neutral-0:   #FFFFFF;  /* dark: #1A1D23 — page bg, pure base canvas */
+--neutral-50:  #F8F7F8;  /* dark: #1A1D23 — subtle surface, alt rows */
 --neutral-100: #F4F5F6;  /* dark: #22262E — surface */
 --neutral-200: #E2E5E9;  /* dark: #2E3340 — muted dividers */
 --neutral-300: #C5CCD3;  /* dark: #3A4150 — borders */
@@ -108,11 +109,11 @@
 --warning-text:      #705700;  /* dark: #E8B830 */
 --warning-accent:    #EC9C0D;  /* dark: #E8B830 — borders, icons, indicators */
 
-/* Error (rose — no pure red) */
---error-bg-subtle:   #FEF5F6;  /* dark: #1F0A10 — filter chips, badge fills */
---error-bg:          #FCE5E9;  /* dark: #2E1219 — toasts, alerts, banners */
---error-text:        #8C1D35;  /* dark: #F06080 */
---error-accent:      #D42A54;  /* dark: #F06080 — borders, icons, indicators */
+/* Error */
+--error-bg-subtle:   #FDF1F2;  /* dark: #240A0D — filter chips, badge fills */
+--error-bg:          #FBDADC;  /* dark: #371015 — toasts, alerts, banners */
+--error-text:        #8A0015;  /* dark: #F5616B */
+--error-accent:      #C20022;  /* dark: #F5616B — borders, icons, indicators */
 
 /* Info */
 --info-bg-subtle:    #F3F7FF;  /* dark: #0D1528 — filter chips, badge fills */
@@ -211,7 +212,7 @@
 --shadow-lg:          0 8px 24px rgba(0,0,0,0.12);
 --shadow-xl:          0 16px 48px rgba(0,0,0,0.16);
 --shadow-focus:       0 0 0 3px rgba(38,98,217,0.4);
---shadow-focus-error: 0 0 0 3px rgba(212,42,84,0.3);
+--shadow-focus-error: 0 0 0 3px rgba(194,0,34,0.3);
 ```
 
 ### Motion
@@ -640,7 +641,7 @@ Key CSS: `.dropdown-search-input` 36px height, 14px, `#F8F8F9` (hardcoded, not a
 | Property | Value |
 |----------|-------|
 | Icon | 24px heart outline (default), filled heart (saved), viewBox 3 3 18 18 for inline buttons |
-| Saved color | `var(--error-accent)` (#D42A54) — filled heart |
+| Saved color | `var(--error-accent)` (#C20022) — filled heart |
 | Default color | `var(--text-secondary)` — stroke outline |
 | Icon-Only size | 40×40px touch target |
 | Label font | 14px / 500 |
@@ -1764,8 +1765,8 @@ Complete `[data-theme="dark"]` override block:
   --success-text: #6ABF4D;  --success-accent: #4CA830;
   --warning-bg-subtle: #1F1A08;  --warning-bg: #2E2510;
   --warning-text: #E8B830;  --warning-accent: #E8B830;
-  --error-bg-subtle: #1F0A10;  --error-bg: #2E1219;
-  --error-text: #F06080;  --error-accent: #F06080;
+  --error-bg-subtle: #240A0D;  --error-bg: #371015;
+  --error-text: #F5616B;  --error-accent: #F5616B;
   --info-bg-subtle: #0D1528;  --info-bg: #141E33;
   --info-text: #7AAAF5;  --info-accent: #5B8EF0;
 
@@ -1869,7 +1870,7 @@ Set `data-platform="mobile"` on `<html>` to activate all CSS variable overrides 
 ## Key Rules Summary
 
 1. **One Primary button per view.** Demote alternatives to Secondary/Tertiary.
-2. **No pure red.** Use `--error-*` (rose/magenta) for all error/destructive states.
+2. **Error states.** Use `--error-*` for all error/destructive states.
 3. **No emoji.** Use Iconic SVG icons only.
 4. **Orange is secondary.** Never use CTA Orange as a primary action competing with Blue.
 5. **Read vs. Compare.** Numbers being *compared* (stacked in lists, cards, ladders) → `var(--font-mono)` + `font-feature-settings: "zero" 0`. Numbers being *read* (singular, dominant) → Inter. Prose-adjacent alignment → Inter + `font-feature-settings: "tnum"`. Mono never bleeds into labels. Timers always mono.

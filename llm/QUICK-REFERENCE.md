@@ -888,14 +888,17 @@ Use Small only for dense UI (toolbars, compact rows). Labels are preferred; omit
 </div>
 ```
 
-**4 Variants:**
+**Types (Subtle default):**
 
 | Class | Background | Text | Icon | Role |
 |-------|-----------|------|------|------|
+| `.alert-neutral` | `var(--gray-100)` | `var(--gray-900)` | info circle | `status` |
 | `.alert-info` | `var(--info-bg)` | `var(--info-text)` | info circle | `status` |
 | `.alert-success` | `var(--success-bg)` | `var(--success-text)` | checkmark circle | `status` |
 | `.alert-warning` | `var(--warning-bg)` | `var(--warning-text)` | triangle exclamation | `alert` |
 | `.alert-error` | `var(--error-bg)` | `var(--error-text)` | octagon exclamation | `alert` |
+
+**Emphasis — Subtle vs Solid:** Subtle (tinted `var(--{type}-bg)`) is the default. Solid (`.alert-solid`: filled `var(--{type}-accent)` + white text) is the rare exception — one critical, must-acknowledge condition only (blocked task, payment/security failure, system outage). Max one Solid in view. Only Warning and Error go Solid; Neutral/Info/Success are Subtle only. Full rule: COMPONENTS.md §3.1.
 
 **Specs:** radius `var(--radius-lg)`, padding `var(--space-4)`, icon 20px, gap `var(--space-3)`, title 14px/600, desc 14px/400. Layout: `align-items: flex-start`, icon gets `margin-top: 1px`.
 

@@ -981,14 +981,33 @@ Plus a boolean `label` option — toggle can render with or without the adjacent
 6. `alert-action` — Optional CTA link or button
 7. `alert-dismiss` — Close/X button (if dismissible)
 
-**Variants (by severity):**
+**Type (severity) — Subtle (default) treatment:**
 
-| Variant | Background | Icon | Icon Color | Text Color |
+| Type | Background | Icon | Icon Color | Text Color |
 |---------|-----------|------|-----------|------------|
+| Neutral | var(--gray-100) | Info circle | var(--gray-700) | var(--gray-900) |
 | Info | var(--feedback-info-bg) | Info circle | var(--feedback-info-accent) | var(--feedback-info-text) |
 | Success | var(--feedback-success-bg) | Checkmark circle | var(--feedback-success-accent) | var(--feedback-success-text) |
 | Warning | var(--feedback-warning-bg) | Triangle exclamation | var(--feedback-warning-accent) | var(--feedback-warning-text) |
 | Error | var(--feedback-error-bg) | Octagon exclamation | var(--feedback-error-accent) | var(--feedback-error-text) |
+
+**Emphasis (Subtle vs Solid):**
+
+Subtle is the default; Solid is the rare exception. Type picks the color + icon (severity); Emphasis sets how hard the surface demands attention. At most one Solid Banner in view at a time — if everything is loud, nothing is.
+
+| Emphasis | Background | Icon / Text | Use for |
+|----------|-----------|-------------|---------|
+| Subtle (default) | `var(--feedback-{type}-bg)` tint | colored (per table above) | Every Banner by default — informs without interrupting |
+| Solid | `var(--feedback-{type}-accent)` (the 600 shade) | white | One critical, must-acknowledge condition |
+
+- **Subtle:** the default for every Banner. Use when the member can keep working, or the condition is routine/expected ("Auction schedule updated").
+- **Solid:** only when all three hold — high-criticality (blocked task, payment/security failure, data-loss, system outage), must be acted on before normal work continues, and rare on this surface. Test: "If the member ignores this, does something break or get lost?"
+- **Neutral, Info, Success: Subtle only.** A solid neutral/info/success surface reads as a false alarm and drives alert fatigue.
+- **Warning:** Subtle by default; Solid only when it gates an imminent irreversible action ("Bidding closes in 2 minutes — confirm your max bid").
+- **Error:** Subtle by default (most errors recover inline); Solid only when it blocks the whole task and has no inline home ("Payment failed — update your payment method to keep bidding"). A system-wide outage uses Error Solid.
+- Warning and Error are the only Types that ever go Solid. Pair a blocking Solid with Static (non-dismissible); never stack Solid banners or keep a permanent Solid bar.
+- Do NOT use Solid for decoration or to make a page "pop" — Solid signals criticality only.
+- Accessibility: the Solid fill is `var(--feedback-{type}-accent)` (the 600 shade), which clears 4.5:1 for white text (≈5.3–7.4:1). Keep the per-severity icon in both treatments — never color or emphasis alone.
 
 **Behavior Variants:**
 
@@ -1025,6 +1044,7 @@ Plus a boolean `label` option — toggle can render with or without the adjacent
 | Min-height | 48px |
 
 **Usage Rules:**
+- Neutral: Non-severity system messages (e.g., "Scheduled maintenance Sunday 2:00–4:00 AM EST"). Subtle only.
 - Info: Non-critical announcements (e.g., "Auction schedule updated").
 - Success: Completed actions (e.g., "Your bid of $4,500 was placed successfully").
 - Warning: Important caution (e.g., "Your deposit covers bids up to $2,000").
@@ -1033,7 +1053,7 @@ Plus a boolean `label` option — toggle can render with or without the adjacent
 
 **Accessibility:**
 - `role="alert"` for Error and Warning variants (announces immediately).
-- `role="status"` for Info and Success variants.
+- `role="status"` for Neutral, Info, and Success variants.
 - Dismiss button: `aria-label="Dismiss alert"`.
 - Focus should not automatically move to alerts.
 

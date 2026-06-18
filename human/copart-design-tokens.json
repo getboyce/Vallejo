@@ -1,55 +1,99 @@
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "copart": {
-    "$description": "Vallejo Design System 1.1.2 Tokens",
+    "$description": "Vallejo Design System 1.2.0 Tokens",
 
     "color": {
       "primitive": {
         "blue": {
-          "50":  { "$value": "#F6F9FD", "$type": "color", "$description": "Brand tint — page backgrounds" },
-          "100": { "$value": "#EEF3FB", "$type": "color", "$description": "Brand lightest — hover backgrounds" },
-          "200": { "$value": "#E1ECF9", "$type": "color", "$description": "Brand light — selected rows, info fills" },
-          "600": { "$value": "#2662D9", "$type": "color", "$description": "Brand primary — CTAs, active links" },
-          "800": { "$value": "#063598", "$type": "color", "$description": "Brand dark — hover states" },
-          "900": { "$value": "#0F2757", "$type": "color", "$description": "Brand darkest — titles, critical text" }
+          "50":  { "$value": "#EFF4FF", "$type": "color", "$description": "Brand tint — page backgrounds" },
+          "100": { "$value": "#DBE7FD", "$type": "color", "$description": "Brand lightest — hover backgrounds" },
+          "200": { "$value": "#B1CCFE", "$type": "color", "$description": "Brand light — selected rows, info fills" },
+          "300": { "$value": "#82ADFC", "$type": "color", "$description": "Brand mid-light — focus-on-dark, subtle accents" },
+          "400": { "$value": "#5A8DF1", "$type": "color", "$description": "Brand mid" },
+          "500": { "$value": "#3970DE", "$type": "color", "$description": "Brand mid-strong" },
+          "600": { "$value": "#2059CC", "$type": "color", "$description": "Brand primary — CTAs, active links" },
+          "700": { "$value": "#1046B4", "$type": "color", "$description": "Brand hover — link/primary hover states" },
+          "800": { "$value": "#043599", "$type": "color", "$description": "Brand dark — pressed/active states" },
+          "900": { "$value": "#032773", "$type": "color", "$description": "Brand darkest — titles, critical text" }
         },
-        "neutral": {
-          "50":  { "$value": "#FFFFFF", "$type": "color", "$description": "Page background — base canvas" },
-          "100": { "$value": "#F4F5F6", "$type": "color", "$description": "Surface — backgrounds, alt rows" },
-          "200": { "$value": "#E2E5E9", "$type": "color", "$description": "Muted — disabled, subtle dividers" },
-          "300": { "$value": "#C5CCD3", "$type": "color", "$description": "Border — form fields, separators" },
-          "500": { "$value": "#7A8691", "$type": "color", "$description": "Subtle — placeholders, captions" },
-          "700": { "$value": "#46525D", "$type": "color", "$description": "Body — body copy, descriptions" },
-          "900": { "$value": "#2F333C", "$type": "color", "$description": "Ink — headlines, primary text" }
+        "gray": {
+          "0":   { "$value": "#FFFFFF", "$type": "color", "$description": "Pure white surface — base canvas, raised surfaces" },
+          "50":  { "$value": "#F6F6F5", "$type": "color", "$description": "Subtle surface — off-white fills, alt rows" },
+          "100": { "$value": "#EEEDEC", "$type": "color", "$description": "Surface — backgrounds, alt rows" },
+          "150": { "$value": "#ECEEF2", "$type": "color", "$description": "Cool light neutral — subtle fills, disabled, hover on white" },
+          "200": { "$value": "#D8DBE2", "$type": "color", "$description": "Muted — disabled, subtle dividers" },
+          "300": { "$value": "#BDC1CA", "$type": "color", "$description": "Border — form fields, separators" },
+          "400": { "$value": "#9C9FA6", "$type": "color", "$description": "Disabled icons, muted on-header text" },
+          "500": { "$value": "#83868D", "$type": "color", "$description": "Subtle — placeholders, captions" },
+          "600": { "$value": "#62666F", "$type": "color", "$description": "Tertiary/disabled text, muted icons" },
+          "700": { "$value": "#484C54", "$type": "color", "$description": "Body — body copy, descriptions" },
+          "800": { "$value": "#30333A", "$type": "color", "$description": "Header surface — dark chrome" },
+          "900": { "$value": "#13161B", "$type": "color", "$description": "Ink — headlines, primary text" },
+          "950": { "$value": "#090B0E", "$type": "color", "$description": "Deepest ink — reserved" }
         },
         "success": {
-          "subtle": { "$value": "#EFF6ED", "$type": "color", "$description": "Filter chips, badge fills" },
-          "light":  { "$value": "#D7E8D1", "$type": "color", "$description": "Toasts, alerts, banners" },
-          "main":   { "$value": "#4CA830", "$type": "color" },
-          "dark":   { "$value": "#1B6600", "$type": "color" },
-          "accent": { "$value": "#4CA830", "$type": "color", "$description": "Borders, icons, indicators" }
+          "50":  { "$value": "#E1F9E6", "$type": "color" },
+          "100": { "$value": "#C8F0D1", "$type": "color" },
+          "200": { "$value": "#9FD8AE", "$type": "color" },
+          "300": { "$value": "#72BC87", "$type": "color" },
+          "400": { "$value": "#47A164", "$type": "color" },
+          "500": { "$value": "#098644", "$type": "color" },
+          "600": { "$value": "#146E3A", "$type": "color", "$description": "Accent — borders, icons, indicators (ADA AA on white)" },
+          "700": { "$value": "#0B5B2E", "$type": "color" },
+          "800": { "$value": "#074823", "$type": "color" },
+          "900": { "$value": "#063519", "$type": "color" },
+          "subtle": { "$value": "{copart.color.primitive.success.50}",  "$type": "color", "$description": "Filter chips, badge fills" },
+          "light":  { "$value": "{copart.color.primitive.success.100}", "$type": "color", "$description": "Toasts, alerts, banners" },
+          "dark":   { "$value": "{copart.color.primitive.success.800}", "$type": "color" },
+          "accent": { "$value": "{copart.color.primitive.success.600}", "$type": "color", "$description": "Borders, icons, indicators" },
+          "main":   { "$value": "{copart.color.primitive.success.600}", "$type": "color", "$description": "DEPRECATED — use accent (600). Retained for back-compat." }
         },
         "warning": {
-          "subtle": { "$value": "#FFFCED", "$type": "color", "$description": "Filter chips, badge fills" },
-          "light":  { "$value": "#FFF7D1", "$type": "color", "$description": "Toasts, alerts, banners" },
-          "main":   { "$value": "#EC9C0D", "$type": "color" },
-          "dark":   { "$value": "#705700", "$type": "color" },
-          "accent": { "$value": "#EC9C0D", "$type": "color", "$description": "Borders, icons, indicators" }
+          "50":  { "$value": "#FEF2E1", "$type": "color" },
+          "100": { "$value": "#FFE3AE", "$type": "color" },
+          "200": { "$value": "#FDC146", "$type": "color" },
+          "300": { "$value": "#E1A117", "$type": "color" },
+          "400": { "$value": "#BC8521", "$type": "color" },
+          "500": { "$value": "#9D6B11", "$type": "color" },
+          "600": { "$value": "#82580B", "$type": "color", "$description": "Accent — borders, icons, indicators (ADA AA on white)" },
+          "700": { "$value": "#6B4806", "$type": "color" },
+          "800": { "$value": "#563804", "$type": "color" },
+          "900": { "$value": "#402903", "$type": "color" },
+          "subtle": { "$value": "{copart.color.primitive.warning.50}",  "$type": "color", "$description": "Filter chips, badge fills" },
+          "light":  { "$value": "{copart.color.primitive.warning.100}", "$type": "color", "$description": "Toasts, alerts, banners" },
+          "dark":   { "$value": "{copart.color.primitive.warning.800}", "$type": "color" },
+          "accent": { "$value": "{copart.color.primitive.warning.600}", "$type": "color", "$description": "Borders, icons, indicators" },
+          "main":   { "$value": "{copart.color.primitive.warning.600}", "$type": "color", "$description": "DEPRECATED — use accent (600). Retained for back-compat." }
         },
         "error": {
-          "subtle": { "$value": "#FEF5F5", "$type": "color", "$description": "Filter chips, badge fills" },
-          "light":  { "$value": "#FCE5E5", "$type": "color", "$description": "Toasts, alerts, banners" },
-          "main":   { "$value": "#D42A3D", "$type": "color" },
-          "dark":   { "$value": "#8C1D28", "$type": "color" },
-          "accent": { "$value": "#D42A3D", "$type": "color", "$description": "Borders, icons, indicators" }
+          "50":  { "$value": "#FFF0EF", "$type": "color" },
+          "100": { "$value": "#FDDFDD", "$type": "color" },
+          "200": { "$value": "#FCBBB5", "$type": "color" },
+          "300": { "$value": "#FD8C86", "$type": "color" },
+          "400": { "$value": "#EE625F", "$type": "color" },
+          "500": { "$value": "#D8383D", "$type": "color" },
+          "600": { "$value": "#C20022", "$type": "color", "$description": "Accent — borders, icons, indicators (ADA AA on white)" },
+          "700": { "$value": "#9D121F", "$type": "color" },
+          "800": { "$value": "#7F0D18", "$type": "color" },
+          "900": { "$value": "#63010D", "$type": "color" },
+          "subtle": { "$value": "{copart.color.primitive.error.50}",  "$type": "color", "$description": "Filter chips, badge fills" },
+          "light":  { "$value": "{copart.color.primitive.error.100}", "$type": "color", "$description": "Toasts, alerts, banners" },
+          "dark":   { "$value": "{copart.color.primitive.error.800}", "$type": "color" },
+          "accent": { "$value": "{copart.color.primitive.error.600}", "$type": "color", "$description": "Borders, icons, indicators" },
+          "main":   { "$value": "{copart.color.primitive.error.600}", "$type": "color", "$description": "DEPRECATED — use accent (600). Retained for back-compat." }
         },
         "orange": {
-          "50":  { "$value": "#FDF7F2", "$type": "color", "$description": "Accent tint — promo surfaces, warm page backgrounds" },
-          "100": { "$value": "#FAEEE5", "$type": "color", "$description": "Accent lightest — hover fills, subtle warm highlights" },
-          "200": { "$value": "#F8E2D3", "$type": "color", "$description": "Accent light — badge fills, selected states, featured backgrounds" },
-          "600": { "$value": "#D86518", "$type": "color", "$description": "Accent — badges, featured borders, urgency indicators. NEVER a button background (3.62:1 on white fails WCAG AA)." },
-          "800": { "$value": "#933C06", "$type": "color", "$description": "Accent dark — hover/pressed states on accent elements" },
-          "900": { "$value": "#50250B", "$type": "color", "$description": "Accent darkest — text on warm surfaces, headings in warm contexts" }
+          "50":  { "$value": "#FFF0E9", "$type": "color", "$description": "Accent tint — promo surfaces, warm page backgrounds" },
+          "100": { "$value": "#FEE0D0", "$type": "color", "$description": "Accent lightest — hover fills, subtle warm highlights" },
+          "200": { "$value": "#FFBC97", "$type": "color", "$description": "Accent light — badge fills, selected states, featured backgrounds" },
+          "300": { "$value": "#FA9252", "$type": "color", "$description": "Accent mid-light" },
+          "400": { "$value": "#E56D05", "$type": "color", "$description": "Accent bright — visual-brand orange" },
+          "500": { "$value": "#BB590C", "$type": "color", "$description": "Accent base — interactive accent (text/badge/border only; NEVER a button background)" },
+          "600": { "$value": "#9A490F", "$type": "color", "$description": "Accent — badges, featured borders, urgency indicators. NEVER a button background." },
+          "700": { "$value": "#7F3C0A", "$type": "color", "$description": "Accent hover/pressed step" },
+          "800": { "$value": "#662F07", "$type": "color", "$description": "Accent dark — hover/pressed states on accent elements" },
+          "900": { "$value": "#4D2104", "$type": "color", "$description": "Accent darkest — text on warm surfaces, headings in warm contexts" }
         },
         "white":  { "$value": "#FFFFFF", "$type": "color" },
         "black":  { "$value": "#000000", "$type": "color" }
@@ -57,47 +101,80 @@
 
       "semantic": {
         "background": {
-          "primary":   { "$value": "{copart.color.primitive.white}", "$type": "color" },
-          "secondary": { "$value": "{copart.color.primitive.neutral.100}", "$type": "color" },
+          "primary":   { "$value": "{copart.color.primitive.gray.0}", "$type": "color" },
+          "secondary": { "$value": "{copart.color.primitive.gray.100}", "$type": "color" },
           "tertiary":  { "$value": "{copart.color.primitive.blue.50}", "$type": "color" },
-          "inverse":   { "$value": "{copart.color.primitive.neutral.900}", "$type": "color" }
+          "inverse":   { "$value": "{copart.color.primitive.gray.900}", "$type": "color" }
         },
         "text": {
-          "primary":   { "$value": "{copart.color.primitive.neutral.900}", "$type": "color" },
-          "secondary": { "$value": "{copart.color.primitive.neutral.700}", "$type": "color" },
-          "tertiary":  { "$value": "{copart.color.primitive.neutral.500}", "$type": "color" },
-          "disabled":  { "$value": "{copart.color.primitive.neutral.300}", "$type": "color" },
+          "primary":   { "$value": "{copart.color.primitive.gray.900}", "$type": "color" },
+          "secondary": { "$value": "{copart.color.primitive.gray.700}", "$type": "color" },
+          "tertiary":  { "$value": "{copart.color.primitive.gray.600}", "$type": "color", "$description": "Remapped to gray/600 in 1.2 for contrast" },
+          "disabled":  { "$value": "{copart.color.primitive.gray.600}", "$type": "color", "$description": "Remapped to gray/600 in 1.2 (darker, ADA)" },
           "inverse":   { "$value": "{copart.color.primitive.white}", "$type": "color" },
           "link":      { "$value": "{copart.color.primitive.blue.600}", "$type": "color" },
-          "link-hover": { "$value": "{copart.color.primitive.blue.800}", "$type": "color" }
+          "link-hover": { "$value": "{copart.color.primitive.blue.700}", "$type": "color" },
+          "on-header":           { "$value": "{copart.color.primitive.gray.0}",   "$type": "color", "$description": "Primary text on dark header" },
+          "on-header-secondary": { "$value": "{copart.color.primitive.gray.300}", "$type": "color", "$description": "Secondary text on dark header" },
+          "on-header-muted":     { "$value": "{copart.color.primitive.gray.400}", "$type": "color", "$description": "Muted text on dark header" }
         },
         "border": {
-          "default":  { "$value": "{copart.color.primitive.neutral.300}", "$type": "color" },
-          "subtle":   { "$value": "{copart.color.primitive.neutral.200}", "$type": "color" },
-          "strong":   { "$value": "{copart.color.primitive.neutral.500}", "$type": "color" },
+          "default":  { "$value": "{copart.color.primitive.gray.300}", "$type": "color" },
+          "subtle":   { "$value": "{copart.color.primitive.gray.200}", "$type": "color" },
+          "strong":   { "$value": "{copart.color.primitive.gray.500}", "$type": "color" },
           "focus":    { "$value": "{copart.color.primitive.blue.600}", "$type": "color" },
-          "error":    { "$value": "{copart.color.primitive.error.main}", "$type": "color" },
-          "success":  { "$value": "{copart.color.primitive.success.main}", "$type": "color" }
+          "error":    { "$value": "{copart.color.primitive.error.accent}", "$type": "color" },
+          "success":  { "$value": "{copart.color.primitive.success.accent}", "$type": "color" },
+          "hairline":       { "$value": "{copart.color.primitive.gray.200}", "$type": "color", "$description": "1px dividers, table rules" },
+          "hairline-faint": { "$value": "{copart.color.primitive.gray.100}", "$type": "color", "$description": "Faintest dividers" },
+          "control":        { "$value": "{copart.color.primitive.gray.300}", "$type": "color", "$description": "Input/control boundaries" },
+          "on-header":        { "$value": "{copart.color.primitive.gray.600}", "$type": "color", "$description": "Borders on dark header" },
+          "on-header-strong": { "$value": "{copart.color.primitive.gray.500}", "$type": "color", "$description": "Stronger borders on dark header" },
+          "focus-on-dark":    { "$value": "{copart.color.primitive.blue.300}", "$type": "color", "$description": "Focus ring on dark surfaces" },
+          "key-edge":        { "$value": "#13161B12", "$type": "color", "$description": "Subtle top key-line — ink ~7%" },
+          "key-edge-strong": { "$value": "#13161B1A", "$type": "color", "$description": "Stronger key-line — ink ~10%" },
+          "key-edge-faint":  { "$value": "#13161B0D", "$type": "color", "$description": "Faintest key-line — ink ~5%" }
         },
         "interactive": {
           "primary":          { "$value": "{copart.color.primitive.blue.600}", "$type": "color" },
-          "primary-hover":    { "$value": "{copart.color.primitive.blue.800}", "$type": "color" },
-          "primary-active":   { "$value": "#042D7A", "$type": "color" },
+          "primary-hover":    { "$value": "{copart.color.primitive.blue.700}", "$type": "color" },
+          "primary-active":   { "$value": "{copart.color.primitive.blue.800}", "$type": "color" },
           "secondary":        { "$value": "{copart.color.primitive.blue.100}", "$type": "color" },
           "secondary-hover":  { "$value": "{copart.color.primitive.blue.200}", "$type": "color" },
-          "accent":           { "$value": "{copart.color.primitive.orange.600}", "$type": "color", "$description": "Secondary CTA, registration, urgency" },
-          "accent-hover":     { "$value": "{copart.color.primitive.orange.800}", "$type": "color" },
-          "accent-surface":   { "$value": "{copart.color.primitive.orange.200}", "$type": "color", "$description": "Badge fills, featured content backgrounds" },
-          "destructive":      { "$value": "{copart.color.primitive.error.icon}", "$type": "color" },
-          "destructive-hover": { "$value": "{copart.color.primitive.error.dark}", "$type": "color" },
-          "disabled":         { "$value": "{copart.color.primitive.neutral.200}", "$type": "color" }
+          "accent":           { "$value": "{copart.color.primitive.orange.500}", "$type": "color", "$description": "Secondary CTA, registration, urgency — text/badge/border only, never a button background" },
+          "accent-hover":     { "$value": "{copart.color.primitive.orange.600}", "$type": "color" },
+          "accent-surface":   { "$value": "{copart.color.primitive.orange.100}", "$type": "color", "$description": "Badge fills, featured content backgrounds" },
+          "destructive":       { "$value": "{copart.color.primitive.error.accent}", "$type": "color", "$description": "Destructive action color (fixed broken ref in 1.2)" },
+          "destructive-hover": { "$value": "{copart.color.primitive.error.700}", "$type": "color" },
+          "destructive-active": { "$value": "{copart.color.primitive.error.800}", "$type": "color" },
+          "disabled":         { "$value": "{copart.color.primitive.gray.150}", "$type": "color" }
         },
         "link": {
           "default":  { "$value": "{copart.color.primitive.blue.600}", "$type": "color", "$description": "Text link default color" },
-          "hover":    { "$value": "{copart.color.primitive.blue.800}", "$type": "color", "$description": "Text link hover color" }
+          "hover":    { "$value": "{copart.color.primitive.blue.700}", "$type": "color", "$description": "Text link hover color" }
+        },
+        "icon": {
+          "on-accent": { "$value": "{copart.color.primitive.gray.0}",   "$type": "color", "$description": "Icon on accent/solid fills" },
+          "default":   { "$value": "{copart.color.primitive.gray.900}", "$type": "color" },
+          "secondary": { "$value": "{copart.color.primitive.gray.700}", "$type": "color" },
+          "muted":     { "$value": "{copart.color.primitive.gray.600}", "$type": "color" },
+          "disabled":  { "$value": "{copart.color.primitive.gray.400}", "$type": "color" },
+          "accent":    { "$value": "{copart.color.primitive.blue.600}", "$type": "color" },
+          "critical":  { "$value": "{copart.color.primitive.error.accent}", "$type": "color" },
+          "success":   { "$value": "{copart.color.primitive.success.accent}", "$type": "color" }
         },
         "surface": {
-          "header-bg": { "$value": "#2F333C", "$type": "color", "$description": "Header background — stays dark in both themes" }
+          "raised":      { "$value": "{copart.color.primitive.gray.0}",   "$type": "color", "$description": "Cards, raised panels" },
+          "sunken":      { "$value": "{copart.color.primitive.gray.100}", "$type": "color", "$description": "Wells, inset surfaces" },
+          "canvas":      { "$value": "{copart.color.primitive.gray.50}",  "$type": "color", "$description": "App canvas background" },
+          "subtle":      { "$value": "{copart.color.primitive.gray.150}", "$type": "color", "$description": "Subtle fills, hover on white" },
+          "tint-accent": { "$value": "{copart.color.primitive.orange.50}", "$type": "color", "$description": "Warm tinted surface" },
+          "header-bg":    { "$value": "{copart.color.primitive.gray.800}", "$type": "color", "$description": "Header background — stays dark in both themes" },
+          "header-deep":  { "$value": "{copart.color.primitive.gray.900}", "$type": "color", "$description": "Deepest header chrome" },
+          "header-field": { "$value": "{copart.color.primitive.gray.700}", "$type": "color", "$description": "Search/input field on header" },
+          "header-shelf": { "$value": "{copart.color.primitive.gray.700}", "$type": "color", "$description": "Header shelf / secondary bar" },
+          "footer-bg":    { "$value": "{copart.color.primitive.gray.900}", "$type": "color", "$description": "Footer background — stays dark in both themes" },
+          "scrim":        { "$value": "#13161B73", "$type": "color", "$description": "Modal/drawer backdrop — ink at ~45%" }
         },
         "feedback": {
           "success-bg-subtle": { "$value": "{copart.color.primitive.success.subtle}", "$type": "color", "$description": "Filter chips, badge fills" },
@@ -112,8 +189,8 @@
           "error-bg":       { "$value": "{copart.color.primitive.error.light}", "$type": "color", "$description": "Toasts, alerts, banners" },
           "error-text":     { "$value": "{copart.color.primitive.error.dark}", "$type": "color" },
           "error-accent":    { "$value": "{copart.color.primitive.error.accent}", "$type": "color", "$description": "Borders, icons, indicators" },
-          "info-bg-subtle": { "$value": "#F3F7FF", "$type": "color", "$description": "Filter chips, badge fills" },
-          "info-bg":        { "$value": "#E0EBFF", "$type": "color", "$description": "Toasts, alerts, banners" },
+          "info-bg-subtle": { "$value": "{copart.color.primitive.blue.50}", "$type": "color", "$description": "Filter chips, badge fills" },
+          "info-bg":        { "$value": "{copart.color.primitive.blue.100}", "$type": "color", "$description": "Toasts, alerts, banners" },
           "info-text":      { "$value": "{copart.color.primitive.blue.900}", "$type": "color" },
           "info-accent":     { "$value": "{copart.color.primitive.blue.600}", "$type": "color", "$description": "Borders, icons, indicators" }
         }
@@ -137,14 +214,20 @@
           "800": { "$value": "#F0A566", "$type": "color", "$description": "Accent hover — hover/pressed states" },
           "900": { "$value": "#F8C99A", "$type": "color", "$description": "Accent text — text on dark warm surfaces" }
         },
-        "neutral": {
+        "gray": {
+          "0":   { "$value": "#1A1D23", "$type": "color", "$description": "Pure white surface (dark) — base dark canvas" },
           "50":  { "$value": "#1A1D23", "$type": "color", "$description": "Page background — base dark canvas" },
           "100": { "$value": "#22262E", "$type": "color", "$description": "Surface — elevated backgrounds, cards" },
+          "150": { "$value": "#2A2E37", "$type": "color", "$description": "INTERIM — Figma exports gray/150 mode-flat (#ECEEF2); derived dark step between 100 and 200, pending design confirmation" },
           "200": { "$value": "#2E3340", "$type": "color", "$description": "Muted — subtle dividers, disabled" },
           "300": { "$value": "#3A4150", "$type": "color", "$description": "Border — form fields, separators" },
+          "400": { "$value": "#545D6B", "$type": "color", "$description": "Disabled icons, muted on-header text" },
           "500": { "$value": "#6E7A86", "$type": "color", "$description": "Subtle — placeholders, captions" },
+          "600": { "$value": "#8B96A1", "$type": "color", "$description": "Tertiary/disabled text, muted icons" },
           "700": { "$value": "#A8B2BC", "$type": "color", "$description": "Body — body copy, descriptions" },
-          "900": { "$value": "#F0F1F3", "$type": "color", "$description": "Ink — headlines, primary text" }
+          "800": { "$value": "#CCD2D8", "$type": "color", "$description": "Near-ink on dark surfaces" },
+          "900": { "$value": "#F0F1F3", "$type": "color", "$description": "Ink — headlines, primary text" },
+          "950": { "$value": "#F8F9FA", "$type": "color", "$description": "Brightest ink on dark — reserved" }
         },
         "success": {
           "subtle": { "$value": "#0F1F0A", "$type": "color", "$description": "Filter chips, badge fills (dark)" },
@@ -173,25 +256,25 @@
         "$description": "Dark mode semantic tokens — reference primitive-dark values",
         "background": {
           "primary":   { "$value": "#1A1D23", "$type": "color" },
-          "secondary": { "$value": "{copart.color.primitive-dark.neutral.100}", "$type": "color" },
-          "tertiary":  { "$value": "{copart.color.primitive-dark.neutral.200}", "$type": "color" },
-          "overlay":   { "$value": "rgba(0,0,0,0.7)", "$type": "color" }
+          "secondary": { "$value": "{copart.color.primitive-dark.gray.100}", "$type": "color" },
+          "tertiary":  { "$value": "{copart.color.primitive-dark.gray.200}", "$type": "color" },
+          "overlay":   { "$value": "#13161B73", "$type": "color", "$description": "Modal/drawer backdrop — ink at ~45% (aligned to surface/scrim)" }
         },
         "text": {
-          "primary":   { "$value": "{copart.color.primitive-dark.neutral.900}", "$type": "color" },
-          "secondary": { "$value": "{copart.color.primitive-dark.neutral.700}", "$type": "color" },
-          "tertiary":  { "$value": "{copart.color.primitive-dark.neutral.500}", "$type": "color" },
+          "primary":   { "$value": "{copart.color.primitive-dark.gray.900}", "$type": "color" },
+          "secondary": { "$value": "{copart.color.primitive-dark.gray.700}", "$type": "color" },
+          "tertiary":  { "$value": "{copart.color.primitive-dark.gray.500}", "$type": "color" },
           "disabled":  { "$value": "#454D58", "$type": "color" }
         },
         "border": {
-          "default":  { "$value": "{copart.color.primitive-dark.neutral.300}", "$type": "color" },
-          "subtle":   { "$value": "{copart.color.primitive-dark.neutral.200}", "$type": "color" },
+          "default":  { "$value": "{copart.color.primitive-dark.gray.300}", "$type": "color" },
+          "subtle":   { "$value": "{copart.color.primitive-dark.gray.200}", "$type": "color" },
           "focus":    { "$value": "{copart.color.primitive-dark.blue.600}", "$type": "color" }
         },
         "interactive": {
           "primary":          { "$value": "{copart.color.primitive-dark.blue.600}", "$type": "color" },
           "primary-hover":    { "$value": "{copart.color.primitive-dark.blue.800}", "$type": "color" },
-          "primary-active":   { "$value": "#4A7DE0", "$type": "color" },
+          "primary-active":   { "$value": "{copart.color.primitive-dark.blue.800}", "$type": "color", "$description": "Aligned to primary-active = blue/800 (dark)" },
           "selected-bg":      { "$value": "{copart.color.primitive-dark.blue.200}", "$type": "color" },
           "accent":           { "$value": "{copart.color.primitive-dark.orange.600}", "$type": "color", "$description": "Orange accent lightened for dark backgrounds (4.1:1 on #1A1D23)" },
           "accent-hover":     { "$value": "{copart.color.primitive-dark.orange.800}", "$type": "color" },
@@ -233,6 +316,39 @@
         "bold":       { "$value": 700, "$type": "fontWeight" },
         "extrabold":  { "$value": 800, "$type": "fontWeight" },
         "black":      { "$value": 900, "$type": "fontWeight" }
+      },
+      "font-size": {
+        "11": { "$value": "11px", "$type": "dimension" },
+        "12": { "$value": "12px", "$type": "dimension" },
+        "13": { "$value": "13px", "$type": "dimension" },
+        "14": { "$value": "14px", "$type": "dimension" },
+        "15": { "$value": "15px", "$type": "dimension" },
+        "16": { "$value": "16px", "$type": "dimension" },
+        "18": { "$value": "18px", "$type": "dimension" },
+        "20": { "$value": "20px", "$type": "dimension" },
+        "22": { "$value": "22px", "$type": "dimension" },
+        "24": { "$value": "24px", "$type": "dimension" },
+        "28": { "$value": "28px", "$type": "dimension" },
+        "36": { "$value": "36px", "$type": "dimension" },
+        "48": { "$value": "48px", "$type": "dimension" },
+        "64": { "$value": "64px", "$type": "dimension" }
+      },
+      "line-height": {
+        "14": { "$value": "14px", "$type": "dimension" },
+        "16": { "$value": "16px", "$type": "dimension" },
+        "18": { "$value": "18px", "$type": "dimension" },
+        "20": { "$value": "20px", "$type": "dimension" },
+        "22": { "$value": "22px", "$type": "dimension" },
+        "24": { "$value": "24px", "$type": "dimension" },
+        "26": { "$value": "26px", "$type": "dimension" },
+        "28": { "$value": "28px", "$type": "dimension" },
+        "30": { "$value": "30px", "$type": "dimension" },
+        "32": { "$value": "32px", "$type": "dimension" },
+        "36": { "$value": "36px", "$type": "dimension" },
+        "44": { "$value": "44px", "$type": "dimension" },
+        "48": { "$value": "48px", "$type": "dimension" },
+        "56": { "$value": "56px", "$type": "dimension" },
+        "72": { "$value": "72px", "$type": "dimension" }
       },
       "scale": {
         "display-lg": {
@@ -302,8 +418,10 @@
     },
 
     "spacing": {
-      "0":  { "$value": "0px",   "$type": "dimension" },
-      "1":  { "$value": "4px",   "$type": "dimension", "$description": "Inline icon gap, tight padding" },
+      "0":   { "$value": "0px",   "$type": "dimension" },
+      "0-5": { "$value": "2px",   "$type": "dimension", "$description": "Component-internal only — hairline gaps, badge y-padding. Never layout." },
+      "1":   { "$value": "4px",   "$type": "dimension", "$description": "Inline icon gap, tight padding" },
+      "1-5": { "$value": "6px",   "$type": "dimension", "$description": "Component-internal only — chip/badge x-padding, tight icon gaps. Never layout." },
       "2":  { "$value": "8px",   "$type": "dimension", "$description": "Default icon-to-label gap" },
       "3":  { "$value": "12px",  "$type": "dimension", "$description": "Form field padding-x, small card padding" },
       "4":  { "$value": "16px",  "$type": "dimension", "$description": "Default component padding" },
@@ -335,8 +453,8 @@
       "md":   { "$value": "0 4px 12px rgba(0,0,0,0.08)", "$type": "shadow", "$description": "Cards hover, dropdowns" },
       "lg":   { "$value": "0 8px 24px rgba(0,0,0,0.12)", "$type": "shadow", "$description": "Floating elements, tooltips" },
       "xl":   { "$value": "0 16px 48px rgba(0,0,0,0.16)", "$type": "shadow", "$description": "Modals, overlays" },
-      "focus": { "$value": "0 0 0 3px rgba(38,98,217,0.4)", "$type": "shadow", "$description": "Focus ring" },
-      "focus-error": { "$value": "0 0 0 3px rgba(212,42,84,0.3)", "$type": "shadow", "$description": "Error focus ring" }
+      "focus": { "$value": "0 0 0 3px rgba(32,89,204,0.4)", "$type": "shadow", "$description": "Focus ring — blue/600" },
+      "focus-error": { "$value": "0 0 0 3px rgba(194,0,34,0.3)", "$type": "shadow", "$description": "Error focus ring — error/600" }
     },
 
     "motion": {
@@ -347,7 +465,9 @@
         "moderate": { "$value": "200ms", "$type": "duration", "$description": "Tooltips, dropdowns, sidebar" },
         "slow":     { "$value": "300ms", "$type": "duration", "$description": "Page transitions, modals" },
         "deliberate": { "$value": "400ms", "$type": "duration", "$description": "Bottom sheet enter, deliberate transitions" },
-        "slower":   { "$value": "500ms", "$type": "duration", "$description": "Skeleton shimmer cycle" }
+        "slower":   { "$value": "500ms", "$type": "duration", "$description": "Skeleton shimmer cycle" },
+        "expressive": { "$value": "700ms", "$type": "duration", "$description": "Expressive, attention-drawing transitions" },
+        "pulse":    { "$value": "2400ms", "$type": "duration", "$description": "Looping pulse / breathing cycle" }
       },
       "easing": {
         "default":     { "$value": "ease",            "$type": "cubicBezier" },
@@ -356,7 +476,8 @@
         "ease-in-out": { "$value": "ease-in-out",     "$type": "cubicBezier", "$description": "State changes" },
         "spring":      { "$value": "cubic-bezier(0.175, 0.885, 0.32, 1.275)", "$type": "cubicBezier", "$description": "Delight animations — overshoot for heart pop, bid pulse" },
         "enter":       { "$value": "cubic-bezier(0.32, 0.72, 0, 1)", "$type": "cubicBezier", "$description": "Elements entering screen" },
-        "exit":        { "$value": "cubic-bezier(0.4, 0, 1, 1)", "$type": "cubicBezier", "$description": "Elements leaving screen" }
+        "exit":        { "$value": "cubic-bezier(0.4, 0, 1, 1)", "$type": "cubicBezier", "$description": "Elements leaving screen" },
+        "linear":      { "$value": "linear", "$type": "cubicBezier", "$description": "Progress indicators only" }
       },
       "delight": {
         "$description": "Delight animation specifications for key user moments",
@@ -449,7 +570,7 @@
       "header": {
         "height-desktop": { "$value": "72px", "$type": "dimension" },
         "height-mobile":  { "$value": "56px", "$type": "dimension" },
-        "z-index":        { "$value": 1000, "$type": "number" }
+        "z-index":        { "$value": 1200, "$type": "number" }
       },
       "sidebar": {
         "width-expanded":  { "$value": "280px", "$type": "dimension" },
@@ -469,13 +590,15 @@
     },
 
     "zIndex": {
-      "dropdown":  { "$value": 1100, "$type": "number" },
-      "sticky":    { "$value": 1000, "$type": "number" },
-      "header":    { "$value": 1000, "$type": "number" },
-      "overlay":   { "$value": 1300, "$type": "number" },
+      "dropdown":  { "$value": 1000, "$type": "number" },
+      "sticky":    { "$value": 1100, "$type": "number" },
+      "header":    { "$value": 1200, "$type": "number" },
+      "drawer":    { "$value": 1300, "$type": "number" },
+      "scrim":     { "$value": 1400, "$type": "number", "$description": "Modal/drawer backdrop layer" },
+      "overlay":   { "$value": 1400, "$type": "number", "$description": "DEPRECATED — use scrim (1400)." },
       "modal":     { "$value": 1500, "$type": "number" },
-      "toast":     { "$value": 2000, "$type": "number" },
-      "tooltip":   { "$value": 2500, "$type": "number" }
+      "toast":     { "$value": 1600, "$type": "number" },
+      "tooltip":   { "$value": 1700, "$type": "number" }
     },
 
     "platform": {

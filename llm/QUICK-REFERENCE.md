@@ -1,4 +1,4 @@
-# Vallejo v1.1.2 — LLM Quick Reference
+# Vallejo v1.2.0 — LLM Quick Reference
 
 > **Design source of truth:** The [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault) defines the "why" — philosophy, principles, anti-patterns. Read the Vault first for context. This file defines the "how" — execution specs and patterns. When they conflict, the Vault wins.
 >
@@ -61,64 +61,76 @@
 ### Colors — Primitives (Blue)
 
 ```css
---blue-50:  #F6F9FD;   /* dark: #0D1117 */
---blue-100: #EEF3FB;   /* dark: #141E33 */
---blue-200: #E1ECF9;   /* dark: #1E2A45 — selected rows, active/pressed states, "you picked this" feedback */
---blue-600: #2662D9;   /* dark: #5B8EF0 — primary brand */
---blue-800: #063598;   /* dark: #7AAAF5 — hover */
---blue-900: #0F2757;   /* dark: #B8D4FA — titles */
+--blue-50:  #EFF4FF;   /* dark: #0D1117 */
+--blue-100: #DBE7FD;   /* dark: #141E33 */
+--blue-200: #B1CCFE;   /* dark: #1E2A45 — selected rows, active/pressed states, "you picked this" feedback */
+--blue-300: #82ADFC;   /* dark: #82ADFC — focus ring on dark surfaces */
+--blue-400: #5A8DF1;
+--blue-500: #3970DE;
+--blue-600: #2059CC;   /* dark: #5B8EF0 — primary brand */
+--blue-700: #1046B4;   /* dark: #7AAAF5 — hover (link-hover / interactive primary-hover) */
+--blue-800: #043599;   /* dark: #7AAAF5 — pressed/active */
+--blue-900: #032773;   /* dark: #B8D4FA — titles */
 ```
 
 ### Colors — Primitives (Orange)
 
 ```css
---orange-50:  #FDF7F2;  /* dark: #1A1008 */
---orange-100: #FAEEE5;  /* dark: #221710 */
---orange-200: #F8E2D3;  /* dark: #2E1F14 */
---orange-600: #D86518;  /* dark: #E8873F — accent (badges, featured borders). NEVER a button background (fails WCAG AA) */
---orange-800: #933C06;  /* dark: #F0A566 — accent hover/pressed */
---orange-900: #50250B;  /* dark: #F8C99A — accent text on warm surfaces */
+--orange-50:  #FFF0E9;  /* dark: #FFF0E9 */
+--orange-100: #FEE0D0;  /* dark: #FEE0D0 — accent surface (featured fills) */
+--orange-200: #FFBC97;  /* dark: #FFBC97 */
+--orange-300: #FA9252;
+--orange-400: #E56D05;
+--orange-500: #BB590C;  /* dark: #BB590C — accent base (badges, featured borders). NEVER a button background (below AA for normal text on white) */
+--orange-600: #9A490F;  /* dark: #9A490F — accent hover */
+--orange-700: #7F3C0A;
+--orange-800: #662F07;  /* dark: #662F07 */
+--orange-900: #4D2104;  /* dark: #4D2104 — accent text on warm surfaces */
 ```
 
-### Colors — Primitives (Neutral)
+### Colors — Primitives (Gray)
 
 ```css
---neutral-50:  #FFFFFF;  /* dark: #1A1D23 — page bg */
---neutral-100: #F4F5F6;  /* dark: #22262E — surface */
---neutral-200: #E2E5E9;  /* dark: #2E3340 — muted dividers */
---neutral-300: #C5CCD3;  /* dark: #3A4150 — borders */
---neutral-500: #7A8691;  /* dark: #6E7A86 — placeholders */
---neutral-700: #46525D;  /* dark: #A8B2BC — body copy */
---neutral-900: #2F333C;  /* dark: #F0F1F3 — headlines */
---neutral-950: #23262F;  /* dark: #F8F9FA — darkest surface */
+--gray-0:   #FFFFFF;  /* dark: #1A1D23 — page bg (pure-white surface) */
+--gray-100: #EEEDEC;  /* dark: #22262E — surface */
+--gray-150: #ECEEF2;  /* dark: #ECEEF2 — disabled fills */
+--gray-200: #D8DBE2;  /* dark: #2E3340 — muted dividers */
+--gray-300: #BDC1CA;  /* dark: #3A4150 — borders */
+--gray-400: #9C9FA6;
+--gray-500: #83868D;  /* dark: #6E7A86 — placeholders */
+--gray-600: #62666F;  /* dark: #8B96A1 — tertiary text, muted icons */
+--gray-700: #484C54;  /* dark: #A8B2BC — body copy */
+--gray-800: #30333A;  /* dark: #CCD2D8 — header background */
+--gray-900: #13161B;  /* dark: #F0F1F3 — headlines / ink */
+--gray-950: #090B0E;  /* dark: #F8F9FA — darkest surface */
 ```
 
 ### Colors — Semantics (Feedback)
 
 ```css
 /* Success */
---success-bg-subtle: #EFF6ED;  /* dark: #0F1F0A — filter chips, badge fills */
---success-bg:        #D7E8D1;  /* dark: #1A2E14 — toasts, alerts, banners */
---success-text:      #1B6600;  /* dark: #6ABF4D */
---success-accent:    #4CA830;  /* dark: #4CA830 — borders, icons, indicators */
+--success-bg-subtle: #E1F9E6;  /* dark: #0F1F0A — filter chips, badge fills */
+--success-bg:        #C8F0D1;  /* dark: #1A2E14 — toasts, alerts, banners */
+--success-text:      #074823;  /* dark: #6ABF4D */
+--success-accent:    #146E3A;  /* dark: #4CA830 — borders, icons, indicators */
 
 /* Warning */
---warning-bg-subtle: #FFFCED;  /* dark: #1F1A08 — filter chips, badge fills */
---warning-bg:        #FFF7D1;  /* dark: #2E2510 — toasts, alerts, banners */
---warning-text:      #705700;  /* dark: #E8B830 */
---warning-accent:    #EC9C0D;  /* dark: #E8B830 — borders, icons, indicators */
+--warning-bg-subtle: #FEF2E1;  /* dark: #1F1A08 — filter chips, badge fills */
+--warning-bg:        #FFE3AE;  /* dark: #2E2510 — toasts, alerts, banners */
+--warning-text:      #563804;  /* dark: #E8B830 */
+--warning-accent:    #82580B;  /* dark: #E8B830 — borders, icons, indicators */
 
 /* Error */
---error-bg-subtle:   #FEF5F5;  /* dark: #1F0A0D — filter chips, badge fills */
---error-bg:          #FCE5E5;  /* dark: #2E1215 — toasts, alerts, banners */
---error-text:        #8C1D28;  /* dark: #F06070 */
---error-accent:      #D42A3D;  /* dark: #F06070 — borders, icons, indicators */
+--error-bg-subtle:   #FFF0EF;  /* dark: #1F0A0D — filter chips, badge fills */
+--error-bg:          #FDDFDD;  /* dark: #2E1215 — toasts, alerts, banners */
+--error-text:        #7F0D18;  /* dark: #F06070 */
+--error-accent:      #C20022;  /* dark: #F06070 — borders, icons, indicators */
 
 /* Info */
---info-bg-subtle:    #F3F7FF;  /* dark: #0D1528 — filter chips, badge fills */
---info-bg:           #E0EBFF;  /* dark: #141E33 — toasts, alerts, banners */
---info-text:         #0F2757;  /* dark: #7AAAF5 */
---info-accent:       #2662D9;  /* dark: #5B8EF0 — borders, icons, indicators */
+--info-bg-subtle:    #EFF4FF;  /* dark: #0D1528 — filter chips, badge fills */
+--info-bg:           #DBE7FD;  /* dark: #141E33 — toasts, alerts, banners */
+--info-text:         #032773;  /* dark: #7AAAF5 */
+--info-accent:       #2059CC;  /* dark: #5B8EF0 — borders, icons, indicators */
 ```
 
 > **`-bg` vs `-bg-subtle`:** Use `-bg-subtle` for filter chips and badges (quiet tint). Use `-bg` for toasts, alerts, and banners (communicative tint).
@@ -128,34 +140,34 @@
 ```css
 /* Backgrounds */
 --bg-primary:   #FFFFFF;  /* dark: #1A1D23 */
---bg-secondary: #F4F5F6;  /* dark: #22262E */
---bg-tertiary:  #F6F9FD;  /* dark: #2E3340 */
+--bg-secondary: #EEEDEC;  /* dark: #22262E */
+--bg-tertiary:  #EFF4FF;  /* dark: #2E3340 */
 
 /* Text */
---text-primary:  #2F333C;  /* dark: #F0F1F3 */
---text-secondary: #46525D; /* dark: #A8B2BC */
---text-tertiary: #7A8691;  /* dark: #6E7A86 */
---text-disabled: #C5CCD3;  /* dark: #454D58 */
+--text-primary:  #13161B;  /* dark: #F0F1F3 */
+--text-secondary: #484C54; /* dark: #A8B2BC */
+--text-tertiary: #62666F;  /* dark: #8B96A1 */
+--text-disabled: #62666F;  /* dark: #8B96A1 */
 
 /* Borders */
---border-default: #C5CCD3; /* dark: #3A4150 */
---border-subtle:  #E2E5E9; /* dark: #2E3340 */
---border-focus:   #2662D9; /* dark: #5B8EF0 */
+--border-default: #BDC1CA; /* dark: #3A4150 */
+--border-subtle:  #D8DBE2; /* dark: #2E3340 */
+--border-focus:   #2059CC; /* dark: #5B8EF0 */
 
 /* Links */
---text-link:       #2662D9; /* dark: #5B8EF0 */
---text-link-hover: #063598; /* dark: #7AAAF5 */
+--text-link:       #2059CC; /* dark: #5B8EF0 */
+--text-link-hover: #1046B4; /* dark: #1046B4 */
 
 /* Interactive */
---interactive-primary:      #2662D9; /* dark: #5B8EF0 */
---interactive-hover:        #063598; /* dark: #7AAAF5 */
---interactive-active:       #042D7A; /* dark: #4A7DE0 */
---interactive-accent:       #D86518; /* dark: #E8873F — badges/borders only, NOT button backgrounds */
---interactive-accent-hover: #933C06; /* dark: #F0A566 — accent hover on badges/borders */
---interactive-accent-surface: #F8E2D3; /* dark: #2E1F14 — featured surface fills */
+--interactive-primary:      #2059CC; /* dark: #5B8EF0 */
+--interactive-hover:        #1046B4; /* dark: #1046B4 */
+--interactive-active:       #043599; /* dark: #7AAAF5 */
+--interactive-accent:       #BB590C; /* dark: #BB590C — badges/borders only, NOT button backgrounds */
+--interactive-accent-hover: #9A490F; /* dark: #9A490F — accent hover on badges/borders */
+--interactive-accent-surface: #FEE0D0; /* dark: #FEE0D0 — featured surface fills */
 
 /* Header — stays dark in both themes */
---header-bg: #2F333C;
+--header-bg: #30333A;
 ```
 
 ### Spacing
@@ -210,8 +222,8 @@
 --shadow-md:          0 4px 12px rgba(0,0,0,0.08);
 --shadow-lg:          0 8px 24px rgba(0,0,0,0.12);
 --shadow-xl:          0 16px 48px rgba(0,0,0,0.16);
---shadow-focus:       0 0 0 3px rgba(38,98,217,0.4);
---shadow-focus-error: 0 0 0 3px rgba(212,42,84,0.3);
+--shadow-focus:       0 0 0 3px rgba(32,89,204,0.4);
+--shadow-focus-error: 0 0 0 3px rgba(194,0,34,0.3);
 ```
 
 ### Motion
@@ -229,11 +241,18 @@
 --ease-enter:  cubic-bezier(0.32, 0.72, 0, 1);
 --ease-exit:   cubic-bezier(0.4, 0, 1, 1);
 
-/* Z-index */
---z-header:   1000;
---z-dropdown: 1100;
---z-overlay:  1200;
---z-drawer:   1300;
+/* Z-index / layers (1.2 ladder) */
+--layer-dropdown: 1000;
+--layer-sticky:   1100;
+--layer-header:   1200;
+--layer-drawer:   1300;
+--layer-scrim:    1400;
+--layer-modal:    1500;
+--layer-toast:    1600;
+--layer-tooltip:  1700;
+/* deprecated --z-* aliases → resolve to new layer values */
+--z-dropdown: var(--layer-dropdown); --z-header: var(--layer-header);
+--z-overlay:  var(--layer-scrim);    --z-drawer:  var(--layer-drawer);
 ```
 
 ### Platform-Adaptive Variables
@@ -393,7 +412,7 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 | `.btn-secondary` | `var(--bg-primary)` | `var(--interactive-primary)` | `1.5px solid var(--interactive-primary)` |
 | `.btn-tertiary` | `transparent` | `var(--interactive-primary)` | none |
 | `.btn-destructive` | `var(--error-accent)` | `#fff` | none |
-| `.btn-success` | `var(--success-text)` (#1B6600, AAA) | `#fff` | none |
+| `.btn-success` | `var(--success-text)` (#074823, AAA) | `#fff` | none |
 
 **Sizes:**
 
@@ -405,7 +424,7 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 | `.btn-lg` | 48px | 24px | 16px | `var(--radius-lg)` |
 | `.btn-xl` | 56px | 32px | 18px | 10px |
 
-**States:** hover (`var(--interactive-hover)` bg for primary), active (`scale(0.98)`), disabled (`var(--neutral-200)` bg, `var(--neutral-700)` text — unified across all variants), loading (`aria-busy="true"`), focus (`box-shadow: var(--shadow-focus)`)
+**States:** hover (`var(--interactive-hover)` bg for primary), active (`scale(0.98)`), disabled (`var(--gray-200)` bg, `var(--gray-700)` text — unified across all variants), loading (`aria-busy="true"`), focus (`box-shadow: var(--shadow-focus)`)
 
 **Icon + Text:** Add `.btn-icon-text` when a button has a leading icon. Reduces left padding by 2px for optical balance (e.g., MD: `14px` left, `16px` right).
 
@@ -565,7 +584,7 @@ Rule: use glossary terms consistently — never alternate between synonyms.
 </div>
 ```
 
-Key CSS: `.dropdown-option-multi` uses flex with gap, `.multi-check` is 18x18 checkbox. Count badge: positioned LEFT of label text inside `.trigger-label` flex wrapper (`align-items: center`). Badge uses gray background (`var(--neutral-200)`) with `var(--text-primary)` text, `margin-right: var(--space-2)`, `flex-shrink: 0`.
+Key CSS: `.dropdown-option-multi` uses flex with gap, `.multi-check` is 18x18 checkbox. Count badge: positioned LEFT of label text inside `.trigger-label` flex wrapper (`align-items: center`). Badge uses gray background (`var(--gray-200)`) with `var(--text-primary)` text, `margin-right: var(--space-2)`, `flex-shrink: 0`.
 
 **Searchable variant:**
 
@@ -614,7 +633,7 @@ Key CSS: `.dropdown-search-input` 36px height, 14px, `#F8F8F9` (hardcoded, not a
 | Thumb | 22px | 18px | 27px |
 | Inset | 3px | 3px | 2px |
 | Label font | 16px | 14px | 16px |
-| Off bg | `var(--neutral-300)` | same | same |
+| Off bg | `var(--gray-300)` | same | same |
 | On bg | `var(--interactive-primary)` | same | same |
 | Transition | `var(--dur-moderate) var(--ease-spring)` | same | same |
 
@@ -652,7 +671,7 @@ Use Small only for dense UI (toolbars, compact rows). Labels are preferred; omit
 | Property | Value |
 |----------|-------|
 | Icon | 24px heart outline (default), filled heart (saved), viewBox 3 3 18 18 for inline buttons |
-| Saved color | `var(--error-accent)` (#D42A3D) — filled heart |
+| Saved color | `var(--error-accent)` (#C20022) — filled heart |
 | Default color | `var(--text-secondary)` — stroke outline |
 | Icon-Only size | 40×40px touch target |
 | Label font | 14px / 500 |
@@ -682,7 +701,7 @@ Use Small only for dense UI (toolbars, compact rows). Labels are preferred; omit
 |----------|-------|
 | Size | 20px (mobile: 22px) |
 | Radius | `var(--radius-sm)` (4px) |
-| Unchecked border | `1.5px solid var(--neutral-300)` |
+| Unchecked border | `1.5px solid var(--gray-300)` |
 | Checked bg | `var(--interactive-primary)` |
 | Indeterminate | `aria-checked="mixed"`, minus icon instead of check |
 | Group spacing | `var(--space-3)` vertical |
@@ -690,7 +709,7 @@ Use Small only for dense UI (toolbars, compact rows). Labels are preferred; omit
 **Hover states:**
 
 ```css
-.checkbox-box:hover { border-color: var(--neutral-500); background: var(--neutral-50); }
+.checkbox-box:hover { border-color: var(--gray-500); background: var(--gray-0); }
 .checkbox-box.checked:hover { background: var(--interactive-hover); border-color: var(--interactive-hover); }
 ```
 
@@ -720,7 +739,7 @@ Use Small only for dense UI (toolbars, compact rows). Labels are preferred; omit
 |----------|-------|
 | Outer circle | 20px, `border-radius: 50%` |
 | Inner dot | 10px, `var(--interactive-primary)` |
-| Unselected border | `1.5px solid var(--neutral-300)` |
+| Unselected border | `1.5px solid var(--gray-300)` |
 | Selected border | `1.5px solid var(--interactive-primary)` |
 | Selected label weight | 600 (Semi Bold) — bold signals active choice |
 | Group spacing | `var(--space-3)` vertical |
@@ -728,7 +747,7 @@ Use Small only for dense UI (toolbars, compact rows). Labels are preferred; omit
 **Hover states:**
 
 ```css
-.radio-circle:hover { border-color: var(--neutral-500); background: var(--neutral-50); }
+.radio-circle:hover { border-color: var(--gray-500); background: var(--gray-0); }
 .radio-circle.selected:hover { border-color: var(--interactive-hover); }
 ```
 
@@ -774,7 +793,7 @@ Use Small only for dense UI (toolbars, compact rows). Labels are preferred; omit
 
 | Property | Value |
 |----------|-------|
-| Track height | 4px, `var(--neutral-200)` bg, 2px radius |
+| Track height | 4px, `var(--gray-200)` bg, 2px radius |
 | Fill | `var(--interactive-primary)` |
 | Thumb | 24px circle (mobile: 28px), white, `1.5px solid var(--interactive-primary)` |
 | Thumb shadow | `0 1px 4px rgba(0,0,0,0.15)` |
@@ -900,7 +919,7 @@ Use Small only for dense UI (toolbars, compact rows). Labels are preferred; omit
 
 | Class | Background | Use |
 |-------|-----------|-----|
-| `.toast-neutral` | `var(--neutral-900)` | General confirmations |
+| `.toast-neutral` | `var(--gray-900)` | General confirmations |
 | `.toast-success` | `var(--success-text)` | Positive completions |
 | `.toast-error` | `var(--error-text)` | Error notifications |
 
@@ -934,7 +953,7 @@ Use Small only for dense UI (toolbars, compact rows). Labels are preferred; omit
 
 | Property | Value |
 |----------|-------|
-| Background | `var(--neutral-900)` (#2F333C) |
+| Background | `var(--gray-900)` (#13161B) |
 | Text color | `#FFFFFF` |
 | Font | 12px / 500 (`type-caption-1`) |
 | Max width | 240px |
@@ -974,7 +993,7 @@ Use Small only for dense UI (toolbars, compact rows). Labels are preferred; omit
 | Property | Value |
 |----------|-------|
 | Background | `var(--bg-primary)` (white) |
-| Border | `1px solid var(--neutral-200)` |
+| Border | `1px solid var(--gray-200)` |
 | Radius | `var(--radius-lg)` (8px) |
 | Shadow | `var(--shadow-lg)` |
 | Max width | 320px |
@@ -1079,7 +1098,7 @@ Use Small only for dense UI (toolbars, compact rows). Labels are preferred; omit
 | Panel bg | `var(--bg-primary)` |
 | Desktop radius | 16px on open side |
 | Mobile radius | `20px 20px 0 0` |
-| Handle | 36x4px, `var(--neutral-300)`, 2px radius, centered |
+| Handle | 36x4px, `var(--gray-300)`, 2px radius, centered |
 | Open anim | desktop: `translateX(100%)->0`, `var(--dur-slow) var(--ease-enter)` |
 | Mobile open | `translateY(100%)->0`, `var(--dur-deliberate) var(--ease-enter)` |
 
@@ -1096,7 +1115,7 @@ Use Small only for dense UI (toolbars, compact rows). Labels are preferred; omit
 <div class="spinner spinner-lg" role="status" aria-label="Loading page"></div>
 ```
 
-Spinner: `var(--interactive-primary)` top border, `var(--neutral-200)` track, 0.8s linear infinite rotation. Default 24px, `.spinner-lg` 48px.
+Spinner: `var(--interactive-primary)` top border, `var(--gray-200)` track, 0.8s linear infinite rotation. Default 24px, `.spinner-lg` 48px.
 
 **Progress bar:**
 
@@ -1108,7 +1127,7 @@ Spinner: `var(--interactive-primary)` top border, `var(--neutral-200)` track, 0.
 </div>
 ```
 
-Track: 6px, `var(--neutral-200)`, 3px radius. Fill: `var(--interactive-primary)`.
+Track: 6px, `var(--gray-200)`, 3px radius. Fill: `var(--interactive-primary)`.
 
 **Step indicator:**
 
@@ -1136,8 +1155,8 @@ Track: 6px, `var(--neutral-200)`, 3px radius. Fill: `var(--interactive-primary)`
 
 | Element | Completed | Current | Upcoming |
 |---------|-----------|---------|----------|
-| Circle (32px) | `var(--interactive-primary)` bg, white check | `2px solid var(--interactive-primary)`, blue number | `2px solid var(--neutral-300)`, gray number |
-| Connector (2px) | `var(--interactive-primary)` | -- | `var(--neutral-200)` |
+| Circle (32px) | `var(--interactive-primary)` bg, white check | `2px solid var(--interactive-primary)`, blue number | `2px solid var(--gray-300)`, gray number |
+| Connector (2px) | `var(--interactive-primary)` | -- | `var(--gray-200)` |
 
 ---
 
@@ -1160,8 +1179,8 @@ Track: 6px, `var(--neutral-200)`, 3px radius. Fill: `var(--interactive-primary)`
 
 | Property | Value |
 |----------|-------|
-| Base bg | `var(--neutral-100)` |
-| Shimmer | `linear-gradient(90deg, transparent 25%, var(--neutral-200) 50%, transparent 75%)` |
+| Base bg | `var(--gray-100)` |
+| Shimmer | `linear-gradient(90deg, transparent 25%, var(--gray-200) 50%, transparent 75%)` |
 | Animation | `shimmer 1.5s infinite ease-in-out` |
 | Radius | match target component |
 
@@ -1257,12 +1276,12 @@ Track: 6px, `var(--neutral-200)`, 3px radius. Fill: `var(--interactive-primary)`
 | Property | Value |
 |----------|-------|
 | Container | `var(--bg-primary)`, `1px solid var(--border-subtle)`, `var(--radius-xl)` |
-| Header bg | `var(--neutral-100)` |
+| Header bg | `var(--gray-100)` |
 | Header font | 13px / 600 |
 | Cell padding | `var(--space-3)` |
 | Cell font | 14px / 400, `var(--text-secondary)` |
-| Row hover | `var(--neutral-100)` bg |
-| Zebra striping | `tr:nth-child(even) td { background: #F8F8F9; }` — intentional hardcoded value (not a token) for subtlety; hover overrides to `var(--neutral-100)` |
+| Row hover | `var(--gray-100)` bg |
+| Zebra striping | `tr:nth-child(even) td { background: #F8F8F9; }` — intentional hardcoded value (not a token) for subtlety; hover overrides to `var(--gray-100)` |
 | Hot row | `var(--orange-50)` bg |
 | Sort icon | 12px, `var(--interactive-primary)` when sorted |
 | `.mono` class | `var(--font-mono)`, 13px (for VIN, lot#, price) |
@@ -1308,8 +1327,8 @@ Track: 6px, `var(--neutral-200)`, 3px radius. Fill: `var(--interactive-primary)`
 | Property | Value |
 |----------|-------|
 | Padding | `var(--space-3) var(--space-4)` |
-| Hover bg | `var(--neutral-100)` |
-| Zebra striping | `.list-item:nth-child(even) { background: #F8F8F9; }` — intentional hardcoded value (not a token) for subtlety; hover overrides to `var(--neutral-100)` |
+| Hover bg | `var(--gray-100)` |
+| Zebra striping | `.list-item:nth-child(even) { background: #F8F8F9; }` — intentional hardcoded value (not a token) for subtlety; hover overrides to `var(--gray-100)` |
 | Divider | `1px solid var(--border-subtle)` |
 | Title | 15px / 500, `var(--text-primary)` |
 | Subtitle | 12px, `var(--text-tertiary)` |
@@ -1358,14 +1377,14 @@ Track: 6px, `var(--neutral-200)`, 3px radius. Fill: `var(--interactive-primary)`
 
 Specification only (use a chart library). Color sequence for multi-series:
 
-1. `var(--blue-600)` (#2662D9)
+1. `var(--blue-600)` (#2059CC)
 2. `#5B8EF0` (light blue)
-3. `var(--blue-900)` (#0F2757)
-4. `#EC9C0D` (amber)
-5. `#4CA830` (green)
-6. `var(--neutral-500)` (#7A8691)
+3. `var(--blue-900)` (#032773)
+4. `#82580B` (amber)
+5. `#146E3A` (green)
+6. `var(--gray-500)` (#83868D)
 
-Axis labels: 12px/500, `var(--text-tertiary)`. Grid: 1px dashed `var(--neutral-200)`. Tooltip: white bg, 8px radius, `var(--shadow-md)`.
+Axis labels: 12px/500, `var(--text-tertiary)`. Grid: 1px dashed `var(--gray-200)`. Tooltip: white bg, 8px radius, `var(--shadow-md)`.
 
 ---
 
@@ -1419,7 +1438,7 @@ Axis labels: 12px/500, `var(--text-tertiary)`. Grid: 1px dashed `var(--neutral-2
 | Property | Value |
 |----------|-------|
 | Height | 72px desktop / 56px mobile |
-| Background | `var(--header-bg)` (#2F333C -- stays dark in both themes) |
+| Background | `var(--header-bg)` (#30333A -- stays dark in both themes) |
 | z-index | 1000 |
 | Logo height | 32px desktop / 28px mobile |
 | Nav link | 14px/600, white, `opacity: 0.85` -> `1.0` on hover |
@@ -1509,7 +1528,7 @@ Axis labels: 12px/500, `var(--text-tertiary)`. Grid: 1px dashed `var(--neutral-2
 |----------|-------|
 | Font | 12px / 500 |
 | Link color | `var(--text-tertiary)` / hover: `var(--interactive-primary)` |
-| Separator | 16px chevron-right, `var(--neutral-500)` |
+| Separator | 16px chevron-right, `var(--gray-500)` |
 | Current | `var(--text-primary)`, 600 weight |
 | Gap | `var(--space-1)` |
 | Overflow (mobile) | horizontal scroll, no wrap |
@@ -1541,7 +1560,7 @@ Axis labels: 12px/500, `var(--text-tertiary)`. Grid: 1px dashed `var(--neutral-2
 | Padding | `0 var(--space-5)` (0 20px) |
 | Radius | `var(--radius-pill)` (9999px) |
 | Font | 14px / 600 |
-| Default bg | `var(--neutral-100)` |
+| Default bg | `var(--gray-100)` |
 | Default text | `var(--text-secondary)` |
 | Active bg | `var(--interactive-primary)` |
 | Active text | `#FFFFFF` |
@@ -1577,7 +1596,7 @@ Axis labels: 12px/500, `var(--text-tertiary)`. Grid: 1px dashed `var(--neutral-2
 | Font | 14px / 600 (all states — prevents layout shift on tab switch) |
 | Inactive text | `var(--text-tertiary)` |
 | Active text | `var(--interactive-primary)` |
-| Active indicator | 2px `var(--blue-600)` (#2662D9) underline, bottom-aligned |
+| Active indicator | 2px `var(--blue-600)` (#2059CC) underline, bottom-aligned |
 | Indicator anim | slide + width transition, `var(--dur-moderate) var(--ease-out)` |
 | Hover text | `var(--text-primary)` |
 | Border-bottom | `1px solid var(--border-subtle)` (full width track) |
@@ -1593,7 +1612,7 @@ Axis labels: 12px/500, `var(--text-tertiary)`. Grid: 1px dashed `var(--neutral-2
 | Property | Value |
 |----------|-------|
 | Color | `var(--text-link)` / Blue 600 |
-| Hover | `var(--text-link-hover)` / Blue 800, underline |
+| Hover | `var(--text-link-hover)` / Blue 700, underline |
 | Weight | 500 (Medium) — distinguishes from body 400 |
 | Visited | Blue 900 |
 | Focus | 3px Blue 600 @ 40%, 2px offset |
@@ -1625,7 +1644,7 @@ Links navigate (`<a href>`). Buttons act (`<button>`). External links get traili
 |----------|-------|
 | Radius | `var(--radius-lg)` (8px) standard, `50%` avatar |
 | Object-fit | `cover` (vehicles), `contain` (documents) |
-| Placeholder bg | `var(--neutral-100)` |
+| Placeholder bg | `var(--gray-100)` |
 | Lazy loading | `loading="lazy"` on all below-fold images |
 | Gallery dots | 8px, white active, white 50% inactive |
 
@@ -1698,7 +1717,7 @@ All avatars: `border-radius: 50%`, white text, centered. Badge (status dot): bot
 <div class="empty-state">
   <div class="empty-icon">
     <svg width="64" height="64" viewBox="0 0 24 24" fill="none"
-         stroke="var(--neutral-300)" stroke-width="1.5">
+         stroke="var(--gray-300)" stroke-width="1.5">
       <!-- heart, magnifier, gavel, etc. -->
     </svg>
   </div>
@@ -1736,32 +1755,32 @@ Complete `[data-theme="dark"]` override block:
 
 ```css
 [data-theme="dark"] {
-  /* Primitive Blue */
-  --blue-50: #0D1117;  --blue-100: #141E33;  --blue-200: #1E2A45;
-  --blue-600: #5B8EF0; --blue-800: #7AAAF5;  --blue-900: #B8D4FA;
+  /* Primitive Blue (dark values unchanged in 1.2) */
+  --blue-50: #0D1117;  --blue-100: #141E33;  --blue-200: #1E2A45;  --blue-300: #82ADFC;
+  --blue-600: #5B8EF0; --blue-700: #7AAAF5;  --blue-800: #7AAAF5;  --blue-900: #B8D4FA;
 
-  /* Primitive Orange */
+  /* Primitive Orange (curated dark ramp — preserved, not Figma mode-flat) */
   --orange-50: #1A1008;  --orange-100: #221710;  --orange-200: #2E1F14;
-  --orange-600: #E8873F; --orange-800: #F0A566;  --orange-900: #F8C99A;
+  --orange-500: #E8873F; --orange-600: #F0A566;  --orange-800: #F0A566;  --orange-900: #F8C99A;
 
-  /* Primitive Neutral */
-  --neutral-50: #1A1D23;  --neutral-100: #22262E;  --neutral-200: #2E3340;
-  --neutral-300: #3A4150;  --neutral-500: #6E7A86;
-  --neutral-700: #A8B2BC;  --neutral-900: #F0F1F3;  --neutral-950: #F8F9FA;
+  /* Primitive Gray */
+  --gray-0: #1A1D23;  --gray-100: #22262E;  --gray-200: #2E3340;
+  --gray-300: #3A4150;  --gray-500: #6E7A86;  --gray-600: #8B96A1;
+  --gray-700: #A8B2BC;  --gray-800: #CCD2D8;  --gray-900: #F0F1F3;  --gray-950: #F8F9FA;
 
   /* Semantic Surfaces */
   --bg-primary: #1A1D23;  --bg-secondary: #22262E;  --bg-tertiary: #2E3340;
 
   /* Semantic Text */
   --text-primary: #F0F1F3;  --text-secondary: #A8B2BC;
-  --text-tertiary: #6E7A86;  --text-disabled: #454D58;
+  --text-tertiary: #8B96A1;  --text-disabled: #8B96A1;
 
   /* Semantic Borders */
   --border-default: #3A4150;  --border-subtle: #2E3340;  --border-focus: #5B8EF0;
 
   /* Semantic Interactive */
-  --interactive-primary: #5B8EF0;  --interactive-hover: #7AAAF5;
-  --interactive-active: #4A7DE0;
+  --interactive-primary: #5B8EF0;  --interactive-hover: #1046B4;
+  --interactive-active: #7AAAF5;
   --interactive-accent: #E8873F;  --interactive-accent-hover: #F0A566;
   --interactive-accent-surface: #2E1F14;
 
@@ -1782,7 +1801,7 @@ Complete `[data-theme="dark"]` override block:
   --info-text: #7AAAF5;  --info-accent: #5B8EF0;
 
   /* Header stays dark */
-  --header-bg: #2F333C;
+  --header-bg: #30333A;
 }
 ```
 
@@ -1867,14 +1886,17 @@ Set `data-platform="mobile"` on `<html>` to activate all CSS variable overrides 
 
 ## Z-Index Scale
 
-| Layer | z-index | Use |
-|-------|---------|-----|
-| Base content | 0 | Default stacking |
-| Sticky elements | 90-100 | Sticky nav, headers |
-| Dropdown menus | 1100 | Select menus, popovers |
-| Sidebar overlay | 1400 | Shelf/drawer backdrop + panel |
-| Modal | 1500 | Modal backdrop + panel |
-| Toast | 2000 | Toast notifications |
+| Layer | z-index | Token | Use |
+|-------|---------|-------|-----|
+| Base content | 0 | — | Default stacking |
+| Dropdown menus | 1000 | `--layer-dropdown` | Select menus, popovers |
+| Sticky elements | 1100 | `--layer-sticky` | Sticky nav |
+| Header | 1200 | `--layer-header` | Site header |
+| Drawer | 1300 | `--layer-drawer` | Shelf/drawer panel |
+| Scrim | 1400 | `--layer-scrim` | Modal/drawer backdrop |
+| Modal | 1500 | `--layer-modal` | Modal panel |
+| Toast | 1600 | `--layer-toast` | Toast notifications |
+| Tooltip | 1700 | `--layer-tooltip` | Tooltips |
 
 ---
 

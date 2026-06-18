@@ -1,6 +1,6 @@
 # Vallejo Design System
 
-**1.1.2** | Last updated: March 28, 2026
+**1.2.0** | Last updated: June 17, 2026
 
 ---
 
@@ -483,59 +483,59 @@ Real examples of correct and incorrect copy across common patterns.
 
 ## 3.1 Primary Palette
 
-Built around the brand color `#2662D9`, expanded into a functional 6-color primary scale.
+Built around the brand color `#2059CC`, expanded into a functional 6-color primary scale.
 
 ### Blue 600 — Brand Primary
 | Property     | Value                          |
 |-------------|--------------------------------|
-| **Hex**     | `#2662D9`                      |
-| **RGB**     | 38, 98, 217                    |
-| **HSL**     | 220°, 70%, 50%                 |
-| **WCAG on White** | 4.56:1 — **AA (large text)** |
+| **Hex**     | `#2059CC`                      |
+| **RGB**     | 32, 89, 204                    |
+| **HSL**     | 220°, 73%, 46%                 |
+| **WCAG on White** | 5.1:1 — **AA**           |
 | **Usage**   | Primary CTAs, active links, key interactive elements, selected states |
 
 ### Blue 800 — Brand Dark
 | Property     | Value                          |
 |-------------|--------------------------------|
-| **Hex**     | `#063598`                      |
-| **RGB**     | 6, 53, 152                     |
-| **HSL**     | 221°, 92%, 31%                 |
-| **WCAG on White** | 8.45:1 — **AAA**         |
-| **Usage**   | Hover states on primary, high-emphasis headings, focus rings |
+| **Hex**     | `#043599`                      |
+| **RGB**     | 4, 53, 153                     |
+| **HSL**     | 221°, 95%, 31%                 |
+| **WCAG on White** | **AAA**                  |
+| **Usage**   | Pressed/active states on primary, high-emphasis headings. (Hover state now uses Blue 700 `#1046B4`.) |
 
 ### Blue 900 — Brand Darkest
 | Property     | Value                          |
 |-------------|--------------------------------|
-| **Hex**     | `#0F2757`                      |
-| **RGB**     | 15, 39, 87                     |
-| **HSL**     | 220°, 71%, 20%                 |
+| **Hex**     | `#032773`                      |
+| **RGB**     | 3, 39, 115                     |
+| **HSL**     | 220°, 95%, 23%                 |
 | **WCAG on White** | 13.52:1 — **AAA**        |
 | **Usage**   | Page titles, critical text on light backgrounds, info alert text |
 
 ### Blue 200 — Brand Light
 | Property     | Value                          |
 |-------------|--------------------------------|
-| **Hex**     | `#E1ECF9`                      |
-| **RGB**     | 225, 236, 249                  |
-| **HSL**     | 214°, 69%, 93%                 |
+| **Hex**     | `#B1CCFE`                      |
+| **RGB**     | 177, 204, 254                  |
+| **HSL**     | 218°, 97%, 85%                 |
 | **WCAG on Black** | 17.42:1 — **AAA**        |
 | **Usage**   | Selected/active row backgrounds (tables, lists), pressed button states (Secondary, Tertiary), active tab fills. **Use for:** interactive feedback — anywhere a member's action needs a visible "you selected this" state. **Don't use for:** static decorative backgrounds — use Blue 100 for hover fills and Blue 300 for marketing bands. |
 
 ### Blue 100 — Brand Lightest
 | Property     | Value                          |
 |-------------|--------------------------------|
-| **Hex**     | `#EEF3FB`                      |
-| **RGB**     | 238, 243, 251                  |
-| **HSL**     | 216°, 64%, 96%                 |
+| **Hex**     | `#DBE7FD`                      |
+| **RGB**     | 219, 231, 253                  |
+| **HSL**     | 219°, 89%, 93%                 |
 | **WCAG on Black** | 18.45:1 — **AAA**        |
 | **Usage**   | Hover backgrounds on secondary elements, subtle tinted surfaces |
 
 ### Blue 50 — Brand Tint
 | Property     | Value                          |
 |-------------|--------------------------------|
-| **Hex**     | `#F6F9FD`                      |
-| **RGB**     | 246, 249, 253                  |
-| **HSL**     | 214°, 64%, 98%                 |
+| **Hex**     | `#EFF4FF`                      |
+| **RGB**     | 239, 244, 255                  |
+| **HSL**     | 221°, 100%, 97%                |
 | **WCAG on Black** | 19.42:1 — **AAA**        |
 | **Usage**   | Page backgrounds, card surfaces, content area fill |
 
@@ -547,95 +547,95 @@ A warm counterweight to the blue primary. Orange provides accent emphasis and vi
 
 **Why orange:** Urgency without danger — complementary to blue, channels Vitality without the semantic weight of error. Orange breaks the "blue flood" on complex pages. See [Vault > aesthetic-principles.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/aesthetic-principles.md).
 
-> **Never used as a button background.** Orange 600 on white (3.62:1) fails WCAG AA for small body text. All button CTAs — including registration, onboarding, and urgency — use Blue Primary. Orange is an accent color only.
+> **Never used as a button background.** Orange 500 on white is below AA for small body text. All button CTAs — including registration, onboarding, and urgency — use Blue Primary. Orange is an accent color only.
 
-### Orange 600 — Accent Primary
+### Orange 500 — Accent Primary
 | Property     | Value                          |
 |-------------|--------------------------------|
-| **Hex**     | `#D86518`                      |
-| **RGB**     | 216, 101, 24                   |
-| **HSL**     | 24°, 80%, 47%                  |
-| **WCAG on White** | 3.62:1 — **AA large text only (fails AA body, unsafe for button fills)** |
+| **Hex**     | `#BB590C`                      |
+| **RGB**     | 187, 89, 12                    |
+| **HSL**     | 26°, 88%, 39%                  |
+| **WCAG on White** | Below AA for normal body text — **unsafe for button fills** |
 | **Usage**   | Accent badges, featured indicators, urgency indicators (non-button), data visualization accent. **Never a button background.** |
 
-### Orange 800 — Accent Dark
+### Orange 600 — Accent Dark
 | Property     | Value                          |
 |-------------|--------------------------------|
-| **Hex**     | `#933C06`                      |
-| **RGB**     | 147, 60, 6                     |
-| **HSL**     | 23°, 92%, 30%                  |
-| **WCAG on White** | 7.27:1 — **AAA**         |
+| **Hex**     | `#9A490F`                      |
+| **RGB**     | 154, 73, 15                    |
+| **HSL**     | 25°, 82%, 33%                  |
+| **WCAG on White** | **AAA**                  |
 | **Usage**   | Hover/pressed states on accent elements, high-emphasis text on orange surfaces |
 
 ### Orange 900 — Accent Darkest
 | Property     | Value                          |
 |-------------|--------------------------------|
-| **Hex**     | `#50250B`                      |
-| **RGB**     | 80, 37, 11                     |
-| **HSL**     | 22°, 75%, 18%                  |
+| **Hex**     | `#4D2104`                      |
+| **RGB**     | 77, 33, 4                      |
+| **HSL**     | 24°, 90%, 16%                  |
 | **WCAG on White** | 13.04:1 — **AAA**        |
 | **Usage**   | Text on light orange backgrounds, headings in warm/promotional contexts |
 
 ### Orange 200 — Accent Light
 | Property     | Value                          |
 |-------------|--------------------------------|
-| **Hex**     | `#F8E2D3`                      |
-| **RGB**     | 248, 226, 211                  |
-| **HSL**     | 25°, 74%, 90%                  |
-| **WCAG on Black** | 16.05:1 — **AAA**        |
+| **Hex**     | `#FFBC97`                      |
+| **RGB**     | 255, 188, 151                  |
+| **HSL**     | 21°, 100%, 80%                 |
+| **WCAG on Black** | 14.0:1 — **AAA**         |
 | **Usage**   | Badge fills, "Featured" backgrounds, selected states in warm contexts |
 
 ### Orange 100 — Accent Lightest
 | Property     | Value                          |
 |-------------|--------------------------------|
-| **Hex**     | `#FAEEE5`                      |
-| **RGB**     | 250, 238, 229                  |
-| **HSL**     | 26°, 70%, 94%                  |
-| **WCAG on Black** | 17.52:1 — **AAA**        |
+| **Hex**     | `#FEE0D0`                      |
+| **RGB**     | 254, 224, 208                  |
+| **HSL**     | 21°, 96%, 91%                  |
+| **WCAG on Black** | 16.0:1 — **AAA**         |
 | **Usage**   | Hover fills on accent elements, subtle warm highlights |
 
 ### Orange 50 — Accent Tint
 | Property     | Value                          |
 |-------------|--------------------------------|
-| **Hex**     | `#FDF7F2`                      |
-| **RGB**     | 253, 247, 242                  |
-| **HSL**     | 27°, 68%, 97%                  |
-| **WCAG on Black** | 18.82:1 — **AAA**        |
+| **Hex**     | `#FFF0E9`                      |
+| **RGB**     | 255, 240, 233                  |
+| **HSL**     | 19°, 100%, 96%                 |
+| **WCAG on Black** | 18.6:1 — **AAA**         |
 | **Usage**   | Promotional surface backgrounds, warm page tints, marketing sections |
 
 ---
 
-## 3.3 Neutral Palette
+## 3.3 Gray Palette
 
-### Neutral 900 — Ink
+### Gray 900 — Ink
 | **Hex** | **RGB** | **HSL** | **WCAG on White** | **Usage** |
 |---------|---------|---------|-------------------|-----------|
-| `#2F333C` | 47, 51, 60 | 222°, 12%, 21% | 13.01:1 — **AAA** | Headlines, primary text, icons |
+| `#13161B` | 19, 22, 27 | 218°, 17%, 9% | 17.9:1 — **AAA** | Headlines, primary text, icons |
 
-### Neutral 700 — Body
+### Gray 700 — Body
 | **Hex** | **RGB** | **HSL** | **WCAG on White** | **Usage** |
 |---------|---------|---------|-------------------|-----------|
-| `#46525D` | 70, 82, 93 | 209°, 14%, 32% | 8.19:1 — **AAA** | Body copy, descriptions, secondary text |
+| `#484C54` | 72, 76, 84 | 220°, 8%, 31% | 8.6:1 — **AAA** | Body copy, descriptions, secondary text |
 
-### Neutral 500 — Subtle
+### Gray 500 — Subtle
 | **Hex** | **RGB** | **HSL** | **WCAG on White** | **Usage** |
 |---------|---------|---------|-------------------|-----------|
-| `#7A8691` | 122, 134, 145 | 209°, 9%, 52% | 3.72:1 — **AA Large** | Placeholder text, captions, metadata |
+| `#83868D` | 131, 134, 141 | 222°, 4%, 53% | 3.7:1 — **AA Large** | Placeholder text, captions, metadata |
 
-### Neutral 300 — Border
+### Gray 300 — Border
 | **Hex** | **RGB** | **HSL** | **WCAG on White** | **Usage** |
 |---------|---------|---------|-------------------|-----------|
-| `#C5CCD3` | 197, 204, 211 | 210°, 13%, 80% | 1.79:1 | Form field borders, dividers, separators |
+| `#BDC1CA` | 189, 193, 202 | 222°, 9%, 77% | 1.9:1 | Form field borders, dividers, separators |
 
-### Neutral 200 — Muted
+### Gray 200 — Muted
 | **Hex** | **RGB** | **HSL** | **WCAG on White** | **Usage** |
 |---------|---------|---------|-------------------|-----------|
-| `#E2E5E9` | 226, 229, 233 | 214°, 10%, 90% | 1.37:1 | Disabled states, subtle dividers, table borders |
+| `#D8DBE2` | 216, 219, 226 | 221°, 13%, 87% | 1.4:1 | Disabled states, subtle dividers, table borders |
 
-### Neutral 100 — Surface
+### Gray 100 — Surface
 | **Hex** | **RGB** | **HSL** | **WCAG on White** | **Usage** |
 |---------|---------|---------|-------------------|-----------|
-| `#F4F5F6` | 244, 245, 246 | 210°, 7%, 96% | 1.10:1 | Background surfaces, alternating table rows, sidebar fills |
+| `#EEEDEC` | 238, 237, 236 | 30°, 5%, 93% | 1.1:1 | Background surfaces, alternating table rows, sidebar fills |
 
 ---
 
@@ -646,34 +646,34 @@ A warm counterweight to the blue primary. Orange provides accent emphasis and vi
 ### Success
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `success-bg-subtle` | `#EFF6ED` | Filter chips, badge fills, quiet success surfaces |
-| `success-bg` | `#D7E8D1` | Toasts, alerts, banners |
-| `success-text` | `#1B6600` | Success message text (9.03:1 on success-bg — **AAA**) |
-| `success-accent` | `#4CA830` | Borders, icons, indicators (checkmarks, auction-live) |
+| `success-bg-subtle` | `#E1F9E6` | Filter chips, badge fills, quiet success surfaces |
+| `success-bg` | `#C8F0D1` | Toasts, alerts, banners |
+| `success-text` | `#074823` | Success message text (AAA on success-bg) |
+| `success-accent` | `#146E3A` | Borders, icons, indicators (checkmarks, auction-live) |
 
 ### Warning
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `warning-bg-subtle` | `#FFFCED` | Filter chips, badge fills, quiet warning surfaces |
-| `warning-bg` | `#FFF7D1` | Toasts, alerts, banners |
-| `warning-text` | `#705700` | Warning message text (5.64:1 on warning-bg — **AA**) |
-| `warning-accent` | `#EC9C0D` | Borders, icons, indicators (caution, time-sensitive) |
+| `warning-bg-subtle` | `#FEF2E1` | Filter chips, badge fills, quiet warning surfaces |
+| `warning-bg` | `#FFE3AE` | Toasts, alerts, banners |
+| `warning-text` | `#563804` | Warning message text (AAA on warning-bg) |
+| `warning-accent` | `#82580B` | Borders, icons, indicators (caution, time-sensitive) |
 
 ### Error
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `error-bg-subtle` | `#FEF5F5` | Filter chips, badge fills, quiet error surfaces |
-| `error-bg` | `#FCE5E5` | Toasts, alerts, banners, destructive action surfaces |
-| `error-text` | `#8C1D28` | Error message text on error-bg — **AAA** |
-| `error-accent` | `#D42A3D` | Borders, icons, indicators (validation, form errors) |
+| `error-bg-subtle` | `#FFF0EF` | Filter chips, badge fills, quiet error surfaces |
+| `error-bg` | `#FDDFDD` | Toasts, alerts, banners, destructive action surfaces |
+| `error-text` | `#7F0D18` | Error message text on error-bg — **AAA** |
+| `error-accent` | `#C20022` | Borders, icons, indicators (validation, form errors) |
 
 ### Info
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `info-bg-subtle` | `#F3F7FF` | Filter chips, badge fills, quiet info surfaces |
-| `info-bg` | `#E0EBFF` | Toasts, alerts, banners |
-| `info-text` | `#0F2757` | Info message text (11.23:1 on info-bg — **AAA**) |
-| `info-accent` | `#2662D9` | Borders, icons, indicators |
+| `info-bg-subtle` | `#EFF4FF` | Filter chips, badge fills, quiet info surfaces |
+| `info-bg` | `#DBE7FD` | Toasts, alerts, banners |
+| `info-text` | `#032773` | Info message text (AAA on info-bg) |
+| `info-accent` | `#2059CC` | Borders, icons, indicators |
 
 ---
 
@@ -685,73 +685,74 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | Token | Light Mode | Dark Mode | Purpose |
 |-------|-----------|-----------|---------|
 | `surface-primary` | `#FFFFFF` | `#1A1D23` | Base canvas |
-| `surface-secondary` | `#F4F5F6` | `#22262E` | Elevated surfaces, cards |
-| `surface-tertiary` | `#F6F9FD` | `#2E3340` | Inset areas, sidebar |
+| `surface-secondary` | `#EEEDEC` | `#22262E` | Elevated surfaces, cards |
+| `surface-tertiary` | `#EFF4FF` | `#2E3340` | Inset areas, sidebar |
 | `surface-overlay` | `rgba(0,0,0,0.5)` | `rgba(0,0,0,0.7)` | Modal scrims |
 
 ### Dark Mode — Text
 | Token | Light Mode | Dark Mode | Contrast (on dark surface) |
 |-------|-----------|-----------|--------------------------|
-| `text-primary` | `#2F333C` | `#F0F1F3` | 15.2:1 — **AAA** |
-| `text-secondary` | `#46525D` | `#A8B2BC` | 8.4:1 — **AAA** |
-| `text-tertiary` | `#7A8691` | `#6E7A86` | 4.6:1 — **AA** |
-| `text-disabled` | `#C5CCD3` | `#454D58` | 2.8:1 (intentionally reduced) |
+| `text-primary` | `#13161B` | `#F0F1F3` | 15.2:1 — **AAA** |
+| `text-secondary` | `#484C54` | `#A8B2BC` | 8.4:1 — **AAA** |
+| `text-tertiary` | `#62666F` | `#6E7A86` | 4.6:1 — **AA** |
+| `text-disabled` | `#62666F` | `#454D58` | 2.8:1 (intentionally reduced) |
 
 ### Dark Mode — Primary Blue (Full Ramp)
 | Token | Light Mode | Dark Mode | Notes |
 |-------|-----------|-----------|-------|
-| `blue-50` | `#F6F9FD` | `#0D1117` | Subtle blue-tinted dark backgrounds |
-| `blue-100` | `#EEF3FB` | `#141E33` | Info backgrounds, hover fills |
-| `blue-200` | `#E1ECF9` | `#1E2A45` | Selected/active backgrounds on dark |
-| `blue-600` | `#2662D9` | `#5B8EF0` | Primary — CTAs, active links (5.8:1 on `#1A1D23`) |
-| `blue-800` | `#063598` | `#7AAAF5` | Hover state on dark |
-| `blue-900` | `#0F2757` | `#B8D4FA` | High-contrast text on dark surfaces |
+| `blue-50` | `#EFF4FF` | `#0D1117` | Subtle blue-tinted dark backgrounds |
+| `blue-100` | `#DBE7FD` | `#141E33` | Info backgrounds, hover fills |
+| `blue-200` | `#B1CCFE` | `#1E2A45` | Selected/active backgrounds on dark |
+| `blue-600` | `#2059CC` | `#5B8EF0` | Primary — CTAs, active links (5.8:1 on `#1A1D23`) |
+| `blue-700` | `#1046B4` | `#7AAAF5` | Hover state (primary-hover, link-hover) |
+| `blue-800` | `#043599` | `#7AAAF5` | Pressed/active state on dark |
+| `blue-900` | `#032773` | `#B8D4FA` | High-contrast text on dark surfaces |
 
 ### Dark Mode — Accent Orange (Full Ramp)
 | Token | Light Mode | Dark Mode | Notes |
 |-------|-----------|-----------|-------|
-| `orange-50` | `#FDF7F2` | `#1A1008` | Warm dark page tint |
-| `orange-100` | `#FAEEE5` | `#221710` | Warm hover fills |
-| `orange-200` | `#F8E2D3` | `#2E1F14` | Badge fills, featured backgrounds |
-| `orange-600` | `#D86518` | `#E8873F` | Accent — badges, featured borders (not buttons) |
-| `orange-800` | `#933C06` | `#F0A566` | Hover/pressed on accent elements (not buttons) |
-| `orange-900` | `#50250B` | `#F8C99A` | Text on dark warm surfaces |
+| `orange-50` | `#FFF0E9` | `#1A1008` | Warm dark page tint |
+| `orange-100` | `#FEE0D0` | `#221710` | Warm hover fills |
+| `orange-200` | `#FFBC97` | `#2E1F14` | Badge fills, featured backgrounds |
+| `orange-500` | `#BB590C` | `#E8873F` | Accent base — badges, featured borders (not buttons) |
+| `orange-600` | `#9A490F` | `#F0A566` | Hover/pressed on accent elements (not buttons) |
+| `orange-900` | `#4D2104` | `#F8C99A` | Text on dark warm surfaces |
 
-### Dark Mode — Neutral (Full Ramp)
+### Dark Mode — Gray (Full Ramp)
 | Token | Light Mode | Dark Mode | Notes |
 |-------|-----------|-----------|-------|
-| `neutral-50` | `#FFFFFF` | `#1A1D23` | Page background — base canvas |
-| `neutral-100` | `#F4F5F6` | `#22262E` | Surface backgrounds, cards |
-| `neutral-200` | `#E2E5E9` | `#2E3340` | Subtle dividers, disabled |
-| `neutral-300` | `#C5CCD3` | `#3A4150` | Borders, separators |
-| `neutral-500` | `#7A8691` | `#6E7A86` | Placeholders, captions |
-| `neutral-700` | `#46525D` | `#A8B2BC` | Body copy, descriptions |
-| `neutral-900` | `#2F333C` | `#F0F1F3` | Headlines, primary text |
+| `gray-0` | `#FFFFFF` | `#1A1D23` | Page background — base canvas (pure-white surface) |
+| `gray-100` | `#EEEDEC` | `#22262E` | Surface backgrounds, cards |
+| `gray-200` | `#D8DBE2` | `#2E3340` | Subtle dividers, disabled |
+| `gray-300` | `#BDC1CA` | `#3A4150` | Borders, separators |
+| `gray-500` | `#83868D` | `#6E7A86` | Placeholders, captions |
+| `gray-700` | `#484C54` | `#A8B2BC` | Body copy, descriptions |
+| `gray-900` | `#13161B` | `#F0F1F3` | Headlines, primary text |
 
 ### Dark Mode — Semantic
 | Token | Light BG → Dark BG | Light Text → Dark Text | Dark Border | Dark Icon |
 |-------|--------------------|-----------------------|-------------|-----------|
-| Success | `#D7E8D1` → `#1A2E14` | `#1B6600` → `#6ABF4D` | `#4CA830` | `#6ABF4D` |
-| Warning | `#FFF7D1` → `#2E2510` | `#705700` → `#E8B830` | `#E8B830` | `#E8B830` |
-| Error | `#FCE5E5` → `#2E1215` | `#8C1D28` → `#F06070` | `#F06070` | `#F06070` |
-| Info | `#E0EBFF` → `#141E33` | `#0F2757` → `#7AAAF5` | `#5B8EF0` | `#5B8EF0` |
+| Success | `#C8F0D1` → `#1A2E14` | `#074823` → `#6ABF4D` | `#146E3A` | `#6ABF4D` |
+| Warning | `#FFE3AE` → `#2E2510` | `#563804` → `#E8B830` | `#E8B830` | `#E8B830` |
+| Error | `#FDDFDD` → `#2E1215` | `#7F0D18` → `#F06070` | `#F06070` | `#F06070` |
+| Info | `#DBE7FD` → `#141E33` | `#032773` → `#7AAAF5` | `#5B8EF0` | `#5B8EF0` |
 
 ---
 
 ## 3.6 Color Usage Rules
 
 ### Hierarchy
-1. **Blue 600 (`#2662D9`)** is reserved for the single most important action on any screen. Do not use it decoratively.
-2. **Blue 800 (`#063598`)** is used exclusively for hover/pressed states of Blue 600 elements.
-3. **Blue 900 (`#0F2757`)** is for text that needs authority — page titles, modal headings, critical labels.
-4. **Orange 600 (`#D86518`)** is reserved for accent badges, featured borders, and urgency indicators — **never as a button background** (fails WCAG AA on white). Do not use for primary actions.
-5. **Orange 800 (`#933C06`)** is used exclusively for hover/pressed states of Orange 600 accent elements.
+1. **Blue 600 (`#2059CC`)** is reserved for the single most important action on any screen. Do not use it decoratively.
+2. **Blue 700 (`#1046B4`)** is used exclusively for hover/pressed states of Blue 600 elements.
+3. **Blue 900 (`#032773`)** is for text that needs authority — page titles, modal headings, critical labels.
+4. **Orange 500 (`#BB590C`)** is reserved for accent badges, featured borders, and urgency indicators — **never as a button background** (below AA for normal text on white). Do not use for primary actions.
+5. **Orange 600 (`#9A490F`)** is used exclusively for hover/pressed states of Orange 500 accent elements.
 
 ### Backgrounds
 - **White (`#FFFFFF`)** for primary content areas.
-- **Blue 50 (`#F6F9FD`)** for page-level backgrounds behind cards.
-- **Orange 50 (`#FDF7F2`)** for promotional/marketing surface backgrounds — use sparingly for warmth.
-- **Neutral 100 (`#F4F5F6`)** for alternating table rows, sidebar panels, and grouped content areas.
+- **Blue 50 (`#EFF4FF`)** for page-level backgrounds behind cards.
+- **Orange 50 (`#FFF0E9`)** for promotional/marketing surface backgrounds — use sparingly for warmth.
+- **Gray 100 (`#EEEDEC`)** for alternating table rows, sidebar panels, and grouped content areas.
 
 ### Never
 - Never use Blue 600 for body text — it lacks sufficient contrast at small sizes.
@@ -826,7 +827,7 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Line Height** | 48px / 1.2 | 40px / 1.25 | 36px / 1.286 |
 | **Letter Spacing** | -0.015em | -0.01em | -0.01em |
 | **Weight** | 800 (Extra Bold) | 800 (Extra Bold) | 700 (Bold) |
-| **Color** | Neutral 900 (`#2F333C`) | | |
+| **Color** | Gray 900 (`#13161B`) | | |
 | **Token** | `type-headline` | | |
 
 **Use for:** Top-level page titles in the product shell — "Search Results," "My Bids," "Lot #12345678," "Account Settings." One per page, always the first heading in the content area.
@@ -877,7 +878,7 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Line Height** | 28px / 1.556 | 26px / 1.625 | 26px / 1.625 |
 | **Letter Spacing** | 0em | 0em | 0em |
 | **Weight** | 400 (Regular) | 400 (Regular) | 400 (Regular) |
-| **Color** | Neutral 700 (`#46525D`) | | |
+| **Color** | Gray 700 (`#484C54`) | | |
 | **Token** | `type-body-lg` | | |
 
 **Use for:** Lead paragraphs (first paragraph of a page or section), lot detail descriptions, marketing body copy, empty-state descriptions, onboarding explanation text.
@@ -890,7 +891,7 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Line Height** | 24px / 1.5 | 24px / 1.5 | 24px / 1.5 |
 | **Letter Spacing** | 0em | 0em | 0em |
 | **Weight** | 400 (Regular) | 400 (Regular) | 400 (Regular) |
-| **Color** | Neutral 700 (`#46525D`) | | |
+| **Color** | Gray 700 (`#484C54`) | | |
 | **Token** | `type-body` | | |
 
 **Use for:** All standard body text — descriptions, paragraphs, form field values, table cell text, list item content, alert descriptions, toast messages, modal body text. This is the default for any text that isn't a heading, label, or utility text.
@@ -939,7 +940,7 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Line Height** | 18px / 1.385 |
 | **Letter Spacing** | 0.01em |
 | **Weight** | 400 (Regular) |
-| **Color** | Neutral 500 (`#7A8691`) |
+| **Color** | Gray 500 (`#83868D`) |
 | **Token** | `type-footnote` |
 
 **Use for:** Helper text below form fields, timestamps in feeds/activity logs, "Last updated" lines, legal disclaimers, character counts, secondary metadata that doesn't need the weight of Caption 1.
@@ -952,7 +953,7 @@ Dark mode uses the same hue families with adjusted lightness and saturation to m
 | **Line Height** | 16px / 1.333 |
 | **Letter Spacing** | 0.015em |
 | **Weight** | 500 (Medium) |
-| **Color** | Neutral 500 (`#7A8691`) |
+| **Color** | Gray 500 (`#83868D`) |
 | **Token** | `type-caption-1` |
 
 **Use for:** Axis labels on charts, step indicator labels, stat component labels (uppercase with 0.08em tracking in stat context), badge text, table footer totals labels, image captions.
@@ -1266,9 +1267,9 @@ All icons in the Vallejo Design System come exclusively from the **Iconic** icon
 
 | Tier | Element | Height | Background | Visibility |
 |------|---------|--------|------------|------------|
-| 1 — Utility bar | `header-utility-bar` | 36px | Neutral 950 (#23262F) | Desktop only (hidden on mobile) |
-| 2 — Primary bar | `header-container` | 80px (64px scrolled) | Neutral 900 (#2F333C) | Always visible |
-| 3 — Member nav | `member-nav` | 44px | Neutral 700 (#46525D) | Logged-in only (hidden on mobile) |
+| 1 — Utility bar | `header-utility-bar` | 36px | Gray 900 (#13161B) | Desktop only (hidden on mobile) |
+| 2 — Primary bar | `header-container` | 80px (64px scrolled) | Gray 800 (#30333A) | Always visible |
+| 3 — Member nav | `member-nav` | 44px | Gray 700 (#484C54) | Logged-in only (hidden on mobile) |
 
 **Tier 1 — Utility Bar:**
 - Left: "243 Live Auctions" with pulsing green dot (8px, #34C759)
@@ -1316,14 +1317,14 @@ Border-radius: pill (9999px)
 Font: 14px, white text, rgba(255,255,255,0.5) placeholder
 Search icon: 18px, left 12px
 Clear button: 20px circle, right 12px, visible only when input has text
-Focus ring: 0 0 0 3px rgba(38,98,217,0.25)
+Focus ring: 0 0 0 3px rgba(32,89,204,0.25)
 ```
 
 **Navigation Dropdown Specs:**
 ```
 Trigger: 14px, weight 600, rgba(255,255,255,0.85), hover white
 Trigger padding: 8px 12px, border-radius 6px
-Panel: white bg, 1px border (neutral-200), border-radius 12px, shadow-lg
+Panel: white bg, 1px border (gray-200), border-radius 12px, shadow-lg
 Panel min-width: 220px
 Item: 14px, weight 500, padding 12px 16px
 Item hover: blue-50 bg, blue-600 text
@@ -1338,7 +1339,7 @@ Header: 44px avatar (editable with pencil badge) + name (14px/600) + email (12px
 Section labels: 11px, weight 700, uppercase, 0.05em letter-spacing
 Sections: Account settings, Preference center, Notifications, Member fees
 Sign Out: orange-600 text, hover orange-800
-Dividers: 1px neutral-200, margin 8px 0
+Dividers: 1px gray-200, margin 8px 0
 ```
 
 **Button Specs:**
@@ -1357,7 +1358,7 @@ Transition: translateX(100%) → translateX(0), 300ms ease-out
 Close button: 36px, top-right
 Sections: 16px padding, 1px bottom border
 Link text: 16px, weight 600
-Footer: neutral-100 bg, language + region selects
+Footer: gray-100 bg, language + region selects
 ```
 
 **Mobile Drawer — Logged-In Additions:**
@@ -1423,16 +1424,16 @@ Member nav: 999
 **States:**
 | State | Icon Color | Label Color | Background |
 |-------|-----------|------------|------------|
-| Default | Neutral 500 | Neutral 500 | Transparent |
+| Default | Gray 500 | Gray 500 | Transparent |
 | Active | Blue 600 | Blue 600 | Transparent |
 | Pressed | Blue 800 | Blue 800 | Blue 100 |
-| Badge | — | — | `error-accent` (#D42A3D) dot or count |
+| Badge | — | — | `error-accent` (#C20022) dot or count |
 
 **Specs:**
 ```
 Height: 56px + env(safe-area-inset-bottom)
 Background: #FFFFFF (light) / #1A1D23 (dark)
-Border-top: 1px solid Neutral 200
+Border-top: 1px solid Gray 200
 Icon size: 24px
 Label: type-caption-2 (12px)
 Gap (icon to label): space-1 (4px)
@@ -1481,10 +1482,10 @@ z-index: 1000
 ```
 Width: 280px (expanded) / 56px (collapsed) / 320px (overlay on mobile)
 Background: #FFFFFF (light) / surface-secondary (dark)
-Border-right: 1px solid Neutral 200
+Border-right: 1px solid Gray 200
 Padding: space-4 (16px)
 Section title: type-subheadline, color Blue 600
-Item: type-body, color Neutral 700
+Item: type-body, color Gray 700
 Item hover: background Blue 100
 Item active: background Blue 200, color Blue 800, font-weight 600
 Transition: width 200ms ease-out
@@ -1511,16 +1512,16 @@ Transition: width 200ms ease-out
 **States:**
 | Element | Default | Hover | Active |
 |---------|---------|-------|--------|
-| Link items | Neutral 500, type-caption-1 | Blue 600, underline | Blue 800 |
-| Current item | Neutral 900, font-weight 600 | N/A (non-interactive) | N/A |
-| Separator | Neutral 500 | N/A | N/A |
+| Link items | Gray 500, type-caption-1 | Blue 600, underline | Blue 800 |
+| Current item | Gray 900, font-weight 600 | N/A (non-interactive) | N/A |
+| Separator | Gray 500 | N/A | N/A |
 
 **Specs:**
 ```
 Height: 32px (container)
 Item font: type-caption-1 (12px, medium)
-Separator: 16px chevron-right stroke icon (from VDS icon set), Neutral 500, margin 0 space-2
-Current item: type-caption-1, font-weight 600, Neutral 900
+Separator: 16px chevron-right stroke icon (from VDS icon set), Gray 500, margin 0 space-2
+Current item: type-caption-1, font-weight 600, Gray 900
 Gap between items: space-1 (4px)
 Overflow (mobile): horizontal scroll, no wrapping, fade-out mask on edges
 ```
@@ -1548,24 +1549,24 @@ Overflow (mobile): horizontal scroll, no wrapping, fade-out mask on edges
 #### Inline Link (within body text)
 | State | Color | Weight | Decoration |
 |-------|-------|--------|------------|
-| Default | Blue 600 (`#2662D9`) | 500 (Medium) | None |
-| Hover | Blue 800 (`#063598`) | 500 (Medium) | Underline |
-| Active | Blue 800 (`#063598`) | 500 (Medium) | Underline |
-| Visited | Blue 900 (`#0F2757`) | 500 (Medium) | None |
-| Disabled | Neutral 500 (`#7A8691`) | 500 (Medium) | None |
+| Default | Blue 600 (`#2059CC`) | 500 (Medium) | None |
+| Hover | Blue 700 (`#1046B4`) | 500 (Medium) | Underline |
+| Active | Blue 800 (`#043599`) | 500 (Medium) | Underline |
+| Visited | Blue 900 (`#032773`) | 500 (Medium) | None |
+| Disabled | Gray 500 (`#83868D`) | 500 (Medium) | None |
 
 #### Standalone Link (on its own line, e.g., "View all results")
 | State | Color | Weight | Decoration |
 |-------|-------|--------|------------|
 | Default | Blue 600 | 500 (Medium) | None |
-| Hover | Blue 800 | 500 (Medium) | Underline |
+| Hover | Blue 700 | 500 (Medium) | Underline |
 | Active | Blue 800 | 500 (Medium) | Underline |
 
 **Specs:**
 ```
 Font: inherits parent size, weight 500 (Medium)
 Color: var(--text-link) / Blue 600
-Hover color: var(--text-link-hover) / Blue 800
+Hover color: var(--text-link-hover) / Blue 700
 Transition: color 150ms ease, text-decoration-color 150ms ease
 Cursor: pointer
 Focus: 3px Blue 600 @ 40% opacity ring, 2px offset
@@ -1604,49 +1605,49 @@ Focus: 3px Blue 600 @ 40% opacity ring, 2px offset
 | State | Background | Text | Border |
 |-------|-----------|------|--------|
 | Default | Blue 600 | White | None |
-| Hover | Blue 800 | White | None |
-| Active/Pressed | `#042D7A` | White | None |
-| Disabled | Neutral 200 | Neutral 700 | None |
+| Hover | Blue 700 | White | None |
+| Active/Pressed | `#043599` | White | None |
+| Disabled | Gray 150 | Gray 700 | None |
 | Loading | Blue 600 @ 70% opacity | Hidden | None |
-| Focus | Blue 600 | White | `0 0 0 3px rgba(38,98,217,0.4)` ring |
+| Focus | Blue 600 | White | `0 0 0 3px rgba(32,89,204,0.4)` ring |
 
 #### Secondary (Outlined)
 | State | Background | Text | Border |
 |-------|-----------|------|--------|
 | Default | White | Blue 600 | 1.5px solid Blue 600 |
-| Hover | Blue 100 | Blue 800 | 1.5px solid Blue 800 |
+| Hover | Blue 100 | Blue 700 | 1.5px solid Blue 700 |
 | Active | Blue 200 | Blue 800 | 1.5px solid Blue 800 |
-| Disabled | Neutral 200 | Neutral 700 | None |
+| Disabled | Gray 150 | Gray 700 | None |
 
 #### Tertiary (Ghost/Text)
 | State | Background | Text | Border |
 |-------|-----------|------|--------|
 | Default | Transparent | Blue 600 | None |
-| Hover | Blue 100 | Blue 800 | None |
+| Hover | Blue 100 | Blue 700 | None |
 | Active | Blue 200 | Blue 800 | None |
-| Disabled | Neutral 200 | Neutral 700 | None |
+| Disabled | Gray 150 | Gray 700 | None |
 
 #### Destructive
 | State | Background | Text | Border |
 |-------|-----------|------|--------|
-| Default | `#D42A3D` | White | None |
-| Hover | `#8C1D28` | White | None |
-| Active | `#6B1520` | White | None |
-| Disabled | Neutral 200 | Neutral 700 | None |
+| Default | `#C20022` | White | None |
+| Hover | `#9D121F` | White | None |
+| Active | `#7F0D18` | White | None |
+| Disabled | Gray 150 | Gray 700 | None |
 
 #### Success / Confirm
 | State | Background | Text | Border |
 |-------|-----------|------|--------|
-| Default | `#1B6600` (success-text) | White | None |
-| Hover | `#145200` | White | None |
-| Active | `#0F3D00` | White | None |
-| Disabled | Neutral 200 | Neutral 700 | None |
+| Default | `#074823` (success-text) | White | None |
+| Hover | `#063519` (success-900) | White | None |
+| Active | `#063519` (success-900) | White | None |
+| Disabled | Gray 150 | Gray 700 | None |
 
-> **Unified disabled state:** All button variants render the same disabled appearance — Neutral 200 background, Neutral 700 text, no border — so disabled affordance reads consistently regardless of variant. Neutral 700 on Neutral 200 hits 6.1:1 (AA) while clearly signalling "not clickable."
+> **Unified disabled state:** All button variants render the same disabled appearance — Gray 150 background, Gray 700 text, no border — so disabled affordance reads consistently regardless of variant. Gray 700 on Gray 150 stays above AA while clearly signalling "not clickable."
 
-> **Why `#1B6600` for buttons, not `#4CA830`:** The lighter `success-accent` (#4CA830) is reserved for borders, icons, and indicators — it only achieves 3.38:1 with white text, failing WCAG AA. Button backgrounds use `success-text` (#1B6600, 9.03:1 — AAA) for safe contrast on white text.
+> **Why `#074823` for buttons, not `#146E3A`:** The lighter `success-accent` (#146E3A) is reserved for borders, icons, and indicators. Button backgrounds use `success-text` (#074823, AAA) for safe contrast on white text.
 
-> **No Orange button variant.** Orange 600 on white fails WCAG AA for small text (3.78:1). Registration and other primary CTAs use the Blue Primary button. Orange is reserved for badges and featured accents — never button backgrounds.
+> **No Orange button variant.** Orange 500 on white is below WCAG AA for small text. Registration and other primary CTAs use the Blue Primary button. Orange is reserved for badges and featured accents — never button backgrounds.
 
 **Sizes:**
 
@@ -1708,14 +1709,14 @@ No shadow on any button variant — color change alone signals state.
 **States:**
 | State | Border | Background | Label Color | Helper |
 |-------|--------|-----------|-------------|--------|
-| Default | 1.5px Neutral 300 | White | Neutral 700 | Neutral 500 |
-| Hover | 1.5px Neutral 500 | White | Neutral 700 | Neutral 500 |
-| Focus | 2px Blue 600 | White | Blue 600 | Neutral 500 |
-| Filled | 1.5px Neutral 300 | White | Neutral 700 | Neutral 500 |
-| Disabled | 1.5px Neutral 200 | Neutral 100 | Neutral 300 | Neutral 300 |
+| Default | 1.5px Gray 300 | White | Gray 700 | Gray 500 |
+| Hover | 1.5px Gray 500 | White | Gray 700 | Gray 500 |
+| Focus | 2px Blue 600 | White | Blue 600 | Gray 500 |
+| Filled | 1.5px Gray 300 | White | Gray 700 | Gray 500 |
+| Disabled | 1.5px Gray 200 | Gray 100 | Gray 300 | Gray 300 |
 | Error | 2px `error-accent` | `#FFF8F9` | `error-text` | `error-text` |
-| Success | 2px `success-accent` | White | Neutral 700 | `success-text` |
-| Read-only | 1.5px Neutral 200 | Neutral 100 | Neutral 700 | Neutral 500 |
+| Success | 2px `success-accent` | White | Gray 700 | `success-text` |
+| Read-only | 1.5px Gray 200 | Gray 100 | Gray 700 | Gray 500 |
 
 **Specs:**
 ```
@@ -1725,10 +1726,10 @@ Padding: space-3 (12px) horizontal, centered vertical
 Font: type-body (16px / 400)
 Label: type-subheadline (14px / 600), margin-bottom space-3 (12px)
 Helper/Error text: type-caption-1 (12px / 500), margin-top space-1 (4px)
-Leading icon: 20px, Neutral 500, 12px from left edge
+Leading icon: 20px, Gray 500, 12px from left edge
 Trailing action: 20px touch target within input
 Transition: border-color 150ms ease, box-shadow 150ms ease
-Focus shadow: 0 0 0 3px rgba(38,98,217,0.15)
+Focus shadow: 0 0 0 3px rgba(32,89,204,0.15)
 ```
 
 **Accessibility:**
@@ -1755,10 +1756,10 @@ Focus shadow: 0 0 0 3px rgba(38,98,217,0.15)
 | State | Border | Background | Shadow |
 |-------|--------|-----------|--------|
 | Default | 1.5px border-default | White | None |
-| Hover | 1.5px Neutral 500 | White | None |
+| Hover | 1.5px Gray 500 | White | None |
 | Focus | 2px interactive-primary | White | shadow-focus |
 | Error | 2px error-text | `#FFF8F9` | shadow-focus-error |
-| Disabled | 1.5px Neutral 200 | bg-secondary | None, cursor not-allowed |
+| Disabled | 1.5px Gray 200 | bg-secondary | None, cursor not-allowed |
 
 Disabled textareas use text-disabled for both the value text and the label. The field cannot be focused or resized.
 
@@ -1772,7 +1773,7 @@ Min-height: 100px
 Line-height: 1.5
 Resize: vertical — user can grab the bottom-right corner to change height, horizontal resize disabled
 Label: type-subheadline (14px / 600), margin-bottom space-3 (12px)
-Focus shadow: 0 0 0 3px rgba(38,98,217,0.15)
+Focus shadow: 0 0 0 3px rgba(32,89,204,0.15)
 Error shadow: 0 0 0 3px rgba(220,38,38,0.15)
 Transition: border-color 150ms ease, box-shadow 150ms ease
 ```
@@ -1806,24 +1807,24 @@ Transition: border-color 150ms ease, box-shadow 150ms ease
 Same as Text Field states, with these overrides:
 | State | Additional Visual |
 |-------|------------------|
-| Hover | Border changes to 1.5px Neutral 500 (no shadow — border only) |
+| Hover | Border changes to 1.5px Gray 500 (no shadow — border only) |
 | Open | Blue 600 border, chevron rotated 180°, menu visible |
-| Has value | Display selected value in Neutral 900 (not placeholder color) |
+| Has value | Display selected value in Gray 900 (not placeholder color) |
 
 **States (Option):**
 | State | Background | Text |
 |-------|-----------|------|
-| Default | White | Neutral 700 |
-| Hover | Blue 100 | Neutral 900 |
+| Default | White | Gray 700 |
+| Hover | Blue 100 | Gray 900 |
 | Selected | Blue 200 | Blue 800, checkmark visible |
-| Disabled | White | Neutral 300 |
+| Disabled | White | Gray 300 |
 
 **Specs:**
 ```
 Trigger: same as Text Field (44px height, 8px radius)
-Chevron icon: `chevron-down` from VDS icon set, 24px, Neutral 700, stroke style (not filled)
+Chevron icon: `chevron-down` from VDS icon set, 24px, Gray 700, stroke style (not filled)
   Rotates 180° when open, transition 150ms ease
-Menu: background White, border 1px Neutral 200, border-radius 12px
+Menu: background White, border 1px Gray 200, border-radius 12px
 Menu shadow: 0 4px 16px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.06)
 Menu max-height: 320px (scrollable)
 Option height: 40px
@@ -1835,13 +1836,13 @@ z-index: 1100
 
 **Variant: Multi-Select**
 
-For cases where the user can pick more than one option (e.g., damage types, auction locations). Each option row includes a checkbox to the left of the label. The menu stays open on selection so members can pick several items without re-opening. The trigger displays the selected values as a comma-separated list; when the list overflows, it truncates with an ellipsis and shows a count badge to the LEFT of the label text. The trigger uses a `.trigger-label` flex wrapper with `align-items: center` for vertical centering. The count badge uses a gray background (Neutral 200) with text-primary text, 12px/600, `margin-right: space-2`, `flex-shrink: 0`.
+For cases where the user can pick more than one option (e.g., damage types, auction locations). Each option row includes a checkbox to the left of the label. The menu stays open on selection so members can pick several items without re-opening. The trigger displays the selected values as a comma-separated list; when the list overflows, it truncates with an ellipsis and shows a count badge to the LEFT of the label text. The trigger uses a `.trigger-label` flex wrapper with `align-items: center` for vertical centering. The count badge uses a gray background (Gray 200) with text-primary text, 12px/600, `margin-right: space-2`, `flex-shrink: 0`.
 
-Checkbox styling inside the menu: 18x18px box, radius-sm, 1.5px border. In the unselected state the box uses Neutral 300 border on a white background. In the selected state the box fills with interactive-primary and displays a white checkmark icon. These checkboxes follow the same hover behavior as standalone checkboxes (border darkens to Neutral 500 on hover when unchecked, background darkens to interactive-hover when checked).
+Checkbox styling inside the menu: 18x18px box, radius-sm, 1.5px border. In the unselected state the box uses Gray 300 border on a white background. In the selected state the box fills with interactive-primary and displays a white checkmark icon. These checkboxes follow the same hover behavior as standalone checkboxes (border darkens to Gray 500 on hover when unchecked, background darkens to interactive-hover when checked).
 
 **Variant: Searchable**
 
-For long option lists (makes, models, locations) where scrolling alone is impractical. A search input is pinned to the top of the menu, separated from the option list by a border-bottom (1px Neutral 200). The input is 36px tall, uses 14px type at font-primary weight, has a #F8F8F9 background (hardcoded, not a token), and radius-md corners. A 14x14px search icon sits inside the input on the left. Below the search input, options render in a scrollable container with a max-height of 220px. The search input has an `oninput` handler that filters options by case-insensitive text match; options that don't match are hidden with `display: none`. When the search query yields no matches, the `dropdown-empty` slot displays "No results" in Neutral 500, centered.
+For long option lists (makes, models, locations) where scrolling alone is impractical. A search input is pinned to the top of the menu, separated from the option list by a border-bottom (1px Gray 200). The input is 36px tall, uses 14px type at font-primary weight, has a #F8F8F9 background (hardcoded, not a token), and radius-md corners. A 14x14px search icon sits inside the input on the left. Below the search input, options render in a scrollable container with a max-height of 220px. The search input has an `oninput` handler that filters options by case-insensitive text match; options that don't match are hidden with `display: none`. When the search query yields no matches, the `dropdown-empty` slot displays "No results" in Gray 500, centered.
 
 **Accessibility:**
 - Trigger: `role="combobox"`, `aria-expanded`, `aria-haspopup="listbox"`
@@ -1871,13 +1872,13 @@ For long option lists (makes, models, locations) where scrolling alone is imprac
 **States:**
 | State | Track BG | Thumb | Label |
 |-------|---------|-------|-------|
-| Off | Neutral 300 | White, left-positioned | Neutral 700 |
-| Off + Hover | Neutral 500 | White, left-positioned | Neutral 700 |
-| On | Blue 600 | White, right-positioned | Neutral 700 |
-| On + Hover | Blue 800 | White, right-positioned | Neutral 700 |
-| Disabled Off | Neutral 200 | Neutral 100, left | Neutral 300 |
-| Disabled On | Blue 600 @ 40% | Neutral 100, right | Neutral 300 |
-| Focus | — | — | Focus ring on track: `0 0 0 3px rgba(38,98,217,0.4)` |
+| Off | Gray 300 | White, left-positioned | Gray 700 |
+| Off + Hover | Gray 500 | White, left-positioned | Gray 700 |
+| On | Blue 600 | White, right-positioned | Gray 700 |
+| On + Hover | Blue 700 | White, right-positioned | Gray 700 |
+| Disabled Off | Gray 200 | Gray 100, left | Gray 300 |
+| Disabled On | Blue 600 @ 40% | Gray 100, right | Gray 300 |
+| Focus | — | — | Focus ring on track: `0 0 0 3px rgba(32,89,204,0.4)` |
 
 **Specs:**
 ```
@@ -1920,13 +1921,13 @@ Gap (toggle to label): space-3 (12px)
 **States:**
 | State | Icon | Label | Behavior |
 |-------|------|-------|----------|
-| Default (unsaved) | Heart outline, Neutral 500 | "Save" | — |
+| Default (unsaved) | Heart outline, Gray 500 | "Save" | — |
 | Hover (unsaved) | Heart outline, Blue 600 | "Save" | Cursor pointer |
 | Saving | Spinner replacing icon | "Saving…" | Disable interaction |
-| Saved | Filled heart, error-accent (#D42A3D) | "Saved" | Scale bounce (celebration) |
-| Hover (saved) | Filled heart, Neutral 500 | "Remove" | Label changes to remove action |
+| Saved | Filled heart, error-accent (#C20022) | "Saved" | Scale bounce (celebration) |
+| Hover (saved) | Filled heart, Gray 500 | "Remove" | Label changes to remove action |
 | Removing | Spinner replacing icon | "Removing…" | Disable interaction |
-| Disabled | Heart outline, Neutral 300 | "Save" (Neutral 300) | Opacity 0.5 |
+| Disabled | Heart outline, Gray 300 | "Save" (Gray 300) | Opacity 0.5 |
 
 **Specs:**
 ```
@@ -1935,7 +1936,7 @@ Icon-only button: 40px × 40px (MD), 32px × 32px (SM)
 Icon + Label gap: space-2 (8px)
 Label: type-subheadline (14px / 600)
 Touch target: 44×44px minimum
-Saved heart color: error-accent (#D42A3D) — red heart convention
+Saved heart color: error-accent (#C20022) — red heart convention
 Save animation: scale(1.2) → scale(1), 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275)
 Spinner: 16px, currentColor
 ```
@@ -1967,17 +1968,17 @@ Spinner: 16px, currentColor
 **States:**
 | State | Box Border | Box BG | Icon |
 |-------|-----------|--------|------|
-| Unchecked | 1.5px Neutral 300 | White | None |
-| Unchecked Hover | 1.5px Neutral 500 | Neutral 50 | None |
+| Unchecked | 1.5px Gray 300 | White | None |
+| Unchecked Hover | 1.5px Gray 500 | Gray 50 | None |
 | Checked | None | Blue 600 | White checkmark |
 | Checked Hover | None | interactive-hover | White checkmark |
 | Indeterminate | None | Blue 600 | White minus line |
-| Disabled Unchecked | 1.5px Neutral 200 | Neutral 100 | None |
-| Disabled Checked | None | Neutral 300 | White checkmark |
+| Disabled Unchecked | 1.5px Gray 200 | Gray 100 | None |
+| Disabled Checked | None | Gray 300 | White checkmark |
 | Error | 1.5px error-accent | White or Blue 600 | — |
-| Focus | — | — | `0 0 0 3px rgba(38,98,217,0.4)` ring |
+| Focus | — | — | `0 0 0 3px rgba(32,89,204,0.4)` ring |
 
-**Hover Behavior:** When the user hovers an unchecked checkbox, the border darkens from Neutral 300 to Neutral 500 and the box picks up a subtle Neutral 50 background fill, giving a soft "I'm interactive" cue without jumping to the brand color. When the user hovers a checked checkbox, both the background fill and border darken to interactive-hover, reinforcing that the control is active and clickable.
+**Hover Behavior:** When the user hovers an unchecked checkbox, the border darkens from Gray 300 to Gray 500 and the box picks up a subtle Gray 50 background fill, giving a soft "I'm interactive" cue without jumping to the brand color. When the user hovers a checked checkbox, both the background fill and border darken to interactive-hover, reinforcing that the control is active and clickable.
 
 **Specs:**
 ```
@@ -2012,15 +2013,15 @@ Transition: background 100ms ease, border-color 100ms ease
 **States:**
 | State | Border | Fill | Dot |
 |-------|--------|------|-----|
-| Unselected | 1.5px Neutral 300 | White | None |
-| Unselected Hover | 1.5px Neutral 500 | Neutral 50 | None |
+| Unselected | 1.5px Gray 300 | White | None |
+| Unselected Hover | 1.5px Gray 500 | Gray 50 | None |
 | Selected | 1.5px Blue 600 | White | Blue 600 (10px) |
 | Selected Hover | 1.5px interactive-hover | White | interactive-hover |
-| Disabled Unselected | 1.5px Neutral 200 | Neutral 100 | None |
-| Disabled Selected | 1.5px Neutral 300 | Neutral 100 | Neutral 300 |
+| Disabled Unselected | 1.5px Gray 200 | Gray 100 | None |
+| Disabled Selected | 1.5px Gray 300 | Gray 100 | Gray 300 |
 | Focus | — | — | Focus ring on outer circle |
 
-**Hover Behavior:** When the user hovers an unselected radio, the border darkens from Neutral 300 to Neutral 500 and the circle gets a subtle Neutral 50 background fill — a gentle affordance without committing to the brand color. When the user hovers a selected radio, the border darkens to interactive-hover, signaling the control is re-clickable (useful in group contexts where changing selection is common).
+**Hover Behavior:** When the user hovers an unselected radio, the border darkens from Gray 300 to Gray 500 and the circle gets a subtle Gray 50 background fill — a gentle affordance without committing to the brand color. When the user hovers a selected radio, the border darkens to interactive-hover, signaling the control is re-clickable (useful in group contexts where changing selection is common).
 
 **Specs:**
 ```
@@ -2057,11 +2058,11 @@ Touch target: 44px minimum height
 **States:**
 | State | Track | Fill | Thumb |
 |-------|-------|------|-------|
-| Default | Neutral 200 | Blue 600 | White, 1.5px Blue 600 border |
-| Hover | Neutral 200 | Blue 600 | White, 2px Blue 800 border, scale(1.1) |
-| Active/Dragging | Neutral 200 | Blue 600 | Blue 600 fill, scale(1.15) |
-| Disabled | Neutral 100 | Neutral 300 | Neutral 200 |
-| Focus | Neutral 200 | Blue 600 | Focus ring on thumb |
+| Default | Gray 200 | Blue 600 | White, 1.5px Blue 600 border |
+| Hover | Gray 200 | Blue 600 | White, 2px Blue 700 border, scale(1.1) |
+| Active/Dragging | Gray 200 | Blue 600 | Blue 600 fill, scale(1.15) |
+| Disabled | Gray 100 | Gray 300 | Gray 200 |
+| Focus | Gray 200 | Blue 600 | Focus ring on thumb |
 
 **Specs:**
 ```
@@ -2069,7 +2070,7 @@ Track height: 4px, border-radius 2px
 Thumb: 24px × 24px circle
 Thumb shadow: 0 1px 4px rgba(0,0,0,0.15)
 Value tooltip: type-caption-1, Blue 900 on Blue 200 bg, 4px radius, appears on hover/drag
-Min/Max labels: type-caption-1, Neutral 500
+Min/Max labels: type-caption-1, Gray 500
 Touch target: 44×44px on thumb (expanded beyond visual circle)
 Transition: transform 100ms ease
 ```
@@ -2100,7 +2101,7 @@ Same track, thumb, and state styles as single slider.
 Two range inputs stacked with `position: absolute`, transparent backgrounds.
 Fill bar positioned via JS: left = % of low thumb, width = % span between thumbs.
 Thumbs cannot cross — JS enforces lo ≤ hi.
-Min/Max endpoint labels: type-caption-1 (12px/500), Neutral 500, below the slider.
+Min/Max endpoint labels: type-caption-1 (12px/500), Gray 500, below the slider.
 Value labels: same as single slider-value, displayed at left (low) and right (high).
 ```
 
@@ -2201,9 +2202,9 @@ Dismiss animation: alertOut keyframe, 300ms ease — opacity 1→0, height/paddi
 **Variants:**
 | Variant | Background | Text | Icon |
 |---------|-----------|------|------|
-| Neutral | Neutral 900 | White | None |
-| Success | `#1B6600` | White | Checkmark |
-| Error | `#8C1D28` | White | Exclamation |
+| Neutral | Gray 900 | White | None |
+| Success | `#074823` | White | Checkmark |
+| Error | `#7F0D18` | White | Exclamation |
 
 **Specs:**
 ```
@@ -2268,11 +2269,11 @@ Panel: background White, border-radius 16px (desktop) / 16px top only (mobile bo
 Panel shadow: 0 24px 48px rgba(0,0,0,0.2)
 Header padding: space-6 (24px) horizontal, space-5 (20px) vertical
 Header title: type-title-2 (22px / 700)
-Close button: 24px icon, top-right, Neutral 500 → Neutral 900 on hover
+Close button: 24px icon, top-right, Gray 500 → Gray 900 on hover
 Body padding: space-6 (24px)
 Body max-height: calc(80vh - header - footer), overflow-y auto
 Footer padding: space-4 (16px) space-6 (24px)
-Footer: border-top 1px Neutral 200, flex with justify-end, gap space-3 (12px)
+Footer: border-top 1px Gray 200, flex with justify-end, gap space-3 (12px)
 ```
 
 **Usage:**
@@ -2330,7 +2331,7 @@ On mobile (< 768px), all shelves become bottom sheets regardless of side class.
 | Tall | 85vh | Detail views, long forms |
 | Full | 100vh | Search, immersive (no handle, X to close) |
 
-Mobile shelves include a drag handle (36 x 4px, Neutral 300, centered) except Full variant.
+Mobile shelves include a drag handle (36 x 4px, Gray 300, centered) except Full variant.
 
 **States:**
 | State | Backdrop | Panel (Desktop) | Panel (Mobile) |
@@ -2347,18 +2348,18 @@ Backdrop: rgba(0,0,0,0.5), z-index 1400
 Panel: background White, height 100vh (desktop) / variant-based (mobile)
 Panel border-radius: 16px on open side only (desktop), 20px 20px 0 0 (mobile)
 Panel shadow: 0 24px 48px rgba(0,0,0,0.2)
-Header: sticky top, border-bottom 1px Neutral 200
+Header: sticky top, border-bottom 1px Gray 200
 Header padding: space-5 (20px) vertical, space-6 (24px) horizontal
 Header title: type-title-2 (20px / 700)
-Close button: 32px, Neutral 500 → Neutral 900 on hover
+Close button: 32px, Gray 500 → Gray 900 on hover
 Body padding: space-5 (20px) vertical, space-6 (24px) horizontal
 Body: flex 1, overflow-y auto
-Footer: sticky bottom, border-top 1px Neutral 200
+Footer: sticky bottom, border-top 1px Gray 200
 Footer padding: space-4 (16px) space-6 (24px)
 Footer layout: display flex, justify-content flex-end, gap space-3 (12px). All action buttons group together on the right — tertiary and primary sit side by side, right-aligned. Never use space-between to float the secondary or tertiary action to the left. When a single primary button is present, it spans full width.
 Open animation: 300ms ease-enter (desktop), 400ms ease-enter (mobile)
 Close animation: 200ms ease-exit
-Mobile handle: 36 x 4px, Neutral 300, border-radius 2px, centered, 8px top margin
+Mobile handle: 36 x 4px, Gray 300, border-radius 2px, centered, 8px top margin
 Full shelf: no border-radius, no handle, close button only
 ```
 
@@ -2391,14 +2392,14 @@ Full shelf: no border-radius, no handle, close button only
 Size: 20px (inline), 32px (component), 48px (page)
 Stroke: 3px, Blue 600
 Animation: rotate 360° in 800ms linear infinite + dash offset
-Background track: Neutral 200 (10% opacity)
+Background track: Gray 200 (10% opacity)
 ```
 
 #### Progress Bar (Determinate)
 ```
-Track: full-width, 6px height, Neutral 200, border-radius 3px
+Track: full-width, 6px height, Gray 200, border-radius 3px
 Fill: Blue 600, border-radius 3px, width = percentage
-Label: type-caption-1, Neutral 700, right-aligned above bar
+Label: type-caption-1, Gray 700, right-aligned above bar
 Transition: width 300ms ease-out
 ```
 
@@ -2407,8 +2408,8 @@ Transition: width 300ms ease-out
 Steps: numbered circles (28px) connected by lines
 Completed: Blue 600 fill, white checkmark
 Current: Blue 600 border, Blue 600 number
-Upcoming: Neutral 300 border, Neutral 500 number
-Connector: 2px line, Blue 600 (completed) or Neutral 200 (upcoming)
+Upcoming: Gray 300 border, Gray 500 number
+Connector: 2px line, Blue 600 (completed) or Gray 200 (upcoming)
 Label below each step: type-caption-1
 ```
 
@@ -2426,8 +2427,8 @@ Label below each step: type-caption-1
 **Specs:**
 ```
 Shape: Matches the component it replaces (rectangle for text, circle for avatar, rounded rect for card)
-Background: Neutral 100
-Animation: shimmer — linear-gradient(90deg, Neutral 100 25%, Neutral 200 50%, Neutral 100 75%)
+Background: Gray 100
+Animation: shimmer — linear-gradient(90deg, Gray 100 25%, Gray 200 50%, Gray 100 75%)
   background-size: 200% 100%
   animation: shimmer 1.5s infinite ease-in-out
 Border-radius: matches the target component (4px for text lines, 50% for avatars, 8px for cards)
@@ -2483,16 +2484,16 @@ Text skeleton width: varies (100%, 80%, 60%) to feel natural
 **Specs:**
 ```
 Border-radius: 12px
-Border: 1px solid Neutral 200 OR shadow: 0 1px 3px rgba(0,0,0,0.06)
+Border: 1px solid Gray 200 OR shadow: 0 1px 3px rgba(0,0,0,0.06)
 Background: White (light) / surface-secondary (dark)
 Padding (body): space-4 (16px)
 Media aspect ratio: 4:3 (all lot images — vehicles and equipment)
 Title: type-title-3 (18px / 600)
 Gap (title to subtitle): space-1 (4px)
-Subtitle: type-body (16px / 400), Neutral 700
+Subtitle: type-body (16px / 400), Gray 700
 Gap (subtitle to meta): space-2 (8px)
-Meta: type-caption-1 (12px / 500), Neutral 500
-Footer: border-top 1px Neutral 200, padding space-3 (12px) space-4 (16px)
+Meta: type-caption-1 (12px / 500), Gray 500
+Footer: border-top 1px Gray 200, padding space-3 (12px) space-4 (16px)
 Button group in footer: space-3 (12px) gap between buttons, max 2 buttons
 Hover transition: transform 200ms ease, box-shadow 200ms ease
 Gap between cards in grid: space-6 (24px)
@@ -2530,24 +2531,24 @@ Gap between cards in grid: space-6 (24px)
 **States:**
 | Element | Default | Hover | Selected | Sorted |
 |---------|---------|-------|----------|--------|
-| Header cell | Neutral 100 bg, Neutral 900 text, 600 weight | — | — | Blue 600 text + sort arrow |
-| Body row | White bg | Neutral 100 bg | Blue 200 bg | — |
-| Alternating row | Neutral 50 bg | Neutral 100 bg | Blue 200 bg | — |
-| Cell | Neutral 700 text | — | — | — |
+| Header cell | Gray 100 bg, Gray 900 text, 600 weight | — | — | Blue 600 text + sort arrow |
+| Body row | White bg | Gray 100 bg | Blue 200 bg | — |
+| Alternating row | Gray 50 bg | Gray 100 bg | Blue 200 bg | — |
+| Cell | Gray 700 text | — | — | — |
 
 **Specs:**
 ```
 Header: height 44px, padding space-3 (12px) horizontal
-Header font: type-subheadline (14px / 600), Neutral 900
+Header font: type-subheadline (14px / 600), Gray 900
 Cell: min-height 48px, padding space-3 (12px) horizontal, vertical center
-Cell font: type-body (16px / 400), Neutral 700
+Cell font: type-body (16px / 400), Gray 700
 Monospace cells (VIN, Lot#, Price): JetBrains Mono, 15px
-Border: 1px solid Neutral 200 between rows
-Sort icon: 12px, Neutral 300 (unsorted) / Blue 600 (sorted)
+Border: 1px solid Gray 200 between rows
+Sort icon: 12px, Gray 300 (unsorted) / Blue 600 (sorted)
 Horizontal scroll: on mobile/tablet when columns exceed viewport
 Sticky first column: optional, with subtle shadow on scroll
 Zebra striping: tr:nth-child(even) td { background: #F8F8F9; } — intentional hardcoded value (not a token) for subtlety
-Hover overrides zebra: var(--neutral-100)
+Hover overrides zebra: var(--gray-100)
 ```
 
 **Responsive behavior:**
@@ -2588,15 +2589,15 @@ Hover overrides zebra: var(--neutral-100)
 ```
 Item min-height: 48px (simple), 64px (two-line), 80px (three-line)
 Padding: space-4 (16px) horizontal
-Leading icon: 24px, Neutral 500
+Leading icon: 24px, Gray 500
 Leading thumbnail: 48px × 48px, 6px radius
 Title: type-body (16px / 500)
-Subtitle: type-caption-1 (12px / 400), Neutral 500
-Divider: 1px solid Neutral 200, inset from leading edge
-Hover: Neutral 100 background
-Active: Neutral 200 background
+Subtitle: type-caption-1 (12px / 400), Gray 500
+Divider: 1px solid Gray 200, inset from leading edge
+Hover: Gray 100 background
+Active: Gray 200 background
 Zebra striping: .list-item:nth-child(even) { background: #F8F8F9; } — intentional hardcoded value (not a token) for subtlety
-Hover overrides zebra: var(--neutral-100)
+Hover overrides zebra: var(--gray-100)
 ```
 
 **Accessibility:**
@@ -2619,13 +2620,13 @@ Hover overrides zebra: var(--neutral-100)
 
 **Specs:**
 ```
-Value: type-display-sm or type-headline (responsive), Neutral 900, font-weight 800
+Value: type-display-sm or type-headline (responsive), Gray 900, font-weight 800
   Monospace for financial values: JetBrains Mono
-Label: type-caption-1 (12px / 500), Neutral 500, uppercase with 0.08em tracking
+Label: type-caption-1 (12px / 500), Gray 500, uppercase with 0.08em tracking
 Trend up: success-accent color, up arrow
 Trend down: error-accent color, down arrow
 Trend font: type-subheadline (14px / 600)
-Period: type-caption-2 (12px), Neutral 500
+Period: type-caption-2 (12px), Gray 500
 Gap (value to trend): space-2 (8px)
 Gap (value to label): space-1 (4px)
 ```
@@ -2645,17 +2646,17 @@ Gap (value to label): space-1 (4px)
 **Chart Types Supported:** Line, Bar, Donut, Area
 
 **Color Sequence (for multi-series):**
-1. Blue 600 (`#2662D9`)
+1. Blue 600 (`#2059CC`)
 2. `#5B8EF0` (Light Blue)
-3. `#0F2757` (Dark Navy)
-4. `#EC9C0D` (Amber)
-5. `#4CA830` (Green)
-6. `#7A8691` (Gray)
+3. `#032773` (Dark Navy)
+4. `#82580B` (Amber)
+5. `#146E3A` (Green)
+6. `#83868D` (Gray)
 
 **Specs:**
 ```
-Axis labels: type-caption-1, Neutral 500
-Grid lines: 1px, Neutral 200, dashed
+Axis labels: type-caption-1, Gray 500
+Grid lines: 1px, Gray 200, dashed
 Tooltip: White bg, 8px radius, shadow 0 4px 12px rgba(0,0,0,0.12)
   Title: type-subheadline (14px / 600)
   Value: type-body (16px / 500)
@@ -2685,7 +2686,7 @@ Responsive: reduce data point density on mobile, maintain touch target on intera
 
 **Specs:**
 ```
-Background: Neutral 900 (#2F333C)
+Background: Gray 900 (#13161B)
 Text: White (#FFFFFF), type-caption-1 (12px / 500)
 Padding: space-2 (8px) horizontal, space-1 (4px) vertical
 Border-radius: radius-sm (4px)
@@ -2728,15 +2729,15 @@ Z-index: z-dropdown (1100)
 **Specs:**
 ```
 Background: White (#FFFFFF)
-Border: 1px Neutral 200
+Border: 1px Gray 200
 Border-radius: radius-lg (8px)
 Padding: space-4 (16px)
 Shadow: shadow-lg
 Max-width: 320px
 Min-width: 200px
-Header: type-subheadline (14px / 600), Neutral 900
-Body: type-body (16px / 400), Neutral 700
-Close button: 20×20 SVG X icon, Neutral 500, top-right, transparent background
+Header: type-subheadline (14px / 600), Gray 900
+Body: type-body (16px / 400), Gray 700
+Close button: 20×20 SVG X icon, Gray 500, top-right, transparent background
 Animation: scale(0.95) + fade → scale(1), 150ms ease-out
 Z-index: z-dropdown (1100)
 ```
@@ -2751,7 +2752,7 @@ Z-index: z-dropdown (1100)
 | | Tooltip | Popover |
 |---|---------|---------|
 | **Trigger** | Hover / focus | Click |
-| **Background** | Dark (Neutral 900) | Light (White) |
+| **Background** | Dark (Gray 900) | Light (White) |
 | **Content** | Plain text, 1–2 lines | Rich text, links, small forms |
 | **Interactive** | No | Yes |
 | **Close** | Auto on mouse-out/blur | Manual (X button or click outside) |
@@ -2791,12 +2792,12 @@ Z-index: z-dropdown (1100)
 ```
 Border-radius: 8px (standard), 50% (avatar)
 Object-fit: cover (vehicles), contain (documents)
-Placeholder: Neutral 100 bg + centered car icon (24px, Neutral 300)
+Placeholder: Gray 100 bg + centered car icon (24px, Gray 300)
 Loading: skeleton shimmer animation
-Error state: Neutral 100 bg + "Image unavailable" text (type-caption-1, Neutral 500)
+Error state: Gray 100 bg + "Image unavailable" text (type-caption-1, Gray 500)
 Overlay gradient: linear-gradient(transparent 60%, rgba(0,0,0,0.6) 100%)
 Gallery indicator: 8px dots, White fill (active), White 50% (inactive), 8px gap
-Gallery arrows: 36px circle, White 90% bg, shadow-sm, centered chevron-left/right (16px, stroke-width 2), positioned 12px from edges, vertically centered. Dark mode: Neutral 900 90% bg.
+Gallery arrows: 36px circle, White 90% bg, shadow-sm, centered chevron-left/right (16px, stroke-width 2), positioned 12px from edges, vertically centered. Dark mode: Gray 900 90% bg.
 Lazy loading: loading="lazy" on all images below the fold
 ```
 
@@ -2868,7 +2869,7 @@ Border: 2px solid White (when on colored background)
 Fallback background: Blue 600 (first letter A-M), Blue 800 (N-Z)
 Fallback text: White, centered
 Badge position: bottom-right, overlapping edge
-Badge: success-accent green (online), Blue 600 (verified), Neutral 300 (offline)
+Badge: success-accent green (online), Blue 600 (verified), Gray 300 (offline)
 Badge border: 2px solid White (to separate from avatar)
 ```
 
@@ -2923,11 +2924,11 @@ See [Vault > surface-intentions.md](https://github.com/getboyce/Copart-Design-Va
 **States:**
 | State | Background | Text | Border |
 |-------|-----------|------|--------|
-| Default | White | Neutral 700 | 1px Neutral 300 |
-| Hover | Neutral 100 | Neutral 900 | 1px Neutral 500 |
+| Default | White | Gray 700 | 1px Gray 300 |
+| Hover | Gray 100 | Gray 900 | 1px Gray 500 |
 | Selected | Blue 600 | White | None |
 | Selected + Hover | Blue 800 | White | None |
-| Disabled | Neutral 100 | Neutral 300 | 1px Neutral 200 |
+| Disabled | Gray 100 | Gray 300 | 1px Gray 200 |
 
 **Specs:**
 ```
@@ -2937,7 +2938,7 @@ Border-radius: radius-pill (9999px)
 Font: type-subheadline (14px / 600)
 Gap between chips: space-2 (8px)
 Icon size: 16px, space-2 gap to label
-Count badge: type-caption-1 (12px / 500), space-2 gap, Neutral 500 text (default), White text (selected)
+Count badge: type-caption-1 (12px / 500), space-2 gap, Gray 500 text (default), White text (selected)
 Container: horizontal scroll, no visible scrollbar, fade gradient on overflow edges
 Touch target: 44px minimum height via padding expansion
 Transition: background 150ms ease, color 150ms ease
@@ -2976,10 +2977,10 @@ Transition: background 150ms ease, color 150ms ease
 **States:**
 | State | Text Color | Weight | Underline |
 |-------|-----------|--------|-----------|
-| Default | Neutral 500 | 600 | None |
-| Hover | Neutral 900 | 600 | None (cursor pointer) |
+| Default | Gray 500 | 600 | None |
+| Hover | Gray 900 | 600 | None (cursor pointer) |
 | Active | Blue 600 | 600 | 2px Blue 600, bottom-aligned |
-| Disabled | Neutral 300 | 600 | None |
+| Disabled | Gray 300 | 600 | None |
 | Focus | Current color | 600 | Focus ring on tab item |
 
 **Implementation note:** All tabs use font-weight 600 in every state. This prevents layout shift when switching between tabs (bold text is wider than regular text, which would cause the indicator width to jump).
@@ -2992,8 +2993,8 @@ Label: type-subheadline (14px / 600 all states — consistent weight prevents la
 Gap between tabs: 0 (tabs butt against each other, separated by padding)
 Active underline: 2px height, Blue 600, bottom of tab, matches label width (not tab width)
 Underline animation: slide horizontally to new tab, 200ms ease-out
-Badge: type-caption-1 (12px / 500), Neutral 500, space-2 gap after label
-Container: border-bottom 1px Neutral 200 (full width baseline)
+Badge: type-caption-1 (12px / 500), Gray 500, space-2 gap after label
+Container: border-bottom 1px Gray 200 (full width baseline)
 ```
 
 **Copart Context:**
@@ -3037,13 +3038,13 @@ Container: border-bottom 1px Neutral 200 (full width baseline)
 **States (Day Cell):**
 | State | Background | Text | Border |
 |-------|-----------|------|--------|
-| Default | None | Neutral 900 | None |
+| Default | None | Gray 900 | None |
 | Hover | Blue 50 | Blue 600 | None |
 | Today | None | Blue 600 | 1px Blue 600 (ring) |
 | Selected | Blue 600 | White | None |
 | Range: In-Between | Blue 100 | Blue 900 | None |
 | Range: Start/End | Blue 600 | White | None (pill ends) |
-| Disabled (past/unavailable) | None | Neutral 300 | None |
+| Disabled (past/unavailable) | None | Gray 300 | None |
 | Focus | — | — | Focus ring (shadow-focus) |
 
 **States (Trigger Input):**
@@ -3052,11 +3053,11 @@ Same as Text Field states (default, hover, focus, filled, error, disabled).
 **Specs:**
 ```
 Trigger input: matches Text Field spec exactly (height, radius, padding, font)
-Trailing icon: calendar icon, 20px, Neutral 500
+Trailing icon: calendar icon, 20px, Gray 500
 
 Calendar dropdown:
   Background: White
-  Border: 1px Neutral 200
+  Border: 1px Gray 200
   Border-radius: radius-lg (8px)
   Shadow: shadow-lg
   Padding: space-4 (16px)
@@ -3065,11 +3066,11 @@ Calendar dropdown:
 
 Header:
   Month/year: type-subheadline (14px / 600)
-  Nav arrows: 32×32px buttons, bg-secondary, radius-sm, stroke caret icon, Neutral 700
+  Nav arrows: 32×32px buttons, bg-secondary, radius-sm, stroke caret icon, Gray 700
   Month-year clickable for year picker
 
 Day grid:
-  Day headers: type-caption-1 (12px / 500), Neutral 500, uppercase
+  Day headers: type-caption-1 (12px / 500), Gray 500, uppercase
   Day cell: 36px × 36px
   Day text: 13px / 400 (selected: 600)
   Grid gap: 2px
@@ -3413,7 +3414,7 @@ Modals become bottom sheets on mobile:
 | Property | Value |
 |----------|-------|
 | Border radius | 20px top, 0 bottom |
-| Drag handle | 36px × 4px pill, Neutral 300, centered, 8px from top |
+| Drag handle | 36px × 4px pill, Gray 300, centered, 8px from top |
 | Max height | 90vh |
 | Animation | Slide up 400ms `cubic-bezier(0.32, 0.72, 0, 1)` |
 | Dismiss | Swipe down 150px or tap backdrop |
@@ -3426,7 +3427,7 @@ Modals become bottom sheets on mobile:
 | Min height | 44px |
 | Padding-X | 16px |
 | Separator | 1px, inset 16px from left |
-| Chevron | 12px, Neutral 300, right-aligned |
+| Chevron | 12px, Gray 300, right-aligned |
 | Swipe actions | 80px reveal width, destructive left, archive right |
 
 ---
@@ -3537,7 +3538,7 @@ Use this to determine which system to apply:
 
 A complete token file is provided at `copart-design-tokens.json` in DTCG (Design Tokens Community Group) format. The file now includes a `platform.mobile` section with all mobile-specific overrides for component sizing, typography, spacing, motion, navigation, and gestures. The file contains all primitive and semantic tokens for:
 
-- **Color** — Primitives (blue scale, neutrals, semantic colors), semantic mappings (background, text, border, interactive, feedback), and full dark mode equivalents
+- **Color** — Primitives (blue scale, grays, semantic colors), semantic mappings (background, text, border, interactive, feedback), and full dark mode equivalents
 - **Typography** — Font families, weights, and the complete type scale with responsive variants
 - **Spacing** — 14-step scale from 0 to 128px
 - **Border Radius** — 8 tokens from `none` to `full`
@@ -3572,7 +3573,7 @@ The three principles — **Precision, Institutional Confidence, Vitality** — a
 ## 12.2 Do's and Don'ts
 
 ### 1. Color Usage
-**Do:** Use Blue 600 for the single primary action on a screen. Use Neutral 700 for body text. Use semantic colors only for their intended purpose (success = green, error = red).
+**Do:** Use Blue 600 for the single primary action on a screen. Use Gray 700 for body text. Use semantic colors only for their intended purpose (success = green, error = red).
 
 **Don't:** Use Blue 600 for decorative elements, large background fills, or body text. Don't use color alone to convey meaning.
 
@@ -3654,7 +3655,7 @@ When using AI to generate UI, watch for these anti-patterns — they are the def
 **Do:** Use the Vallejo type scale, color tokens, and spacing system exactly as defined. Produce components that are visually indistinguishable from hand-crafted Vallejo components. Reference the Vault for design intent before generating.
 
 **Don't:**
-- **Purple accent** — AI models default to purple. Vallejo's accent is Orange 600 (`#D86518`).
+- **Purple accent** — AI models default to purple. Vallejo's accent is Orange 500 (`#BB590C`).
 - **Border-box compositions** — AI loves wrapping everything in bordered boxes. Vallejo uses spacing and typography for structure, not borders.
 - **Emoji / icon overuse** — No emoji, ever. Icons are Iconic SVGs only, and only where they serve function.
 - **Generic typography** — AI ignores type scales and uses arbitrary sizes. Every text element must map to a Vallejo type token.
@@ -3678,10 +3679,10 @@ When using AI to generate UI, watch for these anti-patterns — they are the def
 ```css
 :root {
   /* Colors */
-  --color-blue-600: #2662D9;
-  --color-blue-800: #063598;
-  --color-neutral-900: #2F333C;
-  --color-neutral-700: #46525D;
+  --color-blue-600: #2059CC;
+  --color-blue-800: #043599;
+  --color-gray-900: #13161B;
+  --color-gray-700: #484C54;
 
   /* Spacing */
   --space-1: 4px;
@@ -3698,7 +3699,7 @@ When using AI to generate UI, watch for these anti-patterns — they are the def
   /* Shadows */
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-focus: 0 0 0 3px rgba(38,98,217,0.4);
+  --shadow-focus: 0 0 0 3px rgba(32,89,204,0.4);
 
   /* Radii */
   --radius-sm: 4px;
@@ -3809,4 +3810,4 @@ Use the error color tokens (`--error-bg`, `--error-bg-subtle`, `--error-text`, `
 
 ---
 
-*Vallejo Design System 1.1.2 — Precision, Institutional Confidence, Vitality. Executing the [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault) at the component level.*
+*Vallejo Design System 1.2.0 — Precision, Institutional Confidence, Vitality. Executing the [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault) at the component level.*

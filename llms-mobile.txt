@@ -1,0 +1,184 @@
+# Vallejo 1.2 — Mobile platform (llms-mobile.txt)
+
+This is the mobile counterpart to the web-first DESIGN.md — read DESIGN.md first; this file only states where native/touch mobile diverges, and inherits everything it does not override.
+
+Mobile is a sibling PLATFORM, not a responsive breakpoint. Same brand, same triad (Precision · Institutional Confidence · Vitality), same tokens — different input model (thumb, not cursor) and different sizing. The Vault's surface intention for native mobile is "Efficient discovery": speed, clear vehicle photography, first-impression institutional confidence.
+
+STEP 0 — WHY: the Copart Design Vault (github.com/getboyce/Copart-Design-Vault) is Layer 1 (the why); Vallejo is Layer 2 (the how). When they conflict, the Vault wins.
+
+Version + date live ONLY in version.json — never hardcode them here.
+
+Inherited from the canonical system (do NOT restate or fork these):
+- Canonical neutral ramp is `gray-*` — NEVER `neutral-*`. Bind a semantic alias (text/surface/border/interactive/status), never a primitive, never a raw hex. Full values: llms-tokens.txt.
+- There is NO orange ramp. `gold #FA9252` is for Premier rings ONLY. Express urgency with the warning / error ramps — never a gold or orange button. Destructive uses the error ramp, never a raw red.
+- LIGHT-ONLY today. Dark mode is planned (`data-theme="dark"`) but not shipped — do not make dark-mode claims. Bind semantic aliases so a future swap re-themes.
+- Numbers you COMPARE — VIN, lot number, bid, timer, timestamp, stacked ladders — render in JetBrains Mono (`var(--font-mono)`, weight 500). Numbers you READ as a single dominant impact (hero bid, win amount) stay Inter with `tnum`. The timer is always Mono. Mono never bleeds into labels or prose.
+- State is never color-alone (CVD-safe): every status carries a word; LIVE keeps the ● dot.
+- Sentence case everywhere. No emoji. Verb-first labels. No prices inside button labels.
+- Voice rules: llms-writing.txt. Accessibility floor (WCAG 2.1 AA): llms-a11y.txt. Component detail: llms-components.txt. Token values: llms-tokens.txt.
+
+---
+
+## 1. Two systems, one brand
+
+| Dimension | Desktop (web) | Mobile (native/touch) |
+|---|---|---|
+| Primary input | Mouse + keyboard | Touch (thumb) |
+| Touch target | 40px default | 44px minimum, 48px preferred |
+| Information density | High — dense tables, multi-column | Low — single column, progressive disclosure |
+| Navigation | Top chrome + in-page tabs | Bottom tab bar + navigation stack |
+| Content interaction | Hover + click | Tap + swipe + pull-to-refresh |
+| Modals | Centered floating panel | Bottom sheet with drag handle |
+| Body size | 16px (Body) | 17px (touch reading distance) |
+
+There is NO Sidebar component (dropped from the catalog). On mobile, primary navigation is a fixed bottom tab bar plus a navigation stack; a temporary overlay drawer covers the desktop-sidebar use case — but neither is a published component, so compose them from primitives.
+
+---
+
+## 2. Mobile type scale
+
+Inter for UI and reading; JetBrains Mono 500 for compared numbers / codes / timers / VINs (rule above). The canonical scale (llms-tokens.txt §7) carries; mobile diverges only in these ways:
+
+- Body is 17/24 on mobile (touch reading distance) instead of the canonical 16/24. This is the one governed body bump — it does NOT change the token name, only its mobile-resolved size.
+- No Display styles on mobile — the largest text is Headline (36/44, the page-title role). Mobile does not use 48–64px type.
+- Every line-height stays a multiple of 4 — the off-grid iOS line-heights (25/41/21/18) and off-grid sizes (10/17/26/30) are banned here exactly as on desktop. Map mobile roles onto the canonical styles below; do not reintroduce an iOS-only scale.
+
+| Mobile role | Canonical style | Family | Wt | Size / LH (px) |
+|---|---|---|---|---|
+| Large title (top of scroll view) | Headline | Inter | 700 | 36 / 44 |
+| Page heading | Title 1 | Inter | 600 | 28 / 36 |
+| Section header | Title 2 | Inter | 600 | 24 / 32 |
+| Card / subsection header | Title 3 | Inter | 600 | 20 / 28 |
+| Bold list-cell label | Subheadline | Inter | 600 | 14 / 20 |
+| Body (mobile) | Body @ 17 | Inter | 400 | 17 / 24 |
+| Dense list/card title | List Title | Inter | 500 | 15 / 20 |
+| Secondary label | Body Small | Inter | 400 | 14 / 20 |
+| Timestamp / metadata | Footnote | Inter | 400 | 13 / 16 |
+| Badge text, tab-bar label | Caption 1 | Inter | 500 | 12 / 16 |
+| Compared values / ladders | Mono / Medium | JetBrains Mono | 500 | 16 / 20 |
+| Table numerics, VINs | Mono / Small | JetBrains Mono | 500 | 13 / 16 |
+
+---
+
+## 3. Mobile component specs (deltas only)
+
+Inherit every component spec from llms-components.txt; override only the sizing below for touch. Radii stay on the canonical family (llms-tokens.txt §4) — the legacy off-family mobile radii (10 / 14 / 20px) are RETIRED.
+
+### Button
+| Size | Height | Padding-X | Type | Radius token |
+|---|---|---|---|---|
+| SM | 36px | 14px | Body Small / 500 | `radius-md` (6) |
+| MD (default) | 44px | 20px | Body / 500 | `radius-lg` (8) |
+| LG | 50px | 28px | Body @ 17 / 500 | `radius-lg` (8) |
+| XL | 56px | 32px | Body Large / 600 | `radius-xl` (12) |
+
+- Default is MD (44px) — meets WCAG 2.5.5. No XS size on mobile (too small to target reliably).
+- Primary CTAs on form screens go full-width (16px left/right margin). Still one Primary (blue) per view — no Tertiary, no Success button. Primary + Destructive are raised; Secondary + Quiet stay flat.
+
+### Text Field / Text Area
+| Property | Desktop | Mobile |
+|---|---|---|
+| Height | 44px | 48px |
+| Font size | 16px | 16px (keep ≥16 to prevent iOS auto-zoom) |
+| Padding-X | 12px | 16px |
+| Radius | `radius-lg` (8) | `radius-lg` (8) |
+| Label | Subheadline (14/600) | List Title (15/500) |
+
+Empty-input boundary uses `border-control` (`gray-500`, 3:1). Error = `error-accent` border + message below.
+
+### Toggle
+| Property | Desktop default | Desktop small | Mobile |
+|---|---|---|---|
+| Track | 48 × 28px | 40 × 24px | 51 × 31px |
+| Thumb | 22px | 18px | 27px |
+| Gap to label | 12px | 12px | 12px |
+
+Track color is interactive, not decorative; label optional.
+
+### Other touch-target overrides
+| Element | Desktop | Mobile |
+|---|---|---|
+| Slider thumb | 24px | 28px (track + thumb still meet 3:1) |
+| Checkbox / Radio | 20px | 22px |
+| List Row min-height | 48px | 44px (+ swipe actions) |
+
+### Lot Card
+| Property | Desktop | Mobile |
+|---|---|---|
+| Container radius | `radius-xl` (12) | `radius-2xl` (16) |
+| Body padding | 16px | 16px |
+| Gap (in grid/list) | 24px | 12px |
+| Media height | 180px | 200px (full card width) |
+
+Prices in Mono; one primary action per card.
+
+### Modal → Bottom Sheet
+On mobile, Modal renders as a bottom sheet.
+| Property | Value |
+|---|---|
+| Radius | `radius-2xl` (16) top corners, 0 bottom |
+| Drag handle | 36 × 4px pill, `gray-300`, centered, 8px from top |
+| Max height | 90vh |
+| Enter | slide up, `--duration-deliberate` (400ms) `--ease-enter` |
+| Dismiss | swipe down past 150px, or tap scrim |
+| Scrim | `surface/scrim` (ink 45%) |
+| Safe area | content clears `env(safe-area-inset-bottom)` |
+
+Sheets may stack max 2 deep: the background sheet scales to 95% and shifts up 8px. One Primary action per sheet.
+
+---
+
+## 4. Mobile spacing
+
+Spacing stays on the canonical 4px-grid scale (llms-tokens.txt §3) — bind tokens, never arbitrary px. Mobile resolves the layout/page zones tighter:
+
+| Use | Desktop | Mobile | Token (mobile) |
+|---|---|---|---|
+| Page margin (L/R) | 80px | 16px | `space-4` |
+| Section gap | 48–64px | 24px | `space-6` |
+| Card gap (grid/list) | 24px | 12px | `space-3` |
+| Component gap (sibling fields) | 16–24px | 12px | `space-3` |
+| Card padding | 24px | 16px | `space-4` |
+
+### Safe areas
+Every mobile layout respects device safe areas:
+
+```css
+/* Bottom nav and floating CTAs */
+padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom));
+
+/* Full-screen surfaces */
+padding-top: env(safe-area-inset-top);
+padding-left: env(safe-area-inset-left);
+padding-right: env(safe-area-inset-right);
+```
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+```
+
+---
+
+## 5. Mobile-specific patterns
+
+### Bottom tab bar
+Fixed at the bottom, 56px + `env(safe-area-inset-bottom)`. One active tab per group (`aria-selected`), labels are short sentence-case nouns in Caption 1. Stacks below the toast layer; use `--layer-sticky`. There is no `header` layer in the ladder (that step was removed) — use `sticky` / `drawer` / `modal` as appropriate (llms-tokens.txt §6).
+
+### Pull-to-refresh
+Threshold 64px (`space-16`) pull distance; a 24px Spinner appears below the nav bar; haptic feedback on supported devices. Spinner respects `prefers-reduced-motion`.
+
+### Swipe actions on list rows
+- Swipe left: destructive action (e.g. Remove from Watchlist) — error ramp background.
+- Swipe right: positive action (e.g. Mark as read / Archive) — success ramp background.
+- Reveal width 80px; full swipe executes, partial swipe reveals the labeled button. Color is never the only cue — each action carries an icon + word. It is "Watchlist," never "favorites."
+
+### Gesture navigation
+- Swipe from left edge: navigate back.
+- Long-press a card: quick-actions context menu.
+- Pinch on a vehicle image: zoom in the gallery.
+
+### Motion
+All motion inherits the canonical registers and durations (llms-tokens.txt §5) and collapses to instant under `prefers-reduced-motion`. Motion confirms action; it is never decorative.
+
+---
+
+See also: DESIGN.md (the web-first map), llms.txt (entry), llms-tokens.txt, llms-components.txt, llms-a11y.txt, llms-writing.txt, AGENTS.md.

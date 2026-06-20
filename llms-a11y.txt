@@ -1,0 +1,262 @@
+# Vallejo 1.2 — Accessibility (llms-a11y.txt)
+
+Consolidated, copy-paste-ready accessibility rules for building Vallejo prototypes.
+WCAG 2.1 AA is a non-negotiable engineering floor, not an aspiration — every
+component meets or exceeds it. Version/date live in version.json (never hardcode).
+
+STEP 0 — WHY THIS MATTERS: the Copart Design Vault (github.com/getboyce/Copart-Design-Vault)
+is Layer 1 (the why); Vallejo is Layer 2 (the how). Accessibility serves the triad —
+Precision, Institutional Confidence, Vitality — and the design filter: Does this build
+trust? Respect expertise? Read at multiple depths? An interface that excludes is none
+of those. "It just needs to function" is an anti-pattern; so is treating a11y as a
+post-hoc audit. Build it in.
+
+Five rules carry most of the weight, in order:
+1. Meet the contrast targets (§1).
+2. Never signal state with color alone — pair color + icon + label (§4).
+3. Give every interactive element a visible solid 2px focus ring (§3).
+4. Give every control a 44px hit area (§2).
+5. Collapse all motion to instant under reduce-motion (§5).
+
+================================================================================
+## 1. CONTRAST TARGETS
+================================================================================
+
+| Context                                  | Target  |
+|------------------------------------------|---------|
+| Body text (normal)                       | 4.5:1   |
+| Large text (>=24px, or >=18.66px bold)   | 3:1     |
+| UI / non-text (borders, controls, icons) | 3:1     |
+| Empty-input boundary (border IS the id)  | 3:1     |
+| Labeled-control boundary (label is the id, border decorative) | exempt under WCAG 1.4.11 |
+
+Operative large-text number: >=24px (this is the `display-muted` floor, §7).
+
+### Recomputed contrast table (WCAG 2.x, from swept Figma values, gray/900 = #1D222A)
+Method: sRGB->linear, L = 0.2126R + 0.7152G + 0.0722B, ratio = (L_light+0.05)/(L_dark+0.05).
+
+| Pair                                        | fg / bg            | Ratio   | AA 4.5 | Large 3 | UI 3 |
+|---------------------------------------------|--------------------|---------|:------:|:-------:|:----:|
+| ink text/primary (gray/900) on white        | #1D222A / #FFFFFF  | 15.98:1 |   Y    |    Y    |  Y   |
+| white on header chrome (gray/800)           | #FFFFFF / #30333A  | 12.65:1 |   Y    |    Y    |  Y   |
+| white on interactive/primary (blue/600)     | #FFFFFF / #2059CC  | 6.25:1  |   Y    |    Y    |  Y   |
+| white on interactive/destructive (error/600)| #FFFFFF / #C20022  | 6.33:1  |   Y    |    Y    |  Y   |
+| success/600 on white                        | #146E3A / #FFFFFF  | 6.32:1  |   Y    |    Y    |  Y   |
+| warning/600 on white                        | #82580B / #FFFFFF  | 6.27:1  |   Y    |    Y    |  Y   |
+| error/600 on white                          | #C20022 / #FFFFFF  | 6.33:1  |   Y    |    Y    |  Y   |
+| border/focus (blue/600) on white            | #2059CC / #FFFFFF  | 6.25:1  |   Y    |    Y    |  Y   |
+| border/default (gray/300) on white          | #BDC1CA / #FFFFFF  | 1.80:1  |   N    |    N    |  N   |
+| border/control (gray/500) on white          | #83868D / #FFFFFF  | 3.65:1  |   N    |    Y    |  Y   |
+| disabled (gray/400) on white                | #9C9FA6 / #FFFFFF  | 2.65:1  |   N    |    N    |  N   |
+
+Reading the rows that "fail":
+- **border/default gray/300 = 1.80:1 fails 3:1 BY DESIGN.** A labeled button/control is
+  identified by its label, so the resting boundary is decorative and exempt under W3C
+  Understanding 1.4.11. Light hairlines are correct here — do not "fix" them.
+- **border/control gray/500 = 3.65:1** is the input boundary. An empty input's border IS
+  the identifier, so it must clear 3:1 — and it does. Use gray/500 borders on inputs,
+  gray/300 on labeled buttons.
+- **disabled gray/400 = 2.65:1 is contrast-EXEMPT** (WCAG 1.4.3 / 1.4.11, inactive
+  components). Reported for the record; distinguished by multi-cue, not contrast (§6).
+
+### The 600 step is the button workhorse
+White-on-600 reads 6.25-6.33:1 across blue / success / warning / error — every solid
+button label clears AA 4.5. "Any 600 is button-grade" holds for fills.
+
+### AA-anchor (lightest step usable as normal text / solid fill on white at AA 4.5)
+| Ramp    | AA-anchor | hex     | Ratio  | Step below (fails)        |
+|---------|-----------|---------|--------|---------------------------|
+| gray    | gray/600  | #62666F | 5.75:1 | gray/500 = 3.65 (UI-only) |
+| blue    | blue/500  | #3970DE | 4.62:1 | blue/400 = 3.22           |
+| success | success/500 | #098644 | 4.66:1 | success/400 = 3.21      |
+| warning | warning/500 | #9D6B11 | 4.62:1 | warning/400 = 3.22      |
+| error   | error/500 | #D8383D | 4.61:1 | error/400 = 3.21          |
+
+Gray anchors one step LATER (600) than the four chromatic ramps (500). Practical rule:
+for text on white, reach for the **/600** of any color, the **/500** for chromatic ramps
+at minimum AA, and never put text on a /400 fill. Tonal chip = tone/100 fill + tone/800
+text (~8.5:1).
+
+Anti-pattern: never use blue/600 for body text — fine as a fill behind white, but at
+small text sizes on white it is borderline. Use ink (gray/900) for body copy.
+
+================================================================================
+## 2. TOUCH TARGETS — 44px floor (WCAG 2.5.8)
+================================================================================
+
+- **44px is the minimum HIT AREA** for any interactive control (48px preferred on mobile),
+  regardless of visual size. **8px minimum spacing** between adjacent targets.
+- A visually smaller control expands its hit area with padding to reach 44px. Examples:
+  the 32px Watchlist heart and the 32px overlay Icon Button both carry a required 44px
+  expanded hit area in code. Do not read "32px" or "40px default" as the tappable size —
+  those are visual sizes; the hit area is still 44px.
+- Touch-target text minimum 14px, paired with the >=44x44px area.
+
+```css
+/* small visual control, full hit area */
+.icon-btn { width: 32px; height: 32px; position: relative; }
+.icon-btn::before { content: ""; position: absolute; inset: -6px; } /* -> 44x44 */
+```
+
+================================================================================
+## 3. FOCUS INDICATOR — solid 2px ring (NOT a shadow glow)
+================================================================================
+
+- Every interactive element is keyboard-focusable with a visible focus indicator. Focus
+  is a real, first-class state — it is not optional and it is not a hover lookalike.
+- **The focus indicator is a SOLID 2px ring** with a **concentric radius (+3 over the
+  control's own radius)**. It is NOT a shadow/glow. (The older `--shadow-focus` glow is
+  deprecated — do not reproduce it.)
+  - **On light surfaces:** ring = `border/focus` = blue/600 `#2059CC` (6.25:1 on white).
+  - **On dark chrome** (header / dark bars): ring = `border/focus-on-dark` = blue/300
+    `#82ADFC` — blue/600 fails contrast on a dark bar, so it must swap.
+- Use `:focus-visible` (keyboard focus), never a `.focused` state class.
+
+```css
+:focus-visible {
+  outline: 2px solid var(--border-focus);   /* blue/600 */
+  outline-offset: 1px;                        /* concentric: +3 effective over radius */
+}
+.header-dark :focus-visible,
+[data-theme="dark"] .header :focus-visible { /* the [data-theme=dark] selector is planned; dark not shipped yet */
+  outline-color: var(--border-focus-on-dark); /* blue/300 — applies on dark chrome today via .header-dark */
+}
+```
+
+================================================================================
+## 4. COLOR IS NEVER THE SOLE STATE INDICATOR — pair color + icon + label
+================================================================================
+
+CVD law: **state is never color-alone.** success/600 and error/600 are near-isoluminant
+under deuteranopia, so always add a second cue — an icon, a word, a glyph, or a pattern.
+
+- **Every status chip carries a WORD.** LIVE = Success solid + white text + a ● dot.
+  Outbid = Error solid + word.
+- **Watchlist:** the saved state flips the label Watchlist -> Watching (state in words);
+  the heart fills brand blue (red is reserved for Outbid/destructive), never color alone.
+- **Step item:** distinct glyphs per state (check / number / spinner / x), not color only.
+- **Progress / stat delta:** a ▲/▼ arrow conveys direction, not color alone.
+- **Tabs:** active = 2px blue/600 underline (color + position).
+- Decorative icons get `aria-hidden="true"`; functional icons need an `aria-label` or
+  adjacent visible text.
+
+================================================================================
+## 5. REDUCED MOTION — collapse to instant
+================================================================================
+
+Respect `prefers-reduced-motion: reduce` for EVERY animation. The rule is absolute:
+reduce-motion always collapses to instant (not "shorter" — instant).
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+================================================================================
+## 6. DISABLED STATE — contrast-exempt, but multi-cue distinguished
+================================================================================
+
+- Disabled (inactive) components are **exempt from contrast requirements** (WCAG
+  1.4.3 / 1.4.11). The disabled gray/400 label at 2.65:1 is intentionally below AA.
+- The system still distinguishes disabled with a **multi-cue, luminance-encoded** shift
+  (survives all color blindness because it is luminance- not hue-encoded): the
+  enabled->disabled change is a luminance delta of ~2.4-6.8x per type PLUS chroma loss
+  PLUS a border drop PLUS no hover response. Ink 15.98:1 -> gray/400 2.65:1 keeps the
+  ~6x luminance gap obvious.
+- Unified disabled button appearance across all variants: muted gray fill + muted gray
+  text + no border + no hover — so disabled reads consistently regardless of variant.
+- Disabled controls (checkbox/radio/toggle/slider): gray/100 fill + gray/300 border;
+  disabled-checked/selected uses gray/300 (or gray/400 dot).
+- Preserve focus order: use `aria-disabled="true"` (not the `disabled` attribute) when
+  the element must stay in the tab order; loading = `aria-busy="true"`.
+
+================================================================================
+## 7. GOVERNED-TOKEN A11Y RULES
+================================================================================
+
+- **`display-muted` (gray/500) is >=24px ONLY** — the governed muted-text token is only
+  safe at large-text sizes (3.65:1 = AA-large, fails AA-normal).
+- **`muted` (gray/400) is dark-bars ONLY** — passes on dark chrome but FAILS on
+  shelf/field surfaces. Restrict it to dark bars.
+- **`border/control` (gray/500) is for INPUTS only;** labeled buttons use gray/300
+  (decorative boundary, 1.4.11). Only an empty input — where the boundary IS the
+  identifier — needs the 3:1 control border.
+- **No opacity-derived colors.** Never derive a color with opacity (no `rgba(ink,.07)`).
+  Separation comes from named SOLID tokens — hairlines are gray/200 SOLID, not alpha.
+  Sanctioned alpha exemptions: shadows and scrims ONLY (they model light, not color —
+  shadow color is ink `rgba(19,22,27,...)`, never pure black; scrim = surface/scrim, ink 45%).
+- **Light-only today — dark mode is planned but not shipped yet** (Figma's dark values
+  are placeholders); a `data-theme="dark"` layer with curated dark ramps + an ADA dark
+  guardrail (holding contrast floors on dark surfaces) will land in a dedicated pass.
+  Focus on dark chrome already uses `border/focus-on-dark` (blue/300) — the header bar is
+  dark in light mode too, so that swap applies today regardless of the dark pass.
+
+================================================================================
+## 8. PER-COMPONENT A11Y REQUIREMENTS
+================================================================================
+
+- **Button** — `<button>` or `role="button"`; icon-only requires `aria-label`; loading =
+  `aria-busy="true"` + `aria-label="Loading, please wait"`; `aria-disabled="true"` when
+  focus order must be kept; 44x44 hit area; focus = 2px solid blue/600 ring (blue/300 on
+  dark), concentric. Primary + Destructive are raised (gradient + Elevation shadows);
+  Secondary/Quiet wear the raised key edge — the focus ring is the solid 2px ring above,
+  never a glow.
+- **Text field / forms** — visible `<label for="id">` required (labels are NOT
+  placeholders); errors via `aria-describedby`; `aria-invalid="true"` on error;
+  `aria-required="true"` for mandatory fields. "(Optional)" suffix, not a required star.
+- **Checkbox / Radio** — the box/circle IS the control, so it earns a 3:1 boundary
+  (gray/500 1.5px = 3.65:1); checked = blue/600 fill; focus = 2px blue/600 concentric ring;
+  indeterminate = `aria-checked="mixed"` + dash glyph.
+- **Toggle / switch** — `role="switch"`, `aria-checked`, keyboard-focusable; `aria-label`
+  required when the visible label is removed (Small size); off-track gray/300 (white
+  raised-key thumb identifies it), on = blue/600.
+- **Watchlist toggle** — `aria-pressed` true/false; 44px hit area though visually 32px;
+  saved state flips label AND color register (never color alone).
+- **Modal** — `role="dialog"`, `aria-modal="true"`, focus trap required, Escape to close,
+  return focus to trigger on close; scrim = surface/scrim, ink @45%.
+- **Shelf / drawer** — same as modal (`role="dialog"`, `aria-modal="true"`, focus trap, Escape).
+- **Popover / Menu** — `role="dialog"`/menu; light-dismiss (outside click / Esc); trigger
+  uses `aria-haspopup` + `aria-expanded` (+ `aria-controls`).
+- **Tooltip** — `role="tooltip"`; trigger uses `aria-describedby`; triggers on hover AND
+  focus (keyboard-accessible); 300ms show delay.
+- **Alert / Banner** — error & warning: `role="alert"`; info, success, neutral:
+  `role="status"`. Banner Solid emphasis is the rare must-acknowledge exception
+  (Warning/Error only; max one in view).
+- **Toast** — `role="status"`, `aria-live="polite"`; error toasts `role="alert"`,
+  `aria-live="assertive"`.
+- **Table** — `<th scope="col">`, `aria-sort` on sortable headers, `<caption>` for
+  description; null cell = em dash "—".
+- **Tabs** — `role="tablist"` / `role="tab"` + `aria-selected` + `aria-controls`; panels
+  `role="tabpanel"` + `aria-labelledby`; active = 2px blue/600 underline (color + position).
+- **Icon Button (overlay close/back/more)** — 44px hit area + a11y name in code (e.g.
+  "More actions"); mobile shows the hover fill persistently.
+- **Spinner / progress / skeleton** — `role="status"` + `aria-label`; progress bar
+  `role="progressbar"` + `aria-valuenow/min/max`; loading regions `aria-busy="true"`.
+- **Slider** — `role="slider"` + `aria-valuemin/max/now` + `aria-valuetext` (formatted,
+  e.g. "$25,000") + `aria-label`.
+- **Images** — descriptive `alt` required; decorative `alt=""` / `aria-hidden`.
+- **Zoom** — every component must work at 200% zoom without clipping; all content reflows.
+
+================================================================================
+## 9. PRE-SHIP A11Y CHECKLIST
+================================================================================
+
+[ ] Body text >=4.5:1; large text (>=24px) and UI/borders/icons >=3:1.
+[ ] No state signaled by color alone — every status has an icon and/or word.
+[ ] Every interactive element has a visible solid 2px focus ring (blue/600; blue/300 on dark).
+[ ] Every control has a >=44px hit area; >=8px between adjacent targets.
+[ ] `prefers-reduced-motion: reduce` collapses all animation to instant.
+[ ] Inputs use gray/500 borders (3:1); labeled buttons may use gray/300 (decorative).
+[ ] Disabled is multi-cue (luminance + chroma + border + no hover), not color/contrast alone.
+[ ] No opacity-derived colors (shadows + scrims only); SOLID named tokens elsewhere.
+[ ] Labels are real `<label for>`, errors via `aria-describedby`, `aria-invalid` on error.
+[ ] Modals/shelves trap focus, close on Escape, and return focus to the trigger.
+[ ] Works at 200% zoom without clipping.
+
+See also: llms-tokens.txt (token values), llms-components.txt (full contracts),
+llms-writing.txt (error format + voice), DESIGN.md (overview).

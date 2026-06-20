@@ -1,0 +1,92 @@
+{
+  "$description": "Vallejo 1.2 component (elevation/shadow) tokens (DTCG). Source of truth — edit here, then run `npm run build`. Generated from the Figma sweep 2026-06-20.",
+  "shadow": {
+    "$type": "color",
+    "primary-bevel-top": {
+      "$value": "#82ADFC6B"
+    },
+    "primary-bevel-bottom": {
+      "$value": "#0435994D"
+    },
+    "primary-contact": {
+      "$value": "#03277345"
+    },
+    "primary-ambient": {
+      "$value": "#2059CC33"
+    },
+    "primary-pressed": {
+      "$value": "#03277373"
+    },
+    "destructive-bevel-top": {
+      "$value": "#FD8C8661"
+    },
+    "destructive-bevel-bottom": {
+      "$value": "#7F0D1847"
+    },
+    "destructive-contact": {
+      "$value": "#63010D45"
+    },
+    "destructive-ambient": {
+      "$value": "#C200222E"
+    },
+    "destructive-pressed": {
+      "$value": "#63010D73"
+    },
+    "key-edge": {
+      "$value": "#13161B1A"
+    },
+    "key-drop-hover": {
+      "$value": "#13161B1F"
+    },
+    "key-press": {
+      "$value": "#13161B1F"
+    },
+    "overlay-contact": {
+      "$value": "#13161B26"
+    },
+    "overlay-ambient": {
+      "$value": "#13161B1F"
+    },
+    "modal-ambient": {
+      "$value": "#13161B33"
+    }
+  },
+  "elevation": {
+    "$type": "shadow",
+    "primary-rest": {
+      "$value": "inset 0 1px 0 0 {shadow.primary-bevel-top}, inset 0 -1px 0 0 {shadow.primary-bevel-bottom}, 0 1px 2px 0 {shadow.primary-contact}, 0 4px 12px -2px {shadow.primary-ambient}"
+    },
+    "primary-hover": {
+      "$value": "inset 0 1px 0 0 {shadow.primary-bevel-top}, inset 0 -1px 0 0 {shadow.primary-bevel-bottom}, 0 1px 2px 0 {shadow.primary-contact}, 0 7px 20px -2px {shadow.primary-ambient}"
+    },
+    "primary-pressed": {
+      "$value": "inset 0 2px 4px 0 {shadow.primary-pressed}"
+    },
+    "destructive-rest": {
+      "$value": "inset 0 1px 0 0 {shadow.destructive-bevel-top}, inset 0 -1px 0 0 {shadow.destructive-bevel-bottom}, 0 1px 2px 0 {shadow.destructive-contact}, 0 4px 12px -2px {shadow.destructive-ambient}"
+    },
+    "destructive-hover": {
+      "$value": "inset 0 1px 0 0 {shadow.destructive-bevel-top}, inset 0 -1px 0 0 {shadow.destructive-bevel-bottom}, 0 1px 2px 0 {shadow.destructive-contact}, 0 5px 14px -2px {shadow.destructive-ambient}"
+    },
+    "destructive-pressed": {
+      "$value": "inset 0 2px 4px 0 {shadow.destructive-pressed}"
+    },
+    "key": {
+      "$value": "inset 0 -1px 0 0 {shadow.key-edge}, 0 1px 3px 0 {shadow.key-edge}"
+    },
+    "key-hover": {
+      "$value": "inset 0 -1px 0 0 {shadow.key-edge}, 0 2px 5px 0 {shadow.key-drop-hover}"
+    },
+    "key-pressed": {
+      "$value": "inset 0 1px 2px 0 {shadow.key-press}"
+    },
+    "overlay": {
+      "$value": "0 1px 2px 0 {shadow.overlay-contact}, 0 8px 24px -6px {shadow.overlay-ambient}",
+      "$description": "Floating surfaces: popover, menu, tooltip, toast, dropdowns. Derived layered ink shadow (Figma Elevation/Overlay value not extracted — refine against Figma if needed)."
+    },
+    "modal": {
+      "$value": "0 4px 12px -2px {shadow.overlay-contact}, 0 24px 48px -8px {shadow.modal-ambient}",
+      "$description": "Modal + Shelf — most prominent float. Derived (Figma Elevation/Modal value not extracted)."
+    }
+  }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vallejo prototype</title>
+
+  <!-- Vallejo build surface — link these two committed files; never add Tailwind/Bootstrap/any framework. -->
+  <link rel="stylesheet" href="dist/tokens.css">    <!-- design tokens: CSS custom properties (var(--…)) -->
+  <link rel="stylesheet" href="dist/vallejo.css">    <!-- component classes: .btn, .card, .badge-… (built in Phase 2b) -->
+
+  <!--
+    HOW TO BUILD A VALLEJO PROTOTYPE
+    1. Use the component classes (.btn .btn-primary .btn-md, .card, .badge-success, …) — copy canonical
+       snippets from llms-components.txt. States are native CSS: :hover / :focus-visible / [disabled].
+    2. Only use values via var(--token) (see llms-tokens.txt). NEVER hardcode a hex/size or invent a value.
+    3. One Primary (blue) action per view. Sentence case. Verb-first labels. No emoji.
+    4. Mono (JetBrains Mono) for VIN / lot # / bid / timestamps.
+    Read AGENTS.md first (Step 0 = the Copart Design Vault).
+  -->
+
+  <style>
+    /* Minimal page reset using Vallejo tokens — copy into your prototype, or replace with your layout. */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: 16px;            /* Body */
+      line-height: 24px;
+      color: var(--text-primary);
+      background: var(--surface-canvas);
+    }
+    .page { max-width: 1200px; margin: 0 auto; padding: var(--space-8) var(--space-6); }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <!-- Build your prototype here. Example (replace): -->
+    <h1>Vallejo prototype</h1>
+    <p>Link <code>dist/tokens.css</code> + <code>dist/vallejo.css</code>, then assemble from the component
+       snippets in <code>llms-components.txt</code>. Everything is exact Vallejo — no outside system needed.</p>
+  </main>
+</body>
+</html>

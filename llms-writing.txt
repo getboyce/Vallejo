@@ -1,0 +1,229 @@
+# Vallejo — Voice, Terminology & Microcopy
+
+Version: see version.json. Part of the Vallejo Design System (github.com/getboyce/Vallejo).
+Layer 1 (the why) = Copart Design Vault. Layer 2 (the how) = Vallejo. When they conflict, the Vault wins.
+
+This file is the single source for UX writing. Tokens live in llms-tokens.txt; components in llms-components.txt; a11y in llms-a11y.txt.
+
+Generate ALL copy through this file. The fastest tell of AI-generated UI is the writing: exclamation marks, "Oops/Something went wrong", Title Case, emoji, "Submit"/"Click here", vague errors. Vallejo copy reads like an institution that knows its platform.
+
+---
+
+## 1. Voice — Institutional Confidence
+
+Voice is constant. Tone adapts to context. The voice is **professional, straightforward, confident, helpful**.
+
+- **Professional** — Respect the member's time and money. No fluff, no filler.
+  Do: "Your bid of $4,500 has been placed."  Avoid: "Awesome! You just bid!"
+- **Straightforward** — Say exactly what's happening. No jargon unless the audience expects it.
+  Do: "This lot has a clean title."  Avoid: "Documentation status is clear."
+- **Confident** — We know our platform. State facts; do not hedge.
+  Do: "Bidding closes at 2:30 PM EST."  Avoid: "Should close around 2:30."
+- **Helpful** — Every message moves the member toward their goal.
+  Do: "Enter your VIN to check eligibility."  Avoid: "VIN required."
+
+Triad mapping: Professional + Straightforward = Precision. Confident = Institutional Confidence. Helpful = Vitality.
+
+### The three hard prohibitions of Institutional Confidence
+1. **No hedging.** No "should", "might", "probably", "we think", "try to". State what is true.
+2. **No over-explaining.** Say it once, plainly. Do not justify, soften, or pad.
+3. **No exclamation marks.** Anywhere in UI copy. "Bid placed successfully" — never "Bid placed!"
+
+### Tone spectrum (voice constant, tone shifts)
+- **Informational** → neutral, factual: "This lot is located in Dallas, TX."
+- **Encouraging** → warm, supportive: "You're all set — your watchlist will notify you when bidding opens."
+- **Urgent** → direct, clear: "Bidding closes in 2 minutes. Place your bid now."
+- **Error** → calm, solution-focused: "Payment failed — update your payment method to continue."
+
+**Never use humor, sarcasm, or playful language in error states.** Members may be frustrated or anxious — meet them with clarity, not cleverness.
+
+### Grammar & person
+- **Active voice always** — "We saved your bid." not "Your bid has been saved."
+- **Second person ("you/your")** for the member — never "the user" in UI copy.
+- **First person plural ("we")** when Copart is the subject — "We'll notify you when bidding opens."
+- **Contractions OK:** don't, won't, can't, it's, you'll, we'll, you're, we're, that's. **Avoid:** ain't, y'all, would've, could've.
+- **Tense:** present for current state ("3 items in your watchlist"); past for completed action ("Bid placed successfully"); imperative for instructions ("Enter your VIN"); future for upcoming events ("Bidding opens tomorrow at 10:00 AM ET").
+
+---
+
+## 2. Sentence case — everywhere
+
+**Capitalize the first word and proper nouns only.** Applies to page headings, button labels, nav items, tab labels, table headers, menu items, badges.
+
+| Element      | Correct              | Incorrect            |
+|--------------|----------------------|----------------------|
+| Page heading | My saved vehicles    | My Saved Vehicles    |
+| Button       | Place bid            | Place Bid            |
+| Nav item     | Find vehicles        | Find Vehicles        |
+| Tab          | Bid history          | Bid History          |
+| Table header | Sale date            | Sale Date            |
+| Menu item    | Account settings     | Account Settings     |
+
+**Always capitalize (exceptions):**
+- Proper nouns: Copart, CrashedToys, Copart Dealer Services (CDS), Copart Wholesale Auction, Copart Alliance Gateway
+- Acronyms: VIN, CDV, NMVTIS
+- Product names used as proper nouns
+
+---
+
+## 3. Punctuation
+
+- **No periods** on buttons, labels, table headers, nav items, badges.
+- **Periods** on full sentences (descriptions, helper text, tooltips, body copy).
+- **Serial (Oxford) comma** required in all lists — "Year, make, and model".
+- **Em dash (—)** for clause joining / interruption — "Payment failed — update your payment method."
+- **En dash (–)** for ranges — "$1,200–$3,500", "Mon–Fri".
+- **No exclamation marks** in UI copy — "Bid placed successfully", not "Bid placed!"
+- **Question marks** only in genuine questions — "Are you sure you want to remove this lot?"
+
+---
+
+## 4. Verb-first action labels — no pricing/amounts in buttons
+
+- **Start with a verb.** The label describes the action: "Place bid", "Save to watchlist", "Remove lot".
+- **Be specific.** "Place bid" beats "Submit". "Remove from watchlist" beats "Delete".
+- **No numerical values in buttons.** Never put pricing, amounts, or counts inside a button label. Show pricing, bid amounts, and totals elsewhere — summary text, confirmation area, adjacent labels. Buttons are for actions only. (Include a value in a label only if explicitly instructed.)
+- **Never use:** "Click here", "Submit", "OK", "Yes", "No" (except in confirmation dialogs where the alternative to a real action is "Cancel").
+- **Destructive buttons** state what will be destroyed — "Remove from watchlist", not "Delete".
+- **Loading state** changes the label to the present participle — "Placing bid…", "Saving…".
+- **Navigation labels are NOUNS, never verbs** — "Vehicles", "My bids", "Dashboard"; not "Find vehicles", "View my bids". Members click to go somewhere, not to do something.
+
+---
+
+## 5. Error message format — "[what happened] — [how to fix]"
+
+**Canonical format: `[what went wrong] — [how to fix it]`.**
+
+- Inline (field): "Enter a valid lot number (8 digits)." / "Enter a valid email address (e.g., name@example.com)."
+- Alert / banner: "Payment failed — update your payment method to continue."
+- **Never:** "Invalid input", "Error", "Oops", "Uh oh", "Whoops", "Something went wrong", "Please try again".
+- **Never blame the member:** "We couldn't process your payment" — not "You entered an invalid card."
+- Tone is calm and solution-focused; never humorous in errors.
+
+---
+
+## 6. Canonical terminology glossary
+
+Use these terms consistently; never alternate between synonyms within the same flow or page.
+
+| Preferred term | Never use | Notes |
+|----------------|-----------|-------|
+| **Lot** | listing, item, product, vehicle (as the auction entity) | Copart's canonical term for an auctioned vehicle |
+| **Vehicle** | car, automobile, unit | The physical object, not the auction entity |
+| **Bid** | offer, price, amount | "Bid" for both the action and the value |
+| **Place bid** | submit bid, make bid, enter bid | Canonical CTA verb |
+| **Watchlist** | favorites, saved items, bookmarks | Single canonical term |
+| **Member** | user, customer, client, account holder | "Member" for all Copart users |
+| **Sign in** | log in, login, sign on | Two words as verb; "sign-in page" hyphenated as adjective |
+| **Sign out** | log out, logout, sign off | Same pattern as "sign in" |
+| **Register** | sign up, create account, join | Canonical onboarding term |
+| **VIN** | vehicle identification number (in UI) | Always the abbreviation in interface; spell out only in help docs |
+| **Clean title** | non-salvage, clear title | Industry-standard term Copart uses |
+| **Salvage** | damaged, wrecked, total loss | Legal / industry classification |
+| **Pre-bid** | preliminary bid, early bid, advance bid | Canonical short form everywhere |
+| **Live auction** | real-time auction, active auction | "Live" is the canonical modifier |
+| **Buy it now** | instant purchase, direct buy | Used as-is; capitalize first word only ("Buy it now") |
+| **Buyer fee** | service fee, transaction fee, premium | Copart-specific term |
+| **Sale date** | auction date, event date | Canonical |
+| **Location** | yard (internal only), facility, branch | Public-facing term for Copart sites. "Yard" is internal only — never in member-facing UI. |
+| **Item number** | run number, lane number, sequence | For auction ordering |
+| **Title type** | title status, title category | Field label |
+| **Damage type** | damage category, loss type | Field label |
+| **Odometer** | mileage, miles | Field label; use "miles" only in conversational copy |
+| **Highlights** | features, specs, details | Vehicle summary section |
+| **Condition** | quality, grade | Vehicle state descriptor |
+| **Seller** | consigner, provider, vendor | Entity listing the vehicle |
+| **Storage fees** | yard fees, holding fees | Canonical |
+| **Copart Alliance Gateway** | lounge, Copart Lounge, waiting area | Official name for on-site member facilities (formerly Copart Lounges) |
+| **Wholesale / Copart Wholesale** | Select, Copart Select, Wholecar | Current brand. "Select"/"Copart Select"/"Wholecar" are deprecated. Full product name: "Copart Wholesale Auction". |
+
+**Rule:** If a term is not in the glossary, choose the simplest, most common word and use it consistently. Add new terms when they appear in more than one flow.
+
+---
+
+## 7. Mono for numbers being compared
+
+Use JetBrains Mono (var(--font-mono)) for VIN, lot numbers, bid amounts, and timestamps — the figures members scan and compare in rows. Mono never bleeds into labels or prose. (Token + family details in llms-tokens.txt.)
+
+---
+
+## 8. Copy length limits
+
+| Element              | Word count   | Max chars |
+|----------------------|--------------|-----------|
+| Button label         | 1–3 words    | 20        |
+| Field label          | 1–4 words    | 30        |
+| Placeholder          | 2–5 words    | 30        |
+| Helper text          | 1 sentence   | 80        |
+| Error message        | 1–2 sentences| 120       |
+| Toast                | 1 sentence   | 60        |
+| Empty-state heading  | 3–8 words    | 40        |
+| Empty-state body     | 1–2 sentences| 120       |
+| Modal title          | 3–8 words    | 50        |
+| Table header         | 1–3 words    | 20        |
+| Badge / tag          | 1–2 words    | 15        |
+| Tooltip              | 1–2 sentences| 100       |
+| Breadcrumb segment   | 1–3 words    | 25        |
+| Nav item             | 1–2 words    | 15        |
+
+**Rule:** If copy exceeds the budget, rewrite — don't truncate. Truncation is a last resort for dynamic content only.
+
+---
+
+## 9. Microcopy patterns (per component)
+
+- **Text fields** — Labels name the field, not instructions ("Lot number", not "Enter lot number here"). Placeholders show example format only ("e.g., 12345678"), never repeat the label. Helper text adds context the label can't. Optional fields read "(Optional)" — never a starred-required marker.
+- **Alerts & banners** — Lead with what happened, then what to do. Never "Oops"/"Uh oh"/"Something went wrong". Never blame the member.
+- **Toasts** — Past-tense confirmation of the action just taken, one sentence, ≤60 chars. Include an undo where reversible ("Lot removed from watchlist. **Undo**"). Auto-dismiss ~4–6s; sticky if it carries a retry action.
+- **Modals** — Title = the topic. Body = what's needed to decide (1–3 sentences). Primary button = the specific action ("Place bid", "Confirm purchase"), never "OK"/"Yes". No pricing in the button — show the amount in the body or a summary line. Secondary = "Cancel" (not "No"/"Go back"/"Dismiss"). A destructive confirmation repeats the consequence.
+- **Empty states** — Heading (what's missing) + Body (how to fill) + CTA (action to resolve). Never "No data"/"Nothing to show"/"Empty".
+- **Tables** — Noun / noun-phrase headers, no verbs. Null values use em dash "—", never "N/A"/"null"/blank. Truncate with ellipsis after the last full word + tooltip. Mono (JetBrains Mono) for VIN, lot numbers, bid amounts, timestamps; mono never bleeds into labels or prose.
+- **Badges & tags** — 1–2 words. Status badges = past participle / adjective ("Sold", "Active", "Upcoming", "Ended"). Category tags = nouns ("Clean title", "Salvage"). Count badges = numerals only ("3", "12", "99+").
+- **Navigation** — Top-level items are 1–2 word nouns, never verbs. Breadcrumbs match the page title exactly. Tab labels = short nouns / noun phrases.
+
+---
+
+## 10. Inclusive language
+
+- Gender-neutral by default ("they/them" for an unknown member). "Member" — not "he or she". "Salesperson" — not "salesman/saleswoman".
+- Add a tooltip or inline definition for any term a new member needs explained.
+- Reading level: aim for grade 8 (Flesch-Kincaid) for all member-facing copy.
+- Accessible descriptions: alt text on all images; aria-labels match visible text.
+- No idioms, colloquialisms, or cultural references (global audience).
+- Person-first language where relevant ("members who use screen readers", not "blind members"). "Accessible parking", not "handicapped parking".
+
+---
+
+## 11. Dynamic & adaptive copy
+
+- **Numbers:** spell out 1–9 in body copy ("three vehicles"); numerals for 10+ and always for prices, bids, lot numbers, and counts in UI elements / data tables.
+- **Currency:** "$1,200" — commas, no cents unless partial dollars ("$0.50"); no cents over $100 ("$47,250" not "$47,250.00").
+- **Dates:** "Feb 22, 2026" — abbreviated month, no leading zeros. Relative ("Today", "3 days ago") within 7 days, absolute after.
+- **Times:** "2:30 PM EST" — 12-hour clock, full timezone abbreviation (EST/CST/PST).
+- **Date ranges:** en dash, no spaces — "Feb 22–28, 2026".
+- **Pluralization:** handle 0/1/many — "No results" / "1 result" / "24 results". Never show "0 results" — use zero-state phrasing.
+- **Truncation:** ellipsis (…) after the last full word, minimum 3 visible words, full text in tooltip.
+
+---
+
+## 12. No emoji
+
+**No emoji in UI — ever.** Use the Iconic icon set only: inline SVG, `stroke="currentColor"`, `fill="none"`; no icon fonts, no `<img>` tags. (Icon source: source/icons.json.) Emoji and icon overuse are flagged AI-generated anti-patterns.
+
+---
+
+## 13. Do / Don't quick library
+
+| Pattern | Do | Don't |
+|---------|----|-------|
+| Button labels | "Place bid" / "Save to watchlist" / "Remove lot" | "Submit" / "Click here" / "OK" / "Yes" / "Process" |
+| Error messages | "Enter a valid email address (e.g., name@example.com)." | "Invalid input." / "Error." / "Please try again." |
+| Empty states | "No saved lots yet" + "Search for vehicles and tap the heart icon to save them here." + "Browse vehicles" | "No data." / "Nothing to show." / "Your list is empty." |
+| Confirmations | "Your bid of $4,500 on Lot 78901234 has been placed." | "Success!" / "Done!" / "Action completed." |
+| Field labels | "Lot number" / "Email address" / "Zip code" | "Enter your lot number here" / "Type email" |
+| Error tone | "We couldn't process your payment. Update your payment method to try again." | "Oops! Something went wrong. Please try again later!" |
+| Placeholders | "e.g., 12345678" / "Search by make, model, or VIN" | "Enter lot number" / "Type here" / "Lot number" |
+| Modal actions | Primary "Place bid" / Secondary "Cancel" (amount in body) | Primary "OK"/"Yes" / Secondary "No"/"Go back" |
+| Toasts | "Lot added to watchlist." / "Settings saved." | "Success! Item added to your favorites list!" |
+| Navigation | "Vehicles" / "My bids" / "Dashboard" | "Find vehicles" / "View my bids" / "Go to dashboard" |
+| Status | "Bidding closes Feb 22 at 2:30 PM EST" / "Lot sold — final bid: $12,400" | "Auction ending soon!" / "This item has been sold." |

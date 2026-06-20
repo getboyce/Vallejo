@@ -1,0 +1,258 @@
+/* ============================================================================
+   Vallejo 1.2 — BASE layer
+   Light reset · document defaults · global focus fallback · type-scale utilities
+   No component lives here. Every color/space/radius resolves to a var(--token);
+   font sizes/line-heights/letter-spacing come from the §7 type scale verbatim.
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   1. Light reset
+   Box model + zero default margins. Intentionally minimal — not a full reset.
+   ---------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+p,
+figure,
+blockquote,
+dl, dd,
+ul, ol {
+  margin: 0;
+}
+
+/* ----------------------------------------------------------------------------
+   2. Document defaults
+   Body inherits Inter, primary ink, and the canvas surface. Antialiasing on
+   so Inter renders at its intended weight on the data-dense Copart surfaces.
+   ---------------------------------------------------------------------------- */
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;           /* Body — Inter 400 / 24 LH */
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--text-primary);
+  background-color: var(--surface-canvas);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Inherit type into form controls so utilities + body apply uniformly. */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Media defaults to block to avoid baseline gaps. */
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* ----------------------------------------------------------------------------
+   3. Global focus fallback
+   Solid 2px ring — never a glow. Components override per-surface (e.g.
+   --border-focus-on-dark on dark chrome); this is the keyboard-only fallback.
+   ---------------------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* ----------------------------------------------------------------------------
+   4. Type-scale utilities (§7)
+   Each utility binds family / weight / size / line-height / letter-spacing
+   exactly. Sizes + line-heights are literal px to match the scale; line-heights
+   are all multiples of 4. Mono uses var(--font-mono) at weight 500 with
+   tabular figures for aligned numerics (VIN / lot # / bid / timers).
+   ---------------------------------------------------------------------------- */
+
+/* --- Display --- */
+.text-display-large {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 72px;
+  letter-spacing: -1.6px;
+}
+
+.text-display-small {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: -0.96px;
+}
+
+/* --- Headline --- */
+.text-headline {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 44px;
+  letter-spacing: -0.54px;
+}
+
+/* --- Titles --- */
+.text-title-1 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: -0.28px;
+}
+
+.text-title-2 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.12px;
+}
+
+.text-title-3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
+/* --- Body --- */
+.text-body-large {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
+.text-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+/* Body Emphasis — deprecated dup of Callout; kept for the documented scale. */
+.text-body-emphasis {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+/* List Title — dense list/card titles only, never running body. */
+.text-list-title {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+/* Subheadline — table & section labels. */
+.text-subheadline {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.07px;
+}
+
+/* Body Small — controls, table cells. */
+.text-body-small {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+/* --- Fine print --- */
+.text-footnote {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+}
+
+/* Caption 1 */
+.text-caption {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.18px;
+}
+
+/* Overline — UPPERCASE. */
+.text-overline {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.44px;
+  text-transform: uppercase;
+}
+
+/* --- Mono (JetBrains Mono 500, tabular) — numerics you compare --- */
+.text-mono-large {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 28px;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.text-mono-medium {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.text-mono-small {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ----------------------------------------------------------------------------
+   5. Mono helper
+   Swap the family + tabular figures onto numerics inline (VIN / lot # / bid /
+   timestamp) without changing the surrounding text size or weight.
+   ---------------------------------------------------------------------------- */
+.u-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}

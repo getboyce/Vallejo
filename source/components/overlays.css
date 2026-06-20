@@ -1,0 +1,542 @@
+/* ============================================================================
+   Vallejo Design System v1.2 — Overlays
+   Icon button · Menu (+ Menu Item) · Popover · Tooltip · Modal · Shelf
+
+   Floating surfaces (Menu / Popover / Tooltip / Modal / Shelf) are the only
+   place sanctioned elevation lives — controls never wear shadows.
+
+   NOTE on tokens: the system has no dedicated `--surface-scrim` color or
+   `Elevation/Overlay` / `Elevation/Modal` composite shadow token. To honor the
+   ZERO-hardcoded-color rule, floating elevation is layered from the only
+   neutral shadow-color primitives in the system (`--shadow-key-*`), and the
+   modal scrim is derived from the ink token (`--gray-950`) at 45% via
+   color-mix — no raw hex/rgb is introduced.
+   ============================================================================ */
+
+/* Local floating-surface elevation composites, built from sanctioned
+   --shadow-key-* color primitives. Two tiers: overlay (light floats) and
+   modal (blocking surfaces sit higher). */
+:root {
+  --elevation-overlay:
+    0 1px 2px 0 var(--shadow-key-edge),
+    0 8px 24px -4px var(--shadow-key-drop-hover);
+  --elevation-modal:
+    0 1px 3px 0 var(--shadow-key-edge),
+    0 18px 48px -8px var(--shadow-key-drop-hover);
+  /* Scrim = ink @ 45% (derived from the --gray-950 ink token). */
+  --surface-scrim: color-mix(in srgb, var(--gray-950) 45%, transparent);
+}
+
+/* ============================================================================
+   Icon button
+   Circular 32px overlay-header / row-action button. 24px icon, 44px hit area.
+   Flat — NO elevation. Default transparent / Hover gray-100 / Pressed gray-200.
+   ============================================================================ */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-tertiary);              /* Close default = text/tertiary */
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition:
+    background-color var(--duration-fast) var(--ease-enter),
+    color var(--duration-fast) var(--ease-enter);
+}
+
+/* 44px touch hit-area without growing the visual circle. */
+.icon-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+
+.icon-btn svg {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+.icon-btn:hover {
+  background: var(--surface-sunken);        /* gray-100 */
+}
+
+.icon-btn:active {
+  background: var(--border-hairline);       /* gray-200 */
+}
+
+.icon-btn:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.icon-btn[disabled],
+.icon-btn[aria-disabled="true"] {
+  color: var(--text-disabled);
+  background: transparent;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Icon-intent color cuts. Back = text/primary; More inherits the default. */
+.icon-btn-back { color: var(--text-primary); }
+.icon-btn-close { color: var(--text-tertiary); }
+
+/* On dark overlay chrome (header bars), swap the focus ring + inks. */
+.icon-btn-on-dark {
+  color: var(--text-on-header);
+}
+.icon-btn-on-dark:focus-visible {
+  outline-color: var(--border-focus-on-dark);
+}
+
+/* ============================================================================
+   Menu  +  Menu Item
+   Action / context / overflow container. White card, radius 12, padding 6.
+   NO scrim, light-dismiss. NOT for form selection (that is Select Menu).
+   ============================================================================ */
+.menu {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  padding: var(--space-1-5);                /* 6 */
+  border: 1px solid var(--border-hairline); /* gray-200 */
+  border-radius: var(--radius-xl);          /* 12 */
+  background: var(--surface-raised);        /* white */
+  box-shadow: var(--elevation-overlay);
+  z-index: var(--layer-dropdown);
+}
+
+.menu-divider {
+  height: 1px;
+  margin: var(--space-1) calc(-1 * var(--space-1-5)); /* full-bleed within padding */
+  background: var(--border-hairline);
+  border: none;
+}
+
+/* --- Menu Item ----------------------------------------------------------- */
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-1-5) var(--space-2); /* 6 / 8 */
+  border: none;
+  border-radius: var(--radius-lg);          /* 8 */
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;                          /* Body Small */
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: background-color var(--duration-fast) var(--ease-enter);
+}
+
+.menu-item-icon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  fill: currentColor;
+  color: var(--text-tertiary);
+}
+
+/* Trailing slot: shortcut hint or submenu chevron, pushed to the far edge. */
+.menu-item-shortcut {
+  margin-left: auto;
+  padding-left: var(--space-4);
+  color: var(--text-tertiary);
+  font-family: var(--font-sans);
+  font-size: 13px;                          /* Footnote */
+  line-height: 16px;
+}
+
+.menu-item:hover {
+  background: var(--surface-sunken);        /* gray-100 wash */
+}
+
+.menu-item:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: -2px;
+}
+
+.menu-item[disabled],
+.menu-item[aria-disabled="true"] {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.menu-item[disabled] .menu-item-icon,
+.menu-item[aria-disabled="true"] .menu-item-icon {
+  color: var(--text-disabled);
+}
+
+/* Destructive tone — error ink; hover = error/50 wash. */
+.menu-item-destructive {
+  color: var(--error-accent);               /* error/600 */
+}
+.menu-item-destructive .menu-item-icon {
+  color: var(--error-accent);
+}
+.menu-item-destructive:hover {
+  background: var(--error-subtle);          /* error/50 */
+}
+
+/* ============================================================================
+   Popover
+   Anchored floating panel, NO scrim, light-dismiss, with a caret to its
+   trigger. White card, radius 12, Elevation/Overlay. Holds arbitrary content.
+   ============================================================================ */
+.popover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 320px;
+  padding: var(--space-4);                  /* 16 */
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-xl);          /* 12 */
+  background: var(--surface-raised);
+  box-shadow: var(--elevation-overlay);
+  z-index: var(--layer-dropdown);
+}
+
+.popover-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.popover-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;                          /* List Title */
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.popover-body {
+  margin: 0;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 14px;                          /* Body Small */
+  font-weight: 400;
+  line-height: 20px;
+}
+
+/* Caret — a rotated square that borrows the card fill + hairline so it reads
+   as a continuous point toward the trigger. Default points up (popover-bottom). */
+.popover-caret {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--surface-raised);
+  border-left: 1px solid var(--border-hairline);
+  border-top: 1px solid var(--border-hairline);
+}
+.popover-bottom .popover-caret {           /* panel below trigger → caret on top */
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+.popover-top .popover-caret {              /* panel above trigger → caret on bottom */
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(225deg);
+}
+.popover-left .popover-caret {             /* panel left of trigger → caret on right */
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%) rotate(135deg);
+}
+.popover-right .popover-caret {            /* panel right of trigger → caret on left */
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%) rotate(315deg);
+}
+
+/* ============================================================================
+   Tooltip
+   Tiny transient hover/focus label. Dark ink (gray-900) + white text,
+   Footnote 13/16, radius 8, Elevation/Overlay, caret to its trigger.
+   Must appear on hover AND focus (handled by the trigger in JS).
+   ============================================================================ */
+.tooltip {
+  position: absolute;
+  display: inline-block;
+  max-width: 240px;
+  padding: var(--space-1-5) var(--space-2); /* 6 / 8 */
+  border-radius: var(--radius-lg);          /* 8 */
+  background: var(--gray-900);              /* dark ink */
+  color: var(--text-inverse);               /* white */
+  font-family: var(--font-sans);
+  font-size: 13px;                          /* Footnote */
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+  text-align: center;
+  box-shadow: var(--elevation-overlay);
+  z-index: var(--layer-tooltip);
+  pointer-events: none;                     /* text-only, no interaction */
+}
+
+/* Caret — solid dark square pointing back to the trigger. */
+.tooltip::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--gray-900);
+  transform: rotate(45deg);
+}
+.tooltip-top::after {                       /* tooltip above trigger → caret below */
+  bottom: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+.tooltip-bottom::after {                    /* tooltip below trigger → caret above */
+  top: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+.tooltip-left::after {                      /* tooltip left of trigger → caret right */
+  right: -4px;
+  top: 50%;
+  margin-top: -4px;
+}
+.tooltip-right::after {                     /* tooltip right of trigger → caret left */
+  left: -4px;
+  top: 50%;
+  margin-top: -4px;
+}
+
+/* ============================================================================
+   Modal
+   Centered dialog that BLOCKS the page behind a scrim. White card, radius 16,
+   Elevation/Modal. Header (title + close) · body · right-aligned footer.
+   Sizes: SM 400 · MD 520 · LG 720.
+   ============================================================================ */
+.modal-scrim {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  background: var(--surface-scrim);         /* ink @ 45% */
+  z-index: var(--layer-scrim);
+  animation: vds-scrim-in var(--duration-moderate) var(--ease-enter);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 520px;                         /* MD default */
+  max-height: calc(100vh - var(--space-12));
+  border-radius: var(--radius-2xl);         /* 16 */
+  background: var(--surface-raised);
+  box-shadow: var(--elevation-modal);
+  z-index: var(--layer-modal);
+  animation: vds-modal-in var(--duration-slow) var(--ease-enter);
+}
+
+.modal-sm { max-width: 400px; }
+.modal-md { max-width: 520px; }
+.modal-lg { max-width: 720px; }
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-6) var(--space-3); /* 20 / 24 / 12 */
+}
+
+.modal-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 20px;                          /* Title 3 */
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.modal-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 0 var(--space-6);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 16px;                          /* Body */
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-6) var(--space-6); /* 20 / 24 / 24 */
+}
+
+/* ============================================================================
+   Shelf
+   Edge panel. Forms: Panel (floats over) · Docked (desktop, flush — no shadow,
+   left hairline) · Full-screen (covers viewport). Sticky header + footer; body
+   is the only scroll region. Slides in from the anchored edge via --ease-enter.
+   ============================================================================ */
+.shelf {
+  position: fixed;
+  top: 0;
+  right: 0;                                 /* default anchor: right edge */
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  max-width: 100vw;
+  background: var(--surface-raised);
+  box-shadow: var(--elevation-modal);       /* Panel + Full-screen are elevated */
+  z-index: var(--layer-drawer);
+  animation: vds-shelf-in var(--duration-deliberate) var(--ease-enter);
+}
+
+/* Panel — edge side panel that floats over the page. */
+.shelf-panel {
+  width: 420px;
+}
+
+/* Docked — desktop only; flush against reflowed content. No shadow, left hairline. */
+.shelf-docked {
+  position: relative;                       /* sits in flow beside content */
+  width: 360px;
+  box-shadow: none;
+  border-left: 1px solid var(--border-hairline); /* gray-200 */
+}
+
+/* Full-screen — covers the viewport. */
+.shelf-full-screen {
+  inset: 0;
+  width: 100vw;
+}
+
+/* --- Sticky header ------------------------------------------------------- */
+.shelf-header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: none;
+  padding: var(--space-4) var(--space-5);   /* 16 / 20 */
+  background: var(--surface-raised);
+  z-index: var(--layer-sticky);
+}
+
+.shelf-titles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.shelf-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 18px;                          /* Body Large weight bumped for a header */
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.shelf-subtitle {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-family: var(--font-sans);
+  font-size: 13px;                          /* Footnote */
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+}
+
+/* --- Body: the only scroll region ---------------------------------------- */
+.shelf-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: var(--space-4) var(--space-5);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 14px;                          /* Body Small */
+  font-weight: 400;
+  line-height: 20px;
+}
+
+/* --- Sticky footer: Quiet Cancel + Primary Save -------------------------- */
+.shelf-footer {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  flex: none;
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface-raised);
+  z-index: var(--layer-sticky);
+}
+
+/* Scrolled boolean — reveals a gray-200 hairline under the header + above the
+   footer when the body scrolls (set by code). */
+.shelf-scrolled .shelf-header {
+  border-bottom: 1px solid var(--border-hairline);
+}
+.shelf-scrolled .shelf-footer {
+  border-top: 1px solid var(--border-hairline);
+}
+
+/* ============================================================================
+   Motion — enter transitions for blocking/floating surfaces
+   ============================================================================ */
+@keyframes vds-scrim-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes vds-modal-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes vds-shelf-in {
+  from { transform: translateX(100%); }     /* slide in from the right edge */
+  to   { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-scrim,
+  .modal,
+  .shelf {
+    animation: none;
+  }
+}

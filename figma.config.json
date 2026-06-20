@@ -1,0 +1,9 @@
+{
+  "codeConnect": {
+    "parser": "html",
+    "include": ["figma/**/*.figma.ts"],
+    "documentUrlSubstitutions": {
+      "<FIGMA_FILE>": "https://www.figma.com/design/bSOhenbjW7fx7CvGhOXfC0/Vallejo-DS---1.2"
+    }
+  }
+}

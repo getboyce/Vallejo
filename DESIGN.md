@@ -71,8 +71,8 @@ Essential digest (so this repo stands alone if the Vault is unreachable):
   --error-600: #C20022;  --error-700: #9D121F;  --error-800: #7F0D18;
   --error-900: #63010D;
 
-  /* gold — Premier rings ONLY. There is NO orange ramp. */
-  --gold: #FA9252;
+  /* gold — User Avatar Premier variant ONLY (the gold ring; = warning-200). NO orange ramp. */
+  --gold: #FDC146;
 
   /* ── SEMANTIC ALIASES (bind these) ──────────────────────────── */
 
@@ -119,6 +119,7 @@ Essential digest (so this repo stands alone if the Vault is unreachable):
   --interactive-destructive-grad-end: #AF001F;
   --interactive-destructive-hover:    var(--error-700);
   --interactive-destructive-active:   var(--error-800);
+  --interactive-favorite:             var(--error-500);
 
   /* status family aliases — subtle→50 · light→100 · accent→600 · dark→800.
      Tonal chip = 100 fill + 800 text. Info = blue (info/* RETIRED). */
@@ -194,7 +195,7 @@ Run every choice through the design filter (**trust · expertise · multiple dep
 **Color governance (binding):**
 - **NEVER derive a color with opacity** (no `rgba(ink, .07)`). Separation comes from named SOLID tokens; hairlines are `gray-200` solid. Shadows and scrims are the ONLY sanctioned alpha exemption — they model light, not color.
 - **State is never color-alone (CVD-safe):** every chip carries a word; LIVE keeps the ● dot. `success-600` and `error-600` are near-isoluminant under deuteranopia.
-- **No orange ramp** — it was removed. **`gold #FA9252` is for Premier rings ONLY.** Express urgency with the **warning / error** ramps, never a gold or orange button.
+- **No orange ramp** — it was removed. **`gold #FDC146` is for the User Avatar Premier variant ONLY (the gold ring; same value as warning-200).** Express urgency with the **warning / error** ramps, never a gold or orange button.
 - **Error / destructive uses the error ramp**, never a raw red.
 - If a needed color is missing, raise a palette conversation — don't invent one.
 

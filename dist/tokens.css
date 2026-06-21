@@ -53,7 +53,7 @@
   --error-700: #9D121F;
   --error-800: #7F0D18;
   --error-900: #63010D;
-  --gold: #FA9252;
+  --gold: #FDC146;
   --space-0: 0px;
   --space-1: 4px;
   --space-2: 8px;
@@ -136,6 +136,7 @@
   --interactive-destructive-grad-end: #AF001F;
   --interactive-destructive-hover: var(--error-700);
   --interactive-destructive-active: var(--error-800);
+  --interactive-favorite: var(--error-500);
   --success-subtle: var(--success-50);
   --success-light: var(--success-100);
   --success-accent: var(--success-600);

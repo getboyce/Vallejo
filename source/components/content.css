@@ -100,11 +100,13 @@
   color: var(--text-tertiary);
 }
 
-/* Mono current bid (.input-mono supplies the family) — Mono/Large 22/28 */
+/* Current bid — prominent Inter price (like the Stat Card hero), tabular for
+   alignment. NOT mono: family is Inter even if .input-mono is on the element. */
 .lot-card-bid-value {
+  font-family: var(--font-sans);
   font-size: 22px;
   line-height: 28px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-primary);
   font-variant-numeric: tabular-nums;
 }

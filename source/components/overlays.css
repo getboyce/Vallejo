@@ -208,7 +208,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-1);                       /* 4 — title block → body */
   max-width: 320px;
   padding: var(--space-4);                  /* 16 */
   border: 1px solid var(--border-hairline);
@@ -220,7 +220,7 @@
 
 .popover-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;                       /* close × vertically centered to title */
   justify-content: space-between;
   gap: var(--space-2);
 }
@@ -299,34 +299,47 @@
   pointer-events: none;                     /* text-only, no interaction */
 }
 
-/* Caret — solid dark square pointing back to the trigger. */
+/* Caret — solid dark square, SAME fill as the body, rotated 45° and pulled
+   halfway under the body so its flat edge sits FLUSH against the tooltip and
+   the pair reads as one continuous shape. Default = bottom-center pointing down
+   (tooltip-top: tooltip above trigger). No shadow on the caret so no seam line. */
 .tooltip::after {
   content: "";
   position: absolute;
-  width: 8px;
-  height: 8px;
-  background: var(--gray-900);
+  width: 10px;
+  height: 10px;
+  background: var(--gray-900);              /* identical to body fill */
   transform: rotate(45deg);
-}
-.tooltip-top::after {                       /* tooltip above trigger → caret below */
-  bottom: -4px;
+  /* Default placement = bottom-center pointing down (matches a bare .tooltip). */
+  bottom: -5px;
   left: 50%;
-  margin-left: -4px;
+  margin-left: -5px;
 }
-.tooltip-bottom::after {                    /* tooltip below trigger → caret above */
-  top: -4px;
+.tooltip-top::after {                       /* tooltip above trigger → caret below, points down */
+  bottom: -5px;                             /* half the 10px square overlaps the body edge */
   left: 50%;
-  margin-left: -4px;
+  margin-left: -5px;
 }
-.tooltip-left::after {                      /* tooltip left of trigger → caret right */
-  right: -4px;
-  top: 50%;
-  margin-top: -4px;
+.tooltip-bottom::after {                    /* tooltip below trigger → caret above, points up */
+  top: -5px;
+  bottom: auto;
+  left: 50%;
+  margin-left: -5px;
 }
-.tooltip-right::after {                     /* tooltip right of trigger → caret left */
-  left: -4px;
+.tooltip-left::after {                      /* tooltip left of trigger → caret right, points right */
+  right: -5px;
   top: 50%;
-  margin-top: -4px;
+  bottom: auto;
+  left: auto;
+  margin-top: -5px;
+  margin-left: 0;
+}
+.tooltip-right::after {                     /* tooltip right of trigger → caret left, points left */
+  left: -5px;
+  top: 50%;
+  bottom: auto;
+  margin-top: -5px;
+  margin-left: 0;
 }
 
 /* ============================================================================
@@ -366,10 +379,10 @@
 
 .modal-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;                       /* close × vertically centered to title */
   justify-content: space-between;
   gap: var(--space-3);
-  padding: var(--space-5) var(--space-6) var(--space-3); /* 20 / 24 / 12 */
+  padding: var(--space-5) var(--space-6) var(--space-1); /* 20 / 24 / 4 — 4px gap to body */
 }
 
 .modal-title {

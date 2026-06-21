@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/demo/index.html" },
+    { "source": "/ux-writing", "destination": "/demo/ux-writing.html" }
+  ]
+}

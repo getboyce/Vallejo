@@ -10,7 +10,7 @@ Version + date live ONLY in version.json — never hardcode them here.
 
 Inherited from the canonical system (do NOT restate or fork these):
 - Canonical neutral ramp is `gray-*` — NEVER `neutral-*`. Bind a semantic alias (text/surface/border/interactive/status), never a primitive, never a raw hex. Full values: llms-tokens.txt.
-- There is NO orange ramp. `gold #FA9252` is for Premier rings ONLY. Express urgency with the warning / error ramps — never a gold or orange button. Destructive uses the error ramp, never a raw red.
+- There is NO orange ramp. `gold #FDC146` is for the User Avatar Premier variant ONLY (the gold ring). Express urgency with the warning / error ramps — never a gold or orange button. Destructive uses the error ramp, never a raw red.
 - LIGHT-ONLY today. Dark mode is planned (`data-theme="dark"`) but not shipped — do not make dark-mode claims. Bind semantic aliases so a future swap re-themes.
 - Numbers you COMPARE — VIN, lot number, bid, timer, timestamp, stacked ladders — render in JetBrains Mono (`var(--font-mono)`, weight 500). Numbers you READ as a single dominant impact (hero bid, win amount) stay Inter with `tnum`. The timer is always Mono. Mono never bleeds into labels or prose.
 - State is never color-alone (CVD-safe): every status carries a word; LIVE keeps the ● dot.

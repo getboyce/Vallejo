@@ -28,6 +28,7 @@ The system overview: what exists, how it fits together, links into the detail fi
 - **Motion** → `llms-motion.txt` (durations, easings, registers, micro-interactions, reduce-motion).
 - **Mobile platform** → `llms-mobile.txt` (mobile type scale, touch specs, spacing deltas vs the web-first DESIGN.md).
 - **Icons** → `source/icons.json` (inline SVG path data; `stroke="currentColor"`, `fill="none"`).
+- **Logos** → `source/logos.json` (Copart + Wholesale Auction brand SVG; FIXED brand colors — never recolor; `light`/`dark` variants).
 
 ---
 
@@ -58,7 +59,7 @@ The system overview: what exists, how it fits together, links into the detail fi
 - **44px minimum touch target** (WCAG 2.5.8), 8px min spacing between targets. A visually smaller control expands its hit area to 44px in code.
 - **Pair color with an icon and/or label** — color is never the sole state indicator. Put a word on every status chip; ● dot on LIVE.
 - **`gray-*` is canonical** (gray-0 = white … gray-950; gray-900 = `#1D222A` = ink). `neutral-*` is a deprecated alias only — never emit it. `layer-*` is canonical (`z-*` deprecated).
-- **No orange ramp** (removed). Gold `#FA9252` is for **Premier rings only**. Express urgency via the **warning/error** ramps. Error/destructive uses the **error ramp**, never a raw red.
+- **No orange ramp** (removed). Gold `#FDC146` is for the **User Avatar Premier variant only** (the gold ring; = warning-200). Express urgency via the **warning/error** ramps. Error/destructive uses the **error ramp**, never a raw red.
 - **Light-only today** — dark mode is planned but not shipped yet (Figma's dark values are placeholders); a `data-theme="dark"` layer with curated dark ramps + an ADA dark guardrail will land in a dedicated pass.
 - **Monospace (JetBrains Mono)** for VIN, lot numbers, bid amounts, timestamps — numbers compared in rows. Mono never bleeds into labels or prose.
 - **Focus is a real state** = a **solid 2px ring** (blue-600 on light, blue-300 on dark chrome), concentric +3 radius. **Not** a shadow glow.

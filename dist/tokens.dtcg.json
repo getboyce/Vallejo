@@ -172,8 +172,8 @@
       }
     },
     "gold": {
-      "$value": "#FA9252",
-      "$description": "Premier rings ONLY — not a ramp. Urgency uses warning/error."
+      "$value": "#FDC146",
+      "$description": "User Avatar Premier variant ONLY (the gold ring) — not a ramp; value matches warning-200. Urgency uses warning/error."
     }
   },
   "space": {
@@ -450,6 +450,10 @@
     },
     "destructive-active": {
       "$value": "{color.error.800}"
+    },
+    "favorite": {
+      "$value": "{color.error.500}",
+      "$description": "Save-to-list / watchlist heart (red-500). Shares the red ramp but is NOT a destructive cue — state is carried by the filled heart + label, never color alone."
     }
   },
   "status": {

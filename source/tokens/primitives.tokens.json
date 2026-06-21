@@ -172,8 +172,8 @@
       }
     },
     "gold": {
-      "$value": "#FA9252",
-      "$description": "Premier rings ONLY — not a ramp. Urgency uses warning/error."
+      "$value": "#FDC146",
+      "$description": "User Avatar Premier variant ONLY (the gold ring) — not a ramp; value matches warning-200. Urgency uses warning/error."
     }
   },
   "space": {

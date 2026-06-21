@@ -27,13 +27,14 @@ A self-sufficient digest, if the Vault is unreachable — the triad: **Precision
 - [dist/tokens.dtcg.json](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/dist/tokens.dtcg.json) — tokens in DTCG format.
 - [dist/tokens.js](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/dist/tokens.js) — tokens as a JS module.
 - [source/icons.json](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/source/icons.json) — icon set manifest.
+- [source/logos.json](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/source/logos.json) — brand logo manifest (Copart + Wholesale Auction; fixed-color SVG, light/dark variants).
 - [starter.html](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/starter.html) — copy-paste boilerplate linking vallejo.css; build from here.
 - [version.json](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/version.json) — single source of version + date.
 
 ## Rules of thumb
 
 - **Tokens over hardcoding.** Reference `var(--token)`; never paste a hex, px, or raw red. `gray` is canonical (`gray-0`=white … `gray-950`); `gray-900` = `#1D222A` is ink. `neutral-*`/`z-*` are deprecated aliases.
-- **Status = numeric ramps 50–900 + role aliases** (subtle→50, light→100, accent→600, dark→800). There is **no orange ramp**; gold `#FA9252` is Premier rings only; urgency uses warning/error. Error/destructive uses the error ramp.
+- **Status = numeric ramps 50–900 + role aliases** (subtle→50, light→100, accent→600, dark→800). There is **no orange ramp**; gold `#FDC146` is the User Avatar Premier variant only; urgency uses warning/error. Error/destructive uses the error ramp.
 - **Buttons = 4 types:** Primary, Secondary, Quiet, Destructive (no Tertiary, no Success). One Primary (blue) action per view.
 - **States are native CSS** (`:hover`, `:focus-visible`, `[disabled]`, `aria-*`) — never state classes. Focus = a **solid 2px ring** (blue-600 light / blue-300 on dark chrome), not a glow.
 - **Catalog is the ~50 Figma components only** — there is no Header, Sidebar, Link, Chart, Image, Video, or Date Picker component.

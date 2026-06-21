@@ -9,7 +9,7 @@ Read order: STEP 0 = the Copart Design Vault (github.com/getboyce/Copart-Design-
 - **Unprefixed classes**: base + modifiers. `.btn` / `.btn-primary` / `.btn-md`; `.card`; `.badge` / `.badge-success`; `.chip`; `.modal`. Phase 2 `dist/vallejo.css` implements exactly these classes — they are the contract.
 - **States via NATIVE CSS only** — `:hover`, `:focus-visible`, `[disabled]` / `[aria-disabled]`, `[aria-pressed]`, `[aria-selected]`, `[aria-current]`, `aria-invalid`, `[open]`. **Never** a `.is-hover` / `.selected` state class.
 - **Tokens, never literals.** Every color/size/radius/space resolves to a `var(--token)`. Snippets name the token in a comment where it is load-bearing; never hardcode a hex or px that a token owns. Values live in llms-tokens.txt.
-- **Selected register** (one uniform across chips, selected rows, selected options, Watchlist saved, active filter chip): `--blue-50` wash · `--blue-300` border · `--blue-800` label. Memorize it once.
+- **Selected register** (one uniform across chips, selected rows, selected options, active filter chip): `--blue-50` wash · `--blue-300` border · `--blue-800` label. Memorize it once. (Watchlist saved is the exception — filled red-500 heart on a neutral surface, never the blue register.)
 - **Focus** is a real state on every interactive component: a **solid 2px ring**, never a shadow glow. `--border-focus` (blue/600) on light surfaces; `--border-focus-on-dark` (blue/300) on dark chrome. Ring radius is concentric (control radius + 3). Engineer it with `outline: 2px solid var(--border-focus); outline-offset: 2px;`.
 - **Buttons are raised** via the named Elevation effect styles. **Primary + Destructive are RAISED:** a vertical gradient fill (`var(--interactive-primary)` → `var(--interactive-primary-grad-end)`; Destructive uses `var(--interactive-destructive)` → `var(--interactive-destructive-grad-end)`) plus `box-shadow: var(--elevation-primary-rest)` / `var(--elevation-destructive-rest)` (hover/pressed variants swap the rest token). **Secondary, Quiet, and Chips** wear the raised KEY edge (`var(--elevation-key)`); **Quiet is the flattest.** Floating surfaces (Menu/Popover/Toast/Modal/Shelf/Tooltip, the floating Watchlist heart) use `var(--elevation-overlay)` / `var(--elevation-modal)`. Focus is still a solid 2px ring, never a glow.
 - **44px hit-area floor** regardless of visual size (a 32px control pads out to 44px in code).
@@ -64,8 +64,8 @@ Figma: `Button 1.2` · node `4079:255` · set · 300 variants.
   All filters
 </button>
 
-<!-- Icon-only — MUST name the action -->
-<button class="btn btn-quiet btn-md" aria-label="More actions">
+<!-- Icon-only — MUST name the action + carry .btn-icon-only (collapses to a square) -->
+<button class="btn btn-quiet btn-md btn-icon-only" aria-label="More actions">
   <svg class="btn-icon" aria-hidden="true"><use href="#icon-more-vertical"></use></svg>
 </button>
 
@@ -88,9 +88,9 @@ Figma: `Watchlist 1.2` · node `4098:509` · set · 32 variants.
 
 - **Variant axes** (32 = 2×2×4×2): **Button type** (2): Full · Compact · **Saved** (2): Off · On · **State** (4): Default · Hover · Active · Disabled · **Size** (2): Medium · Small (Small = 32px circle that floats over lot photography).
 - **States:** Default · Hover · Active · Disabled.
-- **The one rule:** Heart fills **Copart blue** (not red — red is spoken for by Outbid/destructive). Saved flips the label **Watchlist → Watching**, never color alone.
-- **Anatomy + key rules:** Save-to-list toggle (bookmark pattern). Unsaved (Regular) wears the raised-key edge (matches Secondary). Saved/On wears the **selected register** (blue/50 wash + blue/300 border + blue/800 label), flat and settled. Hearts: `icon.heart` (outline) → `icon.heart-filled`. Small 32px is floating by construction, so it is the documented elevation exception: it carries Elevation/Hover + a hairline. Heart inset is 12 (wider than the button icon-side 8) — heart-specific optical value.
-- **a11y:** `aria-pressed` true/false carries saved state. Visual 32px (Small) but **required 44px expanded hit area in code**. State is the label flip + register, never color alone.
+- **The one rule:** Heart fills **red (red-500)** when active — the one favorite red that is NOT a destructive cue. Saved flips the label **Watchlist → Watching** and the heart from outline to filled, never color alone.
+- **Anatomy + key rules:** Save-to-list toggle (bookmark pattern). Unsaved wears the raised-key edge (matches Secondary). Saved/On stays on a **neutral surface** — state is carried by the **filled red-500 heart** + the word "Watching," not a blue register and not color alone. Hearts: `icon.heart` (outline) → `icon.heart-filled`, both painting `--interactive-favorite` (red-500) via currentColor. Small 32px is floating by construction, so it is the documented elevation exception: it carries Elevation/Hover + a hairline. Heart inset is 12 (wider than the button icon-side 8) — heart-specific optical value.
+- **a11y:** `aria-pressed` true/false carries saved state. Visual 32px (Small) but **required 44px expanded hit area in code**. State is the label flip + filled red heart, never color alone.
 
 ```html
 <!-- Full, unsaved -->
@@ -99,7 +99,7 @@ Figma: `Watchlist 1.2` · node `4098:509` · set · 32 variants.
   Watchlist
 </button>
 
-<!-- Full, saved — selected register + label flip -->
+<!-- Full, saved — filled red-500 heart + label flip -->
 <button class="watchlist watchlist-full" aria-pressed="true">
   <svg class="watchlist-heart" aria-hidden="true"><use href="#icon-heart-filled"></use></svg>
   Watching
@@ -276,7 +276,7 @@ Figma: `Input / Select Option 1.2` · node `4125:185` · set · 10 variants.
 
 - **Variant axes** (10 = 2×5): **Kind** (2): Single · Multi · **State** (5): Default · Hover · Selected · Selected Hover · Disabled.
 - **States:** Default · Hover · Selected · Selected Hover · Disabled.
-- **The one rule:** Selected row wears the **selected register** (blue/50 wash + blue/800 medium label) — the same uniform as chips/cards/Watchlist.
+- **The one rule:** Selected row wears the **selected register** (blue/50 wash + blue/800 medium label) — the same uniform as chips and cards.
 - **Anatomy + key rules:** 36px rows. Single: selected = leading blue check + blue/800 label. Multi: leading checkbox (forward-ref to Checkbox). Hover = gray/50 (unselected) or deepened blue/50 (selected).
 - **a11y:** `role="option"` + `aria-selected`. Multi options pair with a `Checkbox` whose state mirrors `aria-selected`. Disabled = `aria-disabled="true"`.
 
@@ -301,17 +301,17 @@ Figma: `Input / Toggle 1.2` · node `4162:225` · set · 12 variants.
 - **States:** Off · Off Hover · On · On Hover · Disabled Off · Disabled On.
 - **The one rule:** Recessed track + raised-key thumb; off→on jumps **gray/300 → blue/600** (state in luminance, not hue alone).
 - **Anatomy + key rules:** Off track gray/300 (the white raised-key thumb identifies the control, so the track is a quiet recessed well). On track blue/600. Hover deepens (gray/700 / blue/700). Thumb = white with a raised-key drop shadow. Disabled = gray/300 off / gray/400 on, thumb flat. Sizes 36×20 (Default) / 30×16 (Small). The Small size makes its label optional.
-- **a11y:** `role="switch"` + `aria-checked`. Keyboard-focusable; focus = 2px blue/600 ring. When the visible label is removed (Small), an `aria-label` is **required**.
+- **a11y:** Native `<input type="checkbox" role="switch">` — toggles with click/Space, no JS. `checked` carries state (no `aria-checked` to maintain). Keyboard-focusable; focus = 2px blue/600 ring. When the visible label is removed (Small), an `aria-label` is **required**.
 
 ```html
 <!-- Default with visible label -->
 <label class="toggle-field">
-  <button class="toggle toggle-default" role="switch" aria-checked="true"></button>
+  <input type="checkbox" class="toggle" role="switch" checked>
   <span>Email me when I'm outbid</span>
 </label>
 
 <!-- Small, label-less — aria-label required -->
-<button class="toggle toggle-small" role="switch" aria-checked="false" aria-label="Compact view"></button>
+<input type="checkbox" class="toggle toggle-small" role="switch" aria-label="Compact view">
 ```
 
 ## Checkbox
@@ -363,27 +363,16 @@ Figma: `Input / Slider 1.2` · node `4163:228` · set · 4 variants.
 
 - **Variant axes** (4 = 2×2): **Type** (2): Single · Range · **State** (2): Default · Hover.
 - **States:** Default · Hover.
-- **The one rule:** Recessed track + raised-key thumb(s) — the same rise/recess language as the Toggle.
-- **Anatomy + key rules:** Track 6px (`--gray-200` well) + blue/600 fill + raised-key thumb 18px. Single = one thumb, fill from start; Range = two thumbs, fill between. Thumb border gray/300 → gray/400 hover → blue/600 focus-ring. Disabled = gray/400 fill + gray/100 thumb, flat.
-- **a11y:** Each thumb `role="slider"` + `aria-valuemin` / `aria-valuemax` / `aria-valuenow` + `aria-valuetext` (formatted, e.g. "$25,000") + `aria-label`. Arrow keys step; Home/End jump.
+- **The one rule:** Recessed track + raised-key thumb — the same rise/recess language as the Toggle. (The Figma set documents a Range variant, but the shipped CSS is single-thumb native; dual-handle needs JS.)
+- **Anatomy + key rules:** Track 6px (`--surface-sunken` well) + blue/600 fill (via `accent-color`) + raised-key white thumb 18px. Thumb border gray/300 → gray/400 hover → blue/600 focus-ring. Disabled = gray/400 fill + gray/100 thumb, flat. **Single-thumb only** — a dual-handle range (min + max) is not expressible with one native `<input type="range">` and needs JS.
+- **a11y:** Native `<input type="range">` — drags with the pointer and Arrow keys (Home/End jump), no JS. The browser maps min/max/value to the slider role; add `aria-label` (or a wired `<label>`) and, when the value is formatted, `aria-valuetext` (e.g. "$25,000"). Focus = 2px blue/600 ring on the thumb.
 
 ```html
-<!-- Single -->
-<div class="slider slider-single">
-  <div class="slider-track"><div class="slider-fill" style="width:40%"></div></div>
-  <div class="slider-thumb" role="slider" tabindex="0"
-       aria-label="Max bid" aria-valuemin="0" aria-valuemax="50000"
-       aria-valuenow="20000" aria-valuetext="$20,000" style="left:40%"></div>
-</div>
+<input type="range" class="slider" min="0" max="100" value="40">
 
-<!-- Range -->
-<div class="slider slider-range" aria-label="Price range">
-  <div class="slider-track"><div class="slider-fill" style="left:20%;width:50%"></div></div>
-  <div class="slider-thumb" role="slider" tabindex="0" aria-label="Minimum price"
-       aria-valuemin="0" aria-valuemax="50000" aria-valuenow="10000" aria-valuetext="$10,000" style="left:20%"></div>
-  <div class="slider-thumb" role="slider" tabindex="0" aria-label="Maximum price"
-       aria-valuemin="0" aria-valuemax="50000" aria-valuenow="35000" aria-valuetext="$35,000" style="left:70%"></div>
-</div>
+<!-- Labeled money value -->
+<input type="range" class="slider" min="0" max="50000" value="20000"
+       aria-label="Max bid" aria-valuetext="$20,000">
 ```
 
 ---
@@ -1217,11 +1206,11 @@ Figma: `Content / Empty state` · node `4540:3161` · set · 2 variants.
 # Media
 
 ## Avatar
-Figma: `Media / Avatar` · node `4525:76` · set · 15 variants.
+Figma: `Media / Avatar` · node `4525:76` · set · 15 base variants (3×5) + **Basic** / **Premier** boolean props.
 
-- **Variant axes** (15 = 3×5): **Type** (3): Image · Initials · Icon · **Size** (5): XS (24) · SM (32) · MD (40) · LG (48) · XL (64).
+- **Variant axes** (15 = 3×5): **Type** (3): Image · Initials · Icon · **Size** (5): XS (24) · SM (32) · MD (40) · LG (48) · XL (64). **Booleans:** Basic · Premier (the opt-in membership ring).
 - **States:** —
-- **The one rule:** **NO** hashed/per-user color, **NO** presence dot, **NO** default ring — identity is neutral; color is reserved for status/interactivity.
+- **The one rule:** **NO** hashed/per-user color, **NO** presence dot, **NO** default ring. The one sanctioned ring is the **membership ring**: Free = none · **Basic** = `gray-300` · **Premier** = `gold`, each a 2px ring set 2px off the circle (`.avatar-basic` / `.avatar-premier`, a 2px `outline` with `outline-offset: 2px` so the gap is transparent). Identity is otherwise neutral; color is reserved for status/interactivity.
 - **Anatomy + key rules:** Circle, presentational identity. Fallback chain: real photo → initials → `icon.user`. **Initials** = gray/200 fill + gray/700 (text/secondary) Inter Semi Bold; 1 letter <32px, 2 letters ≥32px (XS = single). **Icon** fallback = `icon.user` (icon/muted) on gray/100. **Image** = a real photo in the fill (placeholder = `icon.user` silhouette in white on gray/300). Circle-only — company/org marks route to a separate Thumbnail concept. MD40 = the List Row leading anchor.
 - **a11y:** Image avatar needs `alt` (person's name) or `alt=""` if purely decorative beside a visible name; Icon/Initials fallbacks are decorative when the name is shown adjacent.
 
@@ -1238,6 +1227,12 @@ Figma: `Media / Avatar` · node `4525:76` · set · 15 variants.
 <span class="avatar avatar-md avatar-icon" aria-hidden="true">
   <svg><use href="#icon-user"></use></svg>
 </span>
+
+<!-- Membership ring — Basic (gray-300) / Premier (gold); composes with any Type + Size -->
+<span class="avatar avatar-md avatar-initials avatar-basic" aria-hidden="true">JL</span>
+<span class="avatar avatar-md avatar-image avatar-premier">
+  <img src="…" alt="Jordan Lee">
+</span>
 ```
 
 ---
@@ -1245,12 +1240,13 @@ Figma: `Media / Avatar` · node `4525:76` · set · 15 variants.
 ## Component → token cheat-sheet (bindings the snippets assume)
 Phase 2 `dist/vallejo.css` resolves these. Values in llms-tokens.txt.
 
-- **Selected register** (chips, selected rows/options, Watchlist saved, active filter chip): `--blue-50` wash · `--blue-300` border · `--blue-800` label.
+- **Selected register** (chips, selected rows/options, active filter chip): `--blue-50` wash · `--blue-300` border · `--blue-800` label. (Watchlist saved = filled red-500 heart on a neutral surface, not this register.)
 - **Focus ring**: `--border-focus` (blue/600) light · `--border-focus-on-dark` (blue/300) dark chrome; `outline: 2px solid; outline-offset: 2px` (concentric +3 radius).
 - **Refined-light button border** (Secondary): rest `--border-default` (gray/300) → hover gray/400 + `--surface-canvas` → pressed gray/500 + `--surface-sunken`.
 - **Input boundary** (empty field IS the control): `--border-control` (gray/500, 3.65:1) — heavier than buttons.
 - **Tonal recipe** (Badge Subtle, Alert): `--{tone}-100` fill + `--{tone}-800` content. **Solid** (Badge/Banner): `--{tone}-600` fill + white.
 - **Quiet surface** (Lot/Stat card, List/Table Row): `--surface-raised` (white) + `--border-hairline` (gray/200), NO zebra, NO resting shadow.
+- **Avatar membership ring** (`.avatar-basic` / `.avatar-premier`): a 2px ring + 2px transparent gap (`outline` + `outline-offset: 2px`) — Basic `--gray-300`, Premier `--gold` (#FDC146, = warning-200).
 - **Radius family**: controls `--radius-lg` (8) · cards/menus/toasts/popovers `--radius-xl` (12) · modals/shelves `--radius-2xl` (16) · pills (badge/chip/tag) `--radius-pill` · tags/tooltips `--radius-md` (6).
 - **Elevation** (floating surfaces only): Elevation/Hover (floating Watchlist), Elevation/Overlay (Menu/Popover/Toast/Tooltip/Select menu), Elevation/Modal (Modal/Shelf), Elevation/Key (raised segment/chip).
 - **Layers**: dropdown 1000 · sticky 1100 · drawer 1300 · scrim 1400 · modal 1500 · toast 1600 · tooltip 1700 (no header layer — DEC-11).

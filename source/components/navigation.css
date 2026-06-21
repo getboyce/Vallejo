@@ -127,7 +127,11 @@
    ========================================================================== */
 
 .segmented {
+  /* Hug content — the track sizes to its segments, never full-width. */
+  position: relative;            /* anchor the sliding indicator */
   display: inline-flex;
+  width: fit-content;
+  max-width: max-content;
   align-items: stretch;
   gap: var(--space-0-5);
   /* Recessed gray track. */
@@ -136,15 +140,57 @@
   border-radius: var(--radius-lg);
 }
 
+/* The single sliding pill that marks the active segment. It is positioned
+   absolutely inside the track and slides under the selected label. Its
+   transform + width are driven by demo.js to match the active segment, so the
+   selection animates with a smooth slide rather than a hard jump. */
+.segmented-indicator {
+  position: absolute;
+  top: var(--space-0-5);
+  left: 0;
+  /* Sized to the active segment's box; height fills the padded track. */
+  height: calc(100% - (var(--space-0-5) * 2));
+  /* White raised-key pill — same register the active segment used to carry. */
+  background: var(--surface-raised);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-key);
+  /* Slide horizontally + resize as the selection changes. */
+  transition:
+    transform var(--duration-moderate) var(--ease-enter),
+    width var(--duration-moderate) var(--ease-enter);
+  /* Sits under the labels; decorative only. */
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* No indicator yet (e.g. before JS init / measurement) — hide it so the track
+   never shows a stray pill parked at the left edge. JS sets width once placed. */
+.segmented-indicator:not([style*="width"]) {
+  display: none;
+}
+
+/* The track carries the hover/active elevation so the pill keeps the same
+   tactile feedback the per-segment pill used to give, regardless of which
+   segment is under the cursor. */
+.segmented.has-indicator:hover .segmented-indicator {
+  box-shadow: var(--elevation-key-hover);
+}
+
+.segmented.has-indicator:active .segmented-indicator {
+  box-shadow: var(--elevation-key-pressed);
+}
+
 .segment {
-  /* layout */
+  /* layout — relative + above the sliding indicator so the label shows through */
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
   padding: var(--space-1) var(--space-3);
   min-height: 28px;
-  /* reset */
+  /* reset — transparent so the indicator pill reads through, not the button */
   appearance: none;
   background: transparent;
   border: 0;
@@ -158,9 +204,7 @@
   color: var(--text-tertiary);
   white-space: nowrap;
   transition:
-    color var(--duration-fast) var(--ease-enter),
-    background-color var(--duration-fast) var(--ease-enter),
-    box-shadow var(--duration-fast) var(--ease-enter);
+    color var(--duration-fast) var(--ease-enter);
 }
 
 .segment:hover {
@@ -172,20 +216,20 @@
   outline-offset: 2px;
 }
 
-/* Active = white raised-key pill in the recessed track + ink medium label. */
+/* Active = ink medium label. The white raised-key pill is painted by the
+   single sliding .segmented-indicator beneath it, so the label itself stays
+   transparent and lets the pill read through. */
 .segment[aria-checked="true"] {
-  background: var(--surface-raised);
   color: var(--text-primary);
   font-weight: 500;
+}
+
+/* Fallback: if JS never runs (no sliding indicator), the active segment still
+   paints its own white pill so the control never reads as flat. */
+.segmented:not(.has-indicator) .segment[aria-checked="true"] {
+  background: var(--surface-raised);
+  border-radius: var(--radius-md);
   box-shadow: var(--elevation-key);
-}
-
-.segment[aria-checked="true"]:hover {
-  box-shadow: var(--elevation-key-hover);
-}
-
-.segment[aria-checked="true"]:active {
-  box-shadow: var(--elevation-key-pressed);
 }
 
 /* Disabled stays flat + muted. */
@@ -201,7 +245,7 @@
 /* ==========================================================================
    Breadcrumbs  +  Breadcrumb item
    --------------------------------------------------------------------------
-   Path of crumbs separated by quiet "/" chevrons.
+   Path of crumbs separated by quiet right-chevron (›) glyphs.
    Link = text/secondary · Hover = blue link · Current = ink medium (non-link).
    a11y: <nav aria-label="Breadcrumb"> → <ol>; current carries aria-current="page".
    ========================================================================== */
@@ -248,13 +292,23 @@
   font-weight: 500;
 }
 
-/* Separator = "/" in gray/400, decorative. */
+/* Separator = muted right-chevron (›), decorative. Any author-supplied glyph
+   is replaced so the separator always renders as a chevron-right caret. */
 .breadcrumb-sep {
-  color: var(--gray-400);
-  font-family: var(--font-sans);
-  font-size: 14px;
-  line-height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
   user-select: none;
+  /* Collapse any literal glyph the markup ships ("/") so only the chevron shows. */
+  font-size: 0;
+}
+
+.breadcrumb-sep::after {
+  content: "\203A"; /* › chevron-right */
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 20px;
 }
 
 

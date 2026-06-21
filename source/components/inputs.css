@@ -215,10 +215,10 @@
   gap: var(--space-3);
 }
 
-/* Counter is a NUMBER -> mono, right-aligned (Read-vs-Compare) */
+/* Counter is a small caption -> sans/body (Inter), right-aligned */
 .textarea-count {
   flex: none;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
@@ -496,8 +496,10 @@
 
 .select-menu {
   position: absolute;
+  top: 100%;   /* anchor to the trigger's bottom edge */
+  left: 0;     /* align to the trigger's left edge; min-width:100% matches its width */
   z-index: var(--layer-dropdown);
-  margin: var(--space-1) 0 0;
+  margin: var(--space-1) 0 0;  /* small gap below the trigger */
   padding: var(--space-1);
   list-style: none;
   min-width: 100%;
@@ -620,13 +622,20 @@
   white-space: nowrap;
 }
 
-/* Single: selected = leading/trailing blue check + blue/800 label */
+/* Single: selected = leading/trailing blue check + blue/800 label.
+   The check belongs ONLY to the selected row, so it is hidden by default
+   and revealed when the row carries aria-selected="true". */
 .select-option-check {
   flex: none;
+  display: none;
   width: 16px;
   height: 16px;
   color: var(--blue-800);
   fill: currentColor;
+}
+
+.select-option[aria-selected="true"] > .select-option-check {
+  display: block;
 }
 
 /* Hover (unselected) = gray/50 */
@@ -655,7 +664,8 @@
 
 /* ============================================================================
    8. TOGGLE — .toggle (+ .toggle-default / .toggle-small), .toggle-field
-   Recessed track + raised-key white thumb.
+   NATIVE checkbox styled as a switch — toggles with click/Space, no JS.
+   Recessed track + raised-key white thumb (drawn via ::after on the box).
    Off track gray/300 -> On track blue/600 (state in luminance, not hue alone).
    ========================================================================== */
 
@@ -671,36 +681,45 @@
   cursor: pointer;
 }
 
-.toggle {
+/* The box IS the track — native checkbox with appearance stripped.
+   NOTE: every STATE rule below is qualified with input[type="checkbox"] so it
+   matches the base selector's specificity (0,2,1). A bare `.toggle:checked`
+   (0,2,0) would LOSE to this base rule and the OFF gray would bleed onto the
+   ON track — that was the reported "gray on-track" bug. */
+input[type="checkbox"].toggle {
+  -webkit-appearance: none;
+  appearance: none;
   position: relative;
   flex: none;
   display: inline-block;
+  margin: 0;
   padding: 0;
   border: 0;
-  background-color: var(--gray-300); /* OFF track — quiet recessed well */
+  box-sizing: border-box;
+  background-color: var(--gray-400); /* OFF track — quiet recessed well */
   border-radius: var(--radius-pill);
   cursor: pointer;
   transition: background-color var(--duration-normal) var(--ease-enter);
 }
 
 /* Raised-key white thumb */
-.toggle::after {
+input[type="checkbox"].toggle::after {
   content: "";
   position: absolute;
   top: 2px;
   left: 2px;
   border-radius: var(--radius-full);
-  background-color: var(--gray-0); /* white thumb */
+  background-color: var(--surface-raised); /* white thumb */
   box-shadow: var(--elevation-key); /* raised-key drop shadow */
   transition: transform var(--duration-normal) var(--ease-spring);
 }
 
-/* Sizes — Default 36x20, Small 30x16 */
-.toggle-default {
+/* Sizes — Default 36x20, Small 30x16 (default size when no modifier given) */
+.toggle {
   width: 36px;
   height: 20px;
 }
-.toggle-default::after {
+.toggle::after {
   width: 16px;
   height: 16px;
 }
@@ -713,24 +732,24 @@
   height: 12px;
 }
 
-/* Off Hover deepens the track */
-.toggle:hover[aria-checked="false"]:not([disabled]) {
-  background-color: var(--gray-700);
+/* Off Hover deepens the track one step */
+input[type="checkbox"].toggle:hover:not(:checked):not(:disabled) {
+  background-color: var(--gray-500);
 }
 
-/* ON — track jumps to blue/600 */
-.toggle[aria-checked="true"] {
+/* ON — track jumps to blue/600, thumb slides right */
+input[type="checkbox"].toggle:checked {
   background-color: var(--interactive-primary); /* blue/600 */
 }
-.toggle-default[aria-checked="true"]::after {
-  transform: translateX(16px);
+input[type="checkbox"].toggle:checked::after {
+  transform: translateX(16px); /* Default: 36 - 16 thumb - 2*2 inset */
 }
-.toggle-small[aria-checked="true"]::after {
-  transform: translateX(14px);
+input[type="checkbox"].toggle-small:checked::after {
+  transform: translateX(14px); /* Small: 30 - 12 thumb - 2*2 inset */
 }
 
 /* On Hover deepens to blue/700 */
-.toggle:hover[aria-checked="true"]:not([disabled]) {
+input[type="checkbox"].toggle:hover:checked:not(:disabled) {
   background-color: var(--interactive-primary-hover); /* blue/700 */
 }
 
@@ -740,16 +759,17 @@
   outline-offset: 2px;
 }
 
-/* Disabled — gray/300 off / gray/400 on, thumb flat */
-.toggle[disabled] {
+/* Disabled — muted for BOTH off and on: light gray/300 track + light thumb */
+input[type="checkbox"].toggle:disabled {
   cursor: not-allowed;
   background-color: var(--gray-300);
 }
-.toggle[disabled][aria-checked="true"] {
-  background-color: var(--gray-400);
+input[type="checkbox"].toggle:disabled:checked {
+  background-color: var(--gray-300);
 }
-.toggle[disabled]::after {
-  box-shadow: none; /* thumb flat when disabled */
+input[type="checkbox"].toggle:disabled::after {
+  background-color: var(--gray-200); /* light thumb, no lift */
+  box-shadow: none;
 }
 
 
@@ -807,25 +827,30 @@
   border-color: var(--interactive-primary);
 }
 
-/* White check glyph (drawn with a rotated border) */
+/* White check glyph (drawn with a rotated border).
+   Centered via 50%/50% + translate so the tick sits optically dead-center in
+   the box at any size. The check's own box is offset by a hair (the rotated
+   stroke is bottom-heavy on the long arm) so the visual mass — not the glyph
+   bounding box — lands on center. */
 .checkbox:checked::after,
 .checkbox[data-checked="true"]::after {
   content: "";
   position: absolute;
-  top: 1px;
-  left: 5px;
+  top: 50%;
+  left: 50%;
   width: 5px;
   height: 9px;
   border: solid var(--text-inverse); /* white */
   border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  /* nudge up-left in glyph space before the 45° turn, so the long arm's
+     extra reach doesn't push the mass low-right */
+  transform: translate(-50%, -60%) rotate(45deg);
 }
 .checkbox-large:checked::after,
 .checkbox-large[data-checked="true"]::after {
-  top: 2px;
-  left: 6px;
   width: 6px;
-  height: 10px;
+  height: 11px;
+  border-width: 0 2px 2px 0;
 }
 
 /* Indeterminate = white dash glyph */
@@ -953,47 +978,70 @@
 
 
 /* ============================================================================
-   11. SLIDER — .slider (+ .slider-single / .slider-range),
-       .slider-track, .slider-fill, .slider-thumb
-   Recessed track (gray/200 well) + blue/600 fill + raised-key thumb(s) 18px.
+   11. SLIDER — .slider
+   NATIVE range input — drags with pointer + arrow keys/Home/End, no JS.
+   accent-color paints the filled track + thumb as the modern baseline; the
+   explicit ::track / ::thumb pseudo-elements layer the Vallejo material on top:
+   recessed track (--surface-sunken well) + raised-key white thumb 18px.
    Same rise/recess language as the Toggle.
+   SINGLE-THUMB ONLY. A dual-handle range (min + max) is not expressible with a
+   single native <input type="range"> — that needs JS (e.g. two stacked inputs
+   or a headless range lib). Build .slider-range as a JS component if required.
    ========================================================================== */
 
-.slider {
-  position: relative;
-  display: flex;
-  align-items: center;
+input[type="range"].slider {
+  -webkit-appearance: none;
+  appearance: none;
   width: 100%;
   height: 18px; /* clears the 18px thumb */
+  margin: 0;
+  background: transparent; /* track painted on the ::track pseudo-element */
+  accent-color: var(--interactive-primary); /* blue/600 — filled track + thumb baseline */
+  cursor: pointer;
 }
 
-/* Recessed track — 6px gray/200 well */
-.slider-track {
-  position: relative;
+/* --- Recessed track — 6px sunken well --- */
+.slider::-webkit-slider-runnable-track {
   width: 100%;
   height: 6px;
-  background-color: var(--gray-200); /* recessed well */
+  background-color: var(--surface-sunken); /* recessed well */
+  border-radius: var(--radius-pill);
+}
+.slider::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  background-color: var(--surface-sunken); /* recessed well */
+  border-radius: var(--radius-pill);
+}
+/* Firefox paints the filled portion separately (accent-color does the rest) */
+.slider::-moz-range-progress {
+  height: 6px;
+  background-color: var(--interactive-primary); /* blue/600 fill */
   border-radius: var(--radius-pill);
 }
 
-/* Filled portion — blue/600 */
-.slider-fill {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  background-color: var(--interactive-primary); /* blue/600 */
-  border-radius: var(--radius-pill);
-}
-
-/* Raised-key thumb — 18px white knob */
-.slider-thumb {
-  position: absolute;
-  top: 50%;
+/* --- Raised-key thumb — 18px white knob --- */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
   width: 18px;
   height: 18px;
-  transform: translate(-50%, -50%);
+  margin-top: -6px; /* center on the 6px track: (6 - 18) / 2 */
   box-sizing: border-box;
-  background-color: var(--gray-0); /* white raised key */
+  background-color: var(--surface-raised); /* white raised key */
+  border: 1px solid var(--border-default); /* gray/300 */
+  border-radius: var(--radius-full);
+  box-shadow: var(--elevation-key); /* raised-key drop shadow */
+  cursor: grab;
+  transition:
+    border-color var(--duration-fast) var(--ease-enter),
+    box-shadow var(--duration-fast) var(--ease-enter);
+}
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+  background-color: var(--surface-raised); /* white raised key */
   border: 1px solid var(--border-default); /* gray/300 */
   border-radius: var(--radius-full);
   box-shadow: var(--elevation-key); /* raised-key drop shadow */
@@ -1004,27 +1052,48 @@
 }
 
 /* Hover — border advances to gray/400, lift deepens */
-.slider-thumb:hover {
+.slider:hover:not(:disabled)::-webkit-slider-thumb {
   border-color: var(--gray-400);
   box-shadow: var(--elevation-key-hover);
 }
-.slider-thumb:active {
+.slider:hover:not(:disabled)::-moz-range-thumb {
+  border-color: var(--gray-400);
+  box-shadow: var(--elevation-key-hover);
+}
+.slider:active:not(:disabled)::-webkit-slider-thumb {
+  cursor: grabbing;
+}
+.slider:active:not(:disabled)::-moz-range-thumb {
   cursor: grabbing;
 }
 
-/* Focus = 2px blue/600 ring */
-.slider-thumb:focus-visible {
+/* Focus = 2px blue/600 ring (on the thumb) */
+.slider:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-color: var(--border-focus);
+}
+.slider:focus-visible::-moz-range-thumb {
   outline: 2px solid var(--border-focus);
   outline-offset: 2px;
   border-color: var(--border-focus);
 }
 
 /* Disabled — gray/400 fill + gray/100 thumb, flat */
-.slider[aria-disabled="true"] .slider-fill,
-.slider-fill[aria-disabled="true"] {
+.slider:disabled {
+  accent-color: var(--text-disabled); /* gray/400 fill */
+  cursor: not-allowed;
+}
+.slider:disabled::-moz-range-progress {
   background-color: var(--text-disabled); /* gray/400 */
 }
-.slider[aria-disabled="true"] .slider-thumb {
+.slider:disabled::-webkit-slider-thumb {
+  background-color: var(--surface-sunken); /* gray/100 */
+  border-color: var(--border-default);
+  box-shadow: none; /* flat */
+  cursor: not-allowed;
+}
+.slider:disabled::-moz-range-thumb {
   background-color: var(--surface-sunken); /* gray/100 */
   border-color: var(--border-default);
   box-shadow: none; /* flat */

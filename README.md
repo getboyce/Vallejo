@@ -33,7 +33,7 @@ Vallejo does not exist in isolation. It executes the design language defined in 
 | `llms-tokens.txt` · `llms-components.txt` · `llms-a11y.txt` · `llms-writing.txt` · `llms-motion.txt` · `llms-mobile.txt` | Focused references (tokens, components, accessibility, voice, motion, mobile) |
 | [`version.json`](version.json) | Single source of version + date + Vault/production URLs |
 | [`starter.html`](starter.html) | Blank prototype shell — links the two stylesheets |
-| `source/` | **Source of truth (hand-edited):** `tokens/*.json` (DTCG), `icons.json`, `components/*.css` |
+| `source/` | **Source of truth (hand-edited):** `tokens/*.json` (DTCG), `icons.json`, `logos.json`, `components/*.css` |
 | `dist/` | **Generated + committed** (consume directly; never run a build): `tokens.css`, `tokens.dtcg.json`, `tokens.js`, `vallejo.css` |
 | `build/` | The token + component generators (`build.mjs`, `build-components.mjs`) |
 | `CLAUDE.md` | One-line pointer → `AGENTS.md` |

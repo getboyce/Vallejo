@@ -10,7 +10,7 @@ Version + date live ONLY in version.json (1.2.0 / 2026-06-20). Source of truth =
 Canonical naming:
 - `gray` is the canonical neutral ramp (gray-0 = white .. gray-950). `neutral-*` is a DEPRECATED alias only → resolves to `gray-*`.
 - `layer-*` is canonical for z-index. `z-*` is a DEPRECATED alias only.
-- NO orange ramp (removed). `gold #FA9252` exists for Premier rings ONLY. Urgency uses the warning/error ramps.
+- NO orange ramp (removed). `gold #FDC146` exists for the User Avatar Premier variant ONLY (same value as warning-200). Urgency uses the warning/error ramps.
 - Info is RETIRED → use blue (informational = blue's job). There is no `info-*` ramp.
 - Error/destructive uses the error ramp — never a raw red.
 
@@ -108,7 +108,7 @@ neutrals (gray-0 white, gray-150 cool fill). Bind the SEMANTIC alias in §2 inst
 ### gold — Premier only
 | Token | Hex | CSS var |
 |---|---|---|
-| gold | #FA9252 | --gold |  (Premier rings ONLY — NOT a ramp, NOT for urgency/accent. Use warning/error for urgency.)
+| gold | #FDC146 | --gold |  (User Avatar Premier variant ONLY — same value as warning-200; NOT a ramp, NOT for urgency/accent.)
 
 
 ## 2. Semantic tokens (alias → what it points at)
@@ -168,6 +168,7 @@ primitive) so a future dark pass can re-theme without touching markup, but don't
 | --interactive-destructive-grad-end | (raised gradient) | #AF001F | gradient end for RAISED Destructive button |
 | --interactive-destructive-hover | error-700 | #9D121F | |
 | --interactive-destructive-active| error-800 | #7F0D18 | |
+| --interactive-favorite          | error-500 | #D8383D | watchlist/save heart — red, NOT destructive (shares the error ramp, never a destructive cue) |
 
 ### status family + role aliases
 Each status family (success, warning, error) exposes 4 role aliases. Pattern per family:

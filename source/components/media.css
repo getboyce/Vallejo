@@ -5,7 +5,9 @@
      Type  [Image / Initials / Icon]  ×  Size [XS24 / SM32 / MD40 / LG48 / XL64]
      Fallback chain: real photo -> initials -> icon.user.
 
-   The one rule: NO hashed/per-user color, NO presence dot, NO default ring.
+   The one rule: NO hashed/per-user color, NO presence dot, NO default ring —
+   the only ring is the opt-in MEMBERSHIP ring (Free = none · Basic = gray/300 ·
+   Premier = gold), added via .avatar-basic / .avatar-premier.
    Identity is neutral; color is reserved for status / interactivity.
    Circle-only — company/org marks route to a separate Thumbnail concept.
    MD40 = the List Row leading anchor.
@@ -112,4 +114,27 @@
   width: 60%;
   height: 60%;
   fill: currentColor;
+}
+
+/* --------------------------------------------------------------------------
+   Avatar — membership ring (Basic / Premier)
+   The ONLY ring the avatar wears. A 2px ring set 2px off the circle, with a
+   TRANSPARENT 2px gap (the background shows through) so it reads as a ring,
+   not a border. Free/Guest members get no ring; paid members get one:
+     · Basic   = gray/300 ring
+     · Premier = gold ring
+   Built with outline + outline-offset (NOT box-shadow) so the gap is genuinely
+   transparent and the ring is never clipped by the avatar's overflow:hidden;
+   modern browsers round the outline to the circle. Composes with any Type +
+   Size — the avatar's size + clipped photo stay untouched. (On an interactive
+   avatar the :focus-visible ring temporarily replaces this one — expected.)
+   -------------------------------------------------------------------------- */
+.avatar-basic {
+  outline: 2px solid var(--gray-300);
+  outline-offset: 2px;
+}
+
+.avatar-premier {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }

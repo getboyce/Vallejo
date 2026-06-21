@@ -549,6 +549,35 @@ body {
   color: var(--text-tertiary);
 }
 
+/* Standalone group label — a quiet overline above a group of cards/logos.
+   NOT the sunken strip atop a .showcase frame (that's .showcase-label, which
+   relies on the frame to clip its corners and reads as a table header on its
+   own). Use this for logo groups, example sets, etc. */
+.demo-group-label {
+  display: block;
+  margin: var(--space-8) 0 var(--space-3);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.44px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* Principle card — a plain doc card (the aesthetic triad). Decoupled from
+   .dodont-card, whose border-radius:0 (so paired do/don't halves butt flush)
+   was leaving these with hard corners. Rounded like every other card. */
+.principle-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-xl);
+}
+
 /* Stage — generous padding, centers the live component on the white surface */
 .showcase-stage {
   display: flex;

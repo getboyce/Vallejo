@@ -9,6 +9,7 @@ iconic-svg-data.json
 new-icon-grid.txt
 plan.md
 replace-svgs.js
-package.json
-package-lock.json
 src/
+
+# package.json, package-lock.json, build/, dist/, source/ are COMMITTED.
+# The token build (build/*.mjs) is author-time only; consumers read committed dist/.

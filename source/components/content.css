@@ -1,0 +1,669 @@
+/* =============================================================================
+   Vallejo 1.2 — Content components
+   Lot Card · Stat Card · Table (Row / Cell / filter bar) · List Row ·
+   Bulk action bar · Accordion · Empty state
+   -----------------------------------------------------------------------------
+   QUIET SURFACE MODEL (the spine of this group):
+     resting surface = var(--surface-raised) (white) + var(--border-hairline)
+     (gray/200) ring · NO zebra · NO resting shadow. Color is reserved for
+     status (badges/tags) and interactivity (selected register, focus, CTA).
+   SELECTED REGISTER (rows/options): var(--interactive-selected-wash) (blue/50)
+     fill + var(--border-focus) (blue/600) 2px left accent + checked box.
+   MONO (.input-mono) carries: VIN · lot # · bid · count · timestamp.
+   All colors via var(--token). Heights/icon px may be literal to the contract.
+   ========================================================================== */
+
+
+/* =============================================================================
+   LOT CARD — the keystone Copart vehicle-listing component
+   Quiet surface, radius xl. Photo carries the Live badge + Watchlist overlay.
+   Current bid in mono; "Bid now" Primary CTA.
+   ========================================================================== */
+
+.lot-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-xl);
+  font-family: var(--font-sans);
+}
+
+/* Media — 4:3 portrait frame; the overlay anchors live here */
+.lot-card-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--surface-sunken); /* photo placeholder while loading */
+}
+
+.lot-card-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Status badge — overlaid top-left over the photo */
+.lot-card-status {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+}
+
+/* Watchlist heart — overlaid top-right over the photo (Small, floating) */
+.lot-card-watch {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+}
+
+/* Body — stacked: brand tag · title · meta · bid · CTA */
+.lot-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+
+/* Title — Title 3 (Inter 600 20/28) */
+.lot-card-title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Meta line — lot # + location · Footnote (Inter 400 13/16) tertiary */
+.lot-card-meta {
+  margin: 0;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+  color: var(--text-tertiary);
+}
+
+/* Bid block — label over a hero mono value */
+.lot-card-bid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+  margin-top: var(--space-1);
+}
+
+.lot-card-bid-label {
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+  color: var(--text-tertiary);
+}
+
+/* Current bid — prominent Inter price (like the Stat Card hero), tabular for
+   alignment. NOT mono: family is Inter even if .input-mono is on the element. */
+.lot-card-bid-value {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* CTA stretches full card width */
+.lot-card-cta {
+  margin-top: var(--space-2);
+  width: 100%;
+}
+
+
+/* =============================================================================
+   STAT CARD — KPI tile. Quiet white card, radius xl.
+   Value = Title 1 (Inter, NOT mono, tabular). Label + delta = Footnote.
+   Delta shows MAGNITUDE only; the arrow + sign carry direction (not color
+   alone). Up = success-text, Down = error-text — chosen per metric.
+   ========================================================================== */
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-xl);
+  font-family: var(--font-sans);
+}
+
+/* Label — Footnote, tertiary */
+.stat-card-label {
+  margin: 0;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+  color: var(--text-tertiary);
+}
+
+/* Value — Title 1 (Inter 600 28/36), hero singular number, tabular figures */
+.stat-card-value {
+  margin: 0;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: -0.28px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Delta — Footnote; neutral by default (Trend=None) */
+.stat-card-delta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Trend tones color the delta + arrow together (sign carries it without color) */
+.stat-card-up .stat-card-delta { color: var(--success-accent); }
+.stat-card-down .stat-card-delta { color: var(--error-accent); }
+
+/* Arrow glyph — decorative; meaning lives in the sign + the delta text */
+.stat-card-arrow {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+
+/* Optional sparkline — blue mini-trend that stretches the card width */
+.stat-card-sparkline {
+  display: block;
+  width: 100%;
+  margin-top: var(--space-2);
+  color: var(--interactive-primary);
+}
+
+
+/* =============================================================================
+   TABLE — Row + Cell + filter bar
+   Quiet surface: white rows, gray/100 hairline dividers, NO zebra.
+   Comfortable density only. Mono follows the Read-vs-Compare law.
+   ========================================================================== */
+
+/* Optional wrapping table — quiet surface ring + radius (rows weld inside) */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface-raised);
+  font-family: var(--font-sans);
+}
+
+/* --- Table Row -------------------------------------------------------------
+   Default white · Hover gray/50 · Selected = gray/50 + 2px blue/600 left
+   accent bar + checked box. Hairline gray/100 divider between rows. */
+.table-row {
+  position: relative;
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--surface-sunken); /* gray/100 divider */
+}
+
+.table-row:hover {
+  background: var(--surface-canvas); /* gray/50 */
+}
+
+/* Selected — wash + a 2px blue/600 left accent bar (rendered as a left border
+   on the first cell so it doesn't disturb the row box) */
+.table-row[aria-selected="true"] {
+  background: var(--surface-canvas);
+}
+
+.table-row[aria-selected="true"] > .table-cell:first-child {
+  box-shadow: inset 2px 0 0 0 var(--border-focus); /* blue/600 accent bar */
+}
+
+/* --- Table Cell ------------------------------------------------------------
+   52px comfortable height; transparent (the Row supplies the fill). */
+.table-cell {
+  height: 52px;
+  padding: 0 var(--space-4);
+  text-align: left;
+  vertical-align: middle;
+  background: transparent;
+  font-size: 14px;            /* Body Small */
+  line-height: 20px;
+  color: var(--text-primary);
+}
+
+/* Column header — Subheadline (Inter 600 14/20), tertiary, sortable */
+.table-cell-header,
+th.table-cell {
+  height: 44px;
+  font-weight: 600;
+  letter-spacing: 0.07px;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--border-hairline); /* gray/200 header rule */
+}
+
+/* Checkbox cell — snug leading column */
+.table-cell-checkbox {
+  width: 1%;
+  padding-right: 0;
+  white-space: nowrap;
+}
+
+/* Stacked cell — title + mono secondary (e.g. Vehicle + VIN) */
+.table-cell-stacked {
+  display: table-cell;
+}
+
+.table-cell-title {
+  display: block;
+  color: var(--text-primary);
+}
+
+.table-cell-sub {
+  display: block;
+  margin-top: var(--space-0-5);
+  font-size: 13px;            /* Mono/Small when .input-mono is applied */
+  line-height: 16px;
+  color: var(--text-tertiary);
+}
+
+/* Numeric cell — right-aligned (bids / odometer / counts), mono via .input-mono */
+.table-cell-numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Actions cell — trailing kebab, right-aligned */
+.table-cell-actions {
+  width: 1%;
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* --- Table filter bar ------------------------------------------------------
+   Welds to the top of a data-table card: shares fill + gray/200 ring + radius.
+   Bottom gray/200 hairline divides it from the column-header row. */
+.table-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-hairline);
+  border-top-left-radius: var(--radius-xl);
+  border-top-right-radius: var(--radius-xl);
+  border-bottom-color: var(--border-hairline); /* divides from header row */
+  font-family: var(--font-sans);
+}
+
+/* Vertical divider between visible chips and the "All filters" / search group */
+.table-filter-divider {
+  width: 1px;
+  align-self: stretch;
+  min-height: 24px;
+  margin: 0 var(--space-1);
+  background: var(--border-hairline); /* gray/200 */
+}
+
+/* Search pushes to the right edge of the bar */
+.table-filter-search {
+  margin-left: auto;
+}
+
+
+/* =============================================================================
+   LIST ROW — single-column vertical lists (saved searches, notifications,
+   members, documents). For data grids use Table Row instead.
+   Quiet surface · hairline gray/100 divider · NO zebra.
+   ========================================================================== */
+
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--surface-sunken); /* gray/100 divider */
+  text-align: left;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  /* button reset (the whole row may be an <a> or <button>) */
+  font: inherit;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-enter);
+}
+
+.list-row:hover {
+  background: var(--surface-canvas); /* gray/50 */
+}
+
+.list-row:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: -2px; /* inset so the ring stays inside the row edges */
+}
+
+/* Leading — Icon tile or Avatar circle */
+.list-row-leading {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon-leading: icon.* in a gray/100 tile (40px) */
+.list-row-leading-icon .list-row-leading {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-sunken); /* gray/100 tile */
+  color: var(--text-tertiary);
+}
+
+.list-row-leading-icon .list-row-leading svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Content — title + optional subtitle; takes the remaining width */
+.list-row-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+/* Title — List Title (Inter 500 15/20), primary */
+.list-row-title {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Subtitle — Footnote (Inter 400 13/16), tertiary */
+.list-row-subtitle {
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+  color: var(--text-tertiary);
+}
+
+/* Trailing chevron — navigational →, icon/muted */
+.list-row-chevron {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: var(--text-tertiary);
+}
+
+/* Trailing meta — date / value / status text, tertiary, right-aligned */
+.list-row-meta {
+  flex: none;
+  margin-left: auto;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+  color: var(--text-tertiary);
+  text-align: right;
+}
+
+
+/* =============================================================================
+   BULK ACTION BAR — appears on row selection. The Primary commit lives RIGHT.
+   Docked  = white + top hairline, NO shadow (reserves height / pushes content).
+   Overlay = dark chrome + upward elevation (sticky, floats over content).
+   ========================================================================== */
+
+.bulk-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-sans);
+}
+
+.bulk-bar-left,
+.bulk-bar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Selection count — ✓ + count; mono-friendly count via .input-mono if numeric */
+.bulk-bar-count {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.bulk-bar-count svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  color: var(--success-accent); /* the ✓ that confirms the selection */
+}
+
+/* Divider between the count and the contextual actions */
+.bulk-bar-divider {
+  width: 1px;
+  align-self: stretch;
+  min-height: 20px;
+  background: var(--border-hairline); /* gray/200 */
+}
+
+/* --- Docked: white + top hairline, reserves height, NO shadow --- */
+.bulk-bar-docked {
+  background: var(--surface-raised);
+  border-top: 1px solid var(--border-hairline);
+}
+
+/* --- Overlay: dark chrome + upward elevation, pins to viewport bottom --- */
+.bulk-bar-overlay {
+  position: sticky;
+  bottom: 0;
+  z-index: var(--layer-sticky);
+  background: var(--surface-header-bg);
+  border-radius: var(--radius-xl);
+  /* upward elevation — sanctioned floating-surface shadow */
+  box-shadow: var(--shadow-key-drop-hover) 0 -4px 16px 0;
+  color: var(--text-inverse);
+}
+
+.bulk-bar-overlay .bulk-bar-count {
+  color: var(--text-inverse);
+}
+
+.bulk-bar-overlay .bulk-bar-divider {
+  background: var(--surface-header-field); /* divider reads on dark chrome */
+}
+
+/* Focus on dark chrome uses the on-dark ring */
+.bulk-bar-overlay :focus-visible {
+  outline: 2px solid var(--border-focus-on-dark);
+  outline-offset: 2px;
+}
+
+
+/* =============================================================================
+   ACCORDION — collapsible disclosure. One header button toggles one panel.
+   Collapsed = chevron-down · Expanded = chevron-up + panel · Hover = gray/50.
+   Quiet surface · hairline gray/200 between items.
+   ========================================================================== */
+
+.accordion {
+  border-top: 1px solid var(--border-hairline);
+  border-bottom: 1px solid var(--border-hairline);
+  background: var(--surface-raised);
+  font-family: var(--font-sans);
+}
+
+/* Header is a heading element that wraps the trigger button — no chrome of its own */
+.accordion-header {
+  margin: 0;
+  font: inherit;
+}
+
+/* Trigger — full-width row: title left, chevron right */
+.accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-4);
+  background: transparent;
+  border: 0;
+  font-family: inherit;
+  font-size: 15px;            /* List Title */
+  line-height: 20px;
+  font-weight: 500;
+  text-align: left;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.accordion-trigger:hover {
+  background: var(--surface-canvas); /* gray/50 header wash */
+}
+
+.accordion-trigger:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: -2px;
+}
+
+/* Chevron — decorative; rotates via the expanded state (chevron-up when open) */
+.accordion-chevron {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: var(--text-tertiary);
+  transition: transform var(--duration-normal) var(--ease-enter);
+}
+
+/* Panel — collapsible region; Body Small reading text */
+.accordion-panel {
+  padding: 0 var(--space-4) var(--space-4);
+  font-size: 14px;            /* Body Small */
+  line-height: 20px;
+  color: var(--text-secondary);
+}
+
+/* Collapsed panel is hidden via [hidden] on the panel element in markup */
+.accordion-panel[hidden] {
+  display: none;
+}
+
+
+/* =============================================================================
+   EMPTY STATE — what a region shows when it has nothing.
+   Quiet line-icon (no illustration); transparent — the container supplies the
+   border. Default (page/full-table) vs Compact (card/inline).
+   ========================================================================== */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: transparent;
+  font-family: var(--font-sans);
+}
+
+/* Icon — gray/100 circle holding an icon/muted glyph */
+.empty-state-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--surface-sunken); /* gray/100 */
+  color: var(--text-tertiary);       /* icon/muted */
+}
+
+.empty-state-title {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+/* Body — text/secondary, wraps to a readable measure */
+.empty-state-body {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+/* --- Default: page / full-table region — 56px icon, Title 3, ~320 wrap --- */
+.empty-state-default {
+  gap: var(--space-4);
+  padding: var(--space-12) var(--space-6);
+}
+
+.empty-state-default .empty-state-icon {
+  width: 56px;
+  height: 56px;
+}
+
+.empty-state-default .empty-state-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.empty-state-default .empty-state-title {
+  font-size: 20px;            /* Title 3 */
+  line-height: 28px;
+  font-weight: 600;
+}
+
+.empty-state-default .empty-state-body {
+  max-width: 320px;
+  font-size: 14px;            /* Body Small */
+  line-height: 20px;
+}
+
+/* --- Compact: card / inline — 40px icon, List Title, ~240 wrap --- */
+.empty-state-compact {
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-4);
+}
+
+.empty-state-compact .empty-state-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.empty-state-compact .empty-state-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.empty-state-compact .empty-state-title {
+  font-size: 15px;            /* List Title */
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.empty-state-compact .empty-state-body {
+  max-width: 240px;
+  font-size: 13px;            /* Footnote */
+  line-height: 16px;
+  letter-spacing: 0.13px;
+}

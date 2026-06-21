@@ -1,0 +1,339 @@
+/* ==========================================================================
+   Vallejo Design System v1.2 — Messaging
+   Alert · Banner (Subtle vs Solid) · Toast
+   --------------------------------------------------------------------------
+   Tonal grammar — 5 tones: neutral / info / success / warning / error.
+   - SUBTLE recipe  : family/100 fill + family/800 text + family/600 icon.
+   - SOLID recipe   : family/600 fill + inverse (white) text + icon.
+   Every message is color + icon + label. Dismiss × is a real <button>.
+   Tokens only — zero hardcoded colors.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   ALERT
+   Inline message in the content flow, about a specific region/form/section.
+   Persistent until resolved/dismissed. Subtle recipe at block scale:
+   tone/100 fill + tone/800 content + tone/600 icon. Radius 12.
+   -------------------------------------------------------------------------- */
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-xl);
+  font-family: var(--font-sans);
+  /* tone defaults (neutral) — overridden by each .alert-{tone} */
+  background-color: var(--surface-sunken);
+  color: var(--text-secondary);
+}
+
+.alert-icon {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  /* icon uses the tone accent (tone/600); set per-tone below */
+  color: var(--text-tertiary);
+}
+
+.alert-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.alert-title {
+  margin: 0;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 500; /* List Title */
+  color: inherit;
+}
+
+/* When a title is present, give the body text a little breathing room */
+.alert-title + .alert-text {
+  margin-top: var(--space-1);
+}
+
+.alert-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400; /* Body Small */
+  color: inherit;
+}
+
+.alert-dismiss {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: -2px -4px -2px 0; /* optical: align × to the top-right edge */
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: currentColor; /* inherits the tone text color */
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-enter);
+}
+.alert-dismiss svg {
+  width: 16px;
+  height: 16px;
+}
+.alert-dismiss:hover {
+  /* subtle scrim from the key-edge shadow color — stays on the tonal fill */
+  background-color: var(--shadow-key-edge);
+}
+
+/* Per-tone fills + text + icon (Subtle recipe) */
+.alert-neutral {
+  background-color: var(--surface-sunken);
+  color: var(--text-secondary);
+}
+.alert-neutral .alert-icon { color: var(--text-tertiary); }
+
+.alert-info {
+  background-color: var(--blue-100);
+  color: var(--blue-800);
+}
+.alert-info .alert-icon { color: var(--blue-600); }
+
+.alert-success {
+  background-color: var(--success-light);
+  color: var(--success-dark);
+}
+.alert-success .alert-icon { color: var(--success-accent); }
+
+.alert-warning {
+  background-color: var(--warning-light);
+  color: var(--warning-dark);
+}
+.alert-warning .alert-icon { color: var(--warning-accent); }
+
+.alert-error {
+  background-color: var(--error-light);
+  color: var(--error-dark);
+}
+.alert-error .alert-icon { color: var(--error-accent); }
+
+/* Focus indicator — solid 2px ring */
+.alert-dismiss:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   BANNER
+   Full-width, persistent, anchored to the top of a view. Edge-to-edge:
+   radius 0, stretches to container width. Single message line.
+   SUBTLE (default) = tone/100 fill + tone/800 content.
+   SOLID (critical only) = tone/600 fill + inverse content
+     (Neutral solid = ink gray/900).
+   -------------------------------------------------------------------------- */
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-none);
+  font-family: var(--font-sans);
+  /* tone defaults (neutral, subtle) */
+  background-color: var(--surface-sunken);
+  color: var(--text-secondary);
+}
+
+.banner-icon {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  color: var(--text-tertiary);
+}
+
+.banner-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400; /* Body Small */
+  color: inherit;
+}
+
+.banner-dismiss {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: -2px -4px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: currentColor;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-enter);
+}
+.banner-dismiss svg {
+  width: 16px;
+  height: 16px;
+}
+.banner-dismiss:hover {
+  background-color: var(--shadow-key-edge);
+}
+.banner-dismiss:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* ---- Subtle tones (default): tone/100 fill + tone/800 text + tone/600 icon */
+.banner-neutral {
+  background-color: var(--surface-sunken);
+  color: var(--text-secondary);
+}
+.banner-neutral .banner-icon { color: var(--text-tertiary); }
+
+.banner-info {
+  background-color: var(--blue-100);
+  color: var(--blue-800);
+}
+.banner-info .banner-icon { color: var(--blue-600); }
+
+.banner-success {
+  background-color: var(--success-light);
+  color: var(--success-dark);
+}
+.banner-success .banner-icon { color: var(--success-accent); }
+
+.banner-warning {
+  background-color: var(--warning-light);
+  color: var(--warning-dark);
+}
+.banner-warning .banner-icon { color: var(--warning-accent); }
+
+.banner-error {
+  background-color: var(--error-light);
+  color: var(--error-dark);
+}
+.banner-error .banner-icon { color: var(--error-accent); }
+
+/* ---- Solid emphasis (critical only): tone/600 fill + inverse content.
+        Neutral solid = ink gray/900. Icon + text both ride on the fill. */
+.banner-solid {
+  color: var(--text-inverse);
+}
+.banner-solid .banner-icon { color: var(--text-inverse); }
+
+.banner-neutral.banner-solid {
+  background-color: var(--surface-header-deep); /* ink gray/900 */
+}
+.banner-info.banner-solid {
+  background-color: var(--blue-600);
+}
+.banner-success.banner-solid {
+  background-color: var(--success-accent);
+}
+.banner-warning.banner-solid {
+  background-color: var(--warning-accent);
+}
+.banner-error.banner-solid {
+  background-color: var(--error-accent);
+}
+/* On solid chrome the focus ring needs the on-dark variant */
+.banner-solid .banner-dismiss:focus-visible {
+  outline-color: var(--border-focus-on-dark);
+}
+
+/* --------------------------------------------------------------------------
+   TOAST
+   Transient float over the page confirming an action just taken.
+   White elevated card (Elevation/Overlay) + gray/200 hairline, radius 12.
+   TONE = a single tone/600 status icon; text stays NEUTRAL ink
+     (title gray/900, body gray/700). Corner-anchored, sits on --layer-toast.
+   -------------------------------------------------------------------------- */
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  max-width: 400px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-hairline); /* gray/200 hairline */
+  border-radius: var(--radius-xl);
+  background-color: var(--surface-raised); /* white elevated card */
+  box-shadow: var(--elevation-overlay); /* floating card */
+  font-family: var(--font-sans);
+  z-index: var(--layer-toast);
+}
+
+.toast-icon {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  /* the ONLY tone signal — tone/600 icon; set per-tone below */
+  color: var(--text-tertiary);
+}
+
+.toast-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.toast-title {
+  margin: 0;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 500; /* List Title */
+  color: var(--text-primary); /* neutral ink gray/900 */
+}
+
+.toast-title + .toast-text {
+  margin-top: var(--space-1);
+}
+
+.toast-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400; /* Body Small */
+  color: var(--text-secondary); /* neutral ink gray/700 */
+}
+
+.toast-dismiss {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: -2px -4px -2px 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-enter),
+              color var(--duration-fast) var(--ease-enter);
+}
+.toast-dismiss svg {
+  width: 16px;
+  height: 16px;
+}
+.toast-dismiss:hover {
+  background-color: var(--surface-sunken);
+  color: var(--text-secondary);
+}
+.toast-dismiss:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Per-tone icon ONLY (text + surface stay neutral) */
+.toast-neutral .toast-icon { color: var(--text-tertiary); }
+.toast-info    .toast-icon { color: var(--blue-600); }
+.toast-success .toast-icon { color: var(--success-accent); }
+.toast-warning .toast-icon { color: var(--warning-accent); }
+.toast-error   .toast-icon { color: var(--error-accent); }

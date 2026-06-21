@@ -1,0 +1,42 @@
+# Vallejo Design System v1.2
+
+> Vallejo is Copart's LLM-focused design system: the **how** (exact tokens + ~50 components) that implements the Copart Design Vault's **why**. An agent given only this repo can build production-faithful Copart prototypes with zero Tailwind and zero outside systems — every value is a token, every component is here. When the Vault and Vallejo conflict, the Vault wins.
+
+**Read first (in order):**
+1. The Copart Design Vault — the design intent/Layer 1: https://github.com/getboyce/Copart-Design-Vault/tree/main/Copart%20Design
+2. AGENTS.md (below) — how to use this repo as an agent.
+
+A self-sufficient digest, if the Vault is unreachable — the triad: **Precision, Institutional Confidence, Vitality**. The design filter for every choice: *Does this build trust? Does it respect expertise? Does it read at multiple depths?* Avoid the anti-patterns: the blue flood (blue on everything), Bootstrap-default aesthetics, tables as default layout, AI-generated defaults (purple, emoji, border-box everything, generic type), and the "it just needs to function" mentality.
+
+## Docs
+
+- [AGENTS.md](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/AGENTS.md) — entry point + workflow for agents; start here after the Vault.
+- [DESIGN.md](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/DESIGN.md) — design overview; summarizes principles and links out for detail.
+- [llms-tokens.txt](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/llms-tokens.txt) — every token: color ramps, status, type, space, radius, layer, shadow.
+- [llms-components.txt](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/llms-components.txt) — the ~50 components: class API, variants, states, full contracts.
+- [llms-a11y.txt](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/llms-a11y.txt) — accessibility rules: contrast, focus, ARIA, target sizes.
+- [llms-writing.txt](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/llms-writing.txt) — voice: sentence case, verb-first labels, error format, terminology.
+- [llms-motion.txt](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/llms-motion.txt) — motion: durations, easings, registers, micro-interactions, reduce-motion.
+- [llms-mobile.txt](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/llms-mobile.txt) — mobile platform: type scale, touch specs, spacing deltas vs the web-first DESIGN.md.
+- [README.md](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/README.md) — repo orientation for humans.
+
+## Build surface (consume directly — never run a build)
+
+- [dist/tokens.css](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/dist/tokens.css) — all tokens as CSS custom properties (`var(--…)`).
+- [dist/vallejo.css](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/dist/vallejo.css) — full stylesheet: tokens + every component class.
+- [dist/tokens.dtcg.json](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/dist/tokens.dtcg.json) — tokens in DTCG format.
+- [dist/tokens.js](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/dist/tokens.js) — tokens as a JS module.
+- [source/icons.json](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/source/icons.json) — icon set manifest.
+- [source/logos.json](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/source/logos.json) — brand logo manifest (Copart + Wholesale Auction; fixed-color SVG, light/dark variants).
+- [starter.html](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/starter.html) — copy-paste boilerplate linking vallejo.css; build from here.
+- [version.json](https://raw.githubusercontent.com/getboyce/Vallejo/v1.2/version.json) — single source of version + date.
+
+## Rules of thumb
+
+- **Tokens over hardcoding.** Reference `var(--token)`; never paste a hex, px, or raw red. `gray` is canonical (`gray-0`=white … `gray-950`); `gray-900` = `#1D222A` is ink. `neutral-*`/`z-*` are deprecated aliases.
+- **Status = numeric ramps 50–900 + role aliases** (subtle→50, light→100, accent→600, dark→800). There is **no orange ramp**; gold `#FDC146` is the User Avatar Premier variant only; urgency uses warning/error. Error/destructive uses the error ramp.
+- **Buttons = 4 types:** Primary, Secondary, Quiet, Destructive (no Tertiary, no Success). One Primary (blue) action per view.
+- **States are native CSS** (`:hover`, `:focus-visible`, `[disabled]`, `aria-*`) — never state classes. Focus = a **solid 2px ring** (blue-600 light / blue-300 on dark chrome), not a glow.
+- **Catalog is the ~50 Figma components only** — there is no Header, Sidebar, Link, Chart, Image, Video, or Date Picker component.
+- **Voice:** sentence case; verb-first labels (no prices in labels); errors are "[what happened] — [how to fix]"; no emoji. Mono (JetBrains Mono) for VIN / lot # / bid / timestamps. Lot not listing, Bid not offer, Watchlist not favorites, Member not user.
+- **Light-only today** — dark mode is planned but not shipped yet (Figma's dark values are placeholders); a `data-theme="dark"` layer with curated dark ramps + an ADA dark guardrail will land in a dedicated pass.

@@ -1,0 +1,17 @@
+{
+  "name": "vallejo-design-system",
+  "version": "1.2.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "description": "Vallejo Design System (Copart). Tokens are authored in source/tokens (DTCG) and generated to dist/ by build/build.mjs. dist/ is committed so consumers never run a build. The version of record is version.json.",
+  "scripts": {
+    "build": "node build/build.mjs",
+    "build:components": "node build/build-components.mjs",
+    "build:all": "node build/build.mjs && node build/build-components.mjs",
+    "preview": "node build/preview.mjs"
+  },
+  "devDependencies": {
+    "@figma/code-connect": "^1.4.8"
+  }
+}

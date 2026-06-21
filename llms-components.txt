@@ -1,0 +1,1253 @@
+# Vallejo 1.2 — Components (full per-component reference)
+
+The single home for component DETAIL. ~50 components, grouped by Figma page. For each:
+variant axes + total count · states · anatomy + key rules · a11y notes · a canonical copy-paste HTML snippet.
+
+Read order: STEP 0 = the Copart Design Vault (github.com/getboyce/Copart-Design-Vault) — the *why* (Layer 1). Vallejo is the *how* (Layer 2). When they conflict, the Vault wins. STEP 1 = llms-tokens.txt for the token values these snippets reference. This file is Layer 2 detail; DESIGN.md is the map.
+
+## How to read the snippets (the class API — DEC-12)
+- **Unprefixed classes**: base + modifiers. `.btn` / `.btn-primary` / `.btn-md`; `.card`; `.badge` / `.badge-success`; `.chip`; `.modal`. Phase 2 `dist/vallejo.css` implements exactly these classes — they are the contract.
+- **States via NATIVE CSS only** — `:hover`, `:focus-visible`, `[disabled]` / `[aria-disabled]`, `[aria-pressed]`, `[aria-selected]`, `[aria-current]`, `aria-invalid`, `[open]`. **Never** a `.is-hover` / `.selected` state class.
+- **Tokens, never literals.** Every color/size/radius/space resolves to a `var(--token)`. Snippets name the token in a comment where it is load-bearing; never hardcode a hex or px that a token owns. Values live in llms-tokens.txt.
+- **Selected register** (one uniform across chips, selected rows, selected options, active filter chip): `--blue-50` wash · `--blue-300` border · `--blue-800` label. Memorize it once. (Watchlist saved is the exception — filled red-500 heart on a neutral surface, never the blue register.)
+- **Focus** is a real state on every interactive component: a **solid 2px ring**, never a shadow glow. `--border-focus` (blue/600) on light surfaces; `--border-focus-on-dark` (blue/300) on dark chrome. Ring radius is concentric (control radius + 3). Engineer it with `outline: 2px solid var(--border-focus); outline-offset: 2px;`.
+- **Buttons are raised** via the named Elevation effect styles. **Primary + Destructive are RAISED:** a vertical gradient fill (`var(--interactive-primary)` → `var(--interactive-primary-grad-end)`; Destructive uses `var(--interactive-destructive)` → `var(--interactive-destructive-grad-end)`) plus `box-shadow: var(--elevation-primary-rest)` / `var(--elevation-destructive-rest)` (hover/pressed variants swap the rest token). **Secondary, Quiet, and Chips** wear the raised KEY edge (`var(--elevation-key)`); **Quiet is the flattest.** Floating surfaces (Menu/Popover/Toast/Modal/Shelf/Tooltip, the floating Watchlist heart) use `var(--elevation-overlay)` / `var(--elevation-modal)`. Focus is still a solid 2px ring, never a glow.
+- **44px hit-area floor** regardless of visual size (a 32px control pads out to 44px in code).
+- **Voice in every label**: sentence case, verb-first, no prices in button labels, no emoji. Numbers you compare (VIN, lot #, bid, timestamp) render in JetBrains Mono.
+
+This file documents the ~50 Figma components ONLY. There is **no** Header, Sidebar, Link, Chart, Image, Video, or Date Picker component (dropped — DEC-4). Do not reference them as components.
+
+---
+
+# Buttons
+
+## Button
+Figma: `Button 1.2` · node `4079:255` · set · 300 variants.
+
+- **Variant axes** (300 = 4×5×3×5):
+  - **Type** (4): Primary · Secondary · Quiet · Destructive. *(There is NO Tertiary — that's a legacy misname for Quiet — and NO Success button.)*
+  - **Size** (5): XS · SM · MD · LG · XL → heights 28 / 32 / 40 / 48 / 56 (the 8px rhythm). **40 (MD) is the lingua franca.** XS is for dense table rows only; XL for marketing heroes; LG+ for comfortable touch.
+  - **Icon** (3): None · Leading · Trailing.
+  - **State** (5): Default · Hover · Active · **Focus** · Disabled.
+- **States:** Default · Hover · Active · Focus · Disabled.
+- **The one rule:** Primary + Destructive are **raised** (gradient fill + layered `--elevation-primary-*` / `--elevation-destructive-*` shadows); Secondary/Quiet wear the raised KEY edge (`--elevation-key`), Quiet flattest. Primary is reserved for the single most important action on the screen (bid, pay, confirm) — **one Primary per view**.
+- **Anatomy + key rules:**
+  - Fill + elevation by type: **Primary** is RAISED — a vertical gradient `var(--interactive-primary)` (blue/600) → `var(--interactive-primary-grad-end)` (#1D50B8) + `box-shadow: var(--elevation-primary-rest)` (hover/pressed swap to the hover/pressed elevation tokens); the fill ladder still deepens 600 → 700 (hover) → 800 (active) under the gradient. **Destructive** is RAISED the same way — gradient `var(--interactive-destructive)` (error/600) → `var(--interactive-destructive-grad-end)` (#AF001F) + `var(--elevation-destructive-rest)`; ladder error 600 → 700 → 800. **Secondary** is fully neutral: white fill, ink label, refined-light border (NOT a brand-color outline — that's a legacy pattern), wearing the raised KEY edge (`var(--elevation-key)`). **Quiet** is text-only blue label, no fill/border at rest — the flattest type.
+  - **Refined-light border** (Secondary/labeled): rest `--border-default` (gray/300) → hover gray/400 + `--surface-canvas` (gray/50) fill → pressed gray/500 + gray/100 fill. The line advances on approach. (A labeled button is identified by its label per W3C 1.4.11, so its boundary is decorative — this is why it may be lighter than the 3:1 an empty input needs.)
+  - **Radius scales with height:** SM 6 (`--radius-md`) · MD/LG 8 (`--radius-lg`) · XL 12 (`--radius-xl`). XS shares 6.
+  - **Optical padding** (icon side pulls tighter than text side): text-side 12/16/20, icon-side 8/8/12 (XL 16); icon↔label gap 6/8/8.
+  - **Labels** Inter Medium 500, sizes 12/14/14/16/18 across XS–XL.
+  - **Disabled** is a multi-cue shift (not color alone): ink 16:1 → gray/400 2.65:1 + border drops to gray/200 + no hover response. Luminance-encoded, so it survives all color-blindness. Contrast-exempt by spec (inactive component).
+  - Blue belongs ONLY to: Primary fills, Quiet labels, links, focus. Loading state is component-pass debt (pending).
+- **a11y:** `<button>` (or `role="button"`). Icon-only requires an `aria-label`. Loading = `aria-busy="true"` + accessible "Loading, please wait". Use `aria-disabled="true"` (not the `disabled` attribute) when focus order must be preserved. 44×44 hit-area floor. Focus = solid 2px blue/600 ring (blue/300 on dark), concentric.
+
+```html
+<!-- Primary (MD, the default) — one per view; verb-first label, no price -->
+<button class="btn btn-primary btn-md">Place bid</button>
+
+<!-- Secondary (MD) — neutral ink label + refined-light border -->
+<button class="btn btn-secondary btn-md">Cancel</button>
+
+<!-- Quiet (MD) — text-only blue, no fill/border at rest -->
+<button class="btn btn-quiet btn-md">View details</button>
+
+<!-- Destructive (MD) — error fill ladder; reserve for dangerous commits -->
+<button class="btn btn-destructive btn-md">Delete vehicle</button>
+
+<!-- Sizes: XS (dense table rows) and LG (comfortable touch) -->
+<button class="btn btn-primary btn-xs">Bid</button>
+<button class="btn btn-primary btn-lg">Pay now</button>
+
+<!-- Icon-leading — icon is decorative, label carries meaning -->
+<button class="btn btn-secondary btn-md">
+  <svg class="btn-icon" aria-hidden="true"><use href="#icon-filter"></use></svg>
+  All filters
+</button>
+
+<!-- Icon-only — MUST name the action + carry .btn-icon-only (collapses to a square) -->
+<button class="btn btn-quiet btn-md btn-icon-only" aria-label="More actions">
+  <svg class="btn-icon" aria-hidden="true"><use href="#icon-more-vertical"></use></svg>
+</button>
+
+<!-- Disabled (preserve focus order) -->
+<button class="btn btn-primary btn-md" aria-disabled="true">Place bid</button>
+
+<!-- Loading -->
+<button class="btn btn-primary btn-md" aria-busy="true" aria-label="Placing bid, please wait">
+  <span class="spinner spinner-16 spinner-inverse" aria-hidden="true"></span>
+  Placing bid
+</button>
+```
+```css
+/* Focus is a state — native, solid ring, no glow */
+.btn:focus-visible { outline: 2px solid var(--border-focus); outline-offset: 2px; }
+```
+
+## Watchlist
+Figma: `Watchlist 1.2` · node `4098:509` · set · 32 variants.
+
+- **Variant axes** (32 = 2×2×4×2): **Button type** (2): Full · Compact · **Saved** (2): Off · On · **State** (4): Default · Hover · Active · Disabled · **Size** (2): Medium · Small (Small = 32px circle that floats over lot photography).
+- **States:** Default · Hover · Active · Disabled.
+- **The one rule:** Heart fills **red (red-500)** when active — the one favorite red that is NOT a destructive cue. Saved flips the label **Watchlist → Watching** and the heart from outline to filled, never color alone.
+- **Anatomy + key rules:** Save-to-list toggle (bookmark pattern). Unsaved wears the raised-key edge (matches Secondary). Saved/On stays on a **neutral surface** — state is carried by the **filled red-500 heart** + the word "Watching," not a blue register and not color alone. Hearts: `icon.heart` (outline) → `icon.heart-filled`, both painting `--interactive-favorite` (red-500) via currentColor. Small 32px is floating by construction, so it is the documented elevation exception: it carries Elevation/Hover + a hairline. Heart inset is 12 (wider than the button icon-side 8) — heart-specific optical value.
+- **a11y:** `aria-pressed` true/false carries saved state. Visual 32px (Small) but **required 44px expanded hit area in code**. State is the label flip + filled red heart, never color alone.
+
+```html
+<!-- Full, unsaved -->
+<button class="watchlist watchlist-full" aria-pressed="false">
+  <svg class="watchlist-heart" aria-hidden="true"><use href="#icon-heart"></use></svg>
+  Watchlist
+</button>
+
+<!-- Full, saved — filled red-500 heart + label flip -->
+<button class="watchlist watchlist-full" aria-pressed="true">
+  <svg class="watchlist-heart" aria-hidden="true"><use href="#icon-heart-filled"></use></svg>
+  Watching
+</button>
+
+<!-- Small (over photography) — visual 32px, 44px hit area in code -->
+<button class="watchlist watchlist-small" aria-pressed="false" aria-label="Add to watchlist">
+  <svg class="watchlist-heart" aria-hidden="true"><use href="#icon-heart"></use></svg>
+</button>
+```
+
+---
+
+# Inputs
+
+## Text Field
+Figma: `Input / Text Field 1.2` · node `4113:79` · set · 18 variants.
+
+- **Variant axes** (18 = 3×6): **Size** (3): SM · MD · LG · **State** (6): Default · Hover · Filled · Error · Success · Disabled.
+- **States:** Default · Hover · Filled · Error · Success · Disabled.
+- **The one rule:** Error owns hue / focus owns weight. Border is **refined-light**, advancing rest gray/300 → hover gray/400 → focus blue 2px.
+- **Anatomy + key rules:** Label above (14/500). Helper below (13). "(Optional)" is plain text, **never a required star**. INPUTS differ from buttons: an empty field's boundary IS its identifier, so rest border = `--border-control` (gray/500, 3.65:1) — heavier than a labeled button's gray/300. Placeholder gray, value ink. VIN / lot # / amount values render in mono. Search is its own component (see Search).
+- **a11y:** Visible `<label for>` required (labels are not placeholders). `aria-invalid="true"` on error; error text wired via `aria-describedby`. `aria-required="true"` for mandatory fields.
+
+```html
+<!-- Default (MD) -->
+<div class="field">
+  <label class="field-label" for="email">Email</label>
+  <input class="input input-md" id="email" type="email" placeholder="name@example.com">
+  <p class="field-helper" id="email-help">We'll send your receipt here.</p>
+</div>
+
+<!-- Error — hue + describedby; role on the message -->
+<div class="field">
+  <label class="field-label" for="vin">VIN</label>
+  <input class="input input-md input-mono" id="vin" value="1HGES16503"
+         aria-invalid="true" aria-describedby="vin-err">
+  <p class="field-error" id="vin-err">VIN must be 17 characters — check for a typo.</p>
+</div>
+
+<!-- Optional (plain text, no star) + Success + Disabled -->
+<div class="field">
+  <label class="field-label" for="nick">Nickname <span class="field-optional">(Optional)</span></label>
+  <input class="input input-md" id="nick">
+</div>
+<input class="input input-sm" value="Saved" aria-describedby="ok"><span id="ok" class="field-success">Looks good.</span>
+<input class="input input-md" value="Locked" disabled>
+```
+```css
+.input:focus-visible { outline: 2px solid var(--border-focus); outline-offset: 2px; }
+```
+
+## Text Area
+Figma: `Input / Text Area 1.2` · node `4120:152` · set · 6 variants.
+
+- **Variant axes** (6): **State** (6): Default · Hover · Filled · Error · Success · Disabled.
+- **States:** Default · Hover · Filled · Error · Success · Disabled.
+- **The one rule:** The character counter is a number → **mono, right-aligned**; over-limit it turns error/700 (the count is the evidence).
+- **Anatomy + key rules:** Same state grammar as Text Field (refined-light ladder, error owns hue / focus owns weight). Multiline: value top-aligned, line-height 20 on the grid, default height 96 (resizable per instance). Helper copy does UX-writing duty — specific + actionable ("Be specific — buyers read these"). Label 14/500; never star required.
+- **a11y:** Visible `<label for>`; `aria-invalid` on error; counter referenced via `aria-describedby` so SRs hear remaining characters.
+
+```html
+<div class="field">
+  <label class="field-label" for="notes">Description</label>
+  <textarea class="textarea" id="notes" rows="4" maxlength="280"
+            aria-describedby="notes-help notes-count"></textarea>
+  <div class="textarea-footer">
+    <p class="field-helper" id="notes-help">Be specific — buyers read these.</p>
+    <span class="textarea-count input-mono" id="notes-count">0/280</span>
+  </div>
+</div>
+```
+
+## Search
+Figma: `Input / Search 1.2` · node `4186:596` · set · 15 variants.
+
+- **Variant axes** (15 = 3×5): **Size** (3): SM · MD · LG · **State** (5): Default · Hover · Filled · Disabled · Autocomplete.
+- **States:** Default · Hover · Filled · Disabled · Autocomplete.
+- **The one rule:** Standalone component (NOT a Text Field kind). Trailing icon swaps **search-glass (empty) → clear ×-circle (typed)**.
+- **Anatomy + key rules:** Bare field — no label/helper. Refined-light border: rest gray/300 → hover gray/400 → focus blue 2px. State=Autocomplete = the focused typed field with a suggestion menu locked beneath via auto-layout (Elevation/Overlay); rows = leading search icon + suggestion; first row hover. Pairs with the global header search.
+- **a11y:** `role="searchbox"` (or `type="search"`); `aria-label` since there is no visible label. Autocomplete listbox: `aria-expanded` + `aria-controls` on the input, `role="listbox"`/`option` on the menu.
+
+```html
+<!-- Empty: trailing search glass -->
+<div class="search search-md">
+  <svg class="search-icon-lead" aria-hidden="true"><use href="#icon-search"></use></svg>
+  <input class="search-input" type="search" aria-label="Search lots" placeholder="Search lots">
+</div>
+
+<!-- Typed: trailing clear ×-circle -->
+<div class="search search-md">
+  <svg class="search-icon-lead" aria-hidden="true"><use href="#icon-search"></use></svg>
+  <input class="search-input" type="search" aria-label="Search lots" value="Honda Civic">
+  <button class="search-clear" aria-label="Clear search">
+    <svg aria-hidden="true"><use href="#icon-close-circle"></use></svg>
+  </button>
+</div>
+
+<!-- Autocomplete: suggestion menu locked beneath -->
+<div class="search search-md" aria-expanded="true" aria-controls="sug">
+  <svg class="search-icon-lead" aria-hidden="true"><use href="#icon-search"></use></svg>
+  <input class="search-input" type="search" aria-label="Search lots" value="Hon">
+  <ul class="search-suggestions" id="sug" role="listbox"><!-- Elevation/Overlay -->
+    <li class="search-suggestion" role="option" aria-selected="true">
+      <svg aria-hidden="true"><use href="#icon-search"></use></svg> Honda Accord
+    </li>
+    <li class="search-suggestion" role="option">
+      <svg aria-hidden="true"><use href="#icon-search"></use></svg> Honda Civic
+    </li>
+  </ul>
+</div>
+```
+
+## Select
+Figma: `Input / Select 1.2` · node `4124:142` · set · 54 variants.
+
+- **Variant axes** (54 = 3×3×6): **Kind** (3): Single · Multi · Search · **Size** (3): SM · MD · LG · **State** (6): Default · Hover · Filled · Error · Open · Disabled.
+- **States:** Default · Hover · Filled · Error · Open · Disabled.
+- **The one rule:** State=Open is the focused trigger with its menu locked beneath via auto-layout — flip the variant, never hand-place a menu.
+- **Anatomy + key rules:** Closed states inherit the Text Field contract (refined-light border, blue 2px focus, trailing chevron; chevron flips up when Open). Menu rows are Select Option instances; the menu container is Select Menu. Selected rows wear the selected register.
+- **a11y:** Trigger `aria-haspopup="listbox"` + `aria-expanded`. Menu `role="listbox"`, rows `role="option"` + `aria-selected`. Multi = `aria-multiselectable="true"`. Keyboard: open on Enter/Space/↓, type-ahead, Esc to close.
+
+```html
+<!-- Single Select, closed -->
+<div class="field">
+  <label class="field-label" for="loc">Location</label>
+  <button class="select select-md" id="loc" aria-haspopup="listbox" aria-expanded="false">
+    <span class="select-value">Dallas, TX</span>
+    <svg class="select-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+  </button>
+</div>
+
+<!-- Open: trigger focused + Select Menu locked beneath (see Select Menu / Option) -->
+<div class="field">
+  <button class="select select-md" aria-haspopup="listbox" aria-expanded="true" aria-controls="loc-menu">
+    <span class="select-value">Dallas, TX</span>
+    <svg class="select-chevron" aria-hidden="true"><use href="#icon-chevron-up"></use></svg>
+  </button>
+  <ul class="select-menu" id="loc-menu" role="listbox"><!-- Elevation/Overlay, radius xl -->
+    <li class="select-option" role="option">Atlanta, GA</li>
+    <li class="select-option" role="option" aria-selected="true">Dallas, TX</li>
+    <li class="select-option" role="option">Phoenix, AZ</li>
+  </ul>
+</div>
+```
+
+## Select Menu
+Figma: `Input / Select Menu 1.2` · node `4167:327` · set · 3 variants.
+
+- **Variant axes** (3): **Kind** (3): Single · Multi · Search.
+- **States:** —
+- **The one rule:** Rows are Select Option instances — compose real menus by duplicating options. **NOT for actions** (that's Menu).
+- **Anatomy + key rules:** The floating menu for Select. Container radius 12 (`--radius-xl`), Elevation/Overlay float, `--border-hairline` (gray/200) border. Selected rows wear the selected register. Search kind adds a filter header whose trailing clear ×-circle (`icon.close-circle`) appears once text is typed — same clear affordance as Search. Pairs with the Select trigger (chevron-up when open).
+- **a11y:** `role="listbox"`; Search kind's filter header is a `searchbox` that filters the options below.
+
+```html
+<!-- Search kind: filter header + options -->
+<div class="select-menu select-menu-search" role="listbox" aria-label="Choose state">
+  <div class="select-menu-search-header">
+    <svg aria-hidden="true"><use href="#icon-search"></use></svg>
+    <input class="select-menu-search-input" type="search" aria-label="Filter states" value="Tex">
+    <button class="select-menu-search-clear" aria-label="Clear filter">
+      <svg aria-hidden="true"><use href="#icon-close-circle"></use></svg>
+    </button>
+  </div>
+  <ul class="select-menu-list">
+    <li class="select-option" role="option" aria-selected="true">Texas</li>
+  </ul>
+</div>
+```
+
+## Select Option
+Figma: `Input / Select Option 1.2` · node `4125:185` · set · 10 variants.
+
+- **Variant axes** (10 = 2×5): **Kind** (2): Single · Multi · **State** (5): Default · Hover · Selected · Selected Hover · Disabled.
+- **States:** Default · Hover · Selected · Selected Hover · Disabled.
+- **The one rule:** Selected row wears the **selected register** (blue/50 wash + blue/800 medium label) — the same uniform as chips and cards.
+- **Anatomy + key rules:** 36px rows. Single: selected = leading blue check + blue/800 label. Multi: leading checkbox (forward-ref to Checkbox). Hover = gray/50 (unselected) or deepened blue/50 (selected).
+- **a11y:** `role="option"` + `aria-selected`. Multi options pair with a `Checkbox` whose state mirrors `aria-selected`. Disabled = `aria-disabled="true"`.
+
+```html
+<!-- Single: selected shows a check -->
+<li class="select-option" role="option" aria-selected="true">
+  <span class="select-option-label">Dallas, TX</span>
+  <svg class="select-option-check" aria-hidden="true"><use href="#icon-check"></use></svg>
+</li>
+
+<!-- Multi: leading checkbox -->
+<li class="select-option select-option-multi" role="option" aria-selected="true">
+  <span class="checkbox" data-checked="true" aria-hidden="true"></span>
+  <span class="select-option-label">Salvage</span>
+</li>
+```
+
+## Toggle
+Figma: `Input / Toggle 1.2` · node `4162:225` · set · 12 variants.
+
+- **Variant axes** (12 = 2×6): **Size** (2): Default · Small · **State** (6): Off · Off Hover · On · On Hover · Disabled Off · Disabled On.
+- **States:** Off · Off Hover · On · On Hover · Disabled Off · Disabled On.
+- **The one rule:** Recessed track + raised-key thumb; off→on jumps **gray/300 → blue/600** (state in luminance, not hue alone).
+- **Anatomy + key rules:** Off track gray/300 (the white raised-key thumb identifies the control, so the track is a quiet recessed well). On track blue/600. Hover deepens (gray/700 / blue/700). Thumb = white with a raised-key drop shadow. Disabled = gray/300 off / gray/400 on, thumb flat. Sizes 36×20 (Default) / 30×16 (Small). The Small size makes its label optional.
+- **a11y:** Native `<input type="checkbox" role="switch">` — toggles with click/Space, no JS. `checked` carries state (no `aria-checked` to maintain). Keyboard-focusable; focus = 2px blue/600 ring. When the visible label is removed (Small), an `aria-label` is **required**.
+
+```html
+<!-- Default with visible label -->
+<label class="toggle-field">
+  <input type="checkbox" class="toggle" role="switch" checked>
+  <span>Email me when I'm outbid</span>
+</label>
+
+<!-- Small, label-less — aria-label required -->
+<input type="checkbox" class="toggle toggle-small" role="switch" aria-label="Compact view">
+```
+
+## Checkbox
+Figma: `Input / Checkbox 1.2` · node `4158:223` · set · 14 variants.
+
+- **Variant axes** (14 = 2×7): **Size** (2): Default (18) · Large (20) · **State** (7): Unchecked · Hover · Checked · Checked Hover · Indeterminate · Disabled · Disabled Checked.
+- **States:** Unchecked · Hover · Checked · Checked Hover · Indeterminate · Disabled · Disabled Checked.
+- **The one rule:** The box IS the control, so it earns a 3:1 boundary — unchecked = gray/500 1.5px (3.65:1), heavier than the lighter rule otherwise allows.
+- **Anatomy + key rules:** Hover = border gray/700. Checked/Indeterminate = blue/600 fill + white check/dash (interactive register). Disabled = gray/100 fill + gray/300 border; disabled-checked = gray/300 fill. Radius 4/5; sizes 18/20.
+- **a11y:** Native `<input type="checkbox">` with a visible `<label for>`. Indeterminate = `aria-checked="mixed"` + dash glyph (set `el.indeterminate = true` in JS). Focus = 2px blue/600 concentric ring.
+
+```html
+<label class="checkbox-field">
+  <input class="checkbox" type="checkbox" id="terms" checked>
+  <span>I accept the buyer terms</span>
+</label>
+
+<!-- Indeterminate (parent of a partial group) -->
+<label class="checkbox-field">
+  <input class="checkbox" type="checkbox" id="all" aria-checked="mixed">
+  <span>Select all</span>
+</label>
+
+<!-- Large + disabled -->
+<input class="checkbox checkbox-large" type="checkbox">
+<input class="checkbox" type="checkbox" disabled checked>
+```
+
+## Radio
+Figma: `Input / Radio 1.2` · node `4160:217` · set · 12 variants.
+
+- **Variant axes** (12 = 2×6): **Size** (2): Default (18) · Large (20) · **State** (6): Unselected · Hover · Selected · Selected Hover · Disabled · Disabled Selected.
+- **States:** Unselected · Hover · Selected · Selected Hover · Disabled · Disabled Selected.
+- **The one rule:** The circle IS the control — unselected = gray/500 1.5px (3.65:1 AA boundary).
+- **Anatomy + key rules:** Hover = gray/700. Selected = blue/600 ring + centered blue/600 dot with a white gap. Disabled = gray/100 + gray/300; disabled-selected dot = gray/400. Sizes 18/20.
+- **a11y:** Native `<input type="radio">` sharing one `name`; wrap the group in `<fieldset>` + `<legend>`. Focus = 2px blue/600 ring. Arrow keys move within the group.
+
+```html
+<fieldset class="radio-group">
+  <legend class="field-label">Title type</legend>
+  <label class="radio-field"><input class="radio" type="radio" name="title" checked> Clean</label>
+  <label class="radio-field"><input class="radio" type="radio" name="title"> Salvage</label>
+  <label class="radio-field"><input class="radio radio-large" type="radio" name="title" disabled> Rebuilt</label>
+</fieldset>
+```
+
+## Slider
+Figma: `Input / Slider 1.2` · node `4163:228` · set · 4 variants.
+
+- **Variant axes** (4 = 2×2): **Type** (2): Single · Range · **State** (2): Default · Hover.
+- **States:** Default · Hover.
+- **The one rule:** Recessed track + raised-key thumb — the same rise/recess language as the Toggle. (The Figma set documents a Range variant, but the shipped CSS is single-thumb native; dual-handle needs JS.)
+- **Anatomy + key rules:** Track 6px (`--surface-sunken` well) + blue/600 fill (via `accent-color`) + raised-key white thumb 18px. Thumb border gray/300 → gray/400 hover → blue/600 focus-ring. Disabled = gray/400 fill + gray/100 thumb, flat. **Single-thumb only** — a dual-handle range (min + max) is not expressible with one native `<input type="range">` and needs JS.
+- **a11y:** Native `<input type="range">` — drags with the pointer and Arrow keys (Home/End jump), no JS. The browser maps min/max/value to the slider role; add `aria-label` (or a wired `<label>`) and, when the value is formatted, `aria-valuetext` (e.g. "$25,000"). Focus = 2px blue/600 ring on the thumb.
+
+```html
+<input type="range" class="slider" min="0" max="100" value="40">
+
+<!-- Labeled money value -->
+<input type="range" class="slider" min="0" max="50000" value="20000"
+       aria-label="Max bid" aria-valuetext="$20,000">
+```
+
+---
+
+# Navigation
+
+## Tabs
+Figma: `Navigation / Tabs` · node `4221:73` · set · 8 variants.
+
+- **Variant axes** (8 = 2×4): **Count** (2): On · Off · **State** (4): Default · Hover · Active · Disabled.
+- **States:** Default · Hover · Active · Disabled.
+- **The one rule:** Active = **2px blue/600 underline**; the member shelf uses THIS (not chips). Optional count = a quiet muted number, NOT a status badge.
+- **Anatomy + key rules:** Sub-nav tabs (L2) — switch between distinct content areas ("places"). Label 14: inactive regular text/tertiary, hover text/secondary, active medium text/primary. The tab bar carries a gray/200 bottom hairline; the active blue underline overlays it.
+- **a11y:** `role="tablist"` → `role="tab"` + `aria-selected` + `aria-controls`; panels `role="tabpanel"` + `aria-labelledby`. Active is color + position (underline), not color alone.
+
+```html
+<div class="tabs" role="tablist" aria-label="Account sections">
+  <button class="tab" role="tab" aria-selected="true" aria-controls="panel-bids" id="tab-bids">
+    My bids <span class="tab-count">12</span>
+  </button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="panel-won" id="tab-won">Won</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="panel-watch" id="tab-watch">Watchlist</button>
+</div>
+<div role="tabpanel" id="panel-bids" aria-labelledby="tab-bids"><!-- … --></div>
+```
+
+## Tab bar
+Figma: `Navigation / Tab bar` · node `4273:140` · set · 3 variants.
+
+- **Variant axes** (3): **Tabs** (3): 3 · 4 · 5.
+- **States:** — (state lives on the individual Tabs).
+- **The one rule:** L2 sub-nav **assembly** — a row of Tabs instances on a continuous quiet hairline rail; the Tabs count sets the slot count.
+- **Anatomy + key rules:** Tabs sit on a continuous `--border-hairline` rail. Active tab = first by default (swap State per instance). Resize width to fit — tabs stay left-aligned, the rail spans full width. Flip Count=On for a quiet number.
+- **a11y:** It's the `role="tablist"` container; see Tabs.
+
+```html
+<div class="tab-bar" role="tablist" aria-label="Lot details">
+  <button class="tab" role="tab" aria-selected="true">Overview</button>
+  <button class="tab" role="tab" aria-selected="false">Condition</button>
+  <button class="tab" role="tab" aria-selected="false">Bid history</button>
+  <button class="tab" role="tab" aria-selected="false">Documents</button>
+</div>
+```
+
+## Segmented control
+Figma: `Navigation / Segmented control` · node `4275:131` · set · 1 variant (Segments=3).
+
+- **Variant axes** (1): **Segments** (1): 3 (built from Segment instances; 2–5 options in use).
+- **States:** — (state lives on each Segment).
+- **The one rule:** L3 in-page switch — switches a **mode/slice of the SAME content** (contrast with tabs that switch "places").
+- **Anatomy + key rules:** Filled-segment active register: a raised-key white pill (Elevation/Key) in a recessed gray/100 track. Use under an underline row or standalone. 2–5 options.
+- **a11y:** A single-select group — `role="radiogroup"` + `role="radio"` + `aria-checked` (it's a value switch, not navigation).
+
+```html
+<div class="segmented" role="radiogroup" aria-label="View density">
+  <button class="segment" role="radio" aria-checked="true">Grid</button>
+  <button class="segment" role="radio" aria-checked="false">List</button>
+  <button class="segment" role="radio" aria-checked="false">Map</button>
+</div>
+```
+
+## Segment
+Figma: `Navigation / Segment` · node `4222:28` · set · 4 variants.
+
+- **Variant axes** (4): **State** (4): Inactive · Hover · Active · Disabled.
+- **States:** Inactive · Hover · Active · Disabled.
+- **The one rule:** Active = white raised-key pill (Elevation/Key) in the recessed gray track; inactive = transparent + muted label.
+- **Anatomy + key rules:** One segment of a Segmented control; active gets an ink medium label, inactive a muted label. Compose by placing segments in a gray/100 track.
+- **a11y:** `role="radio"` + `aria-checked` inside the segmented control's `radiogroup`.
+
+```html
+<button class="segment" role="radio" aria-checked="true">Grid</button>
+```
+
+## Breadcrumbs
+Figma: `Navigation / Breadcrumbs` · node `4275:132` · set · 1 variant (Levels=4).
+
+- **Variant axes** (1): **Levels** (1): 4.
+- **States:** —
+- **The one rule:** Last crumb = current page (ink, **non-link**); items separated by quiet chevrons.
+- **Anatomy + key rules:** A row of Breadcrumb item instances + jump-up affordance for deep hierarchies.
+- **a11y:** `<nav aria-label="Breadcrumb">` → `<ol>`; the current crumb carries `aria-current="page"`.
+
+```html
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-sep" aria-hidden="true">/</li>
+    <li class="breadcrumb-item"><a href="/auctions">Auctions</a></li>
+    <li class="breadcrumb-sep" aria-hidden="true">/</li>
+    <li class="breadcrumb-item"><a href="/auctions/tx">Texas</a></li>
+    <li class="breadcrumb-sep" aria-hidden="true">/</li>
+    <li class="breadcrumb-item" aria-current="page">Lot 48291023</li>
+  </ol>
+</nav>
+```
+
+## Breadcrumb item
+Figma: `Navigation / Breadcrumb item` · node `4223:28` · set · 3 variants.
+
+- **Variant axes** (3): **State** (3): Link · Hover · Current.
+- **States:** Link · Hover · Current.
+- **The one rule:** Current = ink medium (the page you are on, NOT a link); separator = "/" in gray/400.
+- **Anatomy + key rules:** Link = text/secondary; Hover = blue link; Current = ink medium.
+- **a11y:** Current crumb is plain text (no `<a>`) + `aria-current="page"`.
+
+```html
+<li class="breadcrumb-item"><a href="/auctions">Auctions</a></li>
+<li class="breadcrumb-item" aria-current="page">Lot 48291023</li>
+```
+
+## Pagination
+Figma: `Navigation / Pagination` · node `4275:133` · set · 1 variant (Type=Numbered).
+
+- **Variant axes** (1): **Type** (1): Numbered.
+- **States:** — (state lives on each cell).
+- **The one rule:** Current page = filled blue; ellipsis collapses the middle; Prev/Next bracket the cell row.
+- **Anatomy + key rules:** Prev/Next bracket a row of Pagination cell instances.
+- **a11y:** `<nav aria-label="Pagination">`; current cell `aria-current="page"`; Prev/Next get clear `aria-label`s; disabled ends use `aria-disabled`.
+
+```html
+<nav class="pagination" aria-label="Pagination">
+  <button class="pagination-cell" aria-label="Previous page" aria-disabled="true">
+    <svg aria-hidden="true"><use href="#icon-chevron-left"></use></svg>
+  </button>
+  <button class="pagination-cell" aria-current="page">1</button>
+  <button class="pagination-cell">2</button>
+  <button class="pagination-cell">3</button>
+  <span class="pagination-ellipsis" aria-hidden="true">…</span>
+  <button class="pagination-cell">28</button>
+  <button class="pagination-cell" aria-label="Next page">
+    <svg aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+  </button>
+</nav>
+```
+
+## Pagination cell
+Figma: `Navigation / Pagination cell` · node `4223:54` · set · 4 variants.
+
+- **Variant axes** (4): **State** (4): Default · Hover · Current · Disabled.
+- **States:** Default · Hover · Current · Disabled.
+- **The one rule:** 32px square, radius 6 — Current = blue/600 fill + white, Default = ghost text/secondary.
+- **Anatomy + key rules:** Hover = gray/100 bg.
+- **a11y:** Current = `aria-current="page"`; disabled = `aria-disabled="true"`.
+
+```html
+<button class="pagination-cell" aria-current="page">1</button>
+```
+
+---
+
+# Badges, Tags & Chips
+
+## Badge / Status
+Figma: `Badge / Status` · node `4238:86` · set · 20 variants.
+
+- **Variant axes** (20 = 5×2×2): **Tone** (5): Neutral · Info · Success · Warning · Error · **Emphasis** (2): Subtle · Solid · **Dot** (2): Off · On.
+- **States:** —
+- **The one rule:** Badge = a **changing system state**: COLORED, filled, no border, never removable (vs Tag = a user/fixed fact).
+- **Anatomy + key rules:** Pill, filled, no border. **Subtle** = tone/100 fill + tone/800 text (calm states). **Solid** = tone/600 fill + white (loud/live). Optional leading **Dot** for live/active signals. Info = blue. Domain uses: Live (Success Solid + dot), Outbid (Error Solid), Active/Winning (Success Subtle), Pending (Warning Subtle).
+- **a11y:** Decorative when it merely labels; if it conveys a status change announce via the surrounding live region, not color alone (the LIVE dot + word carry it).
+
+```html
+<!-- Subtle (default) -->
+<span class="badge badge-success">Active</span>
+<span class="badge badge-warning">Pending</span>
+<span class="badge badge-neutral">Draft</span>
+
+<!-- Solid (loud) -->
+<span class="badge badge-error badge-solid">Outbid</span>
+
+<!-- Solid + dot (LIVE) -->
+<span class="badge badge-success badge-solid badge-dot"><span class="badge-dot-mark" aria-hidden="true"></span>Live</span>
+```
+
+## Badge / Count
+Figma: `Badge / Count` · node `4239:25` · set · 3 variants.
+
+- **Variant axes** (3): **Tone** (3): Neutral · Brand · Error.
+- **States:** —
+- **The one rule:** A count is **DATA** — in nav it appears as a quiet muted number, not a colored badge.
+- **Anatomy + key rules:** Solid pill, min 18px. Brand (blue) default; Error (red) for urgent counts; Neutral for plain totals.
+- **a11y:** Pair with the labelled control it counts; give it an `aria-label` ("3 unread") if the bare number is ambiguous.
+
+```html
+<span class="badge-count badge-count-brand">3</span>
+<span class="badge-count badge-count-error">12</span>
+<span class="badge-count badge-count-neutral">48</span>
+```
+
+## Tag
+Figma: `Tag` · node `4239:62` · set · 6 variants.
+
+- **Variant axes** (6 = 5×2... displayed as Tone×Removable): **Tone** (5): Neutral · Positive · Caution · Critical · Applied · **Removable** (2): Off · On.
+- **States:** —
+- **The one rule:** The law — **an X appears on blue (Applied) or not at all**; gray facts and risk tonals are never removable.
+- **Anatomy + key rules:** Tag = a fixed attribute/category/applied choice. Squarer (radius 6, `--radius-md`) and quieter than a badge. **Neutral gray** = a fact about the object (4WD, Salvage) — facts can NEVER be removed; gray never carries an X. **Applied (blue)** = the user put it there (filter token, chosen value) — blue/100 + blue/600; the ONLY tone that can be Removable. **Risk tonals** (never vivid) only for fixed facts the buyer must weigh — Clean (Positive), Rebuilt (Caution), Flood/Junk (Critical); these are facts, so never removable.
+- **a11y:** A removable tag's × is a real `<button>` with an `aria-label` ("Remove filter: Texas").
+
+```html
+<!-- Neutral fact (never removable) -->
+<span class="tag tag-neutral">4WD</span>
+
+<!-- Risk tonals (facts, never removable) -->
+<span class="tag tag-positive">Clean title</span>
+<span class="tag tag-caution">Rebuilt</span>
+<span class="tag tag-critical">Flood</span>
+
+<!-- Applied (user-chosen) — the ONLY removable tone -->
+<span class="tag tag-applied tag-removable">
+  Texas
+  <button class="tag-remove" aria-label="Remove filter: Texas">
+    <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+  </button>
+</span>
+```
+
+## Chip
+Figma: `Chip` · node `4241:69` · set · 10 variants.
+
+- **Variant axes** (10 = 5×2): **State** (5): Default · Hover · Selected · Selected Hover · Disabled · **Removable** (2): Off · On.
+- **States:** Default · Hover · Selected · Selected Hover · Disabled.
+- **The one rule:** If it filters/selects on THIS page it's a chip (bordered, raised key); if it navigates it's a tab/segment.
+- **Anatomy + key rules:** Chip = an interactive filter/choice. Pill with a **border** (its silhouette: badge is filled/no-border, chip is bordered), raised like a key (chips wear the button key material because they act). Rest = white + gray/300 border + text/secondary; Hover = gray/400 border (line advances); **Selected = selected register** (blue/100 fill + blue/300 border + blue/800). Removable filter chips carry a trailing ✕. Additive & multi-select — toggle several independently. Disabled stays flat.
+- **a11y:** `aria-pressed` for toggle chips; selected register + word carry state, not color alone. Removable ✕ is a real button with an `aria-label`.
+
+```html
+<!-- Default -->
+<button class="chip" aria-pressed="false">Sedan</button>
+
+<!-- Selected (blue register) -->
+<button class="chip" aria-pressed="true">SUV</button>
+
+<!-- Removable selected chip -->
+<span class="chip chip-removable" aria-pressed="true">
+  Under $10,000
+  <button class="chip-remove" aria-label="Remove filter: Under $10,000">
+    <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+  </button>
+</span>
+```
+
+## Chip / Filter
+Figma: `Chip / Filter` · node `4604:3503` · set · 6 variants.
+
+- **Variant axes** (6): **State** (6): Default · Hover · Active · Active multi · Open · Disabled.
+- **States:** Default · Hover · Active · Active multi · Open · Disabled.
+- **The one rule:** Removability (✕) is NOT on the trigger — clear in-place via the menu or the Applied tag row / Clear all.
+- **Anatomy + key rules:** A filter chip (chip family, pill) that **opens a Select menu** (reuse Select Menu + Option + multi Checkbox). LinkedIn anatomy: rest shows the DIMENSION; 1 selection shows the VALUE; 2+ shows a leading count badge + the DIMENSION; cap displayed text at 15 chars. **Active** = tonal selected register (blue/50 fill + blue/300 border + blue/800 text + blue/600 chevron). Rest border gray/300; the permanent affordance is the chevron, not the box.
+- **a11y:** Trigger `aria-haspopup="listbox"` + `aria-expanded`; the count badge content is reflected in the accessible name ("Make, 2 selected").
+
+```html
+<!-- Rest: shows the dimension -->
+<button class="chip-filter" aria-haspopup="listbox" aria-expanded="false">
+  Make <svg class="chip-filter-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+</button>
+
+<!-- 1 selection: shows the value -->
+<button class="chip-filter chip-filter-active" aria-haspopup="listbox" aria-expanded="false">
+  Honda <svg class="chip-filter-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+</button>
+
+<!-- 2+ selections: count badge + dimension -->
+<button class="chip-filter chip-filter-active" aria-haspopup="listbox" aria-expanded="false"
+        aria-label="Make, 2 selected">
+  <span class="badge-count badge-count-brand">2</span> Make
+  <svg class="chip-filter-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+</button>
+```
+
+---
+
+# Messaging
+
+## Alert
+Figma: `Alert` · node `4288:159` · set · 10 variants.
+
+- **Variant axes** (10 = 5×2): **Type** (5): Neutral · Info · Success · Warning · Error · **Dismissible** (2): Off · On.
+- **States:** —
+- **The one rule:** Inline message about a specific region/form, persistent — tonal grammar (tone/100 fill + tone/800 icon).
+- **Anatomy + key rules:** Inline in the content flow, about a specific region/form/section; persists until resolved/dismissed. The badge-Subtle recipe at block scale: tone/100 fill + tone/800 icon + title (List Title 15/20 Medium) + body (Body Small 14/20). Dismissible adds a trailing × (`icon.close`). Radius 12 (`--radius-xl`). For page/account-wide → Banner; for transient confirmations → Toast.
+- **a11y:** Error & Warning = `role="alert"`; Info / Success / Neutral = `role="status"`. Dismiss × is a real button with an `aria-label`.
+
+```html
+<div class="alert alert-error" role="alert">
+  <svg class="alert-icon" aria-hidden="true"><use href="#icon-alert-circle"></use></svg>
+  <div class="alert-body">
+    <p class="alert-title">Payment failed</p>
+    <p class="alert-text">Your card was declined — update your payment method to continue.</p>
+  </div>
+  <button class="alert-dismiss" aria-label="Dismiss">
+    <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+  </button>
+</div>
+```
+
+## Banner
+Figma: `Banner` · node `4294:246` · set · 20 variants.
+
+- **Variant axes** (20 = 5×2×2): **Type** (5): Neutral · Info · Success · Warning · Error · **Emphasis** (2): Subtle · Solid · **Dismissible** (2): Off · On.
+- **States:** —
+- **The one rule:** Full-width page/account/system message, edge-to-edge (radius 0); **Subtle is the default**, Solid only for genuinely critical states.
+- **Anatomy + key rules:** Full-width, persistent, anchored to the top of a view. **Subtle** = tone/100 fill + tone/800 content (default). **Solid** = tone/600 fill + white content (Neutral solid = ink gray/900) — for genuinely critical system states only. Single message line (Body Small 14/20) + leading tone icon + optional trailing ×. Stretch to container width. For region/form scope → Alert; for transient → Toast.
+- **a11y:** Error & Warning = `role="alert"`; others = `role="status"`. Solid emphasis is the rare must-acknowledge exception (Warning/Error only; max one in view).
+
+```html
+<!-- Subtle (default) -->
+<div class="banner banner-warning" role="alert">
+  <svg class="banner-icon" aria-hidden="true"><use href="#icon-alert-triangle"></use></svg>
+  <p class="banner-text">Scheduled maintenance Sunday 2–4am ET — bidding will be paused.</p>
+  <button class="banner-dismiss" aria-label="Dismiss">
+    <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+  </button>
+</div>
+
+<!-- Solid (critical only) -->
+<div class="banner banner-error banner-solid" role="alert">
+  <svg class="banner-icon" aria-hidden="true"><use href="#icon-alert-circle"></use></svg>
+  <p class="banner-text">Your account is past due — pay your balance to keep bidding.</p>
+</div>
+```
+
+## Toast
+Figma: `Toast` · node `4295:267` · set · 10 variants.
+
+- **Variant axes** (10 = 5×2): **Type** (5): Neutral · Info · Success · Warning · Error · **Dismissible** (2): Off · On.
+- **States:** —
+- **The one rule:** Transient float over the page; tone carried by a single tone/600 icon — text stays neutral ink. Auto-dismisses ~4–6s.
+- **Anatomy + key rules:** Confirms an action you just took (bid placed, link copied). White elevated card (Elevation/Overlay) + gray/200 hairline, radius 12. The TONE is one tone/600 status icon; text is neutral ink (title gray/900 List Title, body gray/700 Body Small). Optional trailing ×. Corner-anchored (top-right or bottom). Sticky if it carries a retry action.
+- **a11y:** `role="status"` + `aria-live="polite"`; **error toasts** `role="alert"` + `aria-live="assertive"`.
+
+```html
+<div class="toast toast-success" role="status" aria-live="polite"><!-- Elevation/Overlay -->
+  <svg class="toast-icon" aria-hidden="true"><use href="#icon-check-circle"></use></svg>
+  <div class="toast-body">
+    <p class="toast-title">Bid placed</p>
+    <p class="toast-text">You're the high bidder on lot 48291023.</p>
+  </div>
+  <button class="toast-dismiss" aria-label="Dismiss">
+    <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+  </button>
+</div>
+```
+
+---
+
+# Loading & Progress
+
+## Progress bar
+Figma: `Loading & Progress / Progress bar` · node `4318:93` · set · 8 variants.
+
+- **Variant axes** (8 = 2×4): **Size** (2): SM (4px) · MD (6px) · **State** (4): Progress · Success · Error · Indeterminate.
+- **States:** Progress · Success · Error · Indeterminate.
+- **The one rule:** Fill scales proportionally on resize; Label/Value are TEXT slots, Show text/value are BOOLEAN toggles.
+- **Anatomy + key rules:** Linear. Progress = interactive/primary (blue/600) · Success = success/600 · Error = error/600 · Indeterminate = animated 40% sweep (in code). Track gray/200, pill radius.
+- **a11y:** `role="progressbar"` + `aria-valuenow` / `aria-valuemin` / `aria-valuemax` (omit valuenow for Indeterminate). Loading regions `aria-busy="true"`.
+
+```html
+<div class="progress-field">
+  <div class="progress-header"><span>Uploading photos</span><span class="input-mono">60%</span></div>
+  <div class="progress progress-md" role="progressbar"
+       aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-fill" style="width:60%"></div>
+  </div>
+</div>
+
+<!-- Indeterminate -->
+<div class="progress progress-sm progress-indeterminate" role="progressbar" aria-label="Loading"></div>
+```
+
+## Spinner
+Figma: `Loading & Progress / Spinner` · node `4309:65` · set · 8 variants.
+
+- **Variant axes** (8 = 4×2): **Size** (4): 16 · 24 · 32 · 48 · **Tone** (2): Default · Inverse.
+- **States:** —
+- **The one rule:** Inverse tone is for accent/dark surfaces (white arc, no track) and looks faint on light canvas by design.
+- **Anatomy + key rules:** Indeterminate circular loader. Default = interactive/primary arc on a gray/200 track; Inverse = `icon/on-accent` white arc, no track. Arc ≈30%, round caps; rotates 0.8s linear (in code).
+- **a11y:** `role="status"` + `aria-label`.
+
+```html
+<span class="spinner spinner-24" role="status" aria-label="Loading"></span>
+<!-- Inverse (on a dark/accent surface) -->
+<span class="spinner spinner-16 spinner-inverse" role="status" aria-label="Loading"></span>
+```
+
+## Skeleton
+Figma: `Loading & Progress / Skeleton` · node `4321:48` · set · 3 variants.
+
+- **Variant axes** (3): **Shape** (3): Line · Circle · Rect.
+- **States:** —
+- **The one rule:** Shimmer/pulse is a motion treatment (workstream 4), NOT baked into the static component.
+- **Anatomy + key rules:** Placeholder primitives. Line (pill), Circle (avatar), Rect (media). Fill gray/100. Compose into any loading layout (text blocks, cards, list rows).
+- **a11y:** Wrap the loading region in `aria-busy="true"` and hide the skeletons from SRs (`aria-hidden="true"`) — announce via a sibling `role="status"`.
+
+```html
+<div aria-busy="true">
+  <span class="skeleton skeleton-circle" aria-hidden="true"></span>
+  <span class="skeleton skeleton-line" aria-hidden="true" style="width:60%"></span>
+  <span class="skeleton skeleton-line" aria-hidden="true" style="width:40%"></span>
+  <span class="skeleton skeleton-rect" aria-hidden="true"></span>
+</div>
+```
+
+## Step indicator
+Figma: `Loading & Progress / Step indicator` · node `4331:123` · set · 1 variant (Orientation=Vertical).
+
+- **Variant axes** (1): **Orientation** (1): Vertical (Horizontal is the fast-follow).
+- **States:** — (state lives on each Step item).
+- **The one rule:** Assembled tracker — a stack of Step item instances; Connector auto-colors (blue behind completed, gray ahead).
+- **Anatomy + key rules:** Set each step's State + Title + Supporting; turn the last step's Connector off. For custom counts add/remove Step item instances.
+- **a11y:** `<ol>`; the current step carries `aria-current="step"`.
+
+```html
+<ol class="step-indicator">
+  <li class="step-item step-item-complete">
+    <span class="step-marker" aria-hidden="true"><use href="#icon-check"></use></span>
+    <div class="step-content"><p class="step-title">Account</p><p class="step-supporting">Verified</p></div>
+  </li>
+  <li class="step-item step-item-current" aria-current="step">
+    <span class="step-marker" aria-hidden="true">2</span>
+    <div class="step-content"><p class="step-title">Payment</p><p class="step-supporting">In progress</p></div>
+  </li>
+  <li class="step-item step-item-upcoming">
+    <span class="step-marker" aria-hidden="true">3</span>
+    <div class="step-content step-content-last"><p class="step-title">Review</p></div>
+  </li>
+</ol>
+```
+
+## Step item
+Figma: `Loading & Progress / Step item` · node `4328:77` · set · 5 variants.
+
+- **Variant axes** (5): **State** (5): Complete · Current · Processing · Upcoming · Error.
+- **States:** Complete · Current · Processing · Upcoming · Error.
+- **The one rule:** Turn the Connector off on the last step; marker connector auto-colors blue when Complete, gray otherwise.
+- **Anatomy + key rules:** Complete (check) · Current (number) · Processing (spinner) · Upcoming (number, muted) · Error (×). Title + Supporting are TEXT slots; Show supporting + Connector are visibility toggles. Number is editable text on Current/Upcoming.
+- **a11y:** Current = `aria-current="step"`; the marker glyph is decorative (`aria-hidden`) — the title carries meaning.
+
+```html
+<li class="step-item step-item-error">
+  <span class="step-marker" aria-hidden="true"><use href="#icon-close"></use></span>
+  <div class="step-content"><p class="step-title">Payment</p><p class="step-supporting">Card declined</p></div>
+</li>
+```
+
+---
+
+# Overlays
+
+## Icon button
+Figma: `Icon button` · node `4393:227` · set · 9 variants.
+
+- **Variant axes** (9 = 3×3): **State** (3): Default · Hover · Pressed · **Icon** (3): Close · Back · More.
+- **States:** Default · Hover · Pressed.
+- **The one rule:** Circular 32px overlay-header action; MOBILE shows the Hover fill persistently; **flat — no elevation**; 44px touch hit-area.
+- **Anatomy + key rules:** For overlay headers (Shelf/Modal close + back) and table row-actions/overflow (More kebab). 24px icon cut. Default transparent / Hover gray/100 / Pressed gray/200. Close = ×, text/tertiary; Back = arrow-left, text/primary; More = `icon.more-vertical`, reveals the text-labeled Menu on click.
+- **a11y:** Always icon-only → **always needs an `aria-label`** ("Close", "Back", "More actions"). 44px hit-area in code. Desktop Default at rest; mobile shows Hover persistently.
+
+```html
+<button class="icon-btn" aria-label="Close">
+  <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+</button>
+<button class="icon-btn" aria-label="Back">
+  <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
+</button>
+<button class="icon-btn" aria-label="More actions" aria-haspopup="menu" aria-expanded="false">
+  <svg aria-hidden="true"><use href="#icon-more-vertical"></use></svg>
+</button>
+```
+
+## Menu
+Figma: `Menu` · node `4357:77` · component (standalone, no variant set) · 0 variants.
+
+- **Variant axes:** — (standalone composed; compose rows from Menu Item).
+- **States:** —
+- **The one rule:** Action/context/overflow container, NO scrim, light-dismiss — **NOT for form selection** (that's Select Menu).
+- **Anatomy + key rules:** White card, radius 12 (`--radius-xl`), Elevation/Overlay, padding 6. Holds Menu Item rows + dividers; a trailing shortcut or submenu chevron is a per-row slot. Light-dismiss (outside click / Esc).
+- **a11y:** `role="menu"`; the trigger uses `aria-haspopup="menu"` + `aria-expanded` (+ `aria-controls`). Arrow-key roving focus; Esc closes and returns focus to the trigger.
+
+```html
+<div class="menu" role="menu"><!-- Elevation/Overlay, radius xl -->
+  <button class="menu-item" role="menuitem">
+    <svg class="menu-item-icon" aria-hidden="true"><use href="#icon-edit"></use></svg> Edit
+  </button>
+  <button class="menu-item" role="menuitem">
+    <svg class="menu-item-icon" aria-hidden="true"><use href="#icon-copy"></use></svg> Duplicate
+  </button>
+  <div class="menu-divider" role="separator"></div>
+  <button class="menu-item menu-item-destructive" role="menuitem">
+    <svg class="menu-item-icon" aria-hidden="true"><use href="#icon-trash"></use></svg> Delete
+  </button>
+</div>
+```
+
+## Menu Item
+Figma: `Menu Item` · node `4356:95` · set · 6 variants.
+
+- **Variant axes** (6 = 2×3): **Tone** (2): Default · Destructive · **State** (3): Default · Hover · Disabled.
+- **States:** Default · Hover · Disabled.
+- **The one rule:** Distinct from Select Option — this is for action/context menus; Destructive tone hover = error/50.
+- **Anatomy + key rules:** One row of an action Menu. Leading icon + label (Body Small). Default (gray) or Destructive (error) tone. Hover = gray/100 wash (Destructive hover = error/50). Radius 8 (`--radius-lg`). Add a trailing shortcut or submenu chevron as a slot.
+- **a11y:** `role="menuitem"`; Disabled = `aria-disabled="true"`.
+
+```html
+<button class="menu-item" role="menuitem">
+  <svg class="menu-item-icon" aria-hidden="true"><use href="#icon-edit"></use></svg> Edit
+  <span class="menu-item-shortcut" aria-hidden="true">⌘E</span>
+</button>
+<button class="menu-item menu-item-destructive" role="menuitem">
+  <svg class="menu-item-icon" aria-hidden="true"><use href="#icon-trash"></use></svg> Delete
+</button>
+```
+
+## Popover
+Figma: `Popover` · node `4352:93` · set · 4 variants.
+
+- **Variant axes** (4): **Position** (4): Top · Bottom · Left · Right.
+- **States:** —
+- **The one rule:** Anchored floating panel, NO scrim, light-dismiss, with a caret to its trigger; for actions use Menu, for blocking use Modal.
+- **Anatomy + key rules:** White card, radius 12 (`--radius-xl`), Elevation/Overlay, caret pointing to its trigger. Position = where it sits relative to the trigger. Holds arbitrary content (here: title + × + body).
+- **a11y:** `role="dialog"`; light-dismiss (outside click / Esc); trigger uses `aria-haspopup="dialog"` + `aria-expanded` + `aria-controls`.
+
+```html
+<div class="popover popover-bottom" role="dialog" aria-label="About this fee" id="fee-pop">
+  <div class="popover-header">
+    <p class="popover-title">Buyer fee</p>
+    <button class="icon-btn" aria-label="Close"><svg aria-hidden="true"><use href="#icon-close"></use></svg></button>
+  </div>
+  <p class="popover-body">A flat fee added at checkout based on the final bid.</p>
+  <span class="popover-caret" aria-hidden="true"></span>
+</div>
+```
+
+## Tooltip
+Figma: `Tooltip` · node `4358:105` · set · 4 variants.
+
+- **Variant axes** (4): **Position** (4): Top · Bottom · Left · Right.
+- **States:** —
+- **The one rule:** Tiny transient hover/focus label, text-only, no interaction; for richer anchored content use Popover.
+- **Anatomy + key rules:** Dark ink (gray/900) + white text (Footnote 13/16), radius 8 (`--radius-lg`), Elevation/Overlay, caret to its trigger. Text-only and brief.
+- **a11y:** `role="tooltip"`; trigger uses `aria-describedby`; must appear on **hover AND focus** (keyboard-accessible); ~300ms show delay.
+
+```html
+<button class="icon-btn" aria-label="Help" aria-describedby="tip-1">
+  <svg aria-hidden="true"><use href="#icon-info"></use></svg>
+</button>
+<span class="tooltip tooltip-top" role="tooltip" id="tip-1">Final bid plus buyer fee.</span>
+```
+
+## Modal
+Figma: `Modal` · node `4368:245` · set · 6 variants.
+
+- **Variant axes** (6 = 3×2): **Size** (3): SM (400) · MD (520) · LG (720) · **State** (2): Default · Hover (the close hovered).
+- **States:** Default · Hover.
+- **The one rule:** Centered dialog that **blocks the page behind a scrim**; footer = Quiet Cancel + Primary Confirm (swap Destructive for dangerous actions).
+- **Anatomy + key rules:** Scrim = `--surface-scrim` (ink @45%). White card, radius 16 (`--radius-2xl`), Elevation/Modal. Header = title + circular close (Icon button); body; footer right-aligned. For edge panels use Shelf; for anchored non-blocking content use Popover/Menu.
+- **a11y:** `role="dialog"` + `aria-modal="true"` + `aria-labelledby`. **Focus trap required**; Esc closes; **return focus to the trigger** on close.
+
+```html
+<div class="modal-scrim"><!-- surface/scrim, layer/scrim -->
+  <div class="modal modal-md" role="dialog" aria-modal="true" aria-labelledby="m-title"><!-- radius 2xl, Elevation/Modal -->
+    <div class="modal-header">
+      <h2 class="modal-title" id="m-title">Confirm your bid</h2>
+      <button class="icon-btn" aria-label="Close"><svg aria-hidden="true"><use href="#icon-close"></use></svg></button>
+    </div>
+    <div class="modal-body">
+      <p>You're about to bid <span class="input-mono">$12,500</span> on lot 48291023.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-quiet btn-md">Cancel</button>
+      <button class="btn btn-primary btn-md">Place bid</button>
+    </div>
+  </div>
+</div>
+```
+
+## Shelf
+Figma: `Shelf` · node `4379:246` · set · 8 variants.
+
+- **Variant axes** (8 = 3×2×... displayed Form×Platform×State): **Form** (3): Panel · Docked · Full-screen · **Platform** (2): Desktop · Mobile (Docked is desktop-only) · **State** (2): Default · Hover.
+- **States:** Default · Hover.
+- **The one rule:** Presentation via composition (Inspector / Modal / Docked / Full-screen); body is the only scroll region; Docked is desktop-only + flush (no shadow).
+- **Anatomy + key rules:** Booleans: Back (‹ arrow) · Subtitle · Scrolled (reveals a gray/200 hairline under the header + above the footer when the body scrolls; set by code). Left-aligned header (back + title/subtitle + close icon-buttons); **sticky header + footer**, body the only scroll region; footer = Quiet Cancel + Primary Save. Presentation: Inspector = Panel, no scrim, page live · Modal = Panel + scrim, blocks · Docked = no scrim, content reflows beside it (left hairline, no shadow) · Full-screen = covers the viewport. Motion: slides in from the anchored edge ~420ms on `cubic-bezier(.32,.72,0,1)`; scrim fades in parallel; dismiss reverses. Elevation/Modal on Panel + Full-screen; Docked is flush.
+- **a11y:** Same as Modal — `role="dialog"` + `aria-modal="true"` (when it blocks), focus trap, Esc to close.
+
+```html
+<aside class="shelf shelf-panel" role="dialog" aria-modal="true" aria-labelledby="shelf-title"><!-- Elevation/Modal -->
+  <header class="shelf-header">
+    <button class="icon-btn" aria-label="Back"><svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg></button>
+    <div class="shelf-titles">
+      <h2 class="shelf-title" id="shelf-title">All filters</h2>
+      <p class="shelf-subtitle">3 applied</p>
+    </div>
+    <button class="icon-btn" aria-label="Close"><svg aria-hidden="true"><use href="#icon-close"></use></svg></button>
+  </header>
+  <div class="shelf-body"><!-- the only scroll region --></div>
+  <footer class="shelf-footer">
+    <button class="btn btn-quiet btn-md">Cancel</button>
+    <button class="btn btn-primary btn-md">Save</button>
+  </footer>
+</aside>
+```
+
+---
+
+# Content
+
+## Lot Card
+Figma: `Content / Lot Card` · node `4422:16` · component (standalone composed) · 0 variants.
+
+- **Variant axes:** — (only Live / Portrait built; add other layouts/statuses on real need).
+- **States:** —
+- **The one rule:** The keystone Copart vehicle-listing component.
+- **Anatomy + key rules:** Portrait grid layout, Live auction status. Quiet surface (white + gray/200 hairline). Composes: status **Badge** (Success Solid + dot "Live"), **Watchlist** (Small) — both overlaid on the photo; title-brand **Tag** (Clean = Positive; swap Caution/Critical for Rebuilt/Flood); **current bid in JetBrains Mono**; **"Bid now" Primary** button.
+- **a11y:** The photo needs descriptive `alt`. Overlay controls keep their 44px hit areas. Bid value in mono with tabular figures.
+
+```html
+<article class="lot-card"><!-- white + gray/200 hairline, radius xl -->
+  <div class="lot-card-media">
+    <img class="lot-card-photo" src="…" alt="2019 Honda Civic LX, front-left, minor front damage">
+    <span class="badge badge-success badge-solid badge-dot lot-card-status">
+      <span class="badge-dot-mark" aria-hidden="true"></span>Live
+    </span>
+    <button class="watchlist watchlist-small lot-card-watch" aria-pressed="false" aria-label="Add to watchlist">
+      <svg class="watchlist-heart" aria-hidden="true"><use href="#icon-heart"></use></svg>
+    </button>
+  </div>
+  <div class="lot-card-body">
+    <span class="tag tag-positive">Clean title</span>
+    <h3 class="lot-card-title">2019 Honda Civic LX</h3>
+    <p class="lot-card-meta">Lot <span class="input-mono">48291023</span> · Dallas, TX</p>
+    <div class="lot-card-bid">
+      <span class="lot-card-bid-label">Current bid</span>
+      <span class="lot-card-bid-value input-mono">$8,750</span>
+    </div>
+    <button class="btn btn-primary btn-md lot-card-cta">Bid now</button>
+  </div>
+</article>
+```
+
+## Stat Card
+Figma: `Content / Stat Card` · node `4484:186` · set · 3 variants.
+
+- **Variant axes** (3): **Trend** (3): None · Up · Down. *(Boolean "Sparkline", off by default.)*
+- **States:** —
+- **The one rule:** Delta shows MAGNITUDE only — the ▲/▼ arrow conveys direction; good-vs-bad swaps per metric via the Trend variant.
+- **Anatomy + key rules:** None (value + context subtext) · Up (Δ with ▲ in feedback/success-text) · Down (Δ with ▼ in feedback/error-text). Quiet white card + gray/200 hairline, radius 12. Value = Title 1 (Inter, a hero singular number — NOT mono; apply tabular figures in code). Label + delta = Footnote (label text/tertiary). Sparkline (when on) = blue/600 mini-trend that stretches the card width. No leading icon.
+- **a11y:** The ▲/▼ arrow is decorative; the delta sign and the trend color are paired with the number, so meaning survives without color.
+
+```html
+<div class="stat-card stat-card-up"><!-- white + gray/200 hairline, radius xl -->
+  <p class="stat-card-label">Active bids</p>
+  <p class="stat-card-value">1,284</p><!-- Title 1, Inter, tabular -->
+  <p class="stat-card-delta">
+    <svg class="stat-card-arrow" aria-hidden="true"><use href="#icon-arrow-up"></use></svg> 12% vs last week
+  </p>
+</div>
+```
+
+## Table Row
+Figma: `Content / Table Row` · node `4442:129` · set · 3 variants.
+
+- **Variant axes** (3): **State** (3): Default · Hover · Selected.
+- **States:** Default · Hover · Selected.
+- **The one rule:** Quiet surface — hairline gray/100 dividers, **NO zebra**; Selected = gray/50 + 2px blue/600 left accent bar + checked box.
+- **Anatomy + key rules:** Default white / Hover gray/50 / Selected gray/50 + accent bar + checked box. Baked Copart columns as a prescriptive default: checkbox · Lot # (mono) · Vehicle (stacked) · Current bid (mono) · Sale date · Status badge · trailing kebab (Icon Button "More"). Override cell content per table. Comfortable density only.
+- **a11y:** `<tr>`; selected row's checkbox carries the selection state; kebab is an Icon button with "More actions".
+
+```html
+<tr class="table-row" aria-selected="true"><!-- Selected: gray/50 + blue/600 left bar + checked -->
+  <td class="table-cell table-cell-checkbox"><input class="checkbox" type="checkbox" checked aria-label="Select lot 48291023"></td>
+  <td class="table-cell"><span class="input-mono">48291023</span></td>
+  <td class="table-cell table-cell-stacked">
+    <span class="table-cell-title">2019 Honda Civic LX</span>
+    <span class="table-cell-sub input-mono">1HGES16503...</span>
+  </td>
+  <td class="table-cell table-cell-numeric input-mono">$8,750</td>
+  <td class="table-cell">Jun 24, 2026</td>
+  <td class="table-cell"><span class="badge badge-success badge-solid badge-dot"><span class="badge-dot-mark" aria-hidden="true"></span>Live</span></td>
+  <td class="table-cell table-cell-actions">
+    <button class="icon-btn" aria-label="More actions"><svg aria-hidden="true"><use href="#icon-more-vertical"></use></svg></button>
+  </td>
+</tr>
+```
+
+## Table Cell
+Figma: `Content / Table Cell` · node `4442:75` · set · 5 variants.
+
+- **Variant axes** (5): **Type** (5): Text · Stacked · Numeric · Status · Actions.
+- **States:** —
+- **The one rule:** Mono follows the Read-vs-Compare law: VINs and compared/stacked numbers = JetBrains Mono.
+- **Anatomy + key rules:** 52px comfortable height, transparent (the Row supplies the fill). Text (Inter, text/primary) · Stacked (title + mono secondary, e.g. Vehicle name + VIN) · Numeric (mono, right-aligned — bids/odometer/counts) · Status (Badge instance) · Actions (Icon Button "More" kebab, right-aligned).
+- **a11y:** `<td>`; sortable headers use `<th scope="col">` + `aria-sort`; null cell = em dash "—". Provide a `<caption>` on the table.
+
+```html
+<td class="table-cell">Dallas, TX</td>                                  <!-- Text -->
+<td class="table-cell table-cell-stacked">                              <!-- Stacked -->
+  <span class="table-cell-title">2019 Honda Civic LX</span>
+  <span class="table-cell-sub input-mono">1HGES16503...</span>
+</td>
+<td class="table-cell table-cell-numeric input-mono">$8,750</td>        <!-- Numeric -->
+<td class="table-cell"><span class="badge badge-warning">Pending</span></td><!-- Status -->
+<td class="table-cell table-cell-actions">                              <!-- Actions -->
+  <button class="icon-btn" aria-label="More actions"><svg aria-hidden="true"><use href="#icon-more-vertical"></use></svg></button>
+</td>
+```
+
+## Table filter bar
+Figma: `Content / Table filter bar` · node `4617:3494` · component (standalone composed) · 0 variants.
+
+- **Variant axes:** —
+- **States:** —
+- **The one rule:** WELDS to the top of a data-table card (shares fill + ring + radius); "All filters" opens the Docked Shelf.
+- **Anatomy + key rules:** The filter strip welded to the top of a data-table card — shares the card fill + gray/200 ring + radius; its bottom gray/200 hairline divides it from the column-header row. Holds N Chip/Filter (visible, all on) + a gray/200 divider + **"All filters"** (Quiet button, `icon.filter` → opens the Docked Shelf) + **Search** (right). Set each chip Active/Active-multi as filters apply; surface applied chips below as removable Tags + a Clear all if dense. Stretch to card width.
+- **a11y:** A toolbar region — `role="toolbar"` + `aria-label`; the applied-tag row's removes are real buttons.
+
+```html
+<div class="table-filter-bar" role="toolbar" aria-label="Table filters"><!-- welds to the card top -->
+  <button class="chip-filter" aria-haspopup="listbox" aria-expanded="false">Make
+    <svg class="chip-filter-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg></button>
+  <button class="chip-filter" aria-haspopup="listbox" aria-expanded="false">Title type
+    <svg class="chip-filter-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg></button>
+  <span class="table-filter-divider" aria-hidden="true"></span>
+  <button class="btn btn-quiet btn-md">
+    <svg class="btn-icon" aria-hidden="true"><use href="#icon-filter"></use></svg> All filters
+  </button>
+  <div class="search search-md table-filter-search">
+    <svg class="search-icon-lead" aria-hidden="true"><use href="#icon-search"></use></svg>
+    <input class="search-input" type="search" aria-label="Search this table">
+  </div>
+</div>
+```
+
+## List Row
+Figma: `Content / List Row` · node `4490:356` · set · 18 variants.
+
+- **Variant axes** (18 = 3×3×2): **Leading** (3): None · Icon · Avatar · **Trailing** (3): Chevron · Meta · Action · **State** (2): Default · Hover. *(Boolean "Subtitle", default ON.)*
+- **States:** Default · Hover.
+- **The one rule:** List Row is for single-column vertical lists; use Table Row for data grids (columns/sort/select).
+- **Anatomy + key rules:** Leading {None / Icon (icon.* in a gray/100 tile) / Avatar (icon.user in a gray/200 circle — swap to the Avatar component)}. Trailing {Chevron (navigational →) / Meta (text: date/value/status) / Action (More icon button)}. Default white / Hover gray/50. Quiet surface — hairline gray/100 divider, NO zebra. Title = List Title (Inter Medium 15) text/primary; subtitle + meta = Footnote text/tertiary; trailing chevron = icon/muted. Use for saved searches, notifications, members, documents.
+- **a11y:** If the whole row navigates, make it a single `<a>`/`<button>` with an accessible name; a trailing Action kebab is a separate Icon button.
+
+```html
+<a class="list-row list-row-leading-icon list-row-trailing-chevron" href="/saved/1">
+  <span class="list-row-leading"><svg aria-hidden="true"><use href="#icon-bell"></use></svg></span>
+  <span class="list-row-content">
+    <span class="list-row-title">Outbid alerts</span>
+    <span class="list-row-subtitle">Every lot on your watchlist</span>
+  </span>
+  <svg class="list-row-chevron" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+</a>
+
+<!-- Avatar leading + Meta trailing -->
+<div class="list-row list-row-leading-avatar list-row-trailing-meta">
+  <span class="avatar avatar-md avatar-icon" aria-hidden="true"><svg><use href="#icon-user"></use></svg></span>
+  <span class="list-row-content">
+    <span class="list-row-title">Jordan Lee</span>
+    <span class="list-row-subtitle">Member since 2021</span>
+  </span>
+  <span class="list-row-meta">Active</span>
+</div>
+```
+
+## Bulk action bar
+Figma: `Content / Bulk action bar 1.2` · node `4616:3536` · set · 2 variants.
+
+- **Variant axes** (2): **Surface** (2): Docked · Overlay.
+- **States:** —
+- **The one rule:** The bar exists to act on the selection, so the dominant **Primary commit** (e.g. "Pay $X") lives on the **RIGHT**.
+- **Anatomy + key rules:** Appears on row selection. **Docked** = white + top hairline, NO shadow (reserves height / pushes content). **Overlay** = dark chrome (`--surface-header-bg`) + upward elevation (sticky, floats over scrolling content; chrome tier, matches the header). LEFT = ✓ selection count + divider + quiet contextual actions (icon+label). RIGHT = Clear + a Primary commit. Stretch to full-bleed; override padding to the page margin.
+- **a11y:** `role="region"` + `aria-label="Bulk actions"`; announce the live selection count (`aria-live="polite"`).
+
+```html
+<!-- Docked (reserves height) -->
+<div class="bulk-bar bulk-bar-docked" role="region" aria-label="Bulk actions">
+  <div class="bulk-bar-left">
+    <span class="bulk-bar-count" aria-live="polite"><svg aria-hidden="true"><use href="#icon-check"></use></svg> 3 selected</span>
+    <span class="bulk-bar-divider" aria-hidden="true"></span>
+    <button class="btn btn-quiet btn-sm"><svg class="btn-icon" aria-hidden="true"><use href="#icon-download"></use></svg> Export</button>
+  </div>
+  <div class="bulk-bar-right">
+    <button class="btn btn-quiet btn-md">Clear</button>
+    <button class="btn btn-primary btn-md">Pay $24,300</button>
+  </div>
+</div>
+```
+
+## Accordion
+Figma: `Content / Accordion` · node `4518:405` · set · 3 variants.
+
+- **Variant axes** (3): **State** (3): Collapsed · Hover · Expanded.
+- **States:** Collapsed · Hover · Expanded.
+- **The one rule:** Collapsible disclosure region — one header button toggles one panel.
+- **Anatomy + key rules:** A header row (title + trailing chevron) over a collapsible panel. Collapsed = chevron-down; Expanded = chevron-up + panel visible; Hover = gray/50 header wash. Quiet surface, hairline gray/200 between items. (Index-only in Figma — spec authored here from the State axis + quiet-surface model.)
+- **a11y:** Header is a `<button>` with `aria-expanded` + `aria-controls`; the panel `role="region"` + `aria-labelledby`. Chevron is decorative.
+
+```html
+<div class="accordion">
+  <h3 class="accordion-header">
+    <button class="accordion-trigger" aria-expanded="true" aria-controls="acc-1" id="acc-1-btn">
+      Vehicle condition
+      <svg class="accordion-chevron" aria-hidden="true"><use href="#icon-chevron-up"></use></svg>
+    </button>
+  </h3>
+  <div class="accordion-panel" role="region" id="acc-1" aria-labelledby="acc-1-btn">
+    <p>Runs and drives. Minor front-end damage; airbags intact.</p>
+  </div>
+</div>
+```
+
+## Empty state
+Figma: `Content / Empty state` · node `4540:3161` · set · 2 variants.
+
+- **Variant axes** (2): **Size** (2): Default · Compact. *(Boolean "Show action", default ON.)*
+- **States:** —
+- **The one rule:** Quiet line-icon (no illustration); transparent — the container (table/card/page) supplies the border.
+- **Anatomy + key rules:** What a region shows when it has nothing (no items yet, or a filter with no matches). **Default** (page / full table region) = 56px icon circle + Title 3 + Primary MD button. **Compact** (card / inline) = 40px icon + List Title + Primary SM. Centered vertical: gray/100 icon circle (icon/muted, swap per context) + title (text/primary) + body (text/secondary, ~320/240 wrap) + Button.
+- **a11y:** Heading is a real heading; the icon is decorative (`aria-hidden`); body copy is specific + actionable (sentence case).
+
+```html
+<div class="empty-state empty-state-default"><!-- transparent; container supplies the border -->
+  <span class="empty-state-icon" aria-hidden="true"><svg><use href="#icon-search"></use></svg></span>
+  <h3 class="empty-state-title">No lots match your filters</h3>
+  <p class="empty-state-body">Try widening your price range or clearing a filter to see more results.</p>
+  <button class="btn btn-primary btn-md">Clear all filters</button>
+</div>
+```
+
+---
+
+# Media
+
+## Avatar
+Figma: `Media / Avatar` · node `4525:76` · set · 15 base variants (3×5) + **Basic** / **Premier** boolean props.
+
+- **Variant axes** (15 = 3×5): **Type** (3): Image · Initials · Icon · **Size** (5): XS (24) · SM (32) · MD (40) · LG (48) · XL (64). **Booleans:** Basic · Premier (the opt-in membership ring).
+- **States:** —
+- **The one rule:** **NO** hashed/per-user color, **NO** presence dot, **NO** default ring. The one sanctioned ring is the **membership ring**: Free = none · **Basic** = `gray-300` · **Premier** = `gold`, each a 2px ring set 2px off the circle (`.avatar-basic` / `.avatar-premier`, a 2px `outline` with `outline-offset: 2px` so the gap is transparent). Identity is otherwise neutral; color is reserved for status/interactivity.
+- **Anatomy + key rules:** Circle, presentational identity. Fallback chain: real photo → initials → `icon.user`. **Initials** = gray/200 fill + gray/700 (text/secondary) Inter Semi Bold; 1 letter <32px, 2 letters ≥32px (XS = single). **Icon** fallback = `icon.user` (icon/muted) on gray/100. **Image** = a real photo in the fill (placeholder = `icon.user` silhouette in white on gray/300). Circle-only — company/org marks route to a separate Thumbnail concept. MD40 = the List Row leading anchor.
+- **a11y:** Image avatar needs `alt` (person's name) or `alt=""` if purely decorative beside a visible name; Icon/Initials fallbacks are decorative when the name is shown adjacent.
+
+```html
+<!-- Image -->
+<span class="avatar avatar-md avatar-image">
+  <img src="…" alt="Jordan Lee">
+</span>
+
+<!-- Initials -->
+<span class="avatar avatar-md avatar-initials" aria-hidden="true">JL</span>
+
+<!-- Icon fallback -->
+<span class="avatar avatar-md avatar-icon" aria-hidden="true">
+  <svg><use href="#icon-user"></use></svg>
+</span>
+
+<!-- Membership ring — Basic (gray-300) / Premier (gold); composes with any Type + Size -->
+<span class="avatar avatar-md avatar-initials avatar-basic" aria-hidden="true">JL</span>
+<span class="avatar avatar-md avatar-image avatar-premier">
+  <img src="…" alt="Jordan Lee">
+</span>
+```
+
+---
+
+## Component → token cheat-sheet (bindings the snippets assume)
+Phase 2 `dist/vallejo.css` resolves these. Values in llms-tokens.txt.
+
+- **Selected register** (chips, selected rows/options, active filter chip): `--blue-50` wash · `--blue-300` border · `--blue-800` label. (Watchlist saved = filled red-500 heart on a neutral surface, not this register.)
+- **Focus ring**: `--border-focus` (blue/600) light · `--border-focus-on-dark` (blue/300) dark chrome; `outline: 2px solid; outline-offset: 2px` (concentric +3 radius).
+- **Refined-light button border** (Secondary): rest `--border-default` (gray/300) → hover gray/400 + `--surface-canvas` → pressed gray/500 + `--surface-sunken`.
+- **Input boundary** (empty field IS the control): `--border-control` (gray/500, 3.65:1) — heavier than buttons.
+- **Tonal recipe** (Badge Subtle, Alert): `--{tone}-100` fill + `--{tone}-800` content. **Solid** (Badge/Banner): `--{tone}-600` fill + white.
+- **Quiet surface** (Lot/Stat card, List/Table Row): `--surface-raised` (white) + `--border-hairline` (gray/200), NO zebra, NO resting shadow.
+- **Avatar membership ring** (`.avatar-basic` / `.avatar-premier`): a 2px ring + 2px transparent gap (`outline` + `outline-offset: 2px`) — Basic `--gray-300`, Premier `--gold` (#FDC146, = warning-200).
+- **Radius family**: controls `--radius-lg` (8) · cards/menus/toasts/popovers `--radius-xl` (12) · modals/shelves `--radius-2xl` (16) · pills (badge/chip/tag) `--radius-pill` · tags/tooltips `--radius-md` (6).
+- **Elevation** (floating surfaces only): Elevation/Hover (floating Watchlist), Elevation/Overlay (Menu/Popover/Toast/Tooltip/Select menu), Elevation/Modal (Modal/Shelf), Elevation/Key (raised segment/chip).
+- **Layers**: dropdown 1000 · sticky 1100 · drawer 1300 · scrim 1400 · modal 1500 · toast 1600 · tooltip 1700 (no header layer — DEC-11).
+- **Mono** (`.input-mono` / JetBrains Mono): VIN · lot # · bid · counter · timestamp. Hero singular numbers (Stat Card value) stay Inter + tabular.

@@ -1,60 +1,55 @@
 # Vallejo Design System
 
-**Version 1.1.2** | Copart Production Design System | Updated: March 28, 2026
+Copart's production design system — and an **LLM-focused, agent-buildable** one. Hand an agent this repo and it can build prototypes that use Vallejo **exactly** (exact tokens, exact components) with **zero Tailwind and zero outside systems**. Version + date of record: [`version.json`](version.json).
 
 ---
 
-## The Copart Design Vault — Read This First
+## The Copart Design Vault — read this first
 
 Vallejo does not exist in isolation. It executes the design language defined in the **[Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault)**.
 
-- **Vault (Layer 1)** — The "why." Philosophy, principles, anti-patterns, interaction signatures, and voice. The Vault defines what Copart design *is* and what it rejects.
-- **Vallejo (Layer 2)** — The "how." Tokens, components, specs, patterns, and code. Vallejo implements the Vault's convictions at the pixel level.
+- **Vault (Layer 1)** — the *why*: philosophy, principles, anti-patterns, interaction signatures, voice.
+- **Vallejo (Layer 2)** — the *how*: tokens, components, specs, and the code that ships them.
 
-**When the Vault and Vallejo conflict, the Vault wins.** If a component spec contradicts a design principle, the spec changes.
-
-Every decision in this system passes the Vault's design filter:
-
-1. **Does this build trust?**
-2. **Does this respect expertise?**
-3. **Does this read at multiple depths?**
-
-If the answer to any is no, the design is wrong. See [Vault > language/north-star.md](https://github.com/getboyce/Copart-Design-Vault/blob/main/Copart%20Design/language/north-star.md) for the full case.
+**When the Vault and Vallejo conflict, the Vault wins.** Every decision passes the Vault's design filter: *Does this build trust? Does it respect expertise? Does it read at multiple depths?*
 
 ---
 
-## For AI / LLM Agents
+## Start here
 
-> **Read the [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault) first** for design philosophy and context.
->
-> Then read [`/llm/SYSTEM-INDEX.json`](llm/SYSTEM-INDEX.json) — the manifest and routing for all LLM-optimized documentation.
->
-> **Do not read files in `/human/`.** They are formatted for human readers and will waste your context window. Everything you need is in `/llm/`.
+**Agents / LLM tools** → read **[`AGENTS.md`](AGENTS.md)** (Step 0 = the Vault), then **[`llms.txt`](llms.txt)** to route to the focused references. To build, link `dist/tokens.css` + `dist/vallejo.css` and start from **[`starter.html`](starter.html)**.
 
-## For Human Readers
-
-> See [`/human/copart-design-system.md`](human/copart-design-system.md) for the complete design system specification — principles, foundations, all 37 components, patterns, animation, and mobile platform.
->
-> See [`/human/copart-design-tokens.json`](human/copart-design-tokens.json) for the machine-readable design token file (W3C DTCG format).
+**Humans** → **[`DESIGN.md`](DESIGN.md)** is the canonical spec (foundations + component rules). Open **[`starter.html`](starter.html)** to prototype.
 
 ---
 
-## About Vallejo
+## Repo layout
 
-Vallejo is the production design system for [Copart.com](https://www.copart.com) — online vehicle auctions, salvage and wholesale marketplace, member dashboards, bidding flows, and all customer-facing interfaces. It implements the design philosophy defined in the [Copart Design Vault](https://github.com/getboyce/Copart-Design-Vault).
+| Path | What it is |
+|------|------------|
+| [`AGENTS.md`](AGENTS.md) | Behavior layer — agent entry point, read order, hard rules, quickstart |
+| [`DESIGN.md`](DESIGN.md) | Appearance layer — the canonical spec (tokens block + foundations + component summary) |
+| [`llms.txt`](llms.txt) | Discovery index → progressive-disclosure links (fetchable raw URLs) |
+| `llms-tokens.txt` · `llms-components.txt` · `llms-a11y.txt` · `llms-writing.txt` · `llms-motion.txt` · `llms-mobile.txt` | Focused references (tokens, components, accessibility, voice, motion, mobile) |
+| [`version.json`](version.json) | Single source of version + date + Vault/production URLs |
+| [`starter.html`](starter.html) | Blank prototype shell — links the two stylesheets |
+| `source/` | **Source of truth (hand-edited):** `tokens/*.json` (DTCG), `icons.json`, `logos.json`, `components/*.css` |
+| `dist/` | **Generated + committed** (consume directly; never run a build): `tokens.css`, `tokens.dtcg.json`, `tokens.js`, `vallejo.css` |
+| `build/` | The token + component generators (`build.mjs`, `build-components.mjs`) |
+| `CLAUDE.md` | One-line pointer → `AGENTS.md` |
 
-Four folders, one system:
+## Build (maintainers only)
 
-| Folder | Audience | Contents |
-|--------|----------|----------|
-| `/human/` | Designers, developers, stakeholders | Full specification with execution rules and Vault cross-references |
-| `/llm/` | AI agents, code generators, LLM tools | Structured data, CSS patterns, HTML snippets optimized for token efficiency |
-| `/components/` | Everyone | Working reference implementations (header, etc.) |
-| `/demo/` | Everyone | Interactive visual demos (hostable on Vercel) |
+Tokens are authored once in `source/tokens/*.json` (W3C DTCG) and **generated** to `dist/`. Consumers never build — `dist/` is committed.
 
-## Demos
+```bash
+npm run build            # source/tokens → dist/tokens.css, tokens.dtcg.json, tokens.js
+npm run build:components # source/components → dist/vallejo.css
+npm run build:all        # both
+```
 
-| Demo | Path | Description |
-|------|------|-------------|
-| Design System Overview | [`/demo/index.html`](demo/index.html) | Foundations, tokens, and component showcase |
-| UX Writing Guide | [`/demo/ux-writing.html`](demo/ux-writing.html) | Voice & tone, terminology, microcopy patterns, do/don't examples |
+No runtime dependencies — the generators are plain Node (`build/*.mjs`).
+
+---
+
+*Dark mode is light-only today (Figma's dark values are placeholders); a `data-theme="dark"` layer is a planned follow-up.*

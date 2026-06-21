@@ -1,0 +1,377 @@
+/* =============================================================================
+   Vallejo Design System v1.2 — Loading & Progress
+   Progress bar · Spinner · Skeleton · Step indicator (+ Step item)
+
+   All colors via var(--token). States are native CSS. Motion respects
+   prefers-reduced-motion. No hardcoded colors anywhere.
+   ============================================================================= */
+
+
+/* =============================================================================
+   PROGRESS BAR
+   Linear. Track gray/200, pill radius, fill scales proportionally.
+   Size: SM (4px) / MD (6px).
+   State: Progress (interactive/primary) · Success (success/600) ·
+          Error (error/600) · Indeterminate (animated 40% sweep).
+   role="progressbar" + aria-valuenow/min/max (omit valuenow for indeterminate).
+   ============================================================================= */
+
+/* Optional wrapper: label/value header above the bar */
+.progress-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5);
+}
+
+.progress-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  /* Footnote: Inter 400 / 13 / 16 */
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+  color: var(--text-secondary);
+}
+
+/* Value uses mono for the numeric percentage (e.g. "60%") */
+.progress-header .input-mono {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+/* The track */
+.progress {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--gray-200);
+  border-radius: var(--radius-pill);
+}
+
+/* Size variants — track height */
+.progress-sm { height: 4px; }
+.progress-md { height: 6px; }
+
+/* Determinate fill — width set inline (style="width:60%") */
+.progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background-color: var(--interactive-primary);
+  transition: width var(--duration-moderate) var(--ease-enter);
+}
+
+/* State overrides — fill color per role */
+.progress-success .progress-fill { background-color: var(--success-accent); }
+.progress-error .progress-fill   { background-color: var(--error-accent); }
+
+/* Indeterminate — animated 40% sweep across the track.
+   No fill element required; the sweep is painted on the track itself. */
+.progress-indeterminate::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inline-size: 40%;
+  border-radius: var(--radius-pill);
+  background-color: var(--interactive-primary);
+  animation: vds-progress-sweep var(--duration-pulse) var(--ease-enter) infinite;
+}
+
+@keyframes vds-progress-sweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-fill { transition: none; }
+  .progress-indeterminate::after {
+    /* Static, centered sweep — communicates "busy" without motion */
+    animation: none;
+    transform: translateX(75%);
+  }
+}
+
+
+/* =============================================================================
+   SPINNER
+   Indeterminate circular loader. Arc ~30%, round caps, rotates 0.8s linear.
+   Size: 16 / 24 / 32 / 48.
+   Tone: Default (interactive/primary arc on gray/200 track) ·
+         Inverse (white arc, no track — for accent/dark surfaces).
+   role="status" + aria-label.
+   ============================================================================= */
+
+.spinner {
+  display: inline-block;
+  flex: none;
+  border-radius: var(--radius-full);
+  border-style: solid;
+  /* Track = gray/200; the visible arc is the top border in the accent color */
+  border-color: var(--gray-200);
+  border-top-color: var(--interactive-primary);
+  /* round-ish caps emulated via the arc thickness; rotation is the motion */
+  animation: vds-spin var(--duration-expressive) var(--ease-linear) infinite;
+}
+
+/* Size variants — box size + proportional stroke width */
+.spinner-16 { width: 16px; height: 16px; border-width: 2px; }
+.spinner-24 { width: 24px; height: 24px; border-width: 2px; }
+.spinner-32 { width: 32px; height: 32px; border-width: 3px; }
+.spinner-48 { width: 48px; height: 48px; border-width: 4px; }
+
+/* Inverse tone — white arc, no track (transparent ring) for accent/dark chrome */
+.spinner-inverse {
+  border-color: transparent;
+  border-top-color: var(--text-inverse);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation-duration: calc(var(--duration-expressive) * 3); }
+}
+
+
+/* =============================================================================
+   SKELETON
+   Placeholder primitives: Line (pill) · Circle (avatar) · Rect (media).
+   Fill gray/100 with a subtle shimmer. Decorative (aria-hidden); announce
+   loading via a sibling role="status" inside an aria-busy region.
+   ============================================================================= */
+
+.skeleton {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--gray-100);
+  /* Subtle left-to-right shimmer using a token-driven highlight */
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gray-50) 50%,
+    transparent 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  background-position: -150% 0;
+  animation: vds-skeleton-shimmer var(--duration-pulse) var(--ease-enter) infinite;
+}
+
+/* Shape variants */
+.skeleton-line {
+  height: 12px;
+  width: 100%;            /* width often overridden inline */
+  border-radius: var(--radius-pill);
+}
+
+.skeleton-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+}
+
+.skeleton-rect {
+  width: 100%;
+  height: 120px;
+  border-radius: var(--radius-md);
+}
+
+@keyframes vds-skeleton-shimmer {
+  0%   { background-position: -150% 0; }
+  100% { background-position:  150% 0; }
+}
+
+/* Respect reduced motion — flat, static placeholder (no shimmer) */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    background-image: none;
+    animation: none;
+  }
+}
+
+
+/* =============================================================================
+   STEP INDICATOR (+ STEP ITEM)
+   Vertical process tracker — an <ol> of .step-item.
+   Connector auto-colors: blue behind completed steps, gray ahead.
+   Step item State: Complete (check) · Current (number) · Processing (spinner) ·
+                    Upcoming (number, muted) · Error (×).
+   Current carries aria-current="step"; markers are decorative (aria-hidden).
+   ============================================================================= */
+
+.step-indicator {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Step item --------------------------------------------------------------
+   Two-column row: marker (with vertical connector) + content. */
+.step-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  /* Bottom padding makes room for the connector run to the next item */
+  padding-bottom: var(--space-5);
+}
+
+/* Marker: 24px circular glyph holder */
+.step-marker {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-default);
+  background-color: var(--surface-raised);
+  /* Caption 1: Inter 500 / 12 / 16 — the editable number on Current/Upcoming */
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.18px;
+  color: var(--text-tertiary);
+}
+
+.step-marker svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* Vertical connector — runs from below the marker to the next step.
+   Default (ahead of progress) = gray. */
+.step-item::before {
+  content: "";
+  position: absolute;
+  top: 24px;                 /* start just below the 24px marker */
+  bottom: 0;
+  left: calc(24px / 2);      /* center under the marker */
+  width: 2px;
+  transform: translateX(-50%);
+  background-color: var(--border-hairline);
+}
+
+/* Last step turns the connector off (also covered by .step-content-last) */
+.step-item:last-child::before,
+.step-item:has(.step-content-last)::before {
+  display: none;
+}
+
+/* Content block */
+.step-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+  padding-top: var(--space-0-5);   /* optical align title with marker */
+}
+
+.step-title {
+  margin: 0;
+  /* Body Small: Inter 400 / 14 / 20 — emphasized to 500 for the title slot */
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-primary);
+}
+
+.step-supporting {
+  margin: 0;
+  /* Footnote: Inter 400 / 13 / 16 */
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+  color: var(--text-tertiary);
+}
+
+/* --- Step item states ------------------------------------------------------- */
+
+/* Complete — filled blue marker + check; connector behind it is blue */
+.step-item-complete .step-marker {
+  border-color: var(--interactive-primary);
+  background-color: var(--interactive-primary);
+  color: var(--text-inverse);
+}
+/* The connector trailing a completed step is "behind" progress -> blue */
+.step-item-complete::before {
+  background-color: var(--interactive-primary);
+}
+
+/* Current — selected, active step (number) */
+.step-item-current .step-marker {
+  border-color: var(--interactive-primary);
+  background-color: var(--interactive-selected-wash);
+  color: var(--interactive-primary);
+}
+.step-item-current .step-title {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Processing — current step that's working; marker hosts a small spinner */
+.step-item-processing .step-marker {
+  border-color: var(--interactive-primary);
+  background-color: var(--surface-raised);
+  color: var(--interactive-primary);
+}
+.step-item-processing .step-marker::after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--gray-200);
+  border-top-color: var(--interactive-primary);
+  animation: vds-spin var(--duration-expressive) var(--ease-linear) infinite;
+}
+
+/* Upcoming — muted, not yet reached (number) */
+.step-item-upcoming .step-marker {
+  border-color: var(--border-hairline);
+  background-color: var(--surface-canvas);
+  color: var(--text-disabled);
+}
+.step-item-upcoming .step-title {
+  color: var(--text-secondary);
+}
+
+/* Error — failed step (×) */
+.step-item-error .step-marker {
+  border-color: var(--error-accent);
+  background-color: var(--error-accent);
+  color: var(--text-inverse);
+}
+.step-item-error .step-title {
+  color: var(--error-accent);
+}
+.step-item-error .step-supporting {
+  color: var(--error-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-item-processing .step-marker::after {
+    animation-duration: calc(var(--duration-expressive) * 3);
+  }
+}
+
+
+/* =============================================================================
+   SHARED MOTION
+   ============================================================================= */
+
+@keyframes vds-spin {
+  to { transform: rotate(360deg); }
+}

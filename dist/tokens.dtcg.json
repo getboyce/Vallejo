@@ -1,0 +1,587 @@
+{
+  "$description": "Vallejo 1.2 component (elevation/shadow) tokens (DTCG). Source of truth — edit here, then run `npm run build`. Generated from the Figma sweep 2026-06-20.",
+  "color": {
+    "$type": "color",
+    "gray": {
+      "0": {
+        "$value": "#FFFFFF"
+      },
+      "50": {
+        "$value": "#F6F6F5"
+      },
+      "100": {
+        "$value": "#EEEDEC"
+      },
+      "150": {
+        "$value": "#ECEEF2"
+      },
+      "200": {
+        "$value": "#D8DBE2"
+      },
+      "300": {
+        "$value": "#BDC1CA"
+      },
+      "400": {
+        "$value": "#9C9FA6"
+      },
+      "500": {
+        "$value": "#83868D"
+      },
+      "600": {
+        "$value": "#62666F"
+      },
+      "700": {
+        "$value": "#484C54"
+      },
+      "800": {
+        "$value": "#30333A"
+      },
+      "900": {
+        "$value": "#1D222A"
+      },
+      "950": {
+        "$value": "#090B0E"
+      }
+    },
+    "blue": {
+      "50": {
+        "$value": "#EFF4FF"
+      },
+      "100": {
+        "$value": "#DBE7FD"
+      },
+      "200": {
+        "$value": "#B1CCFE"
+      },
+      "300": {
+        "$value": "#82ADFC"
+      },
+      "400": {
+        "$value": "#5A8DF1"
+      },
+      "500": {
+        "$value": "#3970DE"
+      },
+      "600": {
+        "$value": "#2059CC"
+      },
+      "700": {
+        "$value": "#1046B4"
+      },
+      "800": {
+        "$value": "#043599"
+      },
+      "900": {
+        "$value": "#032773"
+      }
+    },
+    "success": {
+      "50": {
+        "$value": "#E1F9E6"
+      },
+      "100": {
+        "$value": "#C8F0D1"
+      },
+      "200": {
+        "$value": "#9FD8AE"
+      },
+      "300": {
+        "$value": "#72BC87"
+      },
+      "400": {
+        "$value": "#47A164"
+      },
+      "500": {
+        "$value": "#098644"
+      },
+      "600": {
+        "$value": "#146E3A"
+      },
+      "700": {
+        "$value": "#0B5B2E"
+      },
+      "800": {
+        "$value": "#074823"
+      },
+      "900": {
+        "$value": "#063519"
+      }
+    },
+    "warning": {
+      "50": {
+        "$value": "#FEF2E1"
+      },
+      "100": {
+        "$value": "#FFE3AE"
+      },
+      "200": {
+        "$value": "#FDC146"
+      },
+      "300": {
+        "$value": "#E1A117"
+      },
+      "400": {
+        "$value": "#BC8521"
+      },
+      "500": {
+        "$value": "#9D6B11"
+      },
+      "600": {
+        "$value": "#82580B"
+      },
+      "700": {
+        "$value": "#6B4806"
+      },
+      "800": {
+        "$value": "#563804"
+      },
+      "900": {
+        "$value": "#402903"
+      }
+    },
+    "error": {
+      "50": {
+        "$value": "#FFF0EF"
+      },
+      "100": {
+        "$value": "#FDDFDD"
+      },
+      "200": {
+        "$value": "#FCBBB5"
+      },
+      "300": {
+        "$value": "#FD8C86"
+      },
+      "400": {
+        "$value": "#EE625F"
+      },
+      "500": {
+        "$value": "#D8383D"
+      },
+      "600": {
+        "$value": "#C20022"
+      },
+      "700": {
+        "$value": "#9D121F"
+      },
+      "800": {
+        "$value": "#7F0D18"
+      },
+      "900": {
+        "$value": "#63010D"
+      }
+    },
+    "gold": {
+      "$value": "#FDC146",
+      "$description": "User Avatar Premier variant ONLY (the gold ring) — not a ramp; value matches warning-200. Urgency uses warning/error."
+    }
+  },
+  "space": {
+    "0": {
+      "$value": "0px"
+    },
+    "1": {
+      "$value": "4px"
+    },
+    "2": {
+      "$value": "8px"
+    },
+    "3": {
+      "$value": "12px"
+    },
+    "4": {
+      "$value": "16px"
+    },
+    "5": {
+      "$value": "20px"
+    },
+    "6": {
+      "$value": "24px"
+    },
+    "8": {
+      "$value": "32px"
+    },
+    "10": {
+      "$value": "40px"
+    },
+    "12": {
+      "$value": "48px"
+    },
+    "16": {
+      "$value": "64px"
+    },
+    "20": {
+      "$value": "80px"
+    },
+    "24": {
+      "$value": "96px"
+    },
+    "32": {
+      "$value": "128px"
+    },
+    "$type": "dimension",
+    "0-5": {
+      "$value": "2px"
+    },
+    "1-5": {
+      "$value": "6px"
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "none": {
+      "$value": "0px"
+    },
+    "sm": {
+      "$value": "4px"
+    },
+    "md": {
+      "$value": "6px"
+    },
+    "lg": {
+      "$value": "8px"
+    },
+    "xl": {
+      "$value": "12px"
+    },
+    "2xl": {
+      "$value": "16px"
+    },
+    "pill": {
+      "$value": "9999px"
+    },
+    "full": {
+      "$value": "50%"
+    }
+  },
+  "duration": {
+    "$type": "duration",
+    "instant": {
+      "$value": "50ms"
+    },
+    "fast": {
+      "$value": "100ms"
+    },
+    "normal": {
+      "$value": "150ms"
+    },
+    "moderate": {
+      "$value": "200ms"
+    },
+    "slow": {
+      "$value": "300ms"
+    },
+    "deliberate": {
+      "$value": "400ms"
+    },
+    "expressive": {
+      "$value": "700ms"
+    },
+    "pulse": {
+      "$value": "2400ms"
+    },
+    "slower": {
+      "$value": "500ms"
+    }
+  },
+  "easing": {
+    "$type": "cubicBezier",
+    "enter": {
+      "$value": "cubic-bezier(0.32, 0.72, 0, 1)"
+    },
+    "exit": {
+      "$value": "cubic-bezier(0.4, 0, 1, 1)"
+    },
+    "spring": {
+      "$value": "cubic-bezier(0.175, 0.885, 0.32, 1.275)"
+    },
+    "linear": {
+      "$value": "linear"
+    }
+  },
+  "layer": {
+    "$type": "number",
+    "dropdown": {
+      "$value": 1000
+    },
+    "sticky": {
+      "$value": 1100
+    },
+    "drawer": {
+      "$value": 1300
+    },
+    "scrim": {
+      "$value": 1400
+    },
+    "modal": {
+      "$value": 1500
+    },
+    "toast": {
+      "$value": 1600
+    },
+    "tooltip": {
+      "$value": 1700
+    }
+  },
+  "font": {
+    "$type": "fontFamily",
+    "sans": {
+      "$value": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    },
+    "mono": {
+      "$value": "'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', monospace"
+    }
+  },
+  "text": {
+    "$type": "color",
+    "primary": {
+      "$value": "{color.gray.900}"
+    },
+    "secondary": {
+      "$value": "{color.gray.700}"
+    },
+    "tertiary": {
+      "$value": "{color.gray.600}"
+    },
+    "display-muted": {
+      "$value": "{color.gray.500}"
+    },
+    "disabled": {
+      "$value": "{color.gray.400}"
+    },
+    "inverse": {
+      "$value": "{color.gray.0}"
+    },
+    "link": {
+      "$value": "{color.blue.600}"
+    },
+    "link-hover": {
+      "$value": "{color.blue.700}"
+    },
+    "on-header": {
+      "$value": "{color.gray.0}"
+    },
+    "on-header-muted": {
+      "$value": "{color.gray.400}"
+    }
+  },
+  "surface": {
+    "$type": "color",
+    "raised": {
+      "$value": "{color.gray.0}"
+    },
+    "canvas": {
+      "$value": "{color.gray.50}"
+    },
+    "sunken": {
+      "$value": "{color.gray.100}"
+    },
+    "deep": {
+      "$value": "{color.gray.950}"
+    },
+    "subtle": {
+      "$value": "{color.gray.150}"
+    },
+    "header-bg": {
+      "$value": "{color.gray.800}"
+    },
+    "header-deep": {
+      "$value": "{color.gray.900}"
+    },
+    "footer": {
+      "$value": "{color.gray.900}"
+    },
+    "header-field": {
+      "$value": "{color.gray.700}"
+    },
+    "header-shelf": {
+      "$value": "{color.gray.700}"
+    }
+  },
+  "border": {
+    "$type": "color",
+    "hairline": {
+      "$value": "{color.gray.200}"
+    },
+    "default": {
+      "$value": "{color.gray.300}"
+    },
+    "strong": {
+      "$value": "{color.gray.500}"
+    },
+    "control": {
+      "$value": "{color.gray.500}"
+    },
+    "focus": {
+      "$value": "{color.blue.600}"
+    },
+    "focus-on-dark": {
+      "$value": "{color.blue.300}"
+    }
+  },
+  "interactive": {
+    "$type": "color",
+    "primary": {
+      "$value": "{color.blue.600}"
+    },
+    "primary-grad-end": {
+      "$value": "#1D50B8"
+    },
+    "primary-hover": {
+      "$value": "{color.blue.700}"
+    },
+    "primary-active": {
+      "$value": "{color.blue.800}"
+    },
+    "selected-fill": {
+      "$value": "{color.blue.100}"
+    },
+    "selected-wash": {
+      "$value": "{color.blue.50}"
+    },
+    "destructive": {
+      "$value": "{color.error.600}"
+    },
+    "destructive-grad-end": {
+      "$value": "#AF001F"
+    },
+    "destructive-hover": {
+      "$value": "{color.error.700}"
+    },
+    "destructive-active": {
+      "$value": "{color.error.800}"
+    },
+    "favorite": {
+      "$value": "{color.error.500}",
+      "$description": "Save-to-list / watchlist heart (red-500). Shares the red ramp but is NOT a destructive cue — state is carried by the filled heart + label, never color alone."
+    }
+  },
+  "status": {
+    "$type": "color",
+    "success-subtle": {
+      "$value": "{color.success.50}"
+    },
+    "success-light": {
+      "$value": "{color.success.100}"
+    },
+    "success-accent": {
+      "$value": "{color.success.600}"
+    },
+    "success-dark": {
+      "$value": "{color.success.800}"
+    },
+    "warning-subtle": {
+      "$value": "{color.warning.50}"
+    },
+    "warning-light": {
+      "$value": "{color.warning.100}"
+    },
+    "warning-accent": {
+      "$value": "{color.warning.600}"
+    },
+    "warning-dark": {
+      "$value": "{color.warning.800}"
+    },
+    "error-subtle": {
+      "$value": "{color.error.50}"
+    },
+    "error-light": {
+      "$value": "{color.error.100}"
+    },
+    "error-accent": {
+      "$value": "{color.error.600}"
+    },
+    "error-dark": {
+      "$value": "{color.error.800}"
+    }
+  },
+  "shadow": {
+    "$type": "color",
+    "primary-bevel-top": {
+      "$value": "#82ADFC6B"
+    },
+    "primary-bevel-bottom": {
+      "$value": "#0435994D"
+    },
+    "primary-contact": {
+      "$value": "#03277345"
+    },
+    "primary-ambient": {
+      "$value": "#2059CC33"
+    },
+    "primary-pressed": {
+      "$value": "#03277373"
+    },
+    "destructive-bevel-top": {
+      "$value": "#FD8C8661"
+    },
+    "destructive-bevel-bottom": {
+      "$value": "#7F0D1847"
+    },
+    "destructive-contact": {
+      "$value": "#63010D45"
+    },
+    "destructive-ambient": {
+      "$value": "#C200222E"
+    },
+    "destructive-pressed": {
+      "$value": "#63010D73"
+    },
+    "key-edge": {
+      "$value": "#13161B1A"
+    },
+    "key-drop-hover": {
+      "$value": "#13161B1F"
+    },
+    "key-press": {
+      "$value": "#13161B1F"
+    },
+    "overlay-contact": {
+      "$value": "#13161B26"
+    },
+    "overlay-ambient": {
+      "$value": "#13161B1F"
+    },
+    "modal-ambient": {
+      "$value": "#13161B33"
+    }
+  },
+  "elevation": {
+    "$type": "shadow",
+    "primary-rest": {
+      "$value": "inset 0 1px 0 0 {shadow.primary-bevel-top}, inset 0 -1px 0 0 {shadow.primary-bevel-bottom}, 0 1px 2px 0 {shadow.primary-contact}, 0 4px 12px -2px {shadow.primary-ambient}"
+    },
+    "primary-hover": {
+      "$value": "inset 0 1px 0 0 {shadow.primary-bevel-top}, inset 0 -1px 0 0 {shadow.primary-bevel-bottom}, 0 1px 2px 0 {shadow.primary-contact}, 0 7px 20px -2px {shadow.primary-ambient}"
+    },
+    "primary-pressed": {
+      "$value": "inset 0 2px 4px 0 {shadow.primary-pressed}"
+    },
+    "destructive-rest": {
+      "$value": "inset 0 1px 0 0 {shadow.destructive-bevel-top}, inset 0 -1px 0 0 {shadow.destructive-bevel-bottom}, 0 1px 2px 0 {shadow.destructive-contact}, 0 4px 12px -2px {shadow.destructive-ambient}"
+    },
+    "destructive-hover": {
+      "$value": "inset 0 1px 0 0 {shadow.destructive-bevel-top}, inset 0 -1px 0 0 {shadow.destructive-bevel-bottom}, 0 1px 2px 0 {shadow.destructive-contact}, 0 5px 14px -2px {shadow.destructive-ambient}"
+    },
+    "destructive-pressed": {
+      "$value": "inset 0 2px 4px 0 {shadow.destructive-pressed}"
+    },
+    "key": {
+      "$value": "inset 0 -1px 0 0 {shadow.key-edge}, 0 1px 3px 0 {shadow.key-edge}"
+    },
+    "key-hover": {
+      "$value": "inset 0 -1px 0 0 {shadow.key-edge}, 0 2px 5px 0 {shadow.key-drop-hover}"
+    },
+    "key-pressed": {
+      "$value": "inset 0 1px 2px 0 {shadow.key-press}"
+    },
+    "overlay": {
+      "$value": "0 1px 2px 0 {shadow.overlay-contact}, 0 8px 24px -6px {shadow.overlay-ambient}",
+      "$description": "Floating surfaces: popover, menu, tooltip, toast, dropdowns. Derived layered ink shadow (Figma Elevation/Overlay value not extracted — refine against Figma if needed)."
+    },
+    "modal": {
+      "$value": "0 4px 12px -2px {shadow.overlay-contact}, 0 24px 48px -8px {shadow.modal-ambient}",
+      "$description": "Modal + Shelf — most prominent float. Derived (Figma Elevation/Modal value not extracted)."
+    }
+  }
+}

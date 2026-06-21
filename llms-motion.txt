@@ -1,0 +1,182 @@
+# Vallejo 1.2 — Motion (llms-motion.txt)
+
+Consolidated, copy-paste-ready motion rules for building Vallejo prototypes.
+Motion expresses Vitality — the energy of live auctions — while Precision demands
+every animation earn its frame count. We confirm actions, direct attention, and
+provide spatial context. We never animate for decoration. Speed communicates
+confidence; motion never blocks interaction. Version/date live in version.json
+(never hardcode).
+
+STEP 0 — WHY THIS MATTERS: the Copart Design Vault (github.com/getboyce/Copart-Design-Vault)
+is Layer 1 (the why); Vallejo is Layer 2 (the how). Motion serves the triad —
+Precision, Institutional Confidence, Vitality — and the design filter: Does this
+build trust? Respect expertise? Read at multiple depths? The Vault's motion
+philosophy (craft/motion-philosophy.md) defines four registers, each matched to a
+surface and emotional context; every animation in this system belongs to exactly
+one. This file is self-sufficient if the Vault is unreachable.
+
+Four rules carry most of the weight, in order:
+1. Bind motion tokens — durations and easings, never raw ms or raw cubic-bezier (§1).
+2. Pick a register and stay inside its range — transactional must feel instant (§2).
+3. Animate to confirm, direct, or orient; never to decorate or to delay (§5).
+4. Collapse all motion to instant under reduce-motion — absolute, not "shorter" (§6).
+
+================================================================================
+## 1. MOTION TOKENS — durations + easings
+================================================================================
+
+Bind `var(--duration-*)` and `var(--ease-*)`; never paste a raw ms value or a raw
+cubic-bezier. Durations are unitless names tuned so the whole system reads fast —
+the v1.2 scale is deliberately quicker than a generic UI kit.
+
+### Durations
+| Token                 | Value  | Where it lives                                            |
+|-----------------------|--------|-----------------------------------------------------------|
+| --duration-instant    | 50ms   | Hover tint, color cross-fade, press feedback, micro-cues  |
+| --duration-fast       | 100ms  | Dropdowns, tooltips, small reveals, button press scale    |
+| --duration-normal     | 150ms  | Standard state changes, modal/menu close, tab cross-fade  |
+| --duration-moderate   | 200ms  | Modal open, banner expand, toast enter, card hover lift   |
+| --duration-slow       | 300ms  | Complex transitions, card-grid stagger, page slide        |
+| --duration-deliberate | 400ms  | Bottom sheet, full-screen transition, counter tick        |
+| --duration-slower     | 500ms  | Celebration draws (repo-only; not named on Figma)         |
+| --duration-expressive | 700ms  | Largest celebration beats — proportional to significance  |
+| --duration-pulse      | 2400ms | Ambient cycle — loading dots, live-indicator pulse        |
+
+### Easings
+| Token         | Value                                   | Meaning / where                          |
+|---------------|-----------------------------------------|------------------------------------------|
+| --ease-enter  | cubic-bezier(0.32, 0.72, 0, 1)          | decelerate — elements entering the screen|
+| --ease-exit   | cubic-bezier(0.4, 0, 1, 1)              | accelerate — elements leaving the screen |
+| --ease-spring | cubic-bezier(0.175, 0.885, 0.32, 1.275) | overshoot — interactive feedback only    |
+| --ease-linear | linear                                  | progress only (spinners, progress bars)  |
+
+Easing discipline: things that ARRIVE decelerate (--ease-enter); things that LEAVE
+accelerate (--ease-exit) and run shorter than their enter. Spring is reserved for
+direct tactile feedback (toggle thumb, heart pop) — never for chrome that simply
+appears. Linear is for genuinely mechanical motion (a spinner, a progress fill)
+where ease-in/out would look like a stutter.
+
+================================================================================
+## 2. MOTION REGISTERS — pick one, stay in its range
+================================================================================
+
+Every animation belongs to exactly one register. The register sets the duration
+range and the character; the tokens above are the vocabulary.
+
+| Register      | Surface              | Range                        | Character                                  |
+|---------------|----------------------|------------------------------|--------------------------------------------|
+| Transactional | the marketplace / app| fast → moderate (100–200ms)  | crisp, confident, immediate                |
+| Live auction  | real-time bidding    | fast → normal (100–150ms)    | fluid, energetic, responds to data velocity|
+| Celebration   | win / loss moments   | expressive (700ms), proportional, NEVER blocking | expressive, earned       |
+| Ambient       | background liveness  | pulse (2400ms cycles)        | subtle — proves the system is alive        |
+
+Register rules (binding):
+- Transactional never exceeds --duration-moderate (200ms). Speed communicates
+  confidence; a slow transactional animation reads as a slow product.
+- Live auction adapts to data velocity — lean toward --duration-fast when bids
+  arrive rapidly, --duration-normal when the pace is steady. It stays inside the
+  transactional ceiling; it just runs hotter.
+- Celebration is proportional to significance and NEVER blocks interaction: the
+  member can act before, during, and after it. A small confirmation gets a quick
+  draw; a major win earns --duration-expressive. Use --ease-spring or --ease-enter.
+- Ambient must be invisible to someone not looking for it. If it pulls the eye, it
+  is too strong. It is the ONLY sanctioned infinite loop besides spinners and
+  skeleton shimmer.
+
+================================================================================
+## 3. MICRO-INTERACTIONS — immediate feedback (register: transactional)
+================================================================================
+
+Small, functional animations that confirm a member's action the instant it happens.
+
+- Card hover lift — translateY(-2px) plus shadow-sm → shadow-md, at
+  --duration-moderate --ease-enter. Affordance: confirms the card is interactive.
+- Button press — scale(0.97) on mousedown/touchstart at --duration-fast. Tactile
+  feedback simulating a physical press; release returns to rest.
+- Toggle slide — thumb slides with --ease-spring overshoot while the track color
+  cross-fades, at --duration-slow. Light haptic on mobile. Confirms a binary state
+  change. (This is the one transactional control allowed past 200ms, because the
+  spring IS the feedback.)
+- Focus ring — appears instantly (--duration-instant); a solid 2px ring, never a
+  growing glow. See llms-a11y.txt §3.
+
+================================================================================
+## 4. STATE TRANSITIONS + DELIGHT — component enter/exit
+================================================================================
+
+Enter decelerates (--ease-enter); exit accelerates (--ease-exit) and is shorter.
+
+| Element            | Enter / open                                       | Exit / close              | Tokens                                |
+|--------------------|----------------------------------------------------|---------------------------|---------------------------------------|
+| Modal              | backdrop fade in, panel scale(0.95→1) + fade       | panel out, then backdrop  | open --duration-moderate --ease-enter; close --duration-normal --ease-exit |
+| Bottom sheet       | slide up from bottom + backdrop fade               | swipe down / fade out     | --duration-deliberate --ease-enter    |
+| Dropdown / menu    | fade + translateY(-4px → 0)                        | fade out                  | open --duration-fast --ease-enter; close --duration-fast --ease-exit |
+| Tooltip            | fade in                                            | fade out                  | --duration-fast                       |
+| Banner / alert     | slide down + fade + height expand                  | fade + height collapse    | --duration-moderate                   |
+| Toast              | translateY(16px → 0) + fade                        | translateY(0 → 8px) + fade| enter --duration-moderate --ease-enter; exit --duration-normal --ease-exit; auto-dismiss ~5s or swipe |
+| Card-grid load     | staggered fade + translateY(12px → 0)              | instant                   | --duration-slow --ease-enter, ~50ms stagger |
+| Skeleton → content | cross-fade shimmer to real content                 | instant                   | --duration-moderate --ease-enter      |
+| Page navigation    | new page slides in from the right                  | current slides out left   | --duration-slow (mobile nav stack)    |
+| Tab switch         | content cross-fades, underline slides              | cross-fade out            | --duration-moderate                   |
+
+Delight (registers: celebration + live auction + ambient):
+- Watchlist heart fill (celebration) — heart pops scale(1 → 1.3 → 0.9 → 1.15 → 1)
+  and the outline icon switches to filled, at --duration-slower --ease-spring; a
+  subtle shrink on removal. Pair with a medium haptic on add, light on remove.
+- Success draw (celebration) — an SVG circle draws via stroke-dashoffset, then the
+  checkmark draws inside on a short stagger. Circle ~--duration-deliberate, check
+  ~--duration-slow with a brief delay. Confirms a critical action (bid placed,
+  payment confirmed) succeeded — and never blocks the next action.
+- Bid price pulse (live auction) — price text pulses scale(1 → 1.08 → 1) with a
+  flash to the brand blue when a competing bid lands. Draws the eye without
+  disrupting flow; lean expressive only for high-significance lots.
+- Counter tick (live auction) — old number slides up and out, new number slides in
+  from below, at --duration-deliberate. Shows the data is live.
+- Loading dots (ambient) — three dots cycle scale(0.6 → 1) + opacity(0.4 → 1) in
+  sequence over --duration-pulse, infinite, with a short stagger between dots.
+
+================================================================================
+## 5. WHEN TO ANIMATE
+================================================================================
+
+DO animate:
+- Action confirmation — heart fill, success draw, confirmation toast.
+- State change — toggle slide, dropdown open, modal enter, banner expand.
+- Attention direction — bid price pulse, badge/count update, a new item appearing.
+- Loading feedback — skeleton shimmer, spinner, progress fill.
+- Spatial context — page transitions, tab switches, card-grid stagger.
+
+DON'T animate:
+- Decoration — bouncing logos, floating elements, motion for its own sake.
+- Delays — never make a member wait for an animation to finish before they can act.
+- Scrolljacking — never override native scroll or impose parallax on content.
+- Repetitive loops — no infinite animation except spinners, skeleton shimmer, and
+  the ambient register.
+- Form input — typing, selecting, and tabbing between fields must be instant.
+
+================================================================================
+## 6. REDUCED MOTION — collapse to instant
+================================================================================
+
+Respect `prefers-reduced-motion: reduce` for EVERY animation. The rule is absolute:
+reduce-motion always collapses to instant (not "shorter" — instant). This mirrors
+llms-a11y.txt §5; keep them in sync.
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+When reduced motion is active:
+- State changes happen instantly — no transitions.
+- Delight animations are removed entirely; the end state appears directly.
+- Loading indicators fall back to a static or determinate progress bar.
+- Toasts, banners, and sheets appear and disappear without sliding.
+
+See also: llms-tokens.txt (token values), llms-components.txt (full contracts),
+llms-a11y.txt (reduced-motion + focus), DESIGN.md (overview).

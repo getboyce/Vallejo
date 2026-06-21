@@ -1,0 +1,430 @@
+/* ============================================================================
+   Vallejo Design System v1.2 — Badges, Tags & Chips
+   Page: Badges, Tags & Chips
+   Components: Badge / Status, Badge / Count, Tag, Chip, Chip / Filter
+
+   Tonal law (Subtle): family-100 fill + family-800 text.
+   Solid law:          family-600 fill + white text.
+   Selected register:  blue-50/100 wash + blue-300 border + blue-800 label
+                       (one uniform across chips, selected rows, watchlist).
+   Pills (badge/chip/tag-applied capsule) = --radius-pill; Tags = --radius-md.
+   ALL colors via tokens — no hardcoded values.
+   ============================================================================ */
+
+
+/* ============================================================================
+   BADGE / STATUS
+   A changing system state: COLORED, filled, no border, never removable.
+   Tone (Neutral/Info/Success/Warning/Error) × Emphasis (Subtle/Solid) × Dot.
+   Type: Caption 1 (Inter 500, 12/16, +0.18 LS).
+   ============================================================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  height: 20px;
+  padding: 0 var(--space-2);
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.18px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* --- Subtle (default): tone-100 fill + tone-800 text ---------------------- */
+
+.badge-neutral {
+  background-color: var(--gray-100);
+  color: var(--gray-800);
+}
+
+.badge-info {
+  background-color: var(--blue-100);
+  color: var(--blue-800);
+}
+
+.badge-success {
+  background-color: var(--success-light);   /* success-100 */
+  color: var(--success-dark);                /* success-800 */
+}
+
+.badge-warning {
+  background-color: var(--warning-light);    /* warning-100 */
+  color: var(--warning-dark);                /* warning-800 */
+}
+
+.badge-error {
+  background-color: var(--error-light);      /* error-100 */
+  color: var(--error-dark);                  /* error-800 */
+}
+
+/* --- Solid (loud / live): tone-600 fill + white text ---------------------- */
+
+.badge-solid.badge-neutral {
+  background-color: var(--gray-600);
+  color: var(--text-inverse);
+}
+
+.badge-solid.badge-info {
+  background-color: var(--blue-600);
+  color: var(--text-inverse);
+}
+
+.badge-solid.badge-success {
+  background-color: var(--success-accent);   /* success-600 */
+  color: var(--text-inverse);
+}
+
+.badge-solid.badge-warning {
+  background-color: var(--warning-accent);    /* warning-600 */
+  color: var(--text-inverse);
+}
+
+.badge-solid.badge-error {
+  background-color: var(--error-accent);     /* error-600 */
+  color: var(--text-inverse);
+}
+
+/* --- Optional leading dot (live / active signals) ------------------------- */
+/* Inherits text color via currentColor so it reads in both Subtle & Solid.  */
+
+.badge-dot-mark {
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: currentColor;
+}
+
+
+/* ============================================================================
+   BADGE / COUNT
+   A count is DATA. Solid pill, min 18px. Brand (blue) default,
+   Error (urgent), Neutral (plain totals). Number set in mono.
+   ============================================================================ */
+
+.badge-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 var(--space-1-5);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--text-inverse);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.badge-count-brand {
+  background-color: var(--blue-600);
+}
+
+.badge-count-error {
+  background-color: var(--error-accent);     /* error-600 */
+}
+
+.badge-count-neutral {
+  background-color: var(--gray-600);
+}
+
+
+/* ============================================================================
+   TAG
+   A fixed attribute / category / applied choice. Squarer (--radius-md) and
+   quieter than a badge. The law: an X appears on blue (Applied) or not at all.
+   Type: Caption 1 (Inter 500, 12/16).
+   ============================================================================ */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  height: 20px;
+  padding: 0 var(--space-2);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.18px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* Neutral gray = a fact about the object (4WD, Salvage) — never removable.  */
+.tag-neutral {
+  background-color: var(--gray-100);
+  color: var(--gray-800);
+}
+
+/* Risk tonals (never vivid) — fixed facts the buyer must weigh, never X'd.  */
+.tag-positive {
+  background-color: var(--success-light);    /* success-100 */
+  color: var(--success-dark);                /* success-800 */
+}
+
+.tag-caution {
+  background-color: var(--warning-light);     /* warning-100 */
+  color: var(--warning-dark);                /* warning-800 */
+}
+
+.tag-critical {
+  background-color: var(--error-light);      /* error-100 */
+  color: var(--error-dark);                  /* error-800 */
+}
+
+/* Applied (user-chosen) — blue-100 + blue-600 — the ONLY removable tone.    */
+.tag-applied {
+  background-color: var(--blue-100);
+  color: var(--blue-600);
+}
+
+/* Removable: trailing × is a real <button>, only valid on .tag-applied.     */
+.tag-removable {
+  padding-right: var(--space-1);
+}
+
+.tag-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-enter);
+}
+
+.tag-remove svg {
+  width: 12px;
+  height: 12px;
+}
+
+.tag-remove:hover {
+  background-color: var(--blue-200);
+}
+
+.tag-remove:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+
+/* ============================================================================
+   CHIP
+   An interactive filter/choice. Pill with a BORDER (its silhouette) raised
+   like a key — chips wear the button key material because they act.
+   Rest = white + gray-300 border + text-secondary.
+   Hover = gray-400 border (line advances).
+   Selected = selected register (blue-100 fill + blue-300 border + blue-800).
+   Additive & multi-select. Disabled stays flat.
+   Type: Body Small (Inter 400, 14/20).
+   ============================================================================ */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  height: 32px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border-default);   /* gray-300 */
+  border-radius: var(--radius-pill);
+  background-color: var(--surface-raised);   /* white */
+  box-shadow: var(--elevation-key);          /* raised key edge */
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-enter),
+    background-color var(--duration-fast) var(--ease-enter),
+    box-shadow var(--duration-fast) var(--ease-enter);
+}
+
+/* Hover — line advances to gray-400, key lifts. */
+.chip:hover {
+  border-color: var(--gray-400);
+  box-shadow: var(--elevation-key-hover);
+}
+
+/* Pressed — key presses in. */
+.chip:active {
+  box-shadow: var(--elevation-key-pressed);
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Selected register — state carried by fill + border + label, not color alone
+   (the word stays). Toggle chips flag selection via aria-pressed="true".    */
+.chip[aria-pressed="true"] {
+  border-color: var(--blue-300);
+  background-color: var(--interactive-selected-fill);  /* blue-100 */
+  color: var(--blue-800);
+  box-shadow: var(--elevation-key);
+}
+
+.chip[aria-pressed="true"]:hover {
+  border-color: var(--blue-300);
+  box-shadow: var(--elevation-key-hover);
+}
+
+/* Disabled stays flat (no key edge, no hover affordance). */
+.chip[disabled],
+.chip[aria-disabled="true"] {
+  border-color: var(--border-hairline);
+  background-color: var(--surface-sunken);
+  color: var(--text-disabled);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* --- Removable chip ------------------------------------------------------- */
+/* Capsule wrapper (a <span>); the × is a nested real <button>.              */
+.chip-removable {
+  padding-right: var(--space-1-5);
+}
+
+.chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-enter);
+}
+
+.chip-remove svg {
+  width: 12px;
+  height: 12px;
+}
+
+.chip-remove:hover {
+  background-color: var(--blue-200);
+}
+
+.chip-remove:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+
+/* ============================================================================
+   CHIP / FILTER
+   A filter chip (chip family, pill) that OPENS a Select menu.
+   Rest shows the DIMENSION; the permanent affordance is the chevron.
+   Active = tonal selected register (blue-50 fill + blue-300 border +
+            blue-800 text + blue-600 chevron).
+   Removability is NOT on the trigger — cleared in-place via menu / tag row.
+   ============================================================================ */
+
+.chip-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  height: 32px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border-default);   /* gray-300 */
+  border-radius: var(--radius-pill);
+  background-color: var(--surface-raised);   /* white */
+  box-shadow: var(--elevation-key);          /* raised key edge */
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-enter),
+    background-color var(--duration-fast) var(--ease-enter),
+    box-shadow var(--duration-fast) var(--ease-enter);
+}
+
+/* Chevron — the permanent affordance; inherits color until Active. */
+.chip-filter-chevron {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  color: var(--text-tertiary);
+}
+
+/* Hover — line advances to gray-400. */
+.chip-filter:hover {
+  border-color: var(--gray-400);
+  box-shadow: var(--elevation-key-hover);
+}
+
+.chip-filter:active {
+  box-shadow: var(--elevation-key-pressed);
+}
+
+.chip-filter:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Open (menu showing) — reflected via aria-expanded="true". */
+.chip-filter[aria-expanded="true"] {
+  border-color: var(--gray-400);
+  box-shadow: var(--elevation-key-pressed);
+}
+
+/* Active — tonal selected register: blue-50 fill, blue-300 border,
+   blue-800 text, blue-600 chevron. */
+.chip-filter-active {
+  border-color: var(--blue-300);
+  background-color: var(--interactive-selected-wash);  /* blue-50 */
+  color: var(--blue-800);
+}
+
+.chip-filter-active .chip-filter-chevron {
+  color: var(--blue-600);
+}
+
+.chip-filter-active:hover {
+  border-color: var(--blue-300);
+}
+
+/* Disabled stays flat. */
+.chip-filter[disabled],
+.chip-filter[aria-disabled="true"] {
+  border-color: var(--border-hairline);
+  background-color: var(--surface-sunken);
+  color: var(--text-disabled);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.chip-filter[disabled] .chip-filter-chevron,
+.chip-filter[aria-disabled="true"] .chip-filter-chevron {
+  color: var(--text-disabled);
+}

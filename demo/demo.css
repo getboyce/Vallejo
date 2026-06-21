@@ -1,0 +1,1106 @@
+/* ============================================================================
+   Vallejo 1.2 — Documentation-site CHROME (demo.css)
+   ----------------------------------------------------------------------------
+   The OUTWARD-FACING demo site shell, layered ON TOP of:
+     1) /dist/tokens.css     (primitives + semantic aliases)
+     2) /dist/vallejo.css    (base reset, .text-* utilities, components)
+     3) THIS FILE            (site chrome + documentation patterns)
+
+   This file styles ONLY the documentation chrome (app bar, page scaffold,
+   doc patterns: swatch grid, spec table, showcase frame, token chip, do/don't,
+   callout, footer). It NEVER styles a shipped component — those come from
+   vallejo.css and are dropped in LIVE.
+
+   GOVERNANCE (binding, same as the system itself):
+   - ZERO hardcoded colors. Every color resolves to a var(--token).
+   - No opacity-derived colors. Separation is SOLID hairlines (--border-hairline);
+     lift uses the --elevation-* tokens only. No invented shadows.
+   - Spacing/radius/motion all come from the token scale.
+   - Aesthetic: Precision + Institutional Confidence — quiet, whitespace-led,
+     hairlines not heavy borders, restraint over decoration.
+   ============================================================================ */
+
+
+/* ----------------------------------------------------------------------------
+   0. Document frame
+   The demo canvas is the warm paper that recedes; content sits on raised white
+   surfaces. Smooth-scroll honors reduced-motion in §9.
+   ---------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  /* anchored sections clear BOTH sticky bars — app bar (64px) + section index
+     (~49px) — plus a little breathing room */
+  scroll-padding-top: 120px;
+}
+
+body {
+  background-color: var(--surface-canvas);
+  color: var(--text-primary);
+}
+
+/* Skip link — keyboard users jump past the app bar straight to content. */
+.demo-skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: var(--space-2);
+  z-index: var(--layer-tooltip);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background-color: var(--surface-raised);
+  color: var(--text-link);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  text-decoration: none;
+  box-shadow: var(--elevation-overlay);
+  transform: translateY(calc(-100% - var(--space-8)));
+  transition: transform var(--duration-fast) var(--ease-enter);
+}
+.demo-skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+
+/* ============================================================================
+   1. APP BAR (.demo-header)
+   Sticky dark chrome. LEFT = "Vallejo" wordmark + a small "1.2" version pill.
+   RIGHT = a segmented nav switch. Focus on dark chrome uses the on-dark ring.
+   ============================================================================ */
+.demo-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--layer-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  height: 64px;
+  padding: 0 var(--space-6);
+  background-color: var(--surface-header-bg);   /* gray/800 dark chrome */
+  color: var(--text-on-header);                  /* white, 12.65:1 on header */
+  /* hairline parting line reads on dark chrome (deeper header value) */
+  border-bottom: 1px solid var(--surface-header-deep);
+}
+
+/* Focus on the dark bar uses blue/300 (blue/600 fails on dark chrome) */
+.demo-header :focus-visible {
+  outline: 2px solid var(--border-focus-on-dark);
+  outline-offset: 2px;
+}
+
+/* --- Brand cluster: wordmark + version pill -------------------------------- */
+.demo-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: var(--text-on-header);
+  /* 44px touch target without growing the visual height */
+  min-height: 44px;
+}
+
+.demo-wordmark {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;            /* Title 3 weight; tightened for a mark */
+  letter-spacing: -0.2px;
+  color: var(--text-on-header);
+}
+
+/* Version pill — a small mono "1.2" capsule, the quiet authority of a number */
+.demo-version-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background-color: var(--surface-header-field); /* gray/700 on the bar */
+  color: var(--text-on-header);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* --- Segmented nav switch (.demo-nav) -------------------------------------- */
+/* A single-select segmented control sitting on the dark bar. The active link
+   reads as a subtle filled segment; inactive links are muted-on-header. */
+.demo-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-0-5);
+  padding: var(--space-0-5);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface-header-deep);  /* sunken well in the bar */
+}
+
+.demo-nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* 44px touch target; visual height padded within */
+  min-height: 36px;
+  min-width: 44px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--text-on-header-muted);            /* inactive: muted on dark */
+  transition:
+    background-color var(--duration-fast) var(--ease-enter),
+    color var(--duration-fast) var(--ease-enter);
+}
+
+.demo-nav-link:hover {
+  color: var(--text-on-header);
+  background-color: var(--surface-header-field); /* gray/700 hover lift */
+}
+
+/* Active segment — subtle filled + full-strength label + aria-current cue.
+   Marked in markup with .is-active and aria-current="page". */
+.demo-nav-link.is-active,
+.demo-nav-link[aria-current="page"] {
+  color: var(--text-on-header);
+  background-color: var(--surface-header-field); /* the filled selected segment */
+  font-weight: 600;
+}
+
+
+/* --- Section index (.demo-section-nav) ------------------------------------- */
+/* A light, sticky strip beneath the dark app bar that jumps to every section.
+   Scrolls horizontally when the links overflow; the active section (tracked by
+   the scroll-spy in demo.js) wears the SELECTED REGISTER — blue/50 wash +
+   blue/800 label — the same uniform as chips, selected rows, and filter chips. */
+.demo-section-nav {
+  position: sticky;
+  top: 64px;                                    /* sits directly under the 64px app bar */
+  z-index: var(--layer-sticky);
+  background-color: var(--surface-raised);      /* white strip under the dark bar */
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.demo-section-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  max-width: 1080px;                            /* aligns with .demo-main */
+  margin: 0 auto;
+  padding: var(--space-2) var(--space-6);
+  overflow-x: auto;                             /* scroll, don't wrap, on overflow */
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.demo-section-nav-link {
+  flex: none;                                   /* keep each label on one line */
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition:
+    background-color var(--duration-fast) var(--ease-enter),
+    color var(--duration-fast) var(--ease-enter);
+}
+
+.demo-section-nav-link:hover {
+  background-color: var(--surface-canvas);      /* gray/50 */
+  color: var(--text-primary);
+}
+
+/* Active = the section currently in view; wears the selected register. */
+.demo-section-nav-link.is-active,
+.demo-section-nav-link[aria-current="location"] {
+  background-color: var(--interactive-selected-wash);  /* blue/50 */
+  color: var(--blue-800);
+  font-weight: 600;
+}
+
+.demo-section-nav-link:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+
+/* ============================================================================
+   2. PAGE SCAFFOLD
+   Centered measure (~1080px), generous page-level padding, section rhythm via
+   the space scale. Sections are parted by SOLID hairlines, never heavy borders.
+   ============================================================================ */
+.demo-main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-6) var(--space-24);
+}
+
+/* Hero / page intro — sits above the first section, more air below */
+.demo-hero {
+  margin-bottom: var(--space-16);
+}
+
+.demo-hero-eyebrow {
+  display: block;
+  margin-bottom: var(--space-3);
+  color: var(--text-tertiary);
+}
+
+.demo-hero-title {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.demo-hero-lede {
+  max-width: 64ch;                /* readable measure for lead prose */
+  margin-top: var(--space-4);
+  color: var(--text-secondary);
+}
+
+/* Section — the rhythm unit. A hairline parts each from the next. */
+.demo-section {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-4);
+  border-top: 1px solid var(--border-hairline);
+}
+
+/* First section after the hero needs no top hairline (the hero already parts) */
+.demo-section:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.demo-section-header {
+  margin-bottom: var(--space-8);
+}
+
+.demo-section-title {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.demo-section-intro {
+  max-width: 68ch;
+  margin-top: var(--space-3);
+  color: var(--text-secondary);
+}
+
+/* Sub-block within a section (a labeled group of patterns) */
+.demo-block {
+  margin-top: var(--space-12);
+}
+
+.demo-block-title {
+  margin: 0 0 var(--space-4);
+  color: var(--text-primary);
+}
+
+.demo-block-note {
+  max-width: 68ch;
+  margin: 0 0 var(--space-6);
+  color: var(--text-secondary);
+}
+
+/* A bare hairline rule for inline use inside prose */
+.demo-rule {
+  height: 1px;
+  margin: var(--space-8) 0;
+  border: 0;
+  background-color: var(--border-hairline);
+}
+
+
+/* ============================================================================
+   3. COLOR RAMPS — palette documentation
+   One column per family; each step is a full-width swatch labeled with its
+   number + hex (mono). Reads as a continuous ramp top→bottom, and every family
+   sits side-by-side in one row (wraps only on a narrow window). Set the fill
+   inline per step via style="background: var(--blue-600)"; the label flips to
+   dark ink on light steps via .on-light (default ink is inverse/white).
+   ============================================================================ */
+.ramp-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+.ramp-col {
+  flex: 1 1 120px;
+  min-width: 120px;
+}
+
+.ramp-col-title {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--text-primary);
+}
+
+/* One short descriptor; min-height keeps the stacks top-aligned across columns
+   even when a note wraps to two lines. */
+.ramp-col-note {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-tertiary);
+  margin: var(--space-0-5) 0 var(--space-2);
+  min-height: 32px;
+}
+
+.ramp-stack {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;                 /* round the outer corners; steps butt together */
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-lg);
+}
+
+/* One step = a full-width color band, labeled with its number + hex. Default
+   ink is inverse (white) for the dark steps; .on-light flips it to dark ink. */
+.ramp-step {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  min-height: 30px;
+  padding: var(--space-2) var(--space-3);
+  box-sizing: border-box;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-inverse);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "zero" 0;     /* suppress JetBrains dotted zero */
+}
+.ramp-step.on-light {
+  color: var(--text-primary);
+}
+
+/* Step number — fixed column so the hexes line up down the ramp */
+.ramp-step-num {
+  flex: none;
+  min-width: 2.75em;
+  font-weight: 600;
+}
+.ramp-step-hex {
+  opacity: 0.85;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ============================================================================
+   4. SPEC TABLE — clean reference table
+   Header row on the sunken surface; hairline rows; mono values where numeric.
+   Quiet surface model: white body, gray/200 ring + radius, NO zebra.
+   ============================================================================ */
+.spec-table-wrap {
+  overflow-x: auto;                              /* numeric tables can be wide */
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-xl);
+  background-color: var(--surface-raised);
+}
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  /* keep cell ink readable as Body Small */
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.spec-table thead th {
+  height: 44px;
+  padding: 0 var(--space-4);
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+  background-color: var(--surface-sunken);       /* sunken header row */
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;                              /* Subheadline */
+  line-height: 20px;
+  letter-spacing: 0.07px;
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.spec-table tbody th,
+.spec-table tbody td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border-hairline);
+  color: var(--text-primary);
+}
+
+/* Last row sheds its divider so it welds cleanly to the radius */
+.spec-table tbody tr:last-child th,
+.spec-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Row header cell — the token / property name, ink, slightly emphasized */
+.spec-table tbody th {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Secondary descriptive cell text */
+.spec-table .spec-note {
+  color: var(--text-secondary);
+}
+
+/* Mono value cell — values you compare (px, hex, ratios, tokens) */
+.spec-table .spec-mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "zero" 0;
+  white-space: nowrap;
+}
+
+/* Right-align a numeric column when needed */
+.spec-table .spec-numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ============================================================================
+   5. SHOWCASE — a framed area that holds a LIVE component
+   Raised white surface + hairline ring + container radius (xl). An optional
+   label sits on the sunken surface at the top edge. The frame casts NO resting
+   shadow (resting surfaces read by fill + hairline); lift is reserved for
+   the live components inside.
+   ============================================================================ */
+.showcase {
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+/* Overflow-visible variant — for showcases that hold an OPEN floating surface
+   (a chip-filter menu, a select menu). The frame's overflow:hidden would clip
+   the dropdown that escapes the stage; this lets it spill past the frame edge.
+   The label strip keeps its own clipping via its bottom hairline, so only the
+   stage region needs to release. */
+.showcase-overflow {
+  overflow: visible;
+}
+
+/* With overflow released, the sunken label strip can no longer be clipped to the
+   frame's rounded top corners — round its own top corners so the frame stays clean. */
+.showcase-overflow > .showcase-label {
+  border-top-left-radius: var(--radius-xl);
+  border-top-right-radius: var(--radius-xl);
+}
+
+/* Optional label strip — sits above the stage on the sunken surface */
+.showcase-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--surface-sunken);
+  border-bottom: 1px solid var(--border-hairline);
+  font-family: var(--font-sans);
+  font-size: 11px;                               /* Overline */
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.44px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* Stage — generous padding, centers the live component on the white surface */
+.showcase-stage {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-8);
+}
+
+/* Centered stage variant — single hero component */
+.showcase-stage-center {
+  justify-content: center;
+}
+
+/* Stage on the canvas surface — when a component needs the recessed paper
+   behind it (e.g. a card whose own white would vanish on white). */
+.showcase-stage-canvas {
+  background-color: var(--surface-canvas);
+}
+
+/* A row of showcases sitting side-by-side */
+.showcase-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+/* When a .showcase-row is nested DIRECTLY inside a .showcase (a grid of live
+   inputs used in place of a .showcase-stage), it inherits no stage padding, so
+   the full-width inputs would touch the frame edges. Give it the same generous
+   inset as a stage and a smaller column min so the columns + gap always fit
+   within the padded frame, leaving breathing room on both sides. */
+.showcase > .showcase-row {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  padding: var(--space-8);
+}
+
+@media (max-width: 767px) {
+  .showcase > .showcase-row {
+    padding: var(--space-5);
+  }
+}
+
+
+/* ============================================================================
+   6. TOKEN CHIP — an inline reference capsule for a token name / value
+   Mono, pill, sits in prose to name a token without leaving the sentence.
+   ============================================================================ */
+.token-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  height: 24px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-pill);
+  background-color: var(--surface-sunken);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "zero" 0;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* Optional leading color dot — shows the resolved fill of the named token.
+   Set via --chip-dot, e.g. style="--chip-dot: var(--blue-600)". */
+.token-chip-dot {
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background-color: var(--chip-dot, var(--border-default));
+  box-shadow: inset 0 0 0 1px var(--shadow-key-edge);
+}
+
+
+/* ============================================================================
+   7. DO / DON'T — two-column guidance
+   Good vs. Avoid. Success accent rails the Do column; error accent rails the
+   Avoid column. Color is never the only cue — each carries a "Do" / "Don't"
+   word label, so the guidance is CVD-safe.
+   ============================================================================ */
+/* Do/Don't is PAIRED: each Do sits directly beside its matching Don't in ONE
+   framed unit (Do left, Don't right, joined by a single hairline divider), and
+   pairs stack down the page so a comparison never scatters across columns. Cards
+   alternate Do, Don't, Do, Don't… so odd children are the Do (left), even are
+   the Don't (right). Good-only example sets opt out via .dodont-gallery. */
+.dodont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0;                 /* Do | Don't touch — read as one unit */
+  row-gap: var(--space-4);       /* air only BETWEEN pairs */
+}
+
+.dodont-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-hairline);
+  border-radius: 0;              /* the pair frames its own outer corners below */
+}
+
+/* Do = left half: round the outer (left) corners; its right edge is the divider */
+.dodont .dodont-card:nth-child(odd) {
+  border-top-left-radius: var(--radius-xl);
+  border-bottom-left-radius: var(--radius-xl);
+}
+/* Don't = right half: drop the doubled border (the Do's right edge is the single
+   divider) and round the outer (right) corners */
+.dodont .dodont-card:nth-child(even) {
+  border-left: 0;
+  border-top-right-radius: var(--radius-xl);
+  border-bottom-right-radius: var(--radius-xl);
+}
+
+/* Narrow screens: stack Do over Don't as plain rounded cards */
+@media (max-width: 640px) {
+  .dodont {
+    grid-template-columns: 1fr;
+    row-gap: var(--space-4);
+  }
+  .dodont .dodont-card:nth-child(odd),
+  .dodont .dodont-card:nth-child(even) {
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-xl);
+  }
+}
+
+/* Gallery — a set of good-only examples (tenses, registers) with no 1:1 Don't to
+   pair against; each card keeps its own full frame in a simple responsive grid. */
+.dodont-gallery {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  column-gap: var(--space-4);
+}
+.dodont-gallery .dodont-card,
+.dodont-gallery .dodont-card:nth-child(odd),
+.dodont-gallery .dodont-card:nth-child(even) {
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-xl);
+}
+
+/* Label — Overline + a leading mark; the word carries the meaning, not color */
+.dodont-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.44px;
+  text-transform: uppercase;
+}
+
+/* The mark glyph (check / cross) inherits the column accent via currentColor */
+.dodont-label svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+/* Do — the success label word + check glyph carry the meaning (no left rail) */
+.dodont-do .dodont-label {
+  color: var(--success-accent);
+}
+
+/* Don't — the error label word + cross glyph carry the meaning (no left rail) */
+.dodont-dont .dodont-label {
+  color: var(--error-accent);
+}
+
+/* Body copy in a do/don't card */
+.dodont-body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-secondary);
+}
+
+/* The framed demonstration area inside a card (holds a live example) */
+.dodont-figure {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background-color: var(--surface-canvas);
+  border-radius: var(--radius-lg);
+}
+
+
+/* ============================================================================
+   8. CALLOUT — a note box
+   A quiet aside in the documentation flow. Harmonizes with the shipped .alert
+   tonal grammar (tone/100 fill + tone/800 text + tone/600 accent), mirroring the
+   shipped Banner (Subtle): tonal FILL + tone text + tone-accent icon, NO border.
+   The icon + the label word carry the tone (CVD-safe). Vallejo never uses a left
+   accent rail (only the selected table row does). Neutral by default.
+   ============================================================================ */
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-xl);
+  background-color: var(--surface-sunken);       /* neutral default */
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+}
+
+/* Leading icon slot — inherits the tone accent */
+.callout-icon {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  color: var(--text-tertiary);
+}
+
+.callout-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Label — Overline, the tone word (Note / Tip / Heads up) */
+.callout-label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.44px;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.callout-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: inherit;
+}
+
+.callout-text a {
+  color: var(--text-link);
+  text-decoration: underline;
+}
+.callout-text a:hover {
+  color: var(--text-link-hover);
+}
+
+/* Mono inline values inside a callout (token names, px) */
+.callout-text code,
+.callout-text .u-mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1, "zero" 0;
+}
+
+/* --- Tones (subtle recipe, mirrors .alert) --------------------------------- */
+.callout-info {
+  background-color: var(--blue-100);
+  color: var(--blue-800);
+}
+.callout-info .callout-icon { color: var(--blue-600); }
+
+.callout-warning {
+  background-color: var(--warning-light);        /* warning/100 */
+  color: var(--warning-dark);                    /* warning/800 */
+}
+.callout-warning .callout-icon { color: var(--warning-accent); }
+
+.callout-success {
+  background-color: var(--success-light);
+  color: var(--success-dark);
+}
+.callout-success .callout-icon { color: var(--success-accent); }
+
+
+/* ============================================================================
+   9. FOOTER (.demo-footer)
+   Minimal dark chrome. "Vallejo Design System · Copart" + repo + Vault links.
+   ============================================================================ */
+.demo-footer {
+  margin-top: var(--space-24);
+  padding: var(--space-12) var(--space-6);
+  background-color: var(--surface-footer);       /* gray/900, matches header deep */
+  color: var(--text-on-header-muted);
+}
+
+.demo-footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.demo-footer-mark {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--text-on-header);
+}
+
+.demo-footer-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.demo-footer-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;                              /* touch target */
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-on-header-muted);
+  transition: color var(--duration-fast) var(--ease-enter);
+}
+.demo-footer-link:hover {
+  color: var(--text-on-header);
+  text-decoration: underline;
+}
+.demo-footer :focus-visible {
+  outline: 2px solid var(--border-focus-on-dark);
+  outline-offset: 2px;
+}
+
+
+/* ============================================================================
+   10. RESPONSIVE — collapse the page gutters and grids on small screens
+   Mobile-first scale stays on the token grid (margins -> space-4).
+   ============================================================================ */
+@media (max-width: 767px) {
+  .demo-header {
+    padding: 0 var(--space-4);
+    gap: var(--space-3);
+  }
+
+  .demo-nav-link {
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .demo-main {
+    padding: var(--space-12) var(--space-4) var(--space-16);
+  }
+
+  .demo-section {
+    padding-top: var(--space-12);
+  }
+
+  .showcase-stage {
+    padding: var(--space-5);
+  }
+
+  .demo-footer {
+    padding: var(--space-10) var(--space-4);
+  }
+
+  .demo-footer-inner {
+    justify-content: flex-start;
+  }
+}
+
+
+/* ============================================================================
+   11. MOTION — honor prefers-reduced-motion (collapse to instant)
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .demo-skip-link,
+  .demo-nav-link,
+  .demo-footer-link {
+    transition-duration: var(--duration-instant);
+  }
+}
+
+
+/* ============================================================================
+   PORTED FROM THE 1.x DEMO (adapted to v1.2 tokens)
+   Section heads · font-family specimen · spacing live-examples · icon library
+   ============================================================================ */
+
+/* Richer section heads — a blue group eyebrow above each pattern-block title +
+   a larger title (old-demo .section-label / .section-title look). Pure CSS:
+   demo.css loads after dist/vallejo.css, so this overrides the text-title-3
+   utility (20px). Group headers use .demo-section-title, so the eyebrow never
+   appears on those — only on the pattern-block h3s. */
+.demo-block-title {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+.demo-block-title::before {
+  content: "";
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--interactive-primary);
+  margin-bottom: var(--space-2);
+}
+#foundations .demo-block-title::before { content: "Foundations"; }
+#components .demo-block-title::before { content: "Components"; }
+#build .demo-block-title::before { content: "Build"; }
+
+/* Font-families specimen — responsive (Typography block) */
+@media (max-width: 767px) {
+  .font-showcase-grid { grid-template-columns: 1fr !important; }
+  .font-showcase-name { font-size: 40px !important; }
+  .font-showcase-name-mono { font-size: 36px !important; }
+}
+
+/* Spacing "Live examples" cards (demo-only) */
+.spacing-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+@media (max-width: 720px) {
+  .spacing-examples-grid { grid-template-columns: 1fr; }
+}
+.spacing-example {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+}
+.spacing-example-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.spacing-example-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--blue-200);
+  color: var(--blue-900);
+}
+.example-inner-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-canvas);
+  border: 1px dashed var(--border-default);
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.example-highlight {
+  border: 1px dashed var(--interactive-primary);
+}
+
+/* Icon library — categorized grids of inline Iconic SVGs (currentColor) */
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1px;
+  background: var(--gray-100);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+.icon-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-3);
+  background: var(--surface-raised);
+  transition: background var(--duration-fast) var(--ease-enter);
+}
+.icon-cell:hover { background: var(--surface-canvas); }
+.icon-cell svg { width: 24px; height: 24px; color: var(--text-primary); }
+.icon-cell-label {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+.icon-category {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  margin: var(--space-8) 0 var(--space-3);
+}
+.icon-category:first-of-type { margin-top: 0; }
+
+
+/* ============================================================================
+   BRAND LOGOS — recovered into the Logos block + the header Copart mark
+   ============================================================================ */
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+.logo-card {
+  overflow: hidden;
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-xl);
+  background: var(--surface-raised);
+}
+.logo-card-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: var(--space-8) var(--space-6);
+}
+.logo-card-preview.bg-light { background: var(--surface-raised); }   /* white */
+.logo-card-preview.bg-dark  { background: var(--gray-900); }
+.logo-card-preview svg { max-width: 100%; height: auto; }
+.logo-card-info {
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--border-hairline);
+}
+.logo-card-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.logo-card-meta {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+/* Copart mark in the (dark) app bar — sits directly on the chrome; a quiet
+   divider separates the company mark from the Vallejo product wordmark. */
+.demo-header-logo {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+}
+.demo-header-logo svg { display: block; height: 24px; width: auto; }
+.demo-brand-sep {
+  flex: none;
+  width: 1px;
+  height: 24px;
+  background-color: var(--surface-header-field);
+}

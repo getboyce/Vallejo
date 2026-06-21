@@ -1,0 +1,342 @@
+# Vallejo Tokens — full reference
+
+Every value in Vallejo. Components consume `var(--token)` and NEVER hardcode hex/size.
+Bind the SEMANTIC alias (text/*, surface/*, border/*, interactive/*, status roles) — never a primitive,
+never a raw hex. Reach for a primitive ramp step only when no semantic alias fits.
+
+Version + date live ONLY in version.json (1.2.0 / 2026-06-20). Source of truth = Figma "Vallejo DS - 1.2"
+(fileKey bSOhenbjW7fx7CvGhOXfC0). CSS var names are unprefixed-kebab: `--gray-600`, `--space-4`, `--radius-xl`, etc.
+
+Canonical naming:
+- `gray` is the canonical neutral ramp (gray-0 = white .. gray-950). `neutral-*` is a DEPRECATED alias only → resolves to `gray-*`.
+- `layer-*` is canonical for z-index. `z-*` is a DEPRECATED alias only.
+- NO orange ramp (removed). `gold #FDC146` exists for the User Avatar Premier variant ONLY (same value as warning-200). Urgency uses the warning/error ramps.
+- Info is RETIRED → use blue (informational = blue's job). There is no `info-*` ramp.
+- Error/destructive uses the error ramp — never a raw red.
+
+Color governance (binding):
+- NEVER derive a color with opacity (no `rgba(ink, .07)`). Separation = named SOLID tokens; hairlines are gray-200 SOLID.
+  Shadows and scrims are the ONLY sanctioned alpha exemption — they model light, not color.
+- State is NEVER color-alone (CVD): chips carry a word; LIVE keeps the ● dot. success-600 and error-600 are
+  near-isoluminant under deuteranopia.
+- `text-display-muted` (gray-500) is ≥24px display text only. `text-on-header-muted` (gray-400) is dark-bars only
+  (passes 4.77:1 on dark bars; FAILS on shelf/field gray-700).
+- `border-control` (gray-500) = inputs only (an empty input's boundary is its identifier → needs 3:1).
+  Labeled controls incl. Secondary buttons use `border-default` (gray-300) per W3C 1.4.11.
+- Contrast spine on white: 50→1.075 · 100→1.16 · 200→1.37 · 300→1.78 · 400→2.62 · 500→3.64 · 600→5.75 · 700→8.6 · 800→12.6 · 900→18.1.
+  Any 600 is button-grade; any 800-on-100 is a legible tonal badge.
+
+
+## 1. Primitive color ramps (name → hex → CSS var)
+
+Generated in OKLCH; each step solved to a WCAG contrast target on white. Five 10-step ramps + gray's two extra
+neutrals (gray-0 white, gray-150 cool fill). Bind the SEMANTIC alias in §2 instead of these whenever one exists.
+
+### gray (canonical neutral)
+| Step | Hex | CSS var |
+|---|---|---|
+| gray-0   | #FFFFFF | --gray-0   |
+| gray-50  | #F6F6F5 | --gray-50  |
+| gray-100 | #EEEDEC | --gray-100 |
+| gray-150 | #ECEEF2 | --gray-150 |  (cool fill; backs surface-subtle — sits lighter than the 200 line)
+| gray-200 | #D8DBE2 | --gray-200 |
+| gray-300 | #BDC1CA | --gray-300 |
+| gray-400 | #9C9FA6 | --gray-400 |
+| gray-500 | #83868D | --gray-500 |
+| gray-600 | #62666F | --gray-600 |
+| gray-700 | #484C54 | --gray-700 |
+| gray-800 | #30333A | --gray-800 |
+| gray-900 | #1D222A | --gray-900 |  (ink — primary text)
+| gray-950 | #090B0E | --gray-950 |
+
+### blue (primary / interactive)
+| Step | Hex | CSS var |
+|---|---|---|
+| blue-50  | #EFF4FF | --blue-50  |
+| blue-100 | #DBE7FD | --blue-100 |
+| blue-200 | #B1CCFE | --blue-200 |
+| blue-300 | #82ADFC | --blue-300 |  (focus on dark chrome)
+| blue-400 | #5A8DF1 | --blue-400 |
+| blue-500 | #3970DE | --blue-500 |
+| blue-600 | #2059CC | --blue-600 |  (primary / link / focus; hue 262.2, invariant)
+| blue-700 | #1046B4 | --blue-700 |
+| blue-800 | #043599 | --blue-800 |
+| blue-900 | #032773 | --blue-900 |
+
+### success
+| Step | Hex | CSS var |
+|---|---|---|
+| success-50  | #E1F9E6 | --success-50  |
+| success-100 | #C8F0D1 | --success-100 |
+| success-200 | #9FD8AE | --success-200 |
+| success-300 | #72BC87 | --success-300 |
+| success-400 | #47A164 | --success-400 |
+| success-500 | #098644 | --success-500 |
+| success-600 | #146E3A | --success-600 |
+| success-700 | #0B5B2E | --success-700 |
+| success-800 | #074823 | --success-800 |
+| success-900 | #063519 | --success-900 |
+
+### warning
+| Step | Hex | CSS var |
+|---|---|---|
+| warning-50  | #FEF2E1 | --warning-50  |
+| warning-100 | #FFE3AE | --warning-100 |
+| warning-200 | #FDC146 | --warning-200 |
+| warning-300 | #E1A117 | --warning-300 |
+| warning-400 | #BC8521 | --warning-400 |
+| warning-500 | #9D6B11 | --warning-500 |
+| warning-600 | #82580B | --warning-600 |
+| warning-700 | #6B4806 | --warning-700 |
+| warning-800 | #563804 | --warning-800 |
+| warning-900 | #402903 | --warning-900 |
+
+### error (also drives destructive)
+| Step | Hex | CSS var |
+|---|---|---|
+| error-50  | #FFF0EF | --error-50  |
+| error-100 | #FDDFDD | --error-100 |
+| error-200 | #FCBBB5 | --error-200 |
+| error-300 | #FD8C86 | --error-300 |
+| error-400 | #EE625F | --error-400 |
+| error-500 | #D8383D | --error-500 |
+| error-600 | #C20022 | --error-600 |
+| error-700 | #9D121F | --error-700 |
+| error-800 | #7F0D18 | --error-800 |
+| error-900 | #63010D | --error-900 |
+
+### gold — Premier only
+| Token | Hex | CSS var |
+|---|---|---|
+| gold | #FDC146 | --gold |  (User Avatar Premier variant ONLY — same value as warning-200; NOT a ramp, NOT for urgency/accent.)
+
+
+## 2. Semantic tokens (alias → what it points at)
+
+These are the layer you bind in components. Each points INTO a primitive by NAME. The build is LIGHT-ONLY today;
+dark mode is the planned `data-theme=dark` swap (see §8) but is NOT shipped yet — bind the alias name (not the
+primitive) so a future dark pass can re-theme without touching markup, but don't rely on dark resolving today.
+
+### text/*
+| Token | → | Light value | Notes |
+|---|---|---|---|
+| --text-primary       | gray-900 | #1D222A | body / headings ink |
+| --text-secondary     | gray-700 | #484C54 | |
+| --text-tertiary      | gray-600 | #62666F | |
+| --text-display-muted | gray-500 | #83868D | GOVERNED: display only, ≥24px |
+| --text-disabled      | gray-400 | #9C9FA6 | |
+| --text-inverse       | gray-0   | #FFFFFF | text on dark fills |
+| --text-link          | blue-600 | #2059CC | solid, underlined inline |
+| --text-link-hover    | blue-700 | #1046B4 | |
+| --text-on-header     | gray-0   | #FFFFFF | white on header-800 = 12.65:1 |
+| --text-on-header-muted | gray-400 | #9C9FA6 | GOVERNED: dark bars ONLY (fails on shelf/field gray-700) |
+
+### surface/*  (incl. dark chrome — present in BOTH themes)
+| Token | → | Light value | Notes |
+|---|---|---|---|
+| --surface-raised      | gray-0   | #FFFFFF | cards, sheets |
+| --surface-canvas      | gray-50  | #F6F6F5 | page background |
+| --surface-sunken      | gray-100 | #EEEDEC | wells |
+| --surface-subtle      | gray-150 | #ECEEF2 | COOL fill: subtle backgrounds + hover on white/overlay surfaces |
+| --surface-deep        | gray-950 | #090B0E | |
+| --surface-header-bg   | gray-800 | #30333A | dark chrome — header bar |
+| --surface-header-deep | gray-900 | #1D222A | dark chrome — = footer |
+| --surface-footer      | gray-900 | #1D222A | = header-deep |
+| --surface-header-field| gray-700 | #484C54 | dark chrome — = shelf |
+| --surface-header-shelf| gray-700 | #484C54 | = header-field |
+
+### border/*
+| Token | → | Light value | Notes |
+|---|---|---|---|
+| --border-hairline      | gray-200 | #D8DBE2 | SOLID, never alpha |
+| --border-default       | gray-300 | #BDC1CA | labeled controls incl. Secondary buttons (W3C 1.4.11) |
+| --border-strong        | gray-500 | #83868D | |
+| --border-control       | gray-500 | #83868D | INPUTS ONLY (empty-input boundary needs 3:1) |
+| --border-focus         | blue-600 | #2059CC | see §focus |
+| --border-focus-on-dark | blue-300 | #82ADFC | blue-600 fails on a dark bar |
+
+### interactive/*
+| Token | → | Light value | Notes |
+|---|---|---|---|
+| --interactive-primary           | blue-600  | #2059CC | one Primary action per view |
+| --interactive-primary-grad-end  | (raised gradient) | #1D50B8 | gradient end for RAISED Primary button |
+| --interactive-primary-hover     | blue-700  | #1046B4 | |
+| --interactive-primary-active    | blue-800  | #043599 | |
+| --interactive-selected-fill     | blue-100  | #DBE7FD | selected row/option fill |
+| --interactive-selected-wash     | blue-50   | #EFF4FF | lighter selected wash |
+| --interactive-destructive       | error-600 | #C20022 | destructive uses error ramp, never raw red |
+| --interactive-destructive-grad-end | (raised gradient) | #AF001F | gradient end for RAISED Destructive button |
+| --interactive-destructive-hover | error-700 | #9D121F | |
+| --interactive-destructive-active| error-800 | #7F0D18 | |
+| --interactive-favorite          | error-500 | #D8383D | watchlist/save heart — red, NOT destructive (shares the error ramp, never a destructive cue) |
+
+### status family + role aliases
+Each status family (success, warning, error) exposes 4 role aliases. Pattern per family:
+| Role alias | → | success | warning | error |
+|---|---|---|---|---|
+| --{family}-subtle | family-50  | #E1F9E6 | #FEF2E1 | #FFF0EF |
+| --{family}-light  | family-100 | #C8F0D1 | #FFE3AE | #FDDFDD |
+| --{family}-accent | family-600 | #146E3A | #82580B | #C20022 |
+| --{family}-dark   | family-800 | #074823 | #563804 | #7F0D18 |
+Tonal chip = light fill (100) + dark text (800), ~8.5:1. Vivid warning chip = warning-200 fill + warning-900 text.
+Never put text on a 400 fill. Info status is RETIRED → use blue.
+
+### link
+| Token | → | Light value | Notes |
+|---|---|---|---|
+| --link | blue-600 | #2059CC | solid + underlined inline; nav/standalone links exempt from underline by position |
+| (hover) --text-link-hover | blue-700 | #1046B4 | |
+
+### focus
+Focus is a real STATE, rendered via native `:focus-visible`. Indicator = SOLID 2px ring (NOT a shadow glow),
+concentric (+3 radius). Focus shadows are deprecated — do not use a glow.
+| Token | → | Light value | Notes |
+|---|---|---|---|
+| --focus         | blue-600 | #2059CC | 2px solid ring on light surfaces |
+| --focus-on-dark | blue-300 | #82ADFC | 2px solid ring on dark chrome (blue-600 fails on a dark bar) |
+
+
+## 3. Spacing (--space-*)
+
+4px base grid, 16 steps, 4 intent zones. `--space-0-5` / `--space-1-5` use dash-for-dot (Figma rejects periods)
+and are component-internal-only. Killed mid-steps: 5, 9, 10, 13, 14, 18.
+| Token | px | | Token | px |
+|---|---|---|---|---|
+| --space-0   | 0  | | --space-6  | 24  |
+| --space-0-5 | 2  | | --space-8  | 32  |
+| --space-1   | 4  | | --space-10 | 40  |
+| --space-1-5 | 6  | | --space-12 | 48  |
+| --space-2   | 8  | | --space-16 | 64  |
+| --space-3   | 12 | | --space-20 | 80  |
+| --space-4   | 16 | | --space-24 | 96  |
+| --space-5   | 20 | | --space-32 | 128 |
+Zones: micro 2–12 · element 16–24 · layout 32–64 · page 80–128.
+
+
+## 3a. Breakpoints (responsive grid anchors)
+
+Mobile-first `min-width`. `desktop-lg` (1440) is the canonical design width. The 12-column grid collapses to
+8 then 4; content caps at 1280px max-width (margins grow past 1440). Grid: 12/8/4 columns · gutter 24/16/16 ·
+margin 80/32/16 (desktop/tablet/mobile). Every measurement stays on the space scale.
+| Breakpoint | Min-width | Columns |
+|---|---|---|
+| mobile-sm   | 320  | 4  |
+| mobile      | 375  | 4  |
+| tablet      | 768  | 8  |
+| desktop-sm  | 1024 | 12 |
+| desktop     | 1280 | 12 |
+| desktop-lg  | 1440 | 12 |  (canonical design width)
+| desktop-xl  | 1920 | 12 |
+Safe areas: respect env(safe-area-inset-*) on notched/Dynamic Island devices (bottom nav clears inset-bottom + 8px;
+fullscreen modals honor all four insets); set viewport meta `viewport-fit=cover`. Full grid + safe-area prose in DESIGN.md §2.4.
+
+
+## 4. Radius (--radius-*)
+
+Family = interaction class. Concentric law: nested inner = outer − gap, floor 4.
+| Token | px | Interaction class |
+|---|---|---|
+| --radius-none | 0    | (repo-only) |
+| --radius-sm   | 4    | micro |
+| --radius-md   | 6    | small controls + btn-sm; tooltips, square badges, tags |
+| --radius-lg   | 8    | CONTROL — buttons md+, inputs, selects, search |
+| --radius-xl   | 12   | CONTAINER — cards, menus, toasts |
+| --radius-2xl  | 16   | OVERLAY — modals, drawers |
+| --radius-pill | 9999 | capsules — badges, chips, tags |
+| --radius-full | 50%  | circles / avatars (repo-only) |
+Button radii: btn-sm = 6 (md) · btn md+ = 8 (lg) · btn XL = 12 (xl).
+
+
+## 5. Motion (durations + easings)
+
+prefers-reduced-motion ⇒ collapse to instant.
+
+Durations:
+| Token | ms |
+|---|---|
+| --duration-instant     | 50   |
+| --duration-fast        | 100  |
+| --duration-normal      | 150  |
+| --duration-moderate    | 200  |
+| --duration-slow        | 300  |
+| --duration-deliberate  | 400  |
+| --duration-slower      | 500  |  (repo-only; not named on Figma)
+| --duration-expressive  | 700  |
+| --duration-pulse       | 2400 |  (ambient)
+
+Easings:
+| Token | value | use |
+|---|---|---|
+| --ease-enter  | cubic-bezier(0.32, 0.72, 0, 1)            | decelerate (enter) |
+| --ease-exit   | cubic-bezier(0.4, 0, 1, 1)                | accelerate (exit) |
+| --ease-spring | cubic-bezier(0.175, 0.885, 0.32, 1.275)   | interactive feedback only (repo) |
+| --ease-linear | linear                                    | progress only |
+Registers: transactional fast→moderate · live fast→normal · celebration expressive (never blocking) · ambient pulse.
+Elevation: shadow color is ink rgba(19,22,27) at alpha — never pure black. Resting (non-raised) surfaces cast nothing (fill + hairline).
+Scrim = ink 45%. (Shadows/scrims are the sanctioned alpha exemption.)
+
+Elevation tokens (named effect styles → box-shadow stacks; bind the token, never hand-author a shadow):
+| Token | Used by |
+|---|---|
+| --elevation-key             | the resting raised KEY edge for Secondary/Quiet buttons, Chips, segments (inner top-light + dark-bottom + tight contact drop) |
+| --elevation-primary-rest / -hover / -pressed     | RAISED Primary button (paired with the interactive-primary gradient); hover lifts the ambient, pressed collapses to a single inner shadow |
+| --elevation-destructive-rest / -hover / -pressed | RAISED Destructive button (paired with the interactive-destructive gradient) |
+| --elevation-overlay         | floating surfaces: popover, menu, tooltip, toast, dropdowns |
+| --elevation-modal           | modal + shelf |
+
+
+## 6. Layer / z-index ladder (--layer-*)
+
+Use the token, never a raw z-index. `--layer-*` canonical; `--z-*` is a DEPRECATED alias only.
+The old `header` step was REMOVED from the ladder — use sticky/drawer/modal as appropriate. A tooltip always wins; a dropdown always yields.
+| Token | z | | Token | z |
+|---|---|---|---|---|
+| --layer-dropdown | 1000 | | --layer-scrim   | 1400 |
+| --layer-sticky   | 1100 | | --layer-modal   | 1500 |
+| --layer-drawer   | 1300 | | --layer-toast   | 1600 |
+|                  |      | | --layer-tooltip | 1700 |
+
+
+## 7. Type scale (style → family / weight / size / line-height)
+
+Bind the named style, never raw font props. Primary font Inter (UI + reading); data font JetBrains Mono 500
+(numbers you compare, codes, timers, VINs). Mono never in labels/prose. Weights 400/500/600/700 only.
+Every line-height is a multiple of 4. Off-grid sizes (10/17/26/30) banned. LS = letter-spacing.
+
+**Apply type with the `.text-<style>` utility classes in `dist/vallejo.css`** — never hand-write `font-size`/`line-height`. Use them on page chrome AND inside markup: `.text-display-large` · `.text-display-small` · `.text-headline` · `.text-title-1` · `.text-title-2` · `.text-title-3` · `.text-body-large` · `.text-body` · `.text-body-emphasis` · `.text-list-title` · `.text-subheadline` · `.text-body-small` · `.text-footnote` · `.text-caption` · `.text-overline` · and mono `.text-mono-large` · `.text-mono-medium` · `.text-mono-small`. (Only `--font-sans` / `--font-mono` are exposed as CSS vars; the per-style size/line-height live in these classes.)
+
+| Style | Family | Weight | Size | Line-height | LS (px) | Notes |
+|---|---|---|---|---|---|---|
+| Display Large | Inter | 700 | 64 | 72 | -1.6  | |
+| Display Small | Inter | 700 | 48 | 56 | -0.96 | |
+| Headline      | Inter | 700 | 36 | 44 | -0.54 | |
+| Title 1       | Inter | 600 | 28 | 36 | -0.28 | |
+| Title 2       | Inter | 600 | 24 | 32 | -0.12 | |
+| Title 3       | Inter | 600 | 20 | 28 | 0     | |
+| Body Large    | Inter | 400 | 18 | 28 | 0     | |
+| Body          | Inter | 400 | 16 | 24 | 0     | |
+| Body Emphasis | Inter | 500 | 16 | 24 | 0     | deprecated dup of Callout |
+| List Title    | Inter | 500 | 15 | 20 | 0     | dense list/card titles only, never body |
+| Subheadline   | Inter | 600 | 14 | 20 | 0.07  | table & section labels |
+| Body Small    | Inter | 400 | 14 | 20 | 0     | controls, table cells |
+| Footnote      | Inter | 400 | 13 | 16 | 0.13  | |
+| Caption 1     | Inter | 500 | 12 | 16 | 0.18  | |
+| Overline      | Inter | 600 | 11 | 16 | 0.44  | UPPERCASE |
+| Mono / Large  | JetBrains Mono | 500 | 22 | 28 | 0 | ladders, timers |
+| Mono / Medium | JetBrains Mono | 500 | 16 | 20 | 0 | compared values |
+| Mono / Small  | JetBrains Mono | 500 | 13 | 16 | 0 | table numerics, VINs |
+Responsive: 64→48 · 48→40 · 36→32 · 28→24 below 768px. Deprecated styles: Callout (=Body Emphasis), Caption 2.
+
+
+## 8. Dark mode (planned — NOT shipped yet)
+
+The build is LIGHT-ONLY today. Dark mode is planned but not shipped yet — Figma's dark values are placeholders
+("light-only; do not ship dark"), so the values shown in §2 are the only resolutions that exist right now. Do
+NOT rely on dark resolving in this build.
+
+The PLANNED mechanism is a `data-theme="dark"` layer: set `data-theme="dark"` on the root (or any subtree) and the
+SAME semantic aliases you bind in §2 will resolve to curated dark ramp values instead of the light ones — you would
+NOT change the token names in your markup. An ADA dark guardrail will preserve contrast targets in dark, and dark
+chrome (header/footer/shelf) is identical in both themes. This will land in a dedicated pass once Figma finalizes
+dark. Until then, bind semantic aliases (not primitives) so a future single `data-theme=dark` switch can re-theme a
+prototype — but treat the system as light-only for now.

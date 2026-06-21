@@ -1,0 +1,1101 @@
+/* ============================================================================
+   Vallejo Design System v1.2 — Inputs
+   Text Field · Text Area · Search · Select (+ Menu, Option) · Toggle ·
+   Checkbox · Radio · Slider
+   ----------------------------------------------------------------------------
+   STATE GRAMMAR (shared by Text Field / Text Area / Search / Select):
+   - Inputs differ from buttons: an empty field's BOUNDARY is its identifier,
+     so the rest border is heavier — gray/500 (--border-control, 3.65:1).
+     (Search & Select-closed use the refined-light ladder: gray/300 -> 400 -> blue.)
+   - "Error owns hue / focus owns weight": focus = solid 2px blue ring;
+     error = error/600 border + hue, never a heavier ring alone.
+   - All colors via var(--token). Dimensions in px to match the contract.
+   ========================================================================== */
+
+
+/* ============================================================================
+   1. FIELD SCAFFOLD — label / helper / error / success / optional
+   Used by Text Field, Text Area, and Select.
+   ========================================================================== */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5); /* 6px between label, control, helper */
+}
+
+/* Label above — Body Small / Medium (14 / 500) */
+.field-label {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-primary);
+}
+
+/* "(Optional)" is plain inline text — NEVER a required star */
+.field-optional {
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+
+/* Helper below — Footnote (13 / 16) */
+.field-helper {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+  color: var(--text-tertiary);
+}
+
+/* Error message — error owns the hue */
+.field-error {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+  color: var(--error-accent); /* error/600 */
+}
+
+/* Success message */
+.field-success {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+  color: var(--success-accent); /* success/600 */
+}
+
+
+/* ============================================================================
+   2. TEXT FIELD — .input (+ .input-sm / .input-md / .input-lg, .input-mono)
+   Refined empty-field boundary = --border-control (gray/500, 3.65:1).
+   ========================================================================== */
+
+.input {
+  /* box */
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-md);
+  /* type — value ink */
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  /* motion */
+  transition:
+    border-color var(--duration-fast) var(--ease-enter),
+    background-color var(--duration-fast) var(--ease-enter);
+}
+
+/* Placeholder = gray, value = ink */
+.input::placeholder {
+  color: var(--text-tertiary);
+  opacity: 1; /* normalize Firefox */
+}
+
+/* Sizes (heights on the 8px rhythm) */
+.input-sm {
+  height: 32px;
+  padding: 0 var(--space-3); /* 12px */
+  font-size: 13px;
+  line-height: 16px;
+}
+.input-md {
+  height: 40px;
+  padding: 0 var(--space-3); /* 12px */
+  font-size: 14px;
+  line-height: 20px;
+}
+.input-lg {
+  height: 48px;
+  padding: 0 var(--space-4); /* 16px */
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* VIN / lot # / amount values render in mono */
+.input-mono {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+/* Hover — the line advances (refined-light approach) */
+.input:hover:not(:disabled):not([aria-invalid="true"]) {
+  border-color: var(--gray-600);
+}
+
+/* Focus owns weight — solid 2px blue ring, concentric */
+.input:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-color: var(--border-focus);
+}
+
+/* Error owns hue */
+.input[aria-invalid="true"] {
+  border-color: var(--error-accent); /* error/600 */
+}
+.input[aria-invalid="true"]:focus-visible {
+  outline-color: var(--error-accent);
+}
+
+/* Disabled — large delta: gray/100 fill, gray/200 border, gray/400 ink */
+.input:disabled {
+  background-color: var(--surface-sunken); /* gray/100 */
+  border-color: var(--border-hairline);    /* gray/200 */
+  color: var(--text-disabled);             /* gray/400 */
+  cursor: not-allowed;
+}
+
+
+/* ============================================================================
+   3. TEXT AREA — .textarea + .textarea-footer / .textarea-count
+   Same state grammar as Text Field; multiline, value top-aligned.
+   ========================================================================== */
+
+.textarea {
+  display: block;
+  width: 100%;
+  min-height: 96px; /* default height (resizable per instance) */
+  box-sizing: border-box;
+  padding: var(--space-2) var(--space-3); /* 8 / 12 */
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-md);
+  /* type — line-height 20 on the grid, top-aligned by default */
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-primary);
+  resize: vertical;
+  transition:
+    border-color var(--duration-fast) var(--ease-enter),
+    background-color var(--duration-fast) var(--ease-enter);
+}
+
+.textarea::placeholder {
+  color: var(--text-tertiary);
+  opacity: 1;
+}
+
+.textarea:hover:not(:disabled):not([aria-invalid="true"]) {
+  border-color: var(--gray-600);
+}
+
+.textarea:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-color: var(--border-focus);
+}
+
+.textarea[aria-invalid="true"] {
+  border-color: var(--error-accent);
+}
+.textarea[aria-invalid="true"]:focus-visible {
+  outline-color: var(--error-accent);
+}
+
+.textarea:disabled {
+  background-color: var(--surface-sunken);
+  border-color: var(--border-hairline);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+/* Footer row: helper (left) + character counter (right) */
+.textarea-footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+/* Counter is a small caption -> sans/body (Inter), right-aligned */
+.textarea-count {
+  flex: none;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: var(--text-tertiary);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Over-limit: the count turns error/700 — the count is the evidence */
+.textarea-count[data-over-limit="true"] {
+  color: var(--error-dark); /* error/800 ramp dark; over-limit emphasis */
+}
+
+
+/* ============================================================================
+   4. SEARCH — .search (+ .search-sm/-md/-lg), .search-input,
+      .search-icon-lead, .search-clear, .search-suggestions / .search-suggestion
+   Standalone (NOT a Text Field kind). Refined-light border ladder.
+   Trailing icon swaps: search glass (empty) -> clear x-circle (typed).
+   ========================================================================== */
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2); /* 8px between lead icon and input */
+  box-sizing: border-box;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-default); /* refined-light: rest gray/300 */
+  border-radius: var(--radius-md);
+  transition:
+    border-color var(--duration-fast) var(--ease-enter);
+}
+
+/* Sizes */
+.search-sm {
+  height: 32px;
+  padding: 0 var(--space-3);
+}
+.search-md {
+  height: 40px;
+  padding: 0 var(--space-3);
+}
+.search-lg {
+  height: 48px;
+  padding: 0 var(--space-4);
+}
+
+/* Leading search glass */
+.search-icon-lead {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--text-tertiary);
+  fill: currentColor;
+}
+
+/* Bare field — no own border/background (the wrapper owns the chrome) */
+.search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-primary);
+}
+.search-input::placeholder {
+  color: var(--text-tertiary);
+  opacity: 1;
+}
+.search-input:focus {
+  outline: none; /* focus ring is carried by the wrapper */
+}
+/* Remove native WebKit search decorations (we supply our own clear button) */
+.search-input::-webkit-search-decoration,
+.search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Hover — line advances to gray/400 */
+.search:hover:not([aria-disabled="true"]) {
+  border-color: var(--gray-400);
+}
+
+/* Focus owns weight — blue 2px ring on the wrapper */
+.search:focus-within {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-color: var(--border-focus);
+}
+
+/* Disabled */
+.search[aria-disabled="true"] {
+  background-color: var(--surface-sunken);
+  border-color: var(--border-hairline);
+  cursor: not-allowed;
+}
+.search[aria-disabled="true"] .search-input {
+  color: var(--text-disabled);
+}
+
+/* Trailing clear x-circle (appears once typed) */
+.search-clear {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  border-radius: var(--radius-full);
+}
+.search-clear svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+.search-clear:hover {
+  color: var(--text-secondary);
+}
+.search-clear:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Autocomplete: suggestion menu locked beneath (Elevation/Overlay) */
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + var(--space-1));
+  left: 0;
+  right: 0;
+  z-index: var(--layer-dropdown);
+  margin: 0;
+  padding: var(--space-1);
+  list-style: none;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-hairline); /* gray/200 */
+  border-radius: var(--radius-xl);
+  /* Elevation/Overlay float — built from shadow color tokens (offsets are dims) */
+  box-shadow:
+    0 1px 2px 0 var(--shadow-key-edge),
+    0 8px 24px -4px var(--shadow-primary-contact);
+}
+
+.search-suggestion {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 36px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.search-suggestion svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--text-tertiary);
+  fill: currentColor;
+}
+.search-suggestion:hover,
+.search-suggestion[aria-selected="true"] {
+  background-color: var(--surface-canvas); /* gray/50 hover row */
+}
+
+
+/* ============================================================================
+   5. SELECT — .select (+ .select-sm/-md/-lg), .select-value, .select-chevron
+   Closed states inherit the Text Field contract (empty boundary identifier).
+   ========================================================================== */
+
+.select {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-control); /* empty field boundary = gray/500 */
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-enter),
+    background-color var(--duration-fast) var(--ease-enter);
+}
+
+/* Sizes mirror Text Field */
+.select-sm {
+  height: 32px;
+  padding: 0 var(--space-3);
+  font-size: 13px;
+  line-height: 16px;
+}
+.select-md {
+  height: 40px;
+  padding: 0 var(--space-3);
+  font-size: 14px;
+  line-height: 20px;
+}
+.select-lg {
+  height: 48px;
+  padding: 0 var(--space-4);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* Value fills, placeholder-style when empty handled per instance */
+.select-value {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Trailing chevron — flips up when open via markup (#icon-chevron-up) */
+.select-chevron {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--text-tertiary);
+  fill: currentColor;
+}
+
+.select:hover:not(:disabled):not([aria-invalid="true"]) {
+  border-color: var(--gray-600);
+}
+
+.select:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-color: var(--border-focus);
+}
+
+/* Open = focused trigger; keep blue ring + border while expanded */
+.select[aria-expanded="true"] {
+  border-color: var(--border-focus);
+}
+
+.select[aria-invalid="true"] {
+  border-color: var(--error-accent);
+}
+.select[aria-invalid="true"]:focus-visible {
+  outline-color: var(--error-accent);
+}
+
+.select:disabled {
+  background-color: var(--surface-sunken);
+  border-color: var(--border-hairline);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+
+/* ============================================================================
+   6. SELECT MENU — .select-menu (+ .select-menu-search),
+      .select-menu-search-header / -input / -clear, .select-menu-list
+   Floating menu for Select. Container radius 12, Elevation/Overlay, gray/200.
+   ========================================================================== */
+
+.select-menu {
+  position: absolute;
+  top: 100%;   /* anchor to the trigger's bottom edge */
+  left: 0;     /* align to the trigger's left edge; min-width:100% matches its width */
+  z-index: var(--layer-dropdown);
+  margin: var(--space-1) 0 0;  /* small gap below the trigger */
+  padding: var(--space-1);
+  list-style: none;
+  min-width: 100%;
+  box-sizing: border-box;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-hairline); /* gray/200 */
+  border-radius: var(--radius-xl);           /* 12 */
+  /* Elevation/Overlay float — built from shadow color tokens (offsets are dims) */
+  box-shadow:
+    0 1px 2px 0 var(--shadow-key-edge),
+    0 8px 24px -4px var(--shadow-primary-contact);
+}
+
+/* Search kind = filter header + scrollable option list */
+.select-menu-search {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* Filter header — a searchbox that filters the options below */
+.select-menu-search-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 36px;
+  padding: 0 var(--space-2);
+  border-bottom: 1px solid var(--border-hairline);
+}
+.select-menu-search-header svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--text-tertiary);
+  fill: currentColor;
+}
+
+.select-menu-search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-primary);
+}
+.select-menu-search-input::placeholder {
+  color: var(--text-tertiary);
+  opacity: 1;
+}
+.select-menu-search-input:focus {
+  outline: none;
+}
+
+/* Same clear affordance as Search — x-circle once text typed */
+.select-menu-search-clear {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  border-radius: var(--radius-full);
+}
+.select-menu-search-clear svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+.select-menu-search-clear:hover {
+  color: var(--text-secondary);
+}
+.select-menu-search-clear:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Options list inside the search-kind menu */
+.select-menu-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+/* ============================================================================
+   7. SELECT OPTION — .select-option (+ .select-option-multi),
+      .select-option-label, .select-option-check
+   36px rows. Selected row wears the SELECTED REGISTER
+   (blue/50 wash + blue/800 medium label).
+   ========================================================================== */
+
+.select-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 36px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.select-option-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Single: selected = leading/trailing blue check + blue/800 label.
+   The check belongs ONLY to the selected row, so it is hidden by default
+   and revealed when the row carries aria-selected="true". */
+.select-option-check {
+  flex: none;
+  display: none;
+  width: 16px;
+  height: 16px;
+  color: var(--blue-800);
+  fill: currentColor;
+}
+
+.select-option[aria-selected="true"] > .select-option-check {
+  display: block;
+}
+
+/* Hover (unselected) = gray/50 */
+.select-option:hover:not([aria-disabled="true"]) {
+  background-color: var(--surface-canvas); /* gray/50 */
+}
+
+/* Selected register: blue/50 wash + blue/800 medium label */
+.select-option[aria-selected="true"] {
+  background-color: var(--interactive-selected-wash); /* blue/50 */
+  color: var(--blue-800);
+  font-weight: 500;
+}
+
+/* Selected Hover = deepened blue/50 */
+.select-option[aria-selected="true"]:hover:not([aria-disabled="true"]) {
+  background-color: var(--interactive-selected-fill); /* blue/100 */
+}
+
+/* Disabled row */
+.select-option[aria-disabled="true"] {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+
+/* ============================================================================
+   8. TOGGLE — .toggle (+ .toggle-default / .toggle-small), .toggle-field
+   NATIVE checkbox styled as a switch — toggles with click/Space, no JS.
+   Recessed track + raised-key white thumb (drawn via ::after on the box).
+   Off track gray/300 -> On track blue/600 (state in luminance, not hue alone).
+   ========================================================================== */
+
+/* Label wrapper: switch + text */
+.toggle-field {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+/* The box IS the track — native checkbox with appearance stripped.
+   NOTE: every STATE rule below is qualified with input[type="checkbox"] so it
+   matches the base selector's specificity (0,2,1). A bare `.toggle:checked`
+   (0,2,0) would LOSE to this base rule and the OFF gray would bleed onto the
+   ON track — that was the reported "gray on-track" bug. */
+input[type="checkbox"].toggle {
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  flex: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  background-color: var(--gray-400); /* OFF track — quiet recessed well */
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background-color var(--duration-normal) var(--ease-enter);
+}
+
+/* Raised-key white thumb */
+input[type="checkbox"].toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  border-radius: var(--radius-full);
+  background-color: var(--surface-raised); /* white thumb */
+  box-shadow: var(--elevation-key); /* raised-key drop shadow */
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+/* Sizes — Default 36x20, Small 30x16 (default size when no modifier given) */
+.toggle {
+  width: 36px;
+  height: 20px;
+}
+.toggle::after {
+  width: 16px;
+  height: 16px;
+}
+.toggle-small {
+  width: 30px;
+  height: 16px;
+}
+.toggle-small::after {
+  width: 12px;
+  height: 12px;
+}
+
+/* Off Hover deepens the track one step */
+input[type="checkbox"].toggle:hover:not(:checked):not(:disabled) {
+  background-color: var(--gray-500);
+}
+
+/* ON — track jumps to blue/600, thumb slides right */
+input[type="checkbox"].toggle:checked {
+  background-color: var(--interactive-primary); /* blue/600 */
+}
+input[type="checkbox"].toggle:checked::after {
+  transform: translateX(16px); /* Default: 36 - 16 thumb - 2*2 inset */
+}
+input[type="checkbox"].toggle-small:checked::after {
+  transform: translateX(14px); /* Small: 30 - 12 thumb - 2*2 inset */
+}
+
+/* On Hover deepens to blue/700 */
+input[type="checkbox"].toggle:hover:checked:not(:disabled) {
+  background-color: var(--interactive-primary-hover); /* blue/700 */
+}
+
+/* Focus = 2px blue ring */
+.toggle:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Disabled — muted for BOTH off and on: light gray/300 track + light thumb */
+input[type="checkbox"].toggle:disabled {
+  cursor: not-allowed;
+  background-color: var(--gray-300);
+}
+input[type="checkbox"].toggle:disabled:checked {
+  background-color: var(--gray-300);
+}
+input[type="checkbox"].toggle:disabled::after {
+  background-color: var(--gray-200); /* light thumb, no lift */
+  box-shadow: none;
+}
+
+
+/* ============================================================================
+   9. CHECKBOX — .checkbox (+ .checkbox-large), .checkbox-field
+   The box IS the control -> 3:1 boundary: unchecked = gray/500 1.5px.
+   ========================================================================== */
+
+.checkbox-field {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.checkbox {
+  flex: none;
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: var(--surface-raised);
+  border: 1.5px solid var(--border-control); /* gray/500, 3.65:1 */
+  border-radius: var(--radius-sm);            /* 4 */
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-enter),
+    border-color var(--duration-fast) var(--ease-enter);
+}
+
+/* Large = 20, radius 5 */
+.checkbox-large {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+/* Hover = border gray/700 */
+.checkbox:hover:not(:disabled) {
+  border-color: var(--gray-700);
+}
+
+/* Checked / Indeterminate = blue/600 fill + white glyph (interactive register) */
+.checkbox:checked,
+.checkbox[data-checked="true"],
+.checkbox[aria-checked="mixed"] {
+  background-color: var(--interactive-primary); /* blue/600 */
+  border-color: var(--interactive-primary);
+}
+
+/* White check glyph (drawn with a rotated border).
+   Centered via 50%/50% + translate so the tick sits optically dead-center in
+   the box at any size. The check's own box is offset by a hair (the rotated
+   stroke is bottom-heavy on the long arm) so the visual mass — not the glyph
+   bounding box — lands on center. */
+.checkbox:checked::after,
+.checkbox[data-checked="true"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 9px;
+  border: solid var(--text-inverse); /* white */
+  border-width: 0 2px 2px 0;
+  /* nudge up-left in glyph space before the 45° turn, so the long arm's
+     extra reach doesn't push the mass low-right */
+  transform: translate(-50%, -60%) rotate(45deg);
+}
+.checkbox-large:checked::after,
+.checkbox-large[data-checked="true"]::after {
+  width: 6px;
+  height: 11px;
+  border-width: 0 2px 2px 0;
+}
+
+/* Indeterminate = white dash glyph */
+.checkbox[aria-checked="mixed"]::after,
+.checkbox:indeterminate::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 2px;
+  transform: translate(-50%, -50%);
+  background-color: var(--text-inverse); /* white */
+  border-radius: var(--radius-pill);
+}
+
+/* Focus = 2px blue/600 concentric ring */
+.checkbox:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Disabled = gray/100 fill + gray/300 border */
+.checkbox:disabled {
+  background-color: var(--surface-sunken); /* gray/100 */
+  border-color: var(--border-default);     /* gray/300 */
+  cursor: not-allowed;
+}
+/* Disabled-checked = gray/300 fill */
+.checkbox:disabled:checked,
+.checkbox:disabled[data-checked="true"] {
+  background-color: var(--border-default); /* gray/300 */
+  border-color: var(--border-default);
+}
+
+
+/* ============================================================================
+   10. RADIO — .radio (+ .radio-large), .radio-field, .radio-group
+   The circle IS the control -> unselected = gray/500 1.5px (3.65:1).
+   ========================================================================== */
+
+/* Group container */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.radio-field {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.radio {
+  flex: none;
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: var(--surface-raised);
+  border: 1.5px solid var(--border-control); /* gray/500, 3.65:1 */
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-enter);
+}
+
+.radio-large {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hover = gray/700 */
+.radio:hover:not(:disabled) {
+  border-color: var(--gray-700);
+}
+
+/* Selected = blue/600 ring + centered blue/600 dot with a white gap */
+.radio:checked {
+  border-color: var(--interactive-primary); /* blue/600 ring */
+}
+.radio:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  transform: translate(-50%, -50%);
+  background-color: var(--interactive-primary); /* blue/600 dot */
+  border-radius: var(--radius-full);
+}
+.radio-large:checked::after {
+  width: 10px;
+  height: 10px;
+}
+
+/* Focus = 2px blue/600 ring */
+.radio:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Disabled = gray/100 + gray/300 */
+.radio:disabled {
+  background-color: var(--surface-sunken); /* gray/100 */
+  border-color: var(--border-default);     /* gray/300 */
+  cursor: not-allowed;
+}
+/* Disabled-selected dot = gray/400 */
+.radio:disabled:checked::after {
+  background-color: var(--text-disabled); /* gray/400 */
+}
+
+
+/* ============================================================================
+   11. SLIDER — .slider
+   NATIVE range input — drags with pointer + arrow keys/Home/End, no JS.
+   accent-color paints the filled track + thumb as the modern baseline; the
+   explicit ::track / ::thumb pseudo-elements layer the Vallejo material on top:
+   recessed track (--surface-sunken well) + raised-key white thumb 18px.
+   Same rise/recess language as the Toggle.
+   SINGLE-THUMB ONLY. A dual-handle range (min + max) is not expressible with a
+   single native <input type="range"> — that needs JS (e.g. two stacked inputs
+   or a headless range lib). Build .slider-range as a JS component if required.
+   ========================================================================== */
+
+input[type="range"].slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 18px; /* clears the 18px thumb */
+  margin: 0;
+  background: transparent; /* track painted on the ::track pseudo-element */
+  accent-color: var(--interactive-primary); /* blue/600 — filled track + thumb baseline */
+  cursor: pointer;
+}
+
+/* --- Recessed track — 6px sunken well --- */
+.slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  background-color: var(--surface-sunken); /* recessed well */
+  border-radius: var(--radius-pill);
+}
+.slider::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  background-color: var(--surface-sunken); /* recessed well */
+  border-radius: var(--radius-pill);
+}
+/* Firefox paints the filled portion separately (accent-color does the rest) */
+.slider::-moz-range-progress {
+  height: 6px;
+  background-color: var(--interactive-primary); /* blue/600 fill */
+  border-radius: var(--radius-pill);
+}
+
+/* --- Raised-key thumb — 18px white knob --- */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -6px; /* center on the 6px track: (6 - 18) / 2 */
+  box-sizing: border-box;
+  background-color: var(--surface-raised); /* white raised key */
+  border: 1px solid var(--border-default); /* gray/300 */
+  border-radius: var(--radius-full);
+  box-shadow: var(--elevation-key); /* raised-key drop shadow */
+  cursor: grab;
+  transition:
+    border-color var(--duration-fast) var(--ease-enter),
+    box-shadow var(--duration-fast) var(--ease-enter);
+}
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+  background-color: var(--surface-raised); /* white raised key */
+  border: 1px solid var(--border-default); /* gray/300 */
+  border-radius: var(--radius-full);
+  box-shadow: var(--elevation-key); /* raised-key drop shadow */
+  cursor: grab;
+  transition:
+    border-color var(--duration-fast) var(--ease-enter),
+    box-shadow var(--duration-fast) var(--ease-enter);
+}
+
+/* Hover — border advances to gray/400, lift deepens */
+.slider:hover:not(:disabled)::-webkit-slider-thumb {
+  border-color: var(--gray-400);
+  box-shadow: var(--elevation-key-hover);
+}
+.slider:hover:not(:disabled)::-moz-range-thumb {
+  border-color: var(--gray-400);
+  box-shadow: var(--elevation-key-hover);
+}
+.slider:active:not(:disabled)::-webkit-slider-thumb {
+  cursor: grabbing;
+}
+.slider:active:not(:disabled)::-moz-range-thumb {
+  cursor: grabbing;
+}
+
+/* Focus = 2px blue/600 ring (on the thumb) */
+.slider:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-color: var(--border-focus);
+}
+.slider:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-color: var(--border-focus);
+}
+
+/* Disabled — gray/400 fill + gray/100 thumb, flat */
+.slider:disabled {
+  accent-color: var(--text-disabled); /* gray/400 fill */
+  cursor: not-allowed;
+}
+.slider:disabled::-moz-range-progress {
+  background-color: var(--text-disabled); /* gray/400 */
+}
+.slider:disabled::-webkit-slider-thumb {
+  background-color: var(--surface-sunken); /* gray/100 */
+  border-color: var(--border-default);
+  box-shadow: none; /* flat */
+  cursor: not-allowed;
+}
+.slider:disabled::-moz-range-thumb {
+  background-color: var(--surface-sunken); /* gray/100 */
+  border-color: var(--border-default);
+  box-shadow: none; /* flat */
+  cursor: not-allowed;
+}

@@ -1,0 +1,398 @@
+/* ============================================================================
+   Vallejo Design System v1.2 — Buttons
+   Components: Button (.btn) and Watchlist (.watchlist)
+   ----------------------------------------------------------------------------
+   THE RULE: one Primary per view (the single most important action — bid, pay,
+   confirm). Primary + Destructive are RAISED (gradient fill + layered elevation).
+   Secondary/Quiet wear the raised KEY edge; Quiet is the flattest.
+   Heights: XS 28 · SM 32 · MD 40 · LG 48 · XL 56 (the 8px rhythm; MD is default).
+   Labels: Inter Medium (500), 12/14/14/16/18 across XS–XL.
+   Radius scales with height: SM 6 · MD/LG 8 · XL 12 (XS shares 6).
+   Optical padding: icon side pulls tighter than the text side.
+   All colors via tokens. Focus = solid 2px ring (no glow). 44px hit-area floor.
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   Button — base
+   Native <button> (or role="button"). Inline-flex so icon + label center.
+   ---------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);                       /* default icon↔label gap; per-size below */
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);           /* MD/LG default; per-size below */
+  font-family: var(--font-sans);
+  font-weight: 500;                          /* Inter Medium */
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  color: var(--text-primary);
+  transition:
+    background-color var(--duration-fast) var(--ease-enter),
+    border-color var(--duration-fast) var(--ease-enter),
+    box-shadow var(--duration-fast) var(--ease-enter),
+    color var(--duration-fast) var(--ease-enter);
+}
+
+/* Focus is a STATE — native, solid 2px ring, concentric, no glow */
+.btn:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Disabled — multi-cue shift (ink + border drop + no hover response).
+   aria-disabled keeps the element in focus order; disabled removes it. */
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  pointer-events: none;                      /* kills hover/active response */
+  color: var(--text-disabled);               /* gray/400 */
+  background: var(--surface-sunken);         /* settled, de-emphasized */
+  border-color: var(--border-hairline);      /* border drops to gray/200 */
+  box-shadow: none;                          /* flat — no elevation when inert */
+}
+
+/* Loading — keep footprint; spinner swaps in via markup */
+.btn[aria-busy="true"] {
+  cursor: progress;
+}
+
+/* Icon — decorative glyph; label carries meaning.
+   Icon sizes track the size cuts (16/18/24); set per-size below. */
+.btn-icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------------------------
+   Button — types (fill ladders + raised material)
+   ---------------------------------------------------------------------------- */
+
+/* Primary — RAISED. Reserved for the single most important action.
+   Gradient blue fill + primary elevation; fill ladder darkens on press. */
+.btn-primary {
+  color: var(--text-inverse);
+  border-color: transparent;
+  background-image: linear-gradient(
+    var(--interactive-primary),
+    var(--interactive-primary-grad-end)
+  );
+  box-shadow: var(--elevation-primary-rest);
+}
+.btn-primary:hover {
+  background-image: linear-gradient(
+    var(--interactive-primary-hover),
+    var(--interactive-primary-grad-end)
+  );
+  box-shadow: var(--elevation-primary-hover);
+}
+.btn-primary:active {
+  background-image: linear-gradient(
+    var(--interactive-primary-active),
+    var(--interactive-primary-active)
+  );
+  box-shadow: var(--elevation-primary-pressed);
+}
+
+/* Destructive — RAISED. Error fill ladder; reserve for dangerous commits. */
+.btn-destructive {
+  color: var(--text-inverse);
+  border-color: transparent;
+  background-image: linear-gradient(
+    var(--interactive-destructive),
+    var(--interactive-destructive-grad-end)
+  );
+  box-shadow: var(--elevation-destructive-rest);
+}
+.btn-destructive:hover {
+  background-image: linear-gradient(
+    var(--interactive-destructive-hover),
+    var(--interactive-destructive-grad-end)
+  );
+  box-shadow: var(--elevation-destructive-hover);
+}
+.btn-destructive:active {
+  background-image: linear-gradient(
+    var(--interactive-destructive-active),
+    var(--interactive-destructive-active)
+  );
+  box-shadow: var(--elevation-destructive-pressed);
+}
+
+/* Secondary — fully neutral: white fill, ink label, refined-light border that
+   advances on approach (300 → 400 + gray/50 → 500 + gray/100). Wears the KEY edge. */
+.btn-secondary {
+  color: var(--text-primary);
+  background-color: var(--surface-raised);   /* white */
+  border-color: var(--border-default);       /* gray/300, decorative per W3C 1.4.11 */
+  box-shadow: var(--elevation-key);
+}
+.btn-secondary:hover {
+  background-color: var(--surface-canvas);   /* gray/50 */
+  border-color: var(--gray-400);             /* line advances */
+  box-shadow: var(--elevation-key-hover);
+}
+.btn-secondary:active {
+  background-color: var(--surface-sunken);   /* gray/100 */
+  border-color: var(--gray-500);
+  box-shadow: var(--elevation-key-pressed);
+}
+
+/* Quiet — text-only blue label; no fill/border at rest; the flattest type.
+   Blue belongs to Quiet labels (sanctioned blue use). */
+.btn-quiet {
+  color: var(--text-link);                   /* blue/600 */
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+.btn-quiet:hover {
+  background-color: var(--interactive-selected-wash);  /* blue/50 wash */
+  color: var(--text-link-hover);             /* blue/700 */
+}
+.btn-quiet:active {
+  background-color: var(--interactive-selected-fill);  /* blue/100 */
+  color: var(--text-link-hover);
+}
+
+/* ----------------------------------------------------------------------------
+   Button — sizes
+   Heights 28/32/40/48/56; radius + type size + optical padding per step.
+   Optical padding: text-side > icon-side. The icon-side class trims the side
+   that holds a leading/trailing glyph so the glyph sits optically centered.
+   ---------------------------------------------------------------------------- */
+
+/* XS — 28px · dense table rows only · radius 6 · 12/500 · icon 16 */
+.btn-xs {
+  height: 28px;
+  padding: 0 var(--space-3);                  /* 12 text-side */
+  border-radius: var(--radius-md);            /* 6 */
+  font-size: 12px;
+  gap: var(--space-1-5);                       /* 6 icon↔label */
+}
+.btn-xs .btn-icon { width: 16px; height: 16px; }
+
+/* SM — 32px · radius 6 · 14/500 · icon 16 */
+.btn-sm {
+  height: 32px;
+  padding: 0 var(--space-3);                  /* 12 text-side */
+  border-radius: var(--radius-md);            /* 6 */
+  font-size: 14px;
+  gap: var(--space-1-5);                       /* 6 */
+}
+.btn-sm .btn-icon { width: 16px; height: 16px; }
+
+/* MD — 40px · the lingua franca · radius 8 · 14/500 · icon 18 */
+.btn-md {
+  height: 40px;
+  padding: 0 var(--space-4);                  /* 16 text-side */
+  border-radius: var(--radius-lg);            /* 8 */
+  font-size: 14px;
+  gap: var(--space-2);                         /* 8 */
+}
+.btn-md .btn-icon { width: 18px; height: 18px; }
+
+/* LG — 48px · comfortable touch · radius 8 · 16/500 · icon 18 */
+.btn-lg {
+  height: 48px;
+  padding: 0 var(--space-4);                  /* 16 text-side */
+  border-radius: var(--radius-lg);            /* 8 */
+  font-size: 16px;
+  gap: var(--space-2);                         /* 8 */
+}
+.btn-lg .btn-icon { width: 18px; height: 18px; }
+
+/* XL — 56px · marketing heroes · radius 12 · 18/500 · icon 24 */
+.btn-xl {
+  height: 56px;
+  padding: 0 var(--space-5);                  /* 20 text-side */
+  border-radius: var(--radius-xl);            /* 12 */
+  font-size: 18px;
+  gap: var(--space-2);                         /* 8 */
+}
+.btn-xl .btn-icon { width: 24px; height: 24px; }
+
+/* Optical padding — the side that carries a glyph trims tighter than the text side,
+   but keeps REAL breathing room so the glyph never crowds the (hover) fill edge.
+   Icon-side stays one defined step under the text side (a ~4px optical asymmetry),
+   so a leading-icon button looks comfortable when its hover fill appears — never cramped:
+     XS/SM  text 12 → icon-side 8   (--space-2)
+     MD/LG  text 16 → icon-side 12  (--space-3)
+     XL     text 20 → icon-side 16  (--space-4)
+   The text side keeps its full size padding and the gap above spaces glyph↔label.
+   Defaults below cover MD/LG; XS/SM/XL override. All values are defined tokens. */
+.btn:has(> .btn-icon:first-child) { padding-left: var(--space-3); }   /* leading icon → trim left (12, MD/LG) */
+.btn:has(> .btn-icon:last-child)  { padding-right: var(--space-3); }  /* trailing icon → trim right (12, MD/LG) */
+.btn-xs:has(> .btn-icon:first-child) { padding-left: var(--space-2); } /* XS icon-side = 8 */
+.btn-xs:has(> .btn-icon:last-child)  { padding-right: var(--space-2); }
+.btn-sm:has(> .btn-icon:first-child) { padding-left: var(--space-2); } /* SM icon-side = 8 */
+.btn-sm:has(> .btn-icon:last-child)  { padding-right: var(--space-2); }
+.btn-xl:has(> .btn-icon:first-child) { padding-left: var(--space-4); } /* XL icon-side = 16 */
+.btn-xl:has(> .btn-icon:last-child)  { padding-right: var(--space-4); }
+
+/* Icon-only — square footprint sized to the control height (icon centered, no label,
+   no optical pull). Equal L/R padding collapses to the vertical padding (0), so the
+   button is exactly as wide as it is tall.
+   EXPLICIT modifier only: detection MUST use .btn-icon-only. We deliberately do NOT
+   use .btn:has(> .btn-icon:only-child) — the CSS :only-child pseudo-class ignores
+   text nodes, so a glyph sitting next to a BARE text label (e.g. <svg>All filters)
+   is still the only *element* child and would wrongly match, zeroing the horizontal
+   padding on real icon+text buttons. Wrap genuine icon-only buttons in .btn-icon-only. */
+.btn-icon-only {
+  padding-left: 0;
+  padding-right: 0;
+  gap: 0;
+  aspect-ratio: 1 / 1;
+}
+
+/* ----------------------------------------------------------------------------
+   Watchlist — save-to-list toggle (favorite/heart pattern)
+   A PILL (radius-pill) with a RED (red-500) heart. Two button-types × two sizes:
+     · Full    = heart + text label ("Watchlist" / "Watching")
+     · Compact = heart ONLY, circular (Medium 40px · Small 32px)
+     · Sizes   = Medium (default) · Small
+   Unsaved  (aria-pressed="false") = OUTLINE red heart + label "Watchlist"
+   Saved    (aria-pressed="true")  = FILLED  red heart + label "Watching"
+   Saved is conveyed by the FILLED red heart + the word "Watching" on a NEUTRAL
+   surface — NOT a blue selected-register. This is CVD-safe (shape + word carry
+   state, color is only reinforcement).
+   Surfaces: Default = white (surface-raised) + raised-key edge; Hover = gray-50;
+   Active = gray-100; Disabled = muted gray fill with gray-400 heart + label.
+
+   TOKEN NOTE: the heart uses the semantic --interactive-favorite alias (→ red-500,
+   i.e. --error-500) — the 500-step red, distinct from the destructive accent
+   (--error-600). "Favorite" intentionally shares the red ramp but is NOT a
+   destructive cue, so state is still carried by the FILLED heart + the word
+   "Watching," not color alone.
+   ---------------------------------------------------------------------------- */
+.watchlist {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);                         /* 8 heart↔label (Medium); Small below */
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);           /* PILL */
+  font-family: var(--font-sans);
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  -webkit-appearance: none;
+  appearance: none;
+  /* Base = Full + Medium (40px, 14px label, 16 text-side / 12 heart-side inset) */
+  height: 40px;
+  padding: 0 var(--space-4);                   /* 16 text-side */
+  padding-left: var(--space-3);                /* 12 heart-side optical inset */
+  font-size: 14px;
+  /* Surfaces are neutral in BOTH states — state lives in the heart + word.
+     Default = white + raised-key edge; Hover = gray-50; Active = gray-100. */
+  color: var(--text-primary);
+  background-color: var(--surface-raised);     /* white */
+  border-color: var(--border-hairline);        /* hairline pairs with the key edge */
+  box-shadow: var(--elevation-key);
+  transition:
+    background-color var(--duration-fast) var(--ease-enter),
+    border-color var(--duration-fast) var(--ease-enter),
+    box-shadow var(--duration-fast) var(--ease-enter),
+    color var(--duration-fast) var(--ease-enter);
+}
+
+/* Heart glyph — RED in every interactive state (outline vs filled is the markup
+   swap: icon.heart vs icon.heart-filled). Both SVGs paint via currentColor (the
+   outline strokes it, the filled fills it), so we set `color` — NOT `fill` — to
+   make the heart red while the label rides its own --text-primary color. */
+.watchlist-heart {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  color: var(--interactive-favorite);         /* red-500 (semantic favorite alias) — drives currentColor for BOTH the outline stroke and the filled fill */
+  pointer-events: none;
+}
+
+.watchlist:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.watchlist:hover {
+  background-color: var(--surface-canvas);     /* gray-50 */
+  box-shadow: var(--elevation-key-hover);
+}
+.watchlist:active {
+  background-color: var(--surface-sunken);     /* gray-100 */
+  box-shadow: var(--elevation-key-pressed);
+}
+
+/* Disabled — multi-cue: muted gray fill, gray-400 heart + label, flat, no hover */
+.watchlist[disabled],
+.watchlist[aria-disabled="true"] {
+  cursor: not-allowed;
+  pointer-events: none;
+  color: var(--gray-400);
+  background-color: var(--surface-sunken);     /* gray-100 muted fill */
+  border-color: var(--border-hairline);
+  box-shadow: none;
+}
+.watchlist[disabled] .watchlist-heart,
+.watchlist[aria-disabled="true"] .watchlist-heart {
+  color: var(--gray-400);                      /* heart de-saturates with the label (drives currentColor) */
+}
+
+/* Full — labeled pill. The base .watchlist already IS Full + Medium, so
+   .watchlist-full is an explicit-markup alias and needs no overrides. */
+
+/* Small — Full pill at 32px · 13px label · tighter insets.
+   Heart-side stays inset from the border (never flush). */
+.watchlist-small {
+  height: 32px;
+  gap: var(--space-1-5);                       /* 6 heart↔label */
+  padding: 0 var(--space-3);                   /* 12 text-side */
+  padding-left: var(--space-2);                /* 8 heart-side optical inset */
+  font-size: 13px;
+}
+.watchlist-small .watchlist-heart { width: 16px; height: 16px; }
+
+/* Compact — heart ONLY, circular. Medium = 40px, Small = 32px.
+   No label → square footprint, no optical pull, centered heart. */
+.watchlist-compact {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  gap: 0;
+  border-radius: var(--radius-full);           /* circle */
+}
+/* Compact + Small = 32px circle */
+.watchlist-compact.watchlist-small {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+.watchlist-compact.watchlist-small .watchlist-heart { width: 16px; height: 16px; }
+
+/* 44px hit-area floor — expand beyond the 32px visual without growing the circle.
+   Applied to the Small Full pill and the Small compact circle. */
+.watchlist-small { position: relative; }
+.watchlist-small::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  min-width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}

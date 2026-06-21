@@ -1,0 +1,166 @@
+{
+  "$description": "Vallejo 1.2 semantic alias tokens (DTCG). Source of truth — edit here, then run `npm run build`. Generated from the Figma sweep 2026-06-20.",
+  "text": {
+    "$type": "color",
+    "primary": {
+      "$value": "{color.gray.900}"
+    },
+    "secondary": {
+      "$value": "{color.gray.700}"
+    },
+    "tertiary": {
+      "$value": "{color.gray.600}"
+    },
+    "display-muted": {
+      "$value": "{color.gray.500}"
+    },
+    "disabled": {
+      "$value": "{color.gray.400}"
+    },
+    "inverse": {
+      "$value": "{color.gray.0}"
+    },
+    "link": {
+      "$value": "{color.blue.600}"
+    },
+    "link-hover": {
+      "$value": "{color.blue.700}"
+    },
+    "on-header": {
+      "$value": "{color.gray.0}"
+    },
+    "on-header-muted": {
+      "$value": "{color.gray.400}"
+    }
+  },
+  "surface": {
+    "$type": "color",
+    "raised": {
+      "$value": "{color.gray.0}"
+    },
+    "canvas": {
+      "$value": "{color.gray.50}"
+    },
+    "sunken": {
+      "$value": "{color.gray.100}"
+    },
+    "deep": {
+      "$value": "{color.gray.950}"
+    },
+    "subtle": {
+      "$value": "{color.gray.150}"
+    },
+    "header-bg": {
+      "$value": "{color.gray.800}"
+    },
+    "header-deep": {
+      "$value": "{color.gray.900}"
+    },
+    "footer": {
+      "$value": "{color.gray.900}"
+    },
+    "header-field": {
+      "$value": "{color.gray.700}"
+    },
+    "header-shelf": {
+      "$value": "{color.gray.700}"
+    }
+  },
+  "border": {
+    "$type": "color",
+    "hairline": {
+      "$value": "{color.gray.200}"
+    },
+    "default": {
+      "$value": "{color.gray.300}"
+    },
+    "strong": {
+      "$value": "{color.gray.500}"
+    },
+    "control": {
+      "$value": "{color.gray.500}"
+    },
+    "focus": {
+      "$value": "{color.blue.600}"
+    },
+    "focus-on-dark": {
+      "$value": "{color.blue.300}"
+    }
+  },
+  "interactive": {
+    "$type": "color",
+    "primary": {
+      "$value": "{color.blue.600}"
+    },
+    "primary-grad-end": {
+      "$value": "#1D50B8"
+    },
+    "primary-hover": {
+      "$value": "{color.blue.700}"
+    },
+    "primary-active": {
+      "$value": "{color.blue.800}"
+    },
+    "selected-fill": {
+      "$value": "{color.blue.100}"
+    },
+    "selected-wash": {
+      "$value": "{color.blue.50}"
+    },
+    "destructive": {
+      "$value": "{color.error.600}"
+    },
+    "destructive-grad-end": {
+      "$value": "#AF001F"
+    },
+    "destructive-hover": {
+      "$value": "{color.error.700}"
+    },
+    "destructive-active": {
+      "$value": "{color.error.800}"
+    },
+    "favorite": {
+      "$value": "{color.error.500}",
+      "$description": "Save-to-list / watchlist heart (red-500). Shares the red ramp but is NOT a destructive cue — state is carried by the filled heart + label, never color alone."
+    }
+  },
+  "status": {
+    "$type": "color",
+    "success-subtle": {
+      "$value": "{color.success.50}"
+    },
+    "success-light": {
+      "$value": "{color.success.100}"
+    },
+    "success-accent": {
+      "$value": "{color.success.600}"
+    },
+    "success-dark": {
+      "$value": "{color.success.800}"
+    },
+    "warning-subtle": {
+      "$value": "{color.warning.50}"
+    },
+    "warning-light": {
+      "$value": "{color.warning.100}"
+    },
+    "warning-accent": {
+      "$value": "{color.warning.600}"
+    },
+    "warning-dark": {
+      "$value": "{color.warning.800}"
+    },
+    "error-subtle": {
+      "$value": "{color.error.50}"
+    },
+    "error-light": {
+      "$value": "{color.error.100}"
+    },
+    "error-accent": {
+      "$value": "{color.error.600}"
+    },
+    "error-dark": {
+      "$value": "{color.error.800}"
+    }
+  }
+}

@@ -1,0 +1,140 @@
+/* ==========================================================================
+   Vallejo Design System v1.2 — Media
+   --------------------------------------------------------------------------
+   Avatar — circle, presentational identity.
+     Type  [Image / Initials / Icon]  ×  Size [XS24 / SM32 / MD40 / LG48 / XL64]
+     Fallback chain: real photo -> initials -> icon.user.
+
+   The one rule: NO hashed/per-user color, NO presence dot, NO default ring —
+   the only ring is the opt-in MEMBERSHIP ring (Free = none · Basic = gray/300 ·
+   Premier = gold), added via .avatar-basic / .avatar-premier.
+   Identity is neutral; color is reserved for status / interactivity.
+   Circle-only — company/org marks route to a separate Thumbnail concept.
+   MD40 = the List Row leading anchor.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Avatar — base
+   Circle container that hosts an <img>, initials text, or an icon.user svg.
+   -------------------------------------------------------------------------- */
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  overflow: hidden;                 /* clip photo to the circle */
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-weight: 600;                 /* Inter Semi Bold — initials */
+  line-height: 1;
+  user-select: none;
+  /* MD40 is the default anchor size; per-size modifiers override below. */
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+}
+
+/* --------------------------------------------------------------------------
+   Avatar — sizes (XS24 / SM32 / MD40 / LG48 / XL64)
+   font-size scales the initials; the icon.user svg is sized as a share of
+   the circle via .avatar svg below.
+   -------------------------------------------------------------------------- */
+.avatar-xs {
+  width: 24px;
+  height: 24px;
+  font-size: 11px;                  /* single letter < 32px */
+}
+
+.avatar-sm {
+  width: 32px;
+  height: 32px;
+  font-size: 13px;
+}
+
+.avatar-md {
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+}
+
+.avatar-lg {
+  width: 48px;
+  height: 48px;
+  font-size: 18px;
+}
+
+.avatar-xl {
+  width: 64px;
+  height: 64px;
+  font-size: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   Avatar — Image
+   A real photo dropped into the fill. Placeholder (no/failed photo) shows the
+   icon.user silhouette in white on gray/300.
+   -------------------------------------------------------------------------- */
+.avatar-image {
+  background-color: var(--gray-300);   /* placeholder silhouette backdrop */
+  color: var(--text-inverse);          /* icon.user silhouette = white */
+}
+
+.avatar-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Avatar — Initials
+   gray/200 fill + gray/700 (text/secondary) Inter Semi Bold.
+   1 letter < 32px, 2 letters >= 32px (XS = single).
+   -------------------------------------------------------------------------- */
+.avatar-initials {
+  background-color: var(--gray-200);
+  color: var(--text-secondary);        /* gray/700 */
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   Avatar — Icon fallback
+   icon.user (icon/muted) on gray/100.
+   -------------------------------------------------------------------------- */
+.avatar-icon {
+  background-color: var(--gray-100);
+  color: var(--text-tertiary);         /* icon/muted */
+}
+
+/* --------------------------------------------------------------------------
+   Avatar — icon.user svg sizing
+   The glyph fills ~60% of the circle and inherits the modifier's color.
+   -------------------------------------------------------------------------- */
+.avatar svg {
+  width: 60%;
+  height: 60%;
+  fill: currentColor;
+}
+
+/* --------------------------------------------------------------------------
+   Avatar — membership ring (Basic / Premier)
+   The ONLY ring the avatar wears. A 2px ring set 2px off the circle, with a
+   TRANSPARENT 2px gap (the background shows through) so it reads as a ring,
+   not a border. Free/Guest members get no ring; paid members get one:
+     · Basic   = gray/300 ring
+     · Premier = gold ring
+   Built with outline + outline-offset (NOT box-shadow) so the gap is genuinely
+   transparent and the ring is never clipped by the avatar's overflow:hidden;
+   modern browsers round the outline to the circle. Composes with any Type +
+   Size — the avatar's size + clipped photo stay untouched. (On an interactive
+   avatar the :focus-visible ring temporarily replaces this one — expected.)
+   -------------------------------------------------------------------------- */
+.avatar-basic {
+  outline: 2px solid var(--gray-300);
+  outline-offset: 2px;
+}
+
+.avatar-premier {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}

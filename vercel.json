@@ -1,9 +1,5 @@
 {
   "cleanUrls": true,
-  "buildCommand": "mkdir -p public && cp -r dist demo public/",
-  "outputDirectory": "public",
-  "rewrites": [
-    { "source": "/", "destination": "/demo/index.html" },
-    { "source": "/ux-writing", "destination": "/demo/ux-writing.html" }
-  ]
+  "buildCommand": "mkdir -p public/dist public/demo && cp dist/* public/dist/ && cp demo/demo.css demo/demo.js public/demo/ && cp demo/index.html demo/ux-writing.html public/",
+  "outputDirectory": "public"
 }

@@ -272,6 +272,23 @@ body {
   color: var(--text-secondary);
 }
 
+/* Version badge in the hero H1 — a bold JetBrains "1.2" chip: blue/500 text on
+   a blue/50 fill with a blue/400 ring. Sized in em so it tracks the H1. */
+.demo-hero-version {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.72em;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  vertical-align: middle;
+  color: var(--blue-500);
+  background-color: var(--blue-50);
+  border: 2px solid var(--blue-400);
+  border-radius: var(--radius-2xl);
+  padding: 0.12em 0.34em;
+}
+
 /* Section — the rhythm unit. A hairline parts each from the next. */
 .demo-section {
   padding-top: var(--space-16);

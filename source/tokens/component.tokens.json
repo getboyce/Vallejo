@@ -3,7 +3,7 @@
   "shadow": {
     "$type": "color",
     "primary-bevel-top": {
-      "$value": "#82ADFC6B"
+      "$value": "#82ADFC47"
     },
     "primary-bevel-bottom": {
       "$value": "#0435994D"

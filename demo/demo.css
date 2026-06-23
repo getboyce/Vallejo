@@ -104,9 +104,9 @@ body {
 
 .demo-wordmark {
   font-family: var(--font-sans);
-  font-size: 20px;
+  font-size: 16px;
   line-height: 28px;
-  font-weight: 700;            /* Title 3 weight; tightened for a mark */
+  font-weight: 600;            /* Title 3 weight; tightened for a mark */
   letter-spacing: -0.2px;
   color: var(--text-on-header);
 }
@@ -121,8 +121,8 @@ body {
   background-color: var(--surface-header-field); /* gray/700 on the bar */
   color: var(--text-on-header);
   font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 10px;
+  font-weight: 600;
   line-height: 16px;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;

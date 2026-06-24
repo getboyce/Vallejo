@@ -1143,7 +1143,7 @@ body {
   align-items: center;
   flex: none;
 }
-.demo-header-logo svg { display: block; height: 24px; width: auto; }
+.demo-header-logo svg { display: block; height: 30px; width: auto; }
 .demo-brand-sep {
   flex: none;
   width: 1px;

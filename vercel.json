@@ -1,5 +1,5 @@
 {
   "cleanUrls": true,
-  "buildCommand": "mkdir -p public/dist public/demo && cp dist/* public/dist/ && cp demo/demo.css demo/demo.js public/demo/ && cp demo/index.html demo/ux-writing.html public/",
+  "buildCommand": "mkdir -p public/dist public/demo && cp dist/* public/dist/ && cp demo/demo.css demo/demo.js public/demo/ && cp demo/index.html demo/ux-writing.html public/ && cp demo/favicon.png public/",
   "outputDirectory": "public"
 }
